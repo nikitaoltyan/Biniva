@@ -1,0 +1,598 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45914C254D55C0005AE26C /* AppDelegate.swift */; };
+		5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45914E254D55C0005AE26C /* SceneDelegate.swift */; };
+		5C459151254D55C0005AE26C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C459150254D55C0005AE26C /* ViewController.swift */; };
+		5C459154254D55C0005AE26C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C459152254D55C0005AE26C /* Main.storyboard */; };
+		5C459156254D55C1005AE26C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C459155254D55C1005AE26C /* Assets.xcassets */; };
+		5C459159254D55C1005AE26C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C459157254D55C1005AE26C /* LaunchScreen.storyboard */; };
+		5C459164254D55C2005AE26C /* GreenerCoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C459163254D55C2005AE26C /* GreenerCoTests.swift */; };
+		5C45916F254D55C2005AE26C /* GreenerCoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45916E254D55C2005AE26C /* GreenerCoUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5C459160254D55C2005AE26C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C459141254D55C0005AE26C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C459148254D55C0005AE26C;
+			remoteInfo = GreenerCo;
+		};
+		5C45916B254D55C2005AE26C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C459141254D55C0005AE26C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C459148254D55C0005AE26C;
+			remoteInfo = GreenerCo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5C459149254D55C0005AE26C /* GreenerCo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenerCo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C45914C254D55C0005AE26C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5C45914E254D55C0005AE26C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		5C459150254D55C0005AE26C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5C459153254D55C0005AE26C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5C459155254D55C1005AE26C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5C459158254D55C1005AE26C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5C45915A254D55C1005AE26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C45915F254D55C2005AE26C /* GreenerCoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenerCoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C459163254D55C2005AE26C /* GreenerCoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenerCoTests.swift; sourceTree = "<group>"; };
+		5C459165254D55C2005AE26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C45916A254D55C2005AE26C /* GreenerCoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenerCoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C45916E254D55C2005AE26C /* GreenerCoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenerCoUITests.swift; sourceTree = "<group>"; };
+		5C459170254D55C2005AE26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5C459146254D55C0005AE26C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C45915C254D55C2005AE26C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C459167254D55C2005AE26C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C459140254D55C0005AE26C = {
+			isa = PBXGroup;
+			children = (
+				5C45914B254D55C0005AE26C /* GreenerCo */,
+				5C459162254D55C2005AE26C /* GreenerCoTests */,
+				5C45916D254D55C2005AE26C /* GreenerCoUITests */,
+				5C45914A254D55C0005AE26C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5C45914A254D55C0005AE26C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C459149254D55C0005AE26C /* GreenerCo.app */,
+				5C45915F254D55C2005AE26C /* GreenerCoTests.xctest */,
+				5C45916A254D55C2005AE26C /* GreenerCoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5C45914B254D55C0005AE26C /* GreenerCo */ = {
+			isa = PBXGroup;
+			children = (
+				5C45914C254D55C0005AE26C /* AppDelegate.swift */,
+				5C45914E254D55C0005AE26C /* SceneDelegate.swift */,
+				5C459150254D55C0005AE26C /* ViewController.swift */,
+				5C459152254D55C0005AE26C /* Main.storyboard */,
+				5C459155254D55C1005AE26C /* Assets.xcassets */,
+				5C459157254D55C1005AE26C /* LaunchScreen.storyboard */,
+				5C45915A254D55C1005AE26C /* Info.plist */,
+			);
+			path = GreenerCo;
+			sourceTree = "<group>";
+		};
+		5C459162254D55C2005AE26C /* GreenerCoTests */ = {
+			isa = PBXGroup;
+			children = (
+				5C459163254D55C2005AE26C /* GreenerCoTests.swift */,
+				5C459165254D55C2005AE26C /* Info.plist */,
+			);
+			path = GreenerCoTests;
+			sourceTree = "<group>";
+		};
+		5C45916D254D55C2005AE26C /* GreenerCoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5C45916E254D55C2005AE26C /* GreenerCoUITests.swift */,
+				5C459170254D55C2005AE26C /* Info.plist */,
+			);
+			path = GreenerCoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C459148254D55C0005AE26C /* GreenerCo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C459173254D55C2005AE26C /* Build configuration list for PBXNativeTarget "GreenerCo" */;
+			buildPhases = (
+				5C459145254D55C0005AE26C /* Sources */,
+				5C459146254D55C0005AE26C /* Frameworks */,
+				5C459147254D55C0005AE26C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GreenerCo;
+			productName = GreenerCo;
+			productReference = 5C459149254D55C0005AE26C /* GreenerCo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5C45915E254D55C2005AE26C /* GreenerCoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C459176254D55C2005AE26C /* Build configuration list for PBXNativeTarget "GreenerCoTests" */;
+			buildPhases = (
+				5C45915B254D55C2005AE26C /* Sources */,
+				5C45915C254D55C2005AE26C /* Frameworks */,
+				5C45915D254D55C2005AE26C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C459161254D55C2005AE26C /* PBXTargetDependency */,
+			);
+			name = GreenerCoTests;
+			productName = GreenerCoTests;
+			productReference = 5C45915F254D55C2005AE26C /* GreenerCoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5C459169254D55C2005AE26C /* GreenerCoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C459179254D55C2005AE26C /* Build configuration list for PBXNativeTarget "GreenerCoUITests" */;
+			buildPhases = (
+				5C459166254D55C2005AE26C /* Sources */,
+				5C459167254D55C2005AE26C /* Frameworks */,
+				5C459168254D55C2005AE26C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C45916C254D55C2005AE26C /* PBXTargetDependency */,
+			);
+			name = GreenerCoUITests;
+			productName = GreenerCoUITests;
+			productReference = 5C45916A254D55C2005AE26C /* GreenerCoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5C459141254D55C0005AE26C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					5C459148254D55C0005AE26C = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					5C45915E254D55C2005AE26C = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = 5C459148254D55C0005AE26C;
+					};
+					5C459169254D55C2005AE26C = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = 5C459148254D55C0005AE26C;
+					};
+				};
+			};
+			buildConfigurationList = 5C459144254D55C0005AE26C /* Build configuration list for PBXProject "GreenerCo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5C459140254D55C0005AE26C;
+			productRefGroup = 5C45914A254D55C0005AE26C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C459148254D55C0005AE26C /* GreenerCo */,
+				5C45915E254D55C2005AE26C /* GreenerCoTests */,
+				5C459169254D55C2005AE26C /* GreenerCoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5C459147254D55C0005AE26C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C459159254D55C1005AE26C /* LaunchScreen.storyboard in Resources */,
+				5C459156254D55C1005AE26C /* Assets.xcassets in Resources */,
+				5C459154254D55C0005AE26C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C45915D254D55C2005AE26C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C459168254D55C2005AE26C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5C459145254D55C0005AE26C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C459151254D55C0005AE26C /* ViewController.swift in Sources */,
+				5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */,
+				5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C45915B254D55C2005AE26C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C459164254D55C2005AE26C /* GreenerCoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C459166254D55C2005AE26C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C45916F254D55C2005AE26C /* GreenerCoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5C459161254D55C2005AE26C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C459148254D55C0005AE26C /* GreenerCo */;
+			targetProxy = 5C459160254D55C2005AE26C /* PBXContainerItemProxy */;
+		};
+		5C45916C254D55C2005AE26C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C459148254D55C0005AE26C /* GreenerCo */;
+			targetProxy = 5C45916B254D55C2005AE26C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5C459152254D55C0005AE26C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C459153254D55C0005AE26C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5C459157254D55C1005AE26C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C459158254D55C1005AE26C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5C459171254D55C2005AE26C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5C459172254D55C2005AE26C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5C459174254D55C2005AE26C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z962Q7H43F;
+				INFOPLIST_FILE = GreenerCo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5C459175254D55C2005AE26C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z962Q7H43F;
+				INFOPLIST_FILE = GreenerCo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5C459177254D55C2005AE26C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z962Q7H43F;
+				INFOPLIST_FILE = GreenerCoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GreenerCo.app/GreenerCo";
+			};
+			name = Debug;
+		};
+		5C459178254D55C2005AE26C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z962Q7H43F;
+				INFOPLIST_FILE = GreenerCoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GreenerCo.app/GreenerCo";
+			};
+			name = Release;
+		};
+		5C45917A254D55C2005AE26C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z962Q7H43F;
+				INFOPLIST_FILE = GreenerCoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GreenerCo;
+			};
+			name = Debug;
+		};
+		5C45917B254D55C2005AE26C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z962Q7H43F;
+				INFOPLIST_FILE = GreenerCoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GreenerCo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C459144254D55C0005AE26C /* Build configuration list for PBXProject "GreenerCo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C459171254D55C2005AE26C /* Debug */,
+				5C459172254D55C2005AE26C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C459173254D55C2005AE26C /* Build configuration list for PBXNativeTarget "GreenerCo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C459174254D55C2005AE26C /* Debug */,
+				5C459175254D55C2005AE26C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C459176254D55C2005AE26C /* Build configuration list for PBXNativeTarget "GreenerCoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C459177254D55C2005AE26C /* Debug */,
+				5C459178254D55C2005AE26C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C459179254D55C2005AE26C /* Build configuration list for PBXNativeTarget "GreenerCoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C45917A254D55C2005AE26C /* Debug */,
+				5C45917B254D55C2005AE26C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5C459141254D55C0005AE26C /* Project object */;
+}
