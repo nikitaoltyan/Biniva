@@ -9,65 +9,77 @@ import UIKit
 
 class StatsCell: UITableViewCell {
 
-    var logedImage: UIImageView!
-    var dateAndTime: UILabel!
-    var mainLabel: UILabel!
+    let logedImage: UIImageView = {
+        let imageScale: CGFloat = 85
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: imageScale, height: imageScale))
+        image.translatesAutoresizingMaskIntoConstraints =  false
+        image.image = #imageLiteral(resourceName: "justin-kauffman-7_tRMnxWsUg-unsplash")
+        image.layer.masksToBounds = true
+        image.layer.cornerRadius = image.frame.width/3
+        return image
+    }()
+    
+    let mainLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.textColor = MainConstants.nearBlack
+        label.text = "1 бутылка – 150 гр."
+        label.font = UIFont.init(name: "SFPro-Medium", size: 25.0)
+        return label
+    }()
+    
+    let dateAndTime: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.textColor = MainConstants.nearBlack
+        label.text = "15:08   6 Марта"
+        label.font = UIFont.init(name: "SFPro", size: 15.0)
+        return label
+    }()
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = UIColor(red: 242/255, green: 252/255, blue: 250/255, alpha: 1)
-        LogedImage()
-        MainLabel()
-        DateAndTime()
+        self.backgroundColor = MainConstants.white
+        SetSubviews()
+        ActivateLayouts()
     }
     
-    func LogedImage(){
-        let image = UIImageView()
-        self.addSubview(image)
-        logedImage = image
-        let scale = 100 as CGFloat
-        logedImage.translatesAutoresizingMaskIntoConstraints =  false
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+
+}
+
+
+
+
+extension StatsCell {
+    
+    func SetSubviews(){
+        self.addSubview(logedImage)
+        self.addSubview(mainLabel)
+        self.addSubview(dateAndTime)
+    }
+    
+    func ActivateLayouts(){
         NSLayoutConstraint.activate([
             logedImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             logedImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
-            logedImage.heightAnchor.constraint(equalToConstant: scale),
-            logedImage.widthAnchor.constraint(equalToConstant: scale)
-        ])
-        logedImage.image = #imageLiteral(resourceName: "justin-kauffman-7_tRMnxWsUg-unsplash")
-        logedImage.layer.masksToBounds = true
-        logedImage.layer.cornerRadius = scale/2
-    }
-    
-    func MainLabel(){
-        let label = UILabel()
-        self.addSubview(label)
-        mainLabel = label
-        mainLabel.textColor = .darkGray
-        mainLabel.text = "1 бутылка – 150 гр."
-        mainLabel.font = UIFont.init(name: "Palatino Bold", size: 25.0)
-        mainLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            logedImage.heightAnchor.constraint(equalToConstant: logedImage.frame.height),
+            logedImage.widthAnchor.constraint(equalToConstant: logedImage.frame.width),
+            
             mainLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             mainLabel.leftAnchor.constraint(equalTo: logedImage.rightAnchor, constant: 10),
-            mainLabel.rightAnchor.constraint(equalTo: self.rightAnchor),
-            mainLabel.heightAnchor.constraint(equalToConstant: 39)
-        ])
-    }
-    
-    func DateAndTime(){
-        let label = UILabel()
-        self.addSubview(label)
-        dateAndTime = label
-        dateAndTime.textColor = .darkGray
-        dateAndTime.text = "15:08   6 Марта"
-        dateAndTime.font = UIFont.init(name: "Palatino", size: 15.0)
-        dateAndTime.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+            
             dateAndTime.leftAnchor.constraint(equalTo: mainLabel.leftAnchor),
-            dateAndTime.rightAnchor.constraint(equalTo: self.rightAnchor),
-            dateAndTime.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 5),
-            dateAndTime.heightAnchor.constraint(equalToConstant: 20)
+            dateAndTime.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 5)
         ])
     }
-
 }
