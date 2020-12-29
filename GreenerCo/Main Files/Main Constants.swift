@@ -15,6 +15,7 @@ struct MainConstants {
     static let orange = UIColor(red: 238/255, green: 124/255, blue: 30/255, alpha: 1)
     static let nearBlack = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
     static let nearWhite = UIColor(red: 0, green: 0, blue: 0, alpha: 0.03)
+    static let headerColor = UIColor(red: 237/255, green: 246/255, blue: 249/255, alpha: 1)
     static let screenHeight = UIScreen.main.bounds.height
     static let screenWidth = UIScreen.main.bounds.width
 }
@@ -53,3 +54,6 @@ struct MaterialsObjectItems {
     static var image: Array<UIImage> = [MaterialsIcons.waterBottle, MaterialsIcons.organicLimone, MaterialsIcons.paper, MaterialsIcons.metal]
     static let name: Array<String> = ["Пластик", "Органика", "Бумага", "Металл"]
 }
+
+
+// Access Token Github: 26fd87827e28333abd795628645a73b9ea2fd0f5

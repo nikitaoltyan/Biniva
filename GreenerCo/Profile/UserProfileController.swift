@@ -152,7 +152,13 @@ class UserProfileController: UIViewController {
         print("Edit open")
         let newVC = SettingsController()
         newVC.modalPresentationStyle = .overFullScreen
-        present(newVC, animated: true, completion: nil)
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(newVC, animated: false, completion: nil)
     }
     
     @objc func MeetOpen(){

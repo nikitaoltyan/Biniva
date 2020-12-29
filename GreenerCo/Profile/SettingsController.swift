@@ -12,7 +12,8 @@ class SettingsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = MainConstants.white
+        view.backgroundColor = MainConstants.headerColor
+        tableView.separatorColor = MainConstants.headerColor
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
     }
     
@@ -20,35 +21,17 @@ class SettingsController: UITableViewController {
         return 4
     }
     
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view: UIView = {
-            let view = UIView()
-            view.backgroundColor = MainConstants.white
-            return view
-        }()
-        
-        let label: UILabel = {
-            let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.textColor = MainConstants.nearBlack
-            return label
-        }()
-        
         switch section {
         case 0:
-            label.text = "Settings"
-            label.font = UIFont(name: "SFPro-Heavy", size: 31)
+            let view = TopHeaderView()
+            view.delegate = self
+            return view
         default:
-            label.text = "Header"
-            label.font = UIFont(name: "SFPro-Medium", size: 23)
+            let view = OtherHeaderView()
+            return view
         }
-        view.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
-            label.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
-        ])
-        
-        return view
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -70,8 +53,22 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as! SettingsCell
-        cell.backgroundColor = .white
+        cell.backgroundColor = MainConstants.white
         return cell
     }
 
+}
+
+
+
+
+extension SettingsController: HeaderDelegate {
+    func Back(){
+        let transition = CATransition()
+        transition.duration = 0.25
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+        dismiss(animated: false)
+    }
 }
