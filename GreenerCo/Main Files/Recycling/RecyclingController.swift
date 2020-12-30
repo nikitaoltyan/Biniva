@@ -82,7 +82,7 @@ class RecyclingController: UIViewController {
     
     @objc func OpenProfile(){
         print("Open profile function")
-        let newVC = AddMeetingController()
+        let newVC = AchieveController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()
         transition.duration = 0.3

@@ -9,7 +9,23 @@ import UIKit
 
 class AchieveController: UIViewController {
 
-    @IBOutlet weak var achieveCollection: UICollectionView!
+    lazy var achieveCollection: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = .clear
+        collection.delegate = self
+        collection.dataSource = self
+        collection.register(CategoryNameCell.self, forCellWithReuseIdentifier: "CategoryNameCell")
+        collection.register(TopViewCell.self, forCellWithReuseIdentifier: "TopViewCell")
+        collection.register(AchieveCell.self, forCellWithReuseIdentifier: "AchieveCell")
+        
+        return collection
+    }()
     
     let topView: UIView = {
         let view = UIView()
@@ -23,11 +39,9 @@ class AchieveController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = MainConstants.white
-        view.addSubview(topView)
-        achieveCollection.register(CategoryNameCell.self, forCellWithReuseIdentifier: "CategoryNameCell")
         PopulateImages()
-        TopViewLayer()
-        CollectionLayer()
+        SetSubviews()
+        ActivateLayouts()
     }
     
     var useImages: Array<UIImage?> = []
@@ -75,6 +89,7 @@ class AchieveController: UIViewController {
 
 
 
+
 extension AchieveController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -101,9 +116,10 @@ extension AchieveController: UICollectionViewDelegate, UICollectionViewDataSourc
         if row < 19 {
             if row == 0{
                 let cell = achieveCollection.dequeueReusableCell(withReuseIdentifier: "TopViewCell", for: indexPath) as! TopViewCell
-                cell.mainLabel.text = "Достижения"
+                cell.mainLabel.text = "Аллея славы"
                 cell.plusView.isHidden = true
-                cell.isUserInteractionEnabled = false
+                cell.delegateBack = self
+                cell.isUserInteractionEnabled = true
                 return cell
             } else if row == 1{
                 let cell = achieveCollection.dequeueReusableCell(withReuseIdentifier: "CategoryNameCell", for: indexPath) as! CategoryNameCell
@@ -200,6 +216,21 @@ extension AchieveController: UICollectionViewDelegate, UICollectionViewDataSourc
 
 
 
+extension AchieveController: BackDelegate {
+    func Back(){
+        print("Back after delegate")
+        let transition = CATransition()
+        transition.duration = 0.25
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+        dismiss(animated: false)
+    }
+}
+
+
+
+
 extension AchieveController: UIScrollViewDelegate{
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -217,41 +248,28 @@ extension AchieveController: UIScrollViewDelegate{
 
 extension AchieveController {
     
-    func TopViewLayer(){
+    func SetSubviews(){
+        view.addSubview(topView)
+        view.addSubview(achieveCollection)
+    }
+    
+    func ActivateLayouts(){
+        let const: CGFloat = {if MainConstants.screenHeight > 700{return -50}else{return -20}}()
         NSLayoutConstraint.activate([
             topView.topAnchor.constraint(equalTo: view.topAnchor),
             topView.leftAnchor.constraint(equalTo: view.leftAnchor),
             topView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            
+            achieveCollection.topAnchor.constraint(equalTo: view.topAnchor, constant: const),
+            achieveCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            achieveCollection.leftAnchor.constraint(equalTo: view.leftAnchor),
+            achieveCollection.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
         
         topHeightConstraint = topView.heightAnchor.constraint(equalToConstant: 20)
         topHeightConstraint?.isActive = true
+        view.bringSubviewToFront(achieveCollection)
+        
     }
     
-    func CollectionLayer(){
-        achieveCollection.translatesAutoresizingMaskIntoConstraints = false
-        achieveCollection.alwaysBounceVertical = false
-        achieveCollection.backgroundColor = .clear
-        var const: Array<NSLayoutConstraint> = []
-        if MainConstants.screenHeight > 700 {
-            const.append(contentsOf: [
-                achieveCollection.topAnchor.constraint(equalTo: view.topAnchor, constant: -50),
-                achieveCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                achieveCollection.leftAnchor.constraint(equalTo: view.leftAnchor),
-                achieveCollection.rightAnchor.constraint(equalTo: view.rightAnchor)
-            ])
-        } else {
-            const.append(contentsOf: [
-                achieveCollection.topAnchor.constraint(equalTo: view.topAnchor, constant: -20),
-                achieveCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                achieveCollection.leftAnchor.constraint(equalTo: view.leftAnchor),
-                achieveCollection.rightAnchor.constraint(equalTo: view.rightAnchor)
-            ])
-        }
-        NSLayoutConstraint.activate(const)
-        view.bringSubviewToFront(achieveCollection)
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 1
-        layout.minimumLineSpacing = 1
-    }
 }

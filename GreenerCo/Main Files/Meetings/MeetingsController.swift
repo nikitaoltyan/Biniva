@@ -90,8 +90,9 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
         } else {
             let cell = meetingCollection.dequeueReusableCell(withReuseIdentifier: "TopViewCell", for: indexPath) as! TopViewCell
+            cell.SetRightConstraints()
             cell.mainLabel.text = "Встречи"
-            cell.delegate = self
+            cell.delegateMeeting = self
             cell.isUserInteractionEnabled = true
             return cell
         }

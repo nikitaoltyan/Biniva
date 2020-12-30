@@ -9,7 +9,8 @@ import UIKit
 
 class TopViewCell: UICollectionViewCell{
     
-    var delegate: AddMeetingDelegate?
+    var delegateMeeting: AddMeetingDelegate?
+    var delegateBack: BackDelegate?
     
     let topView: UIView = {
         let view = UIView()
@@ -31,6 +32,7 @@ class TopViewCell: UICollectionViewCell{
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = MainConstants.white
         view.layer.cornerRadius = 20
+        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return view
     }()
     
@@ -46,6 +48,19 @@ class TopViewCell: UICollectionViewCell{
         return view
     }()
     
+    let backImage: UIImageView = {
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 18, height: 25))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.isUserInteractionEnabled = true
+        image.tintColor = MainConstants.white
+        image.image = UIImage(systemName: "chevron.left")
+        return image
+    }()
+    
+    
+    var backImageWidthConstraint: NSLayoutConstraint?
+    var mainLabelLeftConstraint: NSLayoutConstraint?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         SetSubview()
@@ -60,11 +75,17 @@ class TopViewCell: UICollectionViewCell{
     override func awakeFromNib() {
         SetSubview()
         ActivateLayouts()
+        SetRightConstraints()
     }
     
     @objc func AddMeeting(){
         print("Add meeting after tap")
-        delegate?.addMeeting()
+        delegateMeeting?.addMeeting()
+    }
+    
+    @objc func Back(){
+        print("Back after tap")
+        delegateBack?.Back()
     }
 }
 
@@ -77,7 +98,9 @@ extension TopViewCell {
         self.addSubview(mainLabel)
         self.addSubview(mainView)
         self.addSubview(plusView)
+        self.addSubview(backImage)
         plusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AddMeeting)))
+        backImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Back)))
     }
     
     func ActivateLayouts(){
@@ -85,27 +108,52 @@ extension TopViewCell {
             topView.topAnchor.constraint(equalTo: self.topAnchor),
             topView.leftAnchor.constraint(equalTo: self.leftAnchor),
             topView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            topView.heightAnchor.constraint(equalToConstant: 200),
+            topView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            mainView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: -103),
+            mainView.topAnchor.constraint(equalTo: self.topAnchor, constant: 97),
             mainView.leftAnchor.constraint(equalTo: self.leftAnchor),
             mainView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            mainView.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: 50),
+            mainView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            backImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 52),
+            backImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
+            backImage.heightAnchor.constraint(equalToConstant: backImage.frame.height),
             
             mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 46),
-            mainLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            mainLabel.heightAnchor.constraint(equalToConstant: 39),
-            mainLabel.widthAnchor.constraint(equalToConstant: 232),
             
             plusView.centerYAnchor.constraint(equalTo: mainLabel.centerYAnchor),
             plusView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
             plusView.heightAnchor.constraint(equalToConstant: plusView.frame.height),
             plusView.widthAnchor.constraint(equalToConstant: plusView.frame.width)
         ])
+        
+        backImageWidthConstraint = backImage.widthAnchor.constraint(equalToConstant: backImage.frame.width)
+        mainLabelLeftConstraint = mainLabel.leftAnchor.constraint(equalTo: backImage.rightAnchor, constant: 0)
+        backImageWidthConstraint?.isActive = true
+        mainLabelLeftConstraint?.isActive = true
+    }
+    
+    func SetRightConstraints(){
+        if (plusView.isHidden) {
+            backImageWidthConstraint?.constant = backImage.frame.width
+            mainLabelLeftConstraint?.constant = 20
+            mainLabel.layoutIfNeeded()
+            backImage.layoutIfNeeded()
+        } else {
+            backImageWidthConstraint?.constant = 0
+            mainLabelLeftConstraint?.constant = 0
+            backImage.layoutIfNeeded()
+            mainLabel.layoutIfNeeded()
+
+        }
     }
     
 }
 
 protocol AddMeetingDelegate {
     func addMeeting()
+}
+
+protocol BackDelegate {
+    func Back()
 }

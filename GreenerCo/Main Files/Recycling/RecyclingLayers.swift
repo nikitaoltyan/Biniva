@@ -23,7 +23,7 @@ extension RecyclingController{
         AddSecondLayer()
         AddThirdLayer()
         mainView.bringSubviewToFront(plusView)
-        UserProfile()
+        AchieveLayout()
         ViewOpenCustomPickerView()
         AddImage()
     }
@@ -210,19 +210,20 @@ extension RecyclingController{
         customTable.backgroundColor = MainConstants.white
     }
     
-    func UserProfile(){
+    func AchieveLayout(){
         let userProfile = UIImageView()
         topBGView.addSubview(userProfile)
         userProfile.translatesAutoresizingMaskIntoConstraints = false
-        let scale = 40 as CGFloat
+        let scale = 30 as CGFloat
         NSLayoutConstraint.activate([
             userProfile.topAnchor.constraint(equalTo: topBGView.topAnchor, constant: 40),
             userProfile.rightAnchor.constraint(equalTo: topBGView.rightAnchor, constant: -20),
             userProfile.widthAnchor.constraint(equalToConstant: scale),
-            userProfile.heightAnchor.constraint(equalToConstant: scale)
+            userProfile.heightAnchor.constraint(equalToConstant: scale*0.9)
         ])
         profileImage = userProfile
-        profileImage.image = #imageLiteral(resourceName: "justin-kauffman-7_tRMnxWsUg-unsplash")
+        profileImage.image = UIImage(systemName: "crown.fill")
+        profileImage.tintColor = MainConstants.white
         profileImage.layer.masksToBounds = true
         profileImage.layer.cornerRadius = scale/2
         profileImage.isUserInteractionEnabled = true
