@@ -147,12 +147,7 @@ class MeetingViewController: UIViewController {
     
     func SetHeightOfComment(rows: Int){
         print("Rows: \(rows)")
-        guard rows<6 else {
-            return
-        }
-//        if rows < 6{
-//            return
-//        }
+        guard rows<6 else {return}
         if rows == numberOfRows{
             return
         } else {

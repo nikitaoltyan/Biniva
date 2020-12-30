@@ -8,6 +8,7 @@
 import UIKit
 
 class UserProfileController: UIViewController {
+    
 
     var scrollView: UIScrollView!
     let profileImageHeight = 140 as CGFloat
@@ -156,6 +157,19 @@ class UserProfileController: UIViewController {
         transition.duration = 0.3
         transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromRight
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(newVC, animated: false, completion: nil)
+        
+//        PresentPopUp()
+    }
+    
+    func PresentPopUp(){
+        let newVC = PopUpController()
+        newVC.modalPresentationStyle = .overFullScreen
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.fade
         transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
         view.window!.layer.add(transition, forKey: kCATransition)
         present(newVC, animated: false, completion: nil)

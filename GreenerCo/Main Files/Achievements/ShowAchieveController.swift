@@ -18,7 +18,7 @@ class ShowAchieveController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 242/255, green: 252/255, blue: 250/255, alpha: 1)
+        view.backgroundColor = MainConstants.white
         BackButton()
         AchieveImage()
         AchieveName()

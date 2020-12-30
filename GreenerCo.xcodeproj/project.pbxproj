@@ -54,7 +54,7 @@
 		5CFB623E259B246800F1C8C7 /* AddMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB623D259B246800F1C8C7 /* AddMapCell.swift */; };
 		5CFB6246259B415100F1C8C7 /* TopProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB6245259B415100F1C8C7 /* TopProgressView.swift */; };
 		5CFB624B259B92E800F1C8C7 /* HeadersViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB624A259B92E800F1C8C7 /* HeadersViews.swift */; };
-		5CFB6250259C49F500F1C8C7 /* NewAchieveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB624F259C49F500F1C8C7 /* NewAchieveView.swift */; };
+		5CFB6255259C8B0900F1C8C7 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB6254259C8B0900F1C8C7 /* PopUpController.swift */; };
 		5CFC3A0B2550702900068A69 /* CustomAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC3A0A2550702900068A69 /* CustomAddCell.swift */; };
 		5CFC3A0D2550703F00068A69 /* CustomAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC3A0C2550703F00068A69 /* CustomAddView.swift */; };
 /* End PBXBuildFile section */
@@ -130,7 +130,7 @@
 		5CFB623D259B246800F1C8C7 /* AddMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapCell.swift; sourceTree = "<group>"; };
 		5CFB6245259B415100F1C8C7 /* TopProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopProgressView.swift; sourceTree = "<group>"; };
 		5CFB624A259B92E800F1C8C7 /* HeadersViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersViews.swift; sourceTree = "<group>"; };
-		5CFB624F259C49F500F1C8C7 /* NewAchieveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAchieveView.swift; sourceTree = "<group>"; };
+		5CFB6254259C8B0900F1C8C7 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
 		5CFC3A0A2550702900068A69 /* CustomAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddCell.swift; sourceTree = "<group>"; };
 		5CFC3A0C2550703F00068A69 /* CustomAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,7 +214,7 @@
 				5C45915A254D55C1005AE26C /* Info.plist */,
 				5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */,
 				5C83A057255F959F005C2CAA /* SF-Pro.ttf */,
-				5CFB624F259C49F500F1C8C7 /* NewAchieveView.swift */,
+				5CFB6254259C8B0900F1C8C7 /* PopUpController.swift */,
 			);
 			path = GreenerCo;
 			sourceTree = "<group>";
@@ -557,7 +557,6 @@
 				5CFB622E259A447200F1C8C7 /* AddMeetingController.swift in Sources */,
 				5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */,
 				5CFC3A0D2550703F00068A69 /* CustomAddView.swift in Sources */,
-				5CFB6250259C49F500F1C8C7 /* NewAchieveView.swift in Sources */,
 				5CF2E63E255D944400B4EFE3 /* MeetingsController.swift in Sources */,
 				5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */,
 				5C83A0722562E616005C2CAA /* AboutUsController.swift in Sources */,
@@ -570,6 +569,7 @@
 				5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */,
 				5C54954C255857FB00E5140C /* TopViewCell.swift in Sources */,
 				5C83A091256420FD005C2CAA /* ChangeButtonView.swift in Sources */,
+				5CFB6255259C8B0900F1C8C7 /* PopUpController.swift in Sources */,
 				5C12A743255452D700A59D8E /* StatsTopBGView.swift in Sources */,
 				5C12A73F2554520500A59D8E /* StatsController.swift in Sources */,
 				5C1D01FA255C26610058D276 /* ShowAchieveController.swift in Sources */,

@@ -49,7 +49,6 @@ extension MeetingsController: AddMeetingDelegate {
     
     func addMeeting(){
         print("Add meeting")
-        
         let newVC = AddMeetingController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()

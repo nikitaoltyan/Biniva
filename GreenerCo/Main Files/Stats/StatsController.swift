@@ -103,6 +103,7 @@ class StatsController: UIViewController, UIScrollViewDelegate, UITableViewDelega
     
     func TableLayer(){
         statsTable.backgroundColor = MainConstants.white
+        statsTable.register(StatsCell.self, forCellReuseIdentifier: "StatsCell")
         statsTable.translatesAutoresizingMaskIntoConstraints = false
         let tableHeight = scrollViewContentHeight - statsView.layer.position.x - CGFloat(350+100) + 48
         scrollChangePoint = statsView.layer.position.y + 350 + 200 - scrollBorder
