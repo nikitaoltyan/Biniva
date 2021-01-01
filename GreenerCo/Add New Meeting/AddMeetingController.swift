@@ -19,6 +19,7 @@ class AddMeetingController: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.showsHorizontalScrollIndicator = false
         collection.isPagingEnabled = true
+        collection.isScrollEnabled = false
         
         collection.register(AddMapCell.self, forCellWithReuseIdentifier: "AddMapCell")
         collection.register(FirstAddCell.self, forCellWithReuseIdentifier: "FirstAddCell")
@@ -57,15 +58,17 @@ class AddMeetingController: UIViewController {
 extension AddMeetingController: TopProgressDelegate {
     
     func CloseView() {
-        print("Close view")
+        let transition = CATransition()
+        transition.duration = 0.25
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+        dismiss(animated: false)
     }
     
-    func NextSlide() {
-        print("Next slide")
-    }
-    
-    func PrevSlide() {
-        print("Prev slide")
+    func Scroll(slide: Int){
+        let indexPath = IndexPath(item: slide, section: 0)
+        mainCollection.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
     }
     
 }
@@ -101,15 +104,6 @@ extension AddMeetingController: UICollectionViewDelegate, UICollectionViewDataSo
 
 
 
-extension AddMeetingController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        topView.slide = Int(mainCollection.contentOffset.x/MainConstants.screenWidth)
-        topView.ChangeImage()
-    }
-}
-
-
-
 
 extension AddMeetingController {
     
@@ -119,6 +113,7 @@ extension AddMeetingController {
     }
     
     func ActivateLayouts(){
+        let topViewHeight: CGFloat = {if MainConstants.screenHeight>700{return 90}else{return 75}}()
         NSLayoutConstraint.activate([
             mainCollection.topAnchor.constraint(equalTo: view.topAnchor),
             mainCollection.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -128,7 +123,7 @@ extension AddMeetingController {
             topView.topAnchor.constraint(equalTo: view.topAnchor),
             topView.leftAnchor.constraint(equalTo: view.leftAnchor),
             topView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            topView.heightAnchor.constraint(equalToConstant: 90)
+            topView.heightAnchor.constraint(equalToConstant: topViewHeight)
         ])
     }
 }
@@ -137,7 +132,6 @@ extension AddMeetingController {
 protocol TopProgressDelegate {
     
     func CloseView()
-    func NextSlide()
-    func PrevSlide()
+    func Scroll(slide: Int)
     
 }
