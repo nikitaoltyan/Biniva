@@ -9,11 +9,15 @@ import UIKit
 
 class UserProfileController: UIViewController {
     
-
-    var scrollView: UIScrollView!
-    let profileImageHeight = 140 as CGFloat
-    var meetCollectionLeftLayoutConstraint: NSLayoutConstraint!
-    var borderSelectedLeftLayoutConstraint: NSLayoutConstraint!
+    lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.contentSize = CGSize(width: MainConstants.screenWidth, height: 1500)
+        scroll.delegate = self
+        scroll.bounces = false
+        scroll.showsVerticalScrollIndicator = true
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
     
     let backButton: UIButton = {
         let button = UIButton()
@@ -33,10 +37,12 @@ class UserProfileController: UIViewController {
     }()
     
     let profileImage: UIImageView = {
-        let image = UIImageView()
+        let imageScale: CGFloat = 140
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: imageScale, height: imageScale))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = #imageLiteral(resourceName: "justin-kauffman-7_tRMnxWsUg-unsplash")
         image.layer.masksToBounds = true
+        image.layer.cornerRadius = imageScale/2
         return image
     }()
     
@@ -87,15 +93,6 @@ class UserProfileController: UIViewController {
         return label
     }()
     
-    let meetingsLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = MainConstants.nearBlack
-        label.text = "Meetings"
-        label.font = UIFont.init(name: "SFPro-Heavy", size: 30.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     let meetLabelButton: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -139,15 +136,49 @@ class UserProfileController: UIViewController {
         return view
     }()
     
-    var meetCollection: UICollectionView!
-    var joinedCollection: UICollectionView!
+    lazy var meetCollection: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.scrollDirection = .vertical
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = MainConstants.white
+        collection.delegate = self
+        collection.dataSource = self
+        collection.showsVerticalScrollIndicator = true
+        collection.tag = 0
+        return collection
+    }()
+    
+    lazy var joinedCollection: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.scrollDirection = .vertical
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = MainConstants.white
+        collection.delegate = self
+        collection.dataSource = self
+        collection.showsVerticalScrollIndicator = true
+        collection.tag = 1
+        return collection
+    }()
+    
+    var editLabel: UILabel!
+    
+    let profileImageHeight = 140 as CGFloat
+    var meetCollectionLeftLayoutConstraint: NSLayoutConstraint!
+    var borderSelectedLeftLayoutConstraint: NSLayoutConstraint!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = MainConstants.white
-        ActivateConstraints()
+        SetSubviews()
+        ActivateLayouts()
     }
+    
+    
+    
     
     @objc func EditOpen(){
         print("Edit open")
@@ -226,6 +257,11 @@ class UserProfileController: UIViewController {
     
 }
 
+
+
+
+
+
 extension UserProfileController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -255,6 +291,10 @@ extension UserProfileController: UICollectionViewDelegate, UICollectionViewDataS
     
 }
 
+
+
+
+
 extension UserProfileController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -271,20 +311,14 @@ extension UserProfileController: UIScrollViewDelegate {
     }
 }
 
+
+
+
+
 extension UserProfileController {
     
-    func ActivateConstraints(){
-        let scroll: UIScrollView = {
-            let scroll = UIScrollView()
-            scroll.contentSize = CGSize(width: MainConstants.screenWidth, height: 1500)
-            scroll.delegate = self
-            scroll.bounces = false
-            scroll.showsVerticalScrollIndicator = true
-            scroll.translatesAutoresizingMaskIntoConstraints = false
-            return scroll
-        }()
-        
-        let editLabel: UILabel = {
+    func SetSubviews(){
+        let label: UILabel = {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.textColor = MainConstants.nearBlack
@@ -292,38 +326,12 @@ extension UserProfileController {
             label.font = UIFont.init(name: "SFPro", size: 20.0)
             return label
         }()
-        
-        let collectionMeet: UICollectionView = {
-            let layout = UICollectionViewFlowLayout()
-            let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            layout.scrollDirection = .vertical
-            collection.translatesAutoresizingMaskIntoConstraints = false
-            collection.backgroundColor = MainConstants.white
-            collection.delegate = self
-            collection.dataSource = self
-            collection.showsVerticalScrollIndicator = true
-            collection.tag = 0
-            return collection
-        }()
-        
-        let collectionJoined: UICollectionView = {
-            let layout = UICollectionViewFlowLayout()
-            let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            layout.scrollDirection = .vertical
-            collection.translatesAutoresizingMaskIntoConstraints = false
-            collection.backgroundColor = MainConstants.white
-            collection.delegate = self
-            collection.dataSource = self
-            collection.showsVerticalScrollIndicator = true
-            collection.tag = 1
-            return collection
-        }()
-        meetCollection = collectionMeet
-        joinedCollection = collectionJoined
+        editLabel = label
+
         meetCollection.register(MeetingCell.self, forCellWithReuseIdentifier: "MeetingCell")
         joinedCollection.register(MeetingCell.self, forCellWithReuseIdentifier: "MeetingCell")
         
-        scrollView = scroll
+        
         view.addSubview(scrollView)
         scrollView.addSubview(backButton)
         scrollView.addSubview(nickname)
@@ -332,7 +340,6 @@ extension UserProfileController {
         scrollView.addSubview(userCity)
         scrollView.addSubview(editView)
         scrollView.addSubview(desc)
-        scrollView.addSubview(meetingsLabel)
         scrollView.addSubview(meetLabelButton)
         scrollView.addSubview(joinedLabelButton)
         scrollView.addSubview(borderViewHorizontal)
@@ -346,14 +353,15 @@ extension UserProfileController {
         backButton.addTarget(self, action: #selector(BackAction), for: .touchUpInside)
         editView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(EditOpen)))
         meetLabelButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MeetOpen)))
-        meetLabelButton.isUserInteractionEnabled = false
         joinedLabelButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(JoinedOpen)))
+        
+        meetLabelButton.isUserInteractionEnabled = false
         meetLabelButton.transform = CGAffineTransform(scaleX: 1.16, y: 1.16)
         meetLabelButton.textColor = .black
-        profileImage.layer.cornerRadius = profileImageHeight/2
-        
-        var const: Array<NSLayoutConstraint> = []
-        const.append(contentsOf: [
+    }
+    
+    func ActivateLayouts(){
+        NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -390,10 +398,7 @@ extension UserProfileController {
             desc.leftAnchor.constraint(equalTo: profileImage.leftAnchor),
             desc.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
             
-            meetingsLabel.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 28),
-            meetingsLabel.leftAnchor.constraint(equalTo: profileImage.leftAnchor),
-            
-            meetLabelButton.topAnchor.constraint(equalTo: meetingsLabel.bottomAnchor, constant: 15),
+            meetLabelButton.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 15),
             meetLabelButton.leftAnchor.constraint(equalTo: view.leftAnchor),
             meetLabelButton.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth/2),
             meetLabelButton.heightAnchor.constraint(equalToConstant: 30),
@@ -426,13 +431,10 @@ extension UserProfileController {
             joinedCollection.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth),
             joinedCollection.heightAnchor.constraint(equalToConstant: MainConstants.screenHeight+10),
         ])
-        NSLayoutConstraint.activate(const)
         
         meetCollectionLeftLayoutConstraint = meetCollection.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0)
         borderSelectedLeftLayoutConstraint = borderSelected.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0)
         meetCollectionLeftLayoutConstraint.isActive = true
         borderSelectedLeftLayoutConstraint.isActive = true
     }
-
-
 }
