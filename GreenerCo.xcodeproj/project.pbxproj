@@ -22,8 +22,6 @@
 		5C459164254D55C2005AE26C /* GreenerCoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C459163254D55C2005AE26C /* GreenerCoTests.swift */; };
 		5C45916F254D55C2005AE26C /* GreenerCoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45916E254D55C2005AE26C /* GreenerCoUITests.swift */; };
 		5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45917D254D59D3005AE26C /* RecyclingController.swift */; };
-		5C459182254D6A0A005AE26C /* RecyclingTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C459181254D6A0A005AE26C /* RecyclingTopView.swift */; };
-		5C459184254D6A4A005AE26C /* RecyclingMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C459183254D6A4A005AE26C /* RecyclingMainView.swift */; };
 		5C513FD72554845A00C1B851 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C513FD62554845A00C1B851 /* StatsView.swift */; };
 		5C54953E2558251A00E5140C /* AchieveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C54953D2558251A00E5140C /* AchieveController.swift */; };
 		5C5495442558253900E5140C /* AchieveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5495432558253900E5140C /* AchieveCell.swift */; };
@@ -43,9 +41,10 @@
 		5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */; };
 		5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */; };
 		5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */; };
-		5CC7C04E254F21CD0069E660 /* AddSecondItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC7C04D254F21CD0069E660 /* AddSecondItemView.swift */; };
-		5CC7C050254F21E40069E660 /* AddThirdItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC7C04F254F21E40069E660 /* AddThirdItemView.swift */; };
 		5CD085D5255198C7006CA751 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD085D4255198C7006CA751 /* ProfileController.swift */; };
+		5CE7217225A07E0700ECE84F /* RegularTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7217125A07E0700ECE84F /* RegularTopView.swift */; };
+		5CE7217A25A2002F00ECE84F /* CustomPickerOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7217925A2002F00ECE84F /* CustomPickerOpenView.swift */; };
+		5CE7218525A2047500ECE84F /* ProgressImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7218425A2047500ECE84F /* ProgressImageView.swift */; };
 		5CF2E63E255D944400B4EFE3 /* MeetingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2E63D255D944400B4EFE3 /* MeetingsController.swift */; };
 		5CF2E64A255D946600B4EFE3 /* MeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2E649255D946600B4EFE3 /* MeetingCell.swift */; };
 		5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */; };
@@ -98,8 +97,6 @@
 		5C45916E254D55C2005AE26C /* GreenerCoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenerCoUITests.swift; sourceTree = "<group>"; };
 		5C459170254D55C2005AE26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C45917D254D59D3005AE26C /* RecyclingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingController.swift; sourceTree = "<group>"; };
-		5C459181254D6A0A005AE26C /* RecyclingTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingTopView.swift; sourceTree = "<group>"; };
-		5C459183254D6A4A005AE26C /* RecyclingMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingMainView.swift; sourceTree = "<group>"; };
 		5C513FD62554845A00C1B851 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		5C54953D2558251A00E5140C /* AchieveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchieveController.swift; sourceTree = "<group>"; };
 		5C5495432558253900E5140C /* AchieveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchieveCell.swift; sourceTree = "<group>"; };
@@ -119,9 +116,10 @@
 		5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePlusView.swift; sourceTree = "<group>"; };
-		5CC7C04D254F21CD0069E660 /* AddSecondItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSecondItemView.swift; sourceTree = "<group>"; };
-		5CC7C04F254F21E40069E660 /* AddThirdItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThirdItemView.swift; sourceTree = "<group>"; };
 		5CD085D4255198C7006CA751 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		5CE7217125A07E0700ECE84F /* RegularTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularTopView.swift; sourceTree = "<group>"; };
+		5CE7217925A2002F00ECE84F /* CustomPickerOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerOpenView.swift; sourceTree = "<group>"; };
+		5CE7218425A2047500ECE84F /* ProgressImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressImageView.swift; sourceTree = "<group>"; };
 		5CF2E63D255D944400B4EFE3 /* MeetingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsController.swift; sourceTree = "<group>"; };
 		5CF2E649255D946600B4EFE3 /* MeetingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCell.swift; sourceTree = "<group>"; };
 		5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
@@ -263,9 +261,12 @@
 		5C459180254D69EA005AE26C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5C459181254D6A0A005AE26C /* RecyclingTopView.swift */,
-				5C459183254D6A4A005AE26C /* RecyclingMainView.swift */,
-				5CC7C04C254F21A80069E660 /* Add Views */,
+				5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */,
+				5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */,
+				5CFC3A0C2550703F00068A69 /* CustomAddView.swift */,
+				5CE7217925A2002F00ECE84F /* CustomPickerOpenView.swift */,
+				5CE7217125A07E0700ECE84F /* RegularTopView.swift */,
+				5CE7218425A2047500ECE84F /* ProgressImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -340,18 +341,6 @@
 				5C448739258A3BF200474BFF /* ReplyCommentController.swift */,
 			);
 			path = "Meeting View";
-			sourceTree = "<group>";
-		};
-		5CC7C04C254F21A80069E660 /* Add Views */ = {
-			isa = PBXGroup;
-			children = (
-				5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */,
-				5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */,
-				5CC7C04D254F21CD0069E660 /* AddSecondItemView.swift */,
-				5CC7C04F254F21E40069E660 /* AddThirdItemView.swift */,
-				5CFC3A0C2550703F00068A69 /* CustomAddView.swift */,
-			);
-			path = "Add Views";
 			sourceTree = "<group>";
 		};
 		5CD085D3255198A9006CA751 /* Profile */ = {
@@ -543,7 +532,6 @@
 				5CFC3A0B2550702900068A69 /* CustomAddCell.swift in Sources */,
 				5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */,
 				5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */,
-				5CC7C04E254F21CD0069E660 /* AddSecondItemView.swift in Sources */,
 				5C83A0802564096C005C2CAA /* ChangeButtonsController.swift in Sources */,
 				5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */,
 				5C83A06925601F4B005C2CAA /* ContactUsController.swift in Sources */,
@@ -556,15 +544,13 @@
 				5CFB624B259B92E800F1C8C7 /* HeadersViews.swift in Sources */,
 				5CFB622E259A447200F1C8C7 /* AddMeetingController.swift in Sources */,
 				5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */,
+				5CE7218525A2047500ECE84F /* ProgressImageView.swift in Sources */,
 				5CFC3A0D2550703F00068A69 /* CustomAddView.swift in Sources */,
 				5CF2E63E255D944400B4EFE3 /* MeetingsController.swift in Sources */,
 				5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */,
 				5C83A0722562E616005C2CAA /* AboutUsController.swift in Sources */,
 				5C6C2B022581477B00B653AD /* MessageCell.swift in Sources */,
 				5C448744258B8ED000474BFF /* UserProfileController.swift in Sources */,
-				5C459184254D6A4A005AE26C /* RecyclingMainView.swift in Sources */,
-				5CC7C050254F21E40069E660 /* AddThirdItemView.swift in Sources */,
-				5C459182254D6A0A005AE26C /* RecyclingTopView.swift in Sources */,
 				5C5495442558253900E5140C /* AchieveCell.swift in Sources */,
 				5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */,
 				5C54954C255857FB00E5140C /* TopViewCell.swift in Sources */,
@@ -573,7 +559,9 @@
 				5C12A743255452D700A59D8E /* StatsTopBGView.swift in Sources */,
 				5C12A73F2554520500A59D8E /* StatsController.swift in Sources */,
 				5C1D01FA255C26610058D276 /* ShowAchieveController.swift in Sources */,
+				5CE7217225A07E0700ECE84F /* RegularTopView.swift in Sources */,
 				5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */,
+				5CE7217A25A2002F00ECE84F /* CustomPickerOpenView.swift in Sources */,
 				5C82772B2556C02E00816D85 /* StatsCell.swift in Sources */,
 				5C12A745255452E500A59D8E /* StatsMainBGView.swift in Sources */,
 				5CFB6239259A4DB100F1C8C7 /* FirstAddCell.swift in Sources */,

@@ -17,64 +17,12 @@
                     <view key="view" contentMode="scaleToFill" id="kC0-Kc-nq7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e55-Mb-Th8" customClass="RecyclingTopView" customModule="GreenerCo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="119"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.14509803921568626" green="0.29019607843137252" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9e1-MJ-lIC" customClass="RecyclingMainView" customModule="GreenerCo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="86" width="414" height="727"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.96083050969999995" green="0.98825436830000002" blue="0.98430615659999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1NA-xk-h53" customClass="CustomAddView" customModule="GreenerCo" customModuleProvider="target">
-                                <rect key="frame" x="53" y="299" width="308" height="297"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ga0-bF-tJC">
-                                        <rect key="frame" x="0.0" y="60" width="308" height="237"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomAddCell" id="GKR-dw-qkb" customClass="CustomAddCell" customModule="GreenerCo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="308" height="43.5"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GKR-dw-qkb" id="upP-n4-5Rb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="308" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <connections>
-                                            <outlet property="dataSource" destination="60p-IN-9rJ" id="ZAS-jY-V1T"/>
-                                            <outlet property="delegate" destination="60p-IN-9rJ" id="iTO-TI-o7v"/>
-                                        </connections>
-                                    </tableView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Переработка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIF-Ym-gZm">
-                                <rect key="frame" x="10" y="39" width="290" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Palatino-Bold" family="Palatino" pointSize="35"/>
-                                <color key="textColor" red="0.95294117649999999" green="0.98823529409999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Dqc-aF-TMr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Переработка" image="arrow.up.bin" catalog="system" selectedImage="arrow.up.bin.fill" id="fgn-nn-B4n">
                         <color key="badgeColor" red="1" green="0.74287382219999998" blue="0.28992924289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBarItem>
-                    <connections>
-                        <outlet property="controllerLabel" destination="sIF-Ym-gZm" id="Y6f-7b-uEM"/>
-                        <outlet property="customAddView" destination="1NA-xk-h53" id="Bs7-JC-7eq"/>
-                        <outlet property="customTable" destination="ga0-bF-tJC" id="BB8-8A-hY9"/>
-                        <outlet property="mainView" destination="9e1-MJ-lIC" id="deM-GB-020"/>
-                        <outlet property="topBGView" destination="e55-Mb-Th8" id="0lN-9p-t4Z"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJB-Nn-UdU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -244,11 +192,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VYS-Xz-XCd" customClass="StatsTopBGView" customModule="GreenerCo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.18449920419999999" green="0.3576093018" blue="0.2744961977" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OJU-EA-Hqm" customClass="StatsMainBGView" customModule="GreenerCo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="106" width="414" height="707"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -282,7 +225,6 @@
                         <outlet property="scrollView" destination="0re-rk-OtV" id="CGu-rN-jFh"/>
                         <outlet property="statsTable" destination="tdr-TE-YMy" id="VWS-ce-43v"/>
                         <outlet property="statsView" destination="kyl-Sl-TNp" id="MM5-ig-jIe"/>
-                        <outlet property="topBGView" destination="VYS-Xz-XCd" id="d8n-9i-Yw1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PJc-WJ-b87" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

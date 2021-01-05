@@ -8,10 +8,13 @@
 import UIKit
 
 class RecyclingController: UIViewController {
-
-    @IBOutlet weak var controllerLabel: UILabel!
-    @IBOutlet weak var topBGView: UIView!
-    @IBOutlet weak var mainView: UIView!
+    
+    let topView: RegularTopView = {
+        let view = RegularTopView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.pageLabel.text = "Page Label Text"
+        return view
+    }()
 
     let plusView: CompletePlusView = {
         var width: CGFloat!
@@ -52,10 +55,26 @@ class RecyclingController: UIViewController {
         return view
     }()
     
-    @IBOutlet weak var customAddView: CustomAddView!
-    @IBOutlet weak var customTable: UITableView!
-    var profileImage: UIImageView!
-    var openCustomView: UIView!
+    let openCustomView: CustomPickerOpenView = {
+        let scale: CGFloat = 35
+        let view = CustomPickerOpenView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
+        return view
+    }()
+    
+    let progressView: ProgressImageView = {
+        let view = ProgressImageView()
+        return view
+    }()
+    
+    let customAddView: CustomAddView = {
+        let viewHeight = MainConstants.screenHeight/1.9
+        let view = CustomAddView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: viewHeight))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 20
+        return view
+    }()
+
     var pickedView: UIView!
     var pickedImage: UIImageView!
     var bgRecyclingBin: UIView!
@@ -68,11 +87,10 @@ class RecyclingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("View height: \(UIScreen.main.bounds.height)")
+        view.backgroundColor = MainConstants.white
         PopulateMaterialsObject()
-        controllerLabel.text = "Переработка"
-        controllerLabel.font = UIFont.init(name: "Palatino-Bold", size: 35.0)
-        PerformLayers()
+        SetSubviews()
+        ActivateLayouts()
     }
     
     func ChangeColor(){
@@ -102,8 +120,8 @@ class RecyclingController: UIViewController {
                 self.addThirdItemView.center.y += movement
                 self.plusView.horizontalView.transform = CGAffineTransform.identity
                 self.plusView.verticalView.transform = CGAffineTransform.identity
-                self.bgRecyclingBin.backgroundColor = self.bgRecyclingBin.backgroundColor?.withAlphaComponent(0.1)
-                self.fillRecylingBin.backgroundColor = self.fillRecylingBin.backgroundColor?.withAlphaComponent(1)
+                self.progressView.backgroundColor = self.progressView.backgroundColor?.withAlphaComponent(0.1)
+                self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(1)
             }, completion: { finished in
                 self.addFirstItemView.isHidden = true
                 self.addSecondItemView.isHidden = true
@@ -127,8 +145,8 @@ class RecyclingController: UIViewController {
                 self.addThirdItemView.center.y -= movement
                 self.plusView.horizontalView.transform = CGAffineTransform(rotationAngle: .pi/4)
                 self.plusView.verticalView.transform = CGAffineTransform(rotationAngle: .pi/4)
-                self.bgRecyclingBin.backgroundColor = self.bgRecyclingBin.backgroundColor?.withAlphaComponent(0.05)
-                self.fillRecylingBin.backgroundColor = self.fillRecylingBin.backgroundColor?.withAlphaComponent(0.2)
+                self.progressView.backgroundColor = self.progressView.backgroundColor?.withAlphaComponent(0.05)
+                self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(0.2)
             }, completion: { finished in
                 self.isAddMenuActivated = true
                 print("Animation completed")
@@ -154,9 +172,9 @@ class RecyclingController: UIViewController {
         customAddView.isHidden = false
         openCustomView.isHidden = true
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-            self.customAddView?.center.y -= self.customAddView.frame.height
-            self.bgRecyclingBin.backgroundColor = self.bgRecyclingBin.backgroundColor?.withAlphaComponent(0.05)
-            self.fillRecylingBin.backgroundColor = self.fillRecylingBin.backgroundColor?.withAlphaComponent(0.2)
+            self.customAddView.center.y -= self.customAddView.frame.height
+            self.progressView.backgroundColor = self.progressView.backgroundColor?.withAlphaComponent(0.05)
+            self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(0.2)
         }, completion: { finished in
             print("Animation completed")
         })
@@ -168,8 +186,8 @@ class RecyclingController: UIViewController {
             case .down:
                 UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
                     self.customAddView.center.y += self.customAddView.frame.height
-                    self.bgRecyclingBin.backgroundColor = self.bgRecyclingBin.backgroundColor?.withAlphaComponent(0.1)
-                    self.fillRecylingBin.backgroundColor = self.fillRecylingBin.backgroundColor?.withAlphaComponent(1)
+                    self.progressView.backgroundColor = self.progressView.backgroundColor?.withAlphaComponent(0.1)
+                    self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(1)
                 }, completion: { finished in
                     self.openCustomView.isHidden = false
                     self.customAddView.isHidden = true
@@ -188,33 +206,37 @@ class RecyclingController: UIViewController {
             toList.name = MaterialsObjectItems.name[count]
             materials.append(toList)
         }
-        customTable.reloadData()
+//        customTable.reloadData()
     }
 
 }
 
-extension RecyclingController: UITableViewDelegate, UITableViewDataSource{
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return materials.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(70)
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = customTable.dequeueReusableCell(withIdentifier: "CustomAddCell", for: indexPath) as! CustomAddCell
-        cell.itemColorView.backgroundColor = materials[indexPath.row].color
-        cell.itemImage.image = materials[indexPath.row].image
-        cell.itemLabel.text = materials[indexPath.row].name
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        pickedImage.image = materials[indexPath.row].image
-        pickedView.backgroundColor = materials[indexPath.row].color
-        print("View center position. y = \(customAddView.center.y), x = \(customAddView.center.x)")
-    }
-}
+
+
+
+
+//extension RecyclingController: UITableViewDelegate, UITableViewDataSource{
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return materials.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return CGFloat(70)
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = customTable.dequeueReusableCell(withIdentifier: "CustomAddCell", for: indexPath) as! CustomAddCell
+//        cell.itemColorView.backgroundColor = materials[indexPath.row].color
+//        cell.itemImage.image = materials[indexPath.row].image
+//        cell.itemLabel.text = materials[indexPath.row].name
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        pickedImage.image = materials[indexPath.row].image
+//        pickedView.backgroundColor = materials[indexPath.row].color
+//        print("View center position. y = \(customAddView.center.y), x = \(customAddView.center.x)")
+//    }
+//}
 
