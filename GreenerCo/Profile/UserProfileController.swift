@@ -20,14 +20,15 @@ class UserProfileController: UIViewController {
     }()
     
     let backButton: UIButton = {
-        let button = UIButton()
+        let scale: CGFloat = 30
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
         button.tintColor = MainConstants.nearBlack
         button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    let nickname: UILabel = {
+    let username: UILabel = {
         let label = UILabel()
         label.textColor = MainConstants.nearBlack
         label.text = "@nikitaoltyan"
@@ -162,13 +163,21 @@ class UserProfileController: UIViewController {
         return collection
     }()
     
-    var editLabel: UILabel!
+    let editLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = MainConstants.nearBlack
+        label.text = "Изменить"
+        label.font = UIFont.init(name: "SFPro", size: 20.0)
+        return label
+    }()
     
-    let profileImageHeight = 140 as CGFloat
-    var meetCollectionLeftLayoutConstraint: NSLayoutConstraint!
-    var borderSelectedLeftLayoutConstraint: NSLayoutConstraint!
+    var meetCollectionLeftLayoutConstraint: NSLayoutConstraint?
+    var borderSelectedLeftLayoutConstraint: NSLayoutConstraint?
+    var backWidthLayoutConstraint: NSLayoutConstraint?
+    var usernameLeftLayoutConstraint: NSLayoutConstraint?
     
-    
+    var userId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,6 +187,21 @@ class UserProfileController: UIViewController {
     }
     
     
+    
+    func PlaceBackButton(withUserId userId: String){
+//        End fucntion after Firebase connection.
+        switch userId{
+        case self.userId:
+            self.backWidthLayoutConstraint?.constant = 0
+            self.usernameLeftLayoutConstraint?.constant = 0
+            view.layoutIfNeeded()
+        default:
+            self.backWidthLayoutConstraint?.constant = self.backButton.frame.width
+            self.usernameLeftLayoutConstraint?.constant = 8
+            view.layoutIfNeeded()
+        }
+        
+    }
     
     
     @objc func EditOpen(){
@@ -191,10 +215,10 @@ class UserProfileController: UIViewController {
         transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
         view.window!.layer.add(transition, forKey: kCATransition)
         present(newVC, animated: false, completion: nil)
-        
-//        PresentPopUp()
     }
     
+    
+//    Test function for PopUpController. Should not be here.
     func PresentPopUp(){
         let newVC = PopUpController()
         newVC.modalPresentationStyle = .overFullScreen
@@ -205,6 +229,7 @@ class UserProfileController: UIViewController {
         view.window!.layer.add(transition, forKey: kCATransition)
         present(newVC, animated: false, completion: nil)
     }
+    
     
     @objc func MeetOpen(){
         print("Meet open")
@@ -217,8 +242,8 @@ class UserProfileController: UIViewController {
             self.joinedLabelButton.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.joinedLabelButton.textColor = MainConstants.nearBlack
         }, completion: { finished in
-            self.meetCollectionLeftLayoutConstraint.constant += MainConstants.screenWidth
-            self.borderSelectedLeftLayoutConstraint.constant -= MainConstants.screenWidth/2
+            self.meetCollectionLeftLayoutConstraint?.constant += MainConstants.screenWidth
+            self.borderSelectedLeftLayoutConstraint?.constant -= MainConstants.screenWidth/2
             self.meetCollection.layoutIfNeeded()
             self.borderSelected.layoutIfNeeded()
             self.joinedLabelButton.isUserInteractionEnabled = true
@@ -237,8 +262,8 @@ class UserProfileController: UIViewController {
             self.meetLabelButton.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.meetLabelButton.textColor = MainConstants.nearBlack
         }, completion: { finished in
-            self.meetCollectionLeftLayoutConstraint.constant -= MainConstants.screenWidth
-            self.borderSelectedLeftLayoutConstraint.constant += MainConstants.screenWidth/2
+            self.meetCollectionLeftLayoutConstraint?.constant -= MainConstants.screenWidth
+            self.borderSelectedLeftLayoutConstraint?.constant += MainConstants.screenWidth/2
             self.meetCollection.layoutIfNeeded()
             self.borderSelected.layoutIfNeeded()
             self.joinedLabelButton.isUserInteractionEnabled = false
@@ -318,23 +343,12 @@ extension UserProfileController: UIScrollViewDelegate {
 extension UserProfileController {
     
     func SetSubviews(){
-        let label: UILabel = {
-            let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.textColor = MainConstants.nearBlack
-            label.text = "Изменить"
-            label.font = UIFont.init(name: "SFPro", size: 20.0)
-            return label
-        }()
-        editLabel = label
-
         meetCollection.register(MeetingCell.self, forCellWithReuseIdentifier: "MeetingCell")
         joinedCollection.register(MeetingCell.self, forCellWithReuseIdentifier: "MeetingCell")
         
-        
         view.addSubview(scrollView)
         scrollView.addSubview(backButton)
-        scrollView.addSubview(nickname)
+        scrollView.addSubview(username)
         scrollView.addSubview(profileImage)
         scrollView.addSubview(userName)
         scrollView.addSubview(userCity)
@@ -367,18 +381,18 @@ extension UserProfileController {
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
             
+//            backButton width constraint on the bottom of the fucntion.
             backButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 25),
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
-            backButton.heightAnchor.constraint(equalToConstant: 30),
-            backButton.widthAnchor.constraint(equalToConstant: 30),
+            backButton.heightAnchor.constraint(equalToConstant: backButton.frame.height),
             
-            nickname.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
-            nickname.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: 8),
+//            username left constraint on the bottom of the fucntion.
+            username.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
             
             profileImage.leftAnchor.constraint(equalTo: backButton.leftAnchor),
             profileImage.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 30),
-            profileImage.heightAnchor.constraint(equalToConstant: profileImageHeight),
-            profileImage.widthAnchor.constraint(equalToConstant: profileImageHeight),
+            profileImage.heightAnchor.constraint(equalToConstant: profileImage.frame.height),
+            profileImage.widthAnchor.constraint(equalToConstant: profileImage.frame.width),
             
             userName.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 20),
             userName.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 10),
@@ -418,10 +432,12 @@ extension UserProfileController {
             borderViewVertical.leftAnchor.constraint(equalTo: meetLabelButton.rightAnchor, constant: -0.5),
             borderViewVertical.widthAnchor.constraint(equalToConstant: 1),
             
+//            borderSelected left layout constraint on the bottom of the fucntion.
             borderSelected.topAnchor.constraint(equalTo: borderViewHorizontal.topAnchor),
             borderSelected.heightAnchor.constraint(equalToConstant: 1.5),
             borderSelected.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth/2),
             
+//            meetCollection left layout constraint on the bottom of the fucntion.
             meetCollection.topAnchor.constraint(equalTo: borderViewHorizontal.bottomAnchor),
             meetCollection.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth),
             meetCollection.heightAnchor.constraint(equalToConstant: MainConstants.screenHeight+10),
@@ -432,9 +448,14 @@ extension UserProfileController {
             joinedCollection.heightAnchor.constraint(equalToConstant: MainConstants.screenHeight+10),
         ])
         
+        backWidthLayoutConstraint = backButton.widthAnchor.constraint(equalToConstant: backButton.frame.width)
+        usernameLeftLayoutConstraint = username.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: 8)
         meetCollectionLeftLayoutConstraint = meetCollection.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0)
         borderSelectedLeftLayoutConstraint = borderSelected.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0)
-        meetCollectionLeftLayoutConstraint.isActive = true
-        borderSelectedLeftLayoutConstraint.isActive = true
+        
+        backWidthLayoutConstraint?.isActive = true
+        usernameLeftLayoutConstraint?.isActive = true
+        meetCollectionLeftLayoutConstraint?.isActive = true
+        borderSelectedLeftLayoutConstraint?.isActive = true
     }
 }

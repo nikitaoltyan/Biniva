@@ -12,13 +12,6 @@ class TopViewCell: UICollectionViewCell{
     var delegateMeeting: AddMeetingDelegate?
     var delegateBack: BackDelegate?
     
-    let topView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = MainConstants.green
-        return view
-    }()
-    
     let mainLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -63,6 +56,7 @@ class TopViewCell: UICollectionViewCell{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = MainConstants.green
         SetSubview()
         ActivateLayouts()
     }
@@ -94,22 +88,17 @@ class TopViewCell: UICollectionViewCell{
 extension TopViewCell {
     
     func SetSubview(){
-        self.addSubview(topView)
         self.addSubview(mainLabel)
         self.addSubview(mainView)
         self.addSubview(plusView)
         self.addSubview(backImage)
+        
         plusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AddMeeting)))
         backImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Back)))
     }
     
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
-            topView.topAnchor.constraint(equalTo: self.topAnchor),
-            topView.leftAnchor.constraint(equalTo: self.leftAnchor),
-            topView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            topView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            
             mainView.topAnchor.constraint(equalTo: self.topAnchor, constant: 97),
             mainView.leftAnchor.constraint(equalTo: self.leftAnchor),
             mainView.rightAnchor.constraint(equalTo: self.rightAnchor),
@@ -137,18 +126,17 @@ extension TopViewCell {
         if (plusView.isHidden) {
             backImageWidthConstraint?.constant = backImage.frame.width
             mainLabelLeftConstraint?.constant = 20
-            mainLabel.layoutIfNeeded()
-            backImage.layoutIfNeeded()
+            self.layoutIfNeeded()
         } else {
             backImageWidthConstraint?.constant = 0
             mainLabelLeftConstraint?.constant = 0
-            backImage.layoutIfNeeded()
-            mainLabel.layoutIfNeeded()
-
+            self.layoutIfNeeded()
         }
     }
     
 }
+
+
 
 protocol AddMeetingDelegate {
     func addMeeting()

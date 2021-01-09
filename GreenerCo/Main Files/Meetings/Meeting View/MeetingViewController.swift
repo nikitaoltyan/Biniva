@@ -98,9 +98,10 @@ class MeetingViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.hideKeyboardWhenTappedAround()
-        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
+        _ = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
         SetUpAllLayouts()
     }
+    
     
     @objc func keyboardWillShow(notification: NSNotification) {
         print("Open keyboard")
@@ -112,6 +113,7 @@ class MeetingViewController: UIViewController {
         }
     }
 
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         print("Close keyboard")
         if self.view.frame.origin.y != 0 {
@@ -125,9 +127,11 @@ class MeetingViewController: UIViewController {
         }
     }
     
+    
     override func viewDidLayoutSubviews() {
         print("Layout happened")
     }
+    
     
     @objc func fireTimer() {
         print("Timer fired!")
@@ -141,9 +145,11 @@ class MeetingViewController: UIViewController {
         discussTable.layoutIfNeeded()
     }
     
+    
     @objc func OpenReply(){
         print("Open reply with index")
     }
+    
     
     func SetHeightOfComment(rows: Int){
         print("Rows: \(rows)")
@@ -166,14 +172,17 @@ class MeetingViewController: UIViewController {
         }
     }
     
+    
     @objc func JoinInAction(){
         print("Joined in")
         print(UIFont.preferredFont(forTextStyle: .body).lineHeight)
     }
     
+    
     @objc func SendAction(){
         print("Sended")
     }
+    
     
     @objc func BackAction(sender: UIButton!) {
         let transition = CATransition()
@@ -185,6 +194,10 @@ class MeetingViewController: UIViewController {
     }
 
 }
+
+
+
+
 
 extension MeetingViewController: myTableDelegate {
     
@@ -202,6 +215,11 @@ extension MeetingViewController: myTableDelegate {
         self.present(newVC, animated: false, completion: nil)
     }
 }
+
+
+
+
+
 
 extension MeetingViewController: UITableViewDelegate, UITableViewDataSource{
     
@@ -222,6 +240,10 @@ extension MeetingViewController: UITableViewDelegate, UITableViewDataSource{
     
 }
 
+
+
+
+
 extension MeetingViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
@@ -230,6 +252,10 @@ extension MeetingViewController: UITextViewDelegate {
     }
     
 }
+
+
+
+
 
 extension MeetingViewController: UIScrollViewDelegate {
     
@@ -244,6 +270,9 @@ extension MeetingViewController: UIScrollViewDelegate {
     }
     
 }
+
+
+
 
 extension MeetingViewController {
     
@@ -338,14 +367,12 @@ extension MeetingViewController {
         }()
         scrollView = scroll
         view.addSubview(scrollView)
-        var const: Array<NSLayoutConstraint> = []
-        const.append(contentsOf: [
+        NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
-        NSLayoutConstraint.activate(const)
     }
     
     func BackButtonLayer(){

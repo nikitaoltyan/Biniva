@@ -35,7 +35,7 @@ extension AddItemView {
 
     func ActivateConstraints(){
         var gap: CGFloat!
-        if MainConstants.screenHeight > 700 {gap = 10} else {gap = 5}
+        if MainConstants.screenHeight > 700 {gap = 8} else {gap = 4}
         
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: self.topAnchor, constant: gap),

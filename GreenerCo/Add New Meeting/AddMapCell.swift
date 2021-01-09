@@ -95,6 +95,8 @@ class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             print("Location services enabled")
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
+            
+//              Extend for users with internet (location) unavailablement.
             let location: CLLocationCoordinate2D = locationManager.location!.coordinate
             let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
             let region = MKCoordinateRegion(center: location, span: span)

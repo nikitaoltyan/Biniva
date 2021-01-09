@@ -39,10 +39,12 @@ class MeetingCell: UICollectionViewCell {
     }()
     
     let profileImage: UIImageView = {
-        let image = UIImageView()
+        let scale: CGFloat = 25
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = #imageLiteral(resourceName: "Icon-1024")
         image.layer.masksToBounds = true
+        image.layer.cornerRadius = scale/2
         return image
     }()
     
@@ -105,22 +107,27 @@ class MeetingCell: UICollectionViewCell {
     
     let locationManager = CLLocationManager()
     
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        ActivateConstraints()
+        SetSubviews()
+        ActivateLayouts()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+
+
+
+
+extension MeetingCell {
     
-    func ActivateConstraints(){
-        let width = MainConstants.screenWidth-40
-        let height = 245 as CGFloat
-        let scale = 25 as CGFloat
-        mainView.frame.size = CGSize(width: MainConstants.screenWidth-40, height: height)
-        profileImage.layer.cornerRadius = scale/2
-        
+    func SetSubviews(){
         self.addSubview(mainView)
         mainView.addSubview(meetingLocation)
         mainView.addSubview(profileImage)
@@ -130,13 +137,14 @@ class MeetingCell: UICollectionViewCell {
         mainView.addSubview(desc)
         mainView.addSubview(checkView)
         checkView.addSubview(checkImage)
-        
-        var const: Array<NSLayoutConstraint> = []
-        const.append(contentsOf: [
-            mainView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            mainView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            mainView.widthAnchor.constraint(equalToConstant: width),
-            mainView.heightAnchor.constraint(equalToConstant: height),
+    }
+    
+    func ActivateLayouts(){
+        NSLayoutConstraint.activate([
+            mainView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            mainView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            mainView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+            mainView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
             
             meetingLocation.leftAnchor.constraint(equalTo: mainView.centerXAnchor, constant: 20),
             meetingLocation.topAnchor.constraint(equalTo: mainView.topAnchor),
@@ -145,8 +153,8 @@ class MeetingCell: UICollectionViewCell {
             
             profileImage.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 10),
             profileImage.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 10),
-            profileImage.heightAnchor.constraint(equalToConstant: scale),
-            profileImage.widthAnchor.constraint(equalToConstant: scale),
+            profileImage.heightAnchor.constraint(equalToConstant: profileImage.frame.height),
+            profileImage.widthAnchor.constraint(equalToConstant: profileImage.frame.width),
             
             profileName.topAnchor.constraint(equalTo: profileImage.topAnchor),
             profileName.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 10),
@@ -178,9 +186,13 @@ class MeetingCell: UICollectionViewCell {
             checkImage.heightAnchor.constraint(equalToConstant: 35),
             checkImage.widthAnchor.constraint(equalToConstant: 35)
         ])
-        NSLayoutConstraint.activate(const)
     }
 }
+
+
+
+
+
 
 class Capital: NSObject, MKAnnotation {
     var title: String?

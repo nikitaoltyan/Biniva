@@ -70,7 +70,7 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = MainConstants.screenWidth
         if indexPath.row != 0 {
-            let size: CGSize = CGSize(width: width, height: 270)
+            let size: CGSize = CGSize(width: width, height: 320)
             return size
         } else {
             let size: CGSize = CGSize(width: width, height: 150)

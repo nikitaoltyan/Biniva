@@ -7,81 +7,6 @@
 
 import UIKit
 
-extension RecyclingController{
-    
-    func PerformLayers(){
-        AddCustomPickerView()
-        AddImage()
-    }
-    
-    
-    func AddCustomPickerView(){
-//        customTable.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            customTable.leftAnchor.constraint(equalTo: customAddView.leftAnchor, constant: 0),
-//            customTable.rightAnchor.constraint(equalTo: customAddView.rightAnchor, constant: 0),
-//            customTable.bottomAnchor.constraint(equalTo: customAddView.bottomAnchor, constant: -70),
-//            customTable.topAnchor.constraint(equalTo: customAddView.topAnchor, constant: 90)
-//        ])
-//        customTable.showsVerticalScrollIndicator = false
-//        customTable.backgroundColor = MainConstants.white
-    }
-    
-//    func AchieveLayout(){
-//        let userProfile = UIImageView()
-//        topBGView.addSubview(userProfile)
-//        userProfile.translatesAutoresizingMaskIntoConstraints = false
-//        let scale = 30 as CGFloat
-//        NSLayoutConstraint.activate([
-//            userProfile.topAnchor.constraint(equalTo: topBGView.topAnchor, constant: 40),
-//            userProfile.rightAnchor.constraint(equalTo: topBGView.rightAnchor, constant: -20),
-//            userProfile.widthAnchor.constraint(equalToConstant: scale),
-//            userProfile.heightAnchor.constraint(equalToConstant: scale*0.9)
-//        ])
-//        profileImage = userProfile
-//        profileImage.image = UIImage(systemName: "crown.fill")
-//        profileImage.tintColor = MainConstants.white
-//        profileImage.layer.masksToBounds = true
-//        profileImage.layer.cornerRadius = scale/2
-//        profileImage.isUserInteractionEnabled = true
-//        profileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(OpenProfile)))
-//    }
-
-    
-    func AddImage(){
-        let scale = 50 as CGFloat
-        let view = UIView()
-        customAddView.addSubview(view)
-        pickedView = view
-        pickedView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            pickedView.topAnchor.constraint(equalTo: customAddView.topAnchor, constant: 30),
-            pickedView.leftAnchor.constraint(equalTo: customAddView.leftAnchor, constant: 10),
-            pickedView.widthAnchor.constraint(equalToConstant: scale),
-            pickedView.heightAnchor.constraint(equalToConstant: scale)
-        ])
-        pickedView.layer.masksToBounds = true
-        pickedView.backgroundColor = MaterialsColors.organicGreen
-        pickedView.layer.cornerRadius = scale/4
-        
-        let image = UIImageView()
-        pickedView.addSubview(image)
-        image.translatesAutoresizingMaskIntoConstraints = false
-        pickedImage = image
-        NSLayoutConstraint.activate([
-            pickedImage.topAnchor.constraint(equalTo: pickedView.topAnchor, constant: 2),
-            pickedImage.bottomAnchor.constraint(equalTo: pickedView.bottomAnchor, constant: -2),
-            pickedImage.leftAnchor.constraint(equalTo: pickedView.leftAnchor, constant: 2),
-            pickedImage.rightAnchor.constraint(equalTo: pickedView.rightAnchor, constant: -2),
-        ])
-        pickedImage.layer.masksToBounds = true
-        pickedImage.image = #imageLiteral(resourceName: "Organic-1")
-    }
-}
-
-
-
-
 extension RecyclingController {
     
     func SetSubviews(){
@@ -101,8 +26,8 @@ extension RecyclingController {
         addThirdItemView.backgroundColor = MaterialsColors.paperOrange
         addThirdItemView.image.image = MaterialsIcons.paper
         
+        view.bringSubviewToFront(addThirdItemView)
         view.bringSubviewToFront(plusView)
-        view.bringSubviewToFront(addSecondItemView)
         
         plusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ActivateThreeMainViews)))
         addFirstItemView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AddFirstItem)))
@@ -119,15 +44,20 @@ extension RecyclingController {
         addThirdItemView.isHidden = true
     }
     
+    
+    
     func ActivateLayouts(){
-        let heightOfProgressView: CGFloat = {if MainConstants.screenHeight>700{return 420}else{return 260}}()
+        let heightOfProgressView: CGFloat = {if MainConstants.screenHeight>700{return 420}else{return 360}}()
+        let tabBarHeight: CGFloat = self.tabBarController?.tabBar.frame.size.height ?? 49
+        let plusViewFromBottom: CGFloat = {if MainConstants.screenHeight>700{return 130}else{return 70}}()
+        let progressViewFromHeight: CGFloat = {if MainConstants.screenHeight>700{return 158}else{return 138}}()
         NSLayoutConstraint.activate([
             topView.topAnchor.constraint(equalTo: view.topAnchor),
             topView.leftAnchor.constraint(equalTo: view.leftAnchor),
             topView.rightAnchor.constraint(equalTo: view.rightAnchor),
             topView.heightAnchor.constraint(equalToConstant: 150),
             
-            plusView.bottomAnchor.constraint(equalTo:view.bottomAnchor, constant: -130),
+            plusView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -plusViewFromBottom),
             plusView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             plusView.widthAnchor.constraint(equalToConstant: plusView.frame.width),
             plusView.heightAnchor.constraint(equalToConstant: plusView.frame.height),
@@ -152,12 +82,12 @@ extension RecyclingController {
             openCustomView.widthAnchor.constraint(equalToConstant: openCustomView.frame.width),
             openCustomView.heightAnchor.constraint(equalToConstant: openCustomView.frame.height),
             
-            progressView.topAnchor.constraint(equalTo: view.topAnchor, constant: 158),
+            progressView.topAnchor.constraint(equalTo: view.topAnchor, constant: progressViewFromHeight),
             progressView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             progressView.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth-160),
             progressView.heightAnchor.constraint(equalToConstant: heightOfProgressView),
             
-            customAddView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            customAddView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -tabBarHeight),
             customAddView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
             customAddView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
             customAddView.heightAnchor.constraint(equalToConstant: customAddView.frame.height)

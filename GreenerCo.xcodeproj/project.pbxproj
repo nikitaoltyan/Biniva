@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C12A73F2554520500A59D8E /* StatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C12A73E2554520500A59D8E /* StatsController.swift */; };
-		5C12A743255452D700A59D8E /* StatsTopBGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C12A742255452D700A59D8E /* StatsTopBGView.swift */; };
-		5C12A745255452E500A59D8E /* StatsMainBGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C12A744255452E500A59D8E /* StatsMainBGView.swift */; };
+		5C1C5E0425A6064C000DC5EC /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C5E0325A6064C000DC5EC /* BarView.swift */; };
 		5C1D01FA255C26610058D276 /* ShowAchieveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D01F9255C26610058D276 /* ShowAchieveController.swift */; };
 		5C40C263256D819900444BCA /* RecyclingLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40C262256D819900444BCA /* RecyclingLayers.swift */; };
 		5C44873A258A3BF200474BFF /* ReplyCommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C448739258A3BF200474BFF /* ReplyCommentController.swift */; };
@@ -41,7 +40,6 @@
 		5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */; };
 		5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */; };
 		5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */; };
-		5CD085D5255198C7006CA751 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD085D4255198C7006CA751 /* ProfileController.swift */; };
 		5CE7217225A07E0700ECE84F /* RegularTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7217125A07E0700ECE84F /* RegularTopView.swift */; };
 		5CE7217A25A2002F00ECE84F /* CustomPickerOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7217925A2002F00ECE84F /* CustomPickerOpenView.swift */; };
 		5CE7218525A2047500ECE84F /* ProgressImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7218425A2047500ECE84F /* ProgressImageView.swift */; };
@@ -77,8 +75,7 @@
 
 /* Begin PBXFileReference section */
 		5C12A73E2554520500A59D8E /* StatsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsController.swift; sourceTree = "<group>"; };
-		5C12A742255452D700A59D8E /* StatsTopBGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTopBGView.swift; sourceTree = "<group>"; };
-		5C12A744255452E500A59D8E /* StatsMainBGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMainBGView.swift; sourceTree = "<group>"; };
+		5C1C5E0325A6064C000DC5EC /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		5C1D01F9255C26610058D276 /* ShowAchieveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAchieveController.swift; sourceTree = "<group>"; };
 		5C40C262256D819900444BCA /* RecyclingLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingLayers.swift; sourceTree = "<group>"; };
 		5C448739258A3BF200474BFF /* ReplyCommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCommentController.swift; sourceTree = "<group>"; };
@@ -116,7 +113,6 @@
 		5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePlusView.swift; sourceTree = "<group>"; };
-		5CD085D4255198C7006CA751 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		5CE7217125A07E0700ECE84F /* RegularTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularTopView.swift; sourceTree = "<group>"; };
 		5CE7217925A2002F00ECE84F /* CustomPickerOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerOpenView.swift; sourceTree = "<group>"; };
 		5CE7218425A2047500ECE84F /* ProgressImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressImageView.swift; sourceTree = "<group>"; };
@@ -171,9 +167,8 @@
 		5C12A741255452BA00A59D8E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5C12A742255452D700A59D8E /* StatsTopBGView.swift */,
-				5C12A744255452E500A59D8E /* StatsMainBGView.swift */,
 				5C513FD62554845A00C1B851 /* StatsView.swift */,
+				5C1C5E0325A6064C000DC5EC /* BarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -346,7 +341,6 @@
 		5CD085D3255198A9006CA751 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				5CD085D4255198C7006CA751 /* ProfileController.swift */,
 				5C83A06425601D51005C2CAA /* ContactUs */,
 				5C83A07E25640948005C2CAA /* Change Main Buttons */,
 				5C83A0702562E5FD005C2CAA /* AboutUs */,
@@ -556,16 +550,14 @@
 				5C54954C255857FB00E5140C /* TopViewCell.swift in Sources */,
 				5C83A091256420FD005C2CAA /* ChangeButtonView.swift in Sources */,
 				5CFB6255259C8B0900F1C8C7 /* PopUpController.swift in Sources */,
-				5C12A743255452D700A59D8E /* StatsTopBGView.swift in Sources */,
 				5C12A73F2554520500A59D8E /* StatsController.swift in Sources */,
 				5C1D01FA255C26610058D276 /* ShowAchieveController.swift in Sources */,
 				5CE7217225A07E0700ECE84F /* RegularTopView.swift in Sources */,
 				5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */,
 				5CE7217A25A2002F00ECE84F /* CustomPickerOpenView.swift in Sources */,
 				5C82772B2556C02E00816D85 /* StatsCell.swift in Sources */,
-				5C12A745255452E500A59D8E /* StatsMainBGView.swift in Sources */,
 				5CFB6239259A4DB100F1C8C7 /* FirstAddCell.swift in Sources */,
-				5CD085D5255198C7006CA751 /* ProfileController.swift in Sources */,
+				5C1C5E0425A6064C000DC5EC /* BarView.swift in Sources */,
 				5C44873A258A3BF200474BFF /* ReplyCommentController.swift in Sources */,
 				5C44873F258A5AF200474BFF /* CategoryNameCell.swift in Sources */,
 				5CF2E64A255D946600B4EFE3 /* MeetingCell.swift in Sources */,

@@ -7,134 +7,89 @@
 
 import UIKit
 
-class StatsController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
-
-    @IBOutlet weak var topBGView: StatsTopBGView!
-    @IBOutlet weak var mainBGView: StatsMainBGView!
-    @IBOutlet weak var statsView: StatsView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var statsTable: UITableView!
+class StatsController: UIViewController {
     
-    let scrollViewContentHeight = 1500 as CGFloat
+    var tableHeightConstraint: NSLayoutConstraint?
+    
+    lazy var scrollView: UIScrollView = {
+        let scrollViewContentHeight = 1500 as CGFloat
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: scrollViewContentHeight)
+        scroll.delegate = self
+        scroll.bounces = false
+        scroll.showsVerticalScrollIndicator = false
+        return scroll
+    }()
+    
+    let topView: RegularTopView = {
+        let view = RegularTopView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.pageLabel.text = "Stats"
+        return view
+    }()
+
+    let statsView: StatsView = {
+        let width: CGFloat = MainConstants.screenWidth - 60
+        let height: CGFloat = 350
+        let view = StatsView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let loggedLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = MainConstants.nearBlack
+        label.text = "Записанные события"
+        label.font = UIFont.init(name: "SFPro-Bold", size: 25.0)
+        return label
+    }()
+    
+    lazy var statsTable: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.showsVerticalScrollIndicator = false
+        table.isScrollEnabled = false
+        table.delegate = self
+        table.dataSource = self
+        table.backgroundColor = MainConstants.white
+        return table
+    }()
+    
+    
     let scrollBorder = 48 as CGFloat
     let screenHeight = UIScreen.main.bounds.height
     var scrollChangePoint: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        PerformLayers()
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: scrollViewContentHeight)
-        scrollView.delegate = self
-        scrollView.bounces = false
-        scrollView.showsVerticalScrollIndicator = false
-        statsTable.isScrollEnabled = false
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == self.scrollView {
-            statsTable.isScrollEnabled = (self.scrollView.contentOffset.y >=  600)
-        }
-        if scrollView == self.statsTable {
-            statsTable.isScrollEnabled = (statsTable.contentOffset.y > 0)
-        }
-    }
-    
-    
-    func PerformLayers(){
-        TopView()
-        MainView()
-        StatsView()
-        TableLayer()
-        WeekMonthSelection()
-        LogedLabel()
+        view.backgroundColor = MainConstants.white
+        SetSubviews()
+        ActivateLayouts()
+        _ = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
     }
 
-    func TopView(){
-        topBGView.translatesAutoresizingMaskIntoConstraints = false
-        var const: Array<NSLayoutConstraint> = []
-        if MainConstants.screenHeight > 700 {
-            const.append(contentsOf: [
-                topBGView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -50),
-                topBGView.leftAnchor.constraint(equalTo: view.leftAnchor),
-                topBGView.rightAnchor.constraint(equalTo: view.rightAnchor),
-                topBGView.heightAnchor.constraint(equalToConstant: 200)
-            ])
-        } else {
-            const.append(contentsOf: [
-                topBGView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -20),
-                topBGView.leftAnchor.constraint(equalTo: view.leftAnchor),
-                topBGView.rightAnchor.constraint(equalTo: view.rightAnchor),
-                topBGView.heightAnchor.constraint(equalToConstant: 120)
-            ])
+    
+    @objc func fireTimer() {
+        print("Timer fired!")
+        var tableViewHeight: CGFloat {
+            statsTable.layoutIfNeeded()
+            return statsTable.contentSize.height
         }
-        NSLayoutConstraint.activate(const)
+        let setHeight = statsTable.frame.minY + tableViewHeight
+        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: setHeight)
+        tableHeightConstraint?.constant = tableViewHeight
+        statsTable.layoutIfNeeded()
     }
-    
-    func MainView(){
-        mainBGView.translatesAutoresizingMaskIntoConstraints = false
-        var const: Array<NSLayoutConstraint> = []
-        if MainConstants.screenHeight > 700 {
-            const.append(contentsOf: [
-                mainBGView.topAnchor.constraint(equalTo: topBGView.bottomAnchor, constant: -103),
-                mainBGView.leftAnchor.constraint(equalTo: view.leftAnchor),
-                mainBGView.rightAnchor.constraint(equalTo: view.rightAnchor),
-                mainBGView.heightAnchor.constraint(equalToConstant: scrollViewContentHeight)
-            ])
-        } else {
-            const.append(contentsOf: [
-                mainBGView.topAnchor.constraint(equalTo: topBGView.bottomAnchor, constant: -25),
-                mainBGView.leftAnchor.constraint(equalTo: view.leftAnchor),
-                mainBGView.rightAnchor.constraint(equalTo: view.rightAnchor),
-                mainBGView.heightAnchor.constraint(equalToConstant: scrollViewContentHeight)
-            ])
-        }
-        NSLayoutConstraint.activate(const)
-    }
-    
-    func StatsView(){
-        statsView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            statsView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 150),
-            statsView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
-            statsView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
-            statsView.heightAnchor.constraint(equalToConstant: 350)
-        ])
-    }
-    
-    func TableLayer(){
-        statsTable.backgroundColor = MainConstants.white
-        statsTable.register(StatsCell.self, forCellReuseIdentifier: "StatsCell")
-        statsTable.translatesAutoresizingMaskIntoConstraints = false
-        let tableHeight = scrollViewContentHeight - statsView.layer.position.x - CGFloat(350+100) + 48
-        scrollChangePoint = statsView.layer.position.y + 350 + 200 - scrollBorder
-        print("Table height: \(tableHeight) and scrollChangePoint: \(scrollChangePoint!)")
-        NSLayoutConstraint.activate([
-            statsTable.topAnchor.constraint(equalTo: statsView.bottomAnchor, constant: 100),
-            statsTable.leftAnchor.constraint(equalTo: view.leftAnchor),
-            statsTable.rightAnchor.constraint(equalTo: view.rightAnchor),
-            statsTable.heightAnchor.constraint(equalToConstant: tableHeight)
-        ])
-        statsTable.showsVerticalScrollIndicator = false
-    }
-    
-    func LogedLabel(){
-        let label = UILabel()
-        view.addSubview(label)
-        label.textColor = .darkGray
-        label.text = "Записанные события"
-        label.font = UIFont.init(name: "Palatino Bold", size: 25.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.bottomAnchor.constraint(equalTo: statsTable.topAnchor, constant: -10),
-            label.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
-            label.rightAnchor.constraint(equalTo: view.rightAnchor),
-            label.heightAnchor.constraint(equalToConstant: 39)
-        ])
-    }
-    
-    func WeekMonthSelection(){
-        
-    }
+
+}
+
+
+
+
+
+extension StatsController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
@@ -147,5 +102,77 @@ class StatsController: UIViewController, UIScrollViewDelegate, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = statsTable.dequeueReusableCell(withIdentifier: "StatsCell", for: indexPath) as! StatsCell
         return cell
+    }
+    
+}
+
+
+
+
+extension StatsController: UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == self.scrollView {
+            statsTable.isScrollEnabled = (self.scrollView.contentOffset.y >=  600)
+        }
+        if scrollView == self.statsTable {
+            statsTable.isScrollEnabled = (statsTable.contentOffset.y > 0)
+        }
+    }
+}
+
+
+
+
+
+extension StatsController: StatsDelegate {
+    func OpenAchievements() {
+        print("Open achievements")
+    }
+}
+
+
+
+
+
+extension StatsController {
+    
+    func SetSubviews(){
+        view.addSubview(scrollView)
+        scrollView.addSubview(topView)
+        scrollView.addSubview(statsView)
+        scrollView.addSubview(loggedLabel)
+        scrollView.addSubview(statsTable)
+        
+        statsTable.register(StatsCell.self, forCellReuseIdentifier: "StatsCell")
+    }
+    
+    func ActivateLayouts(){
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            topView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -scrollBorder),
+            topView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            topView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            topView.heightAnchor.constraint(equalToConstant: 150),
+            
+            statsView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 20),
+            statsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            statsView.widthAnchor.constraint(equalToConstant: statsView.frame.width),
+            statsView.heightAnchor.constraint(equalToConstant: statsView.frame.height),
+            
+            loggedLabel.topAnchor.constraint(equalTo: statsView.bottomAnchor, constant: 20),
+            loggedLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            
+//              statsTable height constraint in the bottom of the function.
+            statsTable.topAnchor.constraint(equalTo: loggedLabel.bottomAnchor, constant: 10),
+            statsTable.leftAnchor.constraint(equalTo: view.leftAnchor),
+            statsTable.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+        
+        tableHeightConstraint = statsTable.heightAnchor.constraint(equalToConstant: 250)
+        tableHeightConstraint?.isActive = true
     }
 }

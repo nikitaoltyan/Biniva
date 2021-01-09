@@ -8,66 +8,69 @@
 import UIKit
 
 class CustomAddCell: UITableViewCell {
+    
+    let itemColorView: UIView = {
+        let scale: CGFloat = 60
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = scale/3
+        return view
+    }()
+    
+    let itemImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    let itemLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.init(name: "SFPro", size: 25)
+        label.textColor = MainConstants.nearBlack
+        return label
+    }()
 
-    var itemImage: UIImageView!
-    var itemColorView: UIView!
-    var itemLabel: UILabel!
     
-    let scale = 60 as CGFloat
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        ItemColorView()
-        ItemImage()
-        Label()
-        self.backgroundColor = UIColor(red: 245/255, green: 252/255, blue: 251/255, alpha: 1)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = MainConstants.white
+        SetSubviews()
+        ActivateLayouts()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+}
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
 
+
+
+
+
+extension CustomAddCell{
+    func SetSubviews(){
+        self.addSubview(itemColorView)
+        self.addSubview(itemImage)
+        self.addSubview(itemLabel)
     }
     
-    func ItemColorView(){
-        let view = UIView()
-        self.addSubview(view)
-        itemColorView = view
-        itemColorView.translatesAutoresizingMaskIntoConstraints = false
+    func ActivateLayouts(){
         NSLayoutConstraint.activate([
             itemColorView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
             itemColorView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            itemColorView.widthAnchor.constraint(equalToConstant: scale),
-            itemColorView.heightAnchor.constraint(equalToConstant: scale)
+            itemColorView.widthAnchor.constraint(equalToConstant: itemColorView.frame.width),
+            itemColorView.heightAnchor.constraint(equalToConstant: itemColorView.frame.height),
+            
+            itemImage.topAnchor.constraint(equalTo: itemColorView.topAnchor, constant: 3),
+            itemImage.bottomAnchor.constraint(equalTo: itemColorView.bottomAnchor, constant: -3),
+            itemImage.leftAnchor.constraint(equalTo: itemColorView.leftAnchor, constant: 3),
+            itemImage.rightAnchor.constraint(equalTo: itemColorView.rightAnchor, constant: -3),
+            
+            itemLabel.leftAnchor.constraint(equalTo: itemImage.rightAnchor, constant: 20),
+            itemLabel.centerYAnchor.constraint(equalTo: itemImage.centerYAnchor)
         ])
-        itemColorView.layer.cornerRadius = scale/4
-    }
-
-    func ItemImage(){
-        let newImage = UIImageView()
-        self.addSubview(newImage)
-        newImage.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            newImage.topAnchor.constraint(equalTo: itemColorView.topAnchor, constant: 3),
-            newImage.bottomAnchor.constraint(equalTo: itemColorView.bottomAnchor, constant: -3),
-            newImage.leftAnchor.constraint(equalTo: itemColorView.leftAnchor, constant: 3),
-            newImage.rightAnchor.constraint(equalTo: itemColorView.rightAnchor, constant: -3),
-        ])
-        newImage.image = #imageLiteral(resourceName: "justin-kauffman-7_tRMnxWsUg-unsplash")
-        itemImage = newImage
-    }
-    
-    func Label(){
-        let newLabel = UILabel()
-        self.addSubview(newLabel)
-        newLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            newLabel.leftAnchor.constraint(equalTo: itemImage.rightAnchor, constant: 20),
-            newLabel.centerYAnchor.constraint(equalTo: itemImage.centerYAnchor),
-            newLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
-            newLabel.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        newLabel.font = UIFont.init(name: "SFPro", size: 22)
-        newLabel.textColor = .darkGray
-        itemLabel = newLabel
     }
 }
