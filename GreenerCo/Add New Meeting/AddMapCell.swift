@@ -37,8 +37,20 @@ class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         return label
     }()
     
+    let aboutLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = true
+        label.textColor = .lightGray
+        label.text = "Зачем это нужно?"
+        label.textAlignment = .center
+        label.font = UIFont.init(name: "SFPro", size: 8.0)
+        return label
+    }()
+    
     let locationManager = CLLocationManager()
     var currentAnnotation: MKPointAnnotation?
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,6 +68,7 @@ class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         fatalError()
     }
 
+    
     @objc func handleTap(gestureRecognizer: UILongPressGestureRecognizer) {
         print("Handle tap")
         let location = gestureRecognizer.location(in: mapView)
@@ -91,9 +104,15 @@ class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
                 self.choosedStreetLabel.text = "Location is not available"
             }
         })
-        
-        
+
     }
+    
+    
+    @objc func LabelAction(){
+        print("Label action")
+//        Add function - custome PopUp controller with explanation.
+    }
+    
     
     func Location(){
         mapView.showsUserLocation = true
@@ -124,22 +143,28 @@ extension AddMapCell{
         self.addSubview(cellName)
         self.addSubview(mapView)
         self.addSubview(choosedStreetLabel)
+        self.addSubview(aboutLabel)
+        
+        aboutLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LabelAction)))
     }
     
     
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
-            cellName.topAnchor.constraint(equalTo: self.topAnchor, constant: 50),
+            cellName.topAnchor.constraint(equalTo: self.topAnchor, constant: 60),
             cellName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             
-            mapView.topAnchor.constraint(equalTo: cellName.bottomAnchor, constant: 19),
+            mapView.topAnchor.constraint(equalTo: cellName.bottomAnchor, constant: 10),
             mapView.leftAnchor.constraint(equalTo: self.leftAnchor),
             mapView.rightAnchor.constraint(equalTo: self.rightAnchor),
             mapView.heightAnchor.constraint(equalToConstant: 500),
             
             choosedStreetLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 6),
             choosedStreetLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
-            choosedStreetLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20)
+            choosedStreetLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            
+            aboutLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            aboutLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
 }
