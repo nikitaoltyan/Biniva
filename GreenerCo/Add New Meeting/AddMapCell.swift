@@ -11,11 +11,20 @@ import CoreLocation
 
 class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     
+    let cellName: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = MainConstants.nearBlack
+        label.numberOfLines = 0
+        label.text = "Выбери место проведения"
+        label.font = UIFont.init(name: "SFPro-Heavy", size: 25.0)
+        return label
+    }()
+    
     let mapView: MKMapView = {
         let map = MKMapView()
         map.translatesAutoresizingMaskIntoConstraints = false
         map.layer.cornerRadius = 20
-        map.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         return map
     }()
     
@@ -95,9 +104,9 @@ class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             print("Location services enabled")
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            
-//              Extend for users with internet (location) unavailablement.
-            let location: CLLocationCoordinate2D = locationManager.location!.coordinate
+
+            let location: CLLocationCoordinate2D = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 55.754316, longitude: 37.619521)
+            print("Location: \(location)")
             let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
             let region = MKCoordinateRegion(center: location, span: span)
             mapView.setRegion(region, animated: true)
@@ -112,6 +121,7 @@ class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 extension AddMapCell{
     
     func SetSubviews(){
+        self.addSubview(cellName)
         self.addSubview(mapView)
         self.addSubview(choosedStreetLabel)
     }
@@ -119,7 +129,10 @@ extension AddMapCell{
     
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
-            mapView.topAnchor.constraint(equalTo: self.topAnchor, constant: 40),
+            cellName.topAnchor.constraint(equalTo: self.topAnchor, constant: 50),
+            cellName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
+            
+            mapView.topAnchor.constraint(equalTo: cellName.bottomAnchor, constant: 19),
             mapView.leftAnchor.constraint(equalTo: self.leftAnchor),
             mapView.rightAnchor.constraint(equalTo: self.rightAnchor),
             mapView.heightAnchor.constraint(equalToConstant: 500),

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */; };
 		5C12A73F2554520500A59D8E /* StatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C12A73E2554520500A59D8E /* StatsController.swift */; };
 		5C1C5E0425A6064C000DC5EC /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C5E0325A6064C000DC5EC /* BarView.swift */; };
 		5C1D01FA255C26610058D276 /* ShowAchieveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D01F9255C26610058D276 /* ShowAchieveController.swift */; };
@@ -31,7 +32,6 @@
 		5C83A05C255F9796005C2CAA /* SF-Pro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */; };
 		5C83A060255F979A005C2CAA /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A057255F959F005C2CAA /* SF-Pro.ttf */; };
 		5C83A06925601F4B005C2CAA /* ContactUsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83A06825601F4B005C2CAA /* ContactUsController.swift */; };
-		5C83A0722562E616005C2CAA /* AboutUsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83A0712562E616005C2CAA /* AboutUsController.swift */; };
 		5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83A0792563AC58005C2CAA /* Main Constants.swift */; };
 		5C83A0802564096C005C2CAA /* ChangeButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83A07F2564096C005C2CAA /* ChangeButtonsController.swift */; };
 		5C83A089256420E7005C2CAA /* ButtonImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83A088256420E7005C2CAA /* ButtonImageCell.swift */; };
@@ -74,6 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsController.swift; sourceTree = "<group>"; };
 		5C12A73E2554520500A59D8E /* StatsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsController.swift; sourceTree = "<group>"; };
 		5C1C5E0325A6064C000DC5EC /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		5C1D01F9255C26610058D276 /* ShowAchieveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAchieveController.swift; sourceTree = "<group>"; };
@@ -104,7 +105,6 @@
 		5C83A057255F959F005C2CAA /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro.ttf"; path = "../../../../../../Library/Fonts/SF-Pro.ttf"; sourceTree = "<group>"; };
 		5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Italic.ttf"; path = "../../../../../../Library/Fonts/SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
 		5C83A06825601F4B005C2CAA /* ContactUsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsController.swift; sourceTree = "<group>"; };
-		5C83A0712562E616005C2CAA /* AboutUsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsController.swift; sourceTree = "<group>"; };
 		5C83A0792563AC58005C2CAA /* Main Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main Constants.swift"; sourceTree = "<group>"; };
 		5C83A07F2564096C005C2CAA /* ChangeButtonsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeButtonsController.swift; sourceTree = "<group>"; };
 		5C83A088256420E7005C2CAA /* ButtonImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImageCell.swift; sourceTree = "<group>"; };
@@ -302,14 +302,6 @@
 			path = ContactUs;
 			sourceTree = "<group>";
 		};
-		5C83A0702562E5FD005C2CAA /* AboutUs */ = {
-			isa = PBXGroup;
-			children = (
-				5C83A0712562E616005C2CAA /* AboutUsController.swift */,
-			);
-			path = AboutUs;
-			sourceTree = "<group>";
-		};
 		5C83A07E25640948005C2CAA /* Change Main Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,11 +335,11 @@
 			children = (
 				5C83A06425601D51005C2CAA /* ContactUs */,
 				5C83A07E25640948005C2CAA /* Change Main Buttons */,
-				5C83A0702562E5FD005C2CAA /* AboutUs */,
 				5C448743258B8ED000474BFF /* UserProfileController.swift */,
 				5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */,
 				5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */,
 				5CFB624A259B92E800F1C8C7 /* HeadersViews.swift */,
+				5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -542,10 +534,10 @@
 				5CFC3A0D2550703F00068A69 /* CustomAddView.swift in Sources */,
 				5CF2E63E255D944400B4EFE3 /* MeetingsController.swift in Sources */,
 				5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */,
-				5C83A0722562E616005C2CAA /* AboutUsController.swift in Sources */,
 				5C6C2B022581477B00B653AD /* MessageCell.swift in Sources */,
 				5C448744258B8ED000474BFF /* UserProfileController.swift in Sources */,
 				5C5495442558253900E5140C /* AchieveCell.swift in Sources */,
+				5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */,
 				5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */,
 				5C54954C255857FB00E5140C /* TopViewCell.swift in Sources */,
 				5C83A091256420FD005C2CAA /* ChangeButtonView.swift in Sources */,

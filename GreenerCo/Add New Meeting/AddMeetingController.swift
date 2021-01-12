@@ -90,7 +90,6 @@ extension AddMeetingController: UICollectionViewDelegate, UICollectionViewDataSo
         switch indexPath.row {
         case 0:
             let cell = mainCollection.dequeueReusableCell(withReuseIdentifier: "AddMapCell", for: indexPath) as! AddMapCell
-            cell.backgroundColor = .orange
             return cell
         default:
             let cell = mainCollection.dequeueReusableCell(withReuseIdentifier: "FirstAddCell", for: indexPath) as! FirstAddCell

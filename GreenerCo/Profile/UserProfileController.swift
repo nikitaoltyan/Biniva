@@ -179,6 +179,8 @@ class UserProfileController: UIViewController {
     
     var userId: String?
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = MainConstants.white
@@ -206,7 +208,8 @@ class UserProfileController: UIViewController {
     
     @objc func EditOpen(){
         print("Edit open")
-        let newVC = SettingsController()
+//        let newVC = SettingsController()
+        let newVC = AboutUsController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()
         transition.duration = 0.3
