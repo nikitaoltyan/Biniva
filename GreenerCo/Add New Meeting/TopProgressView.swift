@@ -61,6 +61,8 @@ class TopProgressView: UIView {
     let nextMark = "chevron.right"
     let paperplaneMark = "paperplane"
 
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         SetSubview()
@@ -71,19 +73,23 @@ class TopProgressView: UIView {
         fatalError()
     }
     
+    
+    
     func ChangeImage(){
-        print("Change image function")
         switch slide!{
         case 0:
             backImage.image = UIImage(systemName: closeMark)
             nextImage.image = UIImage(systemName: nextMark)
+            nextImage.isHidden = false
             progressLabel.text = "1 из 2"
             prevImageWidthConstraint?.constant = 25
             nextImageWidthConstraint?.constant = 18
             self.layoutIfNeeded()
         default:
             backImage.image = UIImage(systemName: backMark)
-            nextImage.image = UIImage(systemName: paperplaneMark)
+            nextImage.isHidden = true
+//            Add in other updates this button.
+//            nextImage.image = UIImage(systemName: paperplaneMark)
             progressLabel.text = "2 из 2"
             prevImageWidthConstraint?.constant = 18
             nextImageWidthConstraint?.constant = 25

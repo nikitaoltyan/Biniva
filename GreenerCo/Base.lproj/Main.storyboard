@@ -28,21 +28,6 @@
             </objects>
             <point key="canvasLocation" x="-900.00000000000011" y="1069.4196428571429"/>
         </scene>
-        <!--About Us Controller-->
-        <scene sceneID="4ES-Ws-tzt">
-            <objects>
-                <viewController storyboardIdentifier="AboutUsController" id="Hp0-tL-QND" customClass="AboutUsController" customModule="GreenerCo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kYZ-De-rc1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="byF-3Q-oYy"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Obm-n0-fhq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1148" y="411"/>
-        </scene>
         <!--Change Buttons Controller-->
         <scene sceneID="eSZ-gE-SPh">
             <objects>
@@ -95,21 +80,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZt-sy-Au0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1908.6956521739132" y="409.82142857142856"/>
-        </scene>
-        <!--Contact Us Controller-->
-        <scene sceneID="7ds-cW-Tox">
-            <objects>
-                <viewController storyboardIdentifier="ContactUsController" id="mek-mE-lLF" customClass="ContactUsController" customModule="GreenerCo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZaT-1t-9QZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="ltp-sl-lrA"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oWC-4C-55t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1148" y="1069"/>
         </scene>
         <!--MeetingsController-->
         <scene sceneID="K7g-lS-gdJ">
