@@ -28,6 +28,7 @@
 		5C54953E2558251A00E5140C /* AchieveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C54953D2558251A00E5140C /* AchieveController.swift */; };
 		5C5495442558253900E5140C /* AchieveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5495432558253900E5140C /* AchieveCell.swift */; };
 		5C54954C255857FB00E5140C /* TopViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C54954B255857FB00E5140C /* TopViewCell.swift */; };
+		5C5D03E925B1A71F0011AB9D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D03E825B1A71F0011AB9D /* InfoView.swift */; };
 		5C6C2B022581477B00B653AD /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C2B012581477B00B653AD /* MessageCell.swift */; };
 		5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C89EF25AF41F400D55A16 /* ButtonView.swift */; };
 		5C82772B2556C02E00816D85 /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82772A2556C02E00816D85 /* StatsCell.swift */; };
@@ -104,6 +105,7 @@
 		5C54953D2558251A00E5140C /* AchieveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchieveController.swift; sourceTree = "<group>"; };
 		5C5495432558253900E5140C /* AchieveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchieveCell.swift; sourceTree = "<group>"; };
 		5C54954B255857FB00E5140C /* TopViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewCell.swift; sourceTree = "<group>"; };
+		5C5D03E825B1A71F0011AB9D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		5C6C2B012581477B00B653AD /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		5C6C89EF25AF41F400D55A16 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		5C82772A2556C02E00816D85 /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */,
 				5CFB624A259B92E800F1C8C7 /* HeadersViews.swift */,
 				5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */,
+				5C5D03E825B1A71F0011AB9D /* InfoView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				5C83A06925601F4B005C2CAA /* ContactUsController.swift in Sources */,
 				5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */,
 				5CFB623E259B246800F1C8C7 /* AddMapCell.swift in Sources */,
+				5C5D03E925B1A71F0011AB9D /* InfoView.swift in Sources */,
 				5C22533A25B1690F00E73D0A /* ThreeImagesView.swift in Sources */,
 				5C513FD72554845A00C1B851 /* StatsView.swift in Sources */,
 				5CFB6246259B415100F1C8C7 /* TopProgressView.swift in Sources */,

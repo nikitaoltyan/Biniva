@@ -47,26 +47,24 @@ class UserProfileController: UIViewController {
         return image
     }()
     
-    let userName: UILabel = {
-        let label = UILabel()
-        label.textColor = MainConstants.nearBlack
-        label.text = "Nikita Oltyan"
-        label.font = UIFont.init(name: "SFPro-Bold", size: 26.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let meetedLabelsView: InfoView = {
+        let scale: CGFloat = 50
+        let view = InfoView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    let userCity: UILabel = {
-        let label = UILabel()
-        label.textColor = MainConstants.nearBlack
-        label.text = "Moscow"
-        label.font = UIFont.init(name: "SFPro-Medium", size: 22.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    let joinedLabelsView: InfoView = {
+        let scale: CGFloat = 50
+        let view = InfoView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
-    let editView: UIView = {
-        let view = UIView()
+    let editView: ButtonView = {
+        let view = ButtonView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
         view.backgroundColor = MainConstants.nearWhite
         view.layer.cornerRadius = 7
         view.clipsToBounds = true
@@ -77,12 +75,22 @@ class UserProfileController: UIViewController {
         view.layer.shadowColor = UIColor.darkGray.cgColor
         view.layer.borderWidth = 1
         view.layer.borderColor = MainConstants.nearWhite.cgColor
-        view.isUserInteractionEnabled = true
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.label.textColor = MainConstants.nearBlack
+        view.label.text = "Изменить"
+        view.label.font = UIFont.init(name: "SFPro", size: 20.0)
         return view
     }()
     
-    let desc: UILabel = {
+    let userBigDesc: UILabel = {
+        let label = UILabel()
+        label.textColor = MainConstants.nearBlack
+        label.text = "Nikita Oltyan, Moscow"
+        label.font = UIFont.init(name: "SFPro-Medium", size: 21.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let userDesc: UILabel = {
         let label = UILabel()
         label.textColor = MainConstants.nearBlack
         label.numberOfLines = 0
@@ -161,15 +169,6 @@ class UserProfileController: UIViewController {
         collection.showsVerticalScrollIndicator = true
         collection.tag = 1
         return collection
-    }()
-    
-    let editLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = MainConstants.nearBlack
-        label.text = "Изменить"
-        label.font = UIFont.init(name: "SFPro", size: 20.0)
-        return label
     }()
     
     var meetCollectionLeftLayoutConstraint: NSLayoutConstraint?
@@ -353,10 +352,11 @@ extension UserProfileController {
         scrollView.addSubview(backButton)
         scrollView.addSubview(username)
         scrollView.addSubview(profileImage)
-        scrollView.addSubview(userName)
-        scrollView.addSubview(userCity)
+        scrollView.addSubview(meetedLabelsView)
+        scrollView.addSubview(joinedLabelsView)
+        scrollView.addSubview(userBigDesc)
         scrollView.addSubview(editView)
-        scrollView.addSubview(desc)
+        scrollView.addSubview(userDesc)
         scrollView.addSubview(meetLabelButton)
         scrollView.addSubview(joinedLabelButton)
         scrollView.addSubview(borderViewHorizontal)
@@ -364,8 +364,6 @@ extension UserProfileController {
         scrollView.addSubview(borderSelected)
         scrollView.addSubview(meetCollection)
         scrollView.addSubview(joinedCollection)
-    
-        editView.addSubview(editLabel)
         
         backButton.addTarget(self, action: #selector(BackAction), for: .touchUpInside)
         editView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(EditOpen)))
@@ -397,25 +395,30 @@ extension UserProfileController {
             profileImage.heightAnchor.constraint(equalToConstant: profileImage.frame.height),
             profileImage.widthAnchor.constraint(equalToConstant: profileImage.frame.width),
             
-            userName.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 20),
-            userName.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 10),
+            meetedLabelsView.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor, constant: -20),
+            meetedLabelsView.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 40),
+            meetedLabelsView.heightAnchor.constraint(equalToConstant: meetedLabelsView.frame.height),
+            meetedLabelsView.widthAnchor.constraint(equalToConstant: meetedLabelsView.frame.width),
             
-            userCity.leftAnchor.constraint(equalTo: userName.leftAnchor),
-            userCity.topAnchor.constraint(equalTo: userName.bottomAnchor, constant: 6),
+            joinedLabelsView.centerYAnchor.constraint(equalTo: meetedLabelsView.centerYAnchor),
+            joinedLabelsView.leftAnchor.constraint(equalTo: meetedLabelsView.rightAnchor, constant: 70),
+            joinedLabelsView.heightAnchor.constraint(equalToConstant: joinedLabelsView.frame.height),
+            joinedLabelsView.widthAnchor.constraint(equalToConstant: joinedLabelsView.frame.width),
             
-            editView.topAnchor.constraint(equalTo: userCity.bottomAnchor, constant: 10),
-            editView.leftAnchor.constraint(equalTo: userName.leftAnchor),
+            editView.bottomAnchor.constraint(equalTo: profileImage.bottomAnchor),
+            editView.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 20),
             editView.heightAnchor.constraint(equalToConstant: 35),
             editView.widthAnchor.constraint(equalToConstant: 160),
             
-            editLabel.centerXAnchor.constraint(equalTo: editView.centerXAnchor),
-            editLabel.centerYAnchor.constraint(equalTo: editView.centerYAnchor),
+            userBigDesc.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20),
+            userBigDesc.leftAnchor.constraint(equalTo: profileImage.leftAnchor),
+            userBigDesc.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
             
-            desc.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20),
-            desc.leftAnchor.constraint(equalTo: profileImage.leftAnchor),
-            desc.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
+            userDesc.topAnchor.constraint(equalTo: userBigDesc.bottomAnchor, constant: 6),
+            userDesc.leftAnchor.constraint(equalTo: profileImage.leftAnchor),
+            userDesc.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
             
-            meetLabelButton.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 15),
+            meetLabelButton.topAnchor.constraint(equalTo: userDesc.bottomAnchor, constant: 15),
             meetLabelButton.leftAnchor.constraint(equalTo: view.leftAnchor),
             meetLabelButton.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth/2),
             meetLabelButton.heightAnchor.constraint(equalToConstant: 30),
