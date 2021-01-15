@@ -20,7 +20,7 @@ class MessageCell: UITableViewCell {
         self.contentView.addSubview(profileImage)
         self.contentView.addSubview(dataLabel)
         self.contentView.addSubview(messageLabel)
-        self.contentView.addSubview(answerLabel)
+//        self.contentView.addSubview(answerLabel)
         ActivateConstraints()
         answerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(OpenProfile)))
     }
@@ -103,14 +103,19 @@ class MessageCell: UITableViewCell {
             messageLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             messageLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor),
             messageLabel.rightAnchor.constraint(equalTo: dataLabel.rightAnchor),
-            
-            answerLabel.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 6),
-            answerLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor),
-            answerLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15)
+            messageLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15)
+//            
+//            answerLabel.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 6),
+//            answerLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor),
+//            answerLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -15)
         ])
         NSLayoutConstraint.activate(const)
     }
 }
+
+
+
+
 
 protocol myTableDelegate {
     func myTableDelegate(commentIndex: Int)
