@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		23D2F7A9114228755D725C77 /* Pods_GreenerCo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE30A6D69A87A207719A5E78 /* Pods_GreenerCo.framework */; };
+		5C045BD625BAE80B00E42843 /* BottomLogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C045BD525BAE80B00E42843 /* BottomLogInView.swift */; };
+		5C045BDF25BB0EF100E42843 /* OnboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C045BDE25BB0EF100E42843 /* OnboardCell.swift */; };
 		5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */; };
 		5C12A73F2554520500A59D8E /* StatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C12A73E2554520500A59D8E /* StatsController.swift */; };
 		5C1C5E0425A6064C000DC5EC /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C5E0325A6064C000DC5EC /* BarView.swift */; };
@@ -81,6 +83,8 @@
 		20BE5A996083BF5184D1B21E /* Pods-GreenerCo-GreenerCoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreenerCo-GreenerCoUITests.release.xcconfig"; path = "Target Support Files/Pods-GreenerCo-GreenerCoUITests/Pods-GreenerCo-GreenerCoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		36440B5B66055C3B1C989B6F /* Pods-GreenerCoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreenerCoTests.release.xcconfig"; path = "Target Support Files/Pods-GreenerCoTests/Pods-GreenerCoTests.release.xcconfig"; sourceTree = "<group>"; };
 		369613D9E8EBE94D8A384C3D /* Pods-GreenerCo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreenerCo.release.xcconfig"; path = "Target Support Files/Pods-GreenerCo/Pods-GreenerCo.release.xcconfig"; sourceTree = "<group>"; };
+		5C045BD525BAE80B00E42843 /* BottomLogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLogInView.swift; sourceTree = "<group>"; };
+		5C045BDE25BB0EF100E42843 /* OnboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardCell.swift; sourceTree = "<group>"; };
 		5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsController.swift; sourceTree = "<group>"; };
 		5C12A73E2554520500A59D8E /* StatsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsController.swift; sourceTree = "<group>"; };
 		5C1C5E0325A6064C000DC5EC /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
@@ -171,6 +175,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C045BD425BAE7ED00E42843 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C045BD525BAE80B00E42843 /* BottomLogInView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5C045BDD25BB0EC200E42843 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5C045BDE25BB0EF100E42843 /* OnboardCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		5C454E5225BACF5B00966991 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,8 +222,8 @@
 		5C454E5525BACFD500966991 /* Recycling Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5C40C262256D819900444BCA /* RecyclingLayers.swift */,
 				5C45917D254D59D3005AE26C /* RecyclingController.swift */,
+				5C40C262256D819900444BCA /* RecyclingLayers.swift */,
 				5C454E5625BACFFE00966991 /* Cell */,
 				5C454E5725BAD00400966991 /* View */,
 			);
@@ -267,10 +287,12 @@
 		5C454E5C25BAD0EF00966991 /* Other Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5C454E7025BAE55D00966991 /* Onboarding Controller */,
 				5C454E6925BAD1DB00966991 /* Meeting Controller */,
 				5C454E5E25BAD11500966991 /* Add New Meeting Controller */,
 				5C454E6E25BAD38100966991 /* Achieve Controller */,
 				5C454E6125BAD15500966991 /* Settings */,
+				5CFB6254259C8B0900F1C8C7 /* PopUpController.swift */,
 			);
 			path = "Other Controllers";
 			sourceTree = "<group>";
@@ -403,11 +425,21 @@
 		5C454E6E25BAD38100966991 /* Achieve Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5C1D01F9255C26610058D276 /* ShowAchieveController.swift */,
 				5C54953D2558251A00E5140C /* AchieveController.swift */,
+				5C1D01F9255C26610058D276 /* ShowAchieveController.swift */,
 				5C5495422558252200E5140C /* Cell */,
 			);
 			path = "Achieve Controller";
+			sourceTree = "<group>";
+		};
+		5C454E7025BAE55D00966991 /* Onboarding Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5C454E2925B57B2000966991 /* OnboardingController.swift */,
+				5C045BDD25BB0EC200E42843 /* Cell */,
+				5C045BD425BAE7ED00E42843 /* View */,
+			);
+			path = "Onboarding Controller";
 			sourceTree = "<group>";
 		};
 		5C459140254D55C0005AE26C = {
@@ -448,8 +480,6 @@
 				5C5D03ED25B2B09F0011AB9D /* GoogleService-Info.plist */,
 				5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */,
 				5C83A057255F959F005C2CAA /* SF-Pro.ttf */,
-				5CFB6254259C8B0900F1C8C7 /* PopUpController.swift */,
-				5C454E2925B57B2000966991 /* OnboardingController.swift */,
 			);
 			path = GreenerCo;
 			sourceTree = "<group>";
@@ -760,7 +790,9 @@
 				5C22533A25B1690F00E73D0A /* ThreeImagesView.swift in Sources */,
 				5C513FD72554845A00C1B851 /* StatsView.swift in Sources */,
 				5CFB6246259B415100F1C8C7 /* TopProgressView.swift in Sources */,
+				5C045BDF25BB0EF100E42843 /* OnboardCell.swift in Sources */,
 				5C54953E2558251A00E5140C /* AchieveController.swift in Sources */,
+				5C045BD625BAE80B00E42843 /* BottomLogInView.swift in Sources */,
 				5CFB624B259B92E800F1C8C7 /* HeadersViews.swift in Sources */,
 				5CFB622E259A447200F1C8C7 /* AddMeetingController.swift in Sources */,
 				5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */,

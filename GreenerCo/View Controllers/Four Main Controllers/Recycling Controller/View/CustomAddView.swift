@@ -106,7 +106,6 @@ extension CustomAddView: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomAddCell") as! CustomAddCell
-        print("Cell was created")
         cell.itemImage.image = materials[indexPath.row].image
         cell.itemColorView.backgroundColor = materials[indexPath.row].color
         cell.itemLabel.text = materials[indexPath.row].name

@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,59 +26,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJB-Nn-UdU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-900.00000000000011" y="1069.4196428571429"/>
-        </scene>
-        <!--Change Buttons Controller-->
-        <scene sceneID="eSZ-gE-SPh">
-            <objects>
-                <viewController storyboardIdentifier="ChangeButtonsController" id="jBV-UW-6Ll" customClass="ChangeButtonsController" customModule="GreenerCo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PYd-PB-eg5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="THM-k9-Q0Y" customClass="ChangeButtonView" customModule="GreenerCo" customModuleProvider="target">
-                                <rect key="frame" x="90" y="228" width="308" height="297"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lQj-5j-Uxm">
-                                        <rect key="frame" x="0.0" y="51" width="308" height="246"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bBU-tY-Uq8">
-                                            <size key="itemSize" width="128" height="128"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ButtonImageCell" id="fsb-Jm-ZPd" customClass="ButtonImageCell" customModule="GreenerCo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xdB-7g-wzI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                        </cells>
-                                        <connections>
-                                            <outlet property="dataSource" destination="jBV-UW-6Ll" id="4Dw-bG-Odv"/>
-                                            <outlet property="delegate" destination="jBV-UW-6Ll" id="ehT-25-jRR"/>
-                                        </connections>
-                                    </collectionView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.98823529409999999" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="kfx-na-GLW"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <connections>
-                        <outlet property="changeButtonView" destination="THM-k9-Q0Y" id="miP-m9-chr"/>
-                        <outlet property="collection" destination="lQj-5j-Uxm" id="Krb-kW-v83"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zZt-sy-Au0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1908.6956521739132" y="409.82142857142856"/>
         </scene>
         <!--MeetingsController-->
         <scene sceneID="K7g-lS-gdJ">

@@ -28,7 +28,7 @@ class ProgressImageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = MainConstants.nearWhite
+        self.backgroundColor = MainConstants.nearWhite.withAlphaComponent(0.1)
         SetSubviews()
         ActivateLayouts()
     }

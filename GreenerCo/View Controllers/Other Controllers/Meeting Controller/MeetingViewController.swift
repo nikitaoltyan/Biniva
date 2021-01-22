@@ -315,17 +315,8 @@ class MeetingViewController: UIViewController {
 extension MeetingViewController: myTableDelegate {
     
     func myTableDelegate(commentIndex: Int){
-        print("My table delegate with index \(commentIndex)")
+        print("Open reply view controller")
         
-        let newVC = ReplyCommentController()
-        newVC.modalPresentationStyle = .overFullScreen
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromRight
-        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
-        view.window!.layer.add(transition, forKey: kCATransition)
-        self.present(newVC, animated: false, completion: nil)
     }
 }
 
