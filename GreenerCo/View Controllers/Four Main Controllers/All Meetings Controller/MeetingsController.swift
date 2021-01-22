@@ -100,6 +100,8 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row != 0{
+            Vibration.Soft()
+            
             let newVC = MeetingViewController()
             newVC.modalPresentationStyle = .overFullScreen
             let transition = CATransition()
@@ -112,6 +114,7 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
 }
+
 
 
 

@@ -26,8 +26,9 @@ class MeetingViewController: UIViewController {
         return scroll
     }()
     
-    let backView: BackTopView = {
+    lazy var backView: BackTopView = {
         let view = BackTopView()
+        view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -186,16 +187,18 @@ class MeetingViewController: UIViewController {
         return view
     }()
 
-    let sendView: UIView = {
-        let view = UIView()
+    lazy var sendView: UIView = {
+        let scale = 0.85 * (commentField.textContainerInset.top + commentField.textContainerInset.bottom + commentField.font!.lineHeight)
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = MainConstants.orange
-        view.layer.cornerRadius = 25/3
+        view.layer.cornerRadius = scale/2
         return view
     }()
     
-    let imageInsideSendView: UIImageView = {
-        let image = UIImageView()
+    lazy var imageInsideSendView: UIImageView = {
+        let scale: CGFloat = sendView.frame.height * 0.8
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: scale, height: scale*0.9))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(systemName: "paperplane.fill")
         image.tintColor = MainConstants.white
@@ -294,11 +297,13 @@ class MeetingViewController: UIViewController {
     
     @objc func JoinInAction(){
         print("Joined in")
+        Vibration.Soft()
     }
     
     
     @objc func SendAction(){
         print("Sended")
+        Vibration.Light()
     }
 
 }
@@ -381,6 +386,8 @@ extension MeetingViewController: UIScrollViewDelegate {
 
 extension MeetingViewController: BackTopDelegate {
     @objc func Back(){
+        Vibration.Soft()
+        
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = CATransitionType.push
@@ -427,8 +434,6 @@ extension MeetingViewController {
     
     func ActivateLayouts(){
         let topHeightConst: CGFloat = {if MainConstants.screenHeight>700 {return 90} else {return 70}}()
-        let containerRight = commentField.textContainerInset.right
-        let height = commentField.textContainerInset.top + commentField.textContainerInset.bottom + commentField.font!.lineHeight
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -496,15 +501,15 @@ extension MeetingViewController {
             commentField.leftAnchor.constraint(equalTo: back.leftAnchor),
             commentField.rightAnchor.constraint(equalTo: desc.rightAnchor),
             
-            sendView.centerXAnchor.constraint(equalTo: commentField.rightAnchor, constant: -containerRight/2),
-            sendView.centerYAnchor.constraint(equalTo: commentField.centerYAnchor),
-            sendView.heightAnchor.constraint(equalToConstant: height*0.85),
-            sendView.widthAnchor.constraint(equalToConstant: height*0.85),
+            sendView.rightAnchor.constraint(equalTo: commentField.rightAnchor, constant: -4),
+            sendView.bottomAnchor.constraint(equalTo: commentField.bottomAnchor, constant: -4),
+            sendView.heightAnchor.constraint(equalToConstant: sendView.frame.height),
+            sendView.widthAnchor.constraint(equalToConstant: sendView.frame.width),
 
             imageInsideSendView.centerXAnchor.constraint(equalTo: sendView.centerXAnchor, constant: -1),
             imageInsideSendView.centerYAnchor.constraint(equalTo: sendView.centerYAnchor),
-            imageInsideSendView.heightAnchor.constraint(equalToConstant: height*0.85*0.76),
-            imageInsideSendView.widthAnchor.constraint(equalToConstant: height*0.85*0.96),
+            imageInsideSendView.heightAnchor.constraint(equalToConstant: imageInsideSendView.frame.height),
+            imageInsideSendView.widthAnchor.constraint(equalToConstant: imageInsideSendView.frame.width),
             
             backView.topAnchor.constraint(equalTo: view.topAnchor),
             backView.leftAnchor.constraint(equalTo: view.leftAnchor),

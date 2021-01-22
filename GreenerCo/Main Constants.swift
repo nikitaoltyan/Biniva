@@ -21,12 +21,14 @@ struct MainConstants {
     static let screenWidth = UIScreen.main.bounds.width
 }
 
+
 struct Materials {
     static let paper = [""]
     static let plastic = [""]
     static let metal = [""]
     static let organic = [""]
 }
+
 
 struct MaterialsColors {
     static let waterBlue = UIColor(red: 168/255, green: 217/255, blue: 219/255, alpha: 1)
@@ -36,6 +38,7 @@ struct MaterialsColors {
     static let paperOrange = UIColor(red: 210/255, green: 127/255, blue: 101/255, alpha: 1)
 }
 
+
 struct MaterialsIcons {
     static let waterBottle = #imageLiteral(resourceName: "Water")
     static let paper = #imageLiteral(resourceName: "Paper")
@@ -44,11 +47,13 @@ struct MaterialsIcons {
     static let metal = #imageLiteral(resourceName: "Metal")
 }
 
+
 class MaterialsObject: NSObject{
     var color: UIColor!
     var image: UIImage!
     var name: String!
 }
+
 
 struct MaterialsObjectItems {
     static var color: Array<UIColor> = [MaterialsColors.waterBlue, MaterialsColors.organicGreen, MaterialsColors.paperOrange, MaterialsColors.metalBeige]
@@ -56,5 +61,18 @@ struct MaterialsObjectItems {
     static let name: Array<String> = ["Пластик", "Органика", "Бумага", "Металл"]
 }
 
+
+class Vibration {
+    
+    static func Soft() -> Void{
+        let soft = UIImpactFeedbackGenerator(style: .soft)
+        soft.impactOccurred()
+    }
+    
+    static func Light() -> Void{
+        let light = UIImpactFeedbackGenerator(style: .light)
+        light.impactOccurred()
+    }
+}
 
 // Access Token Github: 26fd87827e28333abd795628645a73b9ea2fd0f5

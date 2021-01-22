@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class AddOtherCell: UICollectionViewCell {
     
@@ -161,6 +162,9 @@ class AddOtherCell: UICollectionViewCell {
     
     
     @objc func Send() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        
         sendDelegate?.Send()
     }
     
@@ -207,6 +211,7 @@ extension AddOtherCell: UITextViewDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
         if updatedText.count >= allowCharacters {
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             AnimateTextField(numberOfIterations: 0)
         }
         delegate?.PassHeader(header: updatedText)

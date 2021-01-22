@@ -98,6 +98,9 @@ class TopProgressView: UIView {
     }
 
     @objc func PrevSlideOrClose(){
+        let generator = UIImpactFeedbackGenerator(style: .soft)
+        generator.impactOccurred()
+        
         switch slide!{
         case 0:
             delegate?.CloseView()
@@ -110,6 +113,9 @@ class TopProgressView: UIView {
     }
     
     @objc func NextSlideOrSent(){
+        let generator = UIImpactFeedbackGenerator(style: .soft)
+        generator.impactOccurred()
+        
         switch slide!{
         case 1:
             Sent()

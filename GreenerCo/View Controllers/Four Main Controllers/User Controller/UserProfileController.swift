@@ -208,7 +208,8 @@ class UserProfileController: UIViewController {
     @objc func EditOpen(){
         print("Edit open")
 //        let newVC = SettingsController()
-        let newVC = AboutUsController()
+//        let newVC = AboutUsController()
+        let newVC = OnboardingController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()
         transition.duration = 0.3
@@ -376,6 +377,8 @@ extension UserProfileController {
     }
     
     func ActivateLayouts(){
+        let leftLabelCont: CGFloat = {if MainConstants.screenHeight>700{return 70}else{return 45}}()
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -401,14 +404,14 @@ extension UserProfileController {
             meetedLabelsView.widthAnchor.constraint(equalToConstant: meetedLabelsView.frame.width),
             
             joinedLabelsView.centerYAnchor.constraint(equalTo: meetedLabelsView.centerYAnchor),
-            joinedLabelsView.leftAnchor.constraint(equalTo: meetedLabelsView.rightAnchor, constant: 70),
+            joinedLabelsView.leftAnchor.constraint(equalTo: meetedLabelsView.rightAnchor, constant: leftLabelCont),
             joinedLabelsView.heightAnchor.constraint(equalToConstant: joinedLabelsView.frame.height),
             joinedLabelsView.widthAnchor.constraint(equalToConstant: joinedLabelsView.frame.width),
             
             editView.bottomAnchor.constraint(equalTo: profileImage.bottomAnchor),
             editView.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 20),
+            editView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
             editView.heightAnchor.constraint(equalToConstant: 35),
-            editView.widthAnchor.constraint(equalToConstant: 160),
             
             userBigDesc.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20),
             userBigDesc.leftAnchor.constraint(equalTo: profileImage.leftAnchor),
