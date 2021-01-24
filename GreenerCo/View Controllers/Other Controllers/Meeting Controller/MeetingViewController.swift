@@ -9,8 +9,11 @@ import UIKit
 import MapKit
 import CoreLocation
 
+import Firebase
+
 class MeetingViewController: UIViewController {
     
+    let ref = Database.database(url: "https://greener-964fe-default-rtdb.europe-west1.firebasedatabase.app/").reference()
     var tableHeightConstraint: NSLayoutConstraint!
     var commentHeightConstraint: NSLayoutConstraint!
     var numberOfRows = 1
@@ -298,12 +301,18 @@ class MeetingViewController: UIViewController {
     @objc func JoinInAction(){
         print("Joined in")
         Vibration.Soft()
+        Server.PostDetails(postWithId: "h") {postDetails in
+            print(postDetails)
+        }
     }
     
     
     @objc func SendAction(){
         print("Sended")
         Vibration.Light()
+        Server.TestArray(){postDetails in
+            print(postDetails)
+        }
     }
 
 }
