@@ -25,12 +25,30 @@ class Server {
     }
 
     
-    static func TestArray(postDetails: @escaping (_ result: Array<AnyObject>?) -> Void) {
+    static func GetArray(postDetails: @escaping (_ result: Array<String>?) -> Void) {
 //        Working function that returns special array. Can be used for any purposes.
-        let postRef = ref.child("users").child("user_example").child("array")
-        postRef.observe(DataEventType.value, with: { (snapshot) in
-            let userArray = snapshot.value as? Array<AnyObject>
+        let postRef = ref.child("users").child("user_example").child("joined_meetings")
+        postRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            let userArray = snapshot.value as? Array<String> ?? []
             postDetails(userArray)
         })
+    }
+    
+    
+    static func JoinMeeting(element: String) {
+//        Working function that Add meeting id on the server. Should be extended be Meeting Id.
+        let postRef = ref.child("users").child("user_example").child("joined_meetings")
+        Server.GetArray() {postDetails in
+            var newArray = postDetails
+            newArray?.append(element)
+            postRef.setValue(newArray)
+            postRef.removeAllObservers()
+        }
+    }
+    
+    
+    static func CreateMeeting(withData data: Dictionary<String, Any>) {
+        let postRef = ref.child("meetings").childByAutoId()
+        postRef.setValue(data)
     }
 }
