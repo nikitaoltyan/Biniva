@@ -51,6 +51,7 @@ class AddMeetingController: UIViewController {
     var header: String?
     var desc: String?
     
+    var dataDictonary: Dictionary<String, Any> = [:]
     
     
     override func viewDidLoad() {
@@ -113,24 +114,28 @@ extension AddMeetingController: TopProgressDelegate {
 
 
 extension AddMeetingController: PassDataDelegate {
-    func PassDate(date: String) {
-        self.date = date
+    func PassDate(date: Dictionary<String, String>) {
+        dataDictonary.merge(dict: date)
     }
     
-    func PassTime(time: String) {
-        self.time = time
+    func PassTime(time: Dictionary<String, String>) {
+        dataDictonary.merge(dict: time)
     }
     
-    func PassHeader(header: String) {
-        self.header = header
+    func PassHeader(header: Dictionary<String, String>) {
+        dataDictonary.merge(dict: header)
     }
     
-    func PassDesc(desc: String) {
-        self.desc = desc
+    func PassDesc(desc: Dictionary<String, String>) {
+        dataDictonary.merge(dict: desc)
     }
     
-    func PassPlace(place: String) {
-        self.place = place
+    func PassStreetName(streetName: Dictionary<String, String>) {
+        dataDictonary.merge(dict: streetName)
+    }
+    
+    func PassCoordinates(coord: Dictionary<String, Array<CGFloat>>) {
+        dataDictonary.merge(dict: coord)
     }
 }
 
@@ -140,7 +145,9 @@ extension AddMeetingController: PassDataDelegate {
 
 extension AddMeetingController: AddMeetingSendDelegate {
     func Send() {
-        print("Send")
+        print("Create meeting")
+//        Also should add user id.
+        Server.CreateMeeting(withData: dataDictonary)
     }
 }
 
@@ -220,11 +227,12 @@ protocol TopProgressDelegate {
 
 
 protocol PassDataDelegate {
-    func PassPlace(place: String)
-    func PassDate(date: String)
-    func PassTime(time: String)
-    func PassHeader(header: String)
-    func PassDesc(desc: String)
+    func PassStreetName(streetName: Dictionary<String, String>)
+    func PassDate(date: Dictionary<String, String>)
+    func PassTime(time: Dictionary<String, String>)
+    func PassHeader(header: Dictionary<String, String>)
+    func PassDesc(desc: Dictionary<String, String>)
+    func PassCoordinates(coord: Dictionary<String, Array<CGFloat>>)
 }
 
 

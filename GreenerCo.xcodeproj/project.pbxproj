@@ -11,6 +11,7 @@
 		5C045BD625BAE80B00E42843 /* BottomLogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C045BD525BAE80B00E42843 /* BottomLogInView.swift */; };
 		5C045BDF25BB0EF100E42843 /* OnboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C045BDE25BB0EF100E42843 /* OnboardCell.swift */; };
 		5C045BE825BC77B200E42843 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C045BE725BC77B200E42843 /* Server.swift */; };
+		5C045BF725BFE25300E42843 /* Dictionary Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C045BF625BFE25300E42843 /* Dictionary Extension.swift */; };
 		5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */; };
 		5C12A73F2554520500A59D8E /* StatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C12A73E2554520500A59D8E /* StatsController.swift */; };
 		5C1C5E0425A6064C000DC5EC /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C5E0325A6064C000DC5EC /* BarView.swift */; };
@@ -87,6 +88,7 @@
 		5C045BD525BAE80B00E42843 /* BottomLogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLogInView.swift; sourceTree = "<group>"; };
 		5C045BDE25BB0EF100E42843 /* OnboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardCell.swift; sourceTree = "<group>"; };
 		5C045BE725BC77B200E42843 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		5C045BF625BFE25300E42843 /* Dictionary Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary Extension.swift"; sourceTree = "<group>"; };
 		5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsController.swift; sourceTree = "<group>"; };
 		5C12A73E2554520500A59D8E /* StatsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsController.swift; sourceTree = "<group>"; };
 		5C1C5E0325A6064C000DC5EC /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,14 @@
 				5C045BE725BC77B200E42843 /* Server.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		5C045BF525BFE24600E42843 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5C045BF625BFE25300E42843 /* Dictionary Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		5C454E5225BACF5B00966991 /* View Controllers */ = {
@@ -482,6 +492,7 @@
 				5C454E6C25BAD24600966991 /* General Views */,
 				5C454E6D25BAD2F100966991 /* General Cells */,
 				5C045BE625BC77A000E42843 /* Firebase */,
+				5C045BF525BFE24600E42843 /* Extensions */,
 				5C83A0792563AC58005C2CAA /* Main Constants.swift */,
 				5C45914C254D55C0005AE26C /* AppDelegate.swift */,
 				5C45914E254D55C0005AE26C /* SceneDelegate.swift */,
@@ -795,6 +806,7 @@
 				5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */,
 				5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */,
 				5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */,
+				5C045BF725BFE25300E42843 /* Dictionary Extension.swift in Sources */,
 				5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */,
 				5CFB623E259B246800F1C8C7 /* AddMapCell.swift in Sources */,
 				5C5D03E925B1A71F0011AB9D /* InfoView.swift in Sources */,

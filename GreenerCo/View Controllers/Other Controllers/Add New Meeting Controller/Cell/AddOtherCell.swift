@@ -156,8 +156,10 @@ class AddOtherCell: UICollectionViewCell {
         let date = DateFormatter()
         time.timeStyle = DateFormatter.Style.medium
         date.dateStyle = DateFormatter.Style.medium
-        delegate?.PassDate(date: date.string(from:  picker.date))
-        delegate?.PassTime(time: time.string(from:  picker.date))
+        let passDate: Dictionary<String,String> = ["date": date.string(from:  picker.date)]
+        let passTime: Dictionary<String,String> = ["time": time.string(from:  picker.date)]
+        delegate?.PassDate(date: passDate)
+        delegate?.PassTime(time: passTime)
     }
     
     
@@ -214,13 +216,15 @@ extension AddOtherCell: UITextViewDelegate {
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             AnimateTextField(numberOfIterations: 0)
         }
-        delegate?.PassHeader(header: updatedText)
+        let passHeader: Dictionary<String,String> = ["header": updatedText]
+        self.delegate?.PassStreetName(streetName: passHeader)
         return updatedText.count <= allowCharacters
     }
     
     func textViewDidChange(_ textView: UITextView) {
         guard textView.tag == 1 else {return}
-        delegate?.PassDesc(desc: textView.text)
+        let passDesc: Dictionary<String,String> = ["header": textView.text]
+        self.delegate?.PassStreetName(streetName: passDesc)
     }
 }
 

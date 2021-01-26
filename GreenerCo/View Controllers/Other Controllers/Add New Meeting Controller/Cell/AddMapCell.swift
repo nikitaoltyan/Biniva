@@ -54,6 +54,8 @@ class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     var currentAnnotation: MKPointAnnotation?
     
     var delegate: PassDataDelegate?
+    var usedCoordinates: Array<CGFloat> = []
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,6 +92,7 @@ class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         }
         
         let usedLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        usedCoordinates = [CGFloat(coordinate.latitude), CGFloat(coordinate.longitude)]
         
         let geocoder = CLGeocoder()
                     
@@ -99,7 +102,7 @@ class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
                 let firstLocation = placemarks?[0]
                 self.currentAnnotation?.title = firstLocation?.name
                 self.choosedStreetLabel.text = firstLocation?.name
-                self.delegate?.PassPlace(place: firstLocation?.name ?? "No data")
+                self.DelegateData(streetName: firstLocation?.name, coordinates: self.usedCoordinates)
             } else {
                 // An error occurred during geocoding.
                 self.currentAnnotation?.title = "Location is not available"
@@ -131,6 +134,14 @@ class AddMapCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             let region = MKCoordinateRegion(center: location, span: span)
             mapView.setRegion(region, animated: true)
         }
+    }
+    
+    
+    func DelegateData(streetName: String?, coordinates: Array<CGFloat>){
+        let passStreetName: Dictionary<String, String> = ["street_name": streetName ?? "No data"]
+        let passCoordinates: Dictionary<String, Array<CGFloat>> = ["coordinates": coordinates]
+        self.delegate?.PassStreetName(streetName: passStreetName)
+        self.delegate?.PassCoordinates(coord: passCoordinates)
     }
 }
 

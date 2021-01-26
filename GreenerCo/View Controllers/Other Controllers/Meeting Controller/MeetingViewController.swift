@@ -301,18 +301,14 @@ class MeetingViewController: UIViewController {
     @objc func JoinInAction(){
         print("Joined in")
         Vibration.Soft()
-        Server.PostDetails(postWithId: "h") {postDetails in
-            print(postDetails)
-        }
+        Server.JoinMeeting(element: "Meeting Id Should be Here")
+        
     }
     
     
     @objc func SendAction(){
         print("Sended")
         Vibration.Light()
-        Server.TestArray(){postDetails in
-            print(postDetails)
-        }
     }
 
 }
