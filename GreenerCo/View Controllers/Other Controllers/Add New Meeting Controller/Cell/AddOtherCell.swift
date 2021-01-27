@@ -62,20 +62,20 @@ class AddOtherCell: UICollectionViewCell {
     
     lazy var commentField: UITextView = {
         let view = UITextView()
+            .with(bgColor: MainConstants.nearWhite)
+            .with(fontName: "SFPro-Medium", size: 23)
+            .with(borderWidth: 1, color: UIColor.lightGray.withAlphaComponent(0.6).cgColor)
+            .with(textContainerInset: UIEdgeInsets(top: 6, left: 5, bottom: 6, right: 5))
+            .with(keybordType: .default)
+        
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = UIFont(name: "SFPro-medium", size: 23)
-        view.keyboardType = .default
         view.autocorrectionType = .yes
         view.isScrollEnabled = false
         view.delegate = self
         view.tag = 0
         
         view.layer.cornerRadius = 10
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.6).cgColor
-        view.backgroundColor = MainConstants.nearWhite
         view.textColor = MainConstants.nearBlack
-        view.textContainerInset = UIEdgeInsets(top: 6, left: 5, bottom: 6, right: 5)
         return view
     }()
     
