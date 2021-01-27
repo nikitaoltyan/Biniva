@@ -34,10 +34,13 @@ class RegistrationController: UIViewController {
     }()
     
     var dataDictonary: Dictionary<String, Any> = [:]
+    var avatarImage: UIImage?
+//    var setPhotoDelegate: AddPhotoDelegate?
     
     let mainLabels: Array<String> = ["Please, enter your Email",
                                      "Please, enter your Password",
-                                     "Please, enter your Username"]
+                                     "Please, enter your Username",
+                                     "Please, take a Photo"]
     let placeholders: Array<String> = ["Email",
                                        "Password",
                                        "Name"]
@@ -100,6 +103,12 @@ extension RegistrationController: UICollectionViewDelegate, UICollectionViewData
             return cell
         case 3:
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "AddPhotoCell", for: indexPath) as! AddPhotoCell
+            cell.mainLabel.text = mainLabels[indexPath.row]
+            if avatarImage != nil {
+                cell.avatar.image = avatarImage
+                cell.nextButton.isActive = true
+            }
+            cell.delegate = self
             return cell
         default:
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "AddGoalCell", for: indexPath) as! AddGoalCell
@@ -144,8 +153,28 @@ extension RegistrationController: RegistrationDelegate {
     func PassUsername(username: Dictionary<String, String>) {
         dataDictonary.merge(dict: username)
     }
+    
+    func PickerController() {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        pickerController.sourceType = .photoLibrary
+        self.present(pickerController, animated: true, completion: nil)
+    }
 }
 
+
+
+
+
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        avatarImage = info[.editedImage] as? UIImage
+        collection.reloadItems(at: [IndexPath(item: 3, section: 0)])
+        self.dismiss(animated: true, completion: nil)
+    }
+}
 
 
 
@@ -178,4 +207,5 @@ protocol RegistrationDelegate {
     func PassEmail(email: Dictionary<String, String>)
     func PassPassword(password: Dictionary<String, String>)
     func PassUsername(username: Dictionary<String, String>)
+    func PickerController()
 }

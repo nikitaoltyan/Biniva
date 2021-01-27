@@ -146,6 +146,7 @@ class TextFieldCell: UICollectionViewCell {
         case 1:
             delegate?.PassPassword(password: ["password": textField.text!])
         default:
+            self.textField.endEditing(true)
             delegate?.PassUsername(username: ["username": textField.text!])
         }
     }
@@ -206,7 +207,7 @@ extension TextFieldCell {
             nextButton.heightAnchor.constraint(equalToConstant: nextButton.frame.height),
             
             back.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            back.rightAnchor.constraint(equalTo: mainLabel.leftAnchor),
+            back.rightAnchor.constraint(equalTo: mainLabel.leftAnchor, constant: back.frame.width/2),
             back.heightAnchor.constraint(equalToConstant: back.frame.height),
             back.widthAnchor.constraint(equalToConstant: back.frame.width)
         ])
