@@ -18,6 +18,8 @@ class ButtonView: UIView {
         label.font = UIFont.init(name: "SFPro-Bold", size: 25.0)
         return label
     }()
+    
+    var isActive: Bool = true
 
     override init(frame: CGRect) {
         super.init(frame: frame)
