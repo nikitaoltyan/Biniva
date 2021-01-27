@@ -18,6 +18,14 @@
 		5C1D01FA255C26610058D276 /* ShowAchieveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D01F9255C26610058D276 /* ShowAchieveController.swift */; };
 		5C22533525B1638800E73D0A /* BackTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C22533425B1638800E73D0A /* BackTopView.swift */; };
 		5C22533A25B1690F00E73D0A /* ThreeImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C22533925B1690F00E73D0A /* ThreeImagesView.swift */; };
+		5C3046DA25C02CA000BAFEEF /* View Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046D925C02CA000BAFEEF /* View Extension.swift */; };
+		5C3046E525C13B8E00BAFEEF /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046E425C13B8E00BAFEEF /* RegistrationController.swift */; };
+		5C3046EE25C13D9800BAFEEF /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046ED25C13D9800BAFEEF /* TextFieldCell.swift */; };
+		5C3046F625C13DAC00BAFEEF /* AddPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046F525C13DAC00BAFEEF /* AddPhotoCell.swift */; };
+		5C3046FC25C13DC100BAFEEF /* AddGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046FB25C13DC100BAFEEF /* AddGoalCell.swift */; };
+		5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470025C140E100BAFEEF /* Label Extension.swift */; };
+		5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470525C1447D00BAFEEF /* TextView Extension.swift */; };
+		5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470A25C157C800BAFEEF /* TextField Extension.swift */; };
 		5C40C263256D819900444BCA /* RecyclingLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40C262256D819900444BCA /* RecyclingLayers.swift */; };
 		5C44873F258A5AF200474BFF /* CategoryNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44873E258A5AF200474BFF /* CategoryNameCell.swift */; };
 		5C448744258B8ED000474BFF /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C448743258B8ED000474BFF /* UserProfileController.swift */; };
@@ -95,6 +103,15 @@
 		5C1D01F9255C26610058D276 /* ShowAchieveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAchieveController.swift; sourceTree = "<group>"; };
 		5C22533425B1638800E73D0A /* BackTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTopView.swift; sourceTree = "<group>"; };
 		5C22533925B1690F00E73D0A /* ThreeImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeImagesView.swift; sourceTree = "<group>"; };
+		5C3046D925C02CA000BAFEEF /* View Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Extension.swift"; sourceTree = "<group>"; };
+		5C3046DE25C06A3100BAFEEF /* GreenerCo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GreenerCo.entitlements; sourceTree = "<group>"; };
+		5C3046E425C13B8E00BAFEEF /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		5C3046ED25C13D9800BAFEEF /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		5C3046F525C13DAC00BAFEEF /* AddPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoCell.swift; sourceTree = "<group>"; };
+		5C3046FB25C13DC100BAFEEF /* AddGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalCell.swift; sourceTree = "<group>"; };
+		5C30470025C140E100BAFEEF /* Label Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label Extension.swift"; sourceTree = "<group>"; };
+		5C30470525C1447D00BAFEEF /* TextView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextView Extension.swift"; sourceTree = "<group>"; };
+		5C30470A25C157C800BAFEEF /* TextField Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField Extension.swift"; sourceTree = "<group>"; };
 		5C40C262256D819900444BCA /* RecyclingLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingLayers.swift; sourceTree = "<group>"; };
 		5C44873E258A5AF200474BFF /* CategoryNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNameCell.swift; sourceTree = "<group>"; };
 		5C448743258B8ED000474BFF /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
@@ -207,8 +224,40 @@
 			isa = PBXGroup;
 			children = (
 				5C045BF625BFE25300E42843 /* Dictionary Extension.swift */,
+				5C3046D925C02CA000BAFEEF /* View Extension.swift */,
+				5C30470025C140E100BAFEEF /* Label Extension.swift */,
+				5C30470525C1447D00BAFEEF /* TextView Extension.swift */,
+				5C30470A25C157C800BAFEEF /* TextField Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5C3046E225C13B3D00BAFEEF /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				5C454E7025BAE55D00966991 /* Onboarding Controller */,
+				5C3046E325C13B6C00BAFEEF /* Registration Controller */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		5C3046E325C13B6C00BAFEEF /* Registration Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5C3046E425C13B8E00BAFEEF /* RegistrationController.swift */,
+				5C3046EC25C13D7D00BAFEEF /* Cell */,
+			);
+			path = "Registration Controller";
+			sourceTree = "<group>";
+		};
+		5C3046EC25C13D7D00BAFEEF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5C3046ED25C13D9800BAFEEF /* TextFieldCell.swift */,
+				5C3046F525C13DAC00BAFEEF /* AddPhotoCell.swift */,
+				5C3046FB25C13DC100BAFEEF /* AddGoalCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		5C454E5225BACF5B00966991 /* View Controllers */ = {
@@ -307,7 +356,7 @@
 		5C454E5C25BAD0EF00966991 /* Other Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5C454E7025BAE55D00966991 /* Onboarding Controller */,
+				5C3046E225C13B3D00BAFEEF /* Registration */,
 				5C454E6925BAD1DB00966991 /* Meeting Controller */,
 				5C454E5E25BAD11500966991 /* Add New Meeting Controller */,
 				5C454E6E25BAD38100966991 /* Achieve Controller */,
@@ -487,6 +536,7 @@
 		5C45914B254D55C0005AE26C /* GreenerCo */ = {
 			isa = PBXGroup;
 			children = (
+				5C3046DE25C06A3100BAFEEF /* GreenerCo.entitlements */,
 				5C459152254D55C0005AE26C /* Main.storyboard */,
 				5C454E5225BACF5B00966991 /* View Controllers */,
 				5C454E6C25BAD24600966991 /* General Views */,
@@ -797,13 +847,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C3046F625C13DAC00BAFEEF /* AddPhotoCell.swift in Sources */,
 				5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */,
 				5C22533525B1638800E73D0A /* BackTopView.swift in Sources */,
 				5C40C263256D819900444BCA /* RecyclingLayers.swift in Sources */,
+				5C3046DA25C02CA000BAFEEF /* View Extension.swift in Sources */,
 				5CFC3A0B2550702900068A69 /* CustomAddCell.swift in Sources */,
 				5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */,
+				5C3046EE25C13D9800BAFEEF /* TextFieldCell.swift in Sources */,
 				5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */,
 				5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */,
+				5C3046E525C13B8E00BAFEEF /* RegistrationController.swift in Sources */,
+				5C3046FC25C13DC100BAFEEF /* AddGoalCell.swift in Sources */,
 				5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */,
 				5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */,
 				5C045BF725BFE25300E42843 /* Dictionary Extension.swift in Sources */,
@@ -811,12 +866,15 @@
 				5CFB623E259B246800F1C8C7 /* AddMapCell.swift in Sources */,
 				5C5D03E925B1A71F0011AB9D /* InfoView.swift in Sources */,
 				5C22533A25B1690F00E73D0A /* ThreeImagesView.swift in Sources */,
+				5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */,
 				5C513FD72554845A00C1B851 /* StatsView.swift in Sources */,
 				5CFB6246259B415100F1C8C7 /* TopProgressView.swift in Sources */,
+				5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */,
 				5C045BDF25BB0EF100E42843 /* OnboardCell.swift in Sources */,
 				5C54953E2558251A00E5140C /* AchieveController.swift in Sources */,
 				5C045BD625BAE80B00E42843 /* BottomLogInView.swift in Sources */,
 				5CFB624B259B92E800F1C8C7 /* HeadersViews.swift in Sources */,
+				5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */,
 				5CFB622E259A447200F1C8C7 /* AddMeetingController.swift in Sources */,
 				5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */,
 				5CE7218525A2047500ECE84F /* ProgressImageView.swift in Sources */,
@@ -1017,6 +1075,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GreenerCo/GreenerCo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7T88SYY74G;
 				INFOPLIST_FILE = GreenerCo/Info.plist;
@@ -1038,6 +1097,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GreenerCo/GreenerCo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7T88SYY74G;
 				INFOPLIST_FILE = GreenerCo/Info.plist;
