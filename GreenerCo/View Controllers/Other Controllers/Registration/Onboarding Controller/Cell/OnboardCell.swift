@@ -57,12 +57,12 @@ extension OnboardCell {
     func SetSubviews(){
         self.addSubview(image)
         self.addSubview(mainLabel)
-        self.addSubview(secondLabel)
+//        self.addSubview(secondLabel)
     }
     
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: self.topAnchor, constant: 90),
+            image.topAnchor.constraint(equalTo: self.topAnchor, constant: 80),
             image.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             image.heightAnchor.constraint(equalToConstant: image.frame.height),
             image.widthAnchor.constraint(equalToConstant: image.frame.width),
@@ -71,9 +71,9 @@ extension OnboardCell {
             mainLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             mainLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
             
-            secondLabel.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 7),
-            secondLabel.leftAnchor.constraint(equalTo: mainLabel.leftAnchor),
-            secondLabel.rightAnchor.constraint(equalTo: mainLabel.rightAnchor)
+//            secondLabel.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 7),
+//            secondLabel.leftAnchor.constraint(equalTo: mainLabel.leftAnchor),
+//            secondLabel.rightAnchor.constraint(equalTo: mainLabel.rightAnchor)
         ])
     }
 }

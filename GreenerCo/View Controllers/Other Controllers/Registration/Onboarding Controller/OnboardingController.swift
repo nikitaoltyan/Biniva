@@ -9,9 +9,10 @@ import UIKit
 
 class OnboardingController: UIViewController {
     
-    let bottomView: BottomLogInView = {
-        let view = BottomLogInView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 380))
+    lazy var bottomView: BottomLogInView = {
+        let view = BottomLogInView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 390))
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.delegate = self
         return view
     }()
     
@@ -104,6 +105,31 @@ extension OnboardingController: UIScrollViewDelegate {
 
 
 
+extension OnboardingController: OnbordingDelegate {
+
+    //        Now is not available
+    func OpenApple() {}
+
+//        Now is not available
+    func OpenFacebook() {}
+    
+    func OpenEmail() {
+        let newVC = RegistrationController()
+        newVC.modalPresentationStyle = .overFullScreen
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(newVC, animated: false, completion: nil)
+    }
+}
+
+
+
+
+
 extension OnboardingController {
     
     func SetSubviews(){
@@ -129,4 +155,13 @@ extension OnboardingController {
             pager.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: -5)
         ])
     }
+}
+
+
+
+
+protocol OnbordingDelegate {
+    func OpenApple()
+    func OpenFacebook()
+    func OpenEmail()
 }
