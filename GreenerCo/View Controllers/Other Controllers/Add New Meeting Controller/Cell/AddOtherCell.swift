@@ -176,8 +176,7 @@ class AddOtherCell: UICollectionViewCell {
         warningLabel.isHidden = false
         UIView.animate(withDuration: 0.07, delay: 0, options: .curveEaseOut, animations: {
             self.commentField.transform = CGAffineTransform(rotationAngle: .pi/70)
-            let pink = UIColor(red: 242/255, green: 132/255, blue: 130/255, alpha: 1)
-            self.commentField.layer.borderColor = pink.cgColor
+            self.commentField.layer.borderColor = MainConstants.pink.cgColor
         }, completion: {finished in
             print("Animated - 1")
             UIView.animate(withDuration: 0.07, delay: 0, options: .curveEaseOut, animations: {

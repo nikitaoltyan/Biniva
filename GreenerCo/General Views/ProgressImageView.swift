@@ -10,10 +10,11 @@ import UIKit
 class ProgressImageView: UIView {
     
     let progressView: UIView = {
-        let view = UIView()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 20))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = MainConstants.orange
         view.layer.cornerRadius = 20
+        view.isUserInteractionEnabled = false
         return view
     }()
     
@@ -23,6 +24,10 @@ class ProgressImageView: UIView {
         image.image = #imageLiteral(resourceName: "Recycling_bin")
         return image
     }()
+    
+    var progressHeightAnchor: NSLayoutConstraint?
+    var delegate: AddGoalDelegate?
+    
     
     
     override init(frame: CGRect) {
@@ -37,6 +42,18 @@ class ProgressImageView: UIView {
         fatalError()
     }
 
+    
+    
+    @objc func PanGesture(_ sender: UIPanGestureRecognizer){
+        let touchPoint = sender.location(in: self)
+        guard (touchPoint.y > image.frame.minY) else { return }
+        guard (touchPoint.y < (progressView.frame.maxY-20)) else { return }
+        if sender.state == UIGestureRecognizer.State.changed  {
+            progressHeightAnchor?.constant = progressView.frame.maxY - touchPoint.y
+            progressView.layoutIfNeeded()
+            delegate?.PassFrame(height: progressView.frame.height, minY: progressView.frame.minY)
+        }
+    }
 }
 
 
@@ -47,19 +64,26 @@ extension ProgressImageView{
     func SetSubviews(){
         self.addSubview(progressView)
         self.addSubview(image)
+        
+        
+        progressView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(PanGesture(_:))))
     }
     
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
+//            progressView height anchor on the bootom os the function.
             progressView.leftAnchor.constraint(equalTo: self.leftAnchor),
             progressView.rightAnchor.constraint(equalTo: self.rightAnchor),
             progressView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            progressView.heightAnchor.constraint(equalToConstant: 60),
             
             image.topAnchor.constraint(equalTo: self.topAnchor),
             image.leftAnchor.constraint(equalTo: self.leftAnchor),
             image.rightAnchor.constraint(equalTo: self.rightAnchor),
             image.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
+        
+        progressHeightAnchor =
+            progressView.heightAnchor.constraint(equalToConstant: progressView.frame.height)
+        progressHeightAnchor?.isActive = true
     }
 }

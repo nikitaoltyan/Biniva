@@ -76,10 +76,7 @@ class PopUpController: UIViewController {
     }
     
     
-    @objc func Close(){
-        print("Close")
-        Dismiss()
-    }
+
     
     @objc func ShowView(){
         UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
@@ -88,6 +85,7 @@ class PopUpController: UIViewController {
         }, completion: { finished in
         })
     }
+    
     
     @objc func DismissAction(_ sender: UIPanGestureRecognizer){
         print("Dismiss action")
@@ -106,6 +104,7 @@ class PopUpController: UIViewController {
         }
     }
 
+    
     func ReturnToStartPosition(closePoint: CGFloat){
         UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
             self.mainView.frame = CGRect(x: self.mainView.frame.minX, y: closePoint - self.mainView.frame.height/1.5, width: self.mainView.frame.size.width, height: self.mainView.frame.size.height)
@@ -113,7 +112,8 @@ class PopUpController: UIViewController {
         })
     }
     
-    func Dismiss(){
+    
+    @objc func Dismiss(){
         UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
             self.mainView.center.y += self.mainView.frame.height
         }, completion: { finished in
@@ -133,7 +133,7 @@ extension PopUpController {
         mainView.addSubview(achieveImage)
         mainView.addSubview(achieveLabel)
         mainView.addSubview(achieveDesc)
-        closeImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Close)))
+        closeImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Dismiss)))
         mainView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(DismissAction(_:))))
     }
     
