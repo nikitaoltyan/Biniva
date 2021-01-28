@@ -27,6 +27,7 @@
 		5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470525C1447D00BAFEEF /* TextView Extension.swift */; };
 		5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470A25C157C800BAFEEF /* TextField Extension.swift */; };
 		5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30472325C2A51E00BAFEEF /* SetResultView.swift */; };
+		5C30472925C2DC5C00BAFEEF /* EnableLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30472825C2DC5C00BAFEEF /* EnableLocationCell.swift */; };
 		5C40C263256D819900444BCA /* RecyclingLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40C262256D819900444BCA /* RecyclingLayers.swift */; };
 		5C44873F258A5AF200474BFF /* CategoryNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44873E258A5AF200474BFF /* CategoryNameCell.swift */; };
 		5C448744258B8ED000474BFF /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C448743258B8ED000474BFF /* UserProfileController.swift */; };
@@ -114,6 +115,7 @@
 		5C30470525C1447D00BAFEEF /* TextView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextView Extension.swift"; sourceTree = "<group>"; };
 		5C30470A25C157C800BAFEEF /* TextField Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField Extension.swift"; sourceTree = "<group>"; };
 		5C30472325C2A51E00BAFEEF /* SetResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetResultView.swift; sourceTree = "<group>"; };
+		5C30472825C2DC5C00BAFEEF /* EnableLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableLocationCell.swift; sourceTree = "<group>"; };
 		5C40C262256D819900444BCA /* RecyclingLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingLayers.swift; sourceTree = "<group>"; };
 		5C44873E258A5AF200474BFF /* CategoryNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNameCell.swift; sourceTree = "<group>"; };
 		5C448743258B8ED000474BFF /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			children = (
 				5C3046ED25C13D9800BAFEEF /* TextFieldCell.swift */,
 				5C3046F525C13DAC00BAFEEF /* AddPhotoCell.swift */,
+				5C30472825C2DC5C00BAFEEF /* EnableLocationCell.swift */,
 				5C3046FB25C13DC100BAFEEF /* AddGoalCell.swift */,
 			);
 			path = Cell;
@@ -873,6 +876,7 @@
 				5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */,
 				5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */,
 				5C045BF725BFE25300E42843 /* Dictionary Extension.swift in Sources */,
+				5C30472925C2DC5C00BAFEEF /* EnableLocationCell.swift in Sources */,
 				5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */,
 				5CFB623E259B246800F1C8C7 /* AddMapCell.swift in Sources */,
 				5C5D03E925B1A71F0011AB9D /* InfoView.swift in Sources */,
