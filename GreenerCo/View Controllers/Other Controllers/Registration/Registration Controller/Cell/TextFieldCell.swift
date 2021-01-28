@@ -183,11 +183,11 @@ extension TextFieldCell {
     
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
-            mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 110),
+            mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 95),
             mainLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 35),
             mainLabel.widthAnchor.constraint(equalToConstant: 250),
             
-            textField.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 45),
+            textField.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 55),
             textField.leftAnchor.constraint(equalTo: mainLabel.leftAnchor),
             textField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -35),
             textField.heightAnchor.constraint(equalToConstant: 40),

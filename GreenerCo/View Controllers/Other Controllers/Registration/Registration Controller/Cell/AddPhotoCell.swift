@@ -119,12 +119,12 @@ extension AddPhotoCell {
     
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
-            mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 110),
+            mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 95),
             mainLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 35),
             mainLabel.widthAnchor.constraint(equalToConstant: 250),
             
             avatar.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            avatar.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 35),
+            avatar.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 45),
             avatar.heightAnchor.constraint(equalToConstant: avatar.frame.height),
             avatar.widthAnchor.constraint(equalToConstant: avatar.frame.width),
             

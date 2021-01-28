@@ -26,6 +26,7 @@
 		5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470025C140E100BAFEEF /* Label Extension.swift */; };
 		5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470525C1447D00BAFEEF /* TextView Extension.swift */; };
 		5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470A25C157C800BAFEEF /* TextField Extension.swift */; };
+		5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30472325C2A51E00BAFEEF /* SetResultView.swift */; };
 		5C40C263256D819900444BCA /* RecyclingLayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40C262256D819900444BCA /* RecyclingLayers.swift */; };
 		5C44873F258A5AF200474BFF /* CategoryNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C44873E258A5AF200474BFF /* CategoryNameCell.swift */; };
 		5C448744258B8ED000474BFF /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C448743258B8ED000474BFF /* UserProfileController.swift */; };
@@ -112,6 +113,7 @@
 		5C30470025C140E100BAFEEF /* Label Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label Extension.swift"; sourceTree = "<group>"; };
 		5C30470525C1447D00BAFEEF /* TextView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextView Extension.swift"; sourceTree = "<group>"; };
 		5C30470A25C157C800BAFEEF /* TextField Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField Extension.swift"; sourceTree = "<group>"; };
+		5C30472325C2A51E00BAFEEF /* SetResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetResultView.swift; sourceTree = "<group>"; };
 		5C40C262256D819900444BCA /* RecyclingLayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingLayers.swift; sourceTree = "<group>"; };
 		5C44873E258A5AF200474BFF /* CategoryNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNameCell.swift; sourceTree = "<group>"; };
 		5C448743258B8ED000474BFF /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				5C3046E425C13B8E00BAFEEF /* RegistrationController.swift */,
 				5C3046EC25C13D7D00BAFEEF /* Cell */,
+				5C30471F25C2A4F100BAFEEF /* View */,
 			);
 			path = "Registration Controller";
 			sourceTree = "<group>";
@@ -258,6 +261,14 @@
 				5C3046FB25C13DC100BAFEEF /* AddGoalCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		5C30471F25C2A4F100BAFEEF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C30472325C2A51E00BAFEEF /* SetResultView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5C454E5225BACF5B00966991 /* View Controllers */ = {
@@ -310,7 +321,6 @@
 		5C454E5725BAD00400966991 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5CE7218425A2047500ECE84F /* ProgressImageView.swift */,
 				5CFC3A0C2550703F00068A69 /* CustomAddView.swift */,
 				5CE7217925A2002F00ECE84F /* CustomPickerOpenView.swift */,
 			);
@@ -474,6 +484,7 @@
 		5C454E6C25BAD24600966991 /* General Views */ = {
 			isa = PBXGroup;
 			children = (
+				5CE7218425A2047500ECE84F /* ProgressImageView.swift */,
 				5C6C89EF25AF41F400D55A16 /* ButtonView.swift */,
 				5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */,
 				5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */,
@@ -895,6 +906,7 @@
 				5CE7217A25A2002F00ECE84F /* CustomPickerOpenView.swift in Sources */,
 				5C045BE825BC77B200E42843 /* Server.swift in Sources */,
 				5C82772B2556C02E00816D85 /* StatsCell.swift in Sources */,
+				5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */,
 				5CFB6239259A4DB100F1C8C7 /* AddOtherCell.swift in Sources */,
 				5C1C5E0425A6064C000DC5EC /* BarView.swift in Sources */,
 				5C44873F258A5AF200474BFF /* CategoryNameCell.swift in Sources */,

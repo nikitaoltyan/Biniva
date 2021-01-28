@@ -40,7 +40,8 @@ class RegistrationController: UIViewController {
     let mainLabels: Array<String> = ["Please, enter your Email",
                                      "Please, enter your Password",
                                      "Please, enter your Username",
-                                     "Please, take a Photo"]
+                                     "Please, take a Photo",
+                                     "Set your daily trash level"]
     let placeholders: Array<String> = ["Email",
                                        "Password",
                                        "Name"]
@@ -103,6 +104,7 @@ extension RegistrationController: UICollectionViewDelegate, UICollectionViewData
             return cell
         case 3:
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "AddPhotoCell", for: indexPath) as! AddPhotoCell
+            cell.cellNumber = indexPath.row
             cell.mainLabel.text = mainLabels[indexPath.row]
             if avatarImage != nil {
                 cell.avatar.image = avatarImage
@@ -112,6 +114,9 @@ extension RegistrationController: UICollectionViewDelegate, UICollectionViewData
             return cell
         default:
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "AddGoalCell", for: indexPath) as! AddGoalCell
+            cell.cellNumber = indexPath.row
+            cell.mainLabel.text = mainLabels[indexPath.row]
+            cell.delegate = self
             return cell
         }
     }
