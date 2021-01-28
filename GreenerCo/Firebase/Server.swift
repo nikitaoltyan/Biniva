@@ -15,6 +15,14 @@ class Server {
     }
     
     
+    static func AuthUser(withEmail: String, password: String) {
+        Auth.auth().signIn(withEmail: withEmail, password: password) { (authResult, error) in
+            guard (error == nil) else { return }
+            UserInformation.userId = authResult?.user.uid
+        }
+    }
+    
+    
     static func PostDetails(postWithId id: String, postDetails: @escaping (_ result: [String : AnyObject]) -> Void) {
 //        Function isn't ready yet! There's test sample with user info, but should be post.
         let postRef = ref.child("users").child("user_example")

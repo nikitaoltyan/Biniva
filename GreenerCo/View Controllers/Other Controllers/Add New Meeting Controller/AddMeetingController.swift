@@ -51,7 +51,7 @@ class AddMeetingController: UIViewController {
     var header: String?
     var desc: String?
     
-    var dataDictonary: Dictionary<String, Any> = [:]
+    var dataDictonary: Dictionary<String, Any> = ["user_id": UserInformation.userId]
     
     
     override func viewDidLoad() {
@@ -146,7 +146,7 @@ extension AddMeetingController: PassDataDelegate {
 extension AddMeetingController: AddMeetingSendDelegate {
     func Send() {
         print("Create meeting")
-//        Also should add user id.
+//        Also should close up that view!
         Server.CreateMeeting(withData: dataDictonary)
     }
 }

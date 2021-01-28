@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MeetingsController: UIViewController {
 
@@ -28,8 +29,9 @@ class MeetingsController: UIViewController {
     
     var topHeightConstraint: NSLayoutConstraint?
     
+    
     override func viewDidLoad() {
-        print("Meetings open")
+        Server.AuthUser(withEmail: "nikitaoltyan@mail.ru", password: "12345678")
         view.backgroundColor = MainConstants.white
         view.addSubview(meetingCollection)
         meetingCollection.delegate = self

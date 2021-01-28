@@ -8,8 +8,6 @@
 import UIKit
  
 struct MainConstants {
-    static let aboutUs = "About us information \n \nWe are ready to introduce ourselves."
-    static let aboutChangingButtons = "About changing buttons information \n \nWe are ready to help you."
     static let green = UIColor(red: 38/255, green: 74/255, blue: 54/255, alpha: 1)
     static let white = UIColor(red: 245/255, green: 252/255, blue: 251/255, alpha: 1)
     static let orange = UIColor(red: 238/255, green: 124/255, blue: 30/255, alpha: 1)
@@ -76,4 +74,8 @@ class Vibration {
     }
 }
 
+
+struct UserInformation {
+    static var userId: String!
+}
 // Access Token Github: 26fd87827e28333abd795628645a73b9ea2fd0f5
