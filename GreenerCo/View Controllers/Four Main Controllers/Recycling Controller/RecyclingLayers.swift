@@ -47,7 +47,7 @@ extension RecyclingController {
     
     
     func ActivateLayouts(){
-        let heightOfProgressView: CGFloat = {if MainConstants.screenHeight>700{return 420}else{return 360}}()
+        let heightOfProgressView: CGFloat = {if MainConstants.screenHeight>700{return 400}else{return 360}}()
         let tabBarHeight: CGFloat = self.tabBarController?.tabBar.frame.size.height ?? 49
         let plusViewFromBottom: CGFloat = {if MainConstants.screenHeight>700{return 130}else{return 70}}()
         let progressViewFromHeight: CGFloat = {if MainConstants.screenHeight>700{return 158}else{return 138}}()

@@ -16,8 +16,15 @@ extension UIView {
         return self
     }
     
+    
     func with(bgColor: UIColor) -> Self {
         backgroundColor = bgColor
+        return self
+    }
+    
+    
+    func with(cornerRadius: CGFloat) -> Self {
+        self.layer.cornerRadius = cornerRadius
         return self
     }
 }
