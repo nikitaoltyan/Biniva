@@ -14,6 +14,7 @@ struct MainConstants {
     static let white = UIColor(red: 245/255, green: 252/255, blue: 251/255, alpha: 1)
     static let orange = UIColor(red: 238/255, green: 124/255, blue: 30/255, alpha: 1)
     static let yellow = UIColor(red: 237/255, green: 193/255, blue: 53/255, alpha: 1)
+    static let pink = UIColor(red: 242/255, green: 132/255, blue: 130/255, alpha: 1)
     static let nearBlack = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
     static let nearWhite = UIColor(red: 0, green: 0, blue: 0, alpha: 0.03)
     static let headerColor = UIColor(red: 237/255, green: 246/255, blue: 249/255, alpha: 1)
