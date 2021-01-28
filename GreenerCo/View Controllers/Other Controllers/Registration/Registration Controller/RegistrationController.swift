@@ -21,13 +21,14 @@ class RegistrationController: UIViewController {
         
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.isPagingEnabled = true
-        collection.isScrollEnabled = true
+        collection.isScrollEnabled = false
         collection.backgroundColor = MainConstants.white
         collection.showsHorizontalScrollIndicator = false
         collection.delegate = self
         collection.dataSource = self
         collection.register(TextFieldCell.self, forCellWithReuseIdentifier: "TextFieldCell")
         collection.register(AddPhotoCell.self, forCellWithReuseIdentifier: "AddPhotoCell")
+        collection.register(EnableLocationCell.self, forCellWithReuseIdentifier: "EnableLocationCell")
         collection.register(AddGoalCell.self, forCellWithReuseIdentifier: "AddGoalCell")
         
         return collection
@@ -41,13 +42,17 @@ class RegistrationController: UIViewController {
                                      "Please, enter your Password",
                                      "Please, enter your Username",
                                      "Please, take a Photo",
+                                     "Please, allow Location",
                                      "Set your daily trash level"]
     let placeholders: Array<String> = ["Email",
                                        "Password",
                                        "Name"]
     let explanations: Array<String> = ["This is how we will identify you and how you can log in. You will not be able to change it.",
                                        "This is how you can log in. You will be able to change it.",
-                                       "This is how Users will identify you. You will not be able to change it."]
+                                       "This is how Users will identify you. You will not be able to change it.",
+                                       "",
+                                       "This is how we can find and kill you."]
+    
     
     
     override func viewDidLoad() {
@@ -55,6 +60,13 @@ class RegistrationController: UIViewController {
         view.backgroundColor = MainConstants.white
         SetSubviews()
         ActivateLayouts()
+    }
+    
+    
+    func OpenMainViewController() {
+        let newVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarStoryboard")
+        newVC.modalPresentationStyle = .fullScreen
+        present(newVC, animated: true, completion: nil)
     }
 
 }
@@ -66,7 +78,7 @@ class RegistrationController: UIViewController {
 extension RegistrationController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     
@@ -110,6 +122,13 @@ extension RegistrationController: UICollectionViewDelegate, UICollectionViewData
                 cell.avatar.image = avatarImage
                 cell.nextButton.isActive = true
             }
+            cell.delegate = self
+            return cell
+        case 4:
+            let cell = collection.dequeueReusableCell(withReuseIdentifier: "EnableLocationCell", for: indexPath) as! EnableLocationCell
+            cell.cellNumber = indexPath.row
+            cell.mainLabel.text = mainLabels[indexPath.row]
+            cell.explainLabel.text = explanations[indexPath.row]
             cell.delegate = self
             return cell
         default:
@@ -157,6 +176,16 @@ extension RegistrationController: RegistrationDelegate {
     
     func PassUsername(username: Dictionary<String, String>) {
         dataDictonary.merge(dict: username)
+    }
+    
+    func PassDailyNorm(norm: Dictionary<String, Int>) {
+        dataDictonary.merge(dict: norm)
+    }
+    
+    func FinishRegistration() {
+        print("Finish registration")
+        Server.CreateUser(withData: dataDictonary, andProfileImage: avatarImage!)
+        OpenMainViewController()
     }
     
     func PickerController() {
@@ -212,5 +241,7 @@ protocol RegistrationDelegate {
     func PassEmail(email: Dictionary<String, String>)
     func PassPassword(password: Dictionary<String, String>)
     func PassUsername(username: Dictionary<String, String>)
+    func PassDailyNorm(norm: Dictionary<String, Int>)
+    func FinishRegistration()
     func PickerController()
 }

@@ -46,7 +46,8 @@
         <!--Tab Bar Controller-->
         <scene sceneID="xGb-Dc-vYD">
             <objects>
-                <tabBarController id="xtk-Ud-Vua" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarStoryboard" id="xtk-Ud-Vua" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IJI-It-zuN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -35,6 +35,7 @@ class TextFieldCell: UICollectionViewCell {
             .with(color: MainConstants.nearBlack)
             .with(keybordType: .default)
             .with(placeholder: "Email")
+        view.autocapitalizationType = .none
         view.translatesAutoresizingMaskIntoConstraints = false
         view.autocorrectionType = .no
         return view
@@ -116,19 +117,24 @@ class TextFieldCell: UICollectionViewCell {
         case 0:
             if ((self.textField.text?.contains("@")) == true) &&
                 ((self.textField.text?.contains(".")) == true) &&
+                ((self.textField.text?.contains(" ")) == false) &&
                 ((self.textField.text?.count ?? 0) > 7) {
                 ActivateButton()
             } else {
                 DisactivateButton()
             }
         case 1:
-            if ((self.textField.text?.count ?? 0) > 7) {
+            if ((self.textField.text?.count ?? 0) > 7) &&
+            ((self.textField.text?.contains(" ")) == false) &&
+            ((self.textField.text?.contains("@")) == false){
                 ActivateButton()
             } else {
                 DisactivateButton()
             }
         default:
-            if ((self.textField.text?.count ?? 0) > 5) {
+            if ((self.textField.text?.count ?? 0) > 5) &&
+                ((self.textField.text?.contains(" ")) == false) &&
+                ((self.textField.text?.contains("@")) == false) {
                 ActivateButton()
             } else {
                 DisactivateButton()
@@ -140,14 +146,15 @@ class TextFieldCell: UICollectionViewCell {
     @objc func NextSlide(){
         guard (nextButton.isActive) else { return }
         delegate?.Scroll(slide: (cellNumber ?? -1) + 1)
+        let text: String = textField.text!.lowercased()
         switch cellNumber {
         case 0:
-            delegate?.PassEmail(email: ["email": textField.text!])
+            delegate?.PassEmail(email: ["email": text])
         case 1:
-            delegate?.PassPassword(password: ["password": textField.text!])
+            delegate?.PassPassword(password: ["password": text])
         default:
             self.textField.endEditing(true)
-            delegate?.PassUsername(username: ["username": textField.text!])
+            delegate?.PassUsername(username: ["username": text])
         }
     }
     

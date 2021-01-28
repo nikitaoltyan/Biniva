@@ -8,6 +8,7 @@ target 'GreenerCo' do
   # Pods for GreenerCo
 
 pod 'Firebase/Auth'
+pod 'Firebase/Storage'
 pod 'Firebase/Messaging'
 pod 'Firebase/Database'
 

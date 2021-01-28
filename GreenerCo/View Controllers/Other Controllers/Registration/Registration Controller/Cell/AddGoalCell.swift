@@ -44,9 +44,23 @@ class AddGoalCell: UICollectionViewCell {
         return view
     }()
     
+    let nextButton: ButtonView = {
+        let view = ButtonView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth-90, height: 53))
+            .with(borderWidth: 1.2, color: UIColor.lightGray.cgColor)
+            .with(bgColor: .clear)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 25
+        view.label.text = "ПРОДОЛЖИТЬ"
+        view.label.font = UIFont(name: "SFPro-Medium", size: 16)
+        view.label.textColor = .lightGray
+        view.isActive = false
+        return view
+    }()
+    
     var cellNumber: Int?
     var delegate: RegistrationDelegate?
     var numberViewBottomConstraint: NSLayoutConstraint?
+    var passDict: Dictionary<String, Int> = [:]
     
     
     
@@ -63,8 +77,27 @@ class AddGoalCell: UICollectionViewCell {
     
     
     
+    
     @objc func ScrollBack() {
-        delegate?.Scroll(slide: (cellNumber ?? 4) - 1)
+        delegate?.Scroll(slide: (cellNumber ?? 5) - 1)
+    }
+    
+    
+    @objc func NextSlide(){
+        guard (nextButton.isActive) else { return }
+        delegate?.PassDailyNorm(norm: passDict)
+        delegate?.FinishRegistration()
+    }
+    
+    
+    func ActivateButton(){
+        guard (nextButton.isActive) else { return }
+        UIView.animate(withDuration: 0.19, delay: 0, options: .curveEaseOut, animations: {
+            self.nextButton.backgroundColor = MainConstants.orange
+            self.nextButton.layer.borderWidth = 0
+            self.nextButton.label.textColor = MainConstants.white
+            self.nextButton.label.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }, completion: { finished in })
     }
  
 }
@@ -76,6 +109,8 @@ class AddGoalCell: UICollectionViewCell {
 
 extension AddGoalCell: AddGoalDelegate {
     func PassFrame(height: CGFloat, minY: CGFloat) {
+        nextButton.isActive = true
+        ActivateButton()
         if minY > 65 {
             numberViewBottomConstraint?.constant = -height
             numberView.backgroundColor = MainConstants.nearWhite
@@ -89,7 +124,8 @@ extension AddGoalCell: AddGoalDelegate {
         let nearest = Int(round(setNumber/5)*5)
         numberView.number.text = String(nearest)
         
-        if (Int(round(setNumber)) % 5 == 0) { Vibration.Soft() }
+        passDict = ["daily_norm": nearest]
+        if (nearest % 20 == 0) { Vibration.Soft() }
     }
 }
 
@@ -108,8 +144,10 @@ extension AddGoalCell {
         self.addSubview(progressView)
         self.addSubview(back)
         self.addSubview(numberView)
+        self.addSubview(nextButton)
         
         back.addTarget(self, action: #selector(ScrollBack), for: .touchUpInside)
+        nextButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NextSlide)))
     }
     
     func ActivateLayouts(){
@@ -133,7 +171,13 @@ extension AddGoalCell {
             numberView.rightAnchor.constraint(equalTo: progressView.leftAnchor, constant: -5),
             numberView.heightAnchor.constraint(equalToConstant: numberView.frame.height),
             numberView.widthAnchor.constraint(equalToConstant: numberView.frame.width),
+            
+            nextButton.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 40),
+            nextButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            nextButton.heightAnchor.constraint(equalToConstant: nextButton.frame.height),
+            nextButton.widthAnchor.constraint(equalToConstant: nextButton.frame.width)
         ])
+        
         numberViewBottomConstraint = numberView.bottomAnchor.constraint(equalTo: progressView.bottomAnchor, constant: -20)
         numberViewBottomConstraint?.isActive = true
     }

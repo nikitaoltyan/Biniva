@@ -51,4 +51,31 @@ class Server {
         let postRef = ref.child("meetings").childByAutoId()
         postRef.setValue(data)
     }
+    
+    
+    static func CreateUser(withData data: Dictionary<String, Any>, andProfileImage image: UIImage) {
+        let email: String = data["email"] as! String
+        let password: String = data["password"] as! String
+        Auth.auth().createUser(withEmail: email, password: password, completion: {(user,error) in
+            if let error = error{ print(error.localizedDescription) }
+            if let user = user{
+                ref.child("users").child(user.user.uid).setValue(data)
+                self.AddUserImage(forUserWith: user.user.uid, image: image)
+            }
+        })
+    }
+    
+    
+    static func AddUserImage(forUserWith userId: String, image: UIImage) {
+        let storageRef = Storage.storage().reference()
+        let data = image.jpegData(compressionQuality: 0.3)
+        let avatarRef = storageRef.child("users").child("\(userId)_avatar.jpg")
+        _ = avatarRef.putData(data!, metadata: nil) { (metadata, error) in
+            guard metadata != nil else { return }
+            avatarRef.downloadURL { (url, error) in
+                guard url != nil else { return }
+                ref.child("users/\(userId)/image").setValue(url?.absoluteString)
+            }
+        }
+    }
 }
