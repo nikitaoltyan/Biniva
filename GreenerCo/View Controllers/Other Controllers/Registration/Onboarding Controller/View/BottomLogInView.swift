@@ -19,7 +19,7 @@ class BottomLogInView: UIView {
     }()
     
     let logInApple: ButtonView = {
-        let view = ButtonView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth-90, height: 53))
+        let view = ButtonView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth-70, height: 53))
             .with(borderWidth: 1.2, color: MainConstants.white.cgColor)
             .with(bgColor: .clear)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +31,7 @@ class BottomLogInView: UIView {
     }()
     
     let logInFacebook: ButtonView = {
-        let view = ButtonView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth-90, height: 53))
+        let view = ButtonView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth-70, height: 53))
             .with(borderWidth: 1.2, color: MainConstants.white.cgColor)
             .with(bgColor: .clear)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,7 @@ class BottomLogInView: UIView {
     }()
     
     let logInEmail: ButtonView = {
-        let view = ButtonView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth-90, height: 53))
+        let view = ButtonView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth-70, height: 53))
             .with(borderWidth: 1.2, color: MainConstants.white.cgColor)
             .with(bgColor: .clear)
         view.translatesAutoresizingMaskIntoConstraints = false
