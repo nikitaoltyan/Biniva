@@ -14,6 +14,7 @@ import Firebase
 class MeetingViewController: UIViewController {
     
     var tableHeightConstraint: NSLayoutConstraint!
+    var joinHeightConstraint: NSLayoutConstraint?
     var commentHeightConstraint: NSLayoutConstraint!
     var numberOfRows = 1
     var keyboardSize: CGFloat?
@@ -221,6 +222,7 @@ class MeetingViewController: UIViewController {
         view.backgroundColor = MainConstants.white
         SetSubviews()
         ActivateLayouts()
+        CheckIfJoin(userId: UserInformation.userId, meetingId: postData["mid"] as! String)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -256,9 +258,9 @@ class MeetingViewController: UIViewController {
     }
     
     
-    override func viewDidLayoutSubviews() {
-        print("Layout happened")
-    }
+//    override func viewDidLayoutSubviews() {
+//        print("Layout happened")
+//    }
     
     
     @objc func fireTimer() {
@@ -302,10 +304,32 @@ class MeetingViewController: UIViewController {
     }
     
     
+    func CheckIfJoin(userId uid: String, meetingId mid: String) {
+        guard (postData["joined"] != nil) else { return }
+        let arr = postData["joined"] as! Array<String>
+        guard (arr.contains(uid)) else { return }
+        print("User joined")
+        joinHeightConstraint?.constant = 0
+        joinInViewButton.layoutIfNeeded()
+        joinInViewButton.isHidden = true
+    }
+    
+    
     @objc func JoinInAction(){
         print("Joined in")
         Vibration.Soft()
-        Server.JoinMeeting(withUserId: UserInformation.userId, meetingId: "-MSBjv2Vv3XLCqKiN7xR", andType: "join")
+        Server.JoinMeeting(withUserId: UserInformation.userId, meetingId: postData["mid"] as! String, andType: "join")
+        guard (postData["joined"] != nil) else {
+            postData.merge(dict: ["joined": [UserInformation.userId]])
+            CheckIfJoin(userId: UserInformation.userId, meetingId: postData["mid"] as! String)
+            return
+        }
+        var arr = postData["joined"] as! Array<String>
+        guard (arr.contains(UserInformation.userId)) else {
+            arr.append(UserInformation.userId)
+            postData.merge(dict: ["joined": arr])
+            CheckIfJoin(userId: UserInformation.userId, meetingId: postData["mid"] as! String)
+            return }
     }
     
     
@@ -481,11 +505,11 @@ extension MeetingViewController {
             
             adressLabel.topAnchor.constraint(equalTo: meetingLocation.bottomAnchor, constant: 7),
             adressLabel.leftAnchor.constraint(equalTo: back.leftAnchor),
-            
+           
+//            joinInViewButton height constraint on the bottom of the function.
             joinInViewButton.topAnchor.constraint(equalTo: adressLabel.bottomAnchor, constant: 30),
             joinInViewButton.leftAnchor.constraint(equalTo: desc.leftAnchor),
             joinInViewButton.rightAnchor.constraint(equalTo: desc.rightAnchor),
-            joinInViewButton.heightAnchor.constraint(equalToConstant: 60),
             
             discussLabel.topAnchor.constraint(equalTo: joinInViewButton.bottomAnchor, constant: 35),
             discussLabel.leftAnchor.constraint(equalTo: back.leftAnchor),
@@ -520,8 +544,10 @@ extension MeetingViewController {
         let containerTopBottom = commentField.textContainerInset.top + commentField.textContainerInset.bottom + 3
         
         tableHeightConstraint = discussTable.heightAnchor.constraint(equalToConstant: 250)
+        joinHeightConstraint = joinInViewButton.heightAnchor.constraint(equalToConstant: 60)
         commentHeightConstraint = commentField.heightAnchor.constraint(equalToConstant: lineHeight+containerTopBottom)
         tableHeightConstraint.isActive = true
+        joinHeightConstraint?.isActive = true
         commentHeightConstraint.isActive = true
     }
 }

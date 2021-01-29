@@ -29,7 +29,6 @@ class Server {
             for element in result! {
                 self.PostDetails(postWithId: element, postDetails: { data in
                     returnArray.append(data)
-                    print("Return array: \(returnArray)")
                     postDetails(returnArray)
                 })
             }

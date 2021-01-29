@@ -54,6 +54,7 @@
 		5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83A0792563AC58005C2CAA /* Main Constants.swift */; };
 		5CB6A22A25C3D4A900EC4B3A /* ViewController Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A22925C3D4A900EC4B3A /* ViewController Extension.swift */; };
 		5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */; };
+		5CB6A23425C4638900EC4B3A /* EmptyMeetingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A23325C4638900EC4B3A /* EmptyMeetingsCell.swift */; };
 		5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB5101257D12160097F4BD /* MeetingViewController.swift */; };
 		5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */; };
 		5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */; };
@@ -150,6 +151,7 @@
 		5C83A0792563AC58005C2CAA /* Main Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main Constants.swift"; sourceTree = "<group>"; };
 		5CB6A22925C3D4A900EC4B3A /* ViewController Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController Extension.swift"; sourceTree = "<group>"; };
 		5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView Extension.swift"; sourceTree = "<group>"; };
+		5CB6A23325C4638900EC4B3A /* EmptyMeetingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMeetingsCell.swift; sourceTree = "<group>"; };
 		5CBB5101257D12160097F4BD /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 			children = (
 				5C54954B255857FB00E5140C /* TopViewCell.swift */,
 				5CF2E649255D946600B4EFE3 /* MeetingCell.swift */,
+				5CB6A23325C4638900EC4B3A /* EmptyMeetingsCell.swift */,
 			);
 			path = "General Cells";
 			sourceTree = "<group>";
@@ -873,6 +876,7 @@
 				5C40C263256D819900444BCA /* RecyclingLayers.swift in Sources */,
 				5C3046DA25C02CA000BAFEEF /* View Extension.swift in Sources */,
 				5CFC3A0B2550702900068A69 /* CustomAddCell.swift in Sources */,
+				5CB6A23425C4638900EC4B3A /* EmptyMeetingsCell.swift in Sources */,
 				5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */,
 				5C3046EE25C13D9800BAFEEF /* TextFieldCell.swift in Sources */,
 				5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */,

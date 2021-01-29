@@ -29,6 +29,7 @@ class MeetingsController: UIViewController {
         collection.dataSource = self
         collection.register(TopViewCell.self, forCellWithReuseIdentifier: "TopViewCell")
         collection.register(MeetingCell.self, forCellWithReuseIdentifier: "MeetingCell")
+        collection.register(EmptyMeetingsCell.self, forCellWithReuseIdentifier: "EmptyMeetingsCell")
         return collection
     }()
     
@@ -61,6 +62,7 @@ extension MeetingsController: AddMeetingDelegate {
     
     func addMeeting(){
         print("Add meeting")
+        Vibration.Light()
         let newVC = AddMeetingController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()
@@ -83,34 +85,62 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = MainConstants.screenWidth
-        switch indexPath.row {
-        case 0:
-            let size: CGSize = CGSize(width: width, height: 150)
-            return size
-        default:
-            let size: CGSize = CGSize(width: width, height: 320)
-            return size
+        if postDetails.count < 10 {
+            switch indexPath.row {
+            case 0:
+                let size: CGSize = CGSize(width: width, height: 150)
+                return size
+            case postDetails.count+1:
+                let size: CGSize = CGSize(width: width, height: 650)
+                return size
+            default:
+                let size: CGSize = CGSize(width: width, height: 320)
+                return size
+            }
+        } else {
+            switch indexPath.row {
+            case 0:
+                let size: CGSize = CGSize(width: width, height: 150)
+                return size
+            default:
+                let size: CGSize = CGSize(width: width, height: 320)
+                return size
+            }
         }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return postDetails.count+1
+        if postDetails.count < 10 {
+            return postDetails.count+2
+        } else {
+            return postDetails.count+1
+        }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.row {
-        case 0:
-            let cell = meetingCollection.dequeueReusableCell(withReuseIdentifier: "TopViewCell", for: indexPath) as! TopViewCell
-            cell.SetRightConstraints()
-            cell.mainLabel.text = "Встречи"
-            cell.delegateMeeting = self
-            cell.isUserInteractionEnabled = true
-            return cell
-        default:
-            let cell = ReturnMeetingCell(forIndexPath: indexPath, data: postDetails[indexPath.row - 1])
-            return cell
+        if postDetails.count < 10 {
+            switch indexPath.row {
+            case 0:
+                let cell = ReturnTopCell(indexPath: indexPath)
+                return cell
+            case postDetails.count+1:
+                let cell = ReturnEmptyCell(indexPath: indexPath)
+                return cell
+            default:
+                let cell = ReturnMeetingCell(forIndexPath: indexPath, data: postDetails[indexPath.row - 1])
+                return cell
+            }
+        } else {
+            switch indexPath.row {
+            case 0:
+                let cell = ReturnTopCell(indexPath: indexPath)
+                return cell
+            default:
+                let cell = ReturnMeetingCell(forIndexPath: indexPath, data: postDetails[indexPath.row - 1])
+                return cell
+            }
         }
     }
     
@@ -133,6 +163,7 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     
+    
     func ReturnMeetingCell(forIndexPath indexPath: IndexPath, data: Dictionary<String, Any>) -> MeetingCell{
         let cell = meetingCollection.dequeueReusableCell(withReuseIdentifier: "MeetingCell", for: indexPath) as! MeetingCell
         cell.profileName.text = data["username"] as? String
@@ -149,6 +180,24 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.meetingLocation.addAnnotation(label)
         cell.meetingLocation.setRegion(viewRegion, animated: false)
         cell.checkView.isHidden = true
+        return cell
+    }
+    
+    
+    func ReturnTopCell(indexPath: IndexPath) -> TopViewCell{
+        let cell = meetingCollection.dequeueReusableCell(withReuseIdentifier: "TopViewCell", for: indexPath) as! TopViewCell
+        cell.SetRightConstraints()
+        cell.mainLabel.text = "Встречи"
+        cell.delegateMeeting = self
+        cell.isUserInteractionEnabled = true
+        return cell
+    }
+    
+    
+    func ReturnEmptyCell(indexPath: IndexPath) -> EmptyMeetingsCell{
+        let cell = meetingCollection.dequeueReusableCell(withReuseIdentifier: "EmptyMeetingsCell", for: indexPath) as! EmptyMeetingsCell
+        cell.delegateMeeting = self
+        cell.isUserInteractionEnabled = true
         return cell
     }
 }
