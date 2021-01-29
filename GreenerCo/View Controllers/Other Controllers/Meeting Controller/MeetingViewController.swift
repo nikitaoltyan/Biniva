@@ -30,6 +30,7 @@ class MeetingViewController: UIViewController {
     
     lazy var backView: BackTopView = {
         let view = BackTopView()
+        view.label.text = postData["header"] as? String
         view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -44,50 +45,50 @@ class MeetingViewController: UIViewController {
         return button
     }()
 
-    let profileImage: UIImageView = {
+    lazy var profileImage: UIImageView = {
         let scale = 37 as CGFloat
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = #imageLiteral(resourceName: "justin-kauffman-7_tRMnxWsUg-unsplash")
+        image.downloadImage(from: postData["image"] as? String)
         image.layer.masksToBounds = true
         image.layer.cornerRadius = scale/2
         return image
     }()
     
-    let profileName: UILabel = {
+    lazy var profileName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.textColor = MainConstants.nearBlack
-        label.text = "@nikitaoltyan"
+        label.text = "@\(postData["username"] as! String)"
         label.font = UIFont.init(name: "SFPro-Bold", size: 22.0)
         return label
     }()
     
-    let titleName: UILabel = {
+    lazy var titleName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = MainConstants.nearBlack
-        label.text = "Big Title Name"
+        label.text = postData["header"] as? String
         label.font = UIFont.init(name: "SFPro-Heavy", size: 27.0)
         return label
     }()
     
-    let timeAndDataLabel: UILabel = {
+    lazy var timeAndDataLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = MainConstants.nearBlack
-        label.text = "19:00,  1 November"
+        label.text = "\(postData["date"] as! String)  \(postData["time"] as! String)"
         label.font = UIFont.init(name: "SFPro-Bold", size: 19.0)
         return label
     }()
     
-    let desc: UILabel = {
+    lazy var desc: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = MainConstants.nearBlack
         label.numberOfLines = 0
-        label.text = "Some big description custome text. Some big description custome text. Some big description custome text. Some big description custome text. Some big description custome text. Some big description custome text. \n\nSome big description custome text. Some big description custome text. Some big description custome text. Some big description custome text. "
+        label.text = postData["desc"] as? String
         label.font = UIFont.init(name: "SFPro", size: 16.0)
         return label
     }()
@@ -116,24 +117,27 @@ class MeetingViewController: UIViewController {
         return label
     }()
     
-    let meetingLocation: MKMapView = {
+    lazy var meetingLocation: MKMapView = {
         let map = MKMapView()
         map.translatesAutoresizingMaskIntoConstraints = false
         map.isUserInteractionEnabled = true
-        let coordinate = CLLocationCoordinate2D(latitude: 55.740897, longitude: 37.598034)
-        let london = Capital(title: "Остоженка", coordinate: coordinate, info: "Home to the 2012 Summer Olympics.")
-        map.addAnnotation(london)
-        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 900, longitudinalMeters: 900)
+        
+        let coordinateArray = postData["coordinates"] as? Array<CGFloat>
+        let title = postData["header"] as? String
+        let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateArray?[0] ?? 0), longitude: CLLocationDegrees(coordinateArray?[1] ?? 0))
+        let label = Capital(title: title ?? "Title wasn't set", coordinate: coordinate, info: "")
+        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1200, longitudinalMeters: 1200)
+        map.addAnnotation(label)
         map.setRegion(viewRegion, animated: false)
         map.layer.cornerRadius = 15
         return map
     }()
     
-    let adressLabel: UILabel = {
+    lazy var adressLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = MainConstants.nearBlack
-        label.text = "Остоженка 12"
+        label.text = postData["street_name"] as? String
         label.font = UIFont.init(name: "SFPro-Bold", size: 19.0)
         return label
     }()

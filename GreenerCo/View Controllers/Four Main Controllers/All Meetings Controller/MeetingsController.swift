@@ -120,6 +120,7 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
             Vibration.Soft()
             
             let newVC = MeetingViewController()
+            newVC.postData = postDetails[indexPath.row - 1]
             newVC.modalPresentationStyle = .overFullScreen
             let transition = CATransition()
             transition.duration = 0.3
