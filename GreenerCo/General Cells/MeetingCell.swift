@@ -30,11 +30,6 @@ class MeetingCell: UICollectionViewCell {
         map.translatesAutoresizingMaskIntoConstraints = false
         map.layer.cornerRadius = 15
         map.isUserInteractionEnabled = false
-        let coordinate = CLLocationCoordinate2D(latitude: 55.740897, longitude: 37.598034)
-        let london = Capital(title: "Остоженка", coordinate: coordinate, info: "Home to the 2012 Summer Olympics.")
-        map.addAnnotation(london)
-        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 900, longitudinalMeters: 900)
-        map.setRegion(viewRegion, animated: false)
         return map
     }()
     
@@ -106,6 +101,8 @@ class MeetingCell: UICollectionViewCell {
     }()
     
     let locationManager = CLLocationManager()
+    var meetingCoordinates: Array<CGFloat>?
+    var title: String?
     
     
     
@@ -113,11 +110,22 @@ class MeetingCell: UICollectionViewCell {
         super.init(frame: frame)
         SetSubviews()
         ActivateLayouts()
-        
+//        SetCoordinates()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+    func SetCoordinates() {
+        print("Set coordinates")
+//        let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(meetingCoordinates?[0] ?? 0), longitude: CLLocationDegrees(meetingCoordinates?[1] ?? 0))
+//        let label = Capital(title: title ?? "Title wasn't set", coordinate: coordinate, info: "")
+//        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 900, longitudinalMeters: 900)
+//        meetingLocation.addAnnotation(label)
+//        meetingLocation.setRegion(viewRegion, animated: false)
     }
 }
 

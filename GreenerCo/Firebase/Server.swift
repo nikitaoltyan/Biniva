@@ -23,12 +23,13 @@ class Server {
     }
     
     
-    static func ReturnArrayWithPostDictonaties(postDetails: @escaping (_ result: Array<Dictionary<String, Any>>) -> Void) {
+    static func ReturnArrayWithPostDictonaries(postDetails: @escaping (_ result: Array<Dictionary<String, Any>>) -> Void) {
         self.GetMeetingsIDs(meetingsArray: { result in
             var returnArray: Array<Dictionary<String, Any>> = []
             for element in result! {
                 self.PostDetails(postWithId: element, postDetails: { data in
                     returnArray.append(data)
+                    print("Return array: \(returnArray)")
                     postDetails(returnArray)
                 })
             }
@@ -38,14 +39,31 @@ class Server {
     
     
     private static func PostDetails(postWithId mid: String, postDetails: @escaping (_ result: [String : Any]) -> Void) {
-//        Function returns dictionary with post details.
+//        Function returns dictionary with post details (including username and user avatar link).
         let postRef = ref.child("meetings").child(mid)
         postRef.observe(DataEventType.value, with: { (snapshot) in
-            var userDict = snapshot.value as? [String : Any] ?? [:]
-            userDict.merge(dict: ["mid": mid])
-            postDetails(userDict)
+            var postDict = snapshot.value as? [String : Any] ?? [:]
+            postDict.merge(dict: ["mid": mid])
+            self.AddUserInfoIntoPostDetails(userId: postDict["user_id"] as! String, postDetails: { returnDict in
+                postDict.merge(dict: returnDict)
+                postDetails(postDict)
+            })
         })
     }
+    
+    
+    private static func AddUserInfoIntoPostDetails(userId uid: String, postDetails: @escaping (_ result: [String : Any]) -> Void) {
+
+        let userRef = ref.child("users").child(uid)
+        userRef.observe(DataEventType.value, with: { (snapshot) in
+            let userDict = snapshot.value as? [String : Any] ?? [:]
+            var returnDict: Dictionary<String, Any> = [:]
+            returnDict.merge(dict: ["username": userDict["username"] as Any])
+            returnDict.merge(dict: ["image": userDict["image"] as Any])
+            postDetails(returnDict)
+        })
+    }
+    
     
     private static func GetMeetingsIDs(meetingsArray: @escaping (_ result: Array<String>?) -> Void) {
 //        Function that returns array with meetings ids. Can be used on the main screen.

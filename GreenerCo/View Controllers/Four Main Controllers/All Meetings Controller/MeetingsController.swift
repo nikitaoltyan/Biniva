@@ -7,6 +7,8 @@
 
 import UIKit
 import Firebase
+import CoreLocation
+import MapKit
 
 class MeetingsController: UIViewController {
 
@@ -42,7 +44,7 @@ class MeetingsController: UIViewController {
     
     
     override func viewDidLoad() {
-        Server.ReturnArrayWithPostDictonaties() { result in
+        Server.ReturnArrayWithPostDictonaries() { result in
             self.postDetails = result
             self.meetingCollection.reloadData()
         }
@@ -107,8 +109,7 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.isUserInteractionEnabled = true
             return cell
         default:
-            let cell = meetingCollection.dequeueReusableCell(withReuseIdentifier: "MeetingCell", for: indexPath) as! MeetingCell
-            cell.checkView.isHidden = true
+            let cell = ReturnMeetingCell(forIndexPath: indexPath, data: postDetails[indexPath.row - 1])
             return cell
         }
     }
@@ -128,6 +129,26 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
             view.window!.layer.add(transition, forKey: kCATransition)
             self.present(newVC, animated: false, completion: nil)
         }
+    }
+    
+    
+    func ReturnMeetingCell(forIndexPath indexPath: IndexPath, data: Dictionary<String, Any>) -> MeetingCell{
+        let cell = meetingCollection.dequeueReusableCell(withReuseIdentifier: "MeetingCell", for: indexPath) as! MeetingCell
+        cell.profileName.text = data["username"] as? String
+        cell.profileImage.downloadImage(from: data["image"] as? String)
+        cell.street.text = data["street_name"] as? String
+        cell.time.text = "\(data["date"] as! String) \(data["time"] as! String)"
+        cell.desc.text = data["desc"] as? String
+        
+        let coordinateArray = data["coordinates"] as? Array<CGFloat>
+        let title = data["header"] as? String
+        let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateArray?[0] ?? 0), longitude: CLLocationDegrees(coordinateArray?[1] ?? 0))
+        let label = Capital(title: title ?? "Title wasn't set", coordinate: coordinate, info: "")
+        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1200, longitudinalMeters: 1200)
+        cell.meetingLocation.addAnnotation(label)
+        cell.meetingLocation.setRegion(viewRegion, animated: false)
+        cell.checkView.isHidden = true
+        return cell
     }
 }
 
