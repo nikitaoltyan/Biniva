@@ -13,7 +13,6 @@ import Firebase
 
 class MeetingViewController: UIViewController {
     
-    let ref = Database.database(url: "https://greener-964fe-default-rtdb.europe-west1.firebasedatabase.app/").reference()
     var tableHeightConstraint: NSLayoutConstraint!
     var commentHeightConstraint: NSLayoutConstraint!
     var numberOfRows = 1
@@ -210,6 +209,7 @@ class MeetingViewController: UIViewController {
     
     let populate: Array<String> = ["Some custome message text.","Some custome message text Some custome message text Some custome message text."," ","Some custome message text","Some custome message text. Some custome message text. Some custome message text. \n\nSome custome message text. Some custome message text", "Some custome message text.","Some custome message text Some custome message text Some custome message text."," ","Some custome message text","Some custome message text. Some custome message text. Some custome message text. \n\nSome custome message text. Some custome message text","Some custome message text Some custome message text Some custome message text."," ","Some custome message text","Some custome message text. Some custome message text. Some custome message text. \n\nSome custome message text. Some custome message text"]
     
+    var postData: Dictionary<String, Any> = [:]
     
     
     override func viewDidLoad() {
@@ -301,8 +301,7 @@ class MeetingViewController: UIViewController {
     @objc func JoinInAction(){
         print("Joined in")
         Vibration.Soft()
-        Server.JoinMeeting(element: "Meeting Id Should be Here")
-        
+        Server.JoinMeeting(withUserId: UserInformation.userId, meetingId: "-MSBjv2Vv3XLCqKiN7xR", andType: "join")
     }
     
     

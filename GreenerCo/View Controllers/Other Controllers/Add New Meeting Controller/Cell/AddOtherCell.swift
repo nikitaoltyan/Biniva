@@ -85,7 +85,7 @@ class AddOtherCell: UICollectionViewCell {
         label.isHidden = true
         label.textColor = .lightGray
         label.numberOfLines = 1
-        label.text = "Используй не больше 6 символов"
+        label.text = "Используй не больше 20 символов"
         let fontSize: CGFloat = {if MainConstants.screenHeight > 700 {return 10} else {return 8}}()
         label.font = UIFont.init(name: "SFPro", size: fontSize)
         return label
@@ -207,7 +207,7 @@ class AddOtherCell: UICollectionViewCell {
 extension AddOtherCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard textView.tag == 0 else {return true}
-        let allowCharacters: Int = 6
+        let allowCharacters: Int = 20
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
@@ -216,14 +216,14 @@ extension AddOtherCell: UITextViewDelegate {
             AnimateTextField(numberOfIterations: 0)
         }
         let passHeader: Dictionary<String,String> = ["header": updatedText]
-        self.delegate?.PassStreetName(streetName: passHeader)
+        self.delegate?.PassHeader(header: passHeader)
         return updatedText.count <= allowCharacters
     }
     
     func textViewDidChange(_ textView: UITextView) {
         guard textView.tag == 1 else {return}
-        let passDesc: Dictionary<String,String> = ["header": textView.text]
-        self.delegate?.PassStreetName(streetName: passDesc)
+        let passDesc: Dictionary<String,String> = ["desc": textView.text]
+        self.delegate?.PassDesc(desc: passDesc)
     }
 }
 

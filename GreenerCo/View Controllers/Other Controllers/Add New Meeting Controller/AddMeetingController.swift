@@ -147,7 +147,7 @@ extension AddMeetingController: AddMeetingSendDelegate {
     func Send() {
         print("Create meeting")
 //        Also should close up that view!
-        Server.CreateMeeting(withData: dataDictonary)
+        Server.CreateMeeting(withData: dataDictonary, andUserId: UserInformation.userId)
     }
 }
 
