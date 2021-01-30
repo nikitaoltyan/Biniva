@@ -215,10 +215,12 @@ class MeetingViewController: UIViewController {
     let populate: Array<String> = ["Some custome message text.","Some custome message text Some custome message text Some custome message text."," ","Some custome message text","Some custome message text. Some custome message text. Some custome message text. \n\nSome custome message text. Some custome message text", "Some custome message text.","Some custome message text Some custome message text Some custome message text."," ","Some custome message text","Some custome message text. Some custome message text. Some custome message text. \n\nSome custome message text. Some custome message text","Some custome message text Some custome message text Some custome message text."," ","Some custome message text","Some custome message text. Some custome message text. Some custome message text. \n\nSome custome message text. Some custome message text"]
     
     var postData: Dictionary<String, Any> = [:]
+    var messagesData: Array<Dictionary<String, Any>> = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        GetMassages()
         view.backgroundColor = MainConstants.white
         SetSubviews()
         ActivateLayouts()
@@ -301,6 +303,13 @@ class MeetingViewController: UIViewController {
             scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: setHeight)
             scrollView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: true)
         }
+    }
+    
+    
+    fileprivate func GetMassages(){
+        Server.GetMessages(meetingId: postData["mid"] as! String, messages: { result in
+            self.messagesData = result
+        })
     }
     
     

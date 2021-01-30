@@ -132,9 +132,25 @@ class Server {
     static func CreateMeeting(withData data: Dictionary<String, Any>, andUserId uid: String) {
         let postRef = ref.child("meetings").childByAutoId()
         postRef.setValue(data)
-        print("Created meeting id: \(postRef.key), userId: \(uid)")
         JoinMeeting(withUserId: uid, meetingId: postRef.key!, andType: "creat")
     }
+    
+    
+    /// Function for returning an Array with Dictionaries. Each dictonary –– one message information.
+    /// - warning: Multiple returns. After each got message dictionary function returns update Array.
+    /// - parameter mid: requested Meeting ID
+    /// - parameter messages: Return
+    /// - returns: Array with Dictionaries
+    static func GetMessages(meetingId mid: String, messages: @escaping (_ result: Array<Dictionary<String, Any>>) -> Void) {
+        let massagesRef = ref.child("meetings").child(mid).child("massages")
+        var arr: Array<Dictionary<String, Any>> = []
+        massagesRef.queryOrdered(byChild: "date").observe( .childAdded, with: { (snapshot) in
+            let massageDict = snapshot.value as? [String: Any] ?? [:]
+            arr.append(massageDict)
+            messages(arr)
+        })
+    }
+    
     
     
     static func CreateUser(withData data: Dictionary<String, Any>, andProfileImage image: UIImage) {
