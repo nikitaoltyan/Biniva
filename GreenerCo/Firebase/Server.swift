@@ -43,7 +43,7 @@ class Server {
         postRef.observe(DataEventType.value, with: { (snapshot) in
             var postDict = snapshot.value as? [String : Any] ?? [:]
             postDict.merge(dict: ["mid": mid])
-            self.AddUserInfoIntoPostDetails(userId: postDict["user_id"] as! String, postDetails: { returnDict in
+            self.ReturnUserData(userId: postDict["user_id"] as! String, userDetails: { returnDict in
                 postDict.merge(dict: returnDict)
                 postDetails(postDict)
             })
@@ -51,15 +51,19 @@ class Server {
     }
     
     
-    private static func AddUserInfoIntoPostDetails(userId uid: String, postDetails: @escaping (_ result: [String : Any]) -> Void) {
-
+    /// Function for returning a Dictionary with two user data: username and image url. That dictionary can be added to post or message details.
+    /// - warning: There must be not nil User ID.
+    /// - parameter uid: requested User ID
+    /// - parameter userDetails: Return
+    /// - returns: Dictionary with two user data: username and image url.
+    private static func ReturnUserData(userId uid: String, userDetails: @escaping (_ result: [String : Any]) -> Void) {
         let userRef = ref.child("users").child(uid)
         userRef.observe(DataEventType.value, with: { (snapshot) in
             let userDict = snapshot.value as? [String : Any] ?? [:]
             var returnDict: Dictionary<String, Any> = [:]
             returnDict.merge(dict: ["username": userDict["username"] as Any])
             returnDict.merge(dict: ["image": userDict["image"] as Any])
-            postDetails(returnDict)
+            userDetails(returnDict)
         })
     }
     
@@ -137,18 +141,33 @@ class Server {
     
     
     /// Function for returning an Array with Dictionaries. Each dictonary –– one message information.
-    /// - warning: Multiple returns. After each got message dictionary function returns update Array.
+    /// - warning: Multiple returns. After each got message dictionary function returns updated Array.
     /// - parameter mid: requested Meeting ID
     /// - parameter messages: Return
     /// - returns: Array with Dictionaries
     static func GetMessages(meetingId mid: String, messages: @escaping (_ result: Array<Dictionary<String, Any>>) -> Void) {
-        let massagesRef = ref.child("meetings").child(mid).child("massages")
-        var arr: Array<Dictionary<String, Any>> = []
-        massagesRef.queryOrdered(byChild: "date").observe( .childAdded, with: { (snapshot) in
-            let massageDict = snapshot.value as? [String: Any] ?? [:]
-            arr.append(massageDict)
-            messages(arr)
+        let messagesRef = ref.child("meetings").child(mid).child("massages")
+        var returnArray: Array<Dictionary<String, Any>> = []
+        messagesRef.queryOrdered(byChild: "date").observe( .childAdded, with: { (snapshot) in
+            var massageDict = snapshot.value as? [String: Any] ?? [:]
+            self.ReturnUserData(userId: massageDict["uid"] as! String, userDetails: { returnDict in
+                massageDict.merge(dict: returnDict)
+                returnArray.append(massageDict)
+                messages(returnArray)
+            })
         })
+    }
+    
+    
+    
+    static func SendMessage(user uid: String, meetingId mid: String, massageText text: String) {
+        let date = Date()
+//        let calendar = Calendar.current
+        let useDay: String = "\(date.day) \(date.month)"
+        
+        let messagesRef = ref.child("meetings").child(mid).child("massages").childByAutoId()
+        let useDict: Dictionary<String, Any> = ["uid": uid, "text": text, "timestamp": ServerValue.timestamp(), "date": useDay]
+        messagesRef.setValue(useDict)
     }
     
     

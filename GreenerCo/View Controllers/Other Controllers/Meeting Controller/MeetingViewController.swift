@@ -259,10 +259,7 @@ class MeetingViewController: UIViewController {
         }
     }
     
-    
-//    override func viewDidLayoutSubviews() {
-//        print("Layout happened")
-//    }
+
     
     
     @objc func fireTimer() {
@@ -285,7 +282,6 @@ class MeetingViewController: UIViewController {
     
     
     func SetHeightOfComment(rows: Int){
-        print("Rows: \(rows)")
         guard rows<6 else {return}
         if rows == numberOfRows{
             return
@@ -309,11 +305,12 @@ class MeetingViewController: UIViewController {
     fileprivate func GetMassages(){
         Server.GetMessages(meetingId: postData["mid"] as! String, messages: { result in
             self.messagesData = result
+            self.discussTable.reloadData()
         })
     }
     
     
-    func CheckIfJoin(userId uid: String, meetingId mid: String) {
+    fileprivate func CheckIfJoin(userId uid: String, meetingId mid: String) {
         guard (postData["joined"] != nil) else { return }
         let arr = postData["joined"] as! Array<String>
         guard (arr.contains(uid)) else { return }
@@ -345,21 +342,27 @@ class MeetingViewController: UIViewController {
     @objc func SendAction(){
         print("Sended")
         Vibration.Light()
+        Server.SendMessage(user: UserInformation.userId,
+                           meetingId: postData["mid"] as! String,
+                           massageText: commentField.text ?? "")
+        commentField.endEditing(true)
+        commentField.text = ""
     }
 
 }
+
 
 
 
 
 
 extension MeetingViewController: myTableDelegate {
-    
     func myTableDelegate(commentIndex: Int){
         print("Open reply view controller")
-        
     }
 }
+
+
 
 
 
@@ -369,21 +372,42 @@ extension MeetingViewController: myTableDelegate {
 extension MeetingViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return populate.count
+//        Add empty state.
+        return messagesData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let data = messagesData[indexPath.row]
         let cell: MessageCell = discussTable.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-        cell.messageLabel.text = populate[indexPath.row]
         cell.contentView.isUserInteractionEnabled = true
         cell.selectionStyle = .none
         cell.delegate = self
         cell.isUserInteractionEnabled = true
+        cell.messageLabel.text = data["text"] as? String
+        cell.dataLabel.text = data["date"] as? String
+        cell.nameLabel.text = data["username"] as? String
+        cell.profileImage.downloadImage(from: data["image"] as? String)
         cell.commentIndex = indexPath.row
         return cell
     }
     
+    
+    func ReturnMessageCell(withIndexPath indexPath: IndexPath, andData data: Dictionary<String, Any>) -> MessageCell{
+        let cell: MessageCell = discussTable.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+        cell.contentView.isUserInteractionEnabled = true
+        cell.selectionStyle = .none
+        cell.delegate = self
+        cell.isUserInteractionEnabled = true
+        cell.messageLabel.text = data["text"] as? String
+        cell.dataLabel.text = data["date"] as? String
+        cell.nameLabel.text = data["username"] as? String
+        cell.profileImage.downloadImage(from: data["image"] as? String)
+        cell.commentIndex = indexPath.row
+        return cell
+    }
 }
+
+
 
 
 
@@ -395,6 +419,8 @@ extension MeetingViewController: UITextViewDelegate {
         SetHeightOfComment(rows: numberOfLines)
     }
 }
+
+
 
 
 
