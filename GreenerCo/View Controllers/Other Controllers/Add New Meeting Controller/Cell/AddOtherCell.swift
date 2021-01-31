@@ -156,7 +156,8 @@ class AddOtherCell: UICollectionViewCell {
         let date = DateFormatter()
         time.timeStyle = DateFormatter.Style.medium
         date.dateStyle = DateFormatter.Style.medium
-        let passDate: Dictionary<String,String> = ["date": date.string(from:  picker.date)]
+        let useDate = date.string(from:  picker.date).split(separator: ",")
+        let passDate: Dictionary<String,String> = ["date": String(useDate[0])]
         let passTime: Dictionary<String,String> = ["time": time.string(from:  picker.date)]
         delegate?.PassDate(date: passDate)
         delegate?.PassTime(time: passTime)
