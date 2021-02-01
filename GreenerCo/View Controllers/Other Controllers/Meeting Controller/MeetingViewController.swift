@@ -220,11 +220,12 @@ class MeetingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ServerMaterials.AddLoggedEvent(addedSize: 20, forUserID: UserInformation.uid)
         GetMassages()
         view.backgroundColor = MainConstants.white
         SetSubviews()
         ActivateLayouts()
-        CheckIfJoin(userId: UserInformation.userId, meetingId: postData["mid"] as! String)
+        CheckIfJoin(userId: UserInformation.uid, meetingId: postData["mid"] as! String)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -324,17 +325,17 @@ class MeetingViewController: UIViewController {
     @objc func JoinInAction(){
         print("Joined in")
         Vibration.Soft()
-        Server.JoinMeeting(withUserId: UserInformation.userId, meetingId: postData["mid"] as! String, andType: "join")
+        Server.JoinMeeting(withUserId: UserInformation.uid, meetingId: postData["mid"] as! String, andType: "join")
         guard (postData["joined"] != nil) else {
-            postData.merge(dict: ["joined": [UserInformation.userId]])
-            CheckIfJoin(userId: UserInformation.userId, meetingId: postData["mid"] as! String)
+            postData.merge(dict: ["joined": [UserInformation.uid]])
+            CheckIfJoin(userId: UserInformation.uid, meetingId: postData["mid"] as! String)
             return
         }
         var arr = postData["joined"] as! Array<String>
-        guard (arr.contains(UserInformation.userId)) else {
-            arr.append(UserInformation.userId)
+        guard (arr.contains(UserInformation.uid)) else {
+            arr.append(UserInformation.uid)
             postData.merge(dict: ["joined": arr])
-            CheckIfJoin(userId: UserInformation.userId, meetingId: postData["mid"] as! String)
+            CheckIfJoin(userId: UserInformation.uid, meetingId: postData["mid"] as! String)
             return }
     }
     
@@ -342,7 +343,7 @@ class MeetingViewController: UIViewController {
     @objc func SendAction(){
         print("Sended")
         Vibration.Light()
-        Server.SendMessage(user: UserInformation.userId,
+        Server.SendMessage(user: UserInformation.uid,
                            meetingId: postData["mid"] as! String,
                            massageText: commentField.text ?? "")
         commentField.endEditing(true)

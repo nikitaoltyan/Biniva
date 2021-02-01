@@ -76,6 +76,6 @@ class Vibration {
 
 
 struct UserInformation {
-    static var userId: String!
+    static var uid: String!
 }
 // Access Token Github: 26fd87827e28333abd795628645a73b9ea2fd0f5

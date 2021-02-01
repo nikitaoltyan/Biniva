@@ -9,15 +9,26 @@ import Foundation
 
 extension Date {
     
+    /// Returns the day of a month of the current Date.
+    var day: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d"
+        return dateFormatter.string(from: self)
+    }
+    
+    
+    /// Returns the text month of the current Date.
     var month: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM"
         return dateFormatter.string(from: self)
     }
     
-    var day: String {
+    
+    /// Returns the year of the current Date.
+    var year: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "DD"
+        dateFormatter.dateFormat = "YYYY"
         return dateFormatter.string(from: self)
     }
 }

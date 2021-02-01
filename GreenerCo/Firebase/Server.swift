@@ -10,6 +10,7 @@ import Firebase
 
 class Server {
 
+    /// Database reference
     static var ref: DatabaseReference {
            return Database.database(url: "https://greener-964fe-default-rtdb.europe-west1.firebasedatabase.app/").reference()
     }
@@ -18,7 +19,8 @@ class Server {
     static func AuthUser(withEmail: String, password: String) {
         Auth.auth().signIn(withEmail: withEmail, password: password) { (authResult, error) in
             guard (error == nil) else { return }
-            UserInformation.userId = authResult?.user.uid
+            print("Auth user")
+            UserInformation.uid = authResult?.user.uid
         }
     }
     
@@ -162,7 +164,6 @@ class Server {
     
     static func SendMessage(user uid: String, meetingId mid: String, massageText text: String) {
         let date = Date()
-//        let calendar = Calendar.current
         let useDay: String = "\(date.day) \(date.month)"
         
         let messagesRef = ref.child("meetings").child(mid).child("massages").childByAutoId()
