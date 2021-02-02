@@ -60,21 +60,26 @@ class RecyclingController: UIViewController {
     
     let progressView: ProgressImageView = {
         let view = ProgressImageView()
+        view.progressView.frame = CGRect(x: 0, y: 0, width: 0, height: 200)
+        view.layoutIfNeeded()
         return view
     }()
     
-    let customAddView: CustomAddView = {
-        let viewHeight: CGFloat = {if MainConstants.screenHeight > 700 {return MainConstants.screenHeight/1.9-80} else {return MainConstants.screenHeight/1.9}}()
+    lazy var customAddView: CustomAddView = {
+        let viewHeight: CGFloat = {if MainConstants.screenHeight > 700 {return MainConstants.screenHeight/1.9-40} else {return MainConstants.screenHeight/1.9+40}}()
         let view = CustomAddView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: viewHeight))
+            .with(cornerRadius: 20)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.masksToBounds = true
-        view.layer.cornerRadius = 20
+        view.delegate = self
         return view
     }()
     
     var materials = [MaterialsObject]()
-    
     var isAddMenuActivated = false
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +87,7 @@ class RecyclingController: UIViewController {
         PopulateMaterialsObject()
         SetSubviews()
         ActivateLayouts()
+        GetUserProgress()
     }
     
     @objc func OpenProfile(){
@@ -98,24 +104,10 @@ class RecyclingController: UIViewController {
     }
     
     @objc func ActivateThreeMainViews(){
+        Vibration.Light()
         let movement = plusView.frame.width * 1.72
         if (isAddMenuActivated){
-            UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
-                self.addFirstItemView.center.x += movement
-                self.addSecondItemView.center.x -= movement
-                self.addThirdItemView.center.y += movement
-                self.plusView.horizontalView.transform = CGAffineTransform.identity
-                self.plusView.verticalView.transform = CGAffineTransform.identity
-                self.progressView.backgroundColor = self.progressView.backgroundColor?.withAlphaComponent(0.1)
-                self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(1)
-            }, completion: { finished in
-                self.addFirstItemView.isHidden = true
-                self.addSecondItemView.isHidden = true
-                self.addThirdItemView.isHidden = true
-                self.openCustomView.isHidden = false
-                self.isAddMenuActivated = false
-                print("Animation completed")
-            })
+            AnimateDismissThreeViews()
         } else {
             let center = plusView.center
             addFirstItemView.center = center
@@ -143,17 +135,33 @@ class RecyclingController: UIViewController {
 
     @objc func AddFirstItem(){
         print("Add first item")
+        let addedSize: Int = 200
+        ServerMaterials.AddLoggedEvent(addedSize: addedSize, forUserID: UserInformation.uid)
+        AnimateDismissThreeViews()
+        SetProgressHeight(addedSize: addedSize)
     }
+    
     
     @objc func AddSecondItem(){
         print("Add second item")
+        let addedSize: Int = 200
+        ServerMaterials.AddLoggedEvent(addedSize: addedSize, forUserID: UserInformation.uid)
+        AnimateDismissThreeViews()
+        SetProgressHeight(addedSize: addedSize)
     }
+    
     
     @objc func AddThirdItem(){
         print("Add third item")
+        let addedSize: Int = 200
+        ServerMaterials.AddLoggedEvent(addedSize: addedSize, forUserID: UserInformation.uid)
+        AnimateDismissThreeViews()
+        SetProgressHeight(addedSize: addedSize)
     }
     
+    
     @objc func ActivateCustomView(){
+        Vibration.Light()
         let tabBarHeight: CGFloat = self.tabBarController?.tabBar.frame.size.height ?? 49
         customAddView.center.y = MainConstants.screenHeight + customAddView.frame.height/2 - tabBarHeight
         customAddView.isHidden = false
@@ -168,38 +176,79 @@ class RecyclingController: UIViewController {
         })
     }
     
+    
     @objc func dismissView(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case .down:
-                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
-                    self.customAddView.center.y += self.customAddView.frame.height
-                    self.progressView.backgroundColor = self.progressView.backgroundColor?.withAlphaComponent(0.1)
-                    self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(1)
-                }, completion: { finished in
-                    self.plusView.isHidden = false
-                    self.openCustomView.isHidden = false
-                    self.customAddView.isHidden = true
-                })
+                AnimateDismissCustomAddView()
             default:
                 return
             }
         }
     }
     
+    
     func PopulateMaterialsObject(){
-        print("Materials populating")
         for count in 0...MaterialsObjectItems.color.count-1 {
             let toList = MaterialsObject()
             toList.color = MaterialsObjectItems.color[count]
             toList.image = MaterialsObjectItems.image[count]
             toList.name = MaterialsObjectItems.name[count]
             materials.append(toList)
-            print(materials.count)
         }
         customAddView.PopulateMaterials(materialsObjectToPass: materials as NSObject)
     }
+    
+    
+    func GetUserProgress(){
+        ServerMaterials.GetUserTodayLoggedData(forUserID: UserInformation.uid, alreadyLogged: { (result) in
+            let setHeight: CGFloat = 0.253 * CGFloat(result)
+            self.progressView.progressHeightAnchor?.constant = CGFloat(setHeight)
+            self.progressView.layoutIfNeeded()
+        })
+    }
+    
+    
+    func SetProgressHeight(addedSize add: Int){
+        progressView.SetProgressHeight(addedSize: add)
+    }
 
+    
+    func AnimateDismissThreeViews(){
+        Vibration.Soft()
+        let movement = plusView.frame.width * 1.72
+        UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
+            self.addFirstItemView.center.x += movement
+            self.addSecondItemView.center.x -= movement
+            self.addThirdItemView.center.y += movement
+            self.plusView.horizontalView.transform = CGAffineTransform.identity
+            self.plusView.verticalView.transform = CGAffineTransform.identity
+            self.progressView.backgroundColor = self.progressView.backgroundColor?.withAlphaComponent(0.1)
+            self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(1)
+        }, completion: { finished in
+            self.addFirstItemView.isHidden = true
+            self.addSecondItemView.isHidden = true
+            self.addThirdItemView.isHidden = true
+            self.openCustomView.isHidden = false
+            self.isAddMenuActivated = false
+            print("Animation completed")
+        })
+    }
+    
+    
+    func AnimateDismissCustomAddView(){
+        Vibration.Light()
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+            self.customAddView.center.y += self.customAddView.frame.height
+            self.progressView.backgroundColor = self.progressView.backgroundColor?.withAlphaComponent(0.1)
+            self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(1)
+        }, completion: { finished in
+            self.plusView.isHidden = false
+            self.openCustomView.isHidden = false
+            self.customAddView.isHidden = true
+        })
+    }
 }
 
 
@@ -210,5 +259,19 @@ extension RecyclingController: RecyclingDelegate {
     func OpenTipsList() {
         print("Open tips list")
     }
+    
+    func LogValue(withSize size: Int, andMaterial material: String) {
+        ServerMaterials.AddLoggedEvent(addedSize: size, forUserID: UserInformation.uid)
+        AnimateDismissCustomAddView()
+        SetProgressHeight(addedSize: size)
+    }
+}
+
+
+
+
+protocol RecyclingDelegate {
+    func OpenTipsList()
+    func LogValue(withSize size: Int, andMaterial material: String)
 }
 

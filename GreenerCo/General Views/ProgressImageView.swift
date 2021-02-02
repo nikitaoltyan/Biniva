@@ -43,6 +43,14 @@ class ProgressImageView: UIView {
     }
 
     
+    func SetProgressHeight(addedSize add: Int) {
+        let setHeight: CGFloat = 0.253 * CGFloat(add)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.progressHeightAnchor?.constant += setHeight
+            self.layoutIfNeeded()
+        }, completion: { finished in })
+    }
+    
     
     @objc func PanGesture(_ sender: UIPanGestureRecognizer){
         let touchPoint = sender.location(in: self)

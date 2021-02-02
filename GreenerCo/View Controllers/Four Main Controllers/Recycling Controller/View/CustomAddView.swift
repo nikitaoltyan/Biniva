@@ -18,31 +18,62 @@ class CustomAddView: UIView {
         return view
     }()
     
-    lazy var slider: UISlider = {
+    let currentValueLabel: UILabel = {
+        let label = UILabel()
+            .with(alignment: .center)
+            .with(color: MainConstants.white)
+            .with(fontName: "SFPro-Medium", size: 22)
+            .with(numberOfLines: 1)
+        label.text = "200 гр Пластик"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let slider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.maximumValue = 20
-        slider.minimumValue = 10
-        slider.value = 15
+        slider.minimumValue = 5
+        slider.maximumValue = 1000
+        slider.value = 200
         slider.tintColor = MainConstants.white
         return slider
+    }()
+    
+    let plusView: CompletePlusView = {
+        let scale: CGFloat = 28
+        let view = CompletePlusView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
+            .with(bgColor: MainConstants.white)
+            .with(cornerRadius: scale/2)
+        view.horizontalView.backgroundColor = MainConstants.green
+        view.verticalView.backgroundColor = MainConstants.green
+        return view
+    }()
+    
+    let minusView: CompletePlusView = {
+        let scale: CGFloat = 28
+        let view = CompletePlusView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
+            .with(bgColor: MainConstants.white)
+            .with(cornerRadius: scale/2)
+        view.horizontalView.backgroundColor = MainConstants.green
+        view.verticalView.isHidden = true
+        return view
     }()
     
     let selectedView: AddItemView = {
         let width: CGFloat = {if MainConstants.screenHeight > 700 {return 50} else {return 40}}()
         let view = AddItemView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+            .with(bgColor: MaterialsColors.waterBlue)
+            .with(cornerRadius: width/3)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = width/3
-        view.backgroundColor = MaterialsColors.waterBlue
         view.image.image = MaterialsIcons.waterBottle
         return view
     }()
     
-    let plusView: CompletePlusView = {
+    let addView: CompletePlusView = {
         let scale: CGFloat = 40
         let view = CompletePlusView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
-        view.layer.cornerRadius = 15
-        view.backgroundColor = MainConstants.white
+            .with(bgColor: MainConstants.white)
+            .with(cornerRadius: 15)
         view.horizontalView.backgroundColor = MainConstants.green
         view.verticalView.backgroundColor = MainConstants.green
         return view
@@ -50,9 +81,9 @@ class CustomAddView: UIView {
     
     let closeView: UIView = {
         let view = UIView()
+            .with(bgColor: MainConstants.white)
+            .with(cornerRadius: 2)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = MainConstants.white
-        view.layer.cornerRadius = 2
         return view
     }()
     
@@ -62,8 +93,14 @@ class CustomAddView: UIView {
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = MainConstants.white
+        table.register(CustomAddCell.self, forCellReuseIdentifier: "CustomAddCell")
         return table
     }()
+    
+    var selectedIndexPath: Int = 0
+    var delegate: RecyclingDelegate?
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -76,20 +113,49 @@ class CustomAddView: UIView {
         fatalError()
     }
     
+    
+    
+    
     func PopulateMaterials(materialsObjectToPass useMeterials: NSObject){
         self.materials = useMeterials as! [MaterialsObject]
     }
+    
     
     func ChangeCurrentItem(withIndexPath indexPath: Int){
         selectedView.image.image = materials[indexPath].image
         selectedView.backgroundColor = materials[indexPath].color
     }
     
-    @objc func AddItem(){
+    
+    @objc func PlusAction() {
+        Vibration.Soft()
+        slider.value += 5
+        currentValueLabel.text = "\(Int(slider.value)) гр \(materials[selectedIndexPath].name ?? "Not Stated")"
+    }
+    
+    
+    @objc func MinusAction() {
+        Vibration.Soft()
+        slider.value -= 5
+        currentValueLabel.text = "\(Int(slider.value)) гр \(materials[selectedIndexPath].name ?? "Not Stated")"
+    }
+    
+    
+    @objc func AddItem() {
         print("Add item")
+        delegate?.LogValue(withSize: Int(slider.value), andMaterial: materials[selectedIndexPath].name ?? "Not Stated")
     }
 
+    
+    @objc func SliderValueChanged() {
+        let roundedValue = round(slider.value / 5) * 5
+        if roundedValue-0.5...roundedValue+0.5 ~= slider.value { Vibration.Soft() }
+        slider.value = roundedValue
+        currentValueLabel.text = "\(Int(roundedValue)) гр \(materials[selectedIndexPath].name ?? "Not Stated")"
+    }
 }
+
+
 
 
 
@@ -113,11 +179,12 @@ extension CustomAddView: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath.row
+        SliderValueChanged()
         ChangeCurrentItem(withIndexPath: indexPath.row)
     }
-    
-    
 }
+
 
 
 
@@ -127,36 +194,55 @@ extension CustomAddView{
     func SetSubviews(){
         self.addSubview(topView)
         self.addSubview(selectedView)
-        self.addSubview(plusView)
+        self.addSubview(addView)
         self.addSubview(slider)
+        self.addSubview(plusView)
+        self.addSubview(minusView)
+        self.addSubview(currentValueLabel)
         self.addSubview(closeView)
         self.addSubview(table)
         
-        table.register(CustomAddCell.self, forCellReuseIdentifier: "CustomAddCell")
-        plusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AddItem)))
+        slider.addTarget(self, action: #selector(SliderValueChanged), for: .valueChanged)
+        plusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(PlusAction)))
+        minusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MinusAction)))
+        addView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AddItem)))
     }
+    
     
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
             topView.topAnchor.constraint(equalTo: self.topAnchor),
             topView.leftAnchor.constraint(equalTo: self.leftAnchor),
             topView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            topView.heightAnchor.constraint(equalToConstant: 80),
+            topView.heightAnchor.constraint(equalToConstant: 120),
             
             selectedView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             selectedView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             selectedView.heightAnchor.constraint(equalToConstant: selectedView.frame.height),
             selectedView.widthAnchor.constraint(equalToConstant: selectedView.frame.width),
             
-            plusView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
-            plusView.centerYAnchor.constraint(equalTo: selectedView.centerYAnchor),
+            addView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            addView.centerYAnchor.constraint(equalTo: selectedView.centerYAnchor),
+            addView.heightAnchor.constraint(equalToConstant: addView.frame.height),
+            addView.widthAnchor.constraint(equalToConstant: addView.frame.width),
+            
+            slider.topAnchor.constraint(equalTo: selectedView.bottomAnchor, constant: 7),
+            slider.leftAnchor.constraint(equalTo: selectedView.rightAnchor, constant: -20),
+            slider.rightAnchor.constraint(equalTo: addView.leftAnchor, constant: 20),
+            slider.heightAnchor.constraint(equalToConstant: 40),
+            
+            plusView.leftAnchor.constraint(equalTo: slider.rightAnchor, constant: 2),
+            plusView.centerYAnchor.constraint(equalTo: slider.centerYAnchor),
             plusView.heightAnchor.constraint(equalToConstant: plusView.frame.height),
             plusView.widthAnchor.constraint(equalToConstant: plusView.frame.width),
             
-            slider.centerYAnchor.constraint(equalTo: selectedView.centerYAnchor, constant: 7),
-            slider.leftAnchor.constraint(equalTo: selectedView.rightAnchor, constant: 10),
-            slider.rightAnchor.constraint(equalTo: plusView.leftAnchor, constant: -10),
-            slider.heightAnchor.constraint(equalToConstant: 50),
+            minusView.rightAnchor.constraint(equalTo: slider.leftAnchor, constant: -2),
+            minusView.centerYAnchor.constraint(equalTo: slider.centerYAnchor),
+            minusView.heightAnchor.constraint(equalToConstant: minusView.frame.height),
+            minusView.widthAnchor.constraint(equalToConstant: minusView.frame.width),
+            
+            currentValueLabel.centerXAnchor.constraint(equalTo: slider.centerXAnchor),
+            currentValueLabel.bottomAnchor.constraint(equalTo: selectedView.bottomAnchor),
             
             closeView.topAnchor.constraint(equalTo: self.topAnchor, constant: 4),
             closeView.centerXAnchor.constraint(equalTo: self.centerXAnchor),

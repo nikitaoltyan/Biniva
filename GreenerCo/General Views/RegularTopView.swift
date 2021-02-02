@@ -104,7 +104,3 @@ extension RegularTopView {
 protocol StatsDelegate {
     func OpenAchievements()
 }
-
-protocol RecyclingDelegate {
-    func OpenTipsList()
-}

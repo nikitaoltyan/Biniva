@@ -120,12 +120,12 @@ extension AddGoalCell: AddGoalDelegate {
         }
         numberView.layoutIfNeeded()
         
-        let setNumber: CGFloat = -2.6315 * minY + 1000
+        let setNumber: CGFloat = -3.9473 * minY + 1500
         let nearest = Int(round(setNumber/5)*5)
         numberView.number.text = String(nearest)
         
         passDict = ["daily_norm": nearest]
-        if (nearest % 20 == 0) { Vibration.Soft() }
+        if CGFloat(nearest)-0.5...CGFloat(nearest)+0.5 ~= setNumber { Vibration.Soft() }
     }
 }
 

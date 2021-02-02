@@ -19,7 +19,7 @@ class ServerMaterials {
     
     
     
-    static func AddLoggedEvent(addedSize size: Int, forUserID uid: String){
+    static func AddLoggedEvent(addedSize size: Int, forUserID uid: String) {
         let dateChild: String = "\(date.day)_\(date.month)_\(date.year)"
         let addRef = ref.child("users/\(uid)/data_logged/\(dateChild)")
         addRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -27,6 +27,19 @@ class ServerMaterials {
             loggedDict["logged"] = (loggedDict["logged"] as? Int ?? 0) + size
             loggedDict["timestamp"] = ServerValue.timestamp()
             addRef.setValue(loggedDict)
+            addRef.removeAllObservers()
+        })
+    }
+    
+    
+    
+    static func GetUserTodayLoggedData(forUserID uid: String, alreadyLogged: @escaping (_ result: Int) -> Void)  {
+        let dateChild: String = "\(date.day)_\(date.month)_\(date.year)"
+        let addRef = ref.child("users/\(uid)/data_logged/\(dateChild)")
+        addRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            let loggedDict = snapshot.value as? [String: Any] ?? [:]
+            let logged = loggedDict["logged"] as? Int ?? 0
+            alreadyLogged(logged)
             addRef.removeAllObservers()
         })
     }
