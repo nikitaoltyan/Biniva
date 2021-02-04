@@ -61,8 +61,9 @@ extension OnboardCell {
     }
     
     func ActivateLayouts(){
+        let imageTop: CGFloat = {if MainConstants.screenHeight>700 { return 80 } else { return 65 }}()
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: self.topAnchor, constant: 80),
+            image.topAnchor.constraint(equalTo: self.topAnchor, constant: imageTop),
             image.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             image.heightAnchor.constraint(equalToConstant: image.frame.height),
             image.widthAnchor.constraint(equalToConstant: image.frame.width),

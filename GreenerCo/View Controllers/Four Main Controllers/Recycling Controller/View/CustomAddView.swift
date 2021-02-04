@@ -12,7 +12,7 @@ class CustomAddView: UIView {
     var materials = [MaterialsObject]()
     
     let topView: UIView = {
-        let view = UIView()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 120))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = MainConstants.green
         return view
@@ -59,9 +59,9 @@ class CustomAddView: UIView {
         return view
     }()
     
-    let selectedView: AddItemView = {
+    let selectedView: ItemView = {
         let width: CGFloat = {if MainConstants.screenHeight > 700 {return 50} else {return 40}}()
-        let view = AddItemView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+        let view = ItemView(frame: CGRect(x: 0, y: 0, width: width, height: width))
             .with(bgColor: MaterialsColors.waterBlue)
             .with(cornerRadius: width/3)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -172,8 +172,8 @@ extension CustomAddView: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomAddCell") as! CustomAddCell
-        cell.itemImage.image = materials[indexPath.row].image
-        cell.itemColorView.backgroundColor = materials[indexPath.row].color
+        cell.itemView.backgroundColor = materials[indexPath.row].color
+        cell.itemView.image.image = materials[indexPath.row].image
         cell.itemLabel.text = materials[indexPath.row].name
         return cell
     }
@@ -210,11 +210,12 @@ extension CustomAddView{
     
     
     func ActivateLayouts(){
+        let tableHeight: CGFloat = self.frame.size.height - topView.frame.height
         NSLayoutConstraint.activate([
             topView.topAnchor.constraint(equalTo: self.topAnchor),
             topView.leftAnchor.constraint(equalTo: self.leftAnchor),
             topView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            topView.heightAnchor.constraint(equalToConstant: 120),
+            topView.heightAnchor.constraint(equalToConstant: topView.frame.height),
             
             selectedView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             selectedView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
@@ -252,7 +253,7 @@ extension CustomAddView{
             table.topAnchor.constraint(equalTo: topView.bottomAnchor),
             table.leftAnchor.constraint(equalTo: self.leftAnchor),
             table.rightAnchor.constraint(equalTo: self.rightAnchor),
-            table.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            table.heightAnchor.constraint(equalToConstant: tableHeight)
         ])
     }
 }

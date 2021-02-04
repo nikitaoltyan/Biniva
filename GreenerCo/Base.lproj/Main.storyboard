@@ -56,9 +56,9 @@
                         <color key="selectedImageTintColor" red="0.93333333330000001" green="0.48627450979999998" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="IWl-6o-oNV" kind="relationship" relationship="viewControllers" id="XuC-Wm-aaA"/>
                         <segue destination="60p-IN-9rJ" kind="relationship" relationship="viewControllers" id="L4g-QW-KF3"/>
                         <segue destination="GHb-dX-2Lc" kind="relationship" relationship="viewControllers" id="4nt-ek-oiS"/>
+                        <segue destination="IWl-6o-oNV" kind="relationship" relationship="viewControllers" id="XuC-Wm-aaA"/>
                         <segue destination="Xvv-ov-VEG" kind="relationship" relationship="viewControllers" id="W6z-QG-nN4"/>
                     </connections>
                 </tabBarController>

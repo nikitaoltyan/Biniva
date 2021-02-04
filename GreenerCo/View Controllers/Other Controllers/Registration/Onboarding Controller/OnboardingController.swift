@@ -10,7 +10,8 @@ import UIKit
 class OnboardingController: UIViewController {
     
     lazy var bottomView: BottomLogInView = {
-        let view = BottomLogInView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 390))
+        let bottomViewHeight: CGFloat = {if MainConstants.screenHeight > 700 { return 390 } else { return 258}}()
+        let view = BottomLogInView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: bottomViewHeight))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.delegate = self
         return view

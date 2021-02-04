@@ -51,9 +51,11 @@ extension CompletePlusView {
         
         switch self.frame.width {
         case 58:
-            print(58)
             width = 11
             gap = 8
+        case 65:
+            width = 12
+            gap = 7
         case 70:
             print(70)
             width = 13

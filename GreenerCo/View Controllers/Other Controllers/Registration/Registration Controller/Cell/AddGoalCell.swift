@@ -44,6 +44,17 @@ class AddGoalCell: UICollectionViewCell {
         return view
     }()
     
+    let explainLabel: UILabel = {
+        let label = UILabel()
+            .with(color: .gray)
+            .with(fontName: "SFPro", size: 15)
+            .with(alignment: .left)
+            .with(numberOfLines: 0)
+        label.text = "Потяни за оранжевое"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let nextButton: ButtonView = {
         let view = ButtonView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth-90, height: 53))
             .with(borderWidth: 1.2, color: UIColor.lightGray.cgColor)
@@ -109,9 +120,10 @@ class AddGoalCell: UICollectionViewCell {
 
 extension AddGoalCell: AddGoalDelegate {
     func PassFrame(height: CGFloat, minY: CGFloat) {
+        explainLabel.isHidden = true
         nextButton.isActive = true
         ActivateButton()
-        if minY > 65 {
+        if minY > 80 {
             numberViewBottomConstraint?.constant = -height
             numberView.backgroundColor = MainConstants.nearWhite
         } else {
@@ -145,15 +157,17 @@ extension AddGoalCell {
         self.addSubview(back)
         self.addSubview(numberView)
         self.addSubview(nextButton)
+        self.addSubview(explainLabel)
         
         back.addTarget(self, action: #selector(ScrollBack), for: .touchUpInside)
         nextButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(NextSlide)))
     }
     
     func ActivateLayouts(){
+        let mainLabelTop: CGFloat = {if MainConstants.screenHeight>700 { return 95 } else { return 80 }}()
         let heightOfProgressView: CGFloat = {if MainConstants.screenHeight>700 { return 400 } else { return 360 }}()
         NSLayoutConstraint.activate([
-            mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 95),
+            mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: mainLabelTop),
             mainLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 35),
             mainLabel.widthAnchor.constraint(equalToConstant: 250),
             
@@ -175,7 +189,11 @@ extension AddGoalCell {
             nextButton.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 40),
             nextButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: nextButton.frame.height),
-            nextButton.widthAnchor.constraint(equalToConstant: nextButton.frame.width)
+            nextButton.widthAnchor.constraint(equalToConstant: nextButton.frame.width),
+            
+            explainLabel.bottomAnchor.constraint(equalTo: progressView.bottomAnchor, constant: -3),
+            explainLabel.leftAnchor.constraint(equalTo: progressView.rightAnchor, constant: -15),
+            explainLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -1)
         ])
         
         numberViewBottomConstraint = numberView.bottomAnchor.constraint(equalTo: progressView.bottomAnchor, constant: -20)

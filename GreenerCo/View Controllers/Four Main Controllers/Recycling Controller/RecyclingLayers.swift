@@ -18,9 +18,10 @@ extension RecyclingController {
         view.addSubview(openCustomView)
         view.addSubview(progressView)
         view.addSubview(customAddView)
+        view.addSubview(dimView)
         
-        addFirstItemView.backgroundColor = MaterialsColors.metalBeige
-        addFirstItemView.image.image = MaterialsIcons.metal
+        addFirstItemView.backgroundColor = MaterialsColors.waterBlue
+        addFirstItemView.image.image = MaterialsIcons.waterBottle
         addSecondItemView.backgroundColor = MaterialsColors.organicGreen
         addSecondItemView.image.image = MaterialsIcons.organicLimone
         addThirdItemView.backgroundColor = MaterialsColors.paperOrange
@@ -28,6 +29,8 @@ extension RecyclingController {
         
         view.bringSubviewToFront(addThirdItemView)
         view.bringSubviewToFront(plusView)
+        view.bringSubviewToFront(dimView)
+        view.bringSubviewToFront(customAddView)
         
         plusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ActivateThreeMainViews)))
         addFirstItemView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AddFirstItem)))
@@ -42,6 +45,7 @@ extension RecyclingController {
         addFirstItemView.isHidden = true
         addSecondItemView.isHidden = true
         addThirdItemView.isHidden = true
+        dimView.isHidden = true
     }
     
     
@@ -51,6 +55,7 @@ extension RecyclingController {
         let tabBarHeight: CGFloat = self.tabBarController?.tabBar.frame.size.height ?? 49
         let plusViewFromBottom: CGFloat = {if MainConstants.screenHeight>700{return 130}else{return 70}}()
         let progressViewFromHeight: CGFloat = {if MainConstants.screenHeight>700{return 158}else{return 138}}()
+        let customAddBottom: CGFloat = {if MainConstants.screenHeight>700{return -tabBarHeight-34}else{return -tabBarHeight}}()
         NSLayoutConstraint.activate([
             topView.topAnchor.constraint(equalTo: view.topAnchor),
             topView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -87,10 +92,15 @@ extension RecyclingController {
             progressView.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth-160),
             progressView.heightAnchor.constraint(equalToConstant: heightOfProgressView),
             
-            customAddView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -tabBarHeight),
+            customAddView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: customAddBottom),
             customAddView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
             customAddView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-            customAddView.heightAnchor.constraint(equalToConstant: customAddView.frame.height)
+            customAddView.heightAnchor.constraint(equalToConstant: customAddView.frame.height),
+            
+            dimView.topAnchor.constraint(equalTo: view.topAnchor),
+            dimView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            dimView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            dimView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
     }
 }

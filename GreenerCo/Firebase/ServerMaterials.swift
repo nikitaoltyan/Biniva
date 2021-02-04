@@ -17,22 +17,31 @@ class ServerMaterials {
     /// Current date.
     static let date = Date()
     
-    
-    
-    static func AddLoggedEvent(addedSize size: Int, forUserID uid: String) {
+    /// Function for adding Today Logged Size into User Defaults (for fast declaration in each session) and adding that data into server for future Statistic and other purposes.
+    /// - parameter uid: User ID
+    static func AddLoggedEvent(addedSize size: Int, forUserID uid: String, material: String) {
+        Defaults.AddLoggedEvent(addedSize: size)
         let dateChild: String = "\(date.day)_\(date.month)_\(date.year)"
         let addRef = ref.child("users/\(uid)/data_logged/\(dateChild)")
         addRef.observeSingleEvent(of: .value, with: { (snapshot) in
             var loggedDict = snapshot.value as? [String: Any] ?? [:]
             loggedDict["logged"] = (loggedDict["logged"] as? Int ?? 0) + size
-            loggedDict["timestamp"] = ServerValue.timestamp()
             addRef.setValue(loggedDict)
             addRef.removeAllObservers()
         })
+        let addDict: Dictionary<String,Any> = ["logged": size, "material": material]
+        addRef.child("logged_materials").childByAutoId().setValue(addDict)
     }
     
     
+    static func SetZeroDayData(forUserID uid: String, andDate date: String) {
+        let addDict: Dictionary<String,Any> = ["logged": 0, "timestamp": ServerValue.timestamp()]
+        ref.child("users/\(uid)/data_logged/\(date)").setValue(addDict)
+    }
     
+    
+    /// Function for getting user logged data for today.
+    /// - warning: Function for delating. Don't call it. Defaults.CheckLastLogged replaced that function.
     static func GetUserTodayLoggedData(forUserID uid: String, alreadyLogged: @escaping (_ result: Int) -> Void)  {
         let dateChild: String = "\(date.day)_\(date.month)_\(date.year)"
         let addRef = ref.child("users/\(uid)/data_logged/\(dateChild)")

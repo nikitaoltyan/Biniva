@@ -118,8 +118,9 @@ extension AddPhotoCell {
     }
     
     func ActivateLayouts(){
+        let mainLabelTop: CGFloat = {if MainConstants.screenHeight>700 { return 95 } else { return 80 }}()
         NSLayoutConstraint.activate([
-            mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 95),
+            mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: mainLabelTop),
             mainLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 35),
             mainLabel.widthAnchor.constraint(equalToConstant: 250),
             

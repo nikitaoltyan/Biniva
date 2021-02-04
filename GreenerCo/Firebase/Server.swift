@@ -20,6 +20,7 @@ class Server {
         Auth.auth().signIn(withEmail: withEmail, password: password) { (authResult, error) in
             guard (error == nil) else { return }
             print("Auth user")
+            UserDefaults.standard.setValue(authResult?.user.uid, forKey: "uid")
             UserInformation.uid = authResult?.user.uid
         }
     }
@@ -56,8 +57,8 @@ class Server {
     /// Function for returning a Dictionary with two user data: username and image url. That dictionary can be added to post or message details.
     /// - warning: There must be not nil User ID.
     /// - parameter uid: requested User ID
-    /// - parameter userDetails: Return
-    /// - returns: Dictionary with two user data: username and image url.
+    /// - parameter userDetails: Function return
+    /// - returns: Dictionary with two user data: Username and Image URL.
     private static func ReturnUserData(userId uid: String, userDetails: @escaping (_ result: [String : Any]) -> Void) {
         let userRef = ref.child("users").child(uid)
         userRef.observe(DataEventType.value, with: { (snapshot) in
@@ -146,7 +147,7 @@ class Server {
     /// - warning: Multiple returns. After each got message dictionary function returns updated Array.
     /// - parameter mid: requested Meeting ID
     /// - parameter messages: Return
-    /// - returns: Array with Dictionaries
+    /// - returns: Array with Dictionaries. Each dictonary –– one message information.
     static func GetMessages(meetingId mid: String, messages: @escaping (_ result: Array<Dictionary<String, Any>>) -> Void) {
         let messagesRef = ref.child("meetings").child(mid).child("massages")
         var returnArray: Array<Dictionary<String, Any>> = []
@@ -172,13 +173,18 @@ class Server {
     }
     
     
-    
+    /// Function for creating user.
+    /// To add user profile image that function calling another after user creation complited.
+    /// After user creation complitedfunction also set user ID from the server to "uid" key for UserDefaults and "daily_norm" to "dailyNorm".
+    /// - parameter data: All user data got from registration fields.
+    /// - parameter image: User profile image.
     static func CreateUser(withData data: Dictionary<String, Any>, andProfileImage image: UIImage) {
         let email: String = data["email"] as! String
         let password: String = data["password"] as! String
         Auth.auth().createUser(withEmail: email, password: password, completion: {(user,error) in
             if let error = error{ print(error.localizedDescription) }
             if let user = user{
+                Defaults.RegistrateUser(withID: user.user.uid, andDailyNorm: data["daily_norm"] as! Int)
                 ref.child("users").child(user.user.uid).setValue(data)
                 self.AddUserImage(forUserWith: user.user.uid, image: image)
             }

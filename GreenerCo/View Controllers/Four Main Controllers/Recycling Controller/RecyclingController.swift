@@ -18,7 +18,7 @@ class RecyclingController: UIViewController {
     }()
 
     let plusView: CompletePlusView = {
-        let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 58}}()
+        let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 65}}()
         let view = CompletePlusView(frame: CGRect(x: 0, y: 0, width: width, height: width))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = MainConstants.green
@@ -29,7 +29,7 @@ class RecyclingController: UIViewController {
     }()
     
     let addFirstItemView: AddItemView = {
-        let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 58}}()
+        let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 65}}()
         let view = AddItemView(frame: CGRect(x: 0, y: 0, width: width, height: width))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = width/3
@@ -37,7 +37,7 @@ class RecyclingController: UIViewController {
     }()
     
     let addSecondItemView: AddItemView = {
-        let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 58}}()
+        let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 65}}()
         let view = AddItemView(frame: CGRect(x: 0, y: 0, width: width, height: width))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = width/3
@@ -45,7 +45,7 @@ class RecyclingController: UIViewController {
     }()
     
     let addThirdItemView: AddItemView = {
-        let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 58}}()
+        let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 65}}()
         let view = AddItemView(frame: CGRect(x: 0, y: 0, width: width, height: width))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = width/3
@@ -71,7 +71,15 @@ class RecyclingController: UIViewController {
             .with(cornerRadius: 20)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.masksToBounds = true
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.delegate = self
+        return view
+    }()
+    
+    let dimView: UIView = {
+        let view = UIView()
+            .with(bgColor: UIColor.black.withAlphaComponent(0))
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -83,12 +91,16 @@ class RecyclingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("UserID from defaults: \(UserDefaults.standard.string(forKey: "uid")!)")
         view.backgroundColor = MainConstants.white
         PopulateMaterialsObject()
         SetSubviews()
         ActivateLayouts()
         GetUserProgress()
     }
+    
+    
+    
     
     @objc func OpenProfile(){
         print("Open profile function")
@@ -102,6 +114,7 @@ class RecyclingController: UIViewController {
         view.window!.layer.add(transition, forKey: kCATransition)
         self.present(newVC, animated: false, completion: nil)
     }
+    
     
     @objc func ActivateThreeMainViews(){
         Vibration.Light()
@@ -136,7 +149,9 @@ class RecyclingController: UIViewController {
     @objc func AddFirstItem(){
         print("Add first item")
         let addedSize: Int = 200
-        ServerMaterials.AddLoggedEvent(addedSize: addedSize, forUserID: UserInformation.uid)
+        ServerMaterials.AddLoggedEvent(addedSize: addedSize,
+                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
+                                       material: "Пластик")
         AnimateDismissThreeViews()
         SetProgressHeight(addedSize: addedSize)
     }
@@ -145,7 +160,9 @@ class RecyclingController: UIViewController {
     @objc func AddSecondItem(){
         print("Add second item")
         let addedSize: Int = 200
-        ServerMaterials.AddLoggedEvent(addedSize: addedSize, forUserID: UserInformation.uid)
+        ServerMaterials.AddLoggedEvent(addedSize: addedSize,
+                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
+                                       material: "БумагаОрганика")
         AnimateDismissThreeViews()
         SetProgressHeight(addedSize: addedSize)
     }
@@ -154,7 +171,9 @@ class RecyclingController: UIViewController {
     @objc func AddThirdItem(){
         print("Add third item")
         let addedSize: Int = 200
-        ServerMaterials.AddLoggedEvent(addedSize: addedSize, forUserID: UserInformation.uid)
+        ServerMaterials.AddLoggedEvent(addedSize: addedSize,
+                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
+                                       material: "Бумага")
         AnimateDismissThreeViews()
         SetProgressHeight(addedSize: addedSize)
     }
@@ -165,14 +184,17 @@ class RecyclingController: UIViewController {
         let tabBarHeight: CGFloat = self.tabBarController?.tabBar.frame.size.height ?? 49
         customAddView.center.y = MainConstants.screenHeight + customAddView.frame.height/2 - tabBarHeight
         customAddView.isHidden = false
+        dimView.isHidden = false
         plusView.isHidden = true
         openCustomView.isHidden = true
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.dimView.backgroundColor = self.dimView.backgroundColor?.withAlphaComponent(0.2)
             self.customAddView.center.y -= self.customAddView.frame.height
             self.progressView.backgroundColor = self.progressView.backgroundColor?.withAlphaComponent(0.05)
             self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(0.2)
         }, completion: { finished in
             print("Animation completed")
+            print("Custom add view top point: \(self.customAddView.frame.minY)")
         })
     }
     
@@ -202,7 +224,8 @@ class RecyclingController: UIViewController {
     
     
     func GetUserProgress(){
-        ServerMaterials.GetUserTodayLoggedData(forUserID: UserInformation.uid, alreadyLogged: { (result) in
+        Defaults.CheckLastLogged(alreadyLogged: { result in
+            print("Already logged from defaults: \(result)")
             let setHeight: CGFloat = 0.253 * CGFloat(result)
             self.progressView.progressHeightAnchor?.constant = CGFloat(setHeight)
             self.progressView.layoutIfNeeded()
@@ -239,12 +262,14 @@ class RecyclingController: UIViewController {
     
     func AnimateDismissCustomAddView(){
         Vibration.Light()
-        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.customAddView.center.y += self.customAddView.frame.height
             self.progressView.backgroundColor = self.progressView.backgroundColor?.withAlphaComponent(0.1)
+            self.dimView.backgroundColor = self.dimView.backgroundColor?.withAlphaComponent(0)
             self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(1)
         }, completion: { finished in
             self.plusView.isHidden = false
+            self.dimView.isHidden = true
             self.openCustomView.isHidden = false
             self.customAddView.isHidden = true
         })
@@ -261,7 +286,9 @@ extension RecyclingController: RecyclingDelegate {
     }
     
     func LogValue(withSize size: Int, andMaterial material: String) {
-        ServerMaterials.AddLoggedEvent(addedSize: size, forUserID: UserInformation.uid)
+        ServerMaterials.AddLoggedEvent(addedSize: size,
+                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
+                                       material: material)
         AnimateDismissCustomAddView()
         SetProgressHeight(addedSize: size)
     }

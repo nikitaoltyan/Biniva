@@ -51,7 +51,7 @@ class AddMeetingController: UIViewController {
     var header: String?
     var desc: String?
     
-    var dataDictonary: Dictionary<String, Any> = ["user_id": UserInformation.uid]
+    var dataDictonary: Dictionary<String, Any> = ["user_id": UserDefaults.standard.string(forKey: "uid") as Any]
     
     
     override func viewDidLoad() {
@@ -137,6 +137,10 @@ extension AddMeetingController: PassDataDelegate {
     func PassCoordinates(coord: Dictionary<String, Array<CGFloat>>) {
         dataDictonary.merge(dict: coord)
     }
+    
+    func CloseKeyboard() {
+        
+    }
 }
 
 
@@ -147,7 +151,8 @@ extension AddMeetingController: AddMeetingSendDelegate {
     func Send() {
         print("Create meeting")
 //        Also should close up that view!
-        Server.CreateMeeting(withData: dataDictonary, andUserId: UserInformation.uid)
+        let uid: String = UserDefaults.standard.string(forKey: "uid")!
+        Server.CreateMeeting(withData: dataDictonary, andUserId: uid)
     }
 }
 
@@ -233,6 +238,7 @@ protocol PassDataDelegate {
     func PassHeader(header: Dictionary<String, String>)
     func PassDesc(desc: Dictionary<String, String>)
     func PassCoordinates(coord: Dictionary<String, Array<CGFloat>>)
+    func CloseKeyboard()
 }
 
 

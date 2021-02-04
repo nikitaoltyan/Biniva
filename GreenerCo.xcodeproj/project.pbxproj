@@ -58,6 +58,7 @@
 		5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */; };
 		5CB6A23425C4638900EC4B3A /* EmptyMeetingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A23325C4638900EC4B3A /* EmptyMeetingsCell.swift */; };
 		5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB5101257D12160097F4BD /* MeetingViewController.swift */; };
+		5CC26A9C25CBF27F000501AD /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC26A9B25CBF27F000501AD /* ItemView.swift */; };
 		5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */; };
 		5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */; };
 		5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */; };
@@ -67,6 +68,7 @@
 		5CF2E63E255D944400B4EFE3 /* MeetingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2E63D255D944400B4EFE3 /* MeetingsController.swift */; };
 		5CF2E64A255D946600B4EFE3 /* MeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2E649255D946600B4EFE3 /* MeetingCell.swift */; };
 		5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */; };
+		5CFA1A3B25C99BD200587EC5 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1A3A25C99BD200587EC5 /* Defaults.swift */; };
 		5CFB622E259A447200F1C8C7 /* AddMeetingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB622D259A447200F1C8C7 /* AddMeetingController.swift */; };
 		5CFB6239259A4DB100F1C8C7 /* AddOtherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB6238259A4DB100F1C8C7 /* AddOtherCell.swift */; };
 		5CFB623E259B246800F1C8C7 /* AddMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB623D259B246800F1C8C7 /* AddMapCell.swift */; };
@@ -157,6 +159,7 @@
 		5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView Extension.swift"; sourceTree = "<group>"; };
 		5CB6A23325C4638900EC4B3A /* EmptyMeetingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMeetingsCell.swift; sourceTree = "<group>"; };
 		5CBB5101257D12160097F4BD /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
+		5CC26A9B25CBF27F000501AD /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePlusView.swift; sourceTree = "<group>"; };
@@ -166,6 +169,7 @@
 		5CF2E63D255D944400B4EFE3 /* MeetingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingsController.swift; sourceTree = "<group>"; };
 		5CF2E649255D946600B4EFE3 /* MeetingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingCell.swift; sourceTree = "<group>"; };
 		5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		5CFA1A3A25C99BD200587EC5 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		5CFB622D259A447200F1C8C7 /* AddMeetingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMeetingController.swift; sourceTree = "<group>"; };
 		5CFB6238259A4DB100F1C8C7 /* AddOtherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOtherCell.swift; sourceTree = "<group>"; };
 		5CFB623D259B246800F1C8C7 /* AddMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapCell.swift; sourceTree = "<group>"; };
@@ -300,9 +304,9 @@
 		5C454E5325BACF7100966991 /* Four Main Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5C454E5425BACFAA00966991 /* All Meetings Controller */,
 				5C454E5525BACFD500966991 /* Recycling Controller */,
 				5C454E5825BAD06200966991 /* Stats Controller */,
+				5C454E5425BACFAA00966991 /* All Meetings Controller */,
 				5C454E5B25BAD0B800966991 /* User Controller */,
 			);
 			path = "Four Main Controllers";
@@ -506,6 +510,7 @@
 				5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */,
 				5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */,
 				5CE7217125A07E0700ECE84F /* RegularTopView.swift */,
+				5CC26A9B25CBF27F000501AD /* ItemView.swift */,
 			);
 			path = "General Views";
 			sourceTree = "<group>";
@@ -570,6 +575,7 @@
 				5C454E5225BACF5B00966991 /* View Controllers */,
 				5C454E6C25BAD24600966991 /* General Views */,
 				5C454E6D25BAD2F100966991 /* General Cells */,
+				5CFA1A3925C99BBE00587EC5 /* User Defaults */,
 				5C045BE625BC77A000E42843 /* Firebase */,
 				5C045BF525BFE24600E42843 /* Extensions */,
 				5C83A0792563AC58005C2CAA /* Main Constants.swift */,
@@ -610,6 +616,14 @@
 				5C44873E258A5AF200474BFF /* CategoryNameCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		5CFA1A3925C99BBE00587EC5 /* User Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				5CFA1A3A25C99BD200587EC5 /* Defaults.swift */,
+			);
+			path = "User Defaults";
 			sourceTree = "<group>";
 		};
 		7516ABB4085A32D4427E527C /* Frameworks */ = {
@@ -886,6 +900,7 @@
 				5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */,
 				5C3046EE25C13D9800BAFEEF /* TextFieldCell.swift in Sources */,
 				5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */,
+				5CC26A9C25CBF27F000501AD /* ItemView.swift in Sources */,
 				5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */,
 				5C3046E525C13B8E00BAFEEF /* RegistrationController.swift in Sources */,
 				5C3046FC25C13DC100BAFEEF /* AddGoalCell.swift in Sources */,
@@ -933,6 +948,7 @@
 				5CFB6239259A4DB100F1C8C7 /* AddOtherCell.swift in Sources */,
 				5C1D11C925C7259B007C8DBC /* ServerMaterials.swift in Sources */,
 				5C1C5E0425A6064C000DC5EC /* BarView.swift in Sources */,
+				5CFA1A3B25C99BD200587EC5 /* Defaults.swift in Sources */,
 				5C44873F258A5AF200474BFF /* CategoryNameCell.swift in Sources */,
 				5CF2E64A255D946600B4EFE3 /* MeetingCell.swift in Sources */,
 			);

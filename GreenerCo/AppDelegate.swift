@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        Server.AuthUser(withEmail: "nikitaoltyan@mail.ru", password: "12345678")
+//        Server.AuthUser(withEmail: "nikitaoltyan@mail.ru", password: "12345678")
         return true
     }
 

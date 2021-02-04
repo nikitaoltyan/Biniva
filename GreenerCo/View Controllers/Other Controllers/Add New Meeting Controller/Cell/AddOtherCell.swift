@@ -14,6 +14,7 @@ class AddOtherCell: UICollectionViewCell {
         let scroll = UIScrollView()
         scroll.contentSize = CGSize(width: MainConstants.screenWidth, height: 1050)
         scroll.bounces = true
+        scroll.delegate = self
         scroll.showsVerticalScrollIndicator = true
         scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
@@ -33,6 +34,7 @@ class AddOtherCell: UICollectionViewCell {
     let picker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.isUserInteractionEnabled = true
         picker.locale = .current
         if #available(iOS 14.0, *) {
             picker.preferredDatePickerStyle = .inline
@@ -134,8 +136,16 @@ class AddOtherCell: UICollectionViewCell {
         return view
     }()
     
+    let clearCloseKeyboardView: UIView = {
+        let view = UIView()
+            .with(bgColor: .clear)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     var delegate: PassDataDelegate?
     var sendDelegate: AddMeetingSendDelegate?
+    
     
     
     override init(frame: CGRect) {
@@ -152,6 +162,7 @@ class AddOtherCell: UICollectionViewCell {
     
     
     @objc func handler(sender: UIDatePicker) {
+        print("Date picker called")
         let time = DateFormatter()
         let date = DateFormatter()
         time.timeStyle = DateFormatter.Style.medium
@@ -162,13 +173,28 @@ class AddOtherCell: UICollectionViewCell {
         delegate?.PassDate(date: passDate)
         delegate?.PassTime(time: passTime)
     }
-    
+
     
     @objc func Send() {
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.impactOccurred()
-        
+        Vibration.Light()
         sendDelegate?.Send()
+    }
+    
+    
+    @objc func CloseKeyboard() {
+        print("Close keyboard called")
+        delegate?.CloseKeyboard()
+        self.commentField.endEditing(true)
+        self.descField.endEditing(true)
+    }
+    
+    
+    func SetScrollView(interaction: UITextView) {
+        print("Set Scroll view")
+        print("TextView maxY: \(interaction.frame.maxY)")
+//        let setHeight = interaction.frame.maxY
+//        let scrollTo = MainConstants.screenHeight-setHeight
+//        scrollView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: true)
     }
     
     
@@ -203,6 +229,24 @@ class AddOtherCell: UICollectionViewCell {
 
 
 
+//extension AddOtherCell: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        print("Scroll view did scroll")
+//        CloseKeyboard()
+//    }
+//}
+
+
+extension AddOtherCell: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        print("gestureRecognizer \(gestureRecognizer)")
+        print("other gestureRecognizer \(otherGestureRecognizer)")
+        return true //Obviously think about the logic of what to return in various cases
+    }
+}
+
+
 
 
 extension AddOtherCell: UITextViewDelegate {
@@ -222,6 +266,7 @@ extension AddOtherCell: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        SetScrollView(interaction: textView)
         guard textView.tag == 1 else {return}
         let passDesc: Dictionary<String,String> = ["desc": textView.text]
         self.delegate?.PassDesc(desc: passDesc)
@@ -238,6 +283,7 @@ extension AddOtherCell {
         self.addSubview(scrollView)
         scrollView.addSubview(pickDateLabel)
         scrollView.addSubview(picker)
+        scrollView.addSubview(clearCloseKeyboardView)
         scrollView.addSubview(writeName)
         scrollView.addSubview(commentField)
         scrollView.addSubview(warningLabel)
@@ -245,8 +291,13 @@ extension AddOtherCell {
         scrollView.addSubview(descField)
         scrollView.addSubview(sendButton)
         
+        
+
+        let closeKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(CloseKeyboard))
+        clearCloseKeyboardView.addGestureRecognizer(closeKeyboardGesture)
         picker.addTarget(self, action: #selector(AddOtherCell.handler(sender:)), for: UIControl.Event.valueChanged)
         sendButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Send)))
+        
     }
     
     
@@ -287,7 +338,12 @@ extension AddOtherCell {
             sendButton.topAnchor.constraint(equalTo: descField.bottomAnchor, constant: 50),
             sendButton.leftAnchor.constraint(equalTo: descField.leftAnchor),
             sendButton.rightAnchor.constraint(equalTo: descField.rightAnchor),
-            sendButton.heightAnchor.constraint(equalToConstant: 65)
+            sendButton.heightAnchor.constraint(equalToConstant: 65),
+            
+            clearCloseKeyboardView.topAnchor.constraint(equalTo: picker.bottomAnchor),
+            clearCloseKeyboardView.heightAnchor.constraint(equalToConstant: 420),
+            clearCloseKeyboardView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            clearCloseKeyboardView.rightAnchor.constraint(equalTo: self.rightAnchor),
         ])
     }
 }

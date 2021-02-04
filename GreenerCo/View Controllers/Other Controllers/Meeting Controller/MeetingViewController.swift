@@ -50,7 +50,7 @@ class MeetingViewController: UIViewController {
         let scale = 37 as CGFloat
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.downloadImage(from: postData["image"] as? String)
+        DispatchQueue.main.async { image.downloadImage(from: self.postData["image"] as? String) }
         image.layer.masksToBounds = true
         image.layer.cornerRadius = scale/2
         return image
@@ -212,20 +212,17 @@ class MeetingViewController: UIViewController {
         return image
     }()
     
-    let populate: Array<String> = ["Some custome message text.","Some custome message text Some custome message text Some custome message text."," ","Some custome message text","Some custome message text. Some custome message text. Some custome message text. \n\nSome custome message text. Some custome message text", "Some custome message text.","Some custome message text Some custome message text Some custome message text."," ","Some custome message text","Some custome message text. Some custome message text. Some custome message text. \n\nSome custome message text. Some custome message text","Some custome message text Some custome message text Some custome message text."," ","Some custome message text","Some custome message text. Some custome message text. Some custome message text. \n\nSome custome message text. Some custome message text"]
-    
     var postData: Dictionary<String, Any> = [:]
     var messagesData: Array<Dictionary<String, Any>> = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ServerMaterials.AddLoggedEvent(addedSize: 20, forUserID: UserInformation.uid)
         GetMassages()
         view.backgroundColor = MainConstants.white
         SetSubviews()
         ActivateLayouts()
-        CheckIfJoin(userId: UserInformation.uid, meetingId: postData["mid"] as! String)
+        CheckIfJoin(userId: UserDefaults.standard.string(forKey: "uid")!, meetingId: postData["mid"] as! String)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -325,17 +322,18 @@ class MeetingViewController: UIViewController {
     @objc func JoinInAction(){
         print("Joined in")
         Vibration.Soft()
-        Server.JoinMeeting(withUserId: UserInformation.uid, meetingId: postData["mid"] as! String, andType: "join")
+        let uid: String = UserDefaults.standard.string(forKey: "uid")!
+        Server.JoinMeeting(withUserId: uid, meetingId: postData["mid"] as! String, andType: "join")
         guard (postData["joined"] != nil) else {
-            postData.merge(dict: ["joined": [UserInformation.uid]])
-            CheckIfJoin(userId: UserInformation.uid, meetingId: postData["mid"] as! String)
+            postData.merge(dict: ["joined": [uid]])
+            CheckIfJoin(userId: uid, meetingId: postData["mid"] as! String)
             return
         }
         var arr = postData["joined"] as! Array<String>
-        guard (arr.contains(UserInformation.uid)) else {
-            arr.append(UserInformation.uid)
+        guard (arr.contains(uid)) else {
+            arr.append(uid)
             postData.merge(dict: ["joined": arr])
-            CheckIfJoin(userId: UserInformation.uid, meetingId: postData["mid"] as! String)
+            CheckIfJoin(userId: uid, meetingId: postData["mid"] as! String)
             return }
     }
     
@@ -343,7 +341,8 @@ class MeetingViewController: UIViewController {
     @objc func SendAction(){
         print("Sended")
         Vibration.Light()
-        Server.SendMessage(user: UserInformation.uid,
+        let uid: String = UserDefaults.standard.string(forKey: "uid")!
+        Server.SendMessage(user: uid,
                            meetingId: postData["mid"] as! String,
                            massageText: commentField.text ?? "")
         commentField.endEditing(true)
@@ -402,7 +401,9 @@ extension MeetingViewController: UITableViewDelegate, UITableViewDataSource{
         cell.messageLabel.text = data["text"] as? String
         cell.dataLabel.text = data["date"] as? String
         cell.nameLabel.text = data["username"] as? String
-        cell.profileImage.downloadImage(from: data["image"] as? String)
+        DispatchQueue.main.async {
+            cell.profileImage.downloadImage(from: data["image"] as? String)
+        }
         cell.commentIndex = indexPath.row
         return cell
     }

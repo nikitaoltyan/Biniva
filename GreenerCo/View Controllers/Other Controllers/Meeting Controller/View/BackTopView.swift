@@ -63,7 +63,7 @@ extension BackTopView {
     
     func ActivateLayouts(){
         let topConst: CGFloat = {if MainConstants.screenHeight>700 {return 20} else {return 12}}()
-        let labelYConst: CGFloat = {if MainConstants.screenHeight>700 {return 20} else {return 0}}()
+        let labelYConst: CGFloat = {if MainConstants.screenHeight>700 {return 20} else {return 13}}()
         
         NSLayoutConstraint.activate([
             backButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: topConst),
