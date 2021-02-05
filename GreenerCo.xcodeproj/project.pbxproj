@@ -59,6 +59,7 @@
 		5CB6A23425C4638900EC4B3A /* EmptyMeetingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A23325C4638900EC4B3A /* EmptyMeetingsCell.swift */; };
 		5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB5101257D12160097F4BD /* MeetingViewController.swift */; };
 		5CC26A9C25CBF27F000501AD /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC26A9B25CBF27F000501AD /* ItemView.swift */; };
+		5CC26AA125CD193B000501AD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC26AA025CD193B000501AD /* MainTabBarController.swift */; };
 		5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */; };
 		5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */; };
 		5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */; };
@@ -160,6 +161,7 @@
 		5CB6A23325C4638900EC4B3A /* EmptyMeetingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMeetingsCell.swift; sourceTree = "<group>"; };
 		5CBB5101257D12160097F4BD /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		5CC26A9B25CBF27F000501AD /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		5CC26AA025CD193B000501AD /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePlusView.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 		5C454E5225BACF5B00966991 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5CC26AC125CD22B4000501AD /* TabBar */,
 				5C454E5325BACF7100966991 /* Four Main Controllers */,
 				5C454E5C25BAD0EF00966991 /* Other Controllers */,
 			);
@@ -618,6 +621,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		5CC26AC125CD22B4000501AD /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				5CC26AA025CD193B000501AD /* MainTabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		5CFA1A3925C99BBE00587EC5 /* User Defaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -918,6 +929,7 @@
 				5CFB6246259B415100F1C8C7 /* TopProgressView.swift in Sources */,
 				5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */,
 				5C045BDF25BB0EF100E42843 /* OnboardCell.swift in Sources */,
+				5CC26AA125CD193B000501AD /* MainTabBarController.swift in Sources */,
 				5C54953E2558251A00E5140C /* AchieveController.swift in Sources */,
 				5C045BD625BAE80B00E42843 /* BottomLogInView.swift in Sources */,
 				5CFB624B259B92E800F1C8C7 /* HeadersViews.swift in Sources */,

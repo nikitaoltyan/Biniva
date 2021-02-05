@@ -84,7 +84,8 @@ class RecyclingController: UIViewController {
     }()
     
     var materials = [MaterialsObject]()
-    var isAddMenuActivated = false
+    var showPopUpController: Bool = false
+    var isAddMenuActivated: Bool = false
     
     
     
@@ -97,6 +98,7 @@ class RecyclingController: UIViewController {
         SetSubviews()
         ActivateLayouts()
         GetUserProgress()
+        _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(ShowPopUpController), userInfo: nil, repeats: false)
     }
     
     
@@ -104,15 +106,15 @@ class RecyclingController: UIViewController {
     
     @objc func OpenProfile(){
         print("Open profile function")
-        let newVC = AchieveController()
-        newVC.modalPresentationStyle = .overFullScreen
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromRight
-        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
-        view.window!.layer.add(transition, forKey: kCATransition)
-        self.present(newVC, animated: false, completion: nil)
+    }
+    
+    
+    @objc func ShowPopUpController() {
+        if (showPopUpController) {
+            let newVC = PopUpController()
+            newVC.modalPresentationStyle = .overFullScreen
+            self.present(newVC, animated: false, completion: nil)
+        }
     }
     
     

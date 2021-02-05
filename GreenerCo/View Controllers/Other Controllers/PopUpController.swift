@@ -81,6 +81,7 @@ class PopUpController: UIViewController {
     @objc func ShowView(){
         UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
             print("Animate")
+            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.24)
             self.mainView.center.y -= 400
         }, completion: { finished in
         })
@@ -115,6 +116,7 @@ class PopUpController: UIViewController {
     
     @objc func Dismiss(){
         UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
+            self.view.backgroundColor = .clear
             self.mainView.center.y += self.mainView.frame.height
         }, completion: { finished in
             self.dismiss(animated: true, completion: nil)
