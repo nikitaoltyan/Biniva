@@ -85,6 +85,12 @@ class AddMeetingController: UIViewController {
         }
     }
 
+    func ShowPopUpController() {
+        sleep(1)
+        let newVC = PopUpController()
+        newVC.modalPresentationStyle = .overFullScreen
+        self.present(newVC, animated: false, completion: nil)
+    }
 }
 
 
@@ -150,9 +156,11 @@ extension AddMeetingController: PassDataDelegate {
 extension AddMeetingController: AddMeetingSendDelegate {
     func Send() {
         print("Create meeting")
-//        Also should close up that view!
         let uid: String = UserDefaults.standard.string(forKey: "uid")!
         Server.CreateMeeting(withData: dataDictonary, andUserId: uid)
+        
+        tabBarController?.selectedIndex = 2
+        DispatchQueue.main.async { self.ShowPopUpController() }
     }
 }
 

@@ -19,13 +19,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = MainTabBarController()
+            let hasLaunched = UserDefaults.standard.bool(forKey: "hasLaunched")
+            if (hasLaunched) {
+                window.rootViewController = MainTabBarController()
+            } else {
+                window.rootViewController = OnboardingController()
+            }
             self.window = window
             window.makeKeyAndVisible()
         }
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = MainTabBarController(nibName: "MainTabBarController", bundle: nil)
-//        window?.makeKeyAndVisible()
         
         guard let _ = (scene as? UIWindowScene) else { return }
 //        print("Scene was connected")

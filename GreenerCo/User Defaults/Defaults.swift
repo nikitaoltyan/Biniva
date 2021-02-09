@@ -20,6 +20,7 @@ class Defaults {
     static func RegistrateUser(withID uid: String, andDailyNorm norm: Int) {
         SetUserId(userId: uid)
         SetUserDailyNorm(userNorm: norm)
+        userDefault.set(true, forKey: "hasLaunched")
     }
     
     

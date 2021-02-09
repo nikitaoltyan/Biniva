@@ -7,11 +7,10 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
         self.tabBar.tintColor = MainConstants.orange
         print("Tab bar controller was load")
     }
@@ -40,10 +39,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             tabFour.tabBarItem = tabFourBarItem
             
             self.viewControllers = [tabOne, tabTwo, tabThree, tabFour]
-        }
-        
-        // UITabBarControllerDelegate method
-        func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         }
 
 }

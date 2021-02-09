@@ -63,10 +63,11 @@ class RegistrationController: UIViewController {
     }
     
     
-    func OpenMainViewController() {
-        let newVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarStoryboard")
-        newVC.modalPresentationStyle = .fullScreen
-        present(newVC, animated: true, completion: nil)
+    func ShowAfterregistrationPopUp() {
+        sleep(1)
+        let newVC = PopUpController()
+        newVC.modalPresentationStyle = .overFullScreen
+        self.present(newVC, animated: false, completion: nil)
     }
 
 }
@@ -185,7 +186,8 @@ extension RegistrationController: RegistrationDelegate {
     func FinishRegistration() {
         print("Finish registration")
         Server.CreateUser(withData: dataDictonary, andProfileImage: avatarImage!)
-        OpenMainViewController()
+        tabBarController?.selectedIndex = 0
+        DispatchQueue.main.async { self.ShowAfterregistrationPopUp() }
     }
     
     func PickerController() {

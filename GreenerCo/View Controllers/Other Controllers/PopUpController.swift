@@ -89,7 +89,6 @@ class PopUpController: UIViewController {
     
     
     @objc func DismissAction(_ sender: UIPanGestureRecognizer){
-        print("Dismiss action")
         let touchPoint = sender.location(in: view)
         let closePoint: CGFloat = MainConstants.screenHeight - mainView.frame.height/2
         if sender.state == UIGestureRecognizer.State.began {

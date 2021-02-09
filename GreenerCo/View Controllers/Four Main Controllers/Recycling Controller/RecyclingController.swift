@@ -84,7 +84,6 @@ class RecyclingController: UIViewController {
     }()
     
     var materials = [MaterialsObject]()
-    var showPopUpController: Bool = false
     var isAddMenuActivated: Bool = false
     
     
@@ -98,7 +97,6 @@ class RecyclingController: UIViewController {
         SetSubviews()
         ActivateLayouts()
         GetUserProgress()
-        _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(ShowPopUpController), userInfo: nil, repeats: false)
     }
     
     
@@ -110,11 +108,10 @@ class RecyclingController: UIViewController {
     
     
     @objc func ShowPopUpController() {
-        if (showPopUpController) {
-            let newVC = PopUpController()
-            newVC.modalPresentationStyle = .overFullScreen
-            self.present(newVC, animated: false, completion: nil)
-        }
+        sleep(1)
+        let newVC = PopUpController()
+        newVC.modalPresentationStyle = .overFullScreen
+        self.present(newVC, animated: false, completion: nil)
     }
     
     
