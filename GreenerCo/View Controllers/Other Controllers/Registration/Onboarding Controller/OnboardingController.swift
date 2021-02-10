@@ -45,6 +45,17 @@ class OnboardingController: UIViewController {
         return pager
     }()
     
+    let logInButton: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+            .with(color: MainConstants.white)
+            .with(alignment: .center)
+            .with(fontName: "SFPro", size: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = true
+        label.text = "Войти"
+        return label
+    }()
+    
     let images: Array<UIImage?> = [UIImage(named: "point_1"),
                                   UIImage(named: "point_2"),
                                   UIImage(named: "point_3")]
@@ -63,6 +74,17 @@ class OnboardingController: UIViewController {
         ActivateLayouts()
     }
 
+    @objc func OpenLogIn() {
+        let newVC = LogInController()
+        newVC.modalPresentationStyle = .overFullScreen
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(newVC, animated: false, completion: nil)
+    }
 }
 
 
@@ -137,6 +159,9 @@ extension OnboardingController {
         view.addSubview(bottomView)
         view.addSubview(collection)
         view.addSubview(pager)
+        view.addSubview(logInButton)
+        
+        logInButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(OpenLogIn)))
     }
     
     
@@ -153,7 +178,12 @@ extension OnboardingController {
             collection.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
             
             pager.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pager.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: -5)
+            pager.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: -5),
+            
+            logInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logInButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            logInButton.heightAnchor.constraint(equalToConstant: logInButton.frame.height),
+            logInButton.widthAnchor.constraint(equalToConstant: logInButton.frame.width)
         ])
     }
 }

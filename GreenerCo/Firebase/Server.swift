@@ -15,7 +15,8 @@ class Server {
            return Database.database(url: "https://greener-964fe-default-rtdb.europe-west1.firebasedatabase.app/").reference()
     }
     
-    
+    /// Authentificate user via Email and pssword by Firebase Auth.
+    /// - warning: Function also add User ID into UserDefaults.
     static func AuthUser(withEmail: String, password: String) {
         Auth.auth().signIn(withEmail: withEmail, password: password) { (authResult, error) in
             guard (error == nil) else { return }

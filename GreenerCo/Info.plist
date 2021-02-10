@@ -2,22 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>instagram</string>
-	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Required to set the current user position to create Eco-Meeting</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Required to set the current user position to create Eco-Meeting</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>SF-Pro-Italic.ttf</string>
-		<string>Iowan Old Style.otf</string>
-		<string>SF-Pro.ttf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -33,9 +17,23 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>instagram</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Required to set the current user position to create Eco-Meeting</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Required to set the current user position to create Eco-Meeting</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-Pro-Italic.ttf</string>
+		<string>Iowan Old Style.otf</string>
+		<string>SF-Pro.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -77,5 +75,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>
