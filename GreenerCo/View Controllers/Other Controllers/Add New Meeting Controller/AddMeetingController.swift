@@ -110,7 +110,7 @@ extension AddMeetingController: TopProgressDelegate {
     
     func Scroll(slide: Int){
         let indexPath = IndexPath(item: slide, section: 0)
-        mainCollection.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        mainCollection.scrollToItem(at: indexPath, at: .right, animated: true)
     }
     
 }

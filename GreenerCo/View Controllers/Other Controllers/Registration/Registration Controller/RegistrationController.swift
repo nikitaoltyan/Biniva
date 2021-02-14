@@ -153,7 +153,7 @@ extension RegistrationController: RegistrationDelegate {
     func Scroll(slide: Int) {
         Vibration.Soft()
         let indexPath = IndexPath(item: slide, section: 0)
-        collection.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        collection.scrollToItem(at: indexPath, at: .right, animated: true)
     }
     
     func Back() {
