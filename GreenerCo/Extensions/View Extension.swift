@@ -34,4 +34,17 @@ extension UIView {
         self.layer.cornerRadius = cornerRadius
         return self
     }
+    
+    
+    func withDashedBorder(lineWidth width: CGFloat, withColor color: UIColor, lineDashesPattern pattern: [NSNumber], Y: CGFloat) {
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.strokeColor = color.cgColor
+        shapeLayer.lineWidth = width
+        shapeLayer.lineDashPattern = pattern
+        let path = CGMutablePath()
+        path.addLines(between: [CGPoint(x: 0, y: Int(Y)),
+                                CGPoint(x: 215, y: Int(Y))])
+        shapeLayer.path = path
+        layer.addSublayer(shapeLayer)
+    }
 }
