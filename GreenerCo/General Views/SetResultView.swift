@@ -31,6 +31,10 @@ class SetResultView: UIView {
         return label
     }()
     
+    var isForRecyclingController: Bool = false
+    let loggedData: Int = UserDefaults.standard.integer(forKey: "loggedData")
+    let dailyNorm: Int = UserDefaults.standard.integer(forKey: "dailyNorm")
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,6 +45,24 @@ class SetResultView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    
+    
+    func SetForRecyclingController() {
+        guard (isForRecyclingController) else { return }
+        print("today logged data: \(loggedData)")
+        switch (loggedData > dailyNorm) {
+        case true:
+            self.backgroundColor = MainConstants.pink
+            number.text = "Упс"
+            label.text = "много"
+        default:
+            print("Is not loggedData > dailyNorm")
+            self.backgroundColor = MainConstants.nearWhite
+            number.text = "MAX"
+            label.text = "сегодня"
+        }
     }
 
 }

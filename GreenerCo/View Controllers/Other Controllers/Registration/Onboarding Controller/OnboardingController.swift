@@ -137,6 +137,7 @@ extension OnboardingController: OnbordingDelegate {
     func OpenFacebook() {}
     
     func OpenEmail() {
+        print("Open registration")
         let newVC = RegistrationController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()

@@ -89,6 +89,7 @@ class TextFieldCell: UICollectionViewCell {
     
     
     func ActivateButton() {
+        print("Button was activated")
         UIView.animate(withDuration: 0.19, delay: 0, options: .curveEaseOut, animations: {
             self.nextButton.backgroundColor = MainConstants.orange
             self.nextButton.layer.borderWidth = 0

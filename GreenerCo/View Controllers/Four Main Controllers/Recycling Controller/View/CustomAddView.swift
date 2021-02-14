@@ -2,10 +2,10 @@
 //  CustomAddView.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 02.11.2020.
+//  Created by Nikita Oltyan on 02.11.2020.
 //
-
 import UIKit
+
 
 class CustomAddView: UIView {
     

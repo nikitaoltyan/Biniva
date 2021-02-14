@@ -20,9 +20,9 @@ class RecyclingController: UIViewController {
     let plusView: CompletePlusView = {
         let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 65}}()
         let view = CompletePlusView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+            .with(bgColor: MainConstants.green)
+            .with(cornerRadius: width/3)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = MainConstants.green
-        view.layer.cornerRadius = width/3
         view.horizontalView.backgroundColor = MainConstants.white
         view.verticalView.backgroundColor = MainConstants.white
         return view
@@ -31,24 +31,24 @@ class RecyclingController: UIViewController {
     let addFirstItemView: AddItemView = {
         let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 65}}()
         let view = AddItemView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+            .with(cornerRadius: width/3)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = width/3
         return view
     }()
     
     let addSecondItemView: AddItemView = {
         let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 65}}()
         let view = AddItemView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+            .with(cornerRadius: width/3)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = width/3
         return view
     }()
     
     let addThirdItemView: AddItemView = {
         let width: CGFloat = {if MainConstants.screenHeight > 700 {return 70} else {return 65}}()
         let view = AddItemView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+            .with(cornerRadius: width/3)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = width/3
         return view
     }()
     
@@ -58,10 +58,23 @@ class RecyclingController: UIViewController {
         return view
     }()
     
-    let progressView: ProgressImageView = {
+    lazy var progressView: ProgressImageView = {
         let view = ProgressImageView()
         view.progressView.frame = CGRect(x: 0, y: 0, width: 0, height: 200)
+        view.loggedLabel.text = "\(UserDefaults.standard.integer(forKey: "loggedData")) гр"
+        view.recyclingDelegate = self
         view.layoutIfNeeded()
+        return view
+    }()
+    
+    let numberView: SetResultView = {
+        let scale: CGFloat = 65
+        let view = SetResultView(frame: CGRect(x: 0, y: 0, width: scale, height: scale+10))
+            .with(bgColor: MainConstants.nearWhite)
+            .with(cornerRadius: 10)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isForRecyclingController = true
+        view.SetForRecyclingController()
         return view
     }()
     
@@ -91,7 +104,6 @@ class RecyclingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("UserID from defaults: \(UserDefaults.standard.string(forKey: "uid")!)")
         view.backgroundColor = MainConstants.white
         PopulateMaterialsObject()
         SetSubviews()
@@ -161,7 +173,7 @@ class RecyclingController: UIViewController {
         let addedSize: Int = 200
         ServerMaterials.AddLoggedEvent(addedSize: addedSize,
                                        forUserID: UserDefaults.standard.string(forKey: "uid")!,
-                                       material: "БумагаОрганика")
+                                       material: "Органика")
         AnimateDismissThreeViews()
         SetProgressHeight(addedSize: addedSize)
     }
@@ -225,9 +237,15 @@ class RecyclingController: UIViewController {
     func GetUserProgress(){
         Defaults.CheckLastLogged(alreadyLogged: { result in
             print("Already logged from defaults: \(result)")
-            let setHeight: CGFloat = 0.253 * CGFloat(result)
-            self.progressView.progressHeightAnchor?.constant = CGFloat(setHeight)
-            self.progressView.layoutIfNeeded()
+            if (result > 1500) {
+                let setHeight: CGFloat = self.progressView.heightOfProgressView
+                self.progressView.progressHeightAnchor?.constant = CGFloat(setHeight)
+                self.progressView.layoutIfNeeded()
+            } else {
+                let setHeight: CGFloat = 0.253 * CGFloat(result)
+                self.progressView.progressHeightAnchor?.constant = CGFloat(setHeight)
+                self.progressView.layoutIfNeeded()
+            }
         })
     }
     
@@ -291,6 +309,12 @@ extension RecyclingController: RecyclingDelegate {
         AnimateDismissCustomAddView()
         SetProgressHeight(addedSize: size)
     }
+    
+    func ChangeNumberViewColor() {
+        numberView.backgroundColor = MainConstants.pink
+        numberView.number.text = "Упс"
+        numberView.label.text = "много"
+    }
 }
 
 
@@ -299,5 +323,6 @@ extension RecyclingController: RecyclingDelegate {
 protocol RecyclingDelegate {
     func OpenTipsList()
     func LogValue(withSize size: Int, andMaterial material: String)
+    func ChangeNumberViewColor()
 }
 

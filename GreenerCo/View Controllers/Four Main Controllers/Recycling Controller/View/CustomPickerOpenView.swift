@@ -2,10 +2,10 @@
 //  CustomPickerOpenView.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 03.01.2021.
+//  Created by Nikita Oltyan on 03.01.2021.
 //
-
 import UIKit
+
 
 class CustomPickerOpenView: UIView {
 

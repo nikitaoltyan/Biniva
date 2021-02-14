@@ -17,6 +17,7 @@ extension RecyclingController {
         view.addSubview(addThirdItemView)
         view.addSubview(openCustomView)
         view.addSubview(progressView)
+        view.addSubview(numberView)
         view.addSubview(customAddView)
         view.addSubview(dimView)
         
@@ -56,6 +57,8 @@ extension RecyclingController {
         let plusViewFromBottom: CGFloat = {if MainConstants.screenHeight>700{return 130}else{return 70}}()
         let progressViewFromHeight: CGFloat = {if MainConstants.screenHeight>700{return 158}else{return 138}}()
         let customAddBottom: CGFloat = {if MainConstants.screenHeight>700{return -tabBarHeight-34}else{return -tabBarHeight}}()
+        let dailyNorm = UserDefaults.standard.integer(forKey: "dailyNorm")
+        let lineTop: CGFloat = MaterialDefaults.YForDashedLine(dailyNorm: dailyNorm)
         NSLayoutConstraint.activate([
             topView.topAnchor.constraint(equalTo: view.topAnchor),
             topView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -91,6 +94,11 @@ extension RecyclingController {
             progressView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             progressView.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth-160),
             progressView.heightAnchor.constraint(equalToConstant: heightOfProgressView),
+            
+            numberView.bottomAnchor.constraint(equalTo: progressView.topAnchor, constant: lineTop+numberView.frame.height/2),
+            numberView.rightAnchor.constraint(equalTo: progressView.leftAnchor, constant: -5),
+            numberView.heightAnchor.constraint(equalToConstant: numberView.frame.height),
+            numberView.widthAnchor.constraint(equalToConstant: numberView.frame.width),
             
             customAddView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: customAddBottom),
             customAddView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),

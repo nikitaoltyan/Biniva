@@ -25,8 +25,32 @@ class ProgressImageView: UIView {
         return image
     }()
     
+    lazy var loggedLabel: UILabel = {
+        let label = UILabel()
+            .with(alignment: .center)
+            .with(color: MaterialDefaults.GetTextColor(alreadyLogged: loggedData))
+            .with(fontName: "SFPro-Medium", size: 30)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var dashedLine: UIView = {
+        let view = UIView()
+            .with(bgColor: MainConstants.orange)
+        view.withDashedBorder(lineWidth: 2,
+                              withColor: MainConstants.orange,
+                              lineDashesPattern: [7,6],
+                              Y: MaterialDefaults.YForDashedLine(dailyNorm: dailyNorm))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var loggedData: Int = 0
+    let dailyNorm: Int = UserDefaults.standard.integer(forKey: "dailyNorm")
+    let heightOfProgressView: CGFloat = {if MainConstants.screenHeight>700{return 400}else{return 360}}()
     var progressHeightAnchor: NSLayoutConstraint?
     var delegate: AddGoalDelegate?
+    var recyclingDelegate: RecyclingDelegate?
     
     
     
@@ -34,6 +58,9 @@ class ProgressImageView: UIView {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = MainConstants.nearWhite.withAlphaComponent(0.1)
+        Defaults.CheckLastLogged(alreadyLogged: { result in
+            self.loggedData = result
+        })
         SetSubviews()
         ActivateLayouts()
     }
@@ -41,14 +68,45 @@ class ProgressImageView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
-
+    
+    
+    
     
     func SetProgressHeight(addedSize add: Int) {
-        let setHeight: CGFloat = 0.253 * CGFloat(add)
+        let totalLogged = loggedData + add
+        print("Before guard. Set height: \(totalLogged)")
+        guard (totalLogged < 1500) else {
+            SetProgressForFullData(logged: totalLogged)
+            return
+        }
+        let setHeight: CGFloat = MaterialDefaults.LinearFunction(viewSize: self.frame.height, addedSize: add)
+        print("After guard")
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             self.progressHeightAnchor?.constant += setHeight
+            self.loggedLabel.textColor = MaterialDefaults.GetTextColor(alreadyLogged: self.loggedData)
             self.layoutIfNeeded()
-        }, completion: { finished in })
+        }, completion: { finished in
+            self.loggedLabel.text = "\(totalLogged) гр"
+            self.CheckDailyNorm(currentLoged: totalLogged)
+        })
+    }
+    
+    
+    func CheckDailyNorm(currentLoged size: Int){
+        guard (size > dailyNorm) else { return }
+        recyclingDelegate?.ChangeNumberViewColor()
+    }
+    
+    
+    func SetProgressForFullData(logged: Int) {
+        print("Set Progress for full data")
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.progressHeightAnchor?.constant = self.heightOfProgressView
+            self.layoutIfNeeded()
+        }, completion: { finished in
+            self.loggedLabel.text = "\(logged) гр"
+            self.CheckDailyNorm(currentLoged: logged)
+        })
     }
     
     
@@ -71,15 +129,16 @@ class ProgressImageView: UIView {
 extension ProgressImageView{
     func SetSubviews(){
         self.addSubview(progressView)
+        self.addSubview(dashedLine)
         self.addSubview(image)
-        
+        self.addSubview(loggedLabel)
         
         progressView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(PanGesture(_:))))
     }
     
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
-//            progressView height anchor on the bootom os the function.
+//            progressView height anchor on the bootom of the function.
             progressView.leftAnchor.constraint(equalTo: self.leftAnchor),
             progressView.rightAnchor.constraint(equalTo: self.rightAnchor),
             progressView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -87,7 +146,10 @@ extension ProgressImageView{
             image.topAnchor.constraint(equalTo: self.topAnchor),
             image.leftAnchor.constraint(equalTo: self.leftAnchor),
             image.rightAnchor.constraint(equalTo: self.rightAnchor),
-            image.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            image.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            loggedLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            loggedLabel.bottomAnchor.constraint(equalTo: image.bottomAnchor, constant: -13),
         ])
         
         progressHeightAnchor =
