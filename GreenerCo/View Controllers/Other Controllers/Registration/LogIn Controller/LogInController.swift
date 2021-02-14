@@ -18,14 +18,14 @@ class LogInController: UIViewController {
         return button
     }()
     
-    let emailLabel: UILabel = {
+    let mainLabel: UILabel = {
         let label = UILabel()
             .with(color: MainConstants.nearBlack)
             .with(fontName: "SFPro-Bold", size: 30)
             .with(alignment: .left)
             .with(numberOfLines: 0)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Email"
+        label.text = "Log in"
         return label
     }()
     
@@ -48,17 +48,6 @@ class LogInController: UIViewController {
             .with(bgColor: .lightGray)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    
-    let passwordLabel: UILabel = {
-        let label = UILabel()
-            .with(color: MainConstants.nearBlack)
-            .with(fontName: "SFPro-Bold", size: 30)
-            .with(alignment: .left)
-            .with(numberOfLines: 0)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Password"
-        return label
     }()
     
     let passwordField: UITextField = {
@@ -157,6 +146,7 @@ class LogInController: UIViewController {
             self.nextButton.label.transform = CGAffineTransform(scaleX: 1, y: 1)
         }, completion: { finished in
             self.nextButton.isActive = false
+            
         })
     }
     
@@ -164,10 +154,21 @@ class LogInController: UIViewController {
     @objc func LogIn() {
         guard (nextButton.isActive) else { return }
         Vibration.Medium()
-        Server.AuthUser(withEmail: emailField.text!, password: passwordField.text!)
-        print("User was logged in")
-        tabBarController?.selectedIndex = 0
-        DispatchQueue.main.async { self.ShowAfterLogInPopUp() }
+        Server.AuthUser(withEmail: emailField.text!.lowercased(), password: passwordField.text!, success: {
+            result in
+            guard (result) else {
+                self.ShowAfterLogInPopUp()
+                return
+            }
+            guard let window = UIApplication.shared.windows.first else { return }
+            
+            let vc = MainTabBarController()
+            window.rootViewController = vc
+            let options: UIView.AnimationOptions = .transitionFlipFromBottom
+            let duration: TimeInterval = 0.3
+            UIView.transition(with: window, duration: duration, options: options, animations: {}, completion:
+            { completed in })
+        })
     }
 
     
@@ -183,6 +184,7 @@ class LogInController: UIViewController {
     
     func ShowAfterLogInPopUp() {
         sleep(1)
+        print("Show pop up")
         let newVC = PopUpController()
         newVC.modalPresentationStyle = .overFullScreen
         self.present(newVC, animated: false, completion: nil)
@@ -195,10 +197,9 @@ extension LogInController {
     
     func SetSubviews(){
         view.addSubview(back)
-        view.addSubview(emailLabel)
+        view.addSubview(mainLabel)
         view.addSubview(emailField)
         view.addSubview(emailLine)
-        view.addSubview(passwordLabel)
         view.addSubview(passwordField)
         view.addSubview(passwordLine)
         view.addSubview(nextButton)
@@ -211,13 +212,13 @@ extension LogInController {
     
     
     func ActivateLayouts() {
-        let emailTop: CGFloat = {if MainConstants.screenHeight>700 { return 95 } else { return 80 }}()
+        let emailTop: CGFloat = {if MainConstants.screenHeight>700 { return 135 } else { return 100 }}()
         NSLayoutConstraint.activate([
-            emailLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: emailTop),
-            emailLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 35),
+            mainLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: emailTop),
+            mainLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 35),
             
-            emailField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 40),
-            emailField.leftAnchor.constraint(equalTo: emailLabel.leftAnchor),
+            emailField.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 20),
+            emailField.leftAnchor.constraint(equalTo: mainLabel.leftAnchor),
             emailField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -35),
             emailField.heightAnchor.constraint(equalToConstant: 40),
             
@@ -226,11 +227,8 @@ extension LogInController {
             emailLine.rightAnchor.constraint(equalTo: emailField.rightAnchor),
             emailLine.heightAnchor.constraint(equalToConstant: 0.7),
             
-            passwordLabel.topAnchor.constraint(equalTo: emailLine.bottomAnchor, constant: 60),
-            passwordLabel.leftAnchor.constraint(equalTo: emailLabel.leftAnchor),
-            
-            passwordField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 40),
-            passwordField.leftAnchor.constraint(equalTo: passwordLabel.leftAnchor),
+            passwordField.topAnchor.constraint(equalTo: emailLine.bottomAnchor, constant: 15),
+            passwordField.leftAnchor.constraint(equalTo: emailLine.leftAnchor),
             passwordField.rightAnchor.constraint(equalTo: emailField.rightAnchor),
             passwordField.heightAnchor.constraint(equalToConstant: 40),
             
@@ -244,8 +242,8 @@ extension LogInController {
             nextButton.rightAnchor.constraint(equalTo: passwordField.rightAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: nextButton.frame.height),
             
-            back.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            back.rightAnchor.constraint(equalTo: emailLabel.leftAnchor, constant: back.frame.width/2),
+            back.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            back.rightAnchor.constraint(equalTo: mainLabel.leftAnchor, constant: back.frame.width/2),
             back.heightAnchor.constraint(equalToConstant: back.frame.height),
             back.widthAnchor.constraint(equalToConstant: back.frame.width)
         ])

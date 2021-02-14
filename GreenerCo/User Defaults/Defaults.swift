@@ -26,14 +26,15 @@ class Defaults {
     
     /// Set user id as default parameter after user registration or log in.
     /// - parameter uid: User ID got from Firebase server.
-    static func SetUserId(userId uid: String) {
-        UserDefaults.standard.setValue(uid, forKey: "uid")
+    static func SetUserId(userId uid: String?) {
+        UserDefaults.standard.setValue(uid ?? "NaN", forKey: "uid")
     }
     
     
     /// Function to set user Daily norm for logging.
     /// - parameter norm: How much user plans to log.
     static func SetUserDailyNorm(userNorm norm: Int) {
+        print("Set user Daily Norm")
         userDefault.setValue(norm, forKey: "dailyNorm")
     }
     
@@ -43,9 +44,10 @@ class Defaults {
     /// - returns: Int result. How much gramms was logged today.
     static func CheckLastLogged(alreadyLogged: @escaping (_ result: Int) -> Void){
         let lastLoggedDate = userDefault.string(forKey: "lastLogged") ?? "No data"
+        let uid = userDefault.string(forKey: "uid") ?? "NaN"
         let todayDate: String = "\(date.day)_\(date.month)_\(date.year)"
         if lastLoggedDate != todayDate {
-            ServerMaterials.SetZeroDayData(forUserID: userDefault.string(forKey: "uid")!, andDate: todayDate)
+            ServerMaterials.SetZeroDayData(forUserID: uid, andDate: todayDate)
             userDefault.setValue(todayDate, forKey: "lastLogged")
             userDefault.setValue(0, forKey: "loggedData")
             alreadyLogged(0)

@@ -17,12 +17,18 @@ class Server {
     
     /// Authentificate user via Email and pssword by Firebase Auth.
     /// - warning: Function also add User ID into UserDefaults.
-    static func AuthUser(withEmail: String, password: String) {
+    static func AuthUser(withEmail: String, password: String, success: @escaping (_ result: Bool) -> Void) {
         Auth.auth().signIn(withEmail: withEmail, password: password) { (authResult, error) in
-            guard (error == nil) else { return }
+            guard (error == nil) else {
+                success(false)
+                return
+            }
             print("Auth user")
+            UserDefaults.standard.setValue(true, forKey: "hasLaunched")
             UserDefaults.standard.setValue(authResult?.user.uid, forKey: "uid")
-            UserInformation.uid = authResult?.user.uid
+            SetUserDailyNormFromServer(forUserID: authResult?.user.uid)
+            Defaults.SetUserId(userId: authResult?.user.uid)
+            success(true)
         }
     }
     
@@ -204,5 +210,15 @@ class Server {
                 ref.child("users/\(userId)/image").setValue(url?.absoluteString)
             }
         }
+    }
+    
+    
+    static func SetUserDailyNormFromServer(forUserID uid: String?) {
+        guard (uid != nil) else { return }
+        let userRef = ref.child("users").child(uid!)
+        userRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            let userData = snapshot.value as? [String: Any] ?? [:]
+            Defaults.SetUserDailyNorm(userNorm: userData["daily_norm"] as! Int)
+        })
     }
 }

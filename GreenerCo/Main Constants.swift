@@ -9,7 +9,8 @@ import UIKit
  
 struct MainConstants {
     static let green = UIColor(red: 38/255, green: 74/255, blue: 54/255, alpha: 1)
-    static let white = UIColor(red: 245/255, green: 252/255, blue: 251/255, alpha: 1)
+//    static let white = UIColor(red: 245/255, green: 252/255, blue: 251/255, alpha: 1)
+    static let white = UIColor(named: "customWhiteColor")!
     static let orange = UIColor(red: 238/255, green: 124/255, blue: 30/255, alpha: 1)
     static let yellow = UIColor(red: 237/255, green: 193/255, blue: 53/255, alpha: 1)
     static let pink = UIColor(red: 242/255, green: 132/255, blue: 130/255, alpha: 1)
@@ -79,8 +80,4 @@ class Vibration {
     }
 }
 
-
-struct UserInformation {
-    static var uid: String!
-}
 // Access Token Github: 26fd87827e28333abd795628645a73b9ea2fd0f5

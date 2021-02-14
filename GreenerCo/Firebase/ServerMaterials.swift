@@ -42,9 +42,13 @@ class ServerMaterials {
     
     /// Function for getting user logged data for today.
     /// - warning: Function for delating. Don't call it. Defaults.CheckLastLogged replaced that function.
-    static func GetUserTodayLoggedData(forUserID uid: String, alreadyLogged: @escaping (_ result: Int) -> Void)  {
+    static func GetUserTodayLoggedData(forUserID uid: String?, alreadyLogged: @escaping (_ result: Int) -> Void)  {
+        guard (uid != nil) else {
+            alreadyLogged(0)
+            return
+        }
         let dateChild: String = "\(date.day)_\(date.month)_\(date.year)"
-        let addRef = ref.child("users/\(uid)/data_logged/\(dateChild)")
+        let addRef = ref.child("users/\(uid!)/data_logged/\(dateChild)")
         addRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let loggedDict = snapshot.value as? [String: Any] ?? [:]
             let logged = loggedDict["logged"] as? Int ?? 0
