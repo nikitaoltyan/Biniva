@@ -229,7 +229,7 @@ class MeetingViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
                                                name: UIResponder.keyboardWillHideNotification, object: nil)
         self.hideKeyboardWhenTappedAround()
-        _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
+        _ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(ReloadTableHeight), userInfo: nil, repeats: false)
     }
     
     
@@ -260,7 +260,7 @@ class MeetingViewController: UIViewController {
 
     
     
-    @objc func fireTimer() {
+    @objc func ReloadTableHeight() {
         print("Timer fired!")
         var tableViewHeight: CGFloat {
             discussTable.layoutIfNeeded()
@@ -304,6 +304,7 @@ class MeetingViewController: UIViewController {
         Server.GetMessages(meetingId: postData["mid"] as! String, messages: { result in
             self.messagesData = result
             self.discussTable.reloadData()
+            self.ReloadTableHeight()
         })
     }
     
@@ -373,21 +374,14 @@ extension MeetingViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        Add empty state.
+        print("Messages count: \(messagesData.count)")
         return messagesData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = messagesData[indexPath.row]
-        let cell: MessageCell = discussTable.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-        cell.contentView.isUserInteractionEnabled = true
-        cell.selectionStyle = .none
-        cell.delegate = self
-        cell.isUserInteractionEnabled = true
-        cell.messageLabel.text = data["text"] as? String
-        cell.dataLabel.text = data["date"] as? String
-        cell.nameLabel.text = data["username"] as? String
-        cell.profileImage.downloadImage(from: data["image"] as? String)
-        cell.commentIndex = indexPath.row
+        print("Message data: \(data)")
+        let cell: MessageCell = ReturnMessageCell(withIndexPath: indexPath, andData: data)
         return cell
     }
     

@@ -156,13 +156,13 @@ class Server {
     /// - parameter messages: Return
     /// - returns: Array with Dictionaries. Each dictonary –– one message information.
     static func GetMessages(meetingId mid: String, messages: @escaping (_ result: Array<Dictionary<String, Any>>) -> Void) {
-        let messagesRef = ref.child("meetings").child(mid).child("massages")
+        let messagesRef = ref.child("meetings").child(mid).child("messages")
         var returnArray: Array<Dictionary<String, Any>> = []
         messagesRef.queryOrdered(byChild: "date").observe( .childAdded, with: { (snapshot) in
-            var massageDict = snapshot.value as? [String: Any] ?? [:]
-            self.ReturnUserData(userId: massageDict["uid"] as! String, userDetails: { returnDict in
-                massageDict.merge(dict: returnDict)
-                returnArray.append(massageDict)
+            var messageDict = snapshot.value as? [String: Any] ?? [:]
+            self.ReturnUserData(userId: messageDict["uid"] as! String, userDetails: { returnDict in
+                messageDict.merge(dict: returnDict)
+                returnArray.append(messageDict)
                 messages(returnArray)
             })
         })
@@ -174,7 +174,7 @@ class Server {
         let date = Date()
         let useDay: String = "\(date.day) \(date.month)"
         
-        let messagesRef = ref.child("meetings").child(mid).child("massages").childByAutoId()
+        let messagesRef = ref.child("meetings").child(mid).child("messages").childByAutoId()
         let useDict: Dictionary<String, Any> = ["uid": uid, "text": text, "timestamp": ServerValue.timestamp(), "date": useDay]
         messagesRef.setValue(useDict)
     }
