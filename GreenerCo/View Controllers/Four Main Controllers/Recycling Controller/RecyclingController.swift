@@ -12,6 +12,7 @@ class RecyclingController: UIViewController {
     let topView: RegularTopView = {
         let view = RegularTopView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.imageButton.isHidden = true
         view.pageLabel.text = "Переработка"
         view.pageName = "recycling"
         return view
