@@ -61,6 +61,7 @@ class RecyclingController: UIViewController {
     
     lazy var progressView: ProgressImageView = {
         let view = ProgressImageView()
+        view.image.tintColor = MainConstants.white
         view.progressView.frame = CGRect(x: 0, y: 0, width: 0, height: 200)
         view.loggedLabel.text = "\(UserDefaults.standard.integer(forKey: "loggedData")) гр"
         view.recyclingDelegate = self

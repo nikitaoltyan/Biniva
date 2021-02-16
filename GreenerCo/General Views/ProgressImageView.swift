@@ -21,7 +21,10 @@ class ProgressImageView: UIView {
     let image: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = #imageLiteral(resourceName: "Recycling_bin")
+        if let useImage = UIImage(named: "Recycling_bin") {
+            let tintableImage = useImage.withRenderingMode(.alwaysTemplate)
+            image.image = tintableImage
+        }
         return image
     }()
     
