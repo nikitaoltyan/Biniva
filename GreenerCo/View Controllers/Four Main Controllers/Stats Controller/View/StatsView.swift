@@ -114,10 +114,14 @@ class StatsView: UIView {
             }
             let avg = result.average()
             let intAvg = Int(avg)
-            self.middleLine.numberLabel.text = String(intAvg)
-            self.middleLineBottom?.constant -= avg
-            self.middleLine.layoutIfNeeded()
+            self.SetAvarageLine(average: intAvg)
         })
+    }
+    
+    func SetAvarageLine(average avg: Int) {
+        self.middleLine.numberLabel.text = String(avg)
+        self.middleLineBottom?.constant -= CGFloat(avg)
+        self.middleLine.layoutIfNeeded()
     }
 }
 
