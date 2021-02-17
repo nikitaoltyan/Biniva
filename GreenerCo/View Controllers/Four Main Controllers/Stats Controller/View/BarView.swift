@@ -2,7 +2,7 @@
 //  BarView.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 06.01.2021.
+//  Created by Nikita Oltyan on 06.01.2021.
 //
 
 import UIKit
