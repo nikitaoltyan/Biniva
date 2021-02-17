@@ -57,4 +57,44 @@ class ServerMaterials {
         })
     }
     
+    
+    
+    static func GetHeights(forUserID uid: String?, maxHeight max: CGFloat, result: @escaping (_ result: Array<CGFloat>) -> Void) {
+        guard (uid != nil) else {
+            let emptyArray = [CGFloat](repeating: 0, count: 7)
+            result(emptyArray)
+            return
+        }
+        var resultArray: Array<CGFloat> = []
+        GetSevenDaysLoggedSize(forUserID: uid, result: { arr in
+            guard ( arr.count == 7) else { return }
+            let maxX: Int = arr.max()!
+            let function = MaterialDefaults.CreateFunction(maxX: CGFloat(maxX), maxY: max)
+            for item in arr{
+                let height: CGFloat = function(CGFloat(item))
+                resultArray.append(height)
+            }
+            result(resultArray)
+        })
+    }
+    
+    
+    static func GetSevenDaysLoggedSize(forUserID uid: String?, result: @escaping (_ result: Array<Int>) -> Void) {
+        guard (uid != nil) else {
+            let emptyArray = [Int](repeating: 0, count: 7)
+            result(emptyArray)
+            return
+        }
+        var resultArray: Array<Int> = []
+        let useRef = ref.child("users/\(uid!)/data_logged/")
+        let useDays = Date().sevenDaysArray
+        for date in useDays{
+            useRef.child(date).observeSingleEvent(of: .value, with: { (snapshot) in
+                let loggedDict = snapshot.value as? [String: Any] ?? [:]
+                let logged = loggedDict["logged"] as? Int ?? 0
+                resultArray.append(logged)
+                result(resultArray)
+            })
+        }
+    }
 }

@@ -11,18 +11,17 @@ class BarView: UIView {
     
     let barView: UIView = {
         let view = UIView()
+            .with(bgColor: MainConstants.orange)
+            .with(cornerRadius: 3)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 2
-        view.backgroundColor = MainConstants.orange
         return view
     }()
     
     let label: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = MainConstants.nearBlack
-        label.textAlignment = .center
-        label.font = UIFont(name: "SFPro", size: 12)
+            .with(color: MainConstants.nearBlack)
+            .with(alignment: .center)
+            .with(fontName: "SFPro", size: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -54,7 +53,7 @@ extension BarView{
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
             barView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            barView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            barView.topAnchor.constraint(equalTo: self.topAnchor, constant: -1),
             barView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             barView.widthAnchor.constraint(equalToConstant: 25),
             

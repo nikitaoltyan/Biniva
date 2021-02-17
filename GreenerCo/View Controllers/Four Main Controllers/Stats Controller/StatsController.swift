@@ -34,6 +34,9 @@ class StatsController: UIViewController {
         let width: CGFloat = MainConstants.screenWidth - 60
         let height: CGFloat = 350
         let view = StatsView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+            .with(bgColor: .clear)
+            .with(cornerRadius: 25)
+            .with(borderWidth: 2, color: MainConstants.orange.cgColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

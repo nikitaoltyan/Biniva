@@ -41,4 +41,17 @@ class MaterialDefaults {
         }
     }
     
+    
+    
+    static func CreateFunction(maxX x: CGFloat, maxY y: CGFloat) -> (CGFloat) -> (CGFloat) {
+        let a = y/x
+        let b = y-a*x
+        let greeter = ResultFunction(a: a, b: b)
+        return greeter
+    }
+    
+    
+    static func ResultFunction(a: CGFloat, b: CGFloat)  -> (CGFloat) -> (CGFloat) {
+        return { x in (a*x + b)}
+    }
 }
