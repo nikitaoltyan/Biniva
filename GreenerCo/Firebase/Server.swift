@@ -66,7 +66,7 @@ class Server {
     /// - parameter uid: requested User ID
     /// - parameter userDetails: Function return
     /// - returns: Dictionary with two user data: Username and Image URL.
-    private static func ReturnUserData(userId uid: String, userDetails: @escaping (_ result: [String : Any]) -> Void) {
+    static func ReturnUserData(userId uid: String, userDetails: @escaping (_ result: [String : Any]) -> Void) {
         let userRef = ref.child("users").child(uid)
         userRef.observe(DataEventType.value, with: { (snapshot) in
             let userDict = snapshot.value as? [String : Any] ?? [:]
@@ -104,12 +104,13 @@ class Server {
     }
     
     
-    static func GetMeetingJoinedArray(withMeetingId mid: String, postDetails: @escaping (_ result: Array<String>?) -> Void) {
-//        Working function that returns special array. Can be used for any purposes.
-        let postRef = ref.child("meetings").child(mid).child("joined")
+    /// Returns Array with User ID of joined users.
+    static func GetMeetingJoinedArray(withMeetingId mid: String?, result: @escaping (_ result: Array<String>?) -> Void) {
+        guard (mid != nil) else { return }
+        let postRef = ref.child("meetings").child(mid!).child("joined")
         postRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let meetArray = snapshot.value as? Array<String> ?? []
-            postDetails(meetArray)
+            result(meetArray)
             postRef.removeAllObservers()
         })
     }
@@ -169,11 +170,13 @@ class Server {
     }
     
     
-    
+    /// Function for posting message into meeting.
+    /// - parameter uid: User ID
+    /// - parameter mid: Meeting ID
+    /// - parameter text: Text of the sending massage
     static func SendMessage(user uid: String, meetingId mid: String, massageText text: String) {
         let date = Date()
         let useDay: String = "\(date.day) \(date.month)"
-        
         let messagesRef = ref.child("meetings").child(mid).child("messages").childByAutoId()
         let useDict: Dictionary<String, Any> = ["uid": uid, "text": text, "timestamp": ServerValue.timestamp(), "date": useDay]
         messagesRef.setValue(useDict)
@@ -213,6 +216,8 @@ class Server {
     }
     
     
+    ///Seting user daily norm from server.
+    /// - warning: Call Defults to set data to UserDefaults.
     static func SetUserDailyNormFromServer(forUserID uid: String?) {
         guard (uid != nil) else { return }
         let userRef = ref.child("users").child(uid!)

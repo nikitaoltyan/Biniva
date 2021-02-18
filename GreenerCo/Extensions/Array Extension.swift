@@ -9,6 +9,23 @@ import Foundation
 import UIKit
 
 
+extension Array where Element == String {
+    mutating func randomElements(numberOfElements number: Int) -> Array<String> {
+        guard (number>0) else { return [] }
+        var returnArr: Array<String> = []
+        for _ in 1...number{
+            guard let element = self.randomElement() else { return ["1"] }
+            returnArr.append(element)
+            if let index = self.firstIndex(of: element) {
+                self.remove(at: Int(index))
+            }
+        }
+        return returnArr
+    }
+}
+
+
+
 extension Sequence where Element: AdditiveArithmetic {
     /// Returns the total sum of all elements in the sequence
     func sum() -> Element { reduce(.zero, +) }

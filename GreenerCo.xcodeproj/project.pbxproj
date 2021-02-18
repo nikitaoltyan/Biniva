@@ -22,7 +22,7 @@
 		5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D11C325C6B7F2007C8DBC /* Date Extension.swift */; };
 		5C1D11C925C7259B007C8DBC /* ServerMaterials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D11C825C7259B007C8DBC /* ServerMaterials.swift */; };
 		5C22533525B1638800E73D0A /* BackTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C22533425B1638800E73D0A /* BackTopView.swift */; };
-		5C22533A25B1690F00E73D0A /* ThreeImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C22533925B1690F00E73D0A /* ThreeImagesView.swift */; };
+		5C22533A25B1690F00E73D0A /* WhoJoinedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C22533925B1690F00E73D0A /* WhoJoinedView.swift */; };
 		5C2E36B525D40CC500F92588 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E36B425D40CC500F92588 /* LogInController.swift */; };
 		5C3046DA25C02CA000BAFEEF /* View Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046D925C02CA000BAFEEF /* View Extension.swift */; };
 		5C3046E525C13B8E00BAFEEF /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046E425C13B8E00BAFEEF /* RegistrationController.swift */; };
@@ -121,7 +121,7 @@
 		5C1D11C325C6B7F2007C8DBC /* Date Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date Extension.swift"; sourceTree = "<group>"; };
 		5C1D11C825C7259B007C8DBC /* ServerMaterials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMaterials.swift; sourceTree = "<group>"; };
 		5C22533425B1638800E73D0A /* BackTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTopView.swift; sourceTree = "<group>"; };
-		5C22533925B1690F00E73D0A /* ThreeImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeImagesView.swift; sourceTree = "<group>"; };
+		5C22533925B1690F00E73D0A /* WhoJoinedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoJoinedView.swift; sourceTree = "<group>"; };
 		5C2E36B425D40CC500F92588 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
 		5C3046D925C02CA000BAFEEF /* View Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Extension.swift"; sourceTree = "<group>"; };
 		5C3046DE25C06A3100BAFEEF /* GreenerCo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GreenerCo.entitlements; sourceTree = "<group>"; };
@@ -525,7 +525,7 @@
 		5C454E6B25BAD20300966991 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5C22533925B1690F00E73D0A /* ThreeImagesView.swift */,
+				5C22533925B1690F00E73D0A /* WhoJoinedView.swift */,
 				5C22533425B1638800E73D0A /* BackTopView.swift */,
 			);
 			path = View;
@@ -952,7 +952,7 @@
 				5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */,
 				5CFB623E259B246800F1C8C7 /* AddMapCell.swift in Sources */,
 				5C5D03E925B1A71F0011AB9D /* InfoView.swift in Sources */,
-				5C22533A25B1690F00E73D0A /* ThreeImagesView.swift in Sources */,
+				5C22533A25B1690F00E73D0A /* WhoJoinedView.swift in Sources */,
 				5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */,
 				5C513FD72554845A00C1B851 /* StatsView.swift in Sources */,
 				5CFB6246259B415100F1C8C7 /* TopProgressView.swift in Sources */,

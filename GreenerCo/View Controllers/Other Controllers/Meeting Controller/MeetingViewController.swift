@@ -94,19 +94,11 @@ class MeetingViewController: UIViewController {
         return label
     }()
     
-    let threeImagesView: ThreeImagesView = {
-        let view = ThreeImagesView(frame: CGRect(x: 0, y: 0, width: 60, height: 25))
+    lazy var whoIsJoined: WhoJoinedView = {
+        let view = WhoJoinedView(frame: CGRect(x: 0, y: 0, width: 200, height: 25))
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.ShowJoinedUsers(withMid: postData["mid"] as! String)
         return view
-    }()
-    
-    let whoIsJoined: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = MainConstants.nearBlack
-        label.text = "vostogor +19 others joined"
-        label.font = UIFont.init(name: "SFPro-Medium", size: 16.0)
-        return label
     }()
     
     let whereLabel: UILabel = {
@@ -261,12 +253,10 @@ class MeetingViewController: UIViewController {
     
     
     @objc func ReloadTableHeight() {
-        print("Timer fired!")
         var tableViewHeight: CGFloat {
             discussTable.layoutIfNeeded()
             return discussTable.contentSize.height
         }
-        print("Table view height: \(tableViewHeight)")
         let setHeight = discussTable.frame.minY + tableViewHeight + commentHeightConstraint.constant + 15
         scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: setHeight)
         tableHeightConstraint.constant = tableViewHeight
@@ -288,11 +278,9 @@ class MeetingViewController: UIViewController {
             let lineHeight = UIFont.preferredFont(forTextStyle: .body).lineHeight
             let containerTopBottom = commentField.textContainerInset.top + commentField.textContainerInset.bottom
             commentHeightConstraint.constant = lineHeight*CGFloat(rows)+containerTopBottom
-            print("Comment height constant: \(commentHeightConstraint.constant)")
             commentField.layoutIfNeeded()
 
             let setHeight = commentField.frame.maxY
-            print("Set height: \(setHeight)")
             let scrollTo = setHeight - MainConstants.screenHeight + lineHeight
             scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: setHeight)
             scrollView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: true)
@@ -374,13 +362,11 @@ extension MeetingViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        Add empty state.
-        print("Messages count: \(messagesData.count)")
         return messagesData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = messagesData[indexPath.row]
-        print("Message data: \(data)")
         let cell: MessageCell = ReturnMessageCell(withIndexPath: indexPath, andData: data)
         return cell
     }
@@ -465,7 +451,6 @@ extension MeetingViewController {
         scrollView.addSubview(titleName)
         scrollView.addSubview(timeAndDataLabel)
         scrollView.addSubview(desc)
-        scrollView.addSubview(threeImagesView)
         scrollView.addSubview(whoIsJoined)
         scrollView.addSubview(whereLabel)
         scrollView.addSubview(meetingLocation)
@@ -518,15 +503,12 @@ extension MeetingViewController {
             desc.leftAnchor.constraint(equalTo: back.leftAnchor),
             desc.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
             
-            threeImagesView.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 24),
-            threeImagesView.leftAnchor.constraint(equalTo: back.leftAnchor),
-            threeImagesView.heightAnchor.constraint(equalToConstant: threeImagesView.frame.height),
-            threeImagesView.widthAnchor.constraint(equalToConstant: threeImagesView.frame.width),
+            whoIsJoined.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 24),
+            whoIsJoined.leftAnchor.constraint(equalTo: back.leftAnchor),
+            whoIsJoined.heightAnchor.constraint(equalToConstant: whoIsJoined.frame.height),
+            whoIsJoined.widthAnchor.constraint(equalToConstant: whoIsJoined.frame.width),
             
-            whoIsJoined.centerYAnchor.constraint(equalTo: threeImagesView.centerYAnchor),
-            whoIsJoined.leftAnchor.constraint(equalTo: threeImagesView.rightAnchor, constant: 6),
-            
-            whereLabel.topAnchor.constraint(equalTo: threeImagesView.bottomAnchor, constant: 35),
+            whereLabel.topAnchor.constraint(equalTo: whoIsJoined.bottomAnchor, constant: 35),
             whereLabel.leftAnchor.constraint(equalTo: back.leftAnchor),
             
             meetingLocation.topAnchor.constraint(equalTo: whereLabel.bottomAnchor, constant: 10),
