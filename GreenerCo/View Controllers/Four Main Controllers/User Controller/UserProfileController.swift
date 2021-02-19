@@ -173,7 +173,6 @@ class UserProfileController: UIViewController {
     
     var meetCollectionLeftLayoutConstraint: NSLayoutConstraint?
     var borderSelectedLeftLayoutConstraint: NSLayoutConstraint?
-    var backWidthLayoutConstraint: NSLayoutConstraint?
     var usernameLeftLayoutConstraint: NSLayoutConstraint?
     
     var userId: String?
@@ -185,19 +184,28 @@ class UserProfileController: UIViewController {
         view.backgroundColor = MainConstants.white
         SetSubviews()
         ActivateLayouts()
+        PlaceBackButton(withUserId: UserDefaults.standard.string(forKey: "uid"))
     }
     
     
     
-    func PlaceBackButton(withUserId userId: String){
-//        End fucntion after Firebase connection.
+    func PlaceBackButton(withUserId uid: String?){
+        if (userId == uid) && (uid != nil) {
+            backButton.isHidden = true
+            usernameLeftLayoutConstraint?.constant = 0
+            view.layoutIfNeeded()
+        } else {
+            backButton.isHidden = false
+            usernameLeftLayoutConstraint?.constant = backButton.frame.width + 8
+            view.layoutIfNeeded()
+        }
+        
+        guard (uid == nil) else { return }
         switch userId{
         case self.userId:
-            self.backWidthLayoutConstraint?.constant = 0
             self.usernameLeftLayoutConstraint?.constant = 0
             view.layoutIfNeeded()
         default:
-            self.backWidthLayoutConstraint?.constant = self.backButton.frame.width
             self.usernameLeftLayoutConstraint?.constant = 8
             view.layoutIfNeeded()
         }
@@ -385,7 +393,7 @@ extension UserProfileController {
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
             
-//            backButton width constraint on the bottom of the fucntion.
+            backButton.widthAnchor.constraint(equalToConstant: backButton.frame.width),
             backButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 25),
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
             backButton.heightAnchor.constraint(equalToConstant: backButton.frame.height),
@@ -457,12 +465,10 @@ extension UserProfileController {
             joinedCollection.heightAnchor.constraint(equalToConstant: MainConstants.screenHeight+10),
         ])
         
-        backWidthLayoutConstraint = backButton.widthAnchor.constraint(equalToConstant: backButton.frame.width)
-        usernameLeftLayoutConstraint = username.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: 8)
+        usernameLeftLayoutConstraint = username.leftAnchor.constraint(equalTo: backButton.leftAnchor, constant: 8+backButton.frame.width)
         meetCollectionLeftLayoutConstraint = meetCollection.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0)
         borderSelectedLeftLayoutConstraint = borderSelected.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0)
         
-        backWidthLayoutConstraint?.isActive = true
         usernameLeftLayoutConstraint?.isActive = true
         meetCollectionLeftLayoutConstraint?.isActive = true
         borderSelectedLeftLayoutConstraint?.isActive = true

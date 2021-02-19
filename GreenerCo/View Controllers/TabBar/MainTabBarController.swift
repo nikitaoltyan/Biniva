@@ -35,6 +35,7 @@ class MainTabBarController: UITabBarController {
             tabThree.tabBarItem = tabThreeBarItem
             
             let tabFour = UserProfileController()
+            tabFour.userId = UserDefaults.standard.string(forKey: "uid")
             let tabFourBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
             tabFour.tabBarItem = tabFourBarItem
             
