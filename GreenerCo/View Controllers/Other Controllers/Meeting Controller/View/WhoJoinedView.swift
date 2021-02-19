@@ -52,6 +52,7 @@ class WhoJoinedView: UIView {
         return label
     }()
     
+    var leftLabelConstraint: NSLayoutConstraint?
     
     
     override init(frame: CGRect) {
@@ -78,11 +79,14 @@ class WhoJoinedView: UIView {
             case 1:
                 self.imageTwo.isHidden = true
                 self.imageThree.isHidden = true
+                self.leftLabelConstraint?.constant = 30
             case 2:
                 self.imageThree.isHidden = true
                 self.label.text = "2 участника"
+                self.leftLabelConstraint?.constant = 48
             default:
                 self.label.text = "3+ участника"
+                self.leftLabelConstraint?.constant = 65
             }
             self.GetImagesAndNames(uidArray: result)
         })
@@ -168,9 +172,10 @@ extension WhoJoinedView {
             imageThree.heightAnchor.constraint(equalToConstant: imageThree.frame.height),
             imageThree.widthAnchor.constraint(equalToConstant: imageThree.frame.width),
             
-            label.centerYAnchor.constraint(equalTo: imageOne.centerYAnchor),
-            label.leftAnchor.constraint(equalTo: imageThree.rightAnchor, constant: 6),
+            label.centerYAnchor.constraint(equalTo: imageOne.centerYAnchor)
         ])
+        leftLabelConstraint = label.leftAnchor.constraint(equalTo: imageOne.leftAnchor, constant: 65)
+        leftLabelConstraint?.isActive = true
     }
 }
 
