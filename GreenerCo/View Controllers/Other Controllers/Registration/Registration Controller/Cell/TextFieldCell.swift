@@ -190,7 +190,13 @@ extension TextFieldCell {
     }
     
     func ActivateLayouts(){
-        let mainLabelTop: CGFloat = {if MainConstants.screenHeight>700 { return 95 } else { return 80 }}()
+        let mainLabelTop: CGFloat = {
+            if MainConstants.screenHeight == 736 { return 70 }
+            else if MainConstants.screenHeight > 700 { return 95 }
+            else { return 80 }}()
+        let backTop: CGFloat = {
+            if MainConstants.screenHeight == 736 { return 13 }
+            else { return 20 }}()
         NSLayoutConstraint.activate([
             mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: mainLabelTop),
             mainLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 35),
@@ -215,7 +221,7 @@ extension TextFieldCell {
             nextButton.rightAnchor.constraint(equalTo: textField.rightAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: nextButton.frame.height),
             
-            back.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
+            back.topAnchor.constraint(equalTo: self.topAnchor, constant: backTop),
             back.rightAnchor.constraint(equalTo: mainLabel.leftAnchor, constant: back.frame.width/2),
             back.heightAnchor.constraint(equalToConstant: back.frame.height),
             back.widthAnchor.constraint(equalToConstant: back.frame.width)

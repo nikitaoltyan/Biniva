@@ -64,10 +64,18 @@ class RegistrationController: UIViewController {
     
     
     func ShowAfterregistrationPopUp() {
-        sleep(1)
-        let newVC = PopUpController()
-        newVC.modalPresentationStyle = .overFullScreen
-        self.present(newVC, animated: false, completion: nil)
+//        sleep(1)
+//        let newVC = PopUpController()
+//        newVC.modalPresentationStyle = .overFullScreen
+//        self.present(newVC, animated: false, completion: nil)
+        guard let window = UIApplication.shared.windows.first else { return }
+        
+        let vc = MainTabBarController()
+        window.rootViewController = vc
+        let options: UIView.AnimationOptions = .transitionFlipFromBottom
+        let duration: TimeInterval = 0.3
+        UIView.transition(with: window, duration: duration, options: options, animations: {}, completion:
+        { completed in })
     }
 
 }
@@ -186,7 +194,7 @@ extension RegistrationController: RegistrationDelegate {
     func FinishRegistration() {
         print("Finish registration")
         Server.CreateUser(withData: dataDictonary, andProfileImage: avatarImage!)
-        tabBarController?.selectedIndex = 0
+//        tabBarController?.selectedIndex = 0
         DispatchQueue.main.async { self.ShowAfterregistrationPopUp() }
     }
     

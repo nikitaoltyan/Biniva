@@ -155,7 +155,10 @@ extension EnableLocationCell {
     }
     
     func ActivateLayouts(){
-        let mainLabelTop: CGFloat = {if MainConstants.screenHeight>700 { return 95 } else { return 80 }}()
+        let mainLabelTop: CGFloat = {
+            if MainConstants.screenHeight == 736 { return 70 }
+            else if MainConstants.screenHeight > 700 { return 95 }
+            else { return 80 }}()
         NSLayoutConstraint.activate([
             mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: mainLabelTop),
             mainLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 35),

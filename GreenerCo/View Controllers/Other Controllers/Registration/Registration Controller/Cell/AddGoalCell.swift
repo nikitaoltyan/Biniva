@@ -30,6 +30,8 @@ class AddGoalCell: UICollectionViewCell {
     
     let progressView: ProgressImageView = {
         let view = ProgressImageView()
+        view.dashedLine.isHidden = true
+        view.image.tintColor = MainConstants.white
         view.isUserInteractionEnabled = true
         view.progressView.isUserInteractionEnabled = true
         return view
@@ -164,8 +166,16 @@ extension AddGoalCell {
     }
     
     func ActivateLayouts(){
-        let mainLabelTop: CGFloat = {if MainConstants.screenHeight>700 { return 95 } else { return 80 }}()
-        let heightOfProgressView: CGFloat = {if MainConstants.screenHeight>700 { return 400 } else { return 360 }}()
+        let mainLabelTop: CGFloat = {
+            if MainConstants.screenHeight == 736 { return 55 }
+            else if MainConstants.screenHeight > 700 { return 95 }
+            else { return 80 }}()
+        let progressTop: CGFloat = {
+            if MainConstants.screenHeight == 736 { return 142 }
+            else { return 195 }}()
+        let heightOfProgressView: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 400 }
+            else { return 360 }}()
         NSLayoutConstraint.activate([
             mainLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: mainLabelTop),
             mainLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 35),
@@ -176,7 +186,7 @@ extension AddGoalCell {
             back.heightAnchor.constraint(equalToConstant: back.frame.height),
             back.widthAnchor.constraint(equalToConstant: back.frame.width),
             
-            progressView.topAnchor.constraint(equalTo: self.topAnchor, constant: 195),
+            progressView.topAnchor.constraint(equalTo: self.topAnchor, constant: progressTop),
             progressView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             progressView.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth-160),
             progressView.heightAnchor.constraint(equalToConstant: heightOfProgressView),

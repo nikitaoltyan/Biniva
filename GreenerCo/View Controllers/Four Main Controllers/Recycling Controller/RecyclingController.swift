@@ -81,7 +81,10 @@ class RecyclingController: UIViewController {
     }()
     
     lazy var customAddView: CustomAddView = {
-        let viewHeight: CGFloat = {if MainConstants.screenHeight > 700 {return MainConstants.screenHeight/1.9-40} else {return MainConstants.screenHeight/1.9+40}}()
+        let viewHeight: CGFloat = {
+            if MainConstants.screenHeight == 736 { return MainConstants.screenHeight/1.9 }
+            else if MainConstants.screenHeight > 700 { return MainConstants.screenHeight/1.9-40 }
+            else { return MainConstants.screenHeight/1.9+40 }}()
         let view = CustomAddView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: viewHeight))
             .with(cornerRadius: 20)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -207,7 +210,6 @@ class RecyclingController: UIViewController {
             self.progressView.progressView.backgroundColor = self.progressView.progressView.backgroundColor?.withAlphaComponent(0.2)
         }, completion: { finished in
             print("Animation completed")
-            print("Custom add view top point: \(self.customAddView.frame.minY)")
         })
     }
     
