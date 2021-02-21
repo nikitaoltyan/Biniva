@@ -26,7 +26,7 @@ class StatsController: UIViewController {
         let view = RegularTopView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.imageButton.isHidden = true
-        view.pageLabel.text = "Stats"
+        view.pageLabel.text = "Статистика"
         return view
     }()
 

@@ -56,4 +56,14 @@ extension Date {
         dateFormatter.dateFormat = "d_MMMM_YYYY"
         return dateFormatter.string(from: da!)
     }
+    
+    static func stringWeekdayName(day: Int) -> String {
+        let yearFormatter  = DateFormatter()
+        yearFormatter.dateFormat = "YYYY"
+        let year = Int(yearFormatter.string(from: Date()))
+        let da = Calendar.current.date(from: DateComponents(year: year, month: 1, day: day))
+        let weekdayFormatter  = DateFormatter()
+        weekdayFormatter.dateFormat = "EE"
+        return weekdayFormatter.string(from: da!)
+    }
 }

@@ -79,13 +79,20 @@ class StatsView: UIView {
     var fridayHeight: NSLayoutConstraint?
     var saturdayHeight: NSLayoutConstraint?
     var sundayHeight: NSLayoutConstraint?
-    lazy var allBars: [NSLayoutConstraint?] = [mondayHeight,
-                                               tuesdayHeight,
-                                               wednesdayHeight,
-                                               thursdayHeight,
-                                               fridayHeight,
-                                               saturdayHeight,
-                                               sundayHeight]
+    lazy var allBarsConstants: [NSLayoutConstraint?] = [mondayHeight,
+                                                        tuesdayHeight,
+                                                        wednesdayHeight,
+                                                        thursdayHeight,
+                                                        fridayHeight,
+                                                        saturdayHeight,
+                                                        sundayHeight]
+    lazy var allBars: [BarView] = [monday,
+                                   tuesday,
+                                   wednesday,
+                                   thursday,
+                                   friday,
+                                   saturday,
+                                   sunday]
 
     lazy var maxHeight: CGFloat = self.frame.height
     lazy var oneTenth: CGFloat = self.frame.width/12
@@ -106,22 +113,23 @@ class StatsView: UIView {
     
     func GetAllHeights() {
         let uid: String? = UserDefaults.standard.string(forKey: "uid")
-        ServerMaterials.GetHeights(forUserID: uid, maxHeight: 300, result: { result in
-            guard(self.allBars.count == result.count) else { return }
-            for i in 0...(result.count-1) {
-                self.allBars[i]?.constant += result[i]
+        ServerMaterials.GetHeights(forUserID: uid, maxHeight: 300, result: { (heights, logged, weekdays) in
+            guard(self.allBarsConstants.count == heights.count) else { return }
+            for i in 0...(heights.count-1) {
+                self.allBarsConstants[i]?.constant += heights[i]
+                self.allBars[i].label.text = weekdays[i]
                 self.monday.layoutIfNeeded()
             }
-            let avg = result.average()
-            let intAvg = Int(avg)
-            self.SetAvarageLine(average: intAvg)
+            let avgLogged = logged.average()
+            let avgHeight = heights.average()
+            self.SetAvarageLine(averageLog: Int(avgLogged), averageHeight: Int(avgHeight))
         })
     }
     
     
-    func SetAvarageLine(average avg: Int) {
-        self.middleLine.numberLabel.text = String(avg)
-        self.middleLineBottom?.constant -= CGFloat(avg)
+    func SetAvarageLine(averageLog avgLog: Int, averageHeight avgHeig: Int) {
+        self.middleLine.numberLabel.text = String(avgLog)
+        self.middleLineBottom?.constant -= CGFloat(avgHeig)
         self.middleLine.layoutIfNeeded()
     }
 }
@@ -196,7 +204,7 @@ extension StatsView{
         fridayHeight = friday.heightAnchor.constraint(equalToConstant: friday.frame.height)
         saturdayHeight = saturday.heightAnchor.constraint(equalToConstant: saturday.frame.height)
         sundayHeight = sunday.heightAnchor.constraint(equalToConstant: sunday.frame.height)
-        for i in allBars{
+        for i in allBarsConstants{
             i?.isActive = true
         }
     }

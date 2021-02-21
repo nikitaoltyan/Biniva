@@ -21,7 +21,7 @@ class BarView: UIView {
         let label = UILabel()
             .with(color: MainConstants.nearBlack)
             .with(alignment: .center)
-            .with(fontName: "SFPro", size: 12)
+            .with(fontName: "SFPro", size: 10)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

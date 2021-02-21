@@ -59,10 +59,14 @@ class ServerMaterials {
     
     
     
-    static func GetHeights(forUserID uid: String?, maxHeight max: CGFloat, result: @escaping (_ result: Array<CGFloat>) -> Void) {
+    static func GetHeights(forUserID uid: String?, maxHeight max: CGFloat, result: @escaping (_ heights: Array<CGFloat>,
+                                                                                              _ logged: Array<Int>,
+                                                                                              _ weekdays: Array<String>) -> Void) {
         guard (uid != nil) else {
-            let emptyArray = [CGFloat](repeating: 0, count: 7)
-            result(emptyArray)
+            let heights = [CGFloat](repeating: 0, count: 7)
+            let logged = [Int](repeating: 0, count: 7)
+            let weekdays = [String](repeating: "NaN", count: 7)
+            result(heights, logged, weekdays)
             return
         }
         GetSevenDaysLoggedSize(forUserID: uid, result: { arr in
@@ -70,11 +74,15 @@ class ServerMaterials {
             let maxX: Int = arr.values.max()!
             let function = MaterialDefaults.CreateFunction(maxX: CGFloat(maxX), maxY: max)
             let sortedKeys = Array(arr.keys).sorted(by: <)
-            var resultArr: Array<CGFloat> = []
+            var heights: Array<CGFloat> = []
+            var logged: Array<Int> = []
+            var weekdays: Array<String> = []
             for key in sortedKeys {
                 let height: CGFloat = function(CGFloat(arr[key]!))
-                resultArr.append(height)
-                result(resultArr)
+                heights.append(height)
+                logged.append(arr[key]!)
+                weekdays.append(Date.stringWeekdayName(day: key))
+                result(heights, logged, weekdays)
             }
         })
     }
