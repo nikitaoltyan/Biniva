@@ -32,21 +32,28 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    
     /// Function returns Array with  names of 7 last logged days (chronologically, just dates, may be empty in Firebase).
     /// - warning: Not working for 6 first days of each new year.
-    var sevenDaysArray: Array<String> {
-        var returnArray: Array<String> = []
+    /// - warning: Empty
+    var sevenDaysDict: Dictionary<Int,Int> {
+        var returnDict: Dictionary<Int,Int> = [:]
         let cal = Calendar.current
         let todayDayOfTheYear = cal.ordinality(of: .day, in: .year, for: self)!
         for i in (todayDayOfTheYear-6)...todayDayOfTheYear{
-            let yearFormatter  = DateFormatter()
-            yearFormatter.dateFormat = "YYYY"
-            let year = Int(yearFormatter.string(from: Date()))
-            let da = Calendar.current.date(from: DateComponents(year: year, month: 1, day: i))
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "d_MMMM_YYYY"
-            returnArray.append(dateFormatter.string(from: da!))
+            returnDict[i] = 0
         }
-        return returnArray
+        return returnDict
+    }
+    
+    
+    static func stringDayName(day: Int) -> String {
+        let yearFormatter  = DateFormatter()
+        yearFormatter.dateFormat = "YYYY"
+        let year = Int(yearFormatter.string(from: Date()))
+        let da = Calendar.current.date(from: DateComponents(year: year, month: 1, day: day))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d_MMMM_YYYY"
+        return dateFormatter.string(from: da!)
     }
 }

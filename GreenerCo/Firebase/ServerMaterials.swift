@@ -65,35 +65,38 @@ class ServerMaterials {
             result(emptyArray)
             return
         }
-        var resultArray: Array<CGFloat> = []
         GetSevenDaysLoggedSize(forUserID: uid, result: { arr in
-            guard ( arr.count == 7) else { return }
-            let maxX: Int = arr.max()!
+            guard (arr.count == 7) else { return }
+            let maxX: Int = arr.values.max()!
             let function = MaterialDefaults.CreateFunction(maxX: CGFloat(maxX), maxY: max)
-            for item in arr{
-                let height: CGFloat = function(CGFloat(item))
-                resultArray.append(height)
+            let sortedKeys = Array(arr.keys).sorted(by: <)
+            var resultArr: Array<CGFloat> = []
+            for key in sortedKeys {
+                let height: CGFloat = function(CGFloat(arr[key]!))
+                resultArr.append(height)
+                result(resultArr)
             }
-            result(resultArray)
         })
     }
     
     
-    static func GetSevenDaysLoggedSize(forUserID uid: String?, result: @escaping (_ result: Array<Int>) -> Void) {
+    private static func GetSevenDaysLoggedSize(forUserID uid: String?, result: @escaping (_ result: Dictionary<Int, Int>) -> Void) {
         guard (uid != nil) else {
-            let emptyArray = [Int](repeating: 0, count: 7)
-            result(emptyArray)
+            let emptyDict: Dictionary<Int, Int> = [0:0, 0:0, 0:0, 0:0, 0:0, 0:0, 0:0]
+            result(emptyDict)
             return
         }
-        var resultArray: Array<Int> = []
         let useRef = ref.child("users/\(uid!)/data_logged/")
-        let useDays = Date().sevenDaysArray
-        for date in useDays{
-            useRef.child(date).observeSingleEvent(of: .value, with: { (snapshot) in
+        let useDict = Date().sevenDaysDict
+        var resDict: Dictionary<Int, Int> = [:]
+        let keys = useDict.keys
+        for key in keys {
+            let day = Date.stringDayName(day: key)
+            useRef.child(day).observeSingleEvent(of: .value, with: { (snapshot) in
                 let loggedDict = snapshot.value as? [String: Any] ?? [:]
                 let logged = loggedDict["logged"] as? Int ?? 0
-                resultArray.append(logged)
-                result(resultArray)
+                resDict[key] = logged
+                result(resDict)
             })
         }
     }

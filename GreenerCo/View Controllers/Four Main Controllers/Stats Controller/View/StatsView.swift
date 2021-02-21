@@ -118,6 +118,7 @@ class StatsView: UIView {
         })
     }
     
+    
     func SetAvarageLine(average avg: Int) {
         self.middleLine.numberLabel.text = String(avg)
         self.middleLineBottom?.constant -= CGFloat(avg)
