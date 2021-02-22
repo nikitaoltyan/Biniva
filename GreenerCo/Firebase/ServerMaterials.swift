@@ -80,6 +80,7 @@ class ServerMaterials {
             for key in sortedKeys {
                 let height: CGFloat = function(CGFloat(arr[key]!))
                 heights.append(height)
+                print("Heights: \(heights)")
                 logged.append(arr[key]!)
                 weekdays.append(Date.stringWeekdayName(day: key))
                 result(heights, logged, weekdays)

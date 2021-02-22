@@ -24,9 +24,8 @@ class Server {
                 return
             }
             print("Auth user")
-            UserDefaults.standard.setValue(true, forKey: "hasLaunched")
-            UserDefaults.standard.setValue(authResult?.user.uid, forKey: "uid")
             SetUserDailyNormFromServer(forUserID: authResult?.user.uid)
+            Defaults.SetHasLaunched(launched: true)
             Defaults.SetUserId(userId: authResult?.user.uid)
             success(true)
         }

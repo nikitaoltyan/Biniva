@@ -44,10 +44,14 @@ class MaterialDefaults {
     
     
     static func CreateFunction(maxX x: CGFloat, maxY y: CGFloat) -> (CGFloat) -> (CGFloat) {
+        guard (x != 0) else {
+            let resultFunction = ResultFunction(a: 0, b: 0)
+            return resultFunction
+        }
         let a = y/x
         let b = y-a*x
-        let greeter = ResultFunction(a: a, b: b)
-        return greeter
+        let resultFunction = ResultFunction(a: a, b: b)
+        return resultFunction
     }
     
     

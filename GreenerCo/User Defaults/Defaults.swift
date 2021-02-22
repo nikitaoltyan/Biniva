@@ -27,7 +27,13 @@ class Defaults {
     /// Set user id as default parameter after user registration or log in.
     /// - parameter uid: User ID got from Firebase server.
     static func SetUserId(userId uid: String?) {
-        UserDefaults.standard.setValue(uid ?? "NaN", forKey: "uid")
+        UserDefaults.standard.setValue(uid ?? nil, forKey: "uid")
+    }
+    
+    /// Set hasLaunched as default parameter after user registration or log in.
+    /// - parameter launched: Bool parameter for app. Always true when there's not user firct launch.
+    static func SetHasLaunched(launched: Bool) {
+        UserDefaults.standard.setValue(launched, forKey: "hasLaunched")
     }
     
     

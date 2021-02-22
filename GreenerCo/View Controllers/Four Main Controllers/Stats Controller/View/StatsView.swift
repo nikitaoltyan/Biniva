@@ -115,6 +115,7 @@ class StatsView: UIView {
         let uid: String? = UserDefaults.standard.string(forKey: "uid")
         ServerMaterials.GetHeights(forUserID: uid, maxHeight: 300, result: { (heights, logged, weekdays) in
             guard(self.allBarsConstants.count == heights.count) else { return }
+            print("Got heights: \(heights)")
             for i in 0...(heights.count-1) {
                 self.allBarsConstants[i]?.constant += heights[i]
                 self.allBars[i].label.text = weekdays[i]
