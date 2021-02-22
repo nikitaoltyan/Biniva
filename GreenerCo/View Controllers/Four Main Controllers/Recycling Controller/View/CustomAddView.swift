@@ -115,7 +115,6 @@ class CustomAddView: UIView {
     
     
     
-    
     func PopulateMaterials(materialsObjectToPass useMeterials: NSObject){
         self.materials = useMeterials as! [MaterialsObject]
     }

@@ -153,13 +153,13 @@ class LogInController: UIViewController {
     
     @objc func LogIn() {
         guard (nextButton.isActive) else { return }
-        Vibration.Medium()
         Server.AuthUser(withEmail: emailField.text!.lowercased(), password: passwordField.text!, success: {
             result in
             guard (result) else {
-                self.ShowAfterLogInPopUp()
+                self.ShowErrorPopUp()
                 return
             }
+            Vibration.Light()
             guard let window = UIApplication.shared.windows.first else { return }
             
             let vc = MainTabBarController()
@@ -182,10 +182,12 @@ class LogInController: UIViewController {
         dismiss(animated: false)
     }
     
-    func ShowAfterLogInPopUp() {
-        sleep(1)
+    func ShowErrorPopUp() {
         print("Show pop up")
+        Vibration.Medium()
         let newVC = PopUpController()
+        newVC.achieveLabel.text = "Ошибка входа"
+        newVC.achieveDesc.text = "Возможно, неправильный Email или пароль =( Попробуй заново."
         newVC.modalPresentationStyle = .overFullScreen
         self.present(newVC, animated: false, completion: nil)
     }

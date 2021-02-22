@@ -59,7 +59,10 @@ extension RecyclingController {
             else if MainConstants.screenHeight>700 { return 130 }
             else { return 70 }}()
         let progressViewFromHeight: CGFloat = {if MainConstants.screenHeight>700{return 158}else{return 138}}()
-        let customAddBottom: CGFloat = {if MainConstants.screenHeight>700{return -tabBarHeight-34}else{return -tabBarHeight}}()
+        let customAddBottom: CGFloat = {
+            if MainConstants.screenHeight == 736 { return -tabBarHeight }
+            else if MainConstants.screenHeight>700 { return -tabBarHeight-34 }
+            else { return -tabBarHeight }}()
         let dailyNorm = UserDefaults.standard.integer(forKey: "dailyNorm")
         let lineTop: CGFloat = MaterialDefaults.YForDashedLine(dailyNorm: dailyNorm)
         NSLayoutConstraint.activate([

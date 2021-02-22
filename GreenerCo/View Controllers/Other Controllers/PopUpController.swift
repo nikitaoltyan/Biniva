@@ -37,7 +37,7 @@ class PopUpController: UIViewController {
         let imageScale: CGFloat = 120
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: imageScale, height: imageScale))
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = #imageLiteral(resourceName: "5-02.2-s")
+        image.image = UIImage(named: "1-02.1-s")
         return image
     }()
     
