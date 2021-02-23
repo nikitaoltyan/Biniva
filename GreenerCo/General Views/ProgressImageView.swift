@@ -49,7 +49,8 @@ class ProgressImageView: UIView {
     }()
     
     var loggedData: Int = 0
-    let dailyNorm: Int = UserDefaults.standard.integer(forKey: "dailyNorm")
+//    Daily norm after loggin not ready and app use 0
+    let dailyNorm: Int = Defaults.GetUserDailyNorm(userId: Defaults.GetUserId())
     let heightOfProgressView: CGFloat = {if MainConstants.screenHeight>700{return 400}else{return 360}}()
     var progressHeightAnchor: NSLayoutConstraint?
     var delegate: AddGoalDelegate?
@@ -77,13 +78,11 @@ class ProgressImageView: UIView {
     
     func SetProgressHeight(addedSize add: Int) {
         let totalLogged = loggedData + add
-        print("Before guard. Set height: \(totalLogged)")
         guard (totalLogged < 1500) else {
             SetProgressForFullData(logged: totalLogged)
             return
         }
         let setHeight: CGFloat = MaterialDefaults.LinearFunction(viewSize: self.frame.height, addedSize: add)
-        print("After guard")
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             self.progressHeightAnchor?.constant += setHeight
             self.loggedLabel.textColor = MaterialDefaults.GetTextColor(alreadyLogged: self.loggedData)
@@ -102,7 +101,6 @@ class ProgressImageView: UIView {
     
     
     func SetProgressForFullData(logged: Int) {
-        print("Set Progress for full data")
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             self.progressHeightAnchor?.constant = self.heightOfProgressView
             self.layoutIfNeeded()

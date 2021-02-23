@@ -59,9 +59,7 @@ class ServerMaterials {
     
     
     
-    static func GetHeights(forUserID uid: String?, maxHeight max: CGFloat, result: @escaping (_ heights: Array<CGFloat>,
-                                                                                              _ logged: Array<Int>,
-                                                                                              _ weekdays: Array<String>) -> Void) {
+    static func GetHeights(forUserID uid: String?, maxHeight max: CGFloat, result: @escaping (_ heights: Array<CGFloat>,  _ logged: Array<Int>, _ weekdays: Array<String>) -> Void) {
         guard (uid != nil) else {
             let heights = [CGFloat](repeating: 0, count: 7)
             let logged = [Int](repeating: 0, count: 7)
@@ -80,7 +78,6 @@ class ServerMaterials {
             for key in sortedKeys {
                 let height: CGFloat = function(CGFloat(arr[key]!))
                 heights.append(height)
-                print("Heights: \(heights)")
                 logged.append(arr[key]!)
                 weekdays.append(Date.stringWeekdayName(day: key))
                 result(heights, logged, weekdays)

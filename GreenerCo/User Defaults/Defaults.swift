@@ -30,6 +30,10 @@ class Defaults {
         UserDefaults.standard.setValue(uid ?? nil, forKey: "uid")
     }
     
+    static func GetUserId() -> String? {
+        return UserDefaults.standard.string(forKey: "uid")
+    }
+    
     /// Set hasLaunched as default parameter after user registration or log in.
     /// - parameter launched: Bool parameter for app. Always true when there's not user firct launch.
     static func SetHasLaunched(launched: Bool) {
@@ -42,6 +46,15 @@ class Defaults {
     static func SetUserDailyNorm(userNorm norm: Int) {
         print("Set user Daily Norm")
         userDefault.setValue(norm, forKey: "dailyNorm")
+    }
+    
+    
+    static func GetUserDailyNorm(userId uid: String?) -> Int {
+        guard (uid != nil) else { return 1100 }
+        let userDN: Int = userDefault.integer(forKey: "dailyNorm")
+        print("User DN from defaults: \(userDN)")
+        guard (userDN != 0) else { return 1100 }
+        return userDN
     }
     
     

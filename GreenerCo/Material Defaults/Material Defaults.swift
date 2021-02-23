@@ -22,7 +22,7 @@ class MaterialDefaults {
     
     static func GetTextColor(alreadyLogged logged: Int) -> UIColor {
         switch logged {
-        case 0...120:
+        case 0...180:
             return MainConstants.nearBlack
         default:
             return MainConstants.white

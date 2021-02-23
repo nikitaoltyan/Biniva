@@ -24,10 +24,12 @@ class Server {
                 return
             }
             print("Auth user")
-            SetUserDailyNormFromServer(forUserID: authResult?.user.uid)
-            Defaults.SetHasLaunched(launched: true)
-            Defaults.SetUserId(userId: authResult?.user.uid)
-            success(true)
+            SetUserDailyNormFromServer(forUserID: authResult?.user.uid, success: { result in
+                guard (result) else { return }
+                Defaults.SetUserId(userId: authResult?.user.uid)
+                Defaults.SetHasLaunched(launched: true)
+                success(true)
+            })
         }
     }
     
@@ -41,6 +43,15 @@ class Server {
                     postDetails(returnArray)
                 })
             }
+        })
+    }
+    
+    
+    static func GetUserDailyNotm(userId uid: String, result: @escaping (_ result: Int) -> Void) {
+        let useRef = ref.child("users").child(uid)
+        useRef.observe(.value, with: { (snapshot) in
+            let data = snapshot.value as? [String : Any] ?? [:]
+            result(data["daily_norm"] as! Int)
         })
     }
 
@@ -217,12 +228,13 @@ class Server {
     
     ///Seting user daily norm from server.
     /// - warning: Call Defults to set data to UserDefaults.
-    static func SetUserDailyNormFromServer(forUserID uid: String?) {
+    static func SetUserDailyNormFromServer(forUserID uid: String?, success: @escaping (_ result: Bool) -> Void) {
         guard (uid != nil) else { return }
         let userRef = ref.child("users").child(uid!)
         userRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let userData = snapshot.value as? [String: Any] ?? [:]
             Defaults.SetUserDailyNorm(userNorm: userData["daily_norm"] as! Int)
+            success(true)
         })
     }
 }
