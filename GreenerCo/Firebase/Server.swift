@@ -237,4 +237,21 @@ class Server {
             success(true)
         })
     }
+    
+    
+    
+    static func GetUserMainData(forUserId uid: String?, userData: @escaping (_ result: Dictionary<String, Any>) -> Void) {
+        guard (uid != nil) else { return }
+        var resultDict: Dictionary<String, Any> = [:]
+        let userRef = ref.child("users").child(uid!)
+        userRef.observe(DataEventType.value, with: { (snapshot) in
+            let userDict = snapshot.value as? [String : Any] ?? [:]
+            resultDict["email"] = userDict["email"] as! String
+            self.ReturnUserData(userId: uid!, userDetails: { result in
+                resultDict.merge(dict: result)
+                userData(resultDict)
+            })
+            userRef.removeAllObservers()
+        })
+    }
 }
