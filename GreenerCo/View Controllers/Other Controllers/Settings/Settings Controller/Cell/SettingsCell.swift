@@ -11,6 +11,7 @@ class SettingsCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = MainConstants.cellColor
     }
     
     required init?(coder: NSCoder) {

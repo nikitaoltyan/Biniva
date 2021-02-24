@@ -13,7 +13,7 @@ class SettingsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = MainConstants.headerColor
-        tableView.separatorColor = MainConstants.headerColor
+        tableView.separatorColor = MainConstants.nearWhite
         tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
     }
     
@@ -37,9 +37,9 @@ class SettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            return 100
+            return 150
         default:
-            return 50
+            return 60
         }
     }
 

@@ -215,9 +215,9 @@ class UserProfileController: UIViewController {
     
     @objc func EditOpen(){
         print("Edit open")
-//        let newVC = SettingsController()
+        let newVC = SettingsController()
 //        let newVC = AboutUsController()
-        let newVC = OnboardingController()
+//        let newVC = OnboardingController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()
         transition.duration = 0.3
