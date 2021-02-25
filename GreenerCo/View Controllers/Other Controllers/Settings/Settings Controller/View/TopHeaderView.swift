@@ -46,7 +46,7 @@ class TopHeaderView: UIView {
         backImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Back)))
         NSLayoutConstraint.activate([
             backImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
-            backImage.bottomAnchor.constraint(equalTo: self.topAnchor, constant: 60),
+            backImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
             backImage.heightAnchor.constraint(equalToConstant: backImage.frame.height),
             backImage.widthAnchor.constraint(equalToConstant: backImage.frame.width),
             
