@@ -56,9 +56,10 @@ class Server {
     }
 
     
-    
-    private static func PostDetails(postWithId mid: String, postDetails: @escaping (_ result: [String : Any]) -> Void) {
-//        Function returns dictionary with post details (including username and user avatar link).
+    /// Function returns dictionary with post details (including username and user avatar link).
+    /// - parameter mid: Meeting ID
+    /// - parameter postDetails: Returning Dictionary
+    static func PostDetails(postWithId mid: String, postDetails: @escaping (_ result: [String : Any]) -> Void) {
         let postRef = ref.child("meetings").child(mid)
         postRef.observe(DataEventType.value, with: { (snapshot) in
             var postDict = snapshot.value as? [String : Any] ?? [:]
@@ -251,6 +252,20 @@ class Server {
                 resultDict.merge(dict: result)
                 userData(resultDict)
             })
+            userRef.removeAllObservers()
+        })
+    }
+    
+    
+    /// Function for returning all user data for given uid.
+    /// - parameter uid: User ID
+    /// - parameter userData: Returning Dictionary.
+    static func GetAllUserData(forUserId uid: String?, userData: @escaping (_ result: Dictionary<String, Any>) -> Void) {
+        guard (uid != nil) else { return }
+        let userRef = ref.child("users").child(uid!)
+        userRef.observe(DataEventType.value, with: { (snapshot) in
+            let userDict = snapshot.value as? [String : Any] ?? [:]
+            userData(userDict)
             userRef.removeAllObservers()
         })
     }

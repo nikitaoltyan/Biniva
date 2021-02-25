@@ -160,7 +160,7 @@ class AboutUsController: UIViewController {
         label.textAlignment = .center
         label.textColor = .darkGray
         label.text = "(Тапни)"
-        label.font = UIFont(name: "SFPro", size: 7)
+        label.font = UIFont(name: "SFPro", size: 6)
         return label
     }()
     
@@ -174,6 +174,7 @@ class AboutUsController: UIViewController {
     
     
     @objc func Back(){
+        Vibration.Light()
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = CATransitionType.push

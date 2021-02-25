@@ -11,21 +11,19 @@ class InfoView: UIView {
     
     let numberLabel: UILabel = {
         let label = UILabel()
+            .with(color: MainConstants.nearBlack)
+            .with(fontName: "SFPro-Medium", size: 28.0)
+            .with(alignment: .center)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.textColor = MainConstants.nearBlack
-        label.text = "2"
-        label.font = UIFont.init(name: "SFPro-Medium", size: 28.0)
         return label
     }()
     
     let descLabel: UILabel = {
         let label = UILabel()
+            .with(color: MainConstants.nearBlack)
+            .with(fontName: "SFPro", size: 5)
+            .with(alignment: .center)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.textColor = MainConstants.nearBlack
-        label.text = "посещено"
-        label.font = UIFont.init(name: "SFPro", size: 6.0)
         return label
     }()
 

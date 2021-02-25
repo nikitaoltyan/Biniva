@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 
 class UserProfileController: UIViewController {
     
@@ -14,7 +16,7 @@ class UserProfileController: UIViewController {
         scroll.contentSize = CGSize(width: MainConstants.screenWidth, height: 1500)
         scroll.delegate = self
         scroll.bounces = false
-        scroll.showsVerticalScrollIndicator = true
+        scroll.showsVerticalScrollIndicator = false
         scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
     }()
@@ -30,9 +32,8 @@ class UserProfileController: UIViewController {
     
     let username: UILabel = {
         let label = UILabel()
-        label.textColor = MainConstants.nearBlack
-        label.text = "@nikitaoltyan"
-        label.font = UIFont.init(name: "SFPro-Medium", size: 22.0)
+            .with(color: MainConstants.nearBlack)
+            .with(fontName: "SFPro-Medium", size: 22.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -40,41 +41,41 @@ class UserProfileController: UIViewController {
     let profileImage: UIImageView = {
         let imageScale: CGFloat = 140
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: imageScale, height: imageScale))
+            .with(cornerRadius: imageScale/2)
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = #imageLiteral(resourceName: "justin-kauffman-7_tRMnxWsUg-unsplash")
         image.layer.masksToBounds = true
-        image.layer.cornerRadius = imageScale/2
         return image
     }()
     
-    let meetedLabelsView: InfoView = {
+    let meetLabelsView: InfoView = {
         let scale: CGFloat = 50
-        let view = InfoView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
+        let view = InfoView(frame: CGRect(x: 0, y: 0, width: scale-5, height: scale))
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.descLabel.text = "встречи"
         return view
     }()
     
     let joinedLabelsView: InfoView = {
         let scale: CGFloat = 50
-        let view = InfoView(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
+        let view = InfoView(frame: CGRect(x: 0, y: 0, width: scale-5, height: scale))
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.descLabel.text = "участник"
         return view
     }()
     
     let editView: ButtonView = {
         let view = ButtonView()
+            .with(bgColor: MainConstants.nearWhite)
+            .with(cornerRadius: 7)
+            .with(borderWidth: 1, color: MainConstants.nearWhite.cgColor)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
-        view.backgroundColor = MainConstants.nearWhite
-        view.layer.cornerRadius = 7
         view.clipsToBounds = true
         view.layer.masksToBounds = false
         view.layer.shadowRadius = 4
         view.layer.shadowOpacity = 0.15
         view.layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
         view.layer.shadowColor = UIColor.darkGray.cgColor
-        view.layer.borderWidth = 1
-        view.layer.borderColor = MainConstants.nearWhite.cgColor
         view.label.textColor = MainConstants.nearBlack
         view.label.text = "Изменить"
         view.label.font = UIFont.init(name: "SFPro", size: 20.0)
@@ -83,19 +84,17 @@ class UserProfileController: UIViewController {
     
     let userBigDesc: UILabel = {
         let label = UILabel()
-        label.textColor = MainConstants.nearBlack
-        label.text = "Nikita Oltyan, Moscow"
-        label.font = UIFont.init(name: "SFPro-Medium", size: 21.0)
+            .with(color: MainConstants.nearBlack)
+            .with(fontName: "SFPro-Medium", size: 21)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let userDesc: UILabel = {
         let label = UILabel()
-        label.textColor = MainConstants.nearBlack
-        label.numberOfLines = 0
-        label.text = "Some big custome description. Some big custome description. Some big custome description. Some big custome description. Some big custome description. Some big custome description."
-        label.font = UIFont.init(name: "SFPro", size: 14.0)
+            .with(color: MainConstants.nearBlack)
+            .with(fontName: "SFPro", size: 14)
+            .with(numberOfLines: 0)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontSizeToFitWidth = false
         label.lineBreakMode = .byTruncatingTail
@@ -104,44 +103,44 @@ class UserProfileController: UIViewController {
     
     let meetLabelButton: UILabel = {
         let label = UILabel()
+            .with(color: MainConstants.nearBlack)
+            .with(fontName: "SFPro", size: 20)
+            .with(alignment: .center)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.textColor = MainConstants.nearBlack
-        label.text = "Meetings"
-        label.font = UIFont.init(name: "SFPro", size: 20.0)
+        label.text = "Встречи"
         label.isUserInteractionEnabled = true
         return label
     }()
     
     let joinedLabelButton: UILabel = {
         let label = UILabel()
+            .with(color: MainConstants.nearBlack)
+            .with(fontName: "SFPro", size: 20)
+            .with(alignment: .center)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.textColor = MainConstants.nearBlack
-        label.text = "Joined"
-        label.font = UIFont.init(name: "SFPro", size: 20.0)
+        label.text = "Участник"
         label.isUserInteractionEnabled = true
         return label
     }()
     
     let borderViewHorizontal: UIView = {
         let view = UIView()
+            .with(bgColor: MainConstants.nearWhite)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = MainConstants.nearWhite
         return view
     }()
     
     let borderViewVertical: UIView = {
         let view = UIView()
+            .with(bgColor: MainConstants.nearWhite)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = MainConstants.nearWhite
         return view
     }()
     
     let borderSelected: UIView = {
         let view = UIView()
+            .with(bgColor: MainConstants.nearBlack)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = MainConstants.nearBlack
         return view
     }()
     
@@ -153,8 +152,10 @@ class UserProfileController: UIViewController {
         collection.backgroundColor = MainConstants.white
         collection.delegate = self
         collection.dataSource = self
-        collection.showsVerticalScrollIndicator = true
+        collection.showsVerticalScrollIndicator = false
         collection.tag = 0
+        collection.register(MeetingCell.self, forCellWithReuseIdentifier: "MeetingCell")
+        collection.register(EmptyMeetingsCell.self, forCellWithReuseIdentifier: "EmptyMeetingsCell")
         return collection
     }()
     
@@ -166,8 +167,10 @@ class UserProfileController: UIViewController {
         collection.backgroundColor = MainConstants.white
         collection.delegate = self
         collection.dataSource = self
-        collection.showsVerticalScrollIndicator = true
+        collection.showsVerticalScrollIndicator = false
         collection.tag = 1
+        collection.register(MeetingCell.self, forCellWithReuseIdentifier: "MeetingCell")
+        collection.register(EmptyMeetingsCell.self, forCellWithReuseIdentifier: "EmptyMeetingsCell")
         return collection
     }()
     
@@ -176,15 +179,19 @@ class UserProfileController: UIViewController {
     var usernameLeftLayoutConstraint: NSLayoutConstraint?
     
     var userId: String?
-    
+    var meetArray: Array<String> = []
+    var meetDetails: Array<Dictionary<String, Any>> = []
+    var joinedArray: Array<String> = []
+    var joinedDetails: Array<Dictionary<String, Any>> = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = MainConstants.white
+        UpdateData()
         SetSubviews()
         ActivateLayouts()
-        PlaceBackButton(withUserId: UserDefaults.standard.string(forKey: "uid"))
+        PlaceBackButton(withUserId: Defaults.GetUserId())
     }
     
     
@@ -213,11 +220,44 @@ class UserProfileController: UIViewController {
     }
     
     
+    
+    func UpdateData() {
+        Server.GetAllUserData(forUserId: Defaults.GetUserId(), userData: { data in
+            DispatchQueue.main.async { self.profileImage.downloadImage(from: data["image"] as? String) }
+            self.username.text = "@\(data["username"] as? String ?? "NaN")"
+            self.userBigDesc.text = data["header_desc"] as? String ?? " "
+            self.userDesc.text = data["desc"] as? String ?? " "
+            let meetings = data["meetings"] as? Dictionary<String, Any> ?? [:]
+            self.meetArray = meetings["created_meetings"] as? Array ?? []
+            self.joinedArray = meetings["joined_meetings"] as? Array ?? []
+            self.meetLabelsView.numberLabel.text = "\(self.meetArray.count)"
+            self.joinedLabelsView.numberLabel.text = "\(self.joinedArray.count)"
+            self.CollectionUpdate()
+        })
+    }
+    
+    
+    func CollectionUpdate(){
+        for mid in meetArray{
+            Server.PostDetails(postWithId: mid, postDetails: { data in
+                self.meetDetails.append(data)
+                self.meetCollection.reloadData()
+            })
+        }
+        for mid in joinedArray{
+            Server.PostDetails(postWithId: mid, postDetails: { data in
+                self.joinedDetails.append(data)
+                self.joinedCollection.reloadData()
+            })
+        }
+        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: meetCollection.frame.minY+MainConstants.screenHeight)
+    }
+    
+    
+    
     @objc func EditOpen(){
         print("Edit open")
         let newVC = SettingsController()
-//        let newVC = AboutUsController()
-//        let newVC = OnboardingController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()
         transition.duration = 0.3
@@ -229,21 +269,8 @@ class UserProfileController: UIViewController {
     }
     
     
-//    Test function for PopUpController. Should not be here.
-    func PresentPopUp(){
-        let newVC = PopUpController()
-        newVC.modalPresentationStyle = .overFullScreen
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = CATransitionType.fade
-        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
-        view.window!.layer.add(transition, forKey: kCATransition)
-        present(newVC, animated: false, completion: nil)
-    }
-    
-    
     @objc func MeetOpen(){
-        print("Meet open")
+        Vibration.Light()
         UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
             self.meetCollection.center.x += MainConstants.screenWidth
             self.joinedCollection.center.x += MainConstants.screenWidth
@@ -263,7 +290,7 @@ class UserProfileController: UIViewController {
     }
     
     @objc func JoinedOpen(){
-        print("Joined open")
+        Vibration.Light()
         UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
             self.meetCollection.center.x -= MainConstants.screenWidth
             self.joinedCollection.center.x -= MainConstants.screenWidth
@@ -302,29 +329,142 @@ extension UserProfileController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 0{
-            return 5
+            if meetDetails.count < 10 {
+                return meetDetails.count + 1
+            } else {
+                return meetDetails.count
+            }
         } else {
-            return 4
+            if joinedDetails.count < 10 {
+                return joinedDetails.count + 1
+            } else {
+                return joinedDetails.count
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = MainConstants.screenWidth
-        let size: CGSize = CGSize(width: width, height: 270)
-        return size
+        if collectionView.tag == 0{
+            if meetDetails.count < 10 {
+                switch indexPath.row {
+                case meetDetails.count:
+                    let size: CGSize = CGSize(width: width, height: 650)
+                    return size
+                default:
+                    let size: CGSize = CGSize(width: width, height: 320)
+                    return size
+                }
+            } else {
+                let size: CGSize = CGSize(width: width, height: 320)
+                return size
+            }
+        } else {
+            if joinedDetails.count < 10 {
+                switch indexPath.row {
+                case joinedDetails.count:
+                    let size: CGSize = CGSize(width: width, height: 650)
+                    return size
+                default:
+                    let size: CGSize = CGSize(width: width, height: 320)
+                    return size
+                }
+            } else {
+                let size: CGSize = CGSize(width: width, height: 320)
+                return size
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView.tag == 0{
-            let cell = meetCollection.dequeueReusableCell(withReuseIdentifier: "MeetingCell", for: indexPath) as! MeetingCell
-            cell.checkView.isHidden = true
-            return cell
-        } else  {
-            let cell = meetCollection.dequeueReusableCell(withReuseIdentifier: "MeetingCell", for: indexPath) as! MeetingCell
-            return cell
+            if meetDetails.count < 10 {
+                switch indexPath.row {
+                case meetDetails.count:
+                    let cell = ReturnEmptyCell(forCollection: meetCollection, indexPath: indexPath)
+                    return cell
+                default:
+                    let cell = ReturnMeetingCell(forCollection: meetCollection, indexPath: indexPath, data: meetDetails[indexPath.row], checkIsHidden: true)
+                    return cell
+                }
+            } else {
+                let cell = ReturnMeetingCell(forCollection: meetCollection, indexPath: indexPath, data: meetDetails[indexPath.row], checkIsHidden: true)
+                return cell
+            }
+        } else {
+            if joinedDetails.count < 10 {
+                switch indexPath.row {
+                case joinedDetails.count:
+                    let cell = ReturnEmptyCell(forCollection: joinedCollection, indexPath: indexPath)
+                    return cell
+                default:
+                    let cell = ReturnMeetingCell(forCollection: joinedCollection, indexPath: indexPath, data: joinedDetails[indexPath.row], checkIsHidden: false)
+                    return cell
+                }
+            } else {
+                let cell = ReturnMeetingCell(forCollection: joinedCollection, indexPath: indexPath, data: joinedDetails[indexPath.row], checkIsHidden: false)
+                return cell
+            }
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.tag == 0{
+            guard (meetDetails.count >= 10 || (indexPath.row != meetDetails.count && meetDetails.count < 10)) else { return }
+            Vibration.Soft()
+            let newVC = MeetingViewController()
+            newVC.postData = meetDetails[indexPath.row]
+            newVC.modalPresentationStyle = .overFullScreen
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromRight
+            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+            view.window!.layer.add(transition, forKey: kCATransition)
+            self.present(newVC, animated: false, completion: nil)
+        } else {
+            guard (joinedDetails.count >= 10 || (indexPath.row != joinedDetails.count && joinedDetails.count < 10)) else { return }
+            Vibration.Soft()
+            let newVC = MeetingViewController()
+            newVC.postData = joinedDetails[indexPath.row]
+            newVC.modalPresentationStyle = .overFullScreen
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromRight
+            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+            view.window!.layer.add(transition, forKey: kCATransition)
+            self.present(newVC, animated: false, completion: nil)
+        }
+    }
+    
+    
+    func ReturnMeetingCell(forCollection collection: UICollectionView, indexPath: IndexPath, data: Dictionary<String, Any>, checkIsHidden: Bool) -> MeetingCell{
+        let cell = collection.dequeueReusableCell(withReuseIdentifier: "MeetingCell", for: indexPath) as! MeetingCell
+        cell.profileName.text = data["username"] as? String
+        cell.profileImage.downloadImage(from: data["image"] as? String)
+        cell.street.text = data["street_name"] as? String
+        cell.time.text = "\(data["date"] as! String) \(data["time"] as! String)"
+        cell.desc.text = data["desc"] as? String
+        cell.checkView.isHidden = checkIsHidden
+        
+        let coordinateArray = data["coordinates"] as? Array<CGFloat>
+        let title = data["header"] as? String
+        let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(coordinateArray?[0] ?? 0), longitude: CLLocationDegrees(coordinateArray?[1] ?? 0))
+        let label = Capital(title: title ?? "Title wasn't set", coordinate: coordinate, info: "")
+        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1200, longitudinalMeters: 1200)
+        cell.meetingLocation.addAnnotation(label)
+        cell.meetingLocation.setRegion(viewRegion, animated: false)
+        cell.checkView.isHidden = true
+        return cell
+    }
+    
+    func ReturnEmptyCell(forCollection collection: UICollectionView, indexPath: IndexPath) -> EmptyMeetingsCell{
+        let cell = collection.dequeueReusableCell(withReuseIdentifier: "EmptyMeetingsCell", for: indexPath) as! EmptyMeetingsCell
+        cell.delegateMeeting = self
+        cell.isUserInteractionEnabled = true
+        return cell
+    }
 }
 
 
@@ -351,17 +491,36 @@ extension UserProfileController: UIScrollViewDelegate {
 
 
 
+
+extension UserProfileController: AddMeetingDelegate {
+    
+    func addMeeting(){
+        print("Add meeting")
+        Vibration.Light()
+        let newVC = AddMeetingController()
+        newVC.modalPresentationStyle = .overFullScreen
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        self.present(newVC, animated: false, completion: nil)
+    }
+    
+}
+
+
+
+
 extension UserProfileController {
     
     func SetSubviews(){
-        meetCollection.register(MeetingCell.self, forCellWithReuseIdentifier: "MeetingCell")
-        joinedCollection.register(MeetingCell.self, forCellWithReuseIdentifier: "MeetingCell")
-        
         view.addSubview(scrollView)
         scrollView.addSubview(backButton)
         scrollView.addSubview(username)
         scrollView.addSubview(profileImage)
-        scrollView.addSubview(meetedLabelsView)
+        scrollView.addSubview(meetLabelsView)
         scrollView.addSubview(joinedLabelsView)
         scrollView.addSubview(userBigDesc)
         scrollView.addSubview(editView)
@@ -385,7 +544,8 @@ extension UserProfileController {
     }
     
     func ActivateLayouts(){
-        let leftLabelCont: CGFloat = {if MainConstants.screenHeight>700{return 70}else{return 45}}()
+        let leftMeetConst: CGFloat = {if MainConstants.screenHeight>700{return 40}else{return 40}}()
+        let leftJoinedConst: CGFloat = {if MainConstants.screenHeight>700{return 50}else{return 30}}()
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -406,13 +566,13 @@ extension UserProfileController {
             profileImage.heightAnchor.constraint(equalToConstant: profileImage.frame.height),
             profileImage.widthAnchor.constraint(equalToConstant: profileImage.frame.width),
             
-            meetedLabelsView.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor, constant: -20),
-            meetedLabelsView.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 40),
-            meetedLabelsView.heightAnchor.constraint(equalToConstant: meetedLabelsView.frame.height),
-            meetedLabelsView.widthAnchor.constraint(equalToConstant: meetedLabelsView.frame.width),
+            meetLabelsView.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor, constant: -20),
+            meetLabelsView.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: leftMeetConst),
+            meetLabelsView.heightAnchor.constraint(equalToConstant: meetLabelsView.frame.height),
+            meetLabelsView.widthAnchor.constraint(equalToConstant: meetLabelsView.frame.width),
             
-            joinedLabelsView.centerYAnchor.constraint(equalTo: meetedLabelsView.centerYAnchor),
-            joinedLabelsView.leftAnchor.constraint(equalTo: meetedLabelsView.rightAnchor, constant: leftLabelCont),
+            joinedLabelsView.centerYAnchor.constraint(equalTo: meetLabelsView.centerYAnchor),
+            joinedLabelsView.leftAnchor.constraint(equalTo: meetLabelsView.rightAnchor, constant: leftJoinedConst),
             joinedLabelsView.heightAnchor.constraint(equalToConstant: joinedLabelsView.frame.height),
             joinedLabelsView.widthAnchor.constraint(equalToConstant: joinedLabelsView.frame.width),
             
@@ -457,12 +617,12 @@ extension UserProfileController {
 //            meetCollection left layout constraint on the bottom of the fucntion.
             meetCollection.topAnchor.constraint(equalTo: borderViewHorizontal.bottomAnchor),
             meetCollection.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth),
-            meetCollection.heightAnchor.constraint(equalToConstant: MainConstants.screenHeight+10),
+            meetCollection.heightAnchor.constraint(equalToConstant: MainConstants.screenHeight),
             
             joinedCollection.topAnchor.constraint(equalTo: meetCollection.topAnchor),
             joinedCollection.leftAnchor.constraint(equalTo: meetCollection.rightAnchor),
             joinedCollection.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth),
-            joinedCollection.heightAnchor.constraint(equalToConstant: MainConstants.screenHeight+10),
+            joinedCollection.heightAnchor.constraint(equalToConstant: MainConstants.screenHeight),
         ])
         
         usernameLeftLayoutConstraint = username.leftAnchor.constraint(equalTo: backButton.leftAnchor, constant: 8+backButton.frame.width)

@@ -41,7 +41,7 @@ class SettingsController: UITableViewController {
             return view
         case 3:
             let view = OtherHeaderView()
-            view.label.text = "О нас"
+            view.label.text = "О Greener"
             return view
         default:
             let view = OtherHeaderView()

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 import CoreLocation
 import MapKit
 
@@ -147,8 +146,8 @@ extension MeetingsController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row != 0{
+            guard (postDetails.count >= 10 || (indexPath.row != postDetails.count && postDetails.count < 10)) else { return }
             Vibration.Soft()
-            
             let newVC = MeetingViewController()
             newVC.postData = postDetails[indexPath.row - 1]
             newVC.modalPresentationStyle = .overFullScreen
