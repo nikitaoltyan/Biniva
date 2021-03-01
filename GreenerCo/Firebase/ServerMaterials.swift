@@ -98,8 +98,9 @@ class ServerMaterials {
         let keys = useDict.keys
         for key in keys {
             let day = Date.stringDayName(day: key)
-            useRef.child(day).observeSingleEvent(of: .value, with: { (snapshot) in
+            useRef.child(day).observe(.value, with: { (snapshot) in
                 let loggedDict = snapshot.value as? [String: Any] ?? [:]
+                print(loggedDict)
                 let logged = loggedDict["logged"] as? Int ?? 0
                 resDict[key] = logged
                 result(resDict)

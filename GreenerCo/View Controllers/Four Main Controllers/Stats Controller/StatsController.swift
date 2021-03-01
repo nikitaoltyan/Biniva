@@ -58,6 +58,8 @@ class StatsController: UIViewController {
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = MainConstants.white
+        table.register(StatsCell.self, forCellReuseIdentifier: "StatsCell")
+        table.register(EmptyStatsCell.self, forCellReuseIdentifier: "EmptyStatsCell")
         return table
     }()
     
@@ -121,7 +123,7 @@ extension StatsController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let numberOfLogged = loggedData[section]["logged_materials"] as? Dictionary<String,Any> ?? [:]
-        guard (numberOfLogged.count != 0) else { return 1}
+        guard (numberOfLogged.count != 0) else { return 1 }
         return numberOfLogged.count
     }
     
@@ -130,19 +132,30 @@ extension StatsController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let numberOfLogged = loggedData[indexPath.section]["logged_materials"] as? Dictionary<String,Any> ?? [:]
+        guard (numberOfLogged.count != 0) else {
+            let cell = ReturnEmptyCell(forIndexPath: indexPath)
+            return cell
+        }
         let cell = ReturnStatsCell(forData: loggedData[indexPath.section], andIndexPath: indexPath)
         return cell
     }
     
     
     
-    func ReturnStatsCell(forData data: Dictionary<String,Any>, andIndexPath indexPath: IndexPath) -> StatsCell{
+    func ReturnStatsCell(forData data: Dictionary<String,Any>, andIndexPath indexPath: IndexPath) -> StatsCell {
         let cell = statsTable.dequeueReusableCell(withIdentifier: "StatsCell", for: indexPath) as! StatsCell
         let logged = data["logged_materials"] as? Dictionary<String,Any> ?? [:]
         let keys = Array(logged.keys)
         let useKey = String(keys[indexPath.row])
         let useData = logged[useKey] as? Dictionary<String,Any> ?? [:]
         cell.SetCell(withData: useData)
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func ReturnEmptyCell(forIndexPath indexPath: IndexPath) -> EmptyStatsCell {
+        let cell = statsTable.dequeueReusableCell(withIdentifier: "EmptyStatsCell", for: indexPath) as! EmptyStatsCell
         cell.selectionStyle = .none
         return cell
     }
@@ -187,8 +200,6 @@ extension StatsController {
         scrollView.addSubview(statsView)
         scrollView.addSubview(loggedLabel)
         scrollView.addSubview(statsTable)
-        
-        statsTable.register(StatsCell.self, forCellReuseIdentifier: "StatsCell")
     }
     
     func ActivateLayouts(){

@@ -111,9 +111,9 @@ class StatsView: UIView {
     }
 
     
+    
     func GetAllHeights() {
-        let uid: String? = UserDefaults.standard.string(forKey: "uid")
-        ServerMaterials.GetHeights(forUserID: uid, maxHeight: 300, result: { (heights, logged, weekdays) in
+        ServerMaterials.GetHeights(forUserID: Defaults.GetUserId(), maxHeight: 300, result: { (heights, logged, weekdays) in
             guard(self.allBarsConstants.count == heights.count) else { return }
             print("Got heights: \(heights)")
             for i in 0...(heights.count-1) {
