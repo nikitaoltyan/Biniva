@@ -63,10 +63,11 @@ class Defaults {
     /// - returns: Int result. How much gramms was logged today.
     static func CheckLastLogged(alreadyLogged: @escaping (_ result: Int) -> Void){
         let lastLoggedDate = userDefault.string(forKey: "lastLogged") ?? "No data"
-        let uid = userDefault.string(forKey: "uid") ?? "NaN"
+        let uid = GetUserId() ?? "NaN"
         let todayDate: String = "\(date.day)_\(date.month)_\(date.year)"
+        let day: String = "\(date.day) \(date.month)"
         if lastLoggedDate != todayDate {
-            ServerMaterials.SetZeroDayData(forUserID: uid, andDate: todayDate)
+            ServerMaterials.SetZeroDayData(forUserID: uid, andDate: todayDate, textDate: day)
             userDefault.setValue(todayDate, forKey: "lastLogged")
             userDefault.setValue(0, forKey: "loggedData")
             alreadyLogged(0)

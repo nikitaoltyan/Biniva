@@ -256,7 +256,6 @@ class Server {
         })
     }
     
-    
     /// Function for returning all user data for given uid.
     /// - parameter uid: User ID
     /// - parameter userData: Returning Dictionary.
@@ -267,6 +266,16 @@ class Server {
             let userDict = snapshot.value as? [String : Any] ?? [:]
             userData(userDict)
             userRef.removeAllObservers()
+        })
+    }
+    
+    
+    static func GetLastSevenDaysLoggedData(forUserId uid: String?, data: @escaping (_ result: Dictionary<String, Any>) -> Void){
+        guard (uid != nil) else { return }
+        let userRef = ref.child("users").child(uid!).child("data_logged").queryOrdered(byChild: "timestamp").queryLimited(toLast: 7)
+        userRef.observe(.childAdded, with: { (snapshot) in
+            let dataDict = snapshot.value as? [String : Any] ?? [:]
+            data(dataDict)
         })
     }
 }

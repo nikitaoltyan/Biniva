@@ -34,8 +34,8 @@ class ServerMaterials {
     }
     
     
-    static func SetZeroDayData(forUserID uid: String, andDate date: String) {
-        let addDict: Dictionary<String,Any> = ["logged": 0, "timestamp": ServerValue.timestamp()]
+    static func SetZeroDayData(forUserID uid: String, andDate date: String, textDate: String) {
+        let addDict: Dictionary<String,Any> = ["logged": 0, "timestamp": ServerValue.timestamp(), "day": textDate]
         ref.child("users/\(uid)/data_logged/\(date)").setValue(addDict)
     }
     

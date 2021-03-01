@@ -65,10 +65,18 @@ class StatsController: UIViewController {
     let scrollBorder = 48 as CGFloat
     let screenHeight = UIScreen.main.bounds.height
     var scrollChangePoint: CGFloat!
+    var loggedData: Array<Dictionary<String,Any>> = []
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        Server.GetLastSevenDaysLoggedData(forUserId: Defaults.GetUserId(), data: { result in
+            self.loggedData.append(result)
+            guard (self.loggedData.count == 7) else { return }
+            self.loggedData.reverse()
+            self.statsTable.reloadData()
+        })
         view.backgroundColor = MainConstants.white
         SetSubviews()
         ActivateLayouts()
@@ -96,20 +104,52 @@ class StatsController: UIViewController {
 
 extension StatsController: UITableViewDelegate, UITableViewDataSource{
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return loggedData.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let useDay = loggedData[section]["day"] as? String ?? "Day"
+        let view = OtherHeaderView()
+        view.label.text = useDay
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        let numberOfLogged = loggedData[section]["logged_materials"] as? Dictionary<String,Any> ?? [:]
+        guard (numberOfLogged.count != 0) else { return 1}
+        return numberOfLogged.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = statsTable.dequeueReusableCell(withIdentifier: "StatsCell", for: indexPath) as! StatsCell
+        let cell = ReturnStatsCell(forData: loggedData[indexPath.section], andIndexPath: indexPath)
         return cell
     }
     
+    
+    
+    func ReturnStatsCell(forData data: Dictionary<String,Any>, andIndexPath indexPath: IndexPath) -> StatsCell{
+        let cell = statsTable.dequeueReusableCell(withIdentifier: "StatsCell", for: indexPath) as! StatsCell
+        let logged = data["logged_materials"] as? Dictionary<String,Any> ?? [:]
+        let keys = Array(logged.keys)
+        let useKey = String(keys[indexPath.row])
+        let useData = logged[useKey] as? Dictionary<String,Any> ?? [:]
+        cell.SetCell(withData: useData)
+        cell.selectionStyle = .none
+        return cell
+    }
 }
+
+
+
 
 
 
