@@ -428,7 +428,7 @@
 				5C454E5E25BAD11500966991 /* Add New Meeting Controller */,
 				5C454E6E25BAD38100966991 /* Achieve Controller */,
 				5C454E6125BAD15500966991 /* Settings */,
-				5CFB6254259C8B0900F1C8C7 /* PopUpController.swift */,
+				5CB2D1DB25EEA105003AFA37 /* Pop Ups */,
 			);
 			path = "Other Controllers";
 			sourceTree = "<group>";
@@ -656,6 +656,14 @@
 				5C44873E258A5AF200474BFF /* CategoryNameCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		5CB2D1DB25EEA105003AFA37 /* Pop Ups */ = {
+			isa = PBXGroup;
+			children = (
+				5CFB6254259C8B0900F1C8C7 /* PopUpController.swift */,
+			);
+			path = "Pop Ups";
 			sourceTree = "<group>";
 		};
 		5CC26AC125CD22B4000501AD /* TabBar */ = {
