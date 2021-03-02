@@ -68,6 +68,7 @@ class StatsController: UIViewController {
     let screenHeight = UIScreen.main.bounds.height
     var scrollChangePoint: CGFloat!
     var loggedData: Array<Dictionary<String,Any>> = []
+    var indayKeys: Array<[String]> = [[],[],[],[],[],[],[]]
     
     
     
@@ -78,15 +79,15 @@ class StatsController: UIViewController {
             guard (self.loggedData.count == 7) else { return }
             self.loggedData.reverse()
             self.statsTable.reloadData()
+            self.UpdateScrollHeight()
         })
         view.backgroundColor = MainConstants.white
         SetSubviews()
         ActivateLayouts()
-        _ = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
     }
 
     
-    @objc func fireTimer() {
+    func UpdateScrollHeight() {
         print("Timer fired!")
         var tableViewHeight: CGFloat {
             statsTable.layoutIfNeeded()
@@ -128,7 +129,7 @@ extension StatsController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 85
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -137,19 +138,50 @@ extension StatsController: UITableViewDelegate, UITableViewDataSource{
             let cell = ReturnEmptyCell(forIndexPath: indexPath)
             return cell
         }
-        let cell = ReturnStatsCell(forData: loggedData[indexPath.section], andIndexPath: indexPath)
+        let cell = ReturnStatsCell(forData: loggedData[indexPath.section],
+                                   section: indexPath.section,
+                                   indexPath: indexPath,
+                                   andKeys: indayKeys[indexPath.section])
         return cell
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, handler) in
+            Vibration.Heavy()
+            let id = self.indayKeys[indexPath.section][indexPath.row] as String
+            self.indayKeys[indexPath.section].remove(at: indexPath.row)
+            if var data = self.loggedData[indexPath.section]["logged_materials"] as? Dictionary<String,Any>{
+                data.removeValue(forKey: id)
+                self.loggedData[indexPath.section]["logged_materials"] = data
+            }
+            self.statsTable.deleteRows(at: [indexPath], with: .automatic)
+        }
+        deleteAction.backgroundColor = MainConstants.pink
+        let editAction = UIContextualAction(style: .normal, title: "Изменить") { (action, view, handler) in
+            print("Edit Action Tapped")
+        }
+        editAction.backgroundColor = MainConstants.orange
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        configuration.performsFirstActionWithFullSwipe = true
+        return configuration
+    }
     
     
-    func ReturnStatsCell(forData data: Dictionary<String,Any>, andIndexPath indexPath: IndexPath) -> StatsCell {
+    func ReturnStatsCell(forData data: Dictionary<String,Any>, section: Int, indexPath: IndexPath, andKeys keys: [String]) -> StatsCell {
         let cell = statsTable.dequeueReusableCell(withIdentifier: "StatsCell", for: indexPath) as! StatsCell
         let logged = data["logged_materials"] as? Dictionary<String,Any> ?? [:]
-        let keys = Array(logged.keys)
-        let useKey = String(keys[indexPath.row])
+        var useKeys: Array<String> = []
+        if keys.count == 0 {
+            useKeys = [String](logged.keys)
+            indayKeys[section] = useKeys
+        } else {
+            useKeys = keys
+        }
+        let useKey = useKeys[indexPath.row]
         let useData = logged[useKey] as? Dictionary<String,Any> ?? [:]
-        cell.SetCell(withData: useData)
+        DispatchQueue.main.async {
+            cell.SetCell(withData: useData)
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -157,6 +189,7 @@ extension StatsController: UITableViewDelegate, UITableViewDataSource{
     func ReturnEmptyCell(forIndexPath indexPath: IndexPath) -> EmptyStatsCell {
         let cell = statsTable.dequeueReusableCell(withIdentifier: "EmptyStatsCell", for: indexPath) as! EmptyStatsCell
         cell.selectionStyle = .none
+        cell.isUserInteractionEnabled = false
         return cell
     }
 }

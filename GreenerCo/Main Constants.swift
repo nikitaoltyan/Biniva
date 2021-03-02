@@ -82,6 +82,12 @@ class Vibration {
         let medium = UIImpactFeedbackGenerator(style: .medium)
         medium.impactOccurred()
     }
+    
+    
+    static func Heavy() -> Void{
+        let heavy = UIImpactFeedbackGenerator(style: .heavy)
+        heavy.impactOccurred()
+    }
 }
 
 // Access Token Github: 26fd87827e28333abd795628645a73b9ea2fd0f5
