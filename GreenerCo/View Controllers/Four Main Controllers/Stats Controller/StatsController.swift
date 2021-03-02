@@ -145,6 +145,7 @@ extension StatsController: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, handler) in
             Vibration.Heavy()
@@ -154,9 +155,11 @@ extension StatsController: UITableViewDelegate, UITableViewDataSource{
                 data.removeValue(forKey: id)
                 self.loggedData[indexPath.section]["logged_materials"] = data
             }
+            let useDay = self.loggedData[indexPath.section]["day"] as? String
+            ServerMaterials.DeleteLoggedData(forUserId: Defaults.GetUserId(), day: useDay, andLoggedId: id)
             self.statsTable.deleteRows(at: [indexPath], with: .automatic)
         }
-        deleteAction.backgroundColor = MainConstants.pink
+        deleteAction.backgroundColor = .red
         let editAction = UIContextualAction(style: .normal, title: "Изменить") { (action, view, handler) in
             print("Edit Action Tapped")
         }

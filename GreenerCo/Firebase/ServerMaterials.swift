@@ -98,13 +98,22 @@ class ServerMaterials {
         let keys = useDict.keys
         for key in keys {
             let day = Date.stringDayName(day: key)
-            useRef.child(day).observe(.value, with: { (snapshot) in
+            useRef.child(day).observeSingleEvent(of: .value, with: { (snapshot) in
                 let loggedDict = snapshot.value as? [String: Any] ?? [:]
-                print(loggedDict)
                 let logged = loggedDict["logged"] as? Int ?? 0
                 resDict[key] = logged
                 result(resDict)
             })
         }
+    }
+    
+    
+    /// - warning: Function works only for 2021 year.
+    static func DeleteLoggedData(forUserId uid: String?, day: String?, andLoggedId lid: String){
+        guard (uid != nil && day != nil) else { return }
+        let dayArr = day!.split(separator: " ")
+        guard (dayArr.count == 2) else { return }
+        let date: String = "\(dayArr[0])_\(dayArr[1])_\(Date().year)"
+        ref.child("users/\(uid!)/data_logged/\(date)/logged_materials/\(lid)").removeValue()
     }
 }
