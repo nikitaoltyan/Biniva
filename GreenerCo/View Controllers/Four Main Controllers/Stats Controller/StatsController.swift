@@ -63,6 +63,13 @@ class StatsController: UIViewController {
         return table
     }()
     
+    let editLoggedView: EditLoggedView = {
+        let view = EditLoggedView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth-30, height: 300))
+            .with(cornerRadius: 15)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     
     let scrollBorder = 48 as CGFloat
     let screenHeight = UIScreen.main.bounds.height
@@ -162,6 +169,8 @@ extension StatsController: UITableViewDelegate, UITableViewDataSource{
         deleteAction.backgroundColor = .red
         let editAction = UIContextualAction(style: .normal, title: "Изменить") { (action, view, handler) in
             print("Edit Action Tapped")
+            self.editLoggedView.isHidden = false
+            
         }
         editAction.backgroundColor = MainConstants.orange
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
@@ -236,6 +245,9 @@ extension StatsController {
         scrollView.addSubview(statsView)
         scrollView.addSubview(loggedLabel)
         scrollView.addSubview(statsTable)
+        view.addSubview(editLoggedView)
+        
+        editLoggedView.isHidden = true
     }
     
     func ActivateLayouts(){
@@ -261,7 +273,12 @@ extension StatsController {
 //              statsTable height constraint in the bottom of the function.
             statsTable.topAnchor.constraint(equalTo: loggedLabel.bottomAnchor, constant: 10),
             statsTable.leftAnchor.constraint(equalTo: view.leftAnchor),
-            statsTable.rightAnchor.constraint(equalTo: view.rightAnchor)
+            statsTable.rightAnchor.constraint(equalTo: view.rightAnchor),
+            
+            editLoggedView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
+            editLoggedView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            editLoggedView.widthAnchor.constraint(equalToConstant: editLoggedView.frame.width),
+            editLoggedView.heightAnchor.constraint(equalToConstant: editLoggedView.frame.height),
         ])
         
         tableHeightConstraint = statsTable.heightAnchor.constraint(equalToConstant: 250)

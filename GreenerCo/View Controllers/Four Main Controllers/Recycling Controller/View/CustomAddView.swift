@@ -22,7 +22,7 @@ class CustomAddView: UIView {
         let label = UILabel()
             .with(alignment: .center)
             .with(color: MainConstants.white)
-            .with(fontName: "SFPro-Medium", size: 22)
+            .with(fontName: "SFPro", size: 22)
             .with(numberOfLines: 1)
         label.text = "200 гр Пластик"
         label.translatesAutoresizingMaskIntoConstraints = false

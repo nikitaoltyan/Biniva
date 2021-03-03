@@ -32,7 +32,7 @@ class ProgressImageView: UIView {
         let label = UILabel()
             .with(alignment: .center)
             .with(color: MaterialDefaults.GetTextColor(alreadyLogged: loggedData))
-            .with(fontName: "SFPro-Medium", size: 30)
+            .with(fontName: "SFPro", size: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
