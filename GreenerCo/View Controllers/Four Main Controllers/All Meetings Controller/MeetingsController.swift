@@ -18,7 +18,6 @@ class MeetingsController: UIViewController {
         layout.minimumLineSpacing = 1
         
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = MainConstants.white
         collection.showsVerticalScrollIndicator = true
         collection.alwaysBounceVertical = false
         collection.backgroundColor = .clear
