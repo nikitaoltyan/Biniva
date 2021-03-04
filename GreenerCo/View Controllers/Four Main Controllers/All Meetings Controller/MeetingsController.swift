@@ -16,7 +16,6 @@ class MeetingsController: UIViewController {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 1
-        layout.minimumLineSpacing = 1
         
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = MainConstants.white
