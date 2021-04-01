@@ -9,10 +9,11 @@ import UIKit
 
 class RecyclingController: UIViewController {
     
-    let topView: RegularTopView = {
+    lazy var topView: RegularTopView = {
         let view = RegularTopView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.imageButton.isHidden = true
+        view.recyclingDelegate = self
+        view.imageButton.isHidden = false
         view.pageLabel.text = "Переработка"
         view.pageName = "recycling"
         return view
@@ -109,6 +110,12 @@ class RecyclingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Переработка"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        
         view.backgroundColor = MainConstants.white
         PopulateMaterialsObject()
         SetSubviews()
@@ -116,6 +123,8 @@ class RecyclingController: UIViewController {
         GetUserProgress()
     }
     
+    
+//    func setupNav
     
     
     
@@ -304,6 +313,8 @@ class RecyclingController: UIViewController {
 extension RecyclingController: RecyclingDelegate {
     func OpenTipsList() {
         print("Open tips list")
+        let newVC = AchieveController()
+        present(newVC, animated: false, completion: nil)
     }
     
     func LogValue(withSize size: Int, andMaterial material: String) {

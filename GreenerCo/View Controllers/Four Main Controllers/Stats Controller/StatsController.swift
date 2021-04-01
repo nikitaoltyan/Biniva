@@ -81,16 +81,25 @@ class StatsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        DispatchQueue.main.async { self.GetLoggedData() }
+        title = "Статистика"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = MainConstants.white
+        SetSubviews()
+        ActivateLayouts()
+    }
+    
+    
+    func GetLoggedData(){
         Server.GetLastSevenDaysLoggedData(forUserId: Defaults.GetUserId(), data: { result in
             self.loggedData.append(result)
             guard (self.loggedData.count == 7) else { return }
             self.loggedData.reverse()
+//            Maybe that think can't be implemented in some cases without exaptions. Not good at all.
+            if (self.statsTable.window != nil) { self.statsTable.reloadData() }
             self.statsTable.reloadData()
             self.UpdateScrollHeight()
         })
-        view.backgroundColor = MainConstants.white
-        SetSubviews()
-        ActivateLayouts()
     }
 
     
@@ -241,7 +250,7 @@ extension StatsController {
     
     func SetSubviews(){
         view.addSubview(scrollView)
-        scrollView.addSubview(topView)
+//        scrollView.addSubview(topView)
         scrollView.addSubview(statsView)
         scrollView.addSubview(loggedLabel)
         scrollView.addSubview(statsTable)
@@ -257,12 +266,12 @@ extension StatsController {
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            topView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -scrollBorder),
-            topView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            topView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            topView.heightAnchor.constraint(equalToConstant: 150),
+//            topView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -scrollBorder),
+//            topView.leftAnchor.constraint(equalTo: view.leftAnchor),
+//            topView.rightAnchor.constraint(equalTo: view.rightAnchor),
+//            topView.heightAnchor.constraint(equalToConstant: 150),
             
-            statsView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 20),
+            statsView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
             statsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             statsView.widthAnchor.constraint(equalToConstant: statsView.frame.width),
             statsView.heightAnchor.constraint(equalToConstant: statsView.frame.height),

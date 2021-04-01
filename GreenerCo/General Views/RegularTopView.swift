@@ -54,14 +54,14 @@ class RegularTopView: UIView {
     }
     
     @objc func OpenViewController(){
-        switch (pageName ?? "stats") {
-        case "stats":
-            print("stats delegate")
-            statsDelegate?.OpenAchievements()
-        default:
+//        switch (pageName ?? "stats") {
+//        case "stats":
+//            print("stats delegate")
+//            statsDelegate?.OpenAchievements()
+//        default:
             print("recycling delegate")
             recyclingDelegate?.OpenTipsList()
-        }
+//        }
     }
     
 }

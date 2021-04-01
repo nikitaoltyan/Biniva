@@ -10,7 +10,7 @@ import UIKit
 extension RecyclingController {
     
     func SetSubviews(){
-        view.addSubview(topView)
+//        view.addSubview(topView)
         view.addSubview(plusView)
         view.addSubview(addFirstItemView)
         view.addSubview(addSecondItemView)
@@ -66,10 +66,10 @@ extension RecyclingController {
         let dailyNorm = UserDefaults.standard.integer(forKey: "dailyNorm")
         let lineTop: CGFloat = MaterialDefaults.YForDashedLine(dailyNorm: dailyNorm)
         NSLayoutConstraint.activate([
-            topView.topAnchor.constraint(equalTo: view.topAnchor),
-            topView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            topView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            topView.heightAnchor.constraint(equalToConstant: 150),
+//            topView.topAnchor.constraint(equalTo: view.topAnchor),
+//            topView.leftAnchor.constraint(equalTo: view.leftAnchor),
+//            topView.rightAnchor.constraint(equalTo: view.rightAnchor),
+//            topView.heightAnchor.constraint(equalToConstant: 150),
             
             plusView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -plusViewFromBottom),
             plusView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
