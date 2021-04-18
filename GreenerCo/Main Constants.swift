@@ -55,16 +55,22 @@ struct MaterialsIcons {
 class MaterialsObject: NSObject{
     var color: UIColor!
     var image: UIImage!
-    var name: String!
+    var name: Int!
 }
 
 
 struct MaterialsObjectItems {
     static var color: Array<UIColor> = [MaterialsColors.waterBlue, MaterialsColors.organicGreen, MaterialsColors.paperOrange, MaterialsColors.metalBeige]
     static var image: Array<UIImage> = [MaterialsIcons.waterBottle, MaterialsIcons.organicLimone, MaterialsIcons.paper, MaterialsIcons.metal]
-    static let name: Array<String> = ["Пластик", "Органика", "Бумага", "Металл"]
+    static let name: Array<Int> = [0, 1, 2, 3]
 }
 
+/// Пластик - 0
+/// Органика - 1
+/// Бумага - 2
+/// Металл - 3
+/// Дерево - 4
+/// Ткань - 5
 
 class Vibration {
     

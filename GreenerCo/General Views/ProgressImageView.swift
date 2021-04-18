@@ -55,6 +55,7 @@ class ProgressImageView: UIView {
     var progressHeightAnchor: NSLayoutConstraint?
     var delegate: AddGoalDelegate?
     var recyclingDelegate: RecyclingDelegate?
+    var database = DataFunction()
     
     
     
@@ -62,8 +63,10 @@ class ProgressImageView: UIView {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = MainConstants.nearWhite.withAlphaComponent(0.1)
-        Defaults.CheckLastLogged(alreadyLogged: { result in
+        database.GetTotalLogged(forDate: Date().onlyDate, result: { result in
+            print("Already logged for that day: \(result)")
             self.loggedData = result
+            self.loggedLabel.text = "\(result) гр"
         })
         SetSubviews()
         ActivateLayouts()

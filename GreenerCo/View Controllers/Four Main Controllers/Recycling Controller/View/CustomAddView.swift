@@ -129,20 +129,20 @@ class CustomAddView: UIView {
     @objc func PlusAction() {
         Vibration.Soft()
         slider.value += 5
-        currentValueLabel.text = "\(Int(slider.value)) гр \(materials[selectedIndexPath].name ?? "Not Stated")"
+        currentValueLabel.text = "\(Int(slider.value)) гр \(materials[selectedIndexPath].name ?? 0)"
     }
     
     
     @objc func MinusAction() {
         Vibration.Soft()
         slider.value -= 5
-        currentValueLabel.text = "\(Int(slider.value)) гр \(materials[selectedIndexPath].name ?? "Not Stated")"
+        currentValueLabel.text = "\(Int(slider.value)) гр \(materials[selectedIndexPath].name ?? 0)"
     }
     
     
     @objc func AddItem() {
         print("Add item")
-        delegate?.LogValue(withSize: Int(slider.value), andMaterial: materials[selectedIndexPath].name ?? "Not Stated")
+        delegate?.LogValue(withSize: Int(slider.value), andMaterial: materials[selectedIndexPath].name ?? 0)
     }
 
     
@@ -150,7 +150,7 @@ class CustomAddView: UIView {
         let roundedValue = round(slider.value / 5) * 5
         if roundedValue-0.5...roundedValue+0.5 ~= slider.value { Vibration.Soft() }
         slider.value = roundedValue
-        currentValueLabel.text = "\(Int(roundedValue)) гр \(materials[selectedIndexPath].name ?? "Not Stated")"
+        currentValueLabel.text = "\(Int(roundedValue)) гр \(materials[selectedIndexPath].name ?? 0)"
     }
 }
 
@@ -173,7 +173,7 @@ extension CustomAddView: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomAddCell") as! CustomAddCell
         cell.itemView.backgroundColor = materials[indexPath.row].color
         cell.itemView.image.image = materials[indexPath.row].image
-        cell.itemLabel.text = materials[indexPath.row].name
+        cell.itemLabel.text = "\(materials[indexPath.row].name)"
         return cell
     }
     

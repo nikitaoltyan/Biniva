@@ -9,6 +9,14 @@ import Foundation
 
 extension Date {
     
+    /// Returns only a date without time. Useable for CoreData.
+    /// - warning: optional
+    var onlyDate: Date? {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: self)
+        let date = Calendar.current.date(from: components)
+        return date
+    }
+    
     /// Returns the day of a month of the current Date.
     var day: String {
         let dateFormatter = DateFormatter()

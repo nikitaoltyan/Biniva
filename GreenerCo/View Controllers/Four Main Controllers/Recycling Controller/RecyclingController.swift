@@ -64,7 +64,6 @@ class RecyclingController: UIViewController {
         let view = ProgressImageView()
         view.image.tintColor = MainConstants.white
         view.progressView.frame = CGRect(x: 0, y: 0, width: 0, height: 200)
-        view.loggedLabel.text = "\(UserDefaults.standard.integer(forKey: "loggedData")) гр"
         view.recyclingDelegate = self
         view.layoutIfNeeded()
         return view
@@ -104,7 +103,7 @@ class RecyclingController: UIViewController {
     
     var materials = [MaterialsObject]()
     var isAddMenuActivated: Bool = false
-    
+    let database = DataFunction()
     
     
     
@@ -122,9 +121,6 @@ class RecyclingController: UIViewController {
         ActivateLayouts()
         GetUserProgress()
     }
-    
-    
-//    func setupNav
     
     
     
@@ -173,34 +169,37 @@ class RecyclingController: UIViewController {
 
     @objc func AddFirstItem(){
         print("Add first item")
-        let addedSize: Int = 200
-        ServerMaterials.AddLoggedEvent(addedSize: addedSize,
-                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
-                                       material: "Пластик")
+        let loggedSize: Int = 200
+        database.AddData(loggedSize: loggedSize, material: 0, date: Date().onlyDate)
+//        ServerMaterials.AddLoggedEvent(addedSize: addedSize,
+//                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
+//                                       material: "Пластик")
         AnimateDismissThreeViews()
-        SetProgressHeight(addedSize: addedSize)
+        SetProgressHeight(addedSize: loggedSize)
     }
     
     
     @objc func AddSecondItem(){
         print("Add second item")
-        let addedSize: Int = 200
-        ServerMaterials.AddLoggedEvent(addedSize: addedSize,
-                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
-                                       material: "Органика")
+        let loggedSize: Int = 200
+        database.AddData(loggedSize: loggedSize, material: 1, date: Date().onlyDate)
+//        ServerMaterials.AddLoggedEvent(addedSize: addedSize,
+//                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
+//                                       material: "Органика")
         AnimateDismissThreeViews()
-        SetProgressHeight(addedSize: addedSize)
+        SetProgressHeight(addedSize: loggedSize)
     }
     
     
     @objc func AddThirdItem(){
         print("Add third item")
-        let addedSize: Int = 200
-        ServerMaterials.AddLoggedEvent(addedSize: addedSize,
-                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
-                                       material: "Бумага")
+        let loggedSize: Int = 200
+        database.AddData(loggedSize: loggedSize, material: 2, date: Date().onlyDate)
+//        ServerMaterials.AddLoggedEvent(addedSize: addedSize,
+//                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
+//                                       material: "Бумага")
         AnimateDismissThreeViews()
-        SetProgressHeight(addedSize: addedSize)
+        SetProgressHeight(addedSize: loggedSize)
     }
     
     
@@ -248,8 +247,8 @@ class RecyclingController: UIViewController {
     
     
     func GetUserProgress(){
-        Defaults.CheckLastLogged(alreadyLogged: { result in
-            print("Already logged from defaults: \(result)")
+        database.GetTotalLogged(forDate: Date().onlyDate, result: { result in
+            print("Already logged for that day: \(result)")
             if (result > 1500) {
                 let setHeight: CGFloat = self.progressView.heightOfProgressView
                 self.progressView.progressHeightAnchor?.constant = CGFloat(setHeight)
@@ -317,10 +316,11 @@ extension RecyclingController: RecyclingDelegate {
         present(newVC, animated: false, completion: nil)
     }
     
-    func LogValue(withSize size: Int, andMaterial material: String) {
-        ServerMaterials.AddLoggedEvent(addedSize: size,
-                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
-                                       material: material)
+    func LogValue(withSize size: Int, andMaterial material: Int) {
+        database.AddData(loggedSize: size, material: material, date: Date().onlyDate)
+//        ServerMaterials.AddLoggedEvent(addedSize: size,
+//                                       forUserID: UserDefaults.standard.string(forKey: "uid")!,
+//                                       material: material)
         AnimateDismissCustomAddView()
         SetProgressHeight(addedSize: size)
     }
@@ -337,7 +337,7 @@ extension RecyclingController: RecyclingDelegate {
 
 protocol RecyclingDelegate {
     func OpenTipsList()
-    func LogValue(withSize size: Int, andMaterial material: String)
+    func LogValue(withSize size: Int, andMaterial material: Int)
     func ChangeNumberViewColor()
 }
 
