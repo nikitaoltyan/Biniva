@@ -26,6 +26,14 @@ struct MainConstants {
 }
 
 
+struct Colors {
+    static let background = UIColor(named: "background") ?? UIColor.white
+    static let grayCircle = UIColor(named: "grayCircle") ?? UIColor.lightGray
+    static let topGradient = UIColor(named: "topGradient")
+    static let bottomGradient = UIColor(named: "bottomGradient")
+}
+
+
 struct Materials {
     static let paper = [""]
     static let plastic = [""]

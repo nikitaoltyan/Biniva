@@ -21,14 +21,6 @@ class StatsController: UIViewController {
         scroll.showsVerticalScrollIndicator = false
         return scroll
     }()
-    
-    let topView: RegularTopView = {
-        let view = RegularTopView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.imageButton.isHidden = true
-        view.pageLabel.text = "Статистика"
-        return view
-    }()
 
     let statsView: StatsView = {
         let width: CGFloat = MainConstants.screenWidth - 60
@@ -236,21 +228,10 @@ extension StatsController: UIScrollViewDelegate{
 
 
 
-extension StatsController: StatsDelegate {
-    func OpenAchievements() {
-        print("Open achievements")
-    }
-}
-
-
-
-
-
 extension StatsController {
     
     func SetSubviews(){
         view.addSubview(scrollView)
-//        scrollView.addSubview(topView)
         scrollView.addSubview(statsView)
         scrollView.addSubview(loggedLabel)
         scrollView.addSubview(statsTable)
@@ -265,11 +246,6 @@ extension StatsController {
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-//            topView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -scrollBorder),
-//            topView.leftAnchor.constraint(equalTo: view.leftAnchor),
-//            topView.rightAnchor.constraint(equalTo: view.rightAnchor),
-//            topView.heightAnchor.constraint(equalToConstant: 150),
             
             statsView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
             statsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

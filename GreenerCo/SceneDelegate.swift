@@ -21,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             let hasLaunched = UserDefaults.standard.bool(forKey: "hasLaunched")
             if (hasLaunched) {
-                window.rootViewController = MainTabBarController()
+                window.rootViewController = RecyclingController()
+//                window.rootViewController = MainTabBarController()
             } else {
                 window.rootViewController = OnboardingController()
             }

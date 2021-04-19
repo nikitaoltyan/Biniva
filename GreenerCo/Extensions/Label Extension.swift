@@ -41,4 +41,12 @@ extension UILabel {
         self.numberOfLines = numberOfLines
         return self
     }
+    
+    
+    /// Self return UILabel with given autolayout.
+    /// - parameter autolayout: Shoud the label Translates Autoresizing Mask Into Constraints.
+//    func with(autolayout: Bool) -> Self {
+//        translatesAutoresizingMaskIntoConstraints = autolayout
+//        return self
+//    }
 }

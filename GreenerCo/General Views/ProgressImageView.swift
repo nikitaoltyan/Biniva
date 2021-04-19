@@ -54,7 +54,7 @@ class ProgressImageView: UIView {
     let heightOfProgressView: CGFloat = {if MainConstants.screenHeight>700{return 400}else{return 360}}()
     var progressHeightAnchor: NSLayoutConstraint?
     var delegate: AddGoalDelegate?
-    var recyclingDelegate: RecyclingDelegate?
+//    var recyclingDelegate: RecyclingDelegate?
     var database = DataFunction()
     
     
@@ -99,7 +99,7 @@ class ProgressImageView: UIView {
     
     func CheckDailyNorm(currentLoged size: Int){
         guard (size > dailyNorm) else { return }
-        recyclingDelegate?.ChangeNumberViewColor()
+//        recyclingDelegate?.ChangeNumberViewColor()
     }
     
     

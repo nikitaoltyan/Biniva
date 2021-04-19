@@ -98,7 +98,7 @@ class CustomAddView: UIView {
     }()
     
     var selectedIndexPath: Int = 0
-    var delegate: RecyclingDelegate?
+//    var delegate: RecyclingDelegate?
     
     
     
@@ -142,7 +142,7 @@ class CustomAddView: UIView {
     
     @objc func AddItem() {
         print("Add item")
-        delegate?.LogValue(withSize: Int(slider.value), andMaterial: materials[selectedIndexPath].name ?? 0)
+//        delegate?.LogValue(withSize: Int(slider.value), andMaterial: materials[selectedIndexPath].name ?? 0)
     }
 
     
