@@ -62,6 +62,8 @@ class SwitcherView: UIView {
     }()
     
     var delegate: SwitcherDelegate?
+    var topViewDelegate: TopViewDelegate?
+    var centerXGreenView: NSLayoutConstraint?
     
     var isLabelOneActivated: Bool = true
     var isLabelTwoActivated: Bool = false
@@ -81,12 +83,17 @@ class SwitcherView: UIView {
     
     @objc func AnimateOne() {
         guard (isLabelOneActivated == false) else { return }
-        DispatchQueue.main.async { self.delegate?.ShowRecycling() }
+        DispatchQueue.main.async {
+            self.topViewDelegate?.UpdateTitles(isRecylcing: true)
+            self.delegate?.ShowRecycling()
+        }
         UIView.animate(withDuration: 0.3, animations: {
-            self.greenView.center = self.labelOne.center
+            self.greenView.center.x = self.labelOne.center.x+3
             self.labelOne.textColor = Colors.background
             self.labelTwo.textColor = Colors.darkGrayText
         }, completion: { (result) in
+            self.centerXGreenView?.constant = -self.grayView.frame.width*1/4+3
+            self.greenView.layoutIfNeeded()
             self.isLabelOneActivated = true
             self.isLabelTwoActivated = false
         })
@@ -94,12 +101,17 @@ class SwitcherView: UIView {
     
     @objc func AnimateTwo() {
         guard (isLabelTwoActivated == false) else { return }
-        DispatchQueue.main.async { self.delegate?.ShowStats() }
+        DispatchQueue.main.async {
+            self.topViewDelegate?.UpdateTitles(isRecylcing: false)
+            self.delegate?.ShowStats()
+        }
         UIView.animate(withDuration: 0.3, animations: {
-            self.greenView.center = self.labelTwo.center
+            self.greenView.center.x = self.labelTwo.center.x-3
             self.labelTwo.textColor = Colors.background
             self.labelOne.textColor = Colors.darkGrayText
         }, completion: { (result) in
+            self.centerXGreenView?.constant = self.grayView.frame.width*1/4-3
+            self.greenView.layoutIfNeeded()
             self.isLabelTwoActivated = true
             self.isLabelOneActivated = false
         })
@@ -130,17 +142,19 @@ extension SwitcherView{
             grayView.heightAnchor.constraint(equalToConstant: grayView.frame.height),
             
             greenView.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
-            greenView.leftAnchor.constraint(equalTo: grayView.leftAnchor, constant: 3),
             greenView.widthAnchor.constraint(equalToConstant: greenView.frame.width),
             greenView.heightAnchor.constraint(equalToConstant: greenView.frame.height),
             
             labelOne.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
-            labelOne.centerXAnchor.constraint(equalTo: greenView.centerXAnchor),
-            labelOne.bottomAnchor.constraint(equalTo: greenView.bottomAnchor),
+            labelOne.centerXAnchor.constraint(equalTo: grayView.centerXAnchor, constant: -grayView.frame.width*1/4),
+            labelOne.bottomAnchor.constraint(equalTo: grayView.bottomAnchor),
             
             labelTwo.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
-            labelTwo.rightAnchor.constraint(equalTo: grayView.rightAnchor, constant: -20),
+            labelTwo.centerXAnchor.constraint(equalTo: grayView.centerXAnchor, constant: grayView.frame.width*1/4),
             labelTwo.bottomAnchor.constraint(equalTo: greenView.bottomAnchor),
         ])
+    
+        centerXGreenView = greenView.centerXAnchor.constraint(equalTo: grayView.centerXAnchor, constant: -grayView.frame.width*1/4+3)
+        centerXGreenView?.isActive = true
     }
 }

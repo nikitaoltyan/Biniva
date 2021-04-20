@@ -37,18 +37,32 @@ class TopView: UIView {
         }()
         let useFrame: CGRect = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: height)
         super.init(frame: useFrame)
+        self.title.text = "Переработка"
+        self.subtitle.text = "поможем сегодня природе?"
         self.backgroundColor = .white
         SetSubviews()
         ActivateLayouts()
-        
-//        UIFont.familyNames.forEach{ print($0); UIFont.fontNames(forFamilyName: $0).forEach{ print("  ", $0) } }
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
 }
 
+
+
+extension TopView: TopViewDelegate {
+    func UpdateTitles(isRecylcing: Bool) {
+        if (isRecylcing) {
+            title.text = "Переработка"
+            subtitle.text = "поможем сегодня природе"
+        } else {
+            title.text = "Твои успехи"
+            subtitle.text = "продолжай в том же духе"
+        }
+    }
+}
 
 
 

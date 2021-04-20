@@ -72,10 +72,10 @@ class StatsView: UIView {
 
 extension StatsView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 30 {
-            delegate?.HideTopBar(true)
-        } else {
+        if scrollView.contentOffset.y < 25 {
             delegate?.HideTopBar(false)
+        } else {
+            delegate?.HideTopBar(true)
         }
     }
 }

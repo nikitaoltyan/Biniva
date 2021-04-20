@@ -23,14 +23,17 @@ protocol RecyclingDelegate {
 }
 
 
+protocol TopViewDelegate {
+    func UpdateTitles(isRecylcing: Bool)
+}
+
+
 class RecyclingController: UIViewController {
     
     let topView: TopView = {
         let view = TopView()
             .with(bgColor: Colors.background)
             .with(autolayout: false)
-        view.title.text = "Переработка"
-        view.subtitle.text = "поможем сегодня природе?"
         return view
     }()
     
@@ -38,6 +41,7 @@ class RecyclingController: UIViewController {
         let view = SwitcherView()
             .with(autolayout: false)
         view.delegate = self
+        view.topViewDelegate = topView
         return view
     }()
     
@@ -56,6 +60,10 @@ class RecyclingController: UIViewController {
     }()
     
     
+    var recyclingXConstraint: NSLayoutConstraint?
+    var statsXConstraint: NSLayoutConstraint?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Colors.background
@@ -71,17 +79,18 @@ class RecyclingController: UIViewController {
 extension RecyclingController: SwitcherDelegate {
     func ShowStats() {
         Vibration.Soft()
+        self.view.layoutIfNeeded()
         UIView.animate(withDuration: 0.4, animations: {
-            self.recyclingView.center = CGPoint(x: -self.view.center.x, y: self.view.center.y)
-            self.statsView.center = self.view.center
+            self.statsView.center.x = self.view.center.x
+            self.recyclingView.center.x = -self.view.center.x
         }, completion: { (result) in })
     }
     
     func ShowRecycling() {
         Vibration.Soft()
         UIView.animate(withDuration: 0.4, animations: {
-            self.recyclingView.center = self.view.center
-            self.statsView.center = CGPoint(x: 3*self.view.center.x, y: self.view.center.y)
+            self.statsView.center.x = 3 * self.view.center.x
+            self.recyclingView.center.x = self.view.center.x
         }, completion: { (result) in })
     }
 }
@@ -148,16 +157,19 @@ extension RecyclingController {
             switcherView.widthAnchor.constraint(equalToConstant: switcherView.frame.width),
             switcherView.heightAnchor.constraint(equalToConstant: switcherView.frame.height),
             
-            recyclingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             recyclingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             recyclingView.widthAnchor.constraint(equalToConstant: recyclingView.frame.width),
             recyclingView.heightAnchor.constraint(equalToConstant: recyclingView.frame.height),
             
             statsView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            statsView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: view.frame.width),
             statsView.widthAnchor.constraint(equalToConstant: statsView.frame.width),
             statsView.heightAnchor.constraint(equalToConstant: statsView.frame.height),
         ])
+        
+        recyclingXConstraint = recyclingView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        statsXConstraint = statsView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: view.frame.width)
+        recyclingXConstraint?.isActive = true
+        statsXConstraint?.isActive = true
     }
 }
 
