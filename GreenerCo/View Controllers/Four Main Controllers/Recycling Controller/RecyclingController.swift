@@ -7,6 +7,22 @@
 
 import UIKit
 
+protocol SwitcherDelegate {
+    func ShowStats()
+    func ShowRecycling()
+}
+
+
+protocol StatsDelegate {
+    func HideTopBar(_ should: Bool)
+}
+
+
+protocol RecyclingDelegate {
+    func Add()
+}
+
+
 class RecyclingController: UIViewController {
     
     let topView: TopView = {
@@ -18,18 +34,24 @@ class RecyclingController: UIViewController {
         return view
     }()
     
-    let progressView: ProgressView = {
-        let view = ProgressView(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
-            .with(bgColor: .white)
+    lazy var switcherView: SwitcherView = {
+        let view = SwitcherView()
             .with(autolayout: false)
+        view.delegate = self
         return view
     }()
     
-    
-    let button: ButtonView = {
-        let view = ButtonView()
+    lazy var recyclingView: RecyclingView = {
+        let view = RecyclingView()
             .with(autolayout: false)
-        view.clipsToBounds = true
+        view.delegate = self
+        return view
+    }()
+    
+    lazy var statsView: StatsView = {
+        let view = StatsView()
+            .with(autolayout: false)
+        view.delegate = self
         return view
     }()
     
@@ -46,13 +68,72 @@ class RecyclingController: UIViewController {
 
 
 
+extension RecyclingController: SwitcherDelegate {
+    func ShowStats() {
+        Vibration.Soft()
+        UIView.animate(withDuration: 0.4, animations: {
+            self.recyclingView.center = CGPoint(x: -self.view.center.x, y: self.view.center.y)
+            self.statsView.center = self.view.center
+        }, completion: { (result) in })
+    }
+    
+    func ShowRecycling() {
+        Vibration.Soft()
+        UIView.animate(withDuration: 0.4, animations: {
+            self.recyclingView.center = self.view.center
+            self.statsView.center = CGPoint(x: 3*self.view.center.x, y: self.view.center.y)
+        }, completion: { (result) in })
+    }
+}
+
+
+
+
+
+
+extension RecyclingController: StatsDelegate {
+    func HideTopBar(_ should: Bool) {
+        if (should) {
+            guard (self.switcherView.center.y > 0) else { return }
+            UIView.animate(withDuration: 0.5, animations: {
+                self.switcherView.center.y = -2 * self.switcherView.center.y
+                self.topView.center.y =  -2 * self.topView.center.y
+            }, completion: { (result) in })
+        } else {
+            guard (self.switcherView.center.y < 0) else { return }
+            UIView.animate(withDuration: 0.5, animations: {
+                self.switcherView.center.y = -0.5 * self.switcherView.center.y
+                self.topView.center.y =  -0.5 * self.topView.center.y
+            }, completion: { (result) in })
+        }
+    }
+    
+}
+
+
+extension RecyclingController: RecyclingDelegate {
+    func Add() {
+        let newVC = AddTrashController()
+        newVC.modalPresentationStyle = .overFullScreen
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromTop
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(newVC, animated: false, completion: nil)
+    }
+}
+
+
 
 
 extension RecyclingController {
     func SetSubviews(){
+        view.addSubview(recyclingView)
+        view.addSubview(statsView)
         view.addSubview(topView)
-        view.addSubview(progressView)
-        view.addSubview(button)
+        view.addSubview(switcherView)
     }
         
     func ActivateLayouts(){
@@ -62,15 +143,20 @@ extension RecyclingController {
             topView.heightAnchor.constraint(equalToConstant: topView.frame.height),
             topView.widthAnchor.constraint(equalToConstant: topView.frame.width),
             
-            progressView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            progressView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            progressView.widthAnchor.constraint(equalToConstant: progressView.frame.width),
-            progressView.heightAnchor.constraint(equalToConstant: progressView.frame.height),
+            switcherView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 50),
+            switcherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            switcherView.widthAnchor.constraint(equalToConstant: switcherView.frame.width),
+            switcherView.heightAnchor.constraint(equalToConstant: switcherView.frame.height),
             
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -66),
-            button.heightAnchor.constraint(equalToConstant: button.frame.height),
-            button.widthAnchor.constraint(equalToConstant: button.frame.width)
+            recyclingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            recyclingView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            recyclingView.widthAnchor.constraint(equalToConstant: recyclingView.frame.width),
+            recyclingView.heightAnchor.constraint(equalToConstant: recyclingView.frame.height),
+            
+            statsView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            statsView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: view.frame.width),
+            statsView.widthAnchor.constraint(equalToConstant: statsView.frame.width),
+            statsView.heightAnchor.constraint(equalToConstant: statsView.frame.height),
         ])
     }
 }

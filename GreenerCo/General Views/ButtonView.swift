@@ -35,6 +35,7 @@ class ButtonView: UIView {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth*0.86, height: 55)
         super.init(frame: useFrame)
         self.layer.cornerRadius = 55/2
+        
         SetSubviews()
         ActivateLayouts()
     }

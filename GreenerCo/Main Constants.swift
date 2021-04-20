@@ -29,6 +29,8 @@ struct MainConstants {
 struct Colors {
     static let background = UIColor(named: "background") ?? UIColor.white
     static let grayCircle = UIColor(named: "grayCircle") ?? UIColor.lightGray
+    static let sliderGray = UIColor(named: "sliderGray") ?? UIColor.lightGray
+    static let darkGrayText = UIColor(named: "darkGrayText") ?? UIColor.darkGray
     static let topGradient = UIColor(named: "topGradient")
     static let bottomGradient = UIColor(named: "bottomGradient")
 }

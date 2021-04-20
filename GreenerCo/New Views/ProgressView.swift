@@ -57,7 +57,7 @@ class ProgressView: UIView {
             .with(color: MainConstants.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 1)
-            .with(fontName: "SFPro-Semibold", size: 48)
+            .with(fontName: "SFPro-Bold", size: 48)
             .with(autolayout: false)
         label.text = "1,5 кг"
         return label
@@ -76,7 +76,7 @@ class ProgressView: UIView {
     
     let warningTitle: UILabel = {
         let label = UILabel()
-            .with(color: .darkGray)
+            .with(color: Colors.darkGrayText)
             .with(alignment: .center)
             .with(numberOfLines: 2)
             .with(fontName: "SFPro-Medium", size: 14)
@@ -87,6 +87,7 @@ class ProgressView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .clear
         SetSubviews()
         ActivateLayouts()
     }
