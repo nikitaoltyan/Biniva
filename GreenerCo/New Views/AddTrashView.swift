@@ -44,6 +44,10 @@ class AddTrashView: UIView {
     }()
     
     var currentSelectedIndexPath: IndexPath?
+    var useCase: material?
+    var titles: Array<String>?
+    var subtitles: Array<String>?
+    var weights: Array<Int>?
     
 
     override init(frame: CGRect){
@@ -56,6 +60,36 @@ class AddTrashView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+    func populate(){
+        switch useCase {
+        case .plastic:
+            titles = plastic.title
+            subtitles = plastic.subtitle
+            weights = plastic.weight
+        case .organic:
+            titles = organic.title
+            subtitles = organic.subtitle
+            weights = organic.weight
+        case .paper:
+            titles = paper.title
+            subtitles = paper.subtitle
+            weights = paper.weight
+        case .metal:
+            titles = metal.title
+            subtitles = metal.subtitle
+            weights = metal.weight
+        case .wood:
+            titles = wood.title
+            subtitles = wood.subtitle
+            weights = wood.weight
+        default:
+            titles = fabric.title
+            subtitles = fabric.subtitle
+            weights = fabric.weight
+        }
+        collection.reloadData()
+    }
 }
 
 
@@ -63,7 +97,7 @@ class AddTrashView: UIView {
 
 extension AddTrashView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return titles?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -72,6 +106,8 @@ extension AddTrashView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collection.dequeueReusableCell(withReuseIdentifier: "ExtraAddCell", for: indexPath) as! ExtraAddCell
+        cell.title.text = titles?[indexPath.row] ?? "Title"
+        cell.subtitle.text = subtitles?[indexPath.row] ?? "Title"
         return cell
     }
     
@@ -82,6 +118,7 @@ extension AddTrashView: UICollectionViewDelegate, UICollectionViewDataSource, UI
         
         if let cell = collection.cellForItem(at: indexPath) as? ExtraAddCell {
             cell.select()
+            weightView.textView.text = "\(weights?[indexPath.row] ?? 0) г"
             currentSelectedIndexPath = indexPath
         }
     }

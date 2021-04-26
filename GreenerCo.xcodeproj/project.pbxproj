@@ -24,6 +24,7 @@
 		5C22533525B1638800E73D0A /* BackTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C22533425B1638800E73D0A /* BackTopView.swift */; };
 		5C22533A25B1690F00E73D0A /* WhoJoinedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C22533925B1690F00E73D0A /* WhoJoinedView.swift */; };
 		5C25D8A7263693A900D2206E /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C25D8A6263693A900D2206E /* StatsCell.swift */; };
+		5C25D8AC2636BB9B00D2206E /* MaterialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C25D8AB2636BB9B00D2206E /* MaterialData.swift */; };
 		5C2E36B525D40CC500F92588 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E36B425D40CC500F92588 /* LogInController.swift */; };
 		5C3046DA25C02CA000BAFEEF /* View Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046D925C02CA000BAFEEF /* View Extension.swift */; };
 		5C3046E525C13B8E00BAFEEF /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046E425C13B8E00BAFEEF /* RegistrationController.swift */; };
@@ -130,6 +131,7 @@
 		5C22533425B1638800E73D0A /* BackTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTopView.swift; sourceTree = "<group>"; };
 		5C22533925B1690F00E73D0A /* WhoJoinedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoJoinedView.swift; sourceTree = "<group>"; };
 		5C25D8A6263693A900D2206E /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
+		5C25D8AB2636BB9B00D2206E /* MaterialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialData.swift; sourceTree = "<group>"; };
 		5C2E36B425D40CC500F92588 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
 		5C3046D925C02CA000BAFEEF /* View Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Extension.swift"; sourceTree = "<group>"; };
 		5C3046DE25C06A3100BAFEEF /* GreenerCo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GreenerCo.entitlements; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				5C1BD65F25D7CA770002A894 /* Material Defaults.swift */,
+				5C25D8AB2636BB9B00D2206E /* MaterialData.swift */,
 			);
 			path = "Material Defaults";
 			sourceTree = "<group>";
@@ -966,6 +969,7 @@
 				5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */,
 				5C045BF725BFE25300E42843 /* Dictionary Extension.swift in Sources */,
 				5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */,
+				5C25D8AC2636BB9B00D2206E /* MaterialData.swift in Sources */,
 				5C087044262739E10057E840 /* Model+CoreDataProperties.swift in Sources */,
 				5C30472925C2DC5C00BAFEEF /* EnableLocationCell.swift in Sources */,
 				5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */,

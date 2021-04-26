@@ -51,7 +51,7 @@ class AddTrashController: UIViewController {
         let pager = UIPageControl()
             .with(bgColor: .clear)
             .with(autolayout: false)
-        pager.numberOfPages = materials.id.count
+        pager.numberOfPages = materials.enums.count
         pager.currentPageIndicatorTintColor = Colors.darkGrayText
         pager.pageIndicatorTintColor = Colors.sliderGray
         return pager
@@ -75,6 +75,9 @@ class AddTrashController: UIViewController {
         view.layer.shadowOffset = CGSize(width: 0, height: 2)
         return view
     }()
+    
+    
+    var currentPage: Int = 0
     
     
     override func viewDidLoad() {
@@ -107,6 +110,8 @@ class AddTrashController: UIViewController {
             materialsCollection.isHidden = true
             pager.isHidden = true
             addTrashView.isHidden = false
+            addTrashView.useCase = materials.enums[currentPage]
+            addTrashView.populate()
             UIView.animate(withDuration: 0.2, animations: {
                 self.backButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
             })
@@ -120,6 +125,7 @@ class AddTrashController: UIViewController {
 extension AddTrashController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
+        currentPage = Int(pageIndex)
         pager.currentPage = Int(pageIndex)
     }
 }
@@ -130,7 +136,7 @@ extension AddTrashController: UIScrollViewDelegate {
 
 extension AddTrashController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return materials.enums.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -139,7 +145,7 @@ extension AddTrashController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = materialsCollection.dequeueReusableCell(withReuseIdentifier: "MaterialCell", for: indexPath) as! MaterialCell
-        cell.image.image = #imageLiteral(resourceName: "5-02.3-s")
+        cell.image.image = materials.image[indexPath.row]
         cell.title.text = materials.name[indexPath.row]
         return cell
     }
