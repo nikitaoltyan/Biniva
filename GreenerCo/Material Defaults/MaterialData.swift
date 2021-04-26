@@ -61,37 +61,37 @@ struct plastic {
 }
 
 struct organic {
-    static let title: Array<String> = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
+    static let title: Array<String> = ["organic 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
     static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
     static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
 }
 
 struct glass {
-    static let title: Array<String> = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
+    static let title: Array<String> = ["glass 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
     static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
     static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
 }
 
 struct paper {
-    static let title: Array<String> = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
+    static let title: Array<String> = ["paper 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
     static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
     static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
 }
 
 struct metal {
-    static let title: Array<String> = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
+    static let title: Array<String> = ["metal 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
     static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
     static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
 }
 
 struct wood {
-    static let title: Array<String> = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
+    static let title: Array<String> = ["wood 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
     static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
     static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
 }
 
 struct fabric {
-    static let title: Array<String> = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
+    static let title: Array<String> = ["fabric 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
     static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
     static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
 }

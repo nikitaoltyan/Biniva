@@ -54,7 +54,7 @@ class StatsView: UIView {
     
     lazy var statsTable: UITableView = {
         let table = UITableView()
-            .with(bgColor: .purple)
+            .with(bgColor: .clear)
             .with(cornerRadius: 30)
             .with(borderWidth: 2, color: Colors.topGradient.cgColor)
             .with(autolayout: false)
@@ -84,6 +84,7 @@ class StatsView: UIView {
     
     @objc func fetchData(){
         model = dataFunction.fetchData()
+        model?.reverse()
         statsTable.reloadData()
     }
 }
@@ -109,16 +110,11 @@ extension StatsView: UITableViewDelegate, UITableViewDataSource {
         return model?.count ?? 0
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = statsTable.dequeueReusableCell(withIdentifier: "StatsCell") as! StatsCell
         cell.dateLabel.text = model?[indexPath.row].day?.inString
         cell.updateData(logSizes: model?[indexPath.row].logSize,
                         logMaterials: model?[indexPath.row].logMaterial)
-        cell.backgroundColor = .orange
         return cell
     }
 }

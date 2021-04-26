@@ -310,7 +310,7 @@ class MeetingViewController: UIViewController {
     
     @objc func JoinInAction(){
         print("Joined in")
-        Vibration.Soft()
+        Vibration.soft()
         let uid: String = UserDefaults.standard.string(forKey: "uid")!
         Server.JoinMeeting(withUserId: uid, meetingId: postData["mid"] as! String, andType: "join")
         guard (postData["joined"] != nil) else {
@@ -426,7 +426,7 @@ extension MeetingViewController: UIScrollViewDelegate {
 
 extension MeetingViewController: BackTopDelegate {
     @objc func Back(){
-        Vibration.Soft()
+        Vibration.soft()
         
         let transition = CATransition()
         transition.duration = 0.25

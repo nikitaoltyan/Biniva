@@ -139,7 +139,7 @@ extension AddGoalCell: AddGoalDelegate {
         numberView.number.text = String(nearest)
         
         passDict = ["daily_norm": nearest]
-        if CGFloat(nearest)-0.5...CGFloat(nearest)+0.5 ~= setNumber { Vibration.Soft() }
+        if CGFloat(nearest)-0.5...CGFloat(nearest)+0.5 ~= setNumber { Vibration.soft() }
     }
 }
 

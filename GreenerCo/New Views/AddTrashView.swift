@@ -62,32 +62,8 @@ class AddTrashView: UIView {
     }
     
     func populate(){
-        switch useCase {
-        case .plastic:
-            titles = plastic.title
-            subtitles = plastic.subtitle
-            weights = plastic.weight
-        case .organic:
-            titles = organic.title
-            subtitles = organic.subtitle
-            weights = organic.weight
-        case .paper:
-            titles = paper.title
-            subtitles = paper.subtitle
-            weights = paper.weight
-        case .metal:
-            titles = metal.title
-            subtitles = metal.subtitle
-            weights = metal.weight
-        case .wood:
-            titles = wood.title
-            subtitles = wood.subtitle
-            weights = wood.weight
-        default:
-            titles = fabric.title
-            subtitles = fabric.subtitle
-            weights = fabric.weight
-        }
+        guard (useCase != nil) else { return }
+        (titles, subtitles, weights) = MaterialDefaults().getMaterialData(material: useCase!)
         collection.reloadData()
     }
 }

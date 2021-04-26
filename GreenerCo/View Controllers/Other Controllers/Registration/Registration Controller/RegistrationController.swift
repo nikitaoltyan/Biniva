@@ -159,13 +159,13 @@ extension RegistrationController: UICollectionViewDelegate, UICollectionViewData
 extension RegistrationController: RegistrationDelegate {
     
     func Scroll(slide: Int) {
-        Vibration.Soft()
+        Vibration.soft()
         let indexPath = IndexPath(item: slide, section: 0)
         collection.scrollToItem(at: indexPath, at: .right, animated: true)
     }
     
     func Back() {
-        Vibration.Soft()
+        Vibration.soft()
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = CATransitionType.push

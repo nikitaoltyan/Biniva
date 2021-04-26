@@ -173,7 +173,7 @@ class LogInController: UIViewController {
 
     
     @objc func Back() {
-        Vibration.Soft()
+        Vibration.soft()
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = CATransitionType.push

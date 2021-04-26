@@ -39,7 +39,7 @@ struct Colors {
 
 class Vibration {
     
-    static func Soft() -> Void{
+    static func soft() -> Void{
         let soft = UIImpactFeedbackGenerator(style: .soft)
         soft.impactOccurred()
     }

@@ -14,7 +14,7 @@ class DataFunction {
     let database = CoreDataFunction.self
     
     
-    func AddData(loggedSize: Int, material: Int, date: Date?) {
+    func addData(loggedSize: Int, material: Int, date: Date?) {
         guard (date != nil) else { return }
         let data = database.GetByDay(date: date!)
         if data.count == 1 {

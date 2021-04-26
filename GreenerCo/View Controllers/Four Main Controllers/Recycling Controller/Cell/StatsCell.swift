@@ -31,6 +31,7 @@ class StatsCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .clear
         SetSubviews()
         ActivateLayouts()
     }
@@ -67,9 +68,9 @@ extension StatsCell {
     func ActivateLayouts(){
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            dateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 17),
+            dateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             
-            loggedLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 4),
+            loggedLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
             loggedLabel.leftAnchor.constraint(equalTo: dateLabel.leftAnchor),
             loggedLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
         ])

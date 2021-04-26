@@ -78,7 +78,7 @@ class WeightView: UIView {
     
     
     @objc func addTen(){
-        Vibration.Soft()
+        Vibration.soft()
         let currentTextArray = textView.text.split(separator: " ")
         if currentTextArray.count > 0 {
             let number = Int(currentTextArray[0]) ?? 0
@@ -90,7 +90,7 @@ class WeightView: UIView {
     }
     
     @objc func reduceTen(){
-        Vibration.Soft()
+        Vibration.soft()
         let currentTextArray = textView.text.split(separator: " ")
         if currentTextArray.count > 0 {
             let number = Int(currentTextArray[0]) ?? 0

@@ -55,7 +55,7 @@ extension MaterialCell {
             image.widthAnchor.constraint(equalToConstant: image.frame.width),
             image.heightAnchor.constraint(equalToConstant: image.frame.height),
             
-            title.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 100),
+            title.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 80),
             title.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }

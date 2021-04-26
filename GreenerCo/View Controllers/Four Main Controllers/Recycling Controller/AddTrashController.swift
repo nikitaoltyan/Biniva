@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol PushUpdateDelegate {
+    func animateCircle(addWeight: Int)
+    func updateStats()
+}
+
 class AddTrashController: UIViewController {
 
     let backButton: UIImageView = {
@@ -104,12 +109,17 @@ class AddTrashController: UIViewController {
     
     @objc func Add(){
         if (materialsCollection.isHidden) {
-//            print(addTrashView.weightView.textView.text)
-//            Add here a function for adding materials.
+            Vibration.Light()
+            let txt = addTrashView.weightView.textView.text.split(separator: " ")
+            let weight: Int = Int(txt[0]) ?? 0
+            DataFunction().addData(loggedSize: weight, material: currentPage, date: Date().onlyDate)
+            dismiss(animated: true, completion: nil)
         } else {
+            Vibration.soft()
             materialsCollection.isHidden = true
             pager.isHidden = true
             addTrashView.isHidden = false
+            addTrashView.title.text = materials.name[currentPage]
             addTrashView.useCase = materials.enums[currentPage]
             addTrashView.populate()
             UIView.animate(withDuration: 0.2, animations: {
@@ -148,6 +158,10 @@ extension AddTrashController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.image.image = materials.image[indexPath.row]
         cell.title.text = materials.name[indexPath.row]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Add()
     }
     
 }

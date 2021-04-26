@@ -78,7 +78,7 @@ class RecyclingController: UIViewController {
 
 extension RecyclingController: SwitcherDelegate {
     func ShowStats() {
-        Vibration.Soft()
+        Vibration.soft()
         self.view.layoutIfNeeded()
         UIView.animate(withDuration: 0.4, animations: {
             self.statsView.center.x = self.view.center.x
@@ -87,7 +87,7 @@ extension RecyclingController: SwitcherDelegate {
     }
     
     func ShowRecycling() {
-        Vibration.Soft()
+        Vibration.soft()
         UIView.animate(withDuration: 0.4, animations: {
             self.statsView.center.x = 3 * self.view.center.x
             self.recyclingView.center.x = self.view.center.x
@@ -122,6 +122,7 @@ extension RecyclingController: StatsDelegate {
 
 extension RecyclingController: RecyclingDelegate {
     func Add() {
+        Vibration.soft()
         let newVC = AddTrashController()
         newVC.modalPresentationStyle = .overFullScreen
         newVC.modalTransitionStyle = .coverVertical

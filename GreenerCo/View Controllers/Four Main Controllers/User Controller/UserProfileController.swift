@@ -411,7 +411,7 @@ extension UserProfileController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 0{
             guard (meetDetails.count >= 10 || (indexPath.row != meetDetails.count && meetDetails.count < 10)) else { return }
-            Vibration.Soft()
+            Vibration.soft()
             let newVC = MeetingViewController()
             newVC.postData = meetDetails[indexPath.row]
             newVC.modalPresentationStyle = .overFullScreen
@@ -424,7 +424,7 @@ extension UserProfileController: UICollectionViewDelegate, UICollectionViewDataS
             self.present(newVC, animated: false, completion: nil)
         } else {
             guard (joinedDetails.count >= 10 || (indexPath.row != joinedDetails.count && joinedDetails.count < 10)) else { return }
-            Vibration.Soft()
+            Vibration.soft()
             let newVC = MeetingViewController()
             newVC.postData = joinedDetails[indexPath.row]
             newVC.modalPresentationStyle = .overFullScreen
