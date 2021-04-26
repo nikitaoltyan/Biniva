@@ -124,13 +124,8 @@ extension RecyclingController: RecyclingDelegate {
     func Add() {
         let newVC = AddTrashController()
         newVC.modalPresentationStyle = .overFullScreen
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromTop
-        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
-        view.window!.layer.add(transition, forKey: kCATransition)
-        present(newVC, animated: false, completion: nil)
+        newVC.modalTransitionStyle = .coverVertical
+        present(newVC, animated: true, completion: nil)
     }
 }
 

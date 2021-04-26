@@ -52,18 +52,39 @@ class StatsView: UIView {
         return label
     }()
     
+    lazy var statsTable: UITableView = {
+        let table = UITableView()
+            .with(bgColor: .purple)
+            .with(cornerRadius: 30)
+            .with(borderWidth: 2, color: Colors.topGradient.cgColor)
+            .with(autolayout: false)
+        
+        table.delegate = self
+        table.dataSource = self
+        table.register(StatsCell.self, forCellReuseIdentifier: "StatsCell")
+        return table
+    }()
+    
     var delegate: StatsDelegate?
+    let dataFunction = DataFunction()
+    var model: [Model]?
     
     override init(frame: CGRect){
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
         super.init(frame: useFrame)
         self.backgroundColor = .clear
+        fetchData()
         SetSubviews()
         ActivateLayouts()
     }
 
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    @objc func fetchData(){
+        model = dataFunction.fetchData()
+        statsTable.reloadData()
     }
 }
 
@@ -83,6 +104,28 @@ extension StatsView: UIScrollViewDelegate {
 
 
 
+extension StatsView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model?.count ?? 0
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = statsTable.dequeueReusableCell(withIdentifier: "StatsCell") as! StatsCell
+        cell.dateLabel.text = model?[indexPath.row].day?.inString
+        cell.updateData(logSizes: model?[indexPath.row].logSize,
+                        logMaterials: model?[indexPath.row].logMaterial)
+        cell.backgroundColor = .orange
+        return cell
+    }
+}
+
+
+
+
 
 extension StatsView {
     func SetSubviews(){
@@ -90,6 +133,7 @@ extension StatsView {
         scrollView.addSubview(weightLabel)
         scrollView.addSubview(subtitle)
         scrollView.addSubview(timeTitle)
+        scrollView.addSubview(statsTable)
     }
     
     func ActivateLayouts(){
@@ -107,6 +151,11 @@ extension StatsView {
             
             timeTitle.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 6),
             timeTitle.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            
+            statsTable.topAnchor.constraint(equalTo: timeTitle.bottomAnchor, constant: 50),
+            statsTable.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            statsTable.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth - 50),
+            statsTable.heightAnchor.constraint(equalToConstant: 500),
         ])
     }
 }

@@ -28,6 +28,7 @@ class DataFunction {
         }
     }
     
+    /// - warning: Only for specific date.
     func GetTotalLogged(forDate date: Date?, result: @escaping(_ result: Int) -> Void){
         guard (date != nil) else {
             result(0)
@@ -39,5 +40,11 @@ class DataFunction {
         let logSize = data[0].logSize
         let sum = logSize?.reduce(0, +)
         result(sum ?? 0)
+    }
+    
+    /// - warning: Fetchs all data that exists.
+    func fetchData() -> [Model] {
+        let data = database.FetchData()
+        return data
     }
 }

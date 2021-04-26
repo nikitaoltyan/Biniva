@@ -10,6 +10,18 @@ import UIKit
 
 class MaterialDefaults {
     
+    
+    func getMaterialName(id: Int) -> String {
+        switch id {
+        case 0: return "пластика"
+        case 1: return "органики"
+        case 2: return "бумаги"
+        case 3: return "металла"
+        case 4: return "дерева"
+        default: return "ткани"
+        }
+    }
+    
     static func LinearFunction(viewSize size: CGFloat, addedSize add: Int) -> CGFloat {
         switch size {
         case 400:

@@ -27,12 +27,13 @@ struct MainConstants {
 
 
 struct Colors {
+    static let nearBlack = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8) // Redevelop into Color Set
     static let background = UIColor(named: "background") ?? UIColor.white
     static let grayCircle = UIColor(named: "grayCircle") ?? UIColor.lightGray
     static let sliderGray = UIColor(named: "sliderGray") ?? UIColor.lightGray
     static let darkGrayText = UIColor(named: "darkGrayText") ?? UIColor.darkGray
-    static let topGradient = UIColor(named: "topGradient")
-    static let bottomGradient = UIColor(named: "bottomGradient")
+    static let topGradient = UIColor(named: "topGradient") ?? UIColor.green
+    static let bottomGradient = UIColor(named: "bottomGradient") ?? UIColor.green
 }
 
 
@@ -69,10 +70,19 @@ class MaterialsObject: NSObject{
 }
 
 
-struct MaterialsObjectItems {
-    static var color: Array<UIColor> = [MaterialsColors.waterBlue, MaterialsColors.organicGreen, MaterialsColors.paperOrange, MaterialsColors.metalBeige]
-    static var image: Array<UIImage> = [MaterialsIcons.waterBottle, MaterialsIcons.organicLimone, MaterialsIcons.paper, MaterialsIcons.metal]
-    static let name: Array<Int> = [0, 1, 2, 3]
+enum material {
+    case plastic
+    case organic
+    case paper
+    case matal
+    case wood
+    case fabric
+}
+
+struct materials {
+    static var name: Array<String> = ["Пластик", "Органика", "Бумага", "Металл", "Дерево", "Ткань"]
+//    static var image: Array<UIImage> = [MaterialsIcons.waterBottle, MaterialsIcons.organicLimone, MaterialsIcons.paper, MaterialsIcons.metal]
+    static let id: Array<Int> = [0, 1, 2, 3, 4, 5]
 }
 
 /// Пластик - 0

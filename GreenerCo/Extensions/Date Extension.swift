@@ -40,7 +40,15 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    /// - warning: Convert into day and month (like: "6 March")
+    var inString: String {
+        let formatter3 = DateFormatter()
+        formatter3.dateFormat = "d MMMM"
+        return formatter3.string(from: self)
+    }
     
+    
+    // WTF ?!?!?!
     /// Function returns Array with  names of 7 last logged days (chronologically, just dates, may be empty in Firebase).
     /// - warning: Not working for 6 first days of each new year.
     /// - warning: Empty

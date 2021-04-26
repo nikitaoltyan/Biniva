@@ -22,8 +22,8 @@ class ButtonView: UIView {
     lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.frame = self.frame
-        gradient.colors = [Colors.topGradient!.cgColor,
-                           Colors.bottomGradient!.cgColor]
+        gradient.colors = [Colors.topGradient.cgColor,
+                           Colors.bottomGradient.cgColor]
         gradient.startPoint = CGPoint(x: 1, y: 0)
         gradient.endPoint = CGPoint(x: 0, y: 1)
         return gradient

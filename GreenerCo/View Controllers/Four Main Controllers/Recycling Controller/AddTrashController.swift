@@ -9,12 +9,13 @@ import UIKit
 
 class AddTrashController: UIViewController {
 
-    let backButton: UIButton = {
-        let scale: CGFloat = 50
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: scale, height: scale))
+    let backButton: UIImageView = {
+        let scale: CGFloat = 35
+        let button = UIImageView(frame: CGRect(x: 0, y: 0, width: scale, height: scale-5))
             .with(autolayout: false)
         button.tintColor = MainConstants.nearBlack
-        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        button.image = UIImage(systemName: "chevron.down")
+        button.isUserInteractionEnabled = true
         return button
     }()
     
@@ -50,10 +51,18 @@ class AddTrashController: UIViewController {
         let pager = UIPageControl()
             .with(bgColor: .clear)
             .with(autolayout: false)
-        pager.numberOfPages = 4
+        pager.numberOfPages = materials.id.count
         pager.currentPageIndicatorTintColor = Colors.darkGrayText
         pager.pageIndicatorTintColor = Colors.sliderGray
         return pager
+    }()
+    
+    let addTrashView: AddTrashView = {
+        let view = AddTrashView()
+            .with(bgColor: .clear)
+            .with(autolayout: false)
+        view.isHidden = true
+        return view
     }()
     
     let button: ButtonView = {
@@ -71,21 +80,47 @@ class AddTrashController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Colors.sliderGray
+        self.hideKeyboardWhenTappedAround()
         SetSubviews()
         ActivateLayouts()
     }
 
     
     @objc func Close(){
-        let newVC = RecyclingController()
-        newVC.modalPresentationStyle = .overFullScreen
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromBottom
-        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
-        view.window!.layer.add(transition, forKey: kCATransition)
-        present(newVC, animated: false, completion: nil)
+        if (materialsCollection.isHidden) {
+            addTrashView.isHidden = true
+            materialsCollection.isHidden = false
+            pager.isHidden = false
+            UIView.animate(withDuration: 0.2, animations: {
+                self.backButton.transform = CGAffineTransform(rotationAngle: 0)
+            })
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @objc func Add(){
+        if (materialsCollection.isHidden) {
+//            print(addTrashView.weightView.textView.text)
+//            Add here a function for adding materials.
+        } else {
+            materialsCollection.isHidden = true
+            pager.isHidden = true
+            addTrashView.isHidden = false
+            UIView.animate(withDuration: 0.2, animations: {
+                self.backButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
+            })
+        }
+    }
+}
+
+
+
+
+extension AddTrashController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
+        pager.currentPage = Int(pageIndex)
     }
 }
 
@@ -95,7 +130,7 @@ class AddTrashController: UIViewController {
 
 extension AddTrashController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -105,7 +140,7 @@ extension AddTrashController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = materialsCollection.dequeueReusableCell(withReuseIdentifier: "MaterialCell", for: indexPath) as! MaterialCell
         cell.image.image = #imageLiteral(resourceName: "5-02.3-s")
-        cell.title.text = "Plastik"
+        cell.title.text = materials.name[indexPath.row]
         return cell
     }
     
@@ -121,8 +156,11 @@ extension AddTrashController {
         view.addSubview(whiteBGView)
         whiteBGView.addSubview(materialsCollection)
         whiteBGView.addSubview(button)
+        whiteBGView.addSubview(pager)
+        whiteBGView.addSubview(addTrashView)
         
-        backButton.addTarget(self, action: #selector(Close), for: .touchUpInside)
+        backButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Close)))
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Add)))
     }
     
     func ActivateLayouts(){
@@ -145,7 +183,15 @@ extension AddTrashController {
             button.centerXAnchor.constraint(equalTo: whiteBGView.centerXAnchor),
             button.bottomAnchor.constraint(equalTo: whiteBGView.bottomAnchor, constant: -66),
             button.heightAnchor.constraint(equalToConstant: button.frame.height),
-            button.widthAnchor.constraint(equalToConstant: button.frame.width)
+            button.widthAnchor.constraint(equalToConstant: button.frame.width),
+            
+            pager.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -50),
+            pager.centerXAnchor.constraint(equalTo: whiteBGView.centerXAnchor),
+            
+            addTrashView.centerXAnchor.constraint(equalTo: whiteBGView.centerXAnchor),
+            addTrashView.topAnchor.constraint(equalTo: whiteBGView.topAnchor, constant: 22),
+            addTrashView.heightAnchor.constraint(equalToConstant: addTrashView.frame.height),
+            addTrashView.widthAnchor.constraint(equalToConstant: addTrashView.frame.width),
         ])
     }
 }
