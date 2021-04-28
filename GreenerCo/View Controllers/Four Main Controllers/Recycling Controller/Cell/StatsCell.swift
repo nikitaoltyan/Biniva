@@ -41,6 +41,7 @@ class StatsCell: UITableViewCell {
     }
     
     func updateData(logSizes: [Int]?, logMaterials: [Int]?) {
+        loggedLabel.text = ""
         guard (logSizes != nil && logMaterials != nil) else { return }
         for item in 0...(logSizes!.count-1){
             let logSize = logSizes![item]

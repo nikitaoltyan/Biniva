@@ -126,6 +126,7 @@ extension RecyclingController: RecyclingDelegate {
         let newVC = AddTrashController()
         newVC.modalPresentationStyle = .overFullScreen
         newVC.modalTransitionStyle = .coverVertical
+        newVC.delegate = statsView
         present(newVC, animated: true, completion: nil)
     }
 }

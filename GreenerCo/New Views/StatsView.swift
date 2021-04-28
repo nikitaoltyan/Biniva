@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol Test {
+    func update()
+}
+
+
 class StatsView: UIView {
 
     lazy var scrollView: UIScrollView = {
@@ -59,8 +64,10 @@ class StatsView: UIView {
             .with(borderWidth: 2, color: Colors.topGradient.cgColor)
             .with(autolayout: false)
         
+        table.allowsSelection = false
         table.delegate = self
         table.dataSource = self
+        table.isScrollEnabled = false
         table.register(StatsCell.self, forCellReuseIdentifier: "StatsCell")
         return table
     }()
@@ -69,13 +76,15 @@ class StatsView: UIView {
     let dataFunction = DataFunction()
     var model: [Model]?
     
+    var statsTableHeightConst: NSLayoutConstraint?
+    
     override init(frame: CGRect){
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
         super.init(frame: useFrame)
         self.backgroundColor = .clear
-        fetchData()
         SetSubviews()
         ActivateLayouts()
+        fetchData()
     }
 
     required init?(coder: NSCoder) {
@@ -83,9 +92,21 @@ class StatsView: UIView {
     }
     
     @objc func fetchData(){
+        model?.removeAll()
+        statsTable.reloadData()
         model = dataFunction.fetchData()
         model?.reverse()
         statsTable.reloadData()
+        updateConst()
+    }
+    
+    func updateConst(){
+        var height: CGFloat {
+                    statsTable.layoutIfNeeded()
+                    return statsTable.contentSize.height + 40
+                }
+        statsTableHeightConst?.constant = height
+        statsTable.layoutIfNeeded()
     }
 }
 
@@ -94,7 +115,8 @@ class StatsView: UIView {
 
 extension StatsView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 25 {
+        guard (scrollView == self.scrollView) else { return }
+        if scrollView.contentOffset.y < 22 {
             delegate?.HideTopBar(false)
         } else {
             delegate?.HideTopBar(true)
@@ -102,6 +124,10 @@ extension StatsView: UIScrollViewDelegate {
     }
 }
 
+
+extension StatsView: Test {
+    func update(){ fetchData() }
+}
 
 
 
@@ -148,10 +174,13 @@ extension StatsView {
             timeTitle.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 6),
             timeTitle.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             
+//            statsTable height was setted in the bottom of the function.
             statsTable.topAnchor.constraint(equalTo: timeTitle.bottomAnchor, constant: 50),
             statsTable.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             statsTable.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth - 50),
-            statsTable.heightAnchor.constraint(equalToConstant: 500),
         ])
+        
+        statsTableHeightConst = statsTable.heightAnchor.constraint(equalToConstant: 100)
+        statsTableHeightConst?.isActive = true
     }
 }

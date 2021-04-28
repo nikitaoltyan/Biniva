@@ -82,6 +82,7 @@ class AddTrashController: UIViewController {
     }()
     
     
+    var delegate: Test?
     var currentPage: Int = 0
     
     
@@ -113,7 +114,8 @@ class AddTrashController: UIViewController {
             let txt = addTrashView.weightView.textView.text.split(separator: " ")
             let weight: Int = Int(txt[0]) ?? 0
             DataFunction().addData(loggedSize: weight, material: currentPage, date: Date().onlyDate)
-            dismiss(animated: true, completion: nil)
+//            Call circle ani,mation function here also.
+            dismiss(animated: true, completion: {() in  self.delegate?.update() })
         } else {
             Vibration.soft()
             materialsCollection.isHidden = true
