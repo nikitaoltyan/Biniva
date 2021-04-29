@@ -88,6 +88,7 @@ extension AddTrashView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Vibration.soft()
         if let cell = collection.cellForItem(at: currentSelectedIndexPath ?? indexPath) as? ExtraAddCell {
             cell.unselect()
         }

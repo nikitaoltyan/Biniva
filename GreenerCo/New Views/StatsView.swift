@@ -103,7 +103,7 @@ class StatsView: UIView {
     func updateConst(){
         var height: CGFloat {
                     statsTable.layoutIfNeeded()
-                    return statsTable.contentSize.height + 40
+                    return statsTable.contentSize.height
                 }
         statsTableHeightConst?.constant = height
         statsTable.layoutIfNeeded()

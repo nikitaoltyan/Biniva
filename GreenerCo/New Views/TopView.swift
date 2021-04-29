@@ -54,6 +54,18 @@ class TopView: UIView {
 
 extension TopView: TopViewDelegate {
     func UpdateTitles(isRecylcing: Bool) {
+        var translation: CGFloat { if (isRecylcing) {return 300} else {return -300}}
+        UIView.animate(withDuration: 0.15, animations: {
+            self.title.transform = CGAffineTransform.init(translationX: translation, y: 0)
+            self.subtitle.transform = CGAffineTransform.init(translationX: translation, y: 0)
+        }, completion: { (_) in
+            self.title.transform = CGAffineTransform(translationX: -translation, y: 0)
+            self.subtitle.transform = CGAffineTransform(translationX: -translation, y: 0)
+            UIView.animate(withDuration: 0.15, animations: {
+                self.title.transform = CGAffineTransform.init(translationX: 0, y: 0)
+                self.subtitle.transform = CGAffineTransform.init(translationX: 0, y: 0)
+            })
+        })
         if (isRecylcing) {
             title.text = "Переработка"
             subtitle.text = "поможем сегодня природе"
