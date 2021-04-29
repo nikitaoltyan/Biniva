@@ -26,20 +26,39 @@ class ProgressView: UIView {
         return shapeLayer
     }()
     
-    lazy var circleView: CAGradientLayer = {
+    lazy var maskCircle: CAShapeLayer = {
         let shapeLayer = CAShapeLayer()
         let center = self.center
         let circularPath = UIBezierPath(arcCenter: center, radius: self.frame.width*0.36, startAngle: -CGFloat.pi/2, endAngle: CGFloat.pi, clockwise: true)
+        
         shapeLayer.path = circularPath.cgPath
-        shapeLayer.strokeColor = MainConstants.green.cgColor
+        shapeLayer.strokeColor = Colors.darkGrayText.cgColor
         shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.lineCap = CAShapeLayerLineCap.round
+        shapeLayer.lineCap = .round
         shapeLayer.lineWidth = 28
         
         shapeLayer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
         shapeLayer.shadowRadius = 10
         shapeLayer.shadowOpacity = 0.8
         shapeLayer.shadowOffset = CGSize(width: 4, height: 4)
+        return shapeLayer
+    }()
+    
+    lazy var circleView: CAGradientLayer = {
+//    lazy var circleView: CAShapeLayer = {
+//        let shapeLayer = CAShapeLayer()
+//        let center = self.center
+//        let circularPath = UIBezierPath(arcCenter: center, radius: self.frame.width*0.36, startAngle: -CGFloat.pi/2, endAngle: CGFloat.pi, clockwise: true)
+//        shapeLayer.path = circularPath.cgPath
+//        shapeLayer.strokeColor = Colors.darkGrayText.cgColor
+//        shapeLayer.fillColor = UIColor.clear.cgColor
+//        shapeLayer.lineCap = .round
+//        shapeLayer.lineWidth = 28
+//
+//        shapeLayer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+//        shapeLayer.shadowRadius = 10
+//        shapeLayer.shadowOpacity = 0.8
+//        shapeLayer.shadowOffset = CGSize(width: 4, height: 4)
         
         let gradient = CAGradientLayer()
         gradient.frame = frame
@@ -47,8 +66,7 @@ class ProgressView: UIView {
                            Colors.bottomGradient.cgColor]
         gradient.startPoint = CGPoint(x: 1, y: 0)
         gradient.endPoint = CGPoint(x: 0, y: 1)
-
-        gradient.mask = shapeLayer
+        gradient.mask = maskCircle
         return gradient
     }()
     
@@ -85,6 +103,7 @@ class ProgressView: UIView {
         return label
     }()
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .clear
@@ -94,6 +113,16 @@ class ProgressView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    
+    @objc func tap(){
+        print("Tap")
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.duration = 5
+        maskCircle.add(animation, forKey: nil)
     }
 }
 
@@ -108,6 +137,8 @@ extension ProgressView {
         self.addSubview(weightLabel)
         self.addSubview(subtitle)
         self.addSubview(warningTitle)
+        
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
     }
     
     func ActivateLayouts(){

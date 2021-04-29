@@ -222,34 +222,34 @@ class UserProfileController: UIViewController {
     
     
     func UpdateData() {
-        Server.GetAllUserData(forUserId: Defaults.GetUserId(), userData: { data in
-            DispatchQueue.main.async { self.profileImage.downloadImage(from: data["image"] as? String) }
-            self.username.text = "@\(data["username"] as? String ?? "NaN")"
-            self.userBigDesc.text = data["header_desc"] as? String ?? " "
-            self.userDesc.text = data["desc"] as? String ?? " "
-            let meetings = data["meetings"] as? Dictionary<String, Any> ?? [:]
-            self.meetArray = meetings["created_meetings"] as? Array ?? []
-            self.joinedArray = meetings["joined_meetings"] as? Array ?? []
-            self.meetLabelsView.numberLabel.text = "\(self.meetArray.count)"
-            self.joinedLabelsView.numberLabel.text = "\(self.joinedArray.count)"
-            self.CollectionUpdate()
-        })
+//        Server.GetAllUserData(forUserId: Defaults.GetUserId(), userData: { data in
+//            DispatchQueue.main.async { self.profileImage.downloadImage(from: data["image"] as? String) }
+//            self.username.text = "@\(data["username"] as? String ?? "NaN")"
+//            self.userBigDesc.text = data["header_desc"] as? String ?? " "
+//            self.userDesc.text = data["desc"] as? String ?? " "
+//            let meetings = data["meetings"] as? Dictionary<String, Any> ?? [:]
+//            self.meetArray = meetings["created_meetings"] as? Array ?? []
+//            self.joinedArray = meetings["joined_meetings"] as? Array ?? []
+//            self.meetLabelsView.numberLabel.text = "\(self.meetArray.count)"
+//            self.joinedLabelsView.numberLabel.text = "\(self.joinedArray.count)"
+//            self.CollectionUpdate()
+//        })
     }
     
     
     func CollectionUpdate(){
-        for mid in meetArray{
-            Server.PostDetails(postWithId: mid, postDetails: { data in
-                self.meetDetails.append(data)
-                self.meetCollection.reloadData()
-            })
-        }
-        for mid in joinedArray{
-            Server.PostDetails(postWithId: mid, postDetails: { data in
-                self.joinedDetails.append(data)
-                self.joinedCollection.reloadData()
-            })
-        }
+//        for mid in meetArray{
+//            Server.PostDetails(postWithId: mid, postDetails: { data in
+//                self.meetDetails.append(data)
+//                self.meetCollection.reloadData()
+//            })
+//        }
+//        for mid in joinedArray{
+//            Server.PostDetails(postWithId: mid, postDetails: { data in
+//                self.joinedDetails.append(data)
+//                self.joinedCollection.reloadData()
+//            })
+//        }
         scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: meetCollection.frame.minY+MainConstants.screenHeight)
     }
     

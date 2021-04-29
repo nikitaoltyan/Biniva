@@ -42,10 +42,10 @@ class MeetingsController: UIViewController {
     
     
     override func viewDidLoad() {
-        Server.ReturnArrayWithPostDictonaries() { result in
-            self.postDetails = result
-            self.meetingCollection.reloadData()
-        }
+//        Server.ReturnArrayWithPostDictonaries() { result in
+//            self.postDetails = result
+//            self.meetingCollection.reloadData()
+//        }
         view.backgroundColor = MainConstants.white
         SetSubviews()
         ActivateLayouts()

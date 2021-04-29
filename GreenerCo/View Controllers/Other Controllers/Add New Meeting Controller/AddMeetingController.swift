@@ -157,7 +157,7 @@ extension AddMeetingController: AddMeetingSendDelegate {
     func Send() {
         print("Create meeting")
         let uid: String = UserDefaults.standard.string(forKey: "uid")!
-        Server.CreateMeeting(withData: dataDictonary, andUserId: uid)
+//        Server.CreateMeeting(withData: dataDictonary, andUserId: uid)
         
         tabBarController?.selectedIndex = 2
         DispatchQueue.main.async { self.ShowPopUpController() }

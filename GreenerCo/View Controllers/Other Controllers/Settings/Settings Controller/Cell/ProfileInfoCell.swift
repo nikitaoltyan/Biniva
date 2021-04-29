@@ -48,11 +48,11 @@ class ProfileInfoCell: UITableViewCell {
     
     
     func UpdateData(userId uid: String?){
-        Server.GetUserMainData(forUserId: uid, userData: { result in
-            DispatchQueue.main.async { self.profileImage.downloadImage(from: result["image"] as? String) }
-            self.username.text = result["username"] as? String
-            self.email.text = result["email"] as? String
-        })
+//        Server.GetUserMainData(forUserId: uid, userData: { result in
+//            DispatchQueue.main.async { self.profileImage.downloadImage(from: result["image"] as? String) }
+//            self.username.text = result["username"] as? String
+//            self.email.text = result["email"] as? String
+//        })
     }
 }
 

@@ -193,7 +193,7 @@ extension RegistrationController: RegistrationDelegate {
     
     func FinishRegistration() {
         print("Finish registration")
-        Server.CreateUser(withData: dataDictonary, andProfileImage: avatarImage!)
+//        Server.CreateUser(withData: dataDictonary, andProfileImage: avatarImage!)
 //        tabBarController?.selectedIndex = 0
         DispatchQueue.main.async { self.ShowAfterregistrationPopUp() }
     }

@@ -9,7 +9,6 @@ import UIKit
 import MapKit
 import CoreLocation
 
-import Firebase
 
 class MeetingViewController: UIViewController {
     
@@ -289,11 +288,11 @@ class MeetingViewController: UIViewController {
     
     
     fileprivate func GetMassages(){
-        Server.GetMessages(meetingId: postData["mid"] as! String, messages: { result in
-            self.messagesData = result
-            self.discussTable.reloadData()
-            self.ReloadTableHeight()
-        })
+//        Server.GetMessages(meetingId: postData["mid"] as! String, messages: { result in
+//            self.messagesData = result
+//            self.discussTable.reloadData()
+//            self.ReloadTableHeight()
+//        })
     }
     
     
@@ -312,7 +311,7 @@ class MeetingViewController: UIViewController {
         print("Joined in")
         Vibration.soft()
         let uid: String = UserDefaults.standard.string(forKey: "uid")!
-        Server.JoinMeeting(withUserId: uid, meetingId: postData["mid"] as! String, andType: "join")
+//        Server.JoinMeeting(withUserId: uid, meetingId: postData["mid"] as! String, andType: "join")
         guard (postData["joined"] != nil) else {
             postData.merge(dict: ["joined": [uid]])
             CheckIfJoin(userId: uid, meetingId: postData["mid"] as! String)
@@ -331,9 +330,9 @@ class MeetingViewController: UIViewController {
         print("Sended")
         Vibration.Light()
         let uid: String = UserDefaults.standard.string(forKey: "uid")!
-        Server.SendMessage(user: uid,
-                           meetingId: postData["mid"] as! String,
-                           massageText: commentField.text ?? "")
+//        Server.SendMessage(user: uid,
+//                           meetingId: postData["mid"] as! String,
+//                           massageText: commentField.text ?? "")
         commentField.endEditing(true)
         commentField.text = ""
     }

@@ -44,7 +44,6 @@ class Defaults {
     /// Function to set user Daily norm for logging.
     /// - parameter norm: How much user plans to log.
     static func SetUserDailyNorm(userNorm norm: Int) {
-        print("Set user Daily Norm")
         userDefault.setValue(norm, forKey: "dailyNorm")
     }
     
@@ -52,7 +51,6 @@ class Defaults {
     static func GetUserDailyNorm(userId uid: String?) -> Int {
         guard (uid != nil) else { return 1100 }
         let userDN: Int = userDefault.integer(forKey: "dailyNorm")
-        print("User DN from defaults: \(userDN)")
         guard (userDN != 0) else { return 1100 }
         return userDN
     }
@@ -67,7 +65,7 @@ class Defaults {
         let todayDate: String = "\(date.day)_\(date.month)_\(date.year)"
         let day: String = "\(date.day) \(date.month)"
         if lastLoggedDate != todayDate {
-            ServerMaterials.SetZeroDayData(forUserID: uid, andDate: todayDate, textDate: day)
+//            ServerMaterials.SetZeroDayData(forUserID: uid, andDate: todayDate, textDate: day)
             userDefault.setValue(todayDate, forKey: "lastLogged")
             userDefault.setValue(0, forKey: "loggedData")
             alreadyLogged(0)

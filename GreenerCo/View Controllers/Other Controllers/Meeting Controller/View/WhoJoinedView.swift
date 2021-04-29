@@ -69,74 +69,74 @@ class WhoJoinedView: UIView {
     
     
     func ShowJoinedUsers(withMid mid: String){
-        Server.GetMeetingJoinedArray(withMeetingId: mid, result: { result in
-            switch result?.count {
-            case 0:
-                self.imageOne.isHidden = true
-                self.imageTwo.isHidden = true
-                self.imageThree.isHidden = true
-                self.label.isHidden = true
-            case 1:
-                self.imageTwo.isHidden = true
-                self.imageThree.isHidden = true
-                self.leftLabelConstraint?.constant = 30
-            case 2:
-                self.imageThree.isHidden = true
-                self.label.text = "2 участника"
-                self.leftLabelConstraint?.constant = 48
-            default:
-                self.label.text = "3+ участника"
-                self.leftLabelConstraint?.constant = 65
-            }
-            self.GetImagesAndNames(uidArray: result)
-        })
+//        Server.GetMeetingJoinedArray(withMeetingId: mid, result: { result in
+//            switch result?.count {
+//            case 0:
+//                self.imageOne.isHidden = true
+//                self.imageTwo.isHidden = true
+//                self.imageThree.isHidden = true
+//                self.label.isHidden = true
+//            case 1:
+//                self.imageTwo.isHidden = true
+//                self.imageThree.isHidden = true
+//                self.leftLabelConstraint?.constant = 30
+//            case 2:
+//                self.imageThree.isHidden = true
+//                self.label.text = "2 участника"
+//                self.leftLabelConstraint?.constant = 48
+//            default:
+//                self.label.text = "3+ участника"
+//                self.leftLabelConstraint?.constant = 65
+//            }
+//            self.GetImagesAndNames(uidArray: result)
+//        })
     }
     
     
     func GetImagesAndNames(uidArray: Array<String>?){
-        guard (uidArray?.count != 0) else { return }
-        var useArr = uidArray
-        switch uidArray?.count {
-        case 1:
-            let res = useArr?.randomElements(numberOfElements: 1)
-            Server.ReturnUserData(userId: res![0], userDetails: { details in
-                DispatchQueue.main.async {
-                    self.imageOne.downloadImage(from: details["image"] as? String)
-                    self.label.text = "\(details["username"] as! String) присоединился"
-                }
-            })
-        case 2:
-            let res = useArr?.randomElements(numberOfElements: 2)
-            Server.ReturnUserData(userId: res![0], userDetails: { details in
-                DispatchQueue.main.async {
-                    self.imageOne.downloadImage(from: details["image"] as? String)
-                }
-            })
-            Server.ReturnUserData(userId: res![1], userDetails: { details in
-                DispatchQueue.main.async {
-                    self.imageTwo.downloadImage(from: details["image"] as? String)
-                    self.label.text = "\(details["username"] as! String) +1 присоединились"
-                }
-            })
-        default:
-            let res = useArr?.randomElements(numberOfElements: 3)
-            Server.ReturnUserData(userId: res![0], userDetails: { details in
-                DispatchQueue.main.async {
-                    self.imageOne.downloadImage(from: details["image"] as? String)
-                }
-            })
-            Server.ReturnUserData(userId: res![1], userDetails: { details in
-                DispatchQueue.main.async {
-                    self.imageTwo.downloadImage(from: details["image"] as? String)
-                }
-            })
-            Server.ReturnUserData(userId: res![2], userDetails: { details in
-                DispatchQueue.main.async {
-                    self.imageThree.downloadImage(from: details["image"] as? String)
-                    self.label.text = "\(details["username"] as! String) +\(uidArray!.count-1) присоединились"
-                }
-            })
-        }
+//        guard (uidArray?.count != 0) else { return }
+//        var useArr = uidArray
+//        switch uidArray?.count {
+//        case 1:
+//            let res = useArr?.randomElements(numberOfElements: 1)
+//            Server.ReturnUserData(userId: res![0], userDetails: { details in
+//                DispatchQueue.main.async {
+//                    self.imageOne.downloadImage(from: details["image"] as? String)
+//                    self.label.text = "\(details["username"] as! String) присоединился"
+//                }
+//            })
+//        case 2:
+//            let res = useArr?.randomElements(numberOfElements: 2)
+//            Server.ReturnUserData(userId: res![0], userDetails: { details in
+//                DispatchQueue.main.async {
+//                    self.imageOne.downloadImage(from: details["image"] as? String)
+//                }
+//            })
+//            Server.ReturnUserData(userId: res![1], userDetails: { details in
+//                DispatchQueue.main.async {
+//                    self.imageTwo.downloadImage(from: details["image"] as? String)
+//                    self.label.text = "\(details["username"] as! String) +1 присоединились"
+//                }
+//            })
+//        default:
+//            let res = useArr?.randomElements(numberOfElements: 3)
+//            Server.ReturnUserData(userId: res![0], userDetails: { details in
+//                DispatchQueue.main.async {
+//                    self.imageOne.downloadImage(from: details["image"] as? String)
+//                }
+//            })
+//            Server.ReturnUserData(userId: res![1], userDetails: { details in
+//                DispatchQueue.main.async {
+//                    self.imageTwo.downloadImage(from: details["image"] as? String)
+//                }
+//            })
+//            Server.ReturnUserData(userId: res![2], userDetails: { details in
+//                DispatchQueue.main.async {
+//                    self.imageThree.downloadImage(from: details["image"] as? String)
+//                    self.label.text = "\(details["username"] as! String) +\(uidArray!.count-1) присоединились"
+//                }
+//            })
+//        }
     }
 }
 

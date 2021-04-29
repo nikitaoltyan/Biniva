@@ -153,14 +153,14 @@ class LogInController: UIViewController {
     
     @objc func LogIn() {
         guard (nextButton.isActive) else { return }
-        Server.AuthUser(withEmail: emailField.text!.lowercased(), password: passwordField.text!, success: {
-            result in
-            guard (result) else {
-                self.ShowErrorPopUp()
-                return
-            }
-            Vibration.Light()
-            guard let window = UIApplication.shared.windows.first else { return }
+//        Server.AuthUser(withEmail: emailField.text!.lowercased(), password: passwordField.text!, success: {
+//            result in
+//            guard (result) else {
+//                self.ShowErrorPopUp()
+//                return
+//            }
+//            Vibration.Light()
+//            guard let window = UIApplication.shared.windows.first else { return }
             
 //            let vc = MainTabBarController()
 //            window.rootViewController = vc
@@ -168,7 +168,7 @@ class LogInController: UIViewController {
 //            let duration: TimeInterval = 0.3
 //            UIView.transition(with: window, duration: duration, options: options, animations: {}, completion:
 //            { completed in })
-        })
+//        })
     }
 
     
