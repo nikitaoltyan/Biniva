@@ -29,11 +29,11 @@ class DataFunction {
     }
     
     /// - warning: Only for specific date.
-    func GetTotalLogged(forDate date: Date?, result: @escaping(_ result: Int) -> Void){
-        guard (date != nil) else {
+    func getTotalLogged(forDate date: Date?, result: @escaping(_ result: Int) -> Void){
+        guard let date = date else {
             result(0)
             return}
-        let data = database.GetByDay(date: date!)
+        let data = database.GetByDay(date: date)
         guard data.count > 0 else {
             result(0)
             return}

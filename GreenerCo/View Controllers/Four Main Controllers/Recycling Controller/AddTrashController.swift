@@ -82,7 +82,8 @@ class AddTrashController: UIViewController {
     }()
     
     
-    var delegate: Test?
+    var statsDelegate: Test?
+    var recyclingDelegate: RecyclingProgressDelegate?
     var currentPage: Int = 0
     
     
@@ -114,8 +115,11 @@ class AddTrashController: UIViewController {
             let txt = addTrashView.weightView.textView.text.split(separator: " ")
             let weight: Int = Int(txt[0]) ?? 0
             DataFunction().addData(loggedSize: weight, material: currentPage, date: Date().onlyDate)
-//            Call circle ani,mation function here also.
-            dismiss(animated: true, completion: {() in  self.delegate?.update() })
+//            Call circle animation function here also.
+            dismiss(animated: true, completion: {() in
+                self.statsDelegate?.update()
+                self.recyclingDelegate?.update(addWeight: weight)
+            })
         } else {
             Vibration.soft()
             materialsCollection.isHidden = true

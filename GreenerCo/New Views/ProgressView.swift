@@ -29,10 +29,11 @@ class ProgressView: UIView {
     lazy var maskCircle: CAShapeLayer = {
         let shapeLayer = CAShapeLayer()
         let center = self.center
-        let circularPath = UIBezierPath(arcCenter: center, radius: self.frame.width*0.36, startAngle: -CGFloat.pi/2, endAngle: CGFloat.pi, clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: center, radius: self.frame.width*0.36, startAngle: -CGFloat.pi/2, endAngle: 2*CGFloat.pi, clockwise: true)
         
         shapeLayer.path = circularPath.cgPath
         shapeLayer.strokeColor = Colors.darkGrayText.cgColor
+        shapeLayer.strokeEnd = 0
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineCap = .round
         shapeLayer.lineWidth = 28
@@ -45,21 +46,6 @@ class ProgressView: UIView {
     }()
     
     lazy var circleView: CAGradientLayer = {
-//    lazy var circleView: CAShapeLayer = {
-//        let shapeLayer = CAShapeLayer()
-//        let center = self.center
-//        let circularPath = UIBezierPath(arcCenter: center, radius: self.frame.width*0.36, startAngle: -CGFloat.pi/2, endAngle: CGFloat.pi, clockwise: true)
-//        shapeLayer.path = circularPath.cgPath
-//        shapeLayer.strokeColor = Colors.darkGrayText.cgColor
-//        shapeLayer.fillColor = UIColor.clear.cgColor
-//        shapeLayer.lineCap = .round
-//        shapeLayer.lineWidth = 28
-//
-//        shapeLayer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
-//        shapeLayer.shadowRadius = 10
-//        shapeLayer.shadowOpacity = 0.8
-//        shapeLayer.shadowOffset = CGSize(width: 4, height: 4)
-        
         let gradient = CAGradientLayer()
         gradient.frame = frame
         gradient.colors = [Colors.topGradient.cgColor,
@@ -77,7 +63,7 @@ class ProgressView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 48)
             .with(autolayout: false)
-        label.text = "1,5 кг"
+        label.text = "0 кг"
         return label
     }()
     
@@ -103,26 +89,50 @@ class ProgressView: UIView {
         return label
     }()
     
+    // Should be setted with initializer.
+    var currentValue: CGFloat = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .clear
         SetSubviews()
         ActivateLayouts()
+        DispatchQueue.main.async { self.setUpInitial() }
+        setUpInitial()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
     
+    func setUpInitial(){
+        DataFunction().getTotalLogged(forDate: Date().onlyDate, result: { (logged) in
+            self.currentValue = CGFloat(logged)/2000.0
+            self.maskCircle.strokeEnd = CGFloat(logged)/2000.0
+            self.setLabel()
+        })
+    }
     
-    @objc func tap(){
-        print("Tap")
+    func update(addWeight weight: Int){
+        let add = CGFloat(weight)/2000.0
+        animate(addValue: add)
+        currentValue += add
+        setLabel()
+    }
+    
+    func animate(addValue: CGFloat){
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = 0
-        animation.toValue = 1
-        animation.duration = 5
+        animation.fromValue = currentValue
+        animation.toValue = currentValue + addValue
+        animation.duration = 0.5
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
         maskCircle.add(animation, forKey: nil)
+    }
+    
+    func setLabel(){
+        let formatted = String(format: "%.2f", currentValue*2)
+        weightLabel.text = "\(formatted) кг"
     }
 }
 
@@ -137,8 +147,6 @@ extension ProgressView {
         self.addSubview(weightLabel)
         self.addSubview(subtitle)
         self.addSubview(warningTitle)
-        
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
     }
     
     func ActivateLayouts(){

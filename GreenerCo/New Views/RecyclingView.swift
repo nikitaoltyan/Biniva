@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol RecyclingProgressDelegate {
+    func update(addWeight weight: Int)
+}
+
 class RecyclingView: UIView {
     
     let progressView: ProgressView = {
@@ -46,6 +50,12 @@ class RecyclingView: UIView {
     }
 }
 
+
+extension RecyclingView: RecyclingProgressDelegate {
+    func update(addWeight weight: Int) {
+        progressView.update(addWeight: weight)
+    }
+}
 
 
 
