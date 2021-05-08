@@ -56,14 +56,14 @@ struct materials {
 
 struct plastic {
     static let title: Array<String> = ["Бутылка", "Бутылка", "Бутылка", "Бутылка", "Канистра", "Другое"]
-    static let subtitle: Array<String> = ["Объем 0.33 литра", "Объем 0.5 литра", "Объем 1 литр", "Объем 1.5 литра", "Объем 5 литров", "Обертка и т.д."]
+    static let subtitle: Array<String> = ["объем 0.33 литра", "Объем 0.5 литра", "Объем 1 литр", "Объем 1.5 литра", "Объем 5 литров", "Обертка и т.д."]
     static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
 }
 
 struct organic {
-    static let title: Array<String> = ["organic 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
-    static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
-    static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
+    static let title: Array<String> = ["Огрызок", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
+    static let subtitle: Array<String> = ["яблока или груши", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
+    static let weight: Array<Int> = [10, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
 }
 
 struct glass {
@@ -73,9 +73,9 @@ struct glass {
 }
 
 struct paper {
-    static let title: Array<String> = ["paper 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
-    static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
-    static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
+    static let title: Array<String> = ["лист", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
+    static let subtitle: Array<String> = ["А4", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
+    static let weight: Array<Int> = [5, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
 }
 
 struct metal {

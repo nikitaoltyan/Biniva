@@ -19,7 +19,7 @@ class CoreDataFunction {
     /// Returns all data in model.
     /// - warning: Only for "Model" Data Model.
     /// - warning: Recreate fetch request for properly fetching updated data.
-    static func FetchData() -> [Model]{
+    static func fetchData() -> [Model]{
         let request: NSFetchRequest<Model> = Model.fetchRequest()
         request.returnsObjectsAsFaults = false
         do {

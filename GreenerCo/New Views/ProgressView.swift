@@ -63,7 +63,6 @@ class ProgressView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 48)
             .with(autolayout: false)
-        label.text = "0 кг"
         return label
     }()
     
@@ -85,7 +84,6 @@ class ProgressView: UIView {
             .with(numberOfLines: 2)
             .with(fontName: "SFPro-Medium", size: 14)
             .with(autolayout: false)
-        label.text = "максимальное значение за день"
         return label
     }()
     
@@ -109,7 +107,7 @@ class ProgressView: UIView {
         DataFunction().getTotalLogged(forDate: Date().onlyDate, result: { (logged) in
             self.currentValue = CGFloat(logged)/2000.0
             self.maskCircle.strokeEnd = CGFloat(logged)/2000.0
-            self.setLabel()
+            self.setLabels()
         })
     }
     
@@ -117,7 +115,7 @@ class ProgressView: UIView {
         let add = CGFloat(weight)/2000.0
         animate(addValue: add)
         currentValue += add
-        setLabel()
+        setLabels()
     }
     
     func animate(addValue: CGFloat){
@@ -130,9 +128,14 @@ class ProgressView: UIView {
         maskCircle.add(animation, forKey: nil)
     }
     
-    func setLabel(){
+    func setLabels(){
         let formatted = String(format: "%.2f", currentValue*2)
         weightLabel.text = "\(formatted) кг"
+        if (currentValue*2 < 1.1) {
+            warningTitle.text = "вы сегодня молодец!"
+        } else {
+            warningTitle.text = "максимальное значение за день"
+        }
     }
 }
 
@@ -155,10 +158,10 @@ extension ProgressView {
             weightLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -30),
             
             subtitle.centerXAnchor.constraint(equalTo: weightLabel.centerXAnchor),
-            subtitle.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 8),
+            subtitle.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 3),
             
             warningTitle.centerXAnchor.constraint(equalTo: weightLabel.centerXAnchor),
-            warningTitle.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 26),
+            warningTitle.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 18),
             warningTitle.widthAnchor.constraint(equalToConstant: 139)
         ])
     }

@@ -42,9 +42,27 @@ class DataFunction {
         result(sum ?? 0)
     }
     
+    /// - warning: For all data.
+    func getTotalLogged(result: @escaping(_ result: Int) -> Void) {
+        let data = database.fetchData()
+        guard data.count > 0 else {
+            result(0)
+            return}
+        
+        var cummulatedSum: Int = 0
+        
+        for row in data {
+            let logSize = row.logSize
+            let sum = logSize?.reduce(0, +)
+            cummulatedSum += sum ?? 0
+        }
+        
+        result(cummulatedSum)
+    }
+    
     /// - warning: Fetchs all data that exists.
     func fetchData() -> [Model] {
-        let data = database.FetchData()
+        let data = database.fetchData()
         return data
     }
 }

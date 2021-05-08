@@ -31,7 +31,6 @@ class StatsView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 36)
             .with(autolayout: false)
-        label.text = "35 кг"
         return label
     }()
     
@@ -46,16 +45,16 @@ class StatsView: UIView {
         return label
     }()
     
-    let timeTitle: UILabel = {
-        let label = UILabel()
-            .with(color: Colors.darkGrayText)
-            .with(alignment: .center)
-            .with(numberOfLines: 2)
-            .with(fontName: "SFPro-Medium", size: 14)
-            .with(autolayout: false)
-        label.text = "максимальное значение за день"
-        return label
-    }()
+//    let timeTitle: UILabel = {
+//        let label = UILabel()
+//            .with(color: Colors.darkGrayText)
+//            .with(alignment: .center)
+//            .with(numberOfLines: 2)
+//            .with(fontName: "SFPro-Medium", size: 14)
+//            .with(autolayout: false)
+//        label.text = "максимальное значение за день"
+//        return label
+//    }()
     
     lazy var statsTable: UITableView = {
         let table = UITableView()
@@ -72,6 +71,17 @@ class StatsView: UIView {
         return table
     }()
     
+    let privacyPolicyLabel: UILabel = {
+        let label = UILabel()
+            .with(color: Colors.nearBlack)
+            .with(alignment: .center)
+            .with(fontName: "SFPro-Medium", size: 15)
+            .with(autolayout: false)
+        label.isUserInteractionEnabled = true
+        label.text = "Политика конфиденциальности"
+        return label
+    }()
+    
     var delegate: StatsDelegate?
     let dataFunction = DataFunction()
     var model: [Model]?
@@ -85,6 +95,7 @@ class StatsView: UIView {
         SetSubviews()
         ActivateLayouts()
         fetchData()
+        updateLabel()
     }
 
     required init?(coder: NSCoder) {
@@ -107,6 +118,19 @@ class StatsView: UIView {
                 }
         statsTableHeightConst?.constant = height
         statsTable.layoutIfNeeded()
+        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 450 + height)
+    }
+    
+    func updateLabel(){
+        DataFunction().getTotalLogged(result: { sum in
+            let formatted = String(format: "%.1f", Double(sum)/1000.0)
+            self.weightLabel.text = "\(formatted) кг"
+        })
+    }
+    
+    @objc func openPrivacyPolicy() {
+        // Add link here
+        print("Privacy policy")
     }
 }
 
@@ -154,8 +178,11 @@ extension StatsView {
         self.addSubview(scrollView)
         scrollView.addSubview(weightLabel)
         scrollView.addSubview(subtitle)
-        scrollView.addSubview(timeTitle)
+//        scrollView.addSubview(timeTitle)
         scrollView.addSubview(statsTable)
+        scrollView.addSubview(privacyPolicyLabel)
+        
+        privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openPrivacyPolicy)))
     }
     
     func ActivateLayouts(){
@@ -171,13 +198,16 @@ extension StatsView {
             subtitle.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 9),
             subtitle.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             
-            timeTitle.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 6),
-            timeTitle.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+//            timeTitle.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 6),
+//            timeTitle.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             
 //            statsTable height was setted in the bottom of the function.
-            statsTable.topAnchor.constraint(equalTo: timeTitle.bottomAnchor, constant: 50),
+            statsTable.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 50),
             statsTable.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             statsTable.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth - 50),
+            
+            privacyPolicyLabel.topAnchor.constraint(equalTo: statsTable.bottomAnchor, constant: 45),
+            privacyPolicyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
         
         statsTableHeightConst = statsTable.heightAnchor.constraint(equalToConstant: 100)
