@@ -10,7 +10,10 @@ import UIKit
 class MaterialCell: UICollectionViewCell {
     
     let image: UIImageView = {
-        let size: CGFloat = 270
+        let size: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 270 }
+            else { return 235 }
+        }()
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: size, height: size))
             .with(autolayout: false)
         return image
@@ -20,7 +23,7 @@ class MaterialCell: UICollectionViewCell {
         let label = UILabel()
             .with(color: MainConstants.nearBlack)
             .with(alignment: .center)
-            .with(fontName: "SFPro-Medium", size: 28)
+            .with(fontName: "SFPro-Medium", size: 24)
             .with(autolayout: false)
         return label
     }()
@@ -49,13 +52,21 @@ extension MaterialCell {
     }
     
     func ActivateLayouts(){
+        let imageTopConst: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 50 }
+            else { return 30 }
+        }()
+        let titleTopConst: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 80 }
+            else { return 40 }
+        }()
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: self.topAnchor, constant: 50),
+            image.topAnchor.constraint(equalTo: self.topAnchor, constant: imageTopConst),
             image.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             image.widthAnchor.constraint(equalToConstant: image.frame.width),
             image.heightAnchor.constraint(equalToConstant: image.frame.height),
             
-            title.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 80),
+            title.topAnchor.constraint(equalTo: image.bottomAnchor, constant: titleTopConst),
             title.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }

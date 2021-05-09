@@ -13,7 +13,7 @@ class AddTrashView: UIView {
         let label = UILabel()
             .with(color: MainConstants.nearBlack)
             .with(alignment: .center)
-            .with(fontName: "SFPro-Medium", size: 28)
+            .with(fontName: "SFPro-Medium", size: 24)
             .with(autolayout: false)
         label.text = "Пластик"
         return label
@@ -26,8 +26,12 @@ class AddTrashView: UIView {
     }()
     
     lazy var collection: UICollectionView = {
+        let height: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 410 }
+            else { return 350 }
+        }()
         let layout = UICollectionViewFlowLayout()
-        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth*0.86, height: 410)
+        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth*0.86, height: height)
         let collection = UICollectionView(frame: useFrame, collectionViewLayout: layout)
             .with(autolayout: false)
             .with(bgColor: .clear)
@@ -77,7 +81,10 @@ extension AddTrashView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.collection.frame.width/2-4, height: 130)
+        switch MainConstants.screenHeight {
+        case 700...: return CGSize(width: self.collection.frame.width/2-4, height: 130)
+        default: return CGSize(width: self.collection.frame.width/3-6, height: 80)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -112,8 +119,12 @@ extension AddTrashView {
     }
     
     func ActivateLayouts(){
+        let titleTopConst: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 5 }
+            else { return 0 }
+        }()
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            title.topAnchor.constraint(equalTo: self.topAnchor, constant: titleTopConst),
             title.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             weightView.centerXAnchor.constraint(equalTo: self.centerXAnchor),

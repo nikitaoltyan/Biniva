@@ -14,7 +14,11 @@ protocol RecyclingProgressDelegate {
 class RecyclingView: UIView {
     
     let progressView: ProgressView = {
-        let view = ProgressView(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
+        let height: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 400 }
+            else { return 380 }
+        }()
+        let view = ProgressView(frame: CGRect(x: 0, y: 0, width: height, height: height))
             .with(autolayout: false)
         return view
     }()
@@ -69,6 +73,10 @@ extension RecyclingView {
     }
     
     func ActivateLayouts(){
+        let buttonBottomConst: CGFloat = {
+            if MainConstants.screenHeight > 700 { return -66 }
+            else { return -30 }
+        }()
         NSLayoutConstraint.activate([
             progressView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             progressView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 30),
@@ -76,7 +84,7 @@ extension RecyclingView {
             progressView.heightAnchor.constraint(equalToConstant: progressView.frame.height),
             
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -66),
+            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: buttonBottomConst),
             button.heightAnchor.constraint(equalToConstant: button.frame.height),
             button.widthAnchor.constraint(equalToConstant: button.frame.width)
         ])

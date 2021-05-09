@@ -15,7 +15,7 @@ class ButtonView: UIView {
         label.textColor = MainConstants.white
         label.textAlignment = .center
         label.text = "Добавить"
-        label.font = UIFont.init(name: "SFPro-Medium", size: 22.0)
+        label.font = UIFont.init(name: "SFPro-Medium", size: 20.0)
         return label
     }()
     

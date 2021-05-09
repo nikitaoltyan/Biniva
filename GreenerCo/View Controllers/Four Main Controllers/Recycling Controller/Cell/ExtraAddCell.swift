@@ -20,10 +20,14 @@ class ExtraAddCell: UICollectionViewCell {
     }()
     
     let title: UILabel = {
+        let size: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 18 }
+            else { return 14 }
+        }()
         let label = UILabel()
             .with(color: MainConstants.nearBlack)
             .with(alignment: .center)
-            .with(fontName: "SFPro-Semibold", size: 20)
+            .with(fontName: "SFPro-Semibold", size: size)
             .with(numberOfLines: 1)
             .with(autolayout: false)
         label.text = "Бутылка"
@@ -31,10 +35,14 @@ class ExtraAddCell: UICollectionViewCell {
     }()
     
     let subtitle: UILabel = {
+        let size: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 13 }
+            else { return 10 }
+        }()
         let label = UILabel()
             .with(color: Colors.darkGrayText)
             .with(alignment: .center)
-            .with(fontName: "SFPro-Regular", size: 14)
+            .with(fontName: "SFPro-Regular", size: size)
             .with(numberOfLines: 1)
             .with(autolayout: false)
         label.text = "объем 0,33 литра"

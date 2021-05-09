@@ -15,7 +15,10 @@ protocol PushUpdateDelegate {
 class AddTrashController: UIViewController {
 
     let backButton: UIImageView = {
-        let scale: CGFloat = 35
+        let scale: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 35 }
+            else { return 27 }
+        }()
         let button = UIImageView(frame: CGRect(x: 0, y: 0, width: scale, height: scale-5))
             .with(autolayout: false)
         button.tintColor = MainConstants.nearBlack
@@ -190,6 +193,14 @@ extension AddTrashController {
     }
     
     func ActivateLayouts(){
+        let buttonBottomConst: CGFloat = {
+            if MainConstants.screenHeight > 700 { return -66 }
+            else { return -30 }
+        }()
+        let pagerBottomConst: CGFloat = {
+            if MainConstants.screenHeight > 700 { return -50 }
+            else { return -20 }
+        }()
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
@@ -207,11 +218,11 @@ extension AddTrashController {
             materialsCollection.widthAnchor.constraint(equalToConstant: materialsCollection.frame.width),
             
             button.centerXAnchor.constraint(equalTo: whiteBGView.centerXAnchor),
-            button.bottomAnchor.constraint(equalTo: whiteBGView.bottomAnchor, constant: -66),
+            button.bottomAnchor.constraint(equalTo: whiteBGView.bottomAnchor, constant: buttonBottomConst),
             button.heightAnchor.constraint(equalToConstant: button.frame.height),
             button.widthAnchor.constraint(equalToConstant: button.frame.width),
             
-            pager.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -50),
+            pager.bottomAnchor.constraint(equalTo: button.topAnchor, constant: pagerBottomConst),
             pager.centerXAnchor.constraint(equalTo: whiteBGView.centerXAnchor),
             
             addTrashView.centerXAnchor.constraint(equalTo: whiteBGView.centerXAnchor),

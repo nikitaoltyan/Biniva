@@ -33,7 +33,7 @@ class TopView: UIView {
     override init(frame: CGRect) {
         let height: CGFloat = {
             if MainConstants.screenHeight > 700 { return 130 }
-            else { return 60 }
+            else { return 95 }
         }()
         let useFrame: CGRect = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: height)
         super.init(frame: useFrame)
