@@ -194,11 +194,12 @@ extension AddTrashController {
     
     func ActivateLayouts(){
         let buttonBottomConst: CGFloat = {
-            if MainConstants.screenHeight > 700 { return -66 }
+            if MainConstants.screenHeight == 736 { return -40 }
+            else if MainConstants.screenHeight > 700 { return -66 }
             else { return -30 }
         }()
         let pagerBottomConst: CGFloat = {
-            if MainConstants.screenHeight > 700 { return -50 }
+            if MainConstants.screenHeight > 736 { return -50 }
             else { return -20 }
         }()
         NSLayoutConstraint.activate([

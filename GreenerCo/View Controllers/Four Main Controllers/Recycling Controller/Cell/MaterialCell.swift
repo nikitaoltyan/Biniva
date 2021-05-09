@@ -57,7 +57,8 @@ extension MaterialCell {
             else { return 30 }
         }()
         let titleTopConst: CGFloat = {
-            if MainConstants.screenHeight > 700 { return 80 }
+            if MainConstants.screenHeight == 736 { return 80 }
+            if MainConstants.screenHeight > 700 { return 120 }
             else { return 40 }
         }()
         NSLayoutConstraint.activate([

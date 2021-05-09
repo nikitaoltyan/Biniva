@@ -95,7 +95,6 @@ class StatsView: UIView {
         SetSubviews()
         ActivateLayouts()
         fetchData()
-        updateLabel()
     }
 
     required init?(coder: NSCoder) {
@@ -109,6 +108,7 @@ class StatsView: UIView {
         model?.reverse()
         statsTable.reloadData()
         updateConst()
+        updateLabel()
     }
     
     func updateConst(){

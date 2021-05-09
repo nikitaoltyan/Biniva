@@ -68,10 +68,10 @@ extension TopView: TopViewDelegate {
         })
         if (isRecylcing) {
             title.text = "Переработка"
-            subtitle.text = "поможем сегодня природе"
+            subtitle.text = "поможем сегодня природе?"
         } else {
             title.text = "Твои успехи"
-            subtitle.text = "продолжай в том же духе"
+            subtitle.text = "продолжай в том же духе!"
         }
     }
 }

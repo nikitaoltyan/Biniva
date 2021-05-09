@@ -144,13 +144,17 @@ extension RecyclingController {
     }
         
     func ActivateLayouts(){
+        let switcherTopConst: CGFloat = {
+            if MainConstants.screenHeight == 736 { return 30 }
+            else { return 50 }
+        }()
         NSLayoutConstraint.activate([
             topView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             topView.topAnchor.constraint(equalTo: view.topAnchor),
             topView.heightAnchor.constraint(equalToConstant: topView.frame.height),
             topView.widthAnchor.constraint(equalToConstant: topView.frame.width),
             
-            switcherView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 50),
+            switcherView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: switcherTopConst),
             switcherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             switcherView.widthAnchor.constraint(equalToConstant: switcherView.frame.width),
             switcherView.heightAnchor.constraint(equalToConstant: switcherView.frame.height),

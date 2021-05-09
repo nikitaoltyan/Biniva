@@ -55,7 +55,11 @@ class AddTrashView: UIView {
     
 
     override init(frame: CGRect){
-        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 530)
+        let height: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 530 }
+            else { return 400 }
+        }()
+        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: height)
         super.init(frame: useFrame)
         SetSubviews()
         ActivateLayouts()
@@ -82,7 +86,8 @@ extension AddTrashView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch MainConstants.screenHeight {
-        case 700...: return CGSize(width: self.collection.frame.width/2-4, height: 130)
+        case 736: return CGSize(width: self.collection.frame.width/2-4, height: 110)
+        case 700...735, 737...: return CGSize(width: self.collection.frame.width/2-4, height: 130)
         default: return CGSize(width: self.collection.frame.width/3-6, height: 80)
         }
     }
@@ -132,7 +137,7 @@ extension AddTrashView {
             weightView.widthAnchor.constraint(equalToConstant: weightView.frame.width),
             weightView.heightAnchor.constraint(equalToConstant: weightView.frame.height),
             
-            collection.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            collection.topAnchor.constraint(equalTo: weightView.bottomAnchor, constant: 40),
             collection.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             collection.widthAnchor.constraint(equalToConstant: collection.frame.width),
             collection.heightAnchor.constraint(equalToConstant: collection.frame.height)
