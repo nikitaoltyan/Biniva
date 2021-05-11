@@ -55,43 +55,43 @@ struct materials {
 
 
 struct plastic {
-    static let title: Array<String> = ["Бутылка", "Бутылка", "Бутылка", "Бутылка", "Канистра", "Другое"]
-    static let subtitle: Array<String> = ["объем 0.33 литра", "Объем 0.5 литра", "Объем 1 литр", "Объем 1.5 литра", "Объем 5 литров", "Обертка и т.д."]
-    static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
+    static let title: Array<String> = ["Пакет", "Бутылка", "Бутылка", "Бутылка", "Бутылка", "Другое"]
+    static let subtitle: Array<String> = ["Майка", "Объем 0.5 литра", "Объем 1 литр", "Объем 1.5 литра", "Объем 2 литра", "Обертка и т.д."]
+    static let weight: Array<Int> = [7, 25, 35, 40, 45, 50]
 }
 
 struct organic {
-    static let title: Array<String> = ["Огрызок", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
-    static let subtitle: Array<String> = ["яблока или груши", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
-    static let weight: Array<Int> = [10, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
+    static let title: Array<String> = ["Огрызок", "Кожура", "Отчистки", "Другое"]
+    static let subtitle: Array<String> = ["Яблоко или груша", "Банановая", "Картофель", "Органика"]
+    static let weight: Array<Int> = [20, 60, 60, 50]
 }
 
 struct glass {
-    static let title: Array<String> = ["glass 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
-    static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
-    static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
+    static let title: Array<String> = ["Стакан", "Бутылка", "Другое"]
+    static let subtitle: Array<String> = ["Объем 0,2 литра", "Объем 0.5 литра", "Стекло"]
+    static let weight: Array<Int> = [250, 350, 50]
 }
 
 struct paper {
-    static let title: Array<String> = ["лист", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
-    static let subtitle: Array<String> = ["А4", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
-    static let weight: Array<Int> = [5, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
+    static let title: Array<String> = ["Лист", "Обертка", "Обертка", "Коробка", "Коробка", "Другое"]
+    static let subtitle: Array<String> = ["А4", "Небольшая", "Большая", "Картонная маленькая", "Картонная большая", "Салфетка и т.д."]
+    static let weight: Array<Int> = [5, 20, 40, 50, 100, 5]
 }
 
 struct metal {
-    static let title: Array<String> = ["metal 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
-    static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
-    static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
+    static let title: Array<String> = ["Фольга", "Батарейка", "Батарейка", "Другое"]
+    static let subtitle: Array<String> = ["Длина 0,5 метра", "Мизинчиковая", "Пальчиковая", "Гвозди и т.д."]
+    static let weight: Array<Int> = [30, 25, 40, 50]
 }
 
 struct wood {
-    static let title: Array<String> = ["wood 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
-    static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
-    static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
+    static let title: Array<String> = ["Другое"]
+    static let subtitle: Array<String> = ["Стулья и т.д."]
+    static let weight: Array<Int> = [500]
 }
 
 struct fabric {
-    static let title: Array<String> = ["fabric 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"]
-    static let subtitle: Array<String> = ["Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle", "Subtitle"]
-    static let weight: Array<Int> = [30, 40, 60, 80, 160, 50] // Weights are incorrect. Should be checked out.
+    static let title: Array<String> = ["Футболка", "Другое"]
+    static let subtitle: Array<String> = ["Взрослая", "Ткань"]
+    static let weight: Array<Int> = [200, 50]
 }

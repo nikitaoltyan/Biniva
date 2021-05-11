@@ -38,8 +38,12 @@ class AddTrashController: UIViewController {
     }()
     
     lazy var materialsCollection: UICollectionView = {
+        let height: CGFloat = {
+            if MainConstants.screenHeight > 736 { return 500 }
+            else { return 450 }
+        }()
         let layout = UICollectionViewFlowLayout()
-        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 450)
+        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: height)
         let collection = UICollectionView(frame: useFrame, collectionViewLayout: layout)
             .with(autolayout: false)
             .with(bgColor: .clear)

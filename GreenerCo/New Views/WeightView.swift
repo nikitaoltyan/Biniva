@@ -18,7 +18,7 @@ class WeightView: UIView {
         view.keyboardType = .numberPad
         view.textAlignment = .center
         view.delegate = self
-        view.text = "200 г"
+        view.text = "50 г"
         return view
     }()
     
