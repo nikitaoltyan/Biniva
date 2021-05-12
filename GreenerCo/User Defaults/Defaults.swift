@@ -36,7 +36,7 @@ class Defaults {
     
     /// Set hasLaunched as default parameter after user registration or log in.
     /// - parameter launched: Bool parameter for app. Always true when there's not user firct launch.
-    static func SetHasLaunched(launched: Bool) {
+    static func setHasLaunched(_ launched: Bool) {
         UserDefaults.standard.setValue(launched, forKey: "hasLaunched")
     }
     

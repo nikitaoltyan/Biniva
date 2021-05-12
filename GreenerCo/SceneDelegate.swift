@@ -19,13 +19,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-//            let hasLaunched = UserDefaults.standard.bool(forKey: "hasLaunched")
-//            if (hasLaunched) {
+            let hasLaunched = UserDefaults.standard.bool(forKey: "hasLaunched")
+            if (hasLaunched) {
                 window.rootViewController = RecyclingController()
-//                window.rootViewController = MainTabBarController()
-//            } else {
-//                window.rootViewController = OnboardingController()
-//            }
+//                window.rootViewController = NewOnboardingController()
+            } else {
+                window.rootViewController = NewOnboardingController()
+            }
             self.window = window
             window.makeKeyAndVisible()
         }

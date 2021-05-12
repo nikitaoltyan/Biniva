@@ -95,7 +95,6 @@ class ProgressView: UIView {
         self.backgroundColor = .clear
         SetSubviews()
         ActivateLayouts()
-        DispatchQueue.main.async { self.setUpInitial() }
         setUpInitial()
     }
     

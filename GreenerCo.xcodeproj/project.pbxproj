@@ -43,7 +43,6 @@
 		5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C454E2925B57B2000966991 /* OnboardingController.swift */; };
 		5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45914C254D55C0005AE26C /* AppDelegate.swift */; };
 		5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45914E254D55C0005AE26C /* SceneDelegate.swift */; };
-		5C459154254D55C0005AE26C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C459152254D55C0005AE26C /* Main.storyboard */; };
 		5C459159254D55C1005AE26C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C459157254D55C1005AE26C /* LaunchScreen.storyboard */; };
 		5C459164254D55C2005AE26C /* GreenerCoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C459163254D55C2005AE26C /* GreenerCoTests.swift */; };
 		5C45916F254D55C2005AE26C /* GreenerCoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45916E254D55C2005AE26C /* GreenerCoUITests.swift */; };
@@ -56,6 +55,7 @@
 		5C5D03EE25B2B09F0011AB9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C5D03ED25B2B09F0011AB9D /* GoogleService-Info.plist */; };
 		5C6C2B022581477B00B653AD /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C2B012581477B00B653AD /* MessageCell.swift */; };
 		5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C89EF25AF41F400D55A16 /* ButtonView.swift */; };
+		5C7C5E9E264ABDDE00B4FE8C /* NewOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */; };
 		5C83A053255EB3CC005C2CAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A052255EB3CC005C2CAA /* Assets.xcassets */; };
 		5C83A05C255F9796005C2CAA /* SF-Pro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */; };
 		5C83A060255F979A005C2CAA /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A057255F959F005C2CAA /* SF-Pro.ttf */; };
@@ -147,7 +147,6 @@
 		5C459149254D55C0005AE26C /* GreenerCo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenerCo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C45914C254D55C0005AE26C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C45914E254D55C0005AE26C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5C459153254D55C0005AE26C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5C459158254D55C1005AE26C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C45915A254D55C1005AE26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C45915F254D55C2005AE26C /* GreenerCoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreenerCoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +164,7 @@
 		5C5D03ED25B2B09F0011AB9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5C6C2B012581477B00B653AD /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		5C6C89EF25AF41F400D55A16 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOnboardingController.swift; sourceTree = "<group>"; };
 		5C83A052255EB3CC005C2CAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C83A057255F959F005C2CAA /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro.ttf"; path = "../../../../../../Library/Fonts/SF-Pro.ttf"; sourceTree = "<group>"; };
 		5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Italic.ttf"; path = "../../../../../../Library/Fonts/SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
@@ -372,6 +372,7 @@
 			children = (
 				5C45917D254D59D3005AE26C /* RecyclingController.swift */,
 				5CF90C50262EA3A000127E4D /* AddTrashController.swift */,
+				5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */,
 				5CF90C55262EA7AB00127E4D /* Cell */,
 			);
 			path = "Recycling Controller";
@@ -573,7 +574,6 @@
 			isa = PBXGroup;
 			children = (
 				5C3046DE25C06A3100BAFEEF /* GreenerCo.entitlements */,
-				5C459152254D55C0005AE26C /* Main.storyboard */,
 				5CAF7D57262C7CD800249CC6 /* New Views */,
 				5C454E5225BACF5B00966991 /* View Controllers */,
 				5C454E6C25BAD24600966991 /* General Views */,
@@ -769,7 +769,6 @@
 			files = (
 				5C459159254D55C1005AE26C /* LaunchScreen.storyboard in Resources */,
 				5C83A053255EB3CC005C2CAA /* Assets.xcassets in Resources */,
-				5C459154254D55C0005AE26C /* Main.storyboard in Resources */,
 				5C83A05C255F9796005C2CAA /* SF-Pro-Italic.ttf in Resources */,
 				5C83A060255F979A005C2CAA /* SF-Pro.ttf in Resources */,
 				5C5D03EE25B2B09F0011AB9D /* GoogleService-Info.plist in Resources */,
@@ -858,6 +857,7 @@
 				5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */,
 				5C1D01FA255C26610058D276 /* ShowAchieveController.swift in Sources */,
 				5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */,
+				5C7C5E9E264ABDDE00B4FE8C /* NewOnboardingController.swift in Sources */,
 				5C08703D262739080057E840 /* Model.xcdatamodeld in Sources */,
 				5C045BE825BC77B200E42843 /* Server.swift in Sources */,
 				5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */,
@@ -906,14 +906,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5C459152254D55C0005AE26C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5C459153254D55C0005AE26C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5C459157254D55C1005AE26C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

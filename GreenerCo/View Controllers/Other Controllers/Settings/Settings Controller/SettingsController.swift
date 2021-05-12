@@ -129,7 +129,7 @@ class SettingsController: UITableViewController {
 extension SettingsController {
     
     func LogOut() {
-        Defaults.SetHasLaunched(launched: false)
+        Defaults.setHasLaunched(false)
         Vibration.Medium()
         let newVC = OnboardingController()
         newVC.modalPresentationStyle = .overFullScreen
