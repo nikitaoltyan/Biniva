@@ -197,7 +197,7 @@ class NewOnboardingController: UIViewController {
 
 extension NewOnboardingController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // add animations for scrolling.
+        //animations for scrolling.
         materialOne.transform = CGAffineTransform(translationX: scrollView.contentOffset.y/4, y: 0)
         materialTwo.transform = CGAffineTransform(translationX: scrollView.contentOffset.y/4, y: 0)
         materialThree.transform = CGAffineTransform(translationX: scrollView.contentOffset.y/4, y: 0)

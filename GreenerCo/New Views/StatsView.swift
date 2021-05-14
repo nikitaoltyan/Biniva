@@ -68,7 +68,19 @@ class StatsView: UIView {
         table.dataSource = self
         table.isScrollEnabled = false
         table.register(StatsCell.self, forCellReuseIdentifier: "StatsCell")
+        table.register(EmptyStatsCell.self, forCellReuseIdentifier: "EmptyStatsCell")
         return table
+    }()
+    
+    let instaLabel: UILabel = {
+        let label = UILabel()
+            .with(color: Colors.nearBlack)
+            .with(alignment: .center)
+            .with(fontName: "SFPro-Medium", size: 15)
+            .with(autolayout: false)
+        label.isUserInteractionEnabled = true
+        label.text = "Instagram"
+        return label
     }()
     
     let privacyPolicyLabel: UILabel = {
@@ -118,7 +130,7 @@ class StatsView: UIView {
                 }
         statsTableHeightConst?.constant = height
         statsTable.layoutIfNeeded()
-        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 450 + height)
+        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 475 + height)
     }
     
     func updateLabel(){
@@ -128,9 +140,24 @@ class StatsView: UIView {
         })
     }
     
-    @objc func openPrivacyPolicy() {
-        // Add link here
-        print("Privacy policy")
+    @objc
+    func openInst() {
+        let instagramHooks = "instagram://user?username=gr.ner"
+        let instagramUrl = NSURL(string: instagramHooks)
+        if UIApplication.shared.canOpenURL(instagramUrl! as URL) {
+            print("Open Greener Inst page")
+            UIApplication.shared.open(instagramUrl! as URL, options: [:], completionHandler: nil)
+        } else {
+            print("Open Ordinary Inst page")
+            UIApplication.shared.open(NSURL(string: "http://instagram.com/")! as URL, options: [:], completionHandler: nil)
+        }
+    }
+    
+    @objc
+    func openPrivacyPolicy() {
+        if let url = URL(string: "http://greener.tilda.ws/privacy_policy") {
+            UIApplication.shared.open(url)
+        }
     }
 }
 
@@ -157,15 +184,21 @@ extension StatsView: Test {
 
 extension StatsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model?.count ?? 0
+        return model?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = statsTable.dequeueReusableCell(withIdentifier: "StatsCell") as! StatsCell
-        cell.dateLabel.text = model?[indexPath.row].day?.inString
-        cell.updateData(logSizes: model?[indexPath.row].logSize,
-                        logMaterials: model?[indexPath.row].logMaterial)
-        return cell
+        switch model?.count {
+        case 0, nil:
+            let cell = statsTable.dequeueReusableCell(withIdentifier: "EmptyStatsCell") as! EmptyStatsCell
+            return cell
+        default:
+            let cell = statsTable.dequeueReusableCell(withIdentifier: "StatsCell") as! StatsCell
+            cell.dateLabel.text = model?[indexPath.row].day?.inString
+            cell.updateData(logSizes: model?[indexPath.row].logSize,
+                            logMaterials: model?[indexPath.row].logMaterial)
+            return cell
+        }
     }
 }
 
@@ -180,8 +213,10 @@ extension StatsView {
         scrollView.addSubview(subtitle)
 //        scrollView.addSubview(timeTitle)
         scrollView.addSubview(statsTable)
+        scrollView.addSubview(instaLabel)
         scrollView.addSubview(privacyPolicyLabel)
         
+        instaLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openInst)))
         privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openPrivacyPolicy)))
     }
     
@@ -206,7 +241,10 @@ extension StatsView {
             statsTable.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             statsTable.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth - 50),
             
-            privacyPolicyLabel.topAnchor.constraint(equalTo: statsTable.bottomAnchor, constant: 45),
+            instaLabel.topAnchor.constraint(equalTo: statsTable.bottomAnchor, constant: 45),
+            instaLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            privacyPolicyLabel.topAnchor.constraint(equalTo: instaLabel.bottomAnchor, constant: 12),
             privacyPolicyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
         
