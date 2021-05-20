@@ -56,6 +56,28 @@ class StatsView: UIView {
 //        return label
 //    }()
     
+    let eventsTitle: UILabel = {
+        let label = UILabel()
+            .with(color: MainConstants.nearBlack)
+            .with(alignment: .left)
+            .with(numberOfLines: 1)
+            .with(fontName: "SFPro-Bold", size: 22)
+            .with(autolayout: false)
+        label.text = "События"
+        return label
+    }()
+    
+    let materialStatsView: MaterialStatView = {
+        let view = MaterialStatView()
+            .with(autolayout: false)
+        view.clipsToBounds = true
+        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        view.layer.shadowRadius = 10
+        view.layer.shadowOpacity = 0.9
+        view.layer.shadowOffset = CGSize(width: 4, height: 4)
+        return view
+    }()
+    
     lazy var statsTable: UITableView = {
         let table = UITableView()
             .with(bgColor: .clear)
@@ -130,7 +152,7 @@ class StatsView: UIView {
                 }
         statsTableHeightConst?.constant = height
         statsTable.layoutIfNeeded()
-        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 475 + height)
+        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 735 + height)
     }
     
     func updateLabel(){
@@ -177,14 +199,22 @@ extension StatsView: UIScrollViewDelegate {
 
 
 extension StatsView: Test {
-    func update(){ fetchData() }
+    func update(){
+        materialStatsView.update()
+        fetchData()
+    }
 }
 
 
 
 extension StatsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model?.count ?? 1
+        switch model?.count {
+        case 0, nil:
+            return 1
+        default:
+            return model?.count ?? 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -212,6 +242,8 @@ extension StatsView {
         scrollView.addSubview(weightLabel)
         scrollView.addSubview(subtitle)
 //        scrollView.addSubview(timeTitle)
+        scrollView.addSubview(eventsTitle)
+        scrollView.addSubview(materialStatsView)
         scrollView.addSubview(statsTable)
         scrollView.addSubview(instaLabel)
         scrollView.addSubview(privacyPolicyLabel)
@@ -236,10 +268,18 @@ extension StatsView {
 //            timeTitle.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 6),
 //            timeTitle.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             
+            materialStatsView.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 37),
+            materialStatsView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            materialStatsView.widthAnchor.constraint(equalToConstant: materialStatsView.frame.width),
+            materialStatsView.heightAnchor.constraint(equalToConstant: materialStatsView.frame.height),
+            
 //            statsTable height was setted in the bottom of the function.
-            statsTable.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 50),
+            statsTable.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 85),
             statsTable.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             statsTable.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth - 50),
+            
+            eventsTitle.bottomAnchor.constraint(equalTo: statsTable.topAnchor, constant: -8),
+            eventsTitle.leftAnchor.constraint(equalTo: statsTable.leftAnchor),
             
             instaLabel.topAnchor.constraint(equalTo: statsTable.bottomAnchor, constant: 45),
             instaLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),

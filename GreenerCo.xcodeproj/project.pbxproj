@@ -63,17 +63,22 @@
 		5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83A0792563AC58005C2CAA /* Main Constants.swift */; };
 		5C9F98AB262DDDDD00DFCFEA /* RecyclingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F98AA262DDDDD00DFCFEA /* RecyclingView.swift */; };
 		5C9F98B3262DE1E200DFCFEA /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F98B2262DE1E200DFCFEA /* StatsView.swift */; };
+		5CA776D22656B3C600EDAF47 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA776D12656B3C600EDAF47 /* MapView.swift */; };
 		5CAF7D53262C7A5700249CC6 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF7D52262C7A5700249CC6 /* TopView.swift */; };
 		5CAF7D59262C7D0F00249CC6 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAF7D58262C7D0F00249CC6 /* ProgressView.swift */; };
 		5CB6A22A25C3D4A900EC4B3A /* ViewController Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A22925C3D4A900EC4B3A /* ViewController Extension.swift */; };
 		5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */; };
 		5CB6A23425C4638900EC4B3A /* EmptyMeetingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A23325C4638900EC4B3A /* EmptyMeetingsCell.swift */; };
+		5CB8593C2652BB3D00885A6D /* MaterialStatsCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */; };
 		5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB5101257D12160097F4BD /* MeetingViewController.swift */; };
 		5CBF94D825E637940071742F /* OtherHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF94D725E637940071742F /* OtherHeaderView.swift */; };
 		5CC26A9C25CBF27F000501AD /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC26A9B25CBF27F000501AD /* ItemView.swift */; };
 		5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */; };
 		5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */; };
 		5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */; };
+		5CD556FB26524DFE007B3D06 /* MaterialStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */; };
+		5CD557002652532F007B3D06 /* MaterialStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */; };
+		5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD5570426526946007B3D06 /* MaterialFunctions.swift */; };
 		5CE1B0282633DA5100549536 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE1B0272633DA5100549536 /* WeightView.swift */; };
 		5CE7218525A2047500ECE84F /* ProgressImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7218425A2047500ECE84F /* ProgressImageView.swift */; };
 		5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDA06625DCF4A0009280D0 /* Array Extension.swift */; };
@@ -173,17 +178,22 @@
 		5C83A0792563AC58005C2CAA /* Main Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main Constants.swift"; sourceTree = "<group>"; };
 		5C9F98AA262DDDDD00DFCFEA /* RecyclingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingView.swift; sourceTree = "<group>"; };
 		5C9F98B2262DE1E200DFCFEA /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		5CA776D12656B3C600EDAF47 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		5CAF7D52262C7A5700249CC6 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		5CAF7D58262C7D0F00249CC6 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		5CB6A22925C3D4A900EC4B3A /* ViewController Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController Extension.swift"; sourceTree = "<group>"; };
 		5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView Extension.swift"; sourceTree = "<group>"; };
 		5CB6A23325C4638900EC4B3A /* EmptyMeetingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMeetingsCell.swift; sourceTree = "<group>"; };
+		5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaterialStatsCell+Empty.swift"; sourceTree = "<group>"; };
 		5CBB5101257D12160097F4BD /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		5CBF94D725E637940071742F /* OtherHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherHeaderView.swift; sourceTree = "<group>"; };
 		5CC26A9B25CBF27F000501AD /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePlusView.swift; sourceTree = "<group>"; };
+		5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatView.swift; sourceTree = "<group>"; };
+		5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatsCell.swift; sourceTree = "<group>"; };
+		5CD5570426526946007B3D06 /* MaterialFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialFunctions.swift; sourceTree = "<group>"; };
 		5CE1B0272633DA5100549536 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
 		5CE7218425A2047500ECE84F /* ProgressImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressImageView.swift; sourceTree = "<group>"; };
 		5CEDA06625DCF4A0009280D0 /* Array Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extension.swift"; sourceTree = "<group>"; };
@@ -292,6 +302,7 @@
 			children = (
 				5C1BD65F25D7CA770002A894 /* Material Defaults.swift */,
 				5C25D8AB2636BB9B00D2206E /* MaterialData.swift */,
+				5CD5570426526946007B3D06 /* MaterialFunctions.swift */,
 			);
 			path = "Material Defaults";
 			sourceTree = "<group>";
@@ -636,6 +647,8 @@
 				5C9F98B2262DE1E200DFCFEA /* StatsView.swift */,
 				5C3D533626301D0A00DA0AFB /* AddTrashView.swift */,
 				5CE1B0272633DA5100549536 /* WeightView.swift */,
+				5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */,
+				5CA776D12656B3C600EDAF47 /* MapView.swift */,
 			);
 			path = "New Views";
 			sourceTree = "<group>";
@@ -655,6 +668,8 @@
 				5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */,
 				5C25D8A6263693A900D2206E /* StatsCell.swift */,
 				5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */,
+				5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */,
+				5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -799,6 +814,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB8593C2652BB3D00885A6D /* MaterialStatsCell+Empty.swift in Sources */,
 				5C55591C262D945C0046F5A5 /* SwitcherView.swift in Sources */,
 				5CAF7D53262C7A5700249CC6 /* TopView.swift in Sources */,
 				5CF90C51262EA3A000127E4D /* AddTrashController.swift in Sources */,
@@ -813,6 +829,7 @@
 				5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */,
 				5C3046EE25C13D9800BAFEEF /* TextFieldCell.swift in Sources */,
 				5C7D378A264CF80C00DFEBA7 /* EmptyStatsCell.swift in Sources */,
+				5CD557002652532F007B3D06 /* MaterialStatsCell.swift in Sources */,
 				5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */,
 				5C087043262739E10057E840 /* Model+CoreDataClass.swift in Sources */,
 				5CFB8FB926281BB000372203 /* DataFunction.swift in Sources */,
@@ -823,6 +840,7 @@
 				5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */,
 				5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */,
 				5C045BF725BFE25300E42843 /* Dictionary Extension.swift in Sources */,
+				5CD556FB26524DFE007B3D06 /* MaterialStatView.swift in Sources */,
 				5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */,
 				5C25D8AC2636BB9B00D2206E /* MaterialData.swift in Sources */,
 				5C087044262739E10057E840 /* Model+CoreDataProperties.swift in Sources */,
@@ -857,12 +875,14 @@
 				5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */,
 				5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */,
 				5C54954C255857FB00E5140C /* TopViewCell.swift in Sources */,
+				5CA776D22656B3C600EDAF47 /* MapView.swift in Sources */,
 				5CFB6255259C8B0900F1C8C7 /* PopUpController.swift in Sources */,
 				5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */,
 				5C1D01FA255C26610058D276 /* ShowAchieveController.swift in Sources */,
 				5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */,
 				5C7C5E9E264ABDDE00B4FE8C /* NewOnboardingController.swift in Sources */,
 				5C08703D262739080057E840 /* Model.xcdatamodeld in Sources */,
+				5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */,
 				5C045BE825BC77B200E42843 /* Server.swift in Sources */,
 				5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */,
 				5CFB6239259A4DB100F1C8C7 /* AddOtherCell.swift in Sources */,
@@ -1044,18 +1064,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GreenerCo/GreenerCo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7T88SYY74G;
 				INFOPLIST_FILE = GreenerCo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1066,18 +1087,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GreenerCo/GreenerCo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7T88SYY74G;
 				INFOPLIST_FILE = GreenerCo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

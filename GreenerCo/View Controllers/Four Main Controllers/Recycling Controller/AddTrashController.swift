@@ -203,7 +203,7 @@ extension AddTrashController {
             else { return -30 }
         }()
         let pagerBottomConst: CGFloat = {
-            if MainConstants.screenHeight > 736 { return -50 }
+            if MainConstants.screenHeight > 736 { return -35 }
             else { return -20 }
         }()
         NSLayoutConstraint.activate([

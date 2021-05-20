@@ -38,6 +38,16 @@ struct materialImages {
     static let fabric = UIImage(named: "fabric") ?? #imageLiteral(resourceName: "Avatar")
 }
 
+struct materialColors {
+    static let plastic = UIColor(named: "placticColor") ?? .orange
+    static let organic = UIColor(named: "organicColor") ?? .green
+    static let glass = UIColor(named: "glassColor") ?? .green
+    static let paper = UIColor(named: "paperColor") ?? .green
+    static let metal = UIColor(named: "metalColor") ?? .green
+    static let wood = UIColor(named: "woodColor") ?? .green
+    static let fabric = UIColor(named: "fabricColor") ?? .green
+}
+
 
 struct materials {
     static let name: Array<String> = ["Пластик", "Органика", "Стекло", "Бумага", "Металл", "Дерево", "Ткань"]
@@ -49,6 +59,13 @@ struct materials {
                                         materialImages.wood,
                                         materialImages.fabric,]
     static let enums: Array<material> = [.plastic, .organic, .glass, .paper, .metal, .wood, .fabric]
+    static let statsColors: Array<UIColor> = [materialColors.plastic,
+                                              materialColors.organic,
+                                              materialColors.glass,
+                                              materialColors.paper,
+                                              materialColors.metal,
+                                              materialColors.wood,
+                                              materialColors.fabric]
     static let id: Array<Int> = [0, 1, 2, 3, 4, 5, 6]
 }
 

@@ -30,7 +30,7 @@ class AddGoalCell: UICollectionViewCell {
     
     let progressView: ProgressImageView = {
         let view = ProgressImageView()
-        view.dashedLine.isHidden = true
+//        view.dashedLine.isHidden = true
         view.image.tintColor = MainConstants.white
         view.isUserInteractionEnabled = true
         view.progressView.isUserInteractionEnabled = true

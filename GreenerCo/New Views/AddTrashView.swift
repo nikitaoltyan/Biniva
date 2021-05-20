@@ -27,7 +27,7 @@ class AddTrashView: UIView {
     
     lazy var collection: UICollectionView = {
         let height: CGFloat = {
-            if MainConstants.screenHeight > 700 { return 410 }
+            if MainConstants.screenHeight > 700 { return 390 }
             else { return 350 }
         }()
         let layout = UICollectionViewFlowLayout()
@@ -87,7 +87,7 @@ extension AddTrashView: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch MainConstants.screenHeight {
         case 736: return CGSize(width: self.collection.frame.width/2-12, height: 100)
-        case 700...735, 737...: return CGSize(width: self.collection.frame.width/2-4, height: 125)
+        case 700...735, 737...: return CGSize(width: self.collection.frame.width/2-4, height: 115)
         default: return CGSize(width: self.collection.frame.width/3-6, height: 80)
         }
     }

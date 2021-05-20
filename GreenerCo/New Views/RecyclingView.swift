@@ -49,7 +49,8 @@ class RecyclingView: UIView {
     }
     
     
-    @objc func Add(){
+    @objc
+    func Add(){
         delegate?.Add()
     }
 }

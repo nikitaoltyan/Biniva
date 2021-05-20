@@ -37,16 +37,16 @@ class ProgressImageView: UIView {
         return label
     }()
     
-    lazy var dashedLine: UIView = {
-        let view = UIView()
-            .with(bgColor: MainConstants.orange)
-        view.withDashedBorder(lineWidth: 2,
-                              withColor: MainConstants.orange,
-                              lineDashesPattern: [7,6],
-                              Y: MaterialDefaults.YForDashedLine(dailyNorm: dailyNorm))
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+//    lazy var dashedLine: UIView = {
+//        let view = UIView()
+//            .with(bgColor: MainConstants.orange)
+//        view.withDashedBorder(lineWidth: 2,
+//                              withColor: MainConstants.orange,
+//                              lineDashesPattern: [7,6],
+//                              Y: MaterialDefaults.YForDashedLine(dailyNorm: dailyNorm))
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
     
     var loggedData: Int = 0
 //    Daily norm after loggin not ready and app use 0
@@ -133,7 +133,7 @@ class ProgressImageView: UIView {
 extension ProgressImageView{
     func SetSubviews(){
         self.addSubview(progressView)
-        self.addSubview(dashedLine)
+//        self.addSubview(dashedLine)
         self.addSubview(image)
         self.addSubview(loggedLabel)
         

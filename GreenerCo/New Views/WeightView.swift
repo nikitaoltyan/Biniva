@@ -68,8 +68,8 @@ class WeightView: UIView {
         self.layer.shadowRadius = 10
         self.layer.shadowOpacity = 0.8
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        SetSubvies()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
     }
 
     required init?(coder: NSCoder) {
@@ -124,7 +124,7 @@ extension WeightView: UITextViewDelegate {
 
 
 extension WeightView {
-    func SetSubvies(){
+    func setSubviews(){
         self.addSubview(textView)
         self.addSubview(minusView)
         self.addSubview(plusView)
@@ -136,7 +136,7 @@ extension WeightView {
         plusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addTen)))
     }
     
-    func ActivateLayouts(){
+    func activateLayouts(){
         NSLayoutConstraint.activate([
             textView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             textView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
