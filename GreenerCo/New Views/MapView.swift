@@ -15,9 +15,13 @@ class MapView: UIView {
         let map = MKMapView()
             .with(autolayout: false)
         map.isUserInteractionEnabled = true
+        map.delegate = self
         
-//        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1200, longitudinalMeters: 1200)
-//        map.setRegion(viewRegion, animated: false)
+        let coordinate = CLLocationCoordinate2D(latitude: 55.794698, longitude: 37.929111)
+        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1200, longitudinalMeters: 1200)
+        let label = Capital(title: "Title", coordinate: coordinate, info: "Info")
+        map.addAnnotation(label)
+        map.setRegion(viewRegion, animated: false)
         return map
     }()
 
@@ -38,6 +42,13 @@ class MapView: UIView {
 }
 
 
+extension MapView: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotation = CustomPin(annotation: annotation, reuseIdentifier: "")
+        print("set annotation")
+        return annotation
+    }
+}
 
 
 

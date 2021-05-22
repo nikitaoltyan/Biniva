@@ -53,6 +53,7 @@
 		5C55591C262D945C0046F5A5 /* SwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55591B262D945C0046F5A5 /* SwitcherView.swift */; };
 		5C5D03E925B1A71F0011AB9D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D03E825B1A71F0011AB9D /* InfoView.swift */; };
 		5C5D03EE25B2B09F0011AB9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C5D03ED25B2B09F0011AB9D /* GoogleService-Info.plist */; };
+		5C5ED19A2659386B00084458 /* CustomPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5ED1992659386B00084458 /* CustomPin.swift */; };
 		5C6C2B022581477B00B653AD /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C2B012581477B00B653AD /* MessageCell.swift */; };
 		5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C89EF25AF41F400D55A16 /* ButtonView.swift */; };
 		5C7C5E9E264ABDDE00B4FE8C /* NewOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */; };
@@ -168,6 +169,7 @@
 		5C55591B262D945C0046F5A5 /* SwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherView.swift; sourceTree = "<group>"; };
 		5C5D03E825B1A71F0011AB9D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		5C5D03ED25B2B09F0011AB9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		5C5ED1992659386B00084458 /* CustomPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPin.swift; sourceTree = "<group>"; };
 		5C6C2B012581477B00B653AD /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		5C6C89EF25AF41F400D55A16 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOnboardingController.swift; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 				5CE1B0272633DA5100549536 /* WeightView.swift */,
 				5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */,
 				5CA776D12656B3C600EDAF47 /* MapView.swift */,
+				5C5ED1992659386B00084458 /* CustomPin.swift */,
 			);
 			path = "New Views";
 			sourceTree = "<group>";
@@ -816,6 +819,7 @@
 			files = (
 				5CB8593C2652BB3D00885A6D /* MaterialStatsCell+Empty.swift in Sources */,
 				5C55591C262D945C0046F5A5 /* SwitcherView.swift in Sources */,
+				5C5ED19A2659386B00084458 /* CustomPin.swift in Sources */,
 				5CAF7D53262C7A5700249CC6 /* TopView.swift in Sources */,
 				5CF90C51262EA3A000127E4D /* AddTrashController.swift in Sources */,
 				5C3046F625C13DAC00BAFEEF /* AddPhotoCell.swift in Sources */,
