@@ -8,8 +8,10 @@
 import UIKit
 
 protocol SwitcherDelegate {
-    func ShowStats()
-    func ShowRecycling()
+    func showStats()
+    func showRecycling()
+    func showMap()
+//    func hideTopView(_ hide: Bool)
 }
 
 
@@ -66,7 +68,9 @@ class RecyclingController: UIViewController {
         return view
     }()
     
-    
+    var isTopViewHidden: Bool = false
+    var topViewYConstraint: NSLayoutConstraint?
+    var switcherTopConstraint: NSLayoutConstraint?
     var recyclingXConstraint: NSLayoutConstraint?
     var statsXConstraint: NSLayoutConstraint?
     var mapXConstraint: NSLayoutConstraint?
@@ -79,6 +83,32 @@ class RecyclingController: UIViewController {
         ActivateLayouts()
         print(MaterialFunctions().calculate())
     }
+    
+    func hideTopView(_ hide: Bool) {
+        if (hide) {
+            guard (isTopViewHidden == false) else { return }
+            view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.topView.center.y =  -2 * self.topView.center.y
+                self.switcherView.center.y = 0.4 * self.switcherView.center.y
+            }, completion: { (result) in
+                self.topViewYConstraint?.constant = -self.topView.frame.height/2
+                self.topView.layoutIfNeeded()
+                self.isTopViewHidden = true
+            })
+        } else {
+            guard (isTopViewHidden) else { return }
+            view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.topView.center.y =  self.topView.frame.height/2
+                self.switcherView.center.y = 2.75 * self.switcherView.center.y
+            }, completion: { (result) in
+                self.topViewYConstraint?.constant = self.topView.frame.height/2
+                self.topView.layoutIfNeeded()
+                self.isTopViewHidden = false
+            })
+        }
+    }
 }
 
 
@@ -86,29 +116,50 @@ class RecyclingController: UIViewController {
 
 
 extension RecyclingController: SwitcherDelegate {
-    func ShowStats() {
+    func showRecycling() {
         Vibration.soft()
         view.layoutIfNeeded()
-        UIView.animate(withDuration: 0.4, animations: {
-            self.mapView.center.x = self.view.center.x
-//            self.statsView.center.x = self.view.center.x
-            self.recyclingView.center.x = -self.view.center.x
+        UIView.animate(withDuration: 0.3, animations: {
+            self.recyclingView.center.x = self.view.center.x
+            self.statsView.center.x = 3 * self.view.center.x
+            self.mapView.center.x = 5 * self.view.center.x
         }, completion: { (_) in
-            self.mapXConstraint?.constant = 0
-//            self.statsXConstraint?.constant = 0
-            self.recyclingXConstraint?.constant = -3*self.view.center.x
+            self.recyclingXConstraint?.constant = 0
+            self.statsXConstraint?.constant = 3 * self.view.center.x
+            self.mapXConstraint?.constant = 5 * self.view.center.x
+            self.hideTopView(false)
         })
     }
     
-    func ShowRecycling() {
+    
+    func showStats() {
         Vibration.soft()
         view.layoutIfNeeded()
-        UIView.animate(withDuration: 0.4, animations: {
-            self.statsView.center.x = 3 * self.view.center.x
-            self.recyclingView.center.x = self.view.center.x
+        UIView.animate(withDuration: 0.3, animations: {
+            self.statsView.center.x = self.view.center.x
+            self.recyclingView.center.x = -self.view.center.x
+            self.mapView.center.x = 3*self.view.center.x
         }, completion: { (_) in
-            self.statsXConstraint?.constant = 3 * self.view.center.x
-            self.recyclingXConstraint?.constant = 0
+            self.statsXConstraint?.constant = 0
+            self.recyclingXConstraint?.constant = -3*self.view.center.x
+            self.mapXConstraint?.constant = 3*self.view.center.x
+            self.hideTopView(false)
+        })
+    }
+
+    
+    func showMap() {
+        Vibration.soft()
+        view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3, animations: {
+            self.mapView.center.x = self.view.center.x
+            self.statsView.center.x = -self.view.center.x
+            self.recyclingView.center.x = -3*self.view.center.x
+        }, completion: { (_) in
+            self.mapXConstraint?.constant = 0
+            self.statsXConstraint?.constant = -3*self.view.center.x
+            self.recyclingXConstraint?.constant = -5*self.view.center.x
+            self.hideTopView(true)
         })
     }
 }
@@ -168,12 +219,12 @@ extension RecyclingController {
             else { return 50 }
         }()
         NSLayoutConstraint.activate([
+            // topViewYConstraint in the bottom of the function.
             topView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            topView.topAnchor.constraint(equalTo: view.topAnchor),
             topView.heightAnchor.constraint(equalToConstant: topView.frame.height),
             topView.widthAnchor.constraint(equalToConstant: topView.frame.width),
             
-            switcherView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: switcherTopConst),
+            // switcherView top constrain in the bottom of the function.
             switcherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             switcherView.widthAnchor.constraint(equalToConstant: switcherView.frame.width),
             switcherView.heightAnchor.constraint(equalToConstant: switcherView.frame.height),
@@ -194,9 +245,13 @@ extension RecyclingController {
             mapView.heightAnchor.constraint(equalToConstant: mapView.frame.height),
         ])
         
+        topViewYConstraint = topView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: topView.frame.height/2)
+        switcherTopConstraint = switcherView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: switcherTopConst)
         recyclingXConstraint = recyclingView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         statsXConstraint = statsView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: view.frame.width)
         mapXConstraint = mapView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 2*view.frame.width)
+        topViewYConstraint?.isActive = true
+        switcherTopConstraint?.isActive = true
         recyclingXConstraint?.isActive = true
         statsXConstraint?.isActive = true
         mapXConstraint?.isActive = true

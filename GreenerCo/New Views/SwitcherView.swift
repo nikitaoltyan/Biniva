@@ -22,7 +22,7 @@ class SwitcherView: UIView {
     }()
     
     lazy var greenView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width/2, height: self.frame.height-6))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width/3-10, height: self.frame.height-6))
             .with(cornerRadius: (self.frame.height-6)/2)
             .with(autolayout: false)
         view.clipsToBounds = true
@@ -61,19 +61,33 @@ class SwitcherView: UIView {
         return label
     }()
     
+    let labelThree: UILabel = {
+        let label = UILabel()
+            .with(color: Colors.darkGrayText)
+            .with(alignment: .center)
+            .with(fontName: "SFPro-Semibold", size: 16)
+            .with(autolayout: false)
+        label.text = "Карта"
+        label.isUserInteractionEnabled = true
+        return label
+    }()
+    
+    
     var delegate: SwitcherDelegate?
     var topViewDelegate: TopViewDelegate?
+    var widthGreenView: NSLayoutConstraint?
     var centerXGreenView: NSLayoutConstraint?
     
     var isLabelOneActivated: Bool = true
     var isLabelTwoActivated: Bool = false
+    var isLabelThreeActivated: Bool = false
     
     override init(frame: CGRect) {
-        let useFrame = CGRect(x: 0, y: 0, width: 240, height: 48)
+        let useFrame = CGRect(x: 0, y: 0, width: 325, height: 48)
         super.init(frame: useFrame)
         self.backgroundColor = .clear
-        SetSubviews()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
     }
     
     required init?(coder: NSCoder) {
@@ -81,38 +95,72 @@ class SwitcherView: UIView {
     }
     
     
-    @objc func AnimateOne() {
+    @objc
+    func animateOne() {
         guard (isLabelOneActivated == false) else { return }
         DispatchQueue.main.async {
             self.topViewDelegate?.UpdateTitles(isRecylcing: true)
-            self.delegate?.ShowRecycling()
+            self.delegate?.showRecycling()
+//            self.delegate?.hideTopView(false)
         }
         UIView.animate(withDuration: 0.3, animations: {
             self.greenView.center.x = self.labelOne.center.x+3
+            self.greenView.transform = CGAffineTransform(scaleX: 0.9, y: 1)
             self.labelOne.textColor = Colors.background
             self.labelTwo.textColor = Colors.darkGrayText
+            self.labelThree.textColor = Colors.darkGrayText
         }, completion: { (result) in
-            self.centerXGreenView?.constant = -self.grayView.frame.width*1/4+3
+            self.centerXGreenView?.constant = -self.grayView.frame.width*1/3
             self.greenView.layoutIfNeeded()
             self.isLabelOneActivated = true
             self.isLabelTwoActivated = false
+            self.isLabelThreeActivated = false
         })
     }
     
-    @objc func AnimateTwo() {
+    
+    @objc
+    func animateTwo() {
         guard (isLabelTwoActivated == false) else { return }
         DispatchQueue.main.async {
             self.topViewDelegate?.UpdateTitles(isRecylcing: false)
-            self.delegate?.ShowStats()
+            self.delegate?.showStats()
+//            self.delegate?.hideTopView(false)
         }
         UIView.animate(withDuration: 0.3, animations: {
             self.greenView.center.x = self.labelTwo.center.x-3
+            self.greenView.transform = CGAffineTransform(scaleX: 1.1, y: 1)
             self.labelTwo.textColor = Colors.background
             self.labelOne.textColor = Colors.darkGrayText
+            self.labelThree.textColor = Colors.darkGrayText
         }, completion: { (result) in
-            self.centerXGreenView?.constant = self.grayView.frame.width*1/4-3
+            self.centerXGreenView?.constant = 0
+            self.greenView.frame.size.width = 170
             self.greenView.layoutIfNeeded()
             self.isLabelTwoActivated = true
+            self.isLabelOneActivated = false
+            self.isLabelThreeActivated = false
+        })
+    }
+    
+    @objc
+    func animateThree() {
+        guard (isLabelThreeActivated == false) else { return }
+        DispatchQueue.main.async {
+            self.delegate?.showMap()
+//            self.delegate?.hideTopView(true)
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            self.greenView.center.x = self.labelThree.center.x-5
+            self.greenView.transform = CGAffineTransform(scaleX: 0.9, y: 1)
+            self.labelThree.textColor = Colors.background
+            self.labelTwo.textColor = Colors.darkGrayText
+            self.labelOne.textColor = Colors.darkGrayText
+        }, completion: { (result) in
+            self.centerXGreenView?.constant = self.grayView.frame.width*1/3
+            self.layoutIfNeeded()
+            self.isLabelThreeActivated = true
+            self.isLabelTwoActivated = false
             self.isLabelOneActivated = false
         })
     }
@@ -123,18 +171,20 @@ class SwitcherView: UIView {
 
 
 extension SwitcherView{
-    func SetSubviews(){
+    func setSubviews(){
         self.addSubview(grayView)
         grayView.addSubview(greenView)
         greenView.layer.addSublayer(gradient)
         grayView.addSubview(labelOne)
         grayView.addSubview(labelTwo)
+        grayView.addSubview(labelThree)
         
-        labelOne.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AnimateOne)))
-        labelTwo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AnimateTwo)))
+        labelOne.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateOne)))
+        labelTwo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateTwo)))
+        labelThree.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateThree)))
     }
     
-    func ActivateLayouts(){
+    func activateLayouts(){
         NSLayoutConstraint.activate([
             grayView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             grayView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
@@ -142,19 +192,24 @@ extension SwitcherView{
             grayView.heightAnchor.constraint(equalToConstant: grayView.frame.height),
             
             greenView.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
-            greenView.widthAnchor.constraint(equalToConstant: greenView.frame.width),
             greenView.heightAnchor.constraint(equalToConstant: greenView.frame.height),
             
             labelOne.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
-            labelOne.centerXAnchor.constraint(equalTo: grayView.centerXAnchor, constant: -grayView.frame.width*1/4),
+            labelOne.centerXAnchor.constraint(equalTo: grayView.centerXAnchor, constant: -grayView.frame.width*1/3),
             labelOne.bottomAnchor.constraint(equalTo: grayView.bottomAnchor),
             
             labelTwo.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
-            labelTwo.centerXAnchor.constraint(equalTo: grayView.centerXAnchor, constant: grayView.frame.width*1/4),
+            labelTwo.centerXAnchor.constraint(equalTo: grayView.centerXAnchor, constant: 0),
             labelTwo.bottomAnchor.constraint(equalTo: greenView.bottomAnchor),
+            
+            labelThree.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
+            labelThree.centerXAnchor.constraint(equalTo: grayView.centerXAnchor, constant: grayView.frame.width*1/3),
+            labelThree.bottomAnchor.constraint(equalTo: greenView.bottomAnchor),
         ])
     
-        centerXGreenView = greenView.centerXAnchor.constraint(equalTo: grayView.centerXAnchor, constant: -grayView.frame.width*1/4+3)
+        centerXGreenView = greenView.centerXAnchor.constraint(equalTo: grayView.centerXAnchor, constant: -grayView.frame.width*1/3+3)
+        widthGreenView = greenView.widthAnchor.constraint(equalToConstant: greenView.frame.width)
         centerXGreenView?.isActive = true
+        widthGreenView?.isActive = true
     }
 }
