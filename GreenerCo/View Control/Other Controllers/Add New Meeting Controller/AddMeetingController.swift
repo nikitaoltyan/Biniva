@@ -85,12 +85,6 @@ class AddMeetingController: UIViewController {
         }
     }
 
-    func ShowPopUpController() {
-        sleep(1)
-        let newVC = PopUpController()
-        newVC.modalPresentationStyle = .overFullScreen
-        self.present(newVC, animated: false, completion: nil)
-    }
 }
 
 
@@ -160,7 +154,6 @@ extension AddMeetingController: AddMeetingSendDelegate {
 //        Server.CreateMeeting(withData: dataDictonary, andUserId: uid)
         
         tabBarController?.selectedIndex = 2
-        DispatchQueue.main.async { self.ShowPopUpController() }
     }
 }
 

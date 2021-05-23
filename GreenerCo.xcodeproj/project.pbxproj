@@ -11,6 +11,7 @@
 		5C045BDF25BB0EF100E42843 /* OnboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C045BDE25BB0EF100E42843 /* OnboardCell.swift */; };
 		5C045BE825BC77B200E42843 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C045BE725BC77B200E42843 /* Server.swift */; };
 		5C045BF725BFE25300E42843 /* Dictionary Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C045BF625BFE25300E42843 /* Dictionary Extension.swift */; };
+		5C07594626596F17000F64C7 /* MaterialPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07594526596F17000F64C7 /* MaterialPinCell.swift */; };
 		5C087034262738EB0057E840 /* CoreDataFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C087033262738EB0057E840 /* CoreDataFunction.swift */; };
 		5C08703D262739080057E840 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C08703B262739080057E840 /* Model.xcdatamodeld */; };
 		5C087043262739E10057E840 /* Model+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C087041262739E10057E840 /* Model+CoreDataClass.swift */; };
@@ -52,6 +53,7 @@
 		5C5ED19A2659386B00084458 /* CustomPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5ED1992659386B00084458 /* CustomPin.swift */; };
 		5C6C2B022581477B00B653AD /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C2B012581477B00B653AD /* MessageCell.swift */; };
 		5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C89EF25AF41F400D55A16 /* ButtonView.swift */; };
+		5C6CDAAF26596990009F72D8 /* BottomPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6CDAAE26596990009F72D8 /* BottomPinView.swift */; };
 		5C7C5E9E264ABDDE00B4FE8C /* NewOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */; };
 		5C7D378A264CF80C00DFEBA7 /* EmptyStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */; };
 		5C83A053255EB3CC005C2CAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A052255EB3CC005C2CAA /* Assets.xcassets */; };
@@ -114,6 +116,7 @@
 		5C045BDE25BB0EF100E42843 /* OnboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardCell.swift; sourceTree = "<group>"; };
 		5C045BE725BC77B200E42843 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		5C045BF625BFE25300E42843 /* Dictionary Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary Extension.swift"; sourceTree = "<group>"; };
+		5C07594526596F17000F64C7 /* MaterialPinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialPinCell.swift; sourceTree = "<group>"; };
 		5C087033262738EB0057E840 /* CoreDataFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFunction.swift; sourceTree = "<group>"; };
 		5C08703C262739080057E840 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5C087041262739E10057E840 /* Model+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -162,6 +165,7 @@
 		5C5ED1992659386B00084458 /* CustomPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPin.swift; sourceTree = "<group>"; };
 		5C6C2B012581477B00B653AD /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		5C6C89EF25AF41F400D55A16 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		5C6CDAAE26596990009F72D8 /* BottomPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPinView.swift; sourceTree = "<group>"; };
 		5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOnboardingController.swift; sourceTree = "<group>"; };
 		5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStatsCell.swift; sourceTree = "<group>"; };
 		5C83A052255EB3CC005C2CAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -599,6 +603,7 @@
 		5C5ED19F265967AC00084458 /* Support Views */ = {
 			isa = PBXGroup;
 			children = (
+				5CAF7D52262C7A5700249CC6 /* TopView.swift */,
 				5C55591B262D945C0046F5A5 /* SwitcherView.swift */,
 				5C5ED1A0265967C100084458 /* Progress View */,
 				5C5ED1A1265967FD00084458 /* Stats View */,
@@ -611,7 +616,6 @@
 		5C5ED1A0265967C100084458 /* Progress View */ = {
 			isa = PBXGroup;
 			children = (
-				5CAF7D52262C7A5700249CC6 /* TopView.swift */,
 				5CAF7D58262C7D0F00249CC6 /* ProgressView.swift */,
 				5C9F98AA262DDDDD00DFCFEA /* RecyclingView.swift */,
 			);
@@ -621,12 +625,12 @@
 		5C5ED1A1265967FD00084458 /* Stats View */ = {
 			isa = PBXGroup;
 			children = (
+				5C9F98B2262DE1E200DFCFEA /* StatsView.swift */,
+				5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */,
+				5C25D8A6263693A900D2206E /* StatsCell.swift */,
+				5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */,
 				5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */,
 				5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */,
-				5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */,
-				5C25D8A6263693A900D2206E /* StatsCell.swift */,
-				5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */,
-				5C9F98B2262DE1E200DFCFEA /* StatsView.swift */,
 			);
 			path = "Stats View";
 			sourceTree = "<group>";
@@ -647,6 +651,8 @@
 			children = (
 				5CA776D12656B3C600EDAF47 /* MapView.swift */,
 				5C5ED1992659386B00084458 /* CustomPin.swift */,
+				5C6CDAAE26596990009F72D8 /* BottomPinView.swift */,
+				5C07594526596F17000F64C7 /* MaterialPinCell.swift */,
 			);
 			path = "Map View";
 			sourceTree = "<group>";
@@ -829,8 +835,10 @@
 				5C22533A25B1690F00E73D0A /* WhoJoinedView.swift in Sources */,
 				5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */,
 				5CFB6246259B415100F1C8C7 /* TopProgressView.swift in Sources */,
+				5C07594626596F17000F64C7 /* MaterialPinCell.swift in Sources */,
 				5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */,
 				5C045BDF25BB0EF100E42843 /* OnboardCell.swift in Sources */,
+				5C6CDAAF26596990009F72D8 /* BottomPinView.swift in Sources */,
 				5C045BD625BAE80B00E42843 /* BottomLogInView.swift in Sources */,
 				5CFB624B259B92E800F1C8C7 /* TopHeaderView.swift in Sources */,
 				5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */,

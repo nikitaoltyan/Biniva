@@ -185,11 +185,6 @@ class LogInController: UIViewController {
     func ShowErrorPopUp() {
         print("Show pop up")
         Vibration.Medium()
-        let newVC = PopUpController()
-        newVC.achieveLabel.text = "Ошибка входа"
-        newVC.achieveDesc.text = "Возможно, неправильный Email или пароль =( Попробуй заново."
-        newVC.modalPresentationStyle = .overFullScreen
-        self.present(newVC, animated: false, completion: nil)
     }
 }
 
