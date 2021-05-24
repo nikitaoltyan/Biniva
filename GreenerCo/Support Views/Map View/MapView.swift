@@ -36,10 +36,6 @@ class MapView: UIView {
     
     var pinAnnotationBottomConstraint: NSLayoutConstraint?
     
-    private var currentState: AnnotationState = .closed
-    private var runningAnimators = [UIViewPropertyAnimator]()
-    private var animationProgress = [CGFloat]()
-    
     override init(frame: CGRect) {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
         super.init(frame: useFrame)
@@ -58,23 +54,23 @@ class MapView: UIView {
         self.bringSubviewToFront(pinAnnotation)
         let translation = sender.translation(in: self)
         let centerCoordinate: CGFloat = MainConstants.screenHeight + pinAnnotation.frame.height/2
-        let condition_1 = pinAnnotation.center.y <= centerCoordinate - 170
-        let condition_2 = pinAnnotation.center.y >= centerCoordinate - 500
+        let condition_1 = pinAnnotation.center.y <= centerCoordinate - 190
+        let condition_2 = pinAnnotation.center.y >= centerCoordinate - 700
         if condition_1 && condition_2 {
-            pinAnnotation.center = CGPoint(x: pinAnnotation.center.x, y: pinAnnotation.center.y + translation.y)
+            pinAnnotation.center = CGPoint(x: pinAnnotation.center.x,
+                                           y: pinAnnotation.center.y + translation.y)
         } else {
             setRightPosition(centerCoordinate)
         }
         sender.setTranslation(CGPoint.zero, in: self)
         
         if (sender.state == .ended) {
-            print("draging ended")
             setRightPosition(centerCoordinate)
         }
     }
     
     func setRightPosition(_ centerCoordinate: CGFloat){
-        let middle: CGFloat = (170.0 + 500.0)/2.0
+        let middle: CGFloat = (190.0 + 500.0)/2.0
         switch centerCoordinate-pinAnnotation.center.y {
         case 0...middle:
             setBottomPosition(centerCoordinate)
@@ -86,7 +82,7 @@ class MapView: UIView {
     func setBottomPosition(_ centerCoordinate: CGFloat) {
         UIView.animate(withDuration: 0.25, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
-                                                y: centerCoordinate-170)
+                                                y: centerCoordinate-190)
         })
     }
     
@@ -130,7 +126,7 @@ extension MapView{
             map.rightAnchor.constraint(equalTo: self.rightAnchor),
             map.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: -170),
+            pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: -190),
             pinAnnotation.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             pinAnnotation.widthAnchor.constraint(equalToConstant: pinAnnotation.frame.width),
             pinAnnotation.heightAnchor.constraint(equalToConstant: pinAnnotation.frame.height)

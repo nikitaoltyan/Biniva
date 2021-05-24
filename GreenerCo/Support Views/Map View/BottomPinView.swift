@@ -25,7 +25,6 @@ class BottomPinView: UIView {
             .with(fontName: "SFPro-Bold", size: 28)
             .with(autolayout: false)
         label.text = "Контейнер"
-        label.transform = CGAffineTransform(scaleX: 0.86, y: 0.86)
         return label
     }()
     
@@ -37,7 +36,6 @@ class BottomPinView: UIView {
             .with(fontName: "SFPro-Medium", size: 20)
             .with(autolayout: false)
         label.text = "Sans Str. 19"
-        label.transform = CGAffineTransform(scaleX: 0.86, y: 0.86)
         return label
     }()
     
@@ -47,7 +45,7 @@ class BottomPinView: UIView {
         let collection = UICollectionView(frame: useFrame, collectionViewLayout: layout)
             .with(bgColor: .clear)
             .with(autolayout: false)
-        collection.contentInset = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+        collection.contentInset = UIEdgeInsets(top: 0, left: 19, bottom: 0, right: 19)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 15
         layout.minimumInteritemSpacing = 15
@@ -58,7 +56,39 @@ class BottomPinView: UIView {
         collection.delegate = self
         collection.dataSource = self
         collection.register(MaterialPinCell.self, forCellWithReuseIdentifier: "MaterialPinCell")
-        collection.transform = CGAffineTransform(scaleX: 0.86, y: 0.86)
+        collection.tag = 0
+        return collection
+    }()
+    
+    let photoLabel: UILabel = {
+        let label = UILabel()
+            .with(color: Colors.nearBlack)
+            .with(alignment: .left)
+            .with(numberOfLines: 1)
+            .with(fontName: "SFPro-Medium", size: 20)
+            .with(autolayout: false)
+        label.text = "Фото"
+        return label
+    }()
+    
+    lazy var photoCollection: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 200)
+        let collection = UICollectionView(frame: useFrame, collectionViewLayout: layout)
+            .with(bgColor: .clear)
+            .with(autolayout: false)
+        collection.contentInset = UIEdgeInsets(top: 0, left: 19, bottom: 0, right: 19)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 15
+        layout.minimumInteritemSpacing = 8
+        
+        collection.isUserInteractionEnabled = true
+        collection.isScrollEnabled = true
+        collection.showsHorizontalScrollIndicator = false
+        collection.delegate = self
+        collection.dataSource = self
+        collection.register(MaterialPinCell.self, forCellWithReuseIdentifier: "MaterialPinCell")
+        collection.tag = 1
         return collection
     }()
     
@@ -79,11 +109,10 @@ class BottomPinView: UIView {
         activateLayouts()
     }
 
-    
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
+
 }
 
 
@@ -91,17 +120,35 @@ class BottomPinView: UIView {
 
 extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        switch collectionView.tag {
+        case 0:
+            return 8
+        default:
+            return 8
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 52, height: 52)
+        print("Update. Colltion view tag: \(collectionView.tag)")
+        switch collectionView.tag {
+        case 0:
+            return CGSize(width: 52, height: 52)
+        default:
+            return CGSize(width: 95, height: 95)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = materialCollection.dequeueReusableCell(withReuseIdentifier: "MaterialPinCell", for: indexPath) as! MaterialPinCell
-        cell.layer.cornerRadius = 26
-        return cell
+        switch collectionView.tag {
+        case 0:
+            let cell = materialCollection.dequeueReusableCell(withReuseIdentifier: "MaterialPinCell", for: indexPath) as! MaterialPinCell
+            cell.layer.cornerRadius = 26
+            return cell
+        default:
+            let cell = materialCollection.dequeueReusableCell(withReuseIdentifier: "MaterialPinCell", for: indexPath) as! MaterialPinCell
+            cell.backgroundColor = .gray
+            return cell
+        }
     }
     
     
@@ -116,6 +163,8 @@ extension BottomPinView {
         self.addSubview(title)
         self.addSubview(adressLabel)
         self.addSubview(materialCollection)
+        self.addSubview(photoLabel)
+        self.addSubview(photoCollection)
     }
     
     func activateLayouts(){
@@ -126,17 +175,23 @@ extension BottomPinView {
             topView.heightAnchor.constraint(equalToConstant: topView.frame.height),
      
             title.topAnchor.constraint(equalTo: self.topAnchor, constant: 19),
+            title.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 19),
             
-            materialCollection.topAnchor.constraint(equalTo: adressLabel.bottomAnchor, constant: 10),
+            adressLabel.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 7),
+            adressLabel.leftAnchor.constraint(equalTo: title.leftAnchor),
+            
+            materialCollection.topAnchor.constraint(equalTo: adressLabel.bottomAnchor, constant: 15),
             materialCollection.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             materialCollection.heightAnchor.constraint(equalToConstant: materialCollection.frame.height),
-            materialCollection.widthAnchor.constraint(equalToConstant: materialCollection.frame.width)
+            materialCollection.widthAnchor.constraint(equalToConstant: materialCollection.frame.width),
+            
+            photoLabel.topAnchor.constraint(equalTo: materialCollection.bottomAnchor, constant: 38),
+            photoLabel.leftAnchor.constraint(equalTo: title.leftAnchor),
+            
+            photoCollection.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: 10),
+            photoCollection.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            photoCollection.heightAnchor.constraint(equalToConstant: photoCollection.frame.height),
+            photoCollection.widthAnchor.constraint(equalToConstant: photoCollection.frame.width),
         ])
-        leftTitleConstraint = title.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 13)
-        leftAdressConstraint = adressLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15)
-        topAdressConstraint = adressLabel.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 2)
-        leftTitleConstraint?.isActive = true
-        leftAdressConstraint?.isActive = true
-        topAdressConstraint?.isActive = true
     }
 }
