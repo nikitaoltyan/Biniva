@@ -17,6 +17,7 @@
 		5C087043262739E10057E840 /* Model+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C087041262739E10057E840 /* Model+CoreDataClass.swift */; };
 		5C087044262739E10057E840 /* Model+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C087042262739E10057E840 /* Model+CoreDataProperties.swift */; };
 		5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */; };
+		5C11455826612B9400F48626 /* MapView+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11455726612B9400F48626 /* MapView+Model.swift */; };
 		5C1BD66025D7CA770002A894 /* Material Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1BD65F25D7CA770002A894 /* Material Defaults.swift */; };
 		5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D11C325C6B7F2007C8DBC /* Date Extension.swift */; };
 		5C1D11C925C7259B007C8DBC /* ServerMaterials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D11C825C7259B007C8DBC /* ServerMaterials.swift */; };
@@ -71,6 +72,7 @@
 		5CB8593C2652BB3D00885A6D /* MaterialStatsCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */; };
 		5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB5101257D12160097F4BD /* MeetingViewController.swift */; };
 		5CBF94D825E637940071742F /* OtherHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF94D725E637940071742F /* OtherHeaderView.swift */; };
+		5CC12876265FFF8C0097ECDD /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC12875265FFF8C0097ECDD /* MKMapView+Extension.swift */; };
 		5CC26A9C25CBF27F000501AD /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC26A9B25CBF27F000501AD /* ItemView.swift */; };
 		5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */; };
 		5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */; };
@@ -122,6 +124,7 @@
 		5C087041262739E10057E840 /* Model+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5C087042262739E10057E840 /* Model+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsController.swift; sourceTree = "<group>"; };
+		5C11455726612B9400F48626 /* MapView+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapView+Model.swift"; sourceTree = "<group>"; };
 		5C1BD65F25D7CA770002A894 /* Material Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Material Defaults.swift"; sourceTree = "<group>"; };
 		5C1D11C325C6B7F2007C8DBC /* Date Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date Extension.swift"; sourceTree = "<group>"; };
 		5C1D11C825C7259B007C8DBC /* ServerMaterials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMaterials.swift; sourceTree = "<group>"; };
@@ -183,6 +186,7 @@
 		5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaterialStatsCell+Empty.swift"; sourceTree = "<group>"; };
 		5CBB5101257D12160097F4BD /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		5CBF94D725E637940071742F /* OtherHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherHeaderView.swift; sourceTree = "<group>"; };
+		5CC12875265FFF8C0097ECDD /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
 		5CC26A9B25CBF27F000501AD /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 				5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */,
 				5C1D11C325C6B7F2007C8DBC /* Date Extension.swift */,
 				5CEDA06625DCF4A0009280D0 /* Array Extension.swift */,
+				5CC12875265FFF8C0097ECDD /* MKMapView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -289,6 +294,13 @@
 				5CFB8FB826281BB000372203 /* DataFunction.swift */,
 			);
 			path = "Core Model Functions";
+			sourceTree = "<group>";
+		};
+		5C11455F26612D4100F48626 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Maps;
 			sourceTree = "<group>";
 		};
 		5C1BD65E25D7CA560002A894 /* Material Defaults */ = {
@@ -549,6 +561,7 @@
 			children = (
 				5C5ED19E2659677D00084458 /* View Controllers */,
 				5C5ED19F265967AC00084458 /* Support Views */,
+				5C11455F26612D4100F48626 /* Maps */,
 				5C3046DE25C06A3100BAFEEF /* GreenerCo.entitlements */,
 				5C454E5225BACF5B00966991 /* View Control */,
 				5C454E6C25BAD24600966991 /* General Views */,
@@ -638,8 +651,8 @@
 		5C5ED1A22659682C00084458 /* Add Trash View */ = {
 			isa = PBXGroup;
 			children = (
-				5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */,
 				5C3D533626301D0A00DA0AFB /* AddTrashView.swift */,
+				5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */,
 				5CF90C56262EA7C100127E4D /* MaterialCell.swift */,
 				5CE1B0272633DA5100549536 /* WeightView.swift */,
 			);
@@ -650,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				5CA776D12656B3C600EDAF47 /* MapView.swift */,
+				5C11455726612B9400F48626 /* MapView+Model.swift */,
 				5C5ED1992659386B00084458 /* CustomPin.swift */,
 				5C6CDAAE26596990009F72D8 /* BottomPinView.swift */,
 				5C07594526596F17000F64C7 /* MaterialPinCell.swift */,
@@ -848,6 +862,7 @@
 				5CFB622E259A447200F1C8C7 /* AddMeetingController.swift in Sources */,
 				5C36401625E64346003908B7 /* ProfileInfoCell.swift in Sources */,
 				5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */,
+				5C11455826612B9400F48626 /* MapView+Model.swift in Sources */,
 				5CE7218525A2047500ECE84F /* ProgressImageView.swift in Sources */,
 				5C3D533C2630564E00DA0AFB /* ExtraAddCell.swift in Sources */,
 				5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */,
@@ -861,6 +876,7 @@
 				5CA776D22656B3C600EDAF47 /* MapView.swift in Sources */,
 				5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */,
 				5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */,
+				5CC12876265FFF8C0097ECDD /* MKMapView+Extension.swift in Sources */,
 				5C7C5E9E264ABDDE00B4FE8C /* NewOnboardingController.swift in Sources */,
 				5C08703D262739080057E840 /* Model.xcdatamodeld in Sources */,
 				5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */,

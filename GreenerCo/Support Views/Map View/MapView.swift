@@ -11,6 +11,8 @@ import CoreLocation
 
 class MapView: UIView {
     
+    var model = MapView_Model()
+    
     lazy var map: MKMapView = {
         let map = MKMapView()
             .with(autolayout: false)
@@ -34,7 +36,11 @@ class MapView: UIView {
         return view
     }()
     
+    
     var pinAnnotationBottomConstraint: NSLayoutConstraint?
+    
+    var coordinates: Array<(CGFloat, CGFloat)> = [(55.794698, 37.929111)]
+    
     
     override init(frame: CGRect) {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
@@ -46,6 +52,18 @@ class MapView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    /// That function shows cordinates of all corners of the visible view.
+    /// - returns: (topLeft, topRight, bottomLeft, bottomRight)
+    func visibleMapBounds(forMap map: MKMapView) -> (CLLocationCoordinate2D,
+                                                     CLLocationCoordinate2D,
+                                                     CLLocationCoordinate2D,
+                                                     CLLocationCoordinate2D) {
+        return (map.topLeftCoordinate,
+                map.topRightCoordinate,
+                map.bottomLeftCoordinate,
+                map.bottomRightCoordinate)
     }
 
     
@@ -92,6 +110,11 @@ class MapView: UIView {
                                                 y: centerCoordinate-500)
         })
     }
+    
+    @objc
+    func annotationTapped(_ sender: UITapGestureRecognizer) {
+        print("Annotation Tapped")
+    }
 }
 
 
@@ -103,6 +126,11 @@ extension MapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annotation = CustomPin(annotation: annotation, reuseIdentifier: "")
         return annotation
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(annotationTapped(_:)))
+        view.addGestureRecognizer(gesture)
     }
 }
 

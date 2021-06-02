@@ -129,7 +129,6 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print("Update. Colltion view tag: \(collectionView.tag)")
         switch collectionView.tag {
         case 0:
             return CGSize(width: 52, height: 52)
