@@ -19,9 +19,10 @@ class MapView: UIView {
         map.isUserInteractionEnabled = true
         map.delegate = self
         
+        // There should be user's coordinate.
         let coordinate = CLLocationCoordinate2D(latitude: 55.794698, longitude: 37.929111)
         let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1200, longitudinalMeters: 1200)
-        let label = Capital(title: "Title", coordinate: coordinate, info: "Info")
+        let label = CoordinateAnnotation(title: " ", coordinate: coordinate, info: " ")
         map.addAnnotation(label)
         map.setRegion(viewRegion, animated: false)
         return map
@@ -60,12 +61,45 @@ class MapView: UIView {
                                                      CLLocationCoordinate2D,
                                                      CLLocationCoordinate2D,
                                                      CLLocationCoordinate2D) {
+        
+        print (map.topLeftCoordinate,
+                map.topRightCoordinate,
+                map.bottomLeftCoordinate,
+                map.bottomRightCoordinate)
+
+        // Just trying to add random annotations in the given area.
+        for _ in 0...5 {
+            addAnnotation(minXminYlat: map.topLeftCoordinate.latitude,
+                          minXminYlong: map.topLeftCoordinate.longitude,
+                          maxXminYlong: map.topRightCoordinate.longitude,
+                          minXmaxYlat: map.bottomLeftCoordinate.latitude)
+        }
+
         return (map.topLeftCoordinate,
                 map.topRightCoordinate,
                 map.bottomLeftCoordinate,
                 map.bottomRightCoordinate)
     }
 
+    
+    /// That function randoms position and adds annotation in the given area.
+    func addAnnotation(minXminYlat: CLLocationDegrees,
+                       minXminYlong: CLLocationDegrees,
+                       maxXminYlong: CLLocationDegrees,
+                       minXmaxYlat: CLLocationDegrees){
+        
+        // Add here checking for proper longitude-latitude direction – from lower to upper.
+        let latitude = CLLocationDegrees.random(in: minXmaxYlat...minXminYlat)
+        let longitude = CLLocationDegrees.random(in: minXminYlong...maxXminYlong)
+        
+        let coordinate = CLLocationCoordinate2D(latitude: latitude,
+                                                longitude: longitude)
+        let label = CoordinateAnnotation(title: "Hey", coordinate: coordinate, info: "What")
+        DispatchQueue.main.async {
+            self.map.addAnnotation(label)
+        }
+    }
+    
     
     @objc
     func draggedView(_ sender:UIPanGestureRecognizer){
@@ -114,6 +148,7 @@ class MapView: UIView {
     @objc
     func annotationTapped(_ sender: UITapGestureRecognizer) {
         print("Annotation Tapped")
+        let _ = visibleMapBounds(forMap: map)
     }
 }
 

@@ -25,6 +25,7 @@
 		5C22533A25B1690F00E73D0A /* WhoJoinedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C22533925B1690F00E73D0A /* WhoJoinedView.swift */; };
 		5C25D8A7263693A900D2206E /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C25D8A6263693A900D2206E /* StatsCell.swift */; };
 		5C25D8AC2636BB9B00D2206E /* MaterialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C25D8AB2636BB9B00D2206E /* MaterialData.swift */; };
+		5C2A670E2667888500772674 /* CoordinateAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A670D2667888500772674 /* CoordinateAnnotation.swift */; };
 		5C2E36B525D40CC500F92588 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E36B425D40CC500F92588 /* LogInController.swift */; };
 		5C3046DA25C02CA000BAFEEF /* View Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046D925C02CA000BAFEEF /* View Extension.swift */; };
 		5C3046E525C13B8E00BAFEEF /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046E425C13B8E00BAFEEF /* RegistrationController.swift */; };
@@ -132,6 +133,7 @@
 		5C22533925B1690F00E73D0A /* WhoJoinedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoJoinedView.swift; sourceTree = "<group>"; };
 		5C25D8A6263693A900D2206E /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 		5C25D8AB2636BB9B00D2206E /* MaterialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialData.swift; sourceTree = "<group>"; };
+		5C2A670D2667888500772674 /* CoordinateAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateAnnotation.swift; sourceTree = "<group>"; };
 		5C2E36B425D40CC500F92588 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
 		5C3046D925C02CA000BAFEEF /* View Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Extension.swift"; sourceTree = "<group>"; };
 		5C3046DE25C06A3100BAFEEF /* GreenerCo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GreenerCo.entitlements; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 		5C11455F26612D4100F48626 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				5C2A670D2667888500772674 /* CoordinateAnnotation.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -821,6 +824,7 @@
 				5C087034262738EB0057E840 /* CoreDataFunction.swift in Sources */,
 				5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */,
 				5CE1B0282633DA5100549536 /* WeightView.swift in Sources */,
+				5C2A670E2667888500772674 /* CoordinateAnnotation.swift in Sources */,
 				5C22533525B1638800E73D0A /* BackTopView.swift in Sources */,
 				5C3046DA25C02CA000BAFEEF /* View Extension.swift in Sources */,
 				5CB6A23425C4638900EC4B3A /* EmptyMeetingsCell.swift in Sources */,
