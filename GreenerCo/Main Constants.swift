@@ -60,5 +60,3 @@ class Vibration {
         heavy.impactOccurred()
     }
 }
-
-// Access Token Github: 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
