@@ -49,9 +49,9 @@
 		5C45916F254D55C2005AE26C /* BinivaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45916E254D55C2005AE26C /* BinivaUITests.swift */; };
 		5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45917D254D59D3005AE26C /* RecyclingController.swift */; };
 		5C54954C255857FB00E5140C /* TopViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C54954B255857FB00E5140C /* TopViewCell.swift */; };
+		5C54DF9626767B03002548B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C54DF9526767B02002548B8 /* GoogleService-Info.plist */; };
 		5C55591C262D945C0046F5A5 /* SwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55591B262D945C0046F5A5 /* SwitcherView.swift */; };
 		5C5D03E925B1A71F0011AB9D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5D03E825B1A71F0011AB9D /* InfoView.swift */; };
-		5C5D03EE25B2B09F0011AB9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C5D03ED25B2B09F0011AB9D /* GoogleService-Info.plist */; };
 		5C5ED19A2659386B00084458 /* DefaultPins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5ED1992659386B00084458 /* DefaultPins.swift */; };
 		5C6C2B022581477B00B653AD /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C2B012581477B00B653AD /* MessageCell.swift */; };
 		5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C89EF25AF41F400D55A16 /* ButtonView.swift */; };
@@ -97,6 +97,9 @@
 		5CFB6246259B415100F1C8C7 /* TopProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB6245259B415100F1C8C7 /* TopProgressView.swift */; };
 		5CFB624B259B92E800F1C8C7 /* TopHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB624A259B92E800F1C8C7 /* TopHeaderView.swift */; };
 		5CFB8FB926281BB000372203 /* DataFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB8FB826281BB000372203 /* DataFunction.swift */; };
+		7AED20DC133BA76E7FD0985E /* Pods_BinivaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4738DE77F4FC6012602D51 /* Pods_BinivaTests.framework */; };
+		964AB812A9DF5A8874E0AB55 /* Pods_Biniva_BinivaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC08C6CA904D3B70E2693E56 /* Pods_Biniva_BinivaUITests.framework */; };
+		EB29D31B284BF2C9CD0D4697 /* Pods_Biniva.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3104BA7F5B996BFFAE13BFE4 /* Pods_Biniva.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +120,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A24BCB40674F162AA005B6A /* Pods-BinivaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinivaTests.debug.xcconfig"; path = "Target Support Files/Pods-BinivaTests/Pods-BinivaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1BBF71B24480A5ADE4CD2524 /* Pods-Biniva.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Biniva.debug.xcconfig"; path = "Target Support Files/Pods-Biniva/Pods-Biniva.debug.xcconfig"; sourceTree = "<group>"; };
+		3104BA7F5B996BFFAE13BFE4 /* Pods_Biniva.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Biniva.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EC76250C5233653E1669399 /* Pods-Biniva-BinivaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Biniva-BinivaUITests.release.xcconfig"; path = "Target Support Files/Pods-Biniva-BinivaUITests/Pods-Biniva-BinivaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3FBFFB943288CF8561B55D0B /* Pods-BinivaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BinivaTests.release.xcconfig"; path = "Target Support Files/Pods-BinivaTests/Pods-BinivaTests.release.xcconfig"; sourceTree = "<group>"; };
+		5A4738DE77F4FC6012602D51 /* Pods_BinivaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BinivaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C045BD525BAE80B00E42843 /* BottomLogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLogInView.swift; sourceTree = "<group>"; };
 		5C045BDE25BB0EF100E42843 /* OnboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardCell.swift; sourceTree = "<group>"; };
 		5C045BE725BC77B200E42843 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
@@ -166,9 +175,9 @@
 		5C459170254D55C2005AE26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C45917D254D59D3005AE26C /* RecyclingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingController.swift; sourceTree = "<group>"; };
 		5C54954B255857FB00E5140C /* TopViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewCell.swift; sourceTree = "<group>"; };
+		5C54DF9526767B02002548B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5C55591B262D945C0046F5A5 /* SwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherView.swift; sourceTree = "<group>"; };
 		5C5D03E825B1A71F0011AB9D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		5C5D03ED25B2B09F0011AB9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5C5ED1992659386B00084458 /* DefaultPins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPins.swift; sourceTree = "<group>"; };
 		5C6C2B012581477B00B653AD /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		5C6C89EF25AF41F400D55A16 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
@@ -214,6 +223,9 @@
 		5CFB6245259B415100F1C8C7 /* TopProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopProgressView.swift; sourceTree = "<group>"; };
 		5CFB624A259B92E800F1C8C7 /* TopHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeaderView.swift; sourceTree = "<group>"; };
 		5CFB8FB826281BB000372203 /* DataFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFunction.swift; sourceTree = "<group>"; };
+		65FAE0A43344AF62CA16FBB3 /* Pods-Biniva-BinivaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Biniva-BinivaUITests.debug.xcconfig"; path = "Target Support Files/Pods-Biniva-BinivaUITests/Pods-Biniva-BinivaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		BC08C6CA904D3B70E2693E56 /* Pods_Biniva_BinivaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Biniva_BinivaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBE81C2D922101F0CB84288C /* Pods-Biniva.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Biniva.release.xcconfig"; path = "Target Support Files/Pods-Biniva/Pods-Biniva.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB29D31B284BF2C9CD0D4697 /* Pods_Biniva.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +241,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AED20DC133BA76E7FD0985E /* Pods_BinivaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,12 +249,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				964AB812A9DF5A8874E0AB55 /* Pods_Biniva_BinivaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B1199908AECEA53EDB01D4F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1BBF71B24480A5ADE4CD2524 /* Pods-Biniva.debug.xcconfig */,
+				EBE81C2D922101F0CB84288C /* Pods-Biniva.release.xcconfig */,
+				65FAE0A43344AF62CA16FBB3 /* Pods-Biniva-BinivaUITests.debug.xcconfig */,
+				3EC76250C5233653E1669399 /* Pods-Biniva-BinivaUITests.release.xcconfig */,
+				1A24BCB40674F162AA005B6A /* Pods-BinivaTests.debug.xcconfig */,
+				3FBFFB943288CF8561B55D0B /* Pods-BinivaTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		5C045BD425BAE7ED00E42843 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -550,6 +579,8 @@
 				5C459162254D55C2005AE26C /* BinivaTests */,
 				5C45916D254D55C2005AE26C /* BinivaUITests */,
 				5C45914A254D55C0005AE26C /* Products */,
+				0B1199908AECEA53EDB01D4F /* Pods */,
+				69F69B6106B6C3A91B2C84B8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -584,7 +615,7 @@
 				5C83A052255EB3CC005C2CAA /* Assets.xcassets */,
 				5C459157254D55C1005AE26C /* LaunchScreen.storyboard */,
 				5C45915A254D55C1005AE26C /* Info.plist */,
-				5C5D03ED25B2B09F0011AB9D /* GoogleService-Info.plist */,
+				5C54DF9526767B02002548B8 /* GoogleService-Info.plist */,
 				5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */,
 				5C83A057255F959F005C2CAA /* SF-Pro.ttf */,
 				5C08703B262739080057E840 /* Model.xcdatamodeld */,
@@ -696,6 +727,16 @@
 			path = "User Defaults";
 			sourceTree = "<group>";
 		};
+		69F69B6106B6C3A91B2C84B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3104BA7F5B996BFFAE13BFE4 /* Pods_Biniva.framework */,
+				BC08C6CA904D3B70E2693E56 /* Pods_Biniva_BinivaUITests.framework */,
+				5A4738DE77F4FC6012602D51 /* Pods_BinivaTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -703,9 +744,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5C459173254D55C2005AE26C /* Build configuration list for PBXNativeTarget "Biniva" */;
 			buildPhases = (
+				BB271048C1A0259996958F28 /* [CP] Check Pods Manifest.lock */,
 				5C459145254D55C0005AE26C /* Sources */,
 				5C459146254D55C0005AE26C /* Frameworks */,
 				5C459147254D55C0005AE26C /* Resources */,
+				E2A1AC9B3C1DA149FA9488BC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -720,6 +763,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5C459176254D55C2005AE26C /* Build configuration list for PBXNativeTarget "BinivaTests" */;
 			buildPhases = (
+				E7FAF27931C8F520DDDCF135 /* [CP] Check Pods Manifest.lock */,
 				5C45915B254D55C2005AE26C /* Sources */,
 				5C45915C254D55C2005AE26C /* Frameworks */,
 				5C45915D254D55C2005AE26C /* Resources */,
@@ -738,9 +782,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5C459179254D55C2005AE26C /* Build configuration list for PBXNativeTarget "BinivaUITests" */;
 			buildPhases = (
+				CDEF29404C08C81B37D5D642 /* [CP] Check Pods Manifest.lock */,
 				5C459166254D55C2005AE26C /* Sources */,
 				5C459167254D55C2005AE26C /* Frameworks */,
 				5C459168254D55C2005AE26C /* Resources */,
+				4EC6870024B981B067A390D6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -801,9 +847,9 @@
 			files = (
 				5C459159254D55C1005AE26C /* LaunchScreen.storyboard in Resources */,
 				5C83A053255EB3CC005C2CAA /* Assets.xcassets in Resources */,
+				5C54DF9626767B03002548B8 /* GoogleService-Info.plist in Resources */,
 				5C83A05C255F9796005C2CAA /* SF-Pro-Italic.ttf in Resources */,
 				5C83A060255F979A005C2CAA /* SF-Pro.ttf in Resources */,
-				5C5D03EE25B2B09F0011AB9D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -822,6 +868,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4EC6870024B981B067A390D6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Biniva-BinivaUITests/Pods-Biniva-BinivaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Biniva-BinivaUITests/Pods-Biniva-BinivaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Biniva-BinivaUITests/Pods-Biniva-BinivaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB271048C1A0259996958F28 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Biniva-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDEF29404C08C81B37D5D642 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Biniva-BinivaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2A1AC9B3C1DA149FA9488BC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Biniva/Pods-Biniva-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Biniva/Pods-Biniva-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Biniva/Pods-Biniva-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7FAF27931C8F520DDDCF135 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BinivaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5C459145254D55C0005AE26C /* Sources */ = {
@@ -1075,6 +1224,7 @@
 		};
 		5C459174254D55C2005AE26C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BBF71B24480A5ADE4CD2524 /* Pods-Biniva.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1098,6 +1248,7 @@
 		};
 		5C459175254D55C2005AE26C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBE81C2D922101F0CB84288C /* Pods-Biniva.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1121,6 +1272,7 @@
 		};
 		5C459177254D55C2005AE26C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A24BCB40674F162AA005B6A /* Pods-BinivaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1143,6 +1295,7 @@
 		};
 		5C459178254D55C2005AE26C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FBFFB943288CF8561B55D0B /* Pods-BinivaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1165,6 +1318,7 @@
 		};
 		5C45917A254D55C2005AE26C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 65FAE0A43344AF62CA16FBB3 /* Pods-Biniva-BinivaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1185,6 +1339,7 @@
 		};
 		5C45917B254D55C2005AE26C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EC76250C5233653E1669399 /* Pods-Biniva-BinivaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
