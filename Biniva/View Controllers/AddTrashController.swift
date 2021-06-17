@@ -103,7 +103,8 @@ class AddTrashController: UIViewController {
     }
 
     
-    @objc func Close(){
+    @objc
+    func Close(){
         if (materialsCollection.isHidden) {
             addTrashView.isHidden = true
             materialsCollection.isHidden = false
@@ -116,7 +117,8 @@ class AddTrashController: UIViewController {
         }
     }
     
-    @objc func Add(){
+    @objc
+    func add(){
         if (materialsCollection.isHidden) {
             Vibration.Light()
             let txt = addTrashView.weightView.textView.text.split(separator: " ")
@@ -174,7 +176,7 @@ extension AddTrashController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Add()
+        add()
     }
     
 }
@@ -193,7 +195,7 @@ extension AddTrashController {
         whiteBGView.addSubview(addTrashView)
         
         backButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Close)))
-        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Add)))
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(add)))
     }
     
     func ActivateLayouts(){

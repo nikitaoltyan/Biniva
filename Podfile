@@ -8,6 +8,7 @@ target 'Biniva' do
   # Pods for Biniva
 pod 'Firebase/Analytics'
 pod 'Firebase/Firestore'
+pod 'GeoFire/Utils'
 # Optionally, include the Swift extensions if you're using Swift.
 pod 'FirebaseFirestoreSwift'
 

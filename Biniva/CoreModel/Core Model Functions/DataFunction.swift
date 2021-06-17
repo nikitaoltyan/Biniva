@@ -11,7 +11,7 @@ import UIKit
 
 class DataFunction {
     
-    let database = CoreDataFunction.self
+    let database = CoreDataFunction()
     
     
     func addData(loggedSize: Int, material: Int, date: Date?) {

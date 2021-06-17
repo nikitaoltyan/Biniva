@@ -30,7 +30,10 @@ protocol TopViewDelegate {
 }
 
 
+
 class RecyclingController: UIViewController {
+    
+    let server = Server()
     
     let topView: TopView = {
         let view = TopView()
@@ -67,6 +70,7 @@ class RecyclingController: UIViewController {
 //        view.delegate = self
         return view
     }()
+
     
     var isTopViewHidden: Bool = false
     var topViewYConstraint: NSLayoutConstraint?
@@ -160,6 +164,7 @@ extension RecyclingController: SwitcherDelegate {
             self.statsXConstraint?.constant = -3*self.view.center.x
             self.recyclingXConstraint?.constant = -5*self.view.center.x
             self.hideTopView(true)
+            self.mapView.loadPoints()
         })
     }
 }

@@ -12,6 +12,7 @@ import CoreLocation
 class MapView: UIView {
     
     var model = MapView_Model()
+    let server = Server()
     
     lazy var map: MKMapView = {
         let map = MKMapView()
@@ -22,13 +23,8 @@ class MapView: UIView {
         // There should be user's coordinate.
         let coordinate = CLLocationCoordinate2D(latitude: 55.794698, longitude: 37.929111)
         let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1200, longitudinalMeters: 1200)
-//        let label = CoordinateAnnotation(title: " ", coordinate: coordinate, info: " ")
-//        map.addAnnotation(label)
         map.setRegion(viewRegion, animated: false)
         
-//        map.register(PlasticAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-//        map.register(OrganicAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-//        map.register(PaperAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         map.register(DefaultAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         map.register(ClusterPin.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         return map
@@ -43,7 +39,6 @@ class MapView: UIView {
         view.isHidden = false // pinAnnotation is hidden due to development of clusterization.
         return view
     }()
-    
     
     var pinAnnotationBottomConstraint: NSLayoutConstraint?
     
@@ -70,13 +65,13 @@ class MapView: UIView {
                                                      CLLocationCoordinate2D) {
     
         // Just adding random annotations in the given area.
-        for i in 0...5 {
-            addAnnotation(minXminYlat: map.topLeftCoordinate.latitude,
-                          minXminYlong: map.topLeftCoordinate.longitude,
-                          maxXminYlong: map.topRightCoordinate.longitude,
-                          minXmaxYlat: map.bottomLeftCoordinate.latitude,
-                          type: i)
-        }
+//        for i in 0...5 {
+//            addAnnotation(minXminYlat: map.topLeftCoordinate.latitude,
+//                          minXminYlong: map.topLeftCoordinate.longitude,
+//                          maxXminYlong: map.topRightCoordinate.longitude,
+//                          minXmaxYlat: map.bottomLeftCoordinate.latitude,
+//                          type: i)
+//        }
 
         return (map.topLeftCoordinate,
                 map.topRightCoordinate,
@@ -171,9 +166,22 @@ class MapView: UIView {
     
     @objc
     func test(){
-        let _ = visibleMapBounds(forMap: map)
+        print(map.region.center)
+//        let _ = visibleMapBounds(forMap: map)
 //        map.removeAnnotations(self.trashBins)
-        
+//        server.getGeoPoints(centerCoordinate: CLLocationCoordinate2D(latitude: 55.794, longitude: 37.929), radius: 30000)
+    }
+    
+    func loadPoints() {
+        print("Load points")
+//        print(self.window)
+//        guard (self.window != nil) else { return }
+//        let (topLeftCoordinate, topRightCoordinate,
+//             bottomLeftCoordinate, _) = visibleMapBounds(forMap: map)
+//        server.loadPoints(minXminYlat: topLeftCoordinate.latitude,
+//                          minXminYlong: topLeftCoordinate.longitude,
+//                          maxXminYlong: topRightCoordinate.longitude,
+//                          minXmaxYlat: bottomLeftCoordinate.latitude)
     }
 }
 
@@ -221,7 +229,6 @@ extension MapView{
             pinAnnotation.widthAnchor.constraint(equalToConstant: pinAnnotation.frame.width),
             pinAnnotation.heightAnchor.constraint(equalToConstant: pinAnnotation.frame.height)
         ])
-        
 //        pinAnnotationBottomConstraint = pinAnnotation.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 330)
 //        pinAnnotationBottomConstraint?.isActive = true
     }

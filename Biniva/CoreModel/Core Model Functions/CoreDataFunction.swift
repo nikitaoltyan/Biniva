@@ -12,16 +12,38 @@ import CoreData
 
 class CoreDataFunction {
     
-    static let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    static let managedContext = appDelegate!.persistentContainer.viewContext
-    static let request: NSFetchRequest<Model> = Model.fetchRequest()
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    lazy var managedContext = appDelegate!.persistentContainer.viewContext
+    let request: NSFetchRequest<Model> = Model.fetchRequest()
+    
+    
+    func testAdd() {
+        print("test Add")
+        let newStamp = Points(context: managedContext)
+        newStamp.id = "1234"
+        newStamp.latitude = 53.3
+        newStamp.longitude = 54.4
+        newStamp.materials = [0,1,2]
+        try! managedContext.save()
+    }
+    
+    func testFetch() {
+        print("test Fetch")
+        let request: NSFetchRequest<Points> = Points.fetchRequest()
+        request.returnsObjectsAsFaults = false
+        do {
+            print( try managedContext.fetch(request) )
+        } catch {
+            print(error)
+        }
+    }
     
     /// Returns all data in model.
     /// - warning: Only for "Model" Data Model.
     /// - warning: Recreate fetch request for properly fetching updated data.
-    static func fetchData() -> [Model]{
+    func fetchData() -> [Model]{
         let request: NSFetchRequest<Model> = Model.fetchRequest()
-        request.returnsObjectsAsFaults = false
+            request.returnsObjectsAsFaults = false
         do {
             return try managedContext.fetch(request)
         } catch {
@@ -33,7 +55,7 @@ class CoreDataFunction {
     
     /// Add given data in model.
     /// - warning: Only for "Model" Data Model.
-    static func AddDataToModel(logSize: [Int], logMaterial: [Int], date: Date?){
+    func AddDataToModel(logSize: [Int], logMaterial: [Int], date: Date?){
         guard (date != nil) else { return }
         guard (logSize.count > 0) else { return }
         guard (logMaterial.count > 0) else { return }
@@ -44,7 +66,7 @@ class CoreDataFunction {
         try! managedContext.save()
     }
     
-    static func GetByDay(date: Date) -> [Model]{
+    func GetByDay(date: Date) -> [Model]{
         request.predicate = NSPredicate(format: "day = %@", argumentArray: [date])
         request.returnsObjectsAsFaults = false
         do {
@@ -57,7 +79,7 @@ class CoreDataFunction {
     
     
     /// Changind data for date that already exists in database.
-    static func ChangeDataForDay(date: Date, logSize: [Int]?, logMaterial: [Int]?){
+    func ChangeDataForDay(date: Date, logSize: [Int]?, logMaterial: [Int]?){
         guard (logSize != nil) else { return }
         guard (logMaterial != nil) else { return }
         request.predicate = NSPredicate(format: "day = %@", argumentArray: [date])

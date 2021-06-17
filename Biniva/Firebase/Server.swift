@@ -6,14 +6,150 @@
 //
 
 import Foundation
-//import Firebase
+import Firebase
+import GeoFire
+import CoreLocation
 
 class Server {
 
     /// Database reference
-//    static var ref: DatabaseReference {
-//           return Database.database(url: "https://greener-964fe-default-rtdb.europe-west1.firebasedatabase.app/").reference()
-//    }
+    let db = Firestore.firestore()
+    
+    func loadPoints(minXminYlat: CLLocationDegrees,
+                    minXminYlong: CLLocationDegrees,
+                    maxXminYlong: CLLocationDegrees,
+                    minXmaxYlat: CLLocationDegrees){
+//        points: @escaping (_ result: [TrashBin]) -> Void
+        print("Server, loadPoints")
+        print(minXminYlat, minXminYlong, maxXminYlong, minXmaxYlat)
+        db.collection("points")
+            .whereField("latitude", isGreaterThan: Float(minXmaxYlat))
+            .whereField("latitude", isLessThan: Float(minXminYlat))
+            .whereField("longitude", isGreaterThan: Float(minXminYlong))
+            .whereField("longitude", isLessThan: Float(maxXminYlong))
+            .getDocuments(completion: { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                    }
+                }
+            })
+    }
+    
+    
+    // That works and should be extended.
+    func addGeoPoint() {
+        let latitude = 55.794698
+        let longitude = 37.929111
+        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+
+        let hash = GFUtils.geoHash(forLocation: location)
+
+        // Add the hash and the lat/lng to the document. We will use the hash
+        // for queries and the lat/lng for distance comparisons.
+        let documentData: [String: Any] = [
+            "geohash": hash,
+            "lat": latitude,
+            "lng": longitude
+        ]
+
+        db.collection("points").addDocument(data: documentData)
+    }
+    
+    /// - parameter radius: Should be in meters.
+    func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D, radius: Double) {
+        let queryBounds = GFUtils.queryBounds(forLocation: center,
+                                              withRadius: radius)
+        
+        let queries = queryBounds.map { bound -> Query in
+            return db.collection("points")
+                .order(by: "geohash")
+                .start(at: [bound.startValue])
+                .end(at: [bound.endValue])
+        }
+        
+        var matchingDocs = [QueryDocumentSnapshot]()
+        func getDocumentsCompletion(snapshot: QuerySnapshot?,  error: Error?) -> () {
+            guard let documents = snapshot?.documents else {
+                print("Unable to fetch snapshot data. \(String(describing: error))")
+                return
+            }
+
+            for document in documents {
+                let lat = document.data()["lat"] as? Double ?? 0
+                let lng = document.data()["lng"] as? Double ?? 0
+                let coordinates = CLLocation(latitude: lat, longitude: lng)
+                let centerPoint = CLLocation(latitude: center.latitude, longitude: center.longitude)
+
+                // We have to filter out a few false positives due to GeoHash accuracy, but most will match
+                let distance = GFUtils.distance(from: centerPoint, to: coordinates)
+                if distance <= radius {
+                    matchingDocs.append(document)
+                    print(matchingDocs)
+                }
+            }
+        }
+        
+        for query in queries {
+            query.getDocuments(completion: getDocumentsCompletion)
+        }
+        
+    }
+    
+    
+    
+    func test() {
+        var ref: DocumentReference? = nil
+        // Thats add location properly.
+        // I will not use it. It doesnt allow me to iterate through data.
+        let geoPoint: GeoPoint = Firebase.GeoPoint(latitude: 54.456, longitude: 54.456)
+        ref = db.collection("users").addDocument(data: [
+            "first": "Ada",
+            "last": "Lovelace",
+            "born": 1815,
+            "location": geoPoint
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+        ref?.delete()
+    }
+    
+    func testGet() {
+        db.collection("users").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    // String
+                    print(type(of: document.documentID))
+                    // [String: Any]
+                    print(type(of: document.data()))
+                }
+            }
+        }
+    }
+    
+    /// That custome getDocument works! That's how I can retrieve only iformation for right locations.
+    func testAnother() {
+        db.collection("users")
+            .whereField("born", isGreaterThan: 1800)
+            .whereField("born", isLessThan: 1900)
+            .getDocuments(completion: { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                    }
+                }
+            })
+    }
     
     /// Authentificate user via Email and pssword by Firebase Auth.
     /// - warning: Function also add User ID into UserDefaults.
