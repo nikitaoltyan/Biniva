@@ -127,7 +127,7 @@ extension RecyclingController: SwitcherDelegate {
             self.recyclingView.center.x = self.view.center.x
             self.statsView.center.x = 3 * self.view.center.x
             self.mapView.center.x = 5 * self.view.center.x
-        }, completion: { (_) in
+        }, completion: { (_) in 
             self.recyclingXConstraint?.constant = 0
             self.statsXConstraint?.constant = 3 * self.view.center.x
             self.mapXConstraint?.constant = 5 * self.view.center.x
