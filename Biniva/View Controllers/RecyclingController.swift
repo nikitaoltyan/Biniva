@@ -137,7 +137,7 @@ extension RecyclingController: SwitcherDelegate {
     
     
     func showStats() {
-        Vibration.soft()
+        Vibration.soft() 
         view.layoutIfNeeded()
         UIView.animate(withDuration: 0.3, animations: {
             self.statsView.center.x = self.view.center.x
