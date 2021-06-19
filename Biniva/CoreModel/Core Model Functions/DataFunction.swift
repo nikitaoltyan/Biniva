@@ -16,7 +16,7 @@ class DataFunction {
     
     func addData(loggedSize: Int, material: Int, date: Date?) {
         guard (date != nil) else { return }
-        let data = database.GetByDay(date: date!)
+        let data = database.getByDay(date: date!)
         if data.count == 1 {
             var logSize = data[0].logSize
             var logMaterial = data[0].logMaterial
@@ -33,7 +33,7 @@ class DataFunction {
         guard let date = date else {
             result(0)
             return}
-        let data = database.GetByDay(date: date)
+        let data = database.getByDay(date: date)
         guard data.count > 0 else {
             result(0)
             return}
@@ -44,7 +44,7 @@ class DataFunction {
     
     /// - warning: For all data.
     func getTotalLogged(result: @escaping(_ result: Int) -> Void) {
-        let data = database.fetchData()
+        let data: [Model] = database.fetchData()
         guard data.count > 0 else {
             result(0)
             return}
@@ -62,7 +62,26 @@ class DataFunction {
     
     /// - warning: Fetchs all data that exists.
     func fetchData() -> [Model] {
-        let data = database.fetchData()
+        let data: [Model] = database.fetchData()
         return data
+    }
+    
+    func fetchData() -> [Points] {
+        let data: [Points] = database.fetchData()
+        return data
+    }
+    
+    func addPoint(latitude: Double, longitude: Double, materials: [Int]?, id: String) {
+        let data = database.getByPointID(id: id)
+        guard data.count == 0 else { return }
+        database.addPointToPoints(latitude: latitude,
+                                  longitude: longitude,
+                                  materials: materials,
+                                  id: id)
+    }
+    
+    /// - warning: That function deletes all data in Points Core Data. Should be used carefully.
+    func deleteAllPoints() {
+        database.deleteAllPoints()
     }
 }

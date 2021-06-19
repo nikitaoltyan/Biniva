@@ -12,6 +12,7 @@ import CoreLocation
 class MapView: UIView {
     
     var model = MapView_Model()
+    let coreDatabase = DataFunction()
     let server = Server()
     
     lazy var map: MKMapView = {
@@ -56,60 +57,30 @@ class MapView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
-    /// That function shows cordinates of all corners of the visible view.
-    /// - returns: (topLeft, topRight, bottomLeft, bottomRight)
-    func visibleMapBounds(forMap map: MKMapView) -> (CLLocationCoordinate2D,
-                                                     CLLocationCoordinate2D,
-                                                     CLLocationCoordinate2D,
-                                                     CLLocationCoordinate2D) {
-    
-        // Just adding random annotations in the given area.
-//        for i in 0...5 {
-//            addAnnotation(minXminYlat: map.topLeftCoordinate.latitude,
-//                          minXminYlong: map.topLeftCoordinate.longitude,
-//                          maxXminYlong: map.topRightCoordinate.longitude,
-//                          minXmaxYlat: map.bottomLeftCoordinate.latitude,
-//                          type: i)
-//        }
-
-        return (map.topLeftCoordinate,
-                map.topRightCoordinate,
-                map.bottomLeftCoordinate,
-                map.bottomRightCoordinate)
-    }
 
     
     /// That function randoms position and adds annotation in the given area.
-    func addAnnotation(minXminYlat: CLLocationDegrees,
-                       minXminYlong: CLLocationDegrees,
-                       maxXminYlong: CLLocationDegrees,
-                       minXmaxYlat: CLLocationDegrees,
-                       type: Int){
-        
-        // Add here checking for proper longitude-latitude direction – from lower to upper.
-        let latitude = CLLocationDegrees.random(in: minXmaxYlat...minXminYlat)
-        let longitude = CLLocationDegrees.random(in: minXminYlong...maxXminYlong)
-        
-        let coordinate = CLLocationCoordinate2D(latitude: latitude,
-                                                longitude: longitude)
-        
-        let bin = TrashBin()
-        bin.coordinate = coordinate
-        
-        switch type {
-        case 0,2,4,6:
-            bin.types.append(.paper)
-        case 3,7,8,9:
-            bin.types.append(.organic)
-        default:
-            bin.types.append(.glass)
-        }
-        
-        self.trashBins.append(bin)
-        
-        DispatchQueue.main.async {
-            self.map.addAnnotation(bin)
+    func addAnnotation(points: [Points]) {
+        print("addAnnotation. Points: \(points)")
+        for point in points {
+            let coordinate = CLLocationCoordinate2D(latitude: point.latitude,
+                                                    longitude: point.longitude)
+            let bin = TrashBin()
+            bin.coordinate = coordinate
+            bin.pointID = point.id
+            
+            guard let materials = point.materials else { return }
+            for type in materials {
+                print("Type: \(type)")
+                // This force unwrap is not good.
+                bin.types.append(TrashType(rawValue: type)!)
+            }
+            
+            self.trashBins.append(bin)
+            
+            DispatchQueue.main.async {
+                self.map.addAnnotation(bin)
+            }
         }
     }
     
@@ -161,28 +132,17 @@ class MapView: UIView {
     @objc
     func annotationTapped(_ sender: UITapGestureRecognizer) {
         print("Annotation Tapped")
-        let _ = visibleMapBounds(forMap: map)
     }
     
     @objc
     func test(){
-        print(map.region.center)
-//        let _ = visibleMapBounds(forMap: map)
-//        map.removeAnnotations(self.trashBins)
-//        server.getGeoPoints(centerCoordinate: CLLocationCoordinate2D(latitude: 55.794, longitude: 37.929), radius: 30000)
+        server.getGeoPoints(centerCoordinate: map.region.center, radius: 10000, result: { result in
+            guard (result) else { return }
+            let points: [Points] = self.coreDatabase.fetchData()
+            self.addAnnotation(points: points)
+        })
     }
-    
-    func loadPoints() {
-        print("Load points")
-//        print(self.window)
-//        guard (self.window != nil) else { return }
-//        let (topLeftCoordinate, topRightCoordinate,
-//             bottomLeftCoordinate, _) = visibleMapBounds(forMap: map)
-//        server.loadPoints(minXminYlat: topLeftCoordinate.latitude,
-//                          minXminYlong: topLeftCoordinate.longitude,
-//                          maxXminYlong: topRightCoordinate.longitude,
-//                          minXmaxYlat: bottomLeftCoordinate.latitude)
-    }
+
 }
 
 

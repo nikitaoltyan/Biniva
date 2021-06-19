@@ -164,7 +164,6 @@ extension RecyclingController: SwitcherDelegate {
             self.statsXConstraint?.constant = -3*self.view.center.x
             self.recyclingXConstraint?.constant = -5*self.view.center.x
             self.hideTopView(true)
-            self.mapView.loadPoints()
         })
     }
 }

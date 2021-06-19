@@ -10,7 +10,7 @@ import UIKit
 class MaterialFunctions {
     
     func calculate() -> Array<(Int, Double)> {
-        let data = DataFunction().fetchData()
+        let data: [Model] = DataFunction().fetchData()
         guard (data.count != 0) else { return [] }
         
         var result: Array<(Int, Double)> = []

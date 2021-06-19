@@ -15,37 +15,30 @@ class CoreDataFunction {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     lazy var managedContext = appDelegate!.persistentContainer.viewContext
     let request: NSFetchRequest<Model> = Model.fetchRequest()
+    let pointsRequest: NSFetchRequest<Points> = Points.fetchRequest()
     
-    
-    func testAdd() {
-        print("test Add")
-        let newStamp = Points(context: managedContext)
-        newStamp.id = "1234"
-        newStamp.latitude = 53.3
-        newStamp.longitude = 54.4
-        newStamp.materials = [0,1,2]
-        try! managedContext.save()
-    }
-    
-    func testFetch() {
-        print("test Fetch")
-        let request: NSFetchRequest<Points> = Points.fetchRequest()
-        request.returnsObjectsAsFaults = false
-        do {
-            print( try managedContext.fetch(request) )
-        } catch {
-            print(error)
-        }
-    }
     
     /// Returns all data in model.
     /// - warning: Only for "Model" Data Model.
     /// - warning: Recreate fetch request for properly fetching updated data.
     func fetchData() -> [Model]{
-        let request: NSFetchRequest<Model> = Model.fetchRequest()
-            request.returnsObjectsAsFaults = false
+        request.returnsObjectsAsFaults = false
         do {
             return try managedContext.fetch(request)
+        } catch {
+            print(error)
+        }
+        return []
+    }
+    
+    
+    /// Returns all data in model.
+    /// - warning: Only for "Points" Data Model.
+    /// - warning: Recreate fetch request for properly fetching updated data.
+    func fetchData() -> [Points]{
+        pointsRequest.returnsObjectsAsFaults = false
+        do {
+            return try managedContext.fetch(pointsRequest)
         } catch {
             print(error)
         }
@@ -66,11 +59,35 @@ class CoreDataFunction {
         try! managedContext.save()
     }
     
-    func GetByDay(date: Date) -> [Model]{
+    
+    func addPointToPoints(latitude: Double, longitude: Double, materials: [Int]?, id: String) {
+        guard let materials = materials else { return }
+        let newStamp = Points(context: managedContext)
+        newStamp.id = id
+        newStamp.materials = materials
+        newStamp.latitude = latitude
+        newStamp.longitude = longitude
+        try! managedContext.save()
+    }
+    
+    
+    func getByDay(date: Date) -> [Model] {
         request.predicate = NSPredicate(format: "day = %@", argumentArray: [date])
         request.returnsObjectsAsFaults = false
         do {
             return try managedContext.fetch(request)
+        } catch {
+            print(error)
+        }
+        return []
+    }
+    
+    
+    func getByPointID(id: String) -> [Points] {
+        pointsRequest.predicate = NSPredicate(format: "id = %@", argumentArray: [id])
+        pointsRequest.returnsObjectsAsFaults = false
+        do {
+            return try managedContext.fetch(pointsRequest)
         } catch {
             print(error)
         }
@@ -91,6 +108,18 @@ class CoreDataFunction {
             try! managedContext.save()
         } catch {
             print(error)
+        }
+    }
+    
+    /// - warning: That function deletes all data in Points Core Data. Should be used carefully.
+    func deleteAllPoints() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Points")
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try managedContext.execute(batchDeleteRequest)
+        } catch {
+           print(error)
         }
     }
 }

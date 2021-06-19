@@ -14,52 +14,30 @@ class Server {
 
     /// Database reference
     let db = Firestore.firestore()
-    
-    func loadPoints(minXminYlat: CLLocationDegrees,
-                    minXminYlong: CLLocationDegrees,
-                    maxXminYlong: CLLocationDegrees,
-                    minXmaxYlat: CLLocationDegrees){
-//        points: @escaping (_ result: [TrashBin]) -> Void
-        print("Server, loadPoints")
-        print(minXminYlat, minXminYlong, maxXminYlong, minXmaxYlat)
-        db.collection("points")
-            .whereField("latitude", isGreaterThan: Float(minXmaxYlat))
-            .whereField("latitude", isLessThan: Float(minXminYlat))
-            .whereField("longitude", isGreaterThan: Float(minXminYlong))
-            .whereField("longitude", isLessThan: Float(maxXminYlong))
-            .getDocuments(completion: { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                    }
-                }
-            })
-    }
+    let coreDatabase = DataFunction()
+
     
     
     // That works and should be extended.
-    func addGeoPoint() {
-        let latitude = 55.794698
-        let longitude = 37.929111
+    func addGeoPoint(latitude: Double, longitude: Double, containerType: Int, trashTypes: [Int]) {
         let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-
         let hash = GFUtils.geoHash(forLocation: location)
 
-        // Add the hash and the lat/lng to the document. We will use the hash
-        // for queries and the lat/lng for distance comparisons.
         let documentData: [String: Any] = [
             "geohash": hash,
             "lat": latitude,
-            "lng": longitude
+            "lng": longitude,
+            "container_type": containerType,
+            "trash_types": trashTypes
         ]
 
         db.collection("points").addDocument(data: documentData)
     }
     
     /// - parameter radius: Should be in meters.
-    func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D, radius: Double) {
+    /// - returns: escaping parameter anout function success.
+    /// - warning: GeoPoints are stored in Points CoreModel and should be gotten from there.
+    func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D, radius: Double, result: @escaping(_ success: Bool) -> Void) {
         let queryBounds = GFUtils.queryBounds(forLocation: center,
                                               withRadius: radius)
         
@@ -70,30 +48,25 @@ class Server {
                 .end(at: [bound.endValue])
         }
         
-        var matchingDocs = [QueryDocumentSnapshot]()
-        func getDocumentsCompletion(snapshot: QuerySnapshot?,  error: Error?) -> () {
-            guard let documents = snapshot?.documents else {
-                print("Unable to fetch snapshot data. \(String(describing: error))")
-                return
-            }
-
-            for document in documents {
-                let lat = document.data()["lat"] as? Double ?? 0
-                let lng = document.data()["lng"] as? Double ?? 0
-                let coordinates = CLLocation(latitude: lat, longitude: lng)
-                let centerPoint = CLLocation(latitude: center.latitude, longitude: center.longitude)
-
-                // We have to filter out a few false positives due to GeoHash accuracy, but most will match
-                let distance = GFUtils.distance(from: centerPoint, to: coordinates)
-                if distance <= radius {
-                    matchingDocs.append(document)
-                    print(matchingDocs)
-                }
-            }
-        }
-        
         for query in queries {
-            query.getDocuments(completion: getDocumentsCompletion)
+            query.getDocuments(completion: { (snapshot, error) in
+                guard let documents = snapshot?.documents else {
+                    print("Unable to fetch snapshot data. \(String(describing: error))")
+                    return
+                }
+                
+                var documentNumber = 0
+                for document in documents {
+                    self.coreDatabase.addPoint(latitude: document.data()["lat"] as? Double ?? 0,
+                                          longitude: document.data()["lng"] as? Double ?? 0,
+                                          materials: document.data()["trash_types"] as? [Int] ?? [0],
+                                          id: document.documentID)
+                    documentNumber += 1
+                    if documentNumber == documents.count {
+                        result(true)
+                    }
+                }
+            })
         }
         
     }
