@@ -7,78 +7,6 @@
 
 import MapKit
 
-class PlasticAnnotationView: MKMarkerAnnotationView {
-
-    static let ReuseID = "plactisAnnotation"
-    
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        canShowCallout = false
-        clusteringIdentifier = "cluster"
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func prepareForDisplay() {
-        super.prepareForDisplay()
-        displayPriority = .defaultLow
-        markerTintColor = .blue
-        glyphImage = UIImage(systemName: "trash")
-        glyphImage?.withTintColor(Colors.background)
-    }
-}
-
-
-class OrganicAnnotationView: MKMarkerAnnotationView {
-
-    static let ReuseID = "organicAnnotation"
-    
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        canShowCallout = false
-        clusteringIdentifier = "cluster"
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func prepareForDisplay() {
-        super.prepareForDisplay()
-        displayPriority = .defaultHigh
-        markerTintColor = .green
-        glyphImage = UIImage(systemName: "trash")
-        glyphImage?.withTintColor(Colors.background)
-    }
-}
-
-class PaperAnnotationView: MKMarkerAnnotationView {
-
-    static let ReuseID = "paperAnnotation"
-    
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        canShowCallout = false
-        clusteringIdentifier = "cluster"
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func prepareForDisplay() {
-        super.prepareForDisplay()
-        displayPriority = .defaultHigh
-        markerTintColor = .brown
-        glyphImage = UIImage(systemName: "trash")
-        glyphImage?.withTintColor(Colors.background)
-    }
-}
-
-
-
 
 class DefaultAnnotationView: MKAnnotationView {
 
@@ -129,15 +57,20 @@ class DefaultAnnotationView: MKAnnotationView {
             UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: size, height: size)).fill()
 
             // Fill pie with fractionColor
-            let fractionColor: UIColor = functions.colorByRowValue(types[1].rawValue)
-            fractionColor.setFill()
-            let piePath = UIBezierPath()
-            piePath.addArc(withCenter: CGPoint(x: size/2, y: size/2), radius: size/2,
-                           startAngle: 0, endAngle: (CGFloat.pi * 2.0 * CGFloat(1)) / CGFloat(2),
-                           clockwise: true)
-            piePath.addLine(to: CGPoint(x: size/2, y: size/2))
-            piePath.close()
-            piePath.fill()
+            for (item, type) in types.enumerated() {
+                let fractionColor: UIColor = functions.colorByRowValue(type.rawValue)
+                fractionColor.setFill()
+                
+                let piePath = UIBezierPath()
+                piePath.addArc(withCenter: CGPoint(x: size/2, y: size/2), radius: size/2,
+                               startAngle: (CGFloat.pi * 2.0 * CGFloat(item)) / CGFloat(types.count),
+                               endAngle: (CGFloat.pi * 2.0 * CGFloat(item+1)) / CGFloat(types.count),
+                               clockwise: true)
+                
+                piePath.addLine(to: CGPoint(x: size/2, y: size/2))
+                piePath.close()
+                piePath.fill()
+            }
 
             let useImage = UIImage(systemName: "trash")?.withTintColor(Colors.background)
             useImage?.draw(in: rect)

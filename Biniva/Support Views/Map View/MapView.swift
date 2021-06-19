@@ -61,7 +61,6 @@ class MapView: UIView {
     
     /// That function randoms position and adds annotation in the given area.
     func addAnnotation(points: [Points]) {
-        print("addAnnotation. Points: \(points)")
         for point in points {
             let coordinate = CLLocationCoordinate2D(latitude: point.latitude,
                                                     longitude: point.longitude)
@@ -71,7 +70,6 @@ class MapView: UIView {
             
             guard let materials = point.materials else { return }
             for type in materials {
-                print("Type: \(type)")
                 // This force unwrap is not good.
                 bin.types.append(TrashType(rawValue: type)!)
             }
