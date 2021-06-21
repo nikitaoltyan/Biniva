@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import CoreLocation
 
 class BottomPinView: UIView {
+    
+    let functions = MaterialFunctions()
     
     let topView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 6))
@@ -35,7 +38,7 @@ class BottomPinView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 20)
             .with(autolayout: false)
-        label.text = "Sans Str. 19"
+        label.text = ""
         return label
     }()
     
@@ -95,6 +98,9 @@ class BottomPinView: UIView {
     var leftTitleConstraint: NSLayoutConstraint?
     var leftAdressConstraint: NSLayoutConstraint?
     var topAdressConstraint: NSLayoutConstraint?
+    var types: [TrashType] = []
+    var pointID: String?
+    
     
     override init(frame: CGRect) {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 800)
@@ -113,6 +119,26 @@ class BottomPinView: UIView {
         fatalError()
     }
 
+    func setUp(trashTypes types: [TrashType], coordinate: CLLocationCoordinate2D) {
+        print("Set up with types: \(types) and coordinate: \(coordinate)")
+        // Add here translation from coordinate into adress.
+        // Then update label and collection view with materials.
+        self.types = types
+        materialCollection.reloadData()
+        
+        let geocoder = CLGeocoder()
+        let usedLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        
+        geocoder.reverseGeocodeLocation(usedLocation, completionHandler: { (placemarks, error) in
+            if error == nil {
+                let firstLocation = placemarks?[0]
+                self.adressLabel.text = firstLocation?.name
+            } else {
+                self.adressLabel.text = "Location is not available"
+            }
+        })
+    }
+
 }
 
 
@@ -122,7 +148,7 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
         case 0:
-            return 8
+            return types.count
         default:
             return 8
         }
@@ -141,6 +167,7 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
         switch collectionView.tag {
         case 0:
             let cell = materialCollection.dequeueReusableCell(withReuseIdentifier: "MaterialPinCell", for: indexPath) as! MaterialPinCell
+            cell.backgroundColor = functions.colorByRowValue(types[indexPath.row].rawValue)
             cell.layer.cornerRadius = 26
             return cell
         default:

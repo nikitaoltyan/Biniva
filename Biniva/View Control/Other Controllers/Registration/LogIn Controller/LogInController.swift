@@ -184,7 +184,7 @@ class LogInController: UIViewController {
     
     func ShowErrorPopUp() {
         print("Show pop up")
-        Vibration.Medium()
+        Vibration.medium()
     }
 }
 

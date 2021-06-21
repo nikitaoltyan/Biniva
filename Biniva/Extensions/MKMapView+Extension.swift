@@ -26,4 +26,14 @@ extension MKMapView {
     var bottomRightCoordinate: CLLocationCoordinate2D {
         return MKMapPoint(x: visibleMapRect.minX, y: visibleMapRect.maxY).coordinate
     }
+
+    /// - parameter delta: Measured in meaters.
+    func currentRadius(withDelta delta: Double) -> Double {
+        let topLeftLocation = CLLocation(latitude: topLeftCoordinate.latitude,
+                                 longitude: topLeftCoordinate.longitude)
+        let center = self.region.center
+        let centerLocation = CLLocation(latitude: center.latitude,
+                                        longitude: center.longitude)
+        return round(centerLocation.distance(from: topLeftLocation) + delta)
+    }
 }

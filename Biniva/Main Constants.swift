@@ -49,7 +49,7 @@ class Vibration {
         light.impactOccurred()
     }
     
-    static func Medium() -> Void{
+    static func medium() -> Void{
         let medium = UIImpactFeedbackGenerator(style: .medium)
         medium.impactOccurred()
     }

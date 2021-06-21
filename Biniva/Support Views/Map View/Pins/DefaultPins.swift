@@ -14,6 +14,7 @@ class DefaultAnnotationView: MKAnnotationView {
     static let ReuseID = "defaultAnnotation"
     
     var types: [TrashType] = []
+    var pointID: String?
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)

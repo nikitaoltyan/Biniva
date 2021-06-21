@@ -130,7 +130,7 @@ extension SettingsController {
     
     func LogOut() {
         Defaults.setHasLaunched(false)
-        Vibration.Medium()
+        Vibration.medium()
         let newVC = OnboardingController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()

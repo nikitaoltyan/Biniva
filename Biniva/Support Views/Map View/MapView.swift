@@ -37,13 +37,14 @@ class MapView: UIView {
             .with(autolayout: false)
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         view.isUserInteractionEnabled = true
-        view.isHidden = false // pinAnnotation is hidden due to development of clusterization.
         return view
     }()
     
     var pinAnnotationBottomConstraint: NSLayoutConstraint?
+    var centerCoordinate: CGFloat = 0
     
     var trashBins: [TrashBin] = []
+    var trashBinsID: Set<String> = []
     
     
     override init(frame: CGRect) {
@@ -62,6 +63,9 @@ class MapView: UIView {
     /// That function randoms position and adds annotation in the given area.
     func addAnnotation(points: [Points]) {
         for point in points {
+            guard trashBinsID.contains(point.id ?? "") == false else { return }
+            trashBinsID.insert(point.id ?? "")
+            
             let coordinate = CLLocationCoordinate2D(latitude: point.latitude,
                                                     longitude: point.longitude)
             let bin = TrashBin()
@@ -73,8 +77,9 @@ class MapView: UIView {
                 // This force unwrap is not good.
                 bin.types.append(TrashType(rawValue: type)!)
             }
-            
-            self.trashBins.append(bin)
+
+            // Why should I store them?
+            trashBins.append(bin)
             
             DispatchQueue.main.async {
                 self.map.addAnnotation(bin)
@@ -87,54 +92,71 @@ class MapView: UIView {
     func draggedView(_ sender:UIPanGestureRecognizer){
         self.bringSubviewToFront(pinAnnotation)
         let translation = sender.translation(in: self)
-        let centerCoordinate: CGFloat = MainConstants.screenHeight + pinAnnotation.frame.height/2
+//        centerCoordinate = MainConstants.screenHeight + pinAnnotation.frame.height/2
         let condition_1 = pinAnnotation.center.y <= centerCoordinate - 190
         let condition_2 = pinAnnotation.center.y >= centerCoordinate - 700
         if condition_1 && condition_2 {
             pinAnnotation.center = CGPoint(x: pinAnnotation.center.x,
                                            y: pinAnnotation.center.y + translation.y)
         } else {
-            setRightPosition(centerCoordinate)
+            setRightPosition()
         }
         sender.setTranslation(CGPoint.zero, in: self)
         
         if (sender.state == .ended) {
-            setRightPosition(centerCoordinate)
+            setRightPosition()
         }
     }
     
-    func setRightPosition(_ centerCoordinate: CGFloat){
+    func setRightPosition(){
         let middle: CGFloat = (190.0 + 500.0)/2.0
         switch centerCoordinate-pinAnnotation.center.y {
-        case 0...middle:
-            setBottomPosition(centerCoordinate)
+        case 0...180:
+            setClosedPosition()
+        case 180...middle:
+            setBottomPosition()
         default:
-            setTopPosition(centerCoordinate)
+            setTopPosition()
         }
     }
     
-    func setBottomPosition(_ centerCoordinate: CGFloat) {
-        UIView.animate(withDuration: 0.25, animations: {
+    func setClosedPosition() {
+        UIView.animate(withDuration: 0.1, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
-                                                y: centerCoordinate-190)
+                                                y: self.centerCoordinate)
         })
     }
     
-    func setTopPosition(_ centerCoordinate: CGFloat) {
+    func setBottomPosition() {
+        print("Set bottom position: \(centerCoordinate)")
+        self.layoutIfNeeded()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
+                                                y: self.centerCoordinate-190)
+        }, completion: { (_) in
+            Vibration.soft()
+        })
+    }
+    
+    func setTopPosition() {
         UIView.animate(withDuration: 0.25, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
-                                                y: centerCoordinate-500)
+                                                y: self.centerCoordinate-500)
+        }, completion: { (_) in
+            Vibration.soft()
         })
     }
     
     @objc
     func annotationTapped(_ sender: UITapGestureRecognizer) {
         print("Annotation Tapped")
+        setBottomPosition()
     }
     
     @objc
-    func test(){
-        server.getGeoPoints(centerCoordinate: map.region.center, radius: 10000, result: { result in
+    func getGeoPoints(){
+        server.getGeoPoints(centerCoordinate: map.region.center,
+                            radius: map.currentRadius(withDelta: 0), result: { result in
             guard (result) else { return }
             let points: [Points] = self.coreDatabase.fetchData()
             self.addAnnotation(points: points)
@@ -156,8 +178,17 @@ extension MapView: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let view = view as? DefaultAnnotationView else { return }
+        guard let annotation = view.annotation as? TrashBin else { return }
         let gesture = UITapGestureRecognizer(target: self, action: #selector(annotationTapped(_:)))
         view.addGestureRecognizer(gesture)
+        pinAnnotation.pointID = annotation.pointID
+        pinAnnotation.setUp(trashTypes: annotation.types, coordinate: annotation.coordinate)
+    }
+
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        // That function is called only when map movement is complited.
+        getGeoPoints()
     }
 }
 
@@ -171,8 +202,7 @@ extension MapView{
         self.addSubview(map)
         self.addSubview(pinAnnotation)
         
-        pinAnnotation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(test)))
-//        pinAnnotation.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:))))
+        pinAnnotation.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:))))
     }
     
     func activateLayouts(){
@@ -182,13 +212,12 @@ extension MapView{
             map.rightAnchor.constraint(equalTo: self.rightAnchor),
             map.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: -190),
+            pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
             pinAnnotation.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             pinAnnotation.widthAnchor.constraint(equalToConstant: pinAnnotation.frame.width),
             pinAnnotation.heightAnchor.constraint(equalToConstant: pinAnnotation.frame.height)
         ])
-//        pinAnnotationBottomConstraint = pinAnnotation.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 330)
-//        pinAnnotationBottomConstraint?.isActive = true
+        centerCoordinate = MainConstants.screenHeight + pinAnnotation.frame.height/2
     }
 }
 
