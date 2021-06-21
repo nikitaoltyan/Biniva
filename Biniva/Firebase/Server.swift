@@ -71,6 +71,20 @@ class Server {
         
     }
     
+    func getImagesArray(forPointID pid: String?, result: @escaping(_ images: [String]) -> Void) {
+        guard let pid = pid else { return }
+        let docRef = db.collection("points").document(pid)
+
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                let imagesArray = data?["photos"] as? [String] ?? []
+                result(imagesArray)
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
     
     
     func test() {

@@ -11,6 +11,7 @@ import CoreLocation
 class BottomPinView: UIView {
     
     let functions = MaterialFunctions()
+    let server = Server()
     
     let topView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 6))
@@ -126,6 +127,8 @@ class BottomPinView: UIView {
         self.types = types
         materialCollection.reloadData()
         
+        loadImages()
+        
         let geocoder = CLGeocoder()
         let usedLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         
@@ -139,6 +142,11 @@ class BottomPinView: UIView {
         })
     }
 
+    func loadImages() {
+        server.getImagesArray(forPointID: pointID, result: { (images) in
+            print("Load images: \(images)")
+        })
+    }
 }
 
 
