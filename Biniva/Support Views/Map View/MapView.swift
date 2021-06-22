@@ -43,7 +43,7 @@ class MapView: UIView {
     var pinAnnotationBottomConstraint: NSLayoutConstraint?
     var centerCoordinate: CGFloat = 0
     
-    var trashBins: [TrashBin] = []
+//    var trashBins: [TrashBin] = []
     var trashBinsID: Set<String> = []
     
     
@@ -79,7 +79,7 @@ class MapView: UIView {
             }
 
             // Why should I store them?
-            trashBins.append(bin)
+//            trashBins.append(bin)
             
             DispatchQueue.main.async {
                 self.map.addAnnotation(bin)
@@ -150,11 +150,9 @@ class MapView: UIView {
     
     @objc
     func annotationTapped(_ sender: UITapGestureRecognizer) {
-        print("Annotation Tapped")
         setBottomPosition()
     }
     
-    @objc
     func getGeoPoints(){
         server.getGeoPoints(centerCoordinate: map.region.center,
                             radius: map.currentRadius(withDelta: 0), result: { result in

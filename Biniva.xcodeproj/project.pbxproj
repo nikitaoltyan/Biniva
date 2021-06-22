@@ -81,6 +81,7 @@
 		5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */; };
 		5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */; };
 		5CD2F5962681C34400993A54 /* ImagePinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2F5952681C34400993A54 /* ImagePinCell.swift */; };
+		5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */; };
 		5CD556FB26524DFE007B3D06 /* MaterialStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */; };
 		5CD557002652532F007B3D06 /* MaterialStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */; };
 		5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD5570426526946007B3D06 /* MaterialFunctions.swift */; };
@@ -210,6 +211,7 @@
 		5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePlusView.swift; sourceTree = "<group>"; };
 		5CD2F5952681C34400993A54 /* ImagePinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePinCell.swift; sourceTree = "<group>"; };
+		5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePinCell+Empty.swift"; sourceTree = "<group>"; };
 		5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatView.swift; sourceTree = "<group>"; };
 		5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatsCell.swift; sourceTree = "<group>"; };
 		5CD5570426526946007B3D06 /* MaterialFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialFunctions.swift; sourceTree = "<group>"; };
@@ -710,12 +712,21 @@
 				5CA776D12656B3C600EDAF47 /* MapView.swift */,
 				5C11455726612B9400F48626 /* MapView+Model.swift */,
 				5C6CDAAE26596990009F72D8 /* BottomPinView.swift */,
-				5C07594526596F17000F64C7 /* MaterialPinCell.swift */,
-				5CD2F5952681C34400993A54 /* ImagePinCell.swift */,
 				5CEE8C01266A173200EB6617 /* TrashBin.swift */,
+				5CD2F5972682251500993A54 /* Cell */,
 				5CEE8BFE266A15AC00EB6617 /* Pins */,
 			);
 			path = "Map View";
+			sourceTree = "<group>";
+		};
+		5CD2F5972682251500993A54 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5C07594526596F17000F64C7 /* MaterialPinCell.swift */,
+				5CD2F5952681C34400993A54 /* ImagePinCell.swift */,
+				5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		5CEE8BFE266A15AC00EB6617 /* Pins */ = {
@@ -1033,6 +1044,7 @@
 				5C6CDAAF26596990009F72D8 /* BottomPinView.swift in Sources */,
 				5C045BD625BAE80B00E42843 /* BottomLogInView.swift in Sources */,
 				5CFB624B259B92E800F1C8C7 /* TopHeaderView.swift in Sources */,
+				5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */,
 				5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */,
 				5CBF94D825E637940071742F /* OtherHeaderView.swift in Sources */,
 				5CB6A22A25C3D4A900EC4B3A /* ViewController Extension.swift in Sources */,

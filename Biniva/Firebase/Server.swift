@@ -19,7 +19,7 @@ class Server {
     
     
     // That works and should be extended.
-    func addGeoPoint(latitude: Double, longitude: Double, containerType: Int, trashTypes: [Int]) {
+    func addGeoPoint(latitude: Double, longitude: Double, trashTypes: [Int]) {
         let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let hash = GFUtils.geoHash(forLocation: location)
 
@@ -27,13 +27,13 @@ class Server {
             "geohash": hash,
             "lat": latitude,
             "lng": longitude,
-            "container_type": containerType,
             "trash_types": trashTypes
         ]
 
         db.collection("points").addDocument(data: documentData)
     }
     
+    /// - parameter center: the center coordinate of the showen mapView.
     /// - parameter radius: Should be in meters.
     /// - returns: escaping parameter anout function success.
     /// - warning: GeoPoints are stored in Points CoreModel and should be gotten from there.
@@ -58,9 +58,9 @@ class Server {
                 var documentNumber = 0
                 for document in documents {
                     self.coreDatabase.addPoint(latitude: document.data()["lat"] as? Double ?? 0,
-                                          longitude: document.data()["lng"] as? Double ?? 0,
-                                          materials: document.data()["trash_types"] as? [Int] ?? [0],
-                                          id: document.documentID)
+                                               longitude: document.data()["lng"] as? Double ?? 0,
+                                               materials: document.data()["trash_types"] as? [Int] ?? [0],
+                                               id: document.documentID)
                     documentNumber += 1
                     if documentNumber == documents.count {
                         result(true)
@@ -71,11 +71,19 @@ class Server {
         
     }
     
+    /// Function for loading array with images URLs.
+    /// - parameter pid: PointID in the server.
+    /// - parameter result: escaping property with [String] image URLs.
     func getImagesArray(forPointID pid: String?, result: @escaping(_ images: [String]) -> Void) {
         guard let pid = pid else { return }
         let docRef = db.collection("points").document(pid)
 
         docRef.getDocument { (document, error) in
+            guard (error == nil) else {
+                result([])
+                return
+            }
+            
             if let document = document, document.exists {
                 let data = document.data()
                 let imagesArray = data?["photos"] as? [String] ?? []
@@ -87,56 +95,6 @@ class Server {
     }
     
     
-    func test() {
-        var ref: DocumentReference? = nil
-        // Thats add location properly.
-        // I will not use it. It doesnt allow me to iterate through data.
-        let geoPoint: GeoPoint = Firebase.GeoPoint(latitude: 54.456, longitude: 54.456)
-        ref = db.collection("users").addDocument(data: [
-            "first": "Ada",
-            "last": "Lovelace",
-            "born": 1815,
-            "location": geoPoint
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
-        ref?.delete()
-    }
-    
-    func testGet() {
-        db.collection("users").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    // String
-                    print(type(of: document.documentID))
-                    // [String: Any]
-                    print(type(of: document.data()))
-                }
-            }
-        }
-    }
-    
-    /// That custome getDocument works! That's how I can retrieve only iformation for right locations.
-    func testAnother() {
-        db.collection("users")
-            .whereField("born", isGreaterThan: 1800)
-            .whereField("born", isLessThan: 1900)
-            .getDocuments(completion: { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                    }
-                }
-            })
-    }
     
     /// Authentificate user via Email and pssword by Firebase Auth.
     /// - warning: Function also add User ID into UserDefaults.

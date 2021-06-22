@@ -92,6 +92,7 @@ class BottomPinView: UIView {
         collection.delegate = self
         collection.dataSource = self
         collection.register(ImagePinCell.self, forCellWithReuseIdentifier: "ImagePinCell")
+        collection.register(ImagePinCell_Empty.self, forCellWithReuseIdentifier: "ImagePinCell_Empty")
         collection.tag = 1
         return collection
     }()
@@ -102,6 +103,7 @@ class BottomPinView: UIView {
     var types: [TrashType] = []
     var images: [String] = []
     var pointID: String?
+    var isError: Bool = false
     
     
     override init(frame: CGRect) {
@@ -135,16 +137,17 @@ class BottomPinView: UIView {
             if error == nil {
                 let firstLocation = placemarks?[0]
                 self.adressLabel.text = firstLocation?.name
+//                self.isError = false
             } else {
                 self.adressLabel.text = "Location is not available"
+//                self.isError = true
             }
         })
     }
 
     func loadImages() {
         server.getImagesArray(forPointID: pointID, result: { (images) in
-            print("Load images: \(images)")
-            guard (images.count != 0) else { return }
+//            guard (images.count != 0) else { return }
             self.images = images
             self.photoCollection.reloadData()
         })
@@ -160,7 +163,11 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
         case 0:
             return types.count
         default:
-            return images.count
+            if images.count > 0 {
+                return images.count
+            } else {
+                return 1
+            }
         }
     }
     
@@ -169,7 +176,11 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
         case 0:
             return CGSize(width: 52, height: 52)
         default:
-            return CGSize(width: 95, height: 95)
+            if images.count > 0 {
+                return CGSize(width: 95, height: 95)
+            } else {
+                return CGSize(width: MainConstants.screenWidth, height: 230)
+            }
         }
     }
     
@@ -181,11 +192,16 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
             cell.layer.cornerRadius = 26
             return cell
         default:
-            let cell = photoCollection.dequeueReusableCell(withReuseIdentifier: "ImagePinCell", for: indexPath) as! ImagePinCell
-            DispatchQueue.main.async {
-                cell.image.downloadImage(from: self.images[indexPath.row])
+            if images.count > 0 {
+                let cell = photoCollection.dequeueReusableCell(withReuseIdentifier: "ImagePinCell", for: indexPath) as! ImagePinCell
+                DispatchQueue.main.async {
+                    cell.image.downloadImage(from: self.images[indexPath.row])
+                }
+                return cell
+            } else {
+                let cell = photoCollection.dequeueReusableCell(withReuseIdentifier: "ImagePinCell_Empty", for: indexPath) as! ImagePinCell_Empty
+                return cell
             }
-            return cell
         }
     }
     
