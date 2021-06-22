@@ -144,6 +144,7 @@ class MapView: UIView {
                                                 y: self.centerCoordinate-500)
         }, completion: { (_) in
             Vibration.soft()
+            self.pinAnnotation.loadImages()
         })
     }
     

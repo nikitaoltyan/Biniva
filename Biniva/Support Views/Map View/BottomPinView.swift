@@ -91,7 +91,7 @@ class BottomPinView: UIView {
         collection.showsHorizontalScrollIndicator = false
         collection.delegate = self
         collection.dataSource = self
-        collection.register(MaterialPinCell.self, forCellWithReuseIdentifier: "MaterialPinCell")
+        collection.register(ImagePinCell.self, forCellWithReuseIdentifier: "ImagePinCell")
         collection.tag = 1
         return collection
     }()
@@ -100,6 +100,7 @@ class BottomPinView: UIView {
     var leftAdressConstraint: NSLayoutConstraint?
     var topAdressConstraint: NSLayoutConstraint?
     var types: [TrashType] = []
+    var images: [String] = []
     var pointID: String?
     
     
@@ -127,8 +128,6 @@ class BottomPinView: UIView {
         self.types = types
         materialCollection.reloadData()
         
-        loadImages()
-        
         let geocoder = CLGeocoder()
         let usedLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         
@@ -145,6 +144,9 @@ class BottomPinView: UIView {
     func loadImages() {
         server.getImagesArray(forPointID: pointID, result: { (images) in
             print("Load images: \(images)")
+            guard (images.count != 0) else { return }
+            self.images = images
+            self.photoCollection.reloadData()
         })
     }
 }
@@ -158,7 +160,7 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
         case 0:
             return types.count
         default:
-            return 8
+            return images.count
         }
     }
     
@@ -179,8 +181,10 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
             cell.layer.cornerRadius = 26
             return cell
         default:
-            let cell = materialCollection.dequeueReusableCell(withReuseIdentifier: "MaterialPinCell", for: indexPath) as! MaterialPinCell
-            cell.backgroundColor = .gray
+            let cell = photoCollection.dequeueReusableCell(withReuseIdentifier: "ImagePinCell", for: indexPath) as! ImagePinCell
+            DispatchQueue.main.async {
+                cell.image.downloadImage(from: self.images[indexPath.row])
+            }
             return cell
         }
     }
