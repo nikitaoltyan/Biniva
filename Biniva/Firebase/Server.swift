@@ -35,14 +35,24 @@ class Server {
     
     /// - parameter center: the center coordinate of the showen mapView.
     /// - parameter radius: Should be in meters.
-    /// - returns: escaping parameter anout function success.
+    /// - returns: Escaping parameter about function success.
     /// - warning: GeoPoints are stored in Points CoreModel and should be gotten from there.
-    func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D, radius: Double, result: @escaping(_ success: Bool) -> Void) {
+    func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D, radius: Double, notItPoints: [Points], result: @escaping(_ points: [Points]) -> Void) {
+        
+        // First elements is added because of unebling to query empty notIt array in some cases.
+        var notInGeohashes: [String] = [" "]
+        for point in notItPoints {
+            guard let geohash = point.geohash else { return }
+            notInGeohashes.append(geohash)
+        }
+        
         let queryBounds = GFUtils.queryBounds(forLocation: center,
                                               withRadius: radius)
         
+        // Query only that geohashes that isn't storing.
         let queries = queryBounds.map { bound -> Query in
             return db.collection("points")
+                .whereField("geohash", notIn: notInGeohashes)
                 .order(by: "geohash")
                 .start(at: [bound.startValue])
                 .end(at: [bound.endValue])
@@ -54,22 +64,27 @@ class Server {
                     print("Unable to fetch snapshot data. \(String(describing: error))")
                     return
                 }
+                guard documents.count > 0 else {
+                    result([])
+                    return
+                }
                 
-                var documentNumber = 0
                 for document in documents {
-                    self.coreDatabase.addPoint(latitude: document.data()["lat"] as? Double ?? 0,
-                                               longitude: document.data()["lng"] as? Double ?? 0,
-                                               materials: document.data()["trash_types"] as? [Int] ?? [0],
-                                               id: document.documentID)
-                    documentNumber += 1
-                    if documentNumber == documents.count {
-                        result(true)
+                    DispatchQueue.main.async {
+                        self.coreDatabase.addPoint(latitude: document.data()["lat"] as? Double ?? 0,
+                                                   longitude: document.data()["lng"] as? Double ?? 0,
+                                                   materials: document.data()["trash_types"] as? [Int] ?? [0],
+                                                   geohash: document.data()["geohash"] as? String ?? "",
+                                                   id: document.documentID, result: { (point) in
+                                                    result(point)
+                        })
                     }
                 }
             })
         }
         
     }
+    
     
     /// Function for loading array with images URLs.
     /// - parameter pid: PointID in the server.

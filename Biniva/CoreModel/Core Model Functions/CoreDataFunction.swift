@@ -60,14 +60,19 @@ class CoreDataFunction {
     }
     
     
-    func addPointToPoints(latitude: Double, longitude: Double, materials: [Int]?, id: String) {
+    func addPointToPoints(latitude: Double, longitude: Double, materials: [Int]?, geohash: String, id: String,
+                          result: @escaping(_ point: Points) -> Void ) {
         guard let materials = materials else { return }
         let newStamp = Points(context: managedContext)
+        newStamp.geohash = geohash
         newStamp.id = id
         newStamp.materials = materials
         newStamp.latitude = latitude
         newStamp.longitude = longitude
         try! managedContext.save()
+        
+        // Returning Point to the called function for future passing to map.
+        result(newStamp)
     }
     
     
@@ -96,7 +101,7 @@ class CoreDataFunction {
     
     
     /// Changind data for date that already exists in database.
-    func ChangeDataForDay(date: Date, logSize: [Int]?, logMaterial: [Int]?){
+    func ChangeDataForDay(date: Date, logSize: [Int]?, logMaterial: [Int]?) {
         guard (logSize != nil) else { return }
         guard (logMaterial != nil) else { return }
         request.predicate = NSPredicate(format: "day = %@", argumentArray: [date])
@@ -121,5 +126,31 @@ class CoreDataFunction {
         } catch {
            print(error)
         }
+    }
+    
+    
+    /// - warning: Returns only [String], where String – geohash of the Point.
+    func getPoitsInArea(xMin: Double, xMax: Double, yMin: Double, yMax: Double, result: @escaping(_ result: [Points]) -> Void) {
+        // latitude - y
+        // longitude - x
+        let predicate1 = NSPredicate(format: "longitude > %@", argumentArray: [xMin])
+        let predicate2 = NSPredicate(format: "longitude < %@", argumentArray: [xMax])
+        let predicate3 = NSPredicate(format: "latitude > %@", argumentArray: [yMin])
+        let predicate4 = NSPredicate(format: "latitude < %@", argumentArray: [yMax])
+        
+        let finalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2, predicate3, predicate4])
+        
+        pointsRequest.predicate = finalPredicate
+        pointsRequest.returnsObjectsAsFaults = false
+        
+        do {
+            let data: [Points] = try managedContext.fetch(pointsRequest)
+            result(data)
+            return
+        } catch {
+            print(error)
+        }
+        result([])
+        return
     }
 }

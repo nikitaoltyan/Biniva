@@ -20,6 +20,7 @@ extension Points {
     @NSManaged public var longitude: Double
     @NSManaged public var materials: [Int]?
     @NSManaged public var id: String?
+    @NSManaged public var geohash: String?
 
 }
 

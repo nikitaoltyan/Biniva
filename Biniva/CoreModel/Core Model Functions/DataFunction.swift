@@ -71,17 +71,38 @@ class DataFunction {
         return data
     }
     
-    func addPoint(latitude: Double, longitude: Double, materials: [Int]?, id: String) {
+    
+    func addPoint(latitude: Double, longitude: Double, materials: [Int]?, geohash: String, id: String, result: @escaping(_ point: [Points]) -> Void) {
         let data = database.getByPointID(id: id)
         guard data.count == 0 else { return }
         database.addPointToPoints(latitude: latitude,
                                   longitude: longitude,
                                   materials: materials,
-                                  id: id)
+                                  geohash: geohash,
+                                  id: id, result: { (point) in
+            result([point])
+        })
     }
     
     /// - warning: That function deletes all data in Points Core Data. Should be used carefully.
     func deleteAllPoints() {
         database.deleteAllPoints()
+    }
+    
+    
+    /// Function catches all geohashes of points in given area (visible part of the map).
+    /// - parameter result: Escaping closure with [String] acceptable points geohashes.
+    func getPointsInArea(topLeftX: Double,
+                         topRightX: Double,
+                         topLeftY: Double,
+                         bottomLeftY: Double,
+                         result: @escaping(_ result: [Points]) -> Void) {
+        
+        database.getPoitsInArea(xMin: min(topLeftX, topRightX),
+                                xMax: max(topLeftX, topRightX),
+                                yMin: min(topLeftY, bottomLeftY),
+                                yMax: max(topLeftY, bottomLeftY), result: { (points) in
+                                    result(points)
+                                })
     }
 }

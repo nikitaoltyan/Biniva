@@ -154,12 +154,32 @@ class MapView: UIView {
     }
     
     func getGeoPoints(){
-        server.getGeoPoints(centerCoordinate: map.region.center,
-                            radius: map.currentRadius(withDelta: 0), result: { result in
-            guard (result) else { return }
-            let points: [Points] = self.coreDatabase.fetchData()
+
+        
+        coreDatabase.getPointsInArea(topLeftX: map.topLeftCoordinate.longitude,
+                                     topRightX: map.topRightCoordinate.longitude,
+                                     topLeftY: map.topLeftCoordinate.latitude,
+                                     bottomLeftY: map.bottomLeftCoordinate.latitude,
+                                     result: { (points) in
+                                        
             self.addAnnotation(points: points)
+                                        
+            print("Dispatch async queue.")
+            DispatchQueue.main.async {
+                self.server.getGeoPoints(centerCoordinate: self.map.region.center,
+                                         radius: self.map.currentRadius(withDelta: 0),
+                                         notItPoints: points, result: { (serverPoint) in
+                    
+                })
+            }
         })
+        
+//        server.getGeoPoints(centerCoordinate: map.region.center,
+//                            radius: map.currentRadius(withDelta: 0), result: { result in
+//            guard (result) else { return }
+//            let points: [Points] = self.coreDatabase.fetchData()
+//            self.addAnnotation(points: points)
+//        })
     }
 
 }

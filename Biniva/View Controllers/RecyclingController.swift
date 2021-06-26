@@ -195,6 +195,8 @@ extension RecyclingController: StatsDelegate {
 
 extension RecyclingController: RecyclingDelegate {
     func Add() {
+//        DataFunction().deleteAllPoints()
+        
         Vibration.soft()
         let newVC = AddTrashController()
         newVC.modalPresentationStyle = .overFullScreen
