@@ -143,7 +143,7 @@ extension SettingsController {
     }
     
     func AboutUs() {
-        Vibration.Light()
+        Vibration.light()
         let newVC = AboutUsController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()

@@ -50,6 +50,7 @@ class MapView: UIView {
         return view
     }()
     
+    var delegate: mapDelegate?
     var pinAnnotationBottomConstraint: NSLayoutConstraint?
     var centerCoordinate: CGFloat = 0
     
@@ -123,7 +124,8 @@ class MapView: UIView {
     
     @objc
     func addPoint() {
-        print("Add point View Controler initiation")
+        Vibration.light()
+        delegate?.openAddNewPoint()
     }
     
     func setRightPosition(){

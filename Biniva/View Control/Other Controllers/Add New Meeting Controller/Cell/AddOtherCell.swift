@@ -176,7 +176,7 @@ class AddOtherCell: UICollectionViewCell {
 
     
     @objc func Send() {
-        Vibration.Light()
+        Vibration.light()
         sendDelegate?.Send()
     }
     

@@ -328,7 +328,7 @@ class MeetingViewController: UIViewController {
     
     @objc func SendAction(){
         print("Sended")
-        Vibration.Light()
+        Vibration.light()
         let uid: String = UserDefaults.standard.string(forKey: "uid")!
 //        Server.SendMessage(user: uid,
 //                           meetingId: postData["mid"] as! String,

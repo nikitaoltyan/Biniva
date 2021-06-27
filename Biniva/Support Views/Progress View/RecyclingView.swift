@@ -50,7 +50,7 @@ class RecyclingView: UIView {
     
     
     @objc
-    func Add(){
+    func add(){
         delegate?.Add()
     }
 }
@@ -70,7 +70,7 @@ extension RecyclingView {
         self.addSubview(progressView)
         self.addSubview(button)
         
-        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Add)))
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(add)))
     }
     
     func ActivateLayouts(){

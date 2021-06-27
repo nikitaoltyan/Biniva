@@ -81,6 +81,7 @@
 		5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */; };
 		5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */; };
 		5CD0B13026888AD200267081 /* AddPointButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B12F26888AD200267081 /* AddPointButtonView.swift */; };
+		5CD0B1322688A85E00267081 /* AddPointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1312688A85E00267081 /* AddPointController.swift */; };
 		5CD2F5962681C34400993A54 /* ImagePinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2F5952681C34400993A54 /* ImagePinCell.swift */; };
 		5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */; };
 		5CD556FB26524DFE007B3D06 /* MaterialStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */; };
@@ -212,6 +213,7 @@
 		5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePlusView.swift; sourceTree = "<group>"; };
 		5CD0B12F26888AD200267081 /* AddPointButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointButtonView.swift; sourceTree = "<group>"; };
+		5CD0B1312688A85E00267081 /* AddPointController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointController.swift; sourceTree = "<group>"; };
 		5CD2F5952681C34400993A54 /* ImagePinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePinCell.swift; sourceTree = "<group>"; };
 		5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePinCell+Empty.swift"; sourceTree = "<group>"; };
 		5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatView.swift; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 				5C45917D254D59D3005AE26C /* RecyclingController.swift */,
 				5CF90C50262EA3A000127E4D /* AddTrashController.swift */,
 				5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */,
+				5CD0B1312688A85E00267081 /* AddPointController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1076,6 +1079,7 @@
 				5C7C5E9E264ABDDE00B4FE8C /* NewOnboardingController.swift in Sources */,
 				5C08703D262739080057E840 /* Model.xcdatamodeld in Sources */,
 				5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */,
+				5CD0B1322688A85E00267081 /* AddPointController.swift in Sources */,
 				5C045BE825BC77B200E42843 /* Server.swift in Sources */,
 				5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */,
 				5CFB6239259A4DB100F1C8C7 /* AddOtherCell.swift in Sources */,

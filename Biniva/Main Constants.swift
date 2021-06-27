@@ -44,7 +44,7 @@ class Vibration {
         soft.impactOccurred()
     }
     
-    static func Light() -> Void{
+    static func light() -> Void{
         let light = UIImpactFeedbackGenerator(style: .light)
         light.impactOccurred()
     }

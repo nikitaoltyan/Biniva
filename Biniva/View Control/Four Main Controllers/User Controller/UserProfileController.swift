@@ -270,7 +270,7 @@ class UserProfileController: UIViewController {
     
     
     @objc func MeetOpen(){
-        Vibration.Light()
+        Vibration.light()
         UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
             self.meetCollection.center.x += MainConstants.screenWidth
             self.joinedCollection.center.x += MainConstants.screenWidth
@@ -290,7 +290,7 @@ class UserProfileController: UIViewController {
     }
     
     @objc func JoinedOpen(){
-        Vibration.Light()
+        Vibration.light()
         UIView.animate(withDuration: 0.29, delay: 0, options: .curveEaseOut, animations: {
             self.meetCollection.center.x -= MainConstants.screenWidth
             self.joinedCollection.center.x -= MainConstants.screenWidth
@@ -496,7 +496,7 @@ extension UserProfileController: AddMeetingDelegate {
     
     func addMeeting(){
         print("Add meeting")
-        Vibration.Light()
+        Vibration.light()
         let newVC = AddMeetingController()
         newVC.modalPresentationStyle = .overFullScreen
         let transition = CATransition()

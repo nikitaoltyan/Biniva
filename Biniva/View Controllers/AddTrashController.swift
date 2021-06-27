@@ -120,7 +120,7 @@ class AddTrashController: UIViewController {
     @objc
     func add(){
         if (materialsCollection.isHidden) {
-            Vibration.Light()
+            Vibration.light()
             let txt = addTrashView.weightView.textView.text.split(separator: " ")
             let weight: Int = Int(txt[0]) ?? 0
             DataFunction().addData(loggedSize: weight, material: currentPage, date: Date().onlyDate)

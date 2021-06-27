@@ -24,6 +24,9 @@ protocol RecyclingDelegate {
     func Add()
 }
 
+protocol mapDelegate {
+    func openAddNewPoint()
+}
 
 protocol TopViewDelegate {
     func UpdateTitles(isRecylcing: Bool)
@@ -67,7 +70,7 @@ class RecyclingController: UIViewController {
     lazy var mapView: MapView = {
         let view = MapView()
             .with(autolayout: false)
-//        view.delegate = self
+        view.delegate = self
         return view
     }()
 
@@ -195,8 +198,6 @@ extension RecyclingController: StatsDelegate {
 
 extension RecyclingController: RecyclingDelegate {
     func Add() {
-//        DataFunction().deleteAllPoints()
-        
         Vibration.soft()
         let newVC = AddTrashController()
         newVC.modalPresentationStyle = .overFullScreen
@@ -206,6 +207,18 @@ extension RecyclingController: RecyclingDelegate {
         present(newVC, animated: true, completion: nil)
     }
 }
+
+
+
+
+
+extension RecyclingController: mapDelegate {
+    func openAddNewPoint() {
+        let newVC = AddPointController()
+        present(newVC, animated: true, completion: nil)
+    }
+}
+
 
 
 

@@ -174,7 +174,7 @@ class AboutUsController: UIViewController {
     
     
     @objc func Back(){
-        Vibration.Light()
+        Vibration.light()
         let transition = CATransition()
         transition.duration = 0.25
         transition.type = CATransitionType.push
