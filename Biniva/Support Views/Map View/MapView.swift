@@ -43,7 +43,10 @@ class MapView: UIView {
     var pinAnnotationBottomConstraint: NSLayoutConstraint?
     var centerCoordinate: CGFloat = 0
     
-//    var trashBins: [TrashBin] = []
+    var usedTopLeftCoordinate: CLLocationCoordinate2D?
+    var usedBottomRightCoordinate: CLLocationCoordinate2D?
+    var isFirstInteraction: Bool = true
+
     var trashBinsID: Set<String> = []
     
     
@@ -148,13 +151,47 @@ class MapView: UIView {
         })
     }
     
-    @objc
-    func annotationTapped(_ sender: UITapGestureRecognizer) {
-        setBottomPosition()
+    func isLoadingDataNecessary() -> Bool {
+        // Setting initial coordinate after first map movement.
+        guard (isFirstInteraction == false) else {
+            usedTopLeftCoordinate = map.topLeftCoordinate
+            usedBottomRightCoordinate = map.bottomRightCoordinate
+            isFirstInteraction = false
+            getGeoPoints()
+            return false
+        }
+        
+        if (usedTopLeftCoordinate?.longitude ?? 90 > map.topLeftCoordinate.longitude) ||
+            (usedBottomRightCoordinate?.longitude ?? -90 < map.topRightCoordinate.longitude) ||
+            (usedTopLeftCoordinate?.latitude ?? -90 < map.topLeftCoordinate.latitude) ||
+            (usedBottomRightCoordinate?.latitude ?? 90 > map.bottomRightCoordinate.latitude) {
+            
+            if map.topLeftCoordinate.longitude < usedTopLeftCoordinate?.longitude ?? 90 {
+                usedTopLeftCoordinate?.longitude = map.topLeftCoordinate.longitude
+            }
+            
+            if map.topRightCoordinate.longitude > usedBottomRightCoordinate?.longitude ?? -90 {
+                usedBottomRightCoordinate?.longitude = map.topRightCoordinate.longitude
+            }
+            
+            if map.topLeftCoordinate.latitude > usedTopLeftCoordinate?.latitude ?? -90 {
+                usedTopLeftCoordinate?.latitude = map.topLeftCoordinate.latitude
+            }
+            
+            if map.bottomRightCoordinate.latitude < usedBottomRightCoordinate?.latitude ?? 90 {
+                usedBottomRightCoordinate?.latitude = map.bottomRightCoordinate.latitude
+            }
+            
+            return true
+        } else {
+            return false
+        }
     }
     
-    func getGeoPoints(){
-
+    
+    func getGeoPoints() {
+        guard isLoadingDataNecessary() else { return }
+        print("guard was passed")
         
         coreDatabase.getPointsInArea(topLeftX: map.topLeftCoordinate.longitude,
                                      topRightX: map.topRightCoordinate.longitude,
@@ -164,22 +201,14 @@ class MapView: UIView {
                                         
             self.addAnnotation(points: points)
                                         
-            print("Dispatch async queue.")
             DispatchQueue.main.async {
                 self.server.getGeoPoints(centerCoordinate: self.map.region.center,
                                          radius: self.map.currentRadius(withDelta: 0),
                                          notItPoints: points, result: { (serverPoint) in
-                    
+                                            self.addAnnotation(points: serverPoint)
                 })
             }
         })
-        
-//        server.getGeoPoints(centerCoordinate: map.region.center,
-//                            radius: map.currentRadius(withDelta: 0), result: { result in
-//            guard (result) else { return }
-//            let points: [Points] = self.coreDatabase.fetchData()
-//            self.addAnnotation(points: points)
-//        })
     }
 
 }
@@ -199,8 +228,7 @@ extension MapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let view = view as? DefaultAnnotationView else { return }
         guard let annotation = view.annotation as? TrashBin else { return }
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(annotationTapped(_:)))
-        view.addGestureRecognizer(gesture)
+        setBottomPosition()
         pinAnnotation.pointID = annotation.pointID
         pinAnnotation.setUp(trashTypes: annotation.types, coordinate: annotation.coordinate)
     }

@@ -77,7 +77,7 @@ class BottomPinView: UIView {
     
     lazy var photoCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 200)
+        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 190)
         let collection = UICollectionView(frame: useFrame, collectionViewLayout: layout)
             .with(bgColor: .clear)
             .with(autolayout: false)
@@ -103,7 +103,6 @@ class BottomPinView: UIView {
     var types: [TrashType] = []
     var images: [String] = []
     var pointID: String?
-    var isError: Bool = false
     
     
     override init(frame: CGRect) {
@@ -137,10 +136,8 @@ class BottomPinView: UIView {
             if error == nil {
                 let firstLocation = placemarks?[0]
                 self.adressLabel.text = firstLocation?.name
-//                self.isError = false
             } else {
                 self.adressLabel.text = "Location is not available"
-//                self.isError = true
             }
         })
     }
@@ -177,7 +174,7 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
             return CGSize(width: 52, height: 52)
         default:
             if images.count > 0 {
-                return CGSize(width: 95, height: 95)
+                return CGSize(width: 140, height: 140)
             } else {
                 return CGSize(width: MainConstants.screenWidth, height: 230)
             }

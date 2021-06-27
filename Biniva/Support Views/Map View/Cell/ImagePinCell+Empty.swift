@@ -32,9 +32,10 @@ class ImagePinCell_Empty: UICollectionViewCell {
     }()
     
     let image: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 130, height: 100))
             .with(autolayout: false)
-        image.image = UIImage(named: "EmptyPhotoState")
+        let useImage = UIImage(named: "EmptyPhotoState")
+        image.image = useImage?.resize(targetSize: CGSize(width: 130, height: 100))
         return image
     }()
     
@@ -74,4 +75,15 @@ extension ImagePinCell_Empty{
             image.heightAnchor.constraint(equalToConstant: image.frame.height),
         ])
     }
+}
+
+
+extension UIImage {
+
+    func resize(targetSize: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size:targetSize).image { _ in
+            self.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+    }
+
 }

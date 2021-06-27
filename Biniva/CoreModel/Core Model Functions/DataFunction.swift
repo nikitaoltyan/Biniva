@@ -101,7 +101,8 @@ class DataFunction {
         database.getPoitsInArea(xMin: min(topLeftX, topRightX),
                                 xMax: max(topLeftX, topRightX),
                                 yMin: min(topLeftY, bottomLeftY),
-                                yMax: max(topLeftY, bottomLeftY), result: { (points) in
+                                yMax: max(topLeftY, bottomLeftY),
+                                result: { (points) in
                                     result(points)
                                 })
     }

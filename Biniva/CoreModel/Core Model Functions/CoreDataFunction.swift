@@ -129,7 +129,7 @@ class CoreDataFunction {
     }
     
     
-    /// - warning: Returns only [String], where String – geohash of the Point.
+    /// - parameter result: [Points] in given area.
     func getPoitsInArea(xMin: Double, xMax: Double, yMin: Double, yMax: Double, result: @escaping(_ result: [Points]) -> Void) {
         // latitude - y
         // longitude - x
