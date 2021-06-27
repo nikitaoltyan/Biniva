@@ -40,6 +40,16 @@ class MapView: UIView {
         return view
     }()
     
+    let addPointView: AddPointButtonView = {
+        let view = AddPointButtonView()
+            .with(autolayout: false)
+//        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+//        view.layer.shadowRadius = 5
+//        view.layer.shadowOpacity = 0.8
+//        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        return view
+    }()
+    
     var pinAnnotationBottomConstraint: NSLayoutConstraint?
     var centerCoordinate: CGFloat = 0
     
@@ -95,7 +105,7 @@ class MapView: UIView {
     func draggedView(_ sender:UIPanGestureRecognizer){
         self.bringSubviewToFront(pinAnnotation)
         let translation = sender.translation(in: self)
-//        centerCoordinate = MainConstants.screenHeight + pinAnnotation.frame.height/2
+        
         let condition_1 = pinAnnotation.center.y <= centerCoordinate - 190
         let condition_2 = pinAnnotation.center.y >= centerCoordinate - 700
         if condition_1 && condition_2 {
@@ -111,6 +121,11 @@ class MapView: UIView {
         }
     }
     
+    @objc
+    func addPoint() {
+        print("Add point View Controler initiation")
+    }
+    
     func setRightPosition(){
         let middle: CGFloat = (190.0 + 500.0)/2.0
         switch centerCoordinate-pinAnnotation.center.y {
@@ -124,19 +139,22 @@ class MapView: UIView {
     }
     
     func setClosedPosition() {
+        addPointView.isHidden = false
         UIView.animate(withDuration: 0.1, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
                                                 y: self.centerCoordinate)
+            self.addPointView.transform = CGAffineTransform(translationX: 0, y: 0)
         })
     }
     
     func setBottomPosition() {
-        print("Set bottom position: \(centerCoordinate)")
         self.layoutIfNeeded()
         UIView.animate(withDuration: 0.2, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
                                                 y: self.centerCoordinate-190)
+            self.addPointView.transform = CGAffineTransform(translationX: -100, y: 0)
         }, completion: { (_) in
+            self.addPointView.isHidden = true
             Vibration.soft()
         })
     }
@@ -150,6 +168,8 @@ class MapView: UIView {
             self.pinAnnotation.loadImages()
         })
     }
+    
+    
     
     func isLoadingDataNecessary() -> Bool {
         // Setting initial coordinate after first map movement.
@@ -191,7 +211,6 @@ class MapView: UIView {
     
     func getGeoPoints() {
         guard isLoadingDataNecessary() else { return }
-        print("guard was passed")
         
         coreDatabase.getPointsInArea(topLeftX: map.topLeftCoordinate.longitude,
                                      topRightX: map.topRightCoordinate.longitude,
@@ -248,8 +267,10 @@ extension MapView{
     func setSubviews(){
         self.addSubview(map)
         self.addSubview(pinAnnotation)
+        self.addSubview(addPointView)
         
         pinAnnotation.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:))))
+        addPointView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPoint)))
     }
     
     func activateLayouts(){
@@ -262,8 +283,14 @@ extension MapView{
             pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
             pinAnnotation.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             pinAnnotation.widthAnchor.constraint(equalToConstant: pinAnnotation.frame.width),
-            pinAnnotation.heightAnchor.constraint(equalToConstant: pinAnnotation.frame.height)
+            pinAnnotation.heightAnchor.constraint(equalToConstant: pinAnnotation.frame.height),
+            
+            addPointView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22),
+            addPointView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -60),
+            addPointView.widthAnchor.constraint(equalToConstant: addPointView.frame.width),
+            addPointView.heightAnchor.constraint(equalToConstant: addPointView.frame.height),
         ])
+        
         centerCoordinate = MainConstants.screenHeight + pinAnnotation.frame.height/2
     }
 }

@@ -80,6 +80,7 @@
 		5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */; };
 		5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */; };
 		5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */; };
+		5CD0B13026888AD200267081 /* AddPointButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B12F26888AD200267081 /* AddPointButtonView.swift */; };
 		5CD2F5962681C34400993A54 /* ImagePinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2F5952681C34400993A54 /* ImagePinCell.swift */; };
 		5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */; };
 		5CD556FB26524DFE007B3D06 /* MaterialStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */; };
@@ -210,6 +211,7 @@
 		5CC2DDCD2590A9D7009E9C73 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		5CC2DDD22590D13E009E9C73 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePlusView.swift; sourceTree = "<group>"; };
+		5CD0B12F26888AD200267081 /* AddPointButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointButtonView.swift; sourceTree = "<group>"; };
 		5CD2F5952681C34400993A54 /* ImagePinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePinCell.swift; sourceTree = "<group>"; };
 		5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePinCell+Empty.swift"; sourceTree = "<group>"; };
 		5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatView.swift; sourceTree = "<group>"; };
@@ -608,8 +610,8 @@
 			children = (
 				5C5ED19E2659677D00084458 /* View Controllers */,
 				5C5ED19F265967AC00084458 /* Support Views */,
-				5C11455F26612D4100F48626 /* Maps */,
 				5C3046DE25C06A3100BAFEEF /* Biniva.entitlements */,
+				5C11455F26612D4100F48626 /* Maps */,
 				5C454E5225BACF5B00966991 /* View Control */,
 				5C454E6C25BAD24600966991 /* General Views */,
 				5C454E6D25BAD2F100966991 /* General Cells */,
@@ -712,6 +714,7 @@
 				5CA776D12656B3C600EDAF47 /* MapView.swift */,
 				5C11455726612B9400F48626 /* MapView+Model.swift */,
 				5C6CDAAE26596990009F72D8 /* BottomPinView.swift */,
+				5CD0B12F26888AD200267081 /* AddPointButtonView.swift */,
 				5CEE8C01266A173200EB6617 /* TrashBin.swift */,
 				5CD2F5972682251500993A54 /* Cell */,
 				5CEE8BFE266A15AC00EB6617 /* Pins */,
@@ -1050,6 +1053,7 @@
 				5CB6A22A25C3D4A900EC4B3A /* ViewController Extension.swift in Sources */,
 				5C9F98B3262DE1E200DFCFEA /* StatsView.swift in Sources */,
 				5CFB622E259A447200F1C8C7 /* AddMeetingController.swift in Sources */,
+				5CD0B13026888AD200267081 /* AddPointButtonView.swift in Sources */,
 				5C36401625E64346003908B7 /* ProfileInfoCell.swift in Sources */,
 				5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */,
 				5C782CD5267A059900A853D5 /* Points+CoreDataProperties.swift in Sources */,
