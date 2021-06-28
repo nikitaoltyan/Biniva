@@ -82,6 +82,8 @@
 		5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */; };
 		5CD0B13026888AD200267081 /* AddPointButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B12F26888AD200267081 /* AddPointButtonView.swift */; };
 		5CD0B1322688A85E00267081 /* AddPointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1312688A85E00267081 /* AddPointController.swift */; };
+		5CD0B1352689BD4500267081 /* TakePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1342689BD4500267081 /* TakePhotoCell.swift */; };
+		5CD0B1372689FFA600267081 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1362689FFA600267081 /* UIImage+Extension.swift */; };
 		5CD2F5962681C34400993A54 /* ImagePinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2F5952681C34400993A54 /* ImagePinCell.swift */; };
 		5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */; };
 		5CD556FB26524DFE007B3D06 /* MaterialStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */; };
@@ -214,6 +216,8 @@
 		5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePlusView.swift; sourceTree = "<group>"; };
 		5CD0B12F26888AD200267081 /* AddPointButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointButtonView.swift; sourceTree = "<group>"; };
 		5CD0B1312688A85E00267081 /* AddPointController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointController.swift; sourceTree = "<group>"; };
+		5CD0B1342689BD4500267081 /* TakePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoCell.swift; sourceTree = "<group>"; };
+		5CD0B1362689FFA600267081 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		5CD2F5952681C34400993A54 /* ImagePinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePinCell.swift; sourceTree = "<group>"; };
 		5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePinCell+Empty.swift"; sourceTree = "<group>"; };
 		5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatView.swift; sourceTree = "<group>"; };
@@ -319,6 +323,7 @@
 				5C1D11C325C6B7F2007C8DBC /* Date Extension.swift */,
 				5CEDA06625DCF4A0009280D0 /* Array Extension.swift */,
 				5CC12875265FFF8C0097ECDD /* MKMapView+Extension.swift */,
+				5CD0B1362689FFA600267081 /* UIImage+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -674,6 +679,7 @@
 				5C5ED1A1265967FD00084458 /* Stats View */,
 				5C5ED1A22659682C00084458 /* Add Trash View */,
 				5C5ED1A32659685000084458 /* Map View */,
+				5CD0B1332689BD0500267081 /* Add Point */,
 			);
 			path = "Support Views";
 			sourceTree = "<group>";
@@ -723,6 +729,14 @@
 				5CEE8BFE266A15AC00EB6617 /* Pins */,
 			);
 			path = "Map View";
+			sourceTree = "<group>";
+		};
+		5CD0B1332689BD0500267081 /* Add Point */ = {
+			isa = PBXGroup;
+			children = (
+				5CD0B1342689BD4500267081 /* TakePhotoCell.swift */,
+			);
+			path = "Add Point";
 			sourceTree = "<group>";
 		};
 		5CD2F5972682251500993A54 /* Cell */ = {
@@ -1051,6 +1065,7 @@
 				5C045BD625BAE80B00E42843 /* BottomLogInView.swift in Sources */,
 				5CFB624B259B92E800F1C8C7 /* TopHeaderView.swift in Sources */,
 				5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */,
+				5CD0B1352689BD4500267081 /* TakePhotoCell.swift in Sources */,
 				5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */,
 				5CBF94D825E637940071742F /* OtherHeaderView.swift in Sources */,
 				5CB6A22A25C3D4A900EC4B3A /* ViewController Extension.swift in Sources */,
@@ -1079,6 +1094,7 @@
 				5C7C5E9E264ABDDE00B4FE8C /* NewOnboardingController.swift in Sources */,
 				5C08703D262739080057E840 /* Model.xcdatamodeld in Sources */,
 				5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */,
+				5CD0B1372689FFA600267081 /* UIImage+Extension.swift in Sources */,
 				5CD0B1322688A85E00267081 /* AddPointController.swift in Sources */,
 				5C045BE825BC77B200E42843 /* Server.swift in Sources */,
 				5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */,

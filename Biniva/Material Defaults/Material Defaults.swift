@@ -19,7 +19,8 @@ class MaterialDefaults {
         case 3: return "бумаги"
         case 4: return "металла"
         case 5: return "дерева"
-        default: return "ткани"
+        case 7: return "ткани"
+        default: return "батареек"
         }
     }
     
@@ -37,8 +38,10 @@ class MaterialDefaults {
             return (metal.title, metal.subtitle, metal.weight)
         case .wood:
             return (wood.title, wood.subtitle, wood.weight)
-        default:
+        case .fabric:
             return (fabric.title, fabric.subtitle, fabric.weight)
+        default:
+            return (battery.title, battery.subtitle, battery.weight)
         }
     }
     

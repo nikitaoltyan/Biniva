@@ -2,7 +2,7 @@
 //  MaterialData.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 26.04.2021.
+//  Created by Nick Oltyan on 26.04.2021.
 //
 
 import Foundation
@@ -16,6 +16,7 @@ import UIKit
 /// Металл - 4
 /// Дерево - 5
 /// Ткань - 6
+/// Батарейки - 7
 
 // Make them one.
 enum TrashType: Int, Decodable {
@@ -26,6 +27,7 @@ enum TrashType: Int, Decodable {
     case glass
     case wood
     case fabric
+    case battery
 }
 
 enum material {
@@ -36,6 +38,7 @@ enum material {
     case glass
     case wood
     case fabric
+    case battery
 }
 
 struct materialImages {
@@ -46,6 +49,18 @@ struct materialImages {
     static let glass = UIImage(named: "glass") ?? #imageLiteral(resourceName: "Avatar")
     static let wood = UIImage(named: "wood") ?? #imageLiteral(resourceName: "Avatar")
     static let fabric = UIImage(named: "fabric") ?? #imageLiteral(resourceName: "Avatar")
+    static let battery = UIImage(named: "battery") ?? #imageLiteral(resourceName: "Avatar")
+}
+
+struct materialIcons {
+    static let plastic = UIImage(named: "plastic-icon") ?? #imageLiteral(resourceName: "StatsEmtyState")
+    static let organic = UIImage(named: "organic-icon") ?? #imageLiteral(resourceName: "StatsEmtyState")
+    static let paper = UIImage(named: "paper-icon") ?? #imageLiteral(resourceName: "StatsEmtyState")
+    static let metal = UIImage(named: "metal-icon") ?? #imageLiteral(resourceName: "StatsEmtyState")
+    static let glass = UIImage(named: "glass-icon") ?? #imageLiteral(resourceName: "StatsEmtyState")
+    static let wood = UIImage(named: "wood-icon") ?? #imageLiteral(resourceName: "StatsEmtyState")
+    static let fabric = UIImage(named: "fabric-icon") ?? #imageLiteral(resourceName: "StatsEmtyState")
+    static let battery = UIImage(named: "battery-icon") ?? #imageLiteral(resourceName: "StatsEmtyState")
 }
 
 struct materialColors {
@@ -56,27 +71,30 @@ struct materialColors {
     static let glass = UIColor(named: "glassColor") ?? .green
     static let wood = UIColor(named: "woodColor") ?? .green
     static let fabric = UIColor(named: "fabricColor") ?? .green
+    static let battery = UIColor(named: "batteryColor") ?? .green
 }
 
 
 struct materials {
-    static let name: Array<String> = ["Пластик", "Органика", "Бумага", "Металл", "Стекло", "Дерево", "Ткань"]
+    static let name: Array<String> = ["Пластик", "Органика", "Бумага", "Металл", "Стекло", "Дерево", "Ткань", "Батарейки"]
     static var image: Array<UIImage> = [materialImages.plastic,
                                         materialImages.organic,
                                         materialImages.paper,
                                         materialImages.metal,
                                         materialImages.glass,
                                         materialImages.wood,
-                                        materialImages.fabric,]
-    static let enums: Array<material> = [.plastic, .organic, .paper, .metal, .glass, .wood, .fabric]
+                                        materialImages.fabric,
+                                        materialImages.battery]
+    static let enums: Array<material> = [.plastic, .organic, .paper, .metal, .glass, .wood, .fabric, .battery]
     static let statsColors: Array<UIColor> = [materialColors.plastic,
                                               materialColors.organic,
                                               materialColors.paper,
                                               materialColors.metal,
                                               materialColors.glass,
                                               materialColors.wood,
-                                              materialColors.fabric]
-    static let id: Array<Int> = [0, 1, 3, 4, 2, 5, 6]
+                                              materialColors.fabric,
+                                              materialColors.battery]
+    static let id: Array<Int> = [0, 1, 3, 4, 2, 5, 6, 7]
 }
 
 
@@ -106,9 +124,9 @@ struct paper {
 }
 
 struct metal {
-    static let title: Array<String> = ["Фольга", "Батарейка", "Батарейка", "Другое"]
-    static let subtitle: Array<String> = ["Длина 0,5 метра", "Мизинчиковая", "Пальчиковая", "Гвозди и т.д."]
-    static let weight: Array<Int> = [30, 25, 40, 50]
+    static let title: Array<String> = ["Фольга", "Фантик", "Другое"]
+    static let subtitle: Array<String> = ["Длина 0,5 метра", "От конфеты", "Гвозди и т.д."]
+    static let weight: Array<Int> = [30, 3, 50]
 }
 
 struct wood {
@@ -121,4 +139,10 @@ struct fabric {
     static let title: Array<String> = ["Футболка", "Другое"]
     static let subtitle: Array<String> = ["Взрослая", "Ткань"]
     static let weight: Array<Int> = [200, 50]
+}
+
+struct battery {
+    static let title: Array<String> = ["Батарейка", "Батарейка"]
+    static let subtitle: Array<String> = ["Мизинчиковая", "Пальчиковая"]
+    static let weight: Array<Int> = [25, 40]
 }

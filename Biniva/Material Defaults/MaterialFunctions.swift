@@ -66,7 +66,24 @@ class MaterialFunctions {
         case 3: return useStruct.paper
         case 4: return useStruct.metal
         case 5: return useStruct.wood
-        default: return useStruct.fabric
+        case 6: return useStruct.fabric
+        default: return useStruct.battery
+        }
+    }
+    
+    
+    /// Some weird shit. Must be redeveloped.
+    func iconByRowValue(_ value: Int) -> UIImage {
+        let useStruct = materialIcons.self
+        switch value {
+        case 0: return useStruct.plastic
+        case 1: return useStruct.organic
+        case 2: return useStruct.glass
+        case 3: return useStruct.paper
+        case 4: return useStruct.metal
+        case 5: return useStruct.wood
+        case 6: return useStruct.fabric
+        default: return useStruct.battery
         }
     }
 }

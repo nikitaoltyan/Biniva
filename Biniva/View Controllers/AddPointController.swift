@@ -54,7 +54,7 @@ class AddPointController: UIViewController {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 20)
             .with(autolayout: false)
-        label.text = "  "
+        label.text = "Адрес не выбран"
         return label
     }()
     
@@ -97,7 +97,7 @@ class AddPointController: UIViewController {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 23)
             .with(autolayout: false)
-        label.text = "Добавь фото?"
+        label.text = "Добавь фото"
         return label
     }()
     
@@ -117,8 +117,8 @@ class AddPointController: UIViewController {
         collection.showsHorizontalScrollIndicator = false
         collection.delegate = self
         collection.dataSource = self
-        collection.register(MaterialPinCell.self, forCellWithReuseIdentifier: "MaterialPinCell")
-        collection.register(ImagePinCell.self, forCellWithReuseIdentifier: "ImagePinCell") // CHANGE
+        collection.register(TakePhotoCell.self, forCellWithReuseIdentifier: "TakePhotoCell")
+        collection.register(ImagePinCell.self, forCellWithReuseIdentifier: "ImagePinCell")
         collection.tag = 1
         return collection
     }()
@@ -136,6 +136,7 @@ class AddPointController: UIViewController {
     
     let locationManager = CLLocationManager()
     var currentAnnotation: MKPointAnnotation?
+    var uploadedImages: [UIImage?] = []
     
     
     
@@ -171,6 +172,14 @@ class AddPointController: UIViewController {
         })
 
     }
+    
+    func showImagePicker() {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        pickerController.sourceType = .photoLibrary
+        self.present(pickerController, animated: true, completion: nil)
+    }
 
     
     @objc
@@ -182,6 +191,17 @@ class AddPointController: UIViewController {
 
 
 
+extension AddPointController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let choosedImage = info[.editedImage] as? UIImage
+        uploadedImages.append(choosedImage)
+        photoCollection.reloadData()
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+
+
 
 
 extension AddPointController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -190,7 +210,14 @@ extension AddPointController: UICollectionViewDelegate, UICollectionViewDataSour
         case 0:
             return materials.name.count
         default:
-            return 3 // CHANGE
+            switch uploadedImages.count {
+            case 0:
+                return 1
+            case 4...:
+                return 4
+            default:
+                return uploadedImages.count+1
+            }
         }
     }
     
@@ -208,18 +235,39 @@ extension AddPointController: UICollectionViewDelegate, UICollectionViewDataSour
         case 0:
             let cell = materialCollection.dequeueReusableCell(withReuseIdentifier: "MaterialPinCell", for: indexPath) as! MaterialPinCell
             cell.backgroundColor = functions.colorByRowValue(indexPath.row)
+            let useImage: UIImage = functions.iconByRowValue(indexPath.row)
+            let tintedImage = useImage.withRenderingMode(.alwaysTemplate)
+            cell.image.image = tintedImage
+            cell.image.tintColor = Colors.background
             cell.layer.cornerRadius = 26
             return cell
+            
         default:
-            let cell = materialCollection.dequeueReusableCell(withReuseIdentifier: "MaterialPinCell", for: indexPath) as! MaterialPinCell
-//            cell.backgroundColor = functions.colorByRowValue(types[indexPath.row].rawValue)
-            cell.backgroundColor = .gray
-            return cell
+            switch uploadedImages.count {
+            case 0:
+                let cell = photoCollection.dequeueReusableCell(withReuseIdentifier: "TakePhotoCell", for: indexPath) as! TakePhotoCell
+                return cell
+            case 4...:
+                let cell = photoCollection.dequeueReusableCell(withReuseIdentifier: "ImagePinCell", for: indexPath) as! ImagePinCell
+                cell.image.image = uploadedImages[indexPath.row]
+                return cell
+            default:
+                if indexPath.row == 0 {
+                    let cell = photoCollection.dequeueReusableCell(withReuseIdentifier: "TakePhotoCell", for: indexPath) as! TakePhotoCell
+                    return cell
+                } else {
+                    let cell = photoCollection.dequeueReusableCell(withReuseIdentifier: "ImagePinCell", for: indexPath) as! ImagePinCell
+                    cell.image.image = uploadedImages[indexPath.row-1]
+                    return cell
+                }
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Select item: \(indexPath.row) in collection with tag: \(collectionView.tag)")
+        if (uploadedImages.count < 5) && (collectionView.tag == 1) && (indexPath.row == 0) {
+            showImagePicker()
+        }
     }
 }
 

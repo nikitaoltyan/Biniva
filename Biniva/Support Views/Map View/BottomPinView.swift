@@ -186,6 +186,10 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
         case 0:
             let cell = materialCollection.dequeueReusableCell(withReuseIdentifier: "MaterialPinCell", for: indexPath) as! MaterialPinCell
             cell.backgroundColor = functions.colorByRowValue(types[indexPath.row].rawValue)
+            let useImage: UIImage = functions.iconByRowValue(types[indexPath.row].rawValue)
+            let tintedImage = useImage.withRenderingMode(.alwaysTemplate)
+            cell.image.image = tintedImage
+            cell.image.tintColor = Colors.background
             cell.layer.cornerRadius = 26
             return cell
         default:
