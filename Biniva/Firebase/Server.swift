@@ -14,24 +14,9 @@ class Server {
 
     /// Database reference
     let db = Firestore.firestore()
+    let storage = Storage.storage(url: "gs://greener-964fe.appspot.com")
     let coreDatabase = DataFunction()
 
-    
-    
-    // That works and should be extended.
-    func addGeoPoint(latitude: Double, longitude: Double, trashTypes: [Int]) {
-        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let hash = GFUtils.geoHash(forLocation: location)
-
-        let documentData: [String: Any] = [
-            "geohash": hash,
-            "lat": latitude,
-            "lng": longitude,
-            "trash_types": trashTypes
-        ]
-
-        db.collection("points").addDocument(data: documentData)
-    }
     
     /// - parameter center: the center coordinate of the showen mapView.
     /// - parameter radius: Should be in meters.
@@ -110,46 +95,66 @@ class Server {
     }
     
     
+    /// This function is called when user manualy add new Bin Point.
+    /// - warning: The data uploading in the separate folder for future administration.
+    func createNewPoint(forCoorinate coordinate: CLLocationCoordinate2D,
+                        withMaterials materials: [Int],
+                        andImages images: [UIImage?]) {
+        let hash = GFUtils.geoHash(forLocation: coordinate)
+
+        let documentData: [String: Any] = [
+            "geohash": hash,
+            "lat": coordinate.latitude,
+            "lng": coordinate.longitude,
+            "trash_types": materials
+        ]
+
+        var ref: DocumentReference? = nil
+        ref = db.collection("points_moderation").addDocument(data: documentData) { (err) in
+            guard (err == nil) else { return }
+            
+            self.addPointImage(forDocumentID: ref!.documentID, images: images, result: { (imageURLs) in
+                self.db.collection("points_moderation").document(ref!.documentID).updateData([
+                    "photos": imageURLs
+                ])
+            })
+        }
+    }
     
-    /// Authentificate user via Email and pssword by Firebase Auth.
-    /// - warning: Function also add User ID into UserDefaults.
-//    static func AuthUser(withEmail: String, password: String, success: @escaping (_ result: Bool) -> Void) {
-//        Auth.auth().signIn(withEmail: withEmail, password: password) { (authResult, error) in
-//            guard (error == nil) else {
-//                success(false)
-//                return
-//            }
-//            print("Auth user")
-//            SetUserDailyNormFromServer(forUserID: authResult?.user.uid, success: { result in
-//                guard (result) else { return }
-//                Defaults.SetUserId(userId: authResult?.user.uid)
-//                Defaults.SetHasLaunched(launched: true)
-//                success(true)
-//            })
-//        }
-//    }
     
-    
-//    static func ReturnArrayWithPostDictonaries(postDetails: @escaping (_ result: Array<Dictionary<String, Any>>) -> Void) {
-//        self.GetMeetingsIDs(meetingsArray: { result in
-//            var returnArray: Array<Dictionary<String, Any>> = []
-//            for element in result! {
-//                self.PostDetails(postWithId: element, postDetails: { data in
-//                    returnArray.append(data)
-//                    postDetails(returnArray)
-//                })
-//            }
-//        })
-//    }
-//
-//
-//    static func GetUserDailyNotm(userId uid: String, result: @escaping (_ result: Int) -> Void) {
-//        let useRef = ref.child("users").child(uid)
-//        useRef.observe(.value, with: { (snapshot) in
-//            let data = snapshot.value as? [String : Any] ?? [:]
-//            result(data["daily_norm"] as! Int)
-//        })
-//    }
+    fileprivate
+    func addPointImage(forDocumentID documentID: String, images: [UIImage?], result: @escaping(_ strings: [String]) -> Void) {
+  
+        let storageRef = storage.reference()
+        var imageURLs: [String] = []
+        for image in images {
+            
+            guard let image = image else { return }
+            
+            let data = image.jpegData(compressionQuality: 0.1)
+            let imageRef = storageRef.child("Points").child(documentID).child("\(NSUUID().uuidString).jpg")
+            
+            _ = imageRef.putData(data!, metadata: nil) { (metadata, error) in
+                if let error = error {
+                    print("Upload error: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard metadata != nil else { return }
+                
+                imageRef.downloadURL { (url, error) in
+                    guard let addURL = url?.absoluteString else { return }
+                    
+                    imageURLs.append(addURL)
+                    
+                    if imageURLs.count == images.count {
+                        result(imageURLs)
+                    }
+                }
+                
+            }
+        }
+        }
 
     
     /// Function returns dictionary with post details (including username and user avatar link).

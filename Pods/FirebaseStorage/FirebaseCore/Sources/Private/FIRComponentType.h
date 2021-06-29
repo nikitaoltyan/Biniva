@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google
+ * Copyright 2018 Google
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,20 @@
  * limitations under the License.
  */
 
-@class FIRApp;
-@class GTMSessionFetcherService;
+#import <Foundation/Foundation.h>
+
+@class FIRComponentContainer;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FIRStorage ()
+/// Do not use directly. A placeholder type in order to provide a macro that will warn users of
+/// mis-matched protocols.
+NS_SWIFT_NAME(ComponentType)
+@interface FIRComponentType<__covariant T> : NSObject
 
-@property(strong, nonatomic, readwrite) FIRApp *app;
-
-@property(strong, nonatomic) GTMSessionFetcherService *fetcherServiceForApp;
-
-@property(nonatomic, readonly) dispatch_queue_t dispatchQueue;
-
-@property(strong, nonatomic) NSString *storageBucket;
-
-/**
- * Enables/disables GTMSessionFetcher HTTP logging
- * @param isLoggingEnabled Boolean passed through to enable/disable GTMSessionFetcher logging
- */
-+ (void)setGTMSessionFetcherLoggingEnabled:(BOOL)isLoggingEnabled;
+/// Do not use directly. A factory method to retrieve an instance that provides a specific
+/// functionality.
++ (T)instanceForProtocol:(Protocol *)protocol inContainer:(FIRComponentContainer *)container;
 
 @end
 

@@ -12,6 +12,7 @@ import CoreLocation
 class AddPointController: UIViewController {
 
     let functions = MaterialFunctions()
+    let server = Server()
     
     let scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -136,7 +137,10 @@ class AddPointController: UIViewController {
     
     let locationManager = CLLocationManager()
     var currentAnnotation: MKPointAnnotation?
+    
+    var settedLocation: CLLocationCoordinate2D?
     var uploadedImages: [UIImage?] = []
+    var selectedMaterials: Set<Int> = []
     
     
     
@@ -151,6 +155,7 @@ class AddPointController: UIViewController {
     func handleTap(gestureRecognizer: UILongPressGestureRecognizer) {
         let location = gestureRecognizer.location(in: map)
         let coordinate = map.convert(location, toCoordinateFrom: map)
+        settedLocation = coordinate
         
         // Remove last setted Pin.
         map.removeAnnotations(map.annotations)
@@ -184,7 +189,30 @@ class AddPointController: UIViewController {
     
     @objc
     func add(){
-        print("Add new Point.")
+        guard (settedLocation != nil) else {
+            showAlert(withTitle: "Не выбрана геопозиция", andSubtitle: "Пожалуйста, выбери точку на карте, где можно найти это место переработки. Это поможет другим пользователям.")
+            return
+        }
+        guard (selectedMaterials.count > 0) else {
+            showAlert(withTitle: "Не выбраны материалы", andSubtitle: "Пожалуйста, выбери материалы, которые можно сдать. Это поможет другим пользователям.")
+            return
+        }
+        guard (uploadedImages.count > 0) else {
+            showAlert(withTitle: "Не загружены фото", andSubtitle: "Пожалуйста, загрузи фото места переработки. Это поможет другим пользователям проще найти это место.")
+            return
+        }
+        print("Guard passed. Add new Point.")
+        server.createNewPoint(forCoorinate: settedLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                              withMaterials: Array(selectedMaterials),
+                              andImages: uploadedImages)
+    }
+    
+    
+    func showAlert(withTitle title: String, andSubtitle subtitle: String) {
+        let alert = prepareAlert(withTitle: title,
+                                 andSubtitle: subtitle,
+                                 closeAction: "Исправить")
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -265,8 +293,22 @@ extension AddPointController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Vibration.soft()
         if (uploadedImages.count < 5) && (collectionView.tag == 1) && (indexPath.row == 0) {
             showImagePicker()
+        }
+        
+        guard collectionView.tag == 0 else { return }
+        if let cell = materialCollection.cellForItem(at: indexPath) as? MaterialPinCell {
+            guard (cell.layer.borderWidth == 0) else {
+                selectedMaterials.remove(indexPath.row)
+                cell.layer.borderWidth = 0
+                return
+            }
+            
+            selectedMaterials.insert(indexPath.row)
+            cell.layer.borderWidth = 1.5
+            cell.layer.borderColor = Colors.bottomGradient.cgColor
         }
     }
 }

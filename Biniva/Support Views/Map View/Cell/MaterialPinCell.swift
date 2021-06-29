@@ -25,6 +25,8 @@ class MaterialPinCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+    var isCellSelected: Bool = false
 }
 
 

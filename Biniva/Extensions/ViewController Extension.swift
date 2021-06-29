@@ -19,7 +19,22 @@ extension UIViewController {
     }
     
     
-    @objc func dismissKeyboard() {
+    @objc
+    func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    
+    func prepareAlert(withTitle title: String, andSubtitle subtitle: String, closeAction close: String) -> UIAlertController {
+        Vibration.soft()
+        let alert = UIAlertController(title: title,
+                                      message: subtitle,
+                                      preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: close,
+                                      style: .cancel,
+                                      handler: { (_) in }))
+
+        return alert
     }
 }

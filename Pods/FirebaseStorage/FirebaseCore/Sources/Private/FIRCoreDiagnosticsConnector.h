@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google
+ * Copyright 2019 Google
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,21 @@
  * limitations under the License.
  */
 
-@class FIRApp;
-@class GTMSessionFetcherService;
+#import <Foundation/Foundation.h>
+
+@class FIRDiagnosticsData;
+@class FIROptions;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FIRStorage ()
+/** Connects FIRCore with the CoreDiagnostics library. */
+@interface FIRCoreDiagnosticsConnector : NSObject
 
-@property(strong, nonatomic, readwrite) FIRApp *app;
-
-@property(strong, nonatomic) GTMSessionFetcherService *fetcherServiceForApp;
-
-@property(nonatomic, readonly) dispatch_queue_t dispatchQueue;
-
-@property(strong, nonatomic) NSString *storageBucket;
-
-/**
- * Enables/disables GTMSessionFetcher HTTP logging
- * @param isLoggingEnabled Boolean passed through to enable/disable GTMSessionFetcher logging
+/** Logs FirebaseCore  related data.
+ *
+ * @param options The options object containing data to log.
  */
-+ (void)setGTMSessionFetcherLoggingEnabled:(BOOL)isLoggingEnabled;
++ (void)logCoreTelemetryWithOptions:(FIROptions *)options;
 
 @end
 
