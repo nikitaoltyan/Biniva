@@ -142,7 +142,7 @@ class AddPointController: UIViewController {
     var uploadedImages: [UIImage?] = []
     var selectedMaterials: Set<Int> = []
     
-    
+    var delegate: mapDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -205,6 +205,8 @@ class AddPointController: UIViewController {
         server.createNewPoint(forCoorinate: settedLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
                               withMaterials: Array(selectedMaterials),
                               andImages: uploadedImages)
+        dismiss(animated: true, completion: nil)
+        delegate?.showPopUp()
     }
     
     
@@ -340,8 +342,8 @@ extension AddPointController {
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            mainTitle.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 33),
-            mainTitle.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 29),
+            mainTitle.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 26),
+            mainTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             map.topAnchor.constraint(equalTo: mainTitle.bottomAnchor, constant: 18),
             map.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 29),

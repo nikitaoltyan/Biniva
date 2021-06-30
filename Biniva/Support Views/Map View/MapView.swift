@@ -43,10 +43,6 @@ class MapView: UIView {
     let addPointView: AddPointButtonView = {
         let view = AddPointButtonView()
             .with(autolayout: false)
-//        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
-//        view.layer.shadowRadius = 5
-//        view.layer.shadowOpacity = 0.8
-//        view.layer.shadowOffset = CGSize(width: 0, height: 2)
         return view
     }()
     

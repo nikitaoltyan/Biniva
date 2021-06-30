@@ -42,14 +42,14 @@ enum material {
 }
 
 struct materialImages {
-    static let plastic = UIImage(named: "plastic") ?? #imageLiteral(resourceName: "Avatar")
-    static let organic = UIImage(named: "organic") ?? #imageLiteral(resourceName: "Avatar")
-    static let paper = UIImage(named: "paper") ?? #imageLiteral(resourceName: "Avatar")
-    static let metal = UIImage(named: "metal") ?? #imageLiteral(resourceName: "Avatar")
-    static let glass = UIImage(named: "glass") ?? #imageLiteral(resourceName: "Avatar")
-    static let wood = UIImage(named: "wood") ?? #imageLiteral(resourceName: "Avatar")
-    static let fabric = UIImage(named: "fabric") ?? #imageLiteral(resourceName: "Avatar")
-    static let battery = UIImage(named: "battery") ?? #imageLiteral(resourceName: "Avatar")
+    static let plastic = UIImage(named: "plastic") ?? #imageLiteral(resourceName: "glass")
+    static let organic = UIImage(named: "organic") ?? #imageLiteral(resourceName: "glass")
+    static let paper = UIImage(named: "paper") ?? #imageLiteral(resourceName: "glass")
+    static let metal = UIImage(named: "metal") ?? #imageLiteral(resourceName: "glass")
+    static let glass = UIImage(named: "glass") ?? #imageLiteral(resourceName: "glass")
+    static let wood = UIImage(named: "wood") ?? #imageLiteral(resourceName: "glass")
+    static let fabric = UIImage(named: "fabric") ?? #imageLiteral(resourceName: "glass")
+    static let battery = UIImage(named: "battery") ?? #imageLiteral(resourceName: "glass")
 }
 
 struct materialIcons {

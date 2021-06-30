@@ -26,6 +26,7 @@ protocol RecyclingDelegate {
 
 protocol mapDelegate {
     func openAddNewPoint()
+    func showPopUp()
 }
 
 protocol TopViewDelegate {
@@ -215,6 +216,13 @@ extension RecyclingController: RecyclingDelegate {
 extension RecyclingController: mapDelegate {
     func openAddNewPoint() {
         let newVC = AddPointController()
+        newVC.delegate = self
+        present(newVC, animated: true, completion: nil)
+    }
+    
+    func showPopUp() {
+        let newVC = PointAddedPopUpController()
+        newVC.modalPresentationStyle = .fullScreen
         present(newVC, animated: true, completion: nil)
     }
 }
