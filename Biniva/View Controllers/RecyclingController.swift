@@ -221,8 +221,9 @@ extension RecyclingController: mapDelegate {
     }
     
     func showPopUp() {
+        Vibration.soft()
         let newVC = PointAddedPopUpController()
-        newVC.modalPresentationStyle = .fullScreen
+        newVC.modalPresentationStyle = .overFullScreen
         present(newVC, animated: true, completion: nil)
     }
 }

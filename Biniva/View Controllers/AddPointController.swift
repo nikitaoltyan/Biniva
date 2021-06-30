@@ -26,7 +26,7 @@ class AddPointController: UIViewController {
     let mainTitle: UILabel = {
         let label = UILabel()
             .with(color: Colors.nearBlack)
-            .with(alignment: .left)
+            .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 28)
             .with(autolayout: false)
