@@ -104,6 +104,7 @@ class BottomPinView: UIView {
     var images: [String] = []
     var pointID: String?
     
+    var isTouchedAlready: Bool = false
     
     override init(frame: CGRect) {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 800)

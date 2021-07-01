@@ -48,7 +48,7 @@ class MapView: UIView {
     }()
     
     var delegate: mapDelegate?
-    var pinAnnotationBottomConstraint: NSLayoutConstraint?
+    var pinAnnotationTopConstraint: NSLayoutConstraint?
     var centerCoordinate: CGFloat = 0
     
     var usedTopLeftCoordinate: CLLocationCoordinate2D?
@@ -114,12 +114,20 @@ class MapView: UIView {
     
     
     @objc
-    func draggedView(_ sender:UIPanGestureRecognizer){
+    func draggedView(_ sender: UIPanGestureRecognizer){
         self.bringSubviewToFront(pinAnnotation)
         let translation = sender.translation(in: self)
-//        centerCoordinate = MainConstants.screenHeight + pinAnnotation.frame.height/2
+//        let condition = pinAnnotation.center.y >= MainConstants.screenHeight/2+50
         let condition_1 = pinAnnotation.center.y <= centerCoordinate - 190
         let condition_2 = pinAnnotation.center.y >= centerCoordinate - 700
+        
+        // Removing some glitch with pinAnnotation.center position for a while.
+        if (pinAnnotation.isTouchedAlready == false) && (pinAnnotation.center.y == centerCoordinate) {
+            print("pinAnnotation.center.y == centerCoordinate")
+            setBottomPosition()
+            pinAnnotation.isTouchedAlready = true
+        }
+        
         if condition_1 && condition_2 {
             pinAnnotation.center = CGPoint(x: pinAnnotation.center.x,
                                            y: pinAnnotation.center.y + translation.y)
@@ -127,7 +135,6 @@ class MapView: UIView {
             setRightPosition()
         }
         sender.setTranslation(CGPoint.zero, in: self)
-        
         if (sender.state == .ended) {
             setRightPosition()
         }
@@ -141,9 +148,6 @@ class MapView: UIView {
     
     func setRightPosition(){
         let middle: CGFloat = (190.0 + 500.0)/2.0
-        print("setRightPosition")
-        print(self.pinAnnotation.center.y)
-        print(centerCoordinate-pinAnnotation.center.y)
         switch centerCoordinate-pinAnnotation.center.y {
         case 0...180:
             setClosedPosition()
@@ -155,7 +159,6 @@ class MapView: UIView {
     }
     
     func setClosedPosition() {
-        print("setClosedPosition")
         addPointView.isHidden = false
         UIView.animate(withDuration: 0.1, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
@@ -165,8 +168,7 @@ class MapView: UIView {
     }
     
     func setBottomPosition() {
-        self.layoutIfNeeded()
-        print("setBottomPosition")
+        self.addPointView.layoutIfNeeded()
         UIView.animate(withDuration: 0.2, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
                                                 y: self.centerCoordinate-190)
@@ -299,7 +301,6 @@ extension MapView{
             map.rightAnchor.constraint(equalTo: self.rightAnchor),
             map.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
             pinAnnotation.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             pinAnnotation.widthAnchor.constraint(equalToConstant: pinAnnotation.frame.width),
             pinAnnotation.heightAnchor.constraint(equalToConstant: pinAnnotation.frame.height),
@@ -310,7 +311,11 @@ extension MapView{
             addPointView.heightAnchor.constraint(equalToConstant: addPointView.frame.height),
         ])
         
+        pinAnnotationTopConstraint = pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+        pinAnnotationTopConstraint?.isActive = true
+        
         centerCoordinate = MainConstants.screenHeight + pinAnnotation.frame.height/2
+        print("activateLayouts. centerCoordinate: \(centerCoordinate), pinAnnotation.frame.height: \(pinAnnotation.frame.height)")
     }
 }
 
