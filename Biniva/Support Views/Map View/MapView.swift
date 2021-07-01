@@ -14,6 +14,7 @@ class MapView: UIView {
     var model = MapView_Model()
     let coreDatabase = DataFunction()
     let server = Server()
+    let locationManager = CLLocationManager()
     
     lazy var map: MKMapView = {
         let map = MKMapView()
@@ -63,6 +64,7 @@ class MapView: UIView {
         self.backgroundColor = .clear
         setSubviews()
         activateLayouts()
+        setUserLocation()
     }
 
     required init?(coder: NSCoder) {
@@ -70,7 +72,23 @@ class MapView: UIView {
     }
 
     
-    /// That function randoms position and adds annotation in the given area.
+    func setUserLocation() {
+        map.showsUserLocation = true
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+
+            let location: CLLocationCoordinate2D = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 55.754316, longitude: 37.619521)
+            let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
+            let region = MKCoordinateRegion(center: location, span: span)
+            map.setRegion(region, animated: true)
+        }
+    }
+    
+    /// That function adds Points from [Points] and store theit IDs in Set.
     func addAnnotation(points: [Points]) {
         for point in points {
             guard trashBinsID.contains(point.id ?? "") == false else { return }
@@ -87,9 +105,6 @@ class MapView: UIView {
                 // This force unwrap is not good.
                 bin.types.append(TrashType(rawValue: type)!)
             }
-
-            // Why should I store them?
-//            trashBins.append(bin)
             
             DispatchQueue.main.async {
                 self.map.addAnnotation(bin)
@@ -102,7 +117,7 @@ class MapView: UIView {
     func draggedView(_ sender:UIPanGestureRecognizer){
         self.bringSubviewToFront(pinAnnotation)
         let translation = sender.translation(in: self)
-        
+//        centerCoordinate = MainConstants.screenHeight + pinAnnotation.frame.height/2
         let condition_1 = pinAnnotation.center.y <= centerCoordinate - 190
         let condition_2 = pinAnnotation.center.y >= centerCoordinate - 700
         if condition_1 && condition_2 {
@@ -126,6 +141,9 @@ class MapView: UIView {
     
     func setRightPosition(){
         let middle: CGFloat = (190.0 + 500.0)/2.0
+        print("setRightPosition")
+        print(self.pinAnnotation.center.y)
+        print(centerCoordinate-pinAnnotation.center.y)
         switch centerCoordinate-pinAnnotation.center.y {
         case 0...180:
             setClosedPosition()
@@ -137,6 +155,7 @@ class MapView: UIView {
     }
     
     func setClosedPosition() {
+        print("setClosedPosition")
         addPointView.isHidden = false
         UIView.animate(withDuration: 0.1, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
@@ -147,6 +166,7 @@ class MapView: UIView {
     
     func setBottomPosition() {
         self.layoutIfNeeded()
+        print("setBottomPosition")
         UIView.animate(withDuration: 0.2, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
                                                 y: self.centerCoordinate-190)
@@ -154,6 +174,7 @@ class MapView: UIView {
         }, completion: { (_) in
             self.addPointView.isHidden = true
             Vibration.soft()
+            print(self.pinAnnotation.center.y)
         })
     }
     

@@ -149,6 +149,23 @@ class AddPointController: UIViewController {
         view.backgroundColor = Colors.background
         setSubviews()
         activateLayouts()
+        setUserLocation()
+    }
+    
+    func setUserLocation() {
+        map.showsUserLocation = true
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+
+            let location: CLLocationCoordinate2D = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 55.754316, longitude: 37.619521)
+            let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
+            let region = MKCoordinateRegion(center: location, span: span)
+            map.setRegion(region, animated: true)
+        }
     }
     
     @objc
