@@ -104,7 +104,7 @@ class AddTrashController: UIViewController {
 
     
     @objc
-    func Close(){
+    func close(){
         if (materialsCollection.isHidden) {
             addTrashView.isHidden = true
             materialsCollection.isHidden = false
@@ -121,13 +121,16 @@ class AddTrashController: UIViewController {
     func add(){
         if (materialsCollection.isHidden) {
             Vibration.light()
-            let txt = addTrashView.weightView.textView.text.split(separator: " ")
-            let weight: Int = Int(txt[0]) ?? 0
-            DataFunction().addData(loggedSize: weight, material: currentPage, date: Date().onlyDate)
-//            Call circle animation function here also.
-            dismiss(animated: true, completion: {() in
-                self.statsDelegate?.update()
-                self.recyclingDelegate?.update(addWeight: weight)
+            button.tap(completion: { (_) in
+                let txt = self.addTrashView.weightView.textView.text.split(separator: " ")
+                let weight: Int = Int(txt[0]) ?? 0
+                DataFunction().addData(loggedSize: weight, material: self.currentPage, date: Date().onlyDate)
+                
+    //            Call circle animation function here also.
+                self.dismiss(animated: true, completion: {() in
+                    self.statsDelegate?.update()
+                    self.recyclingDelegate?.update(addWeight: weight)
+                })
             })
         } else {
             Vibration.soft()
@@ -194,7 +197,7 @@ extension AddTrashController {
         whiteBGView.addSubview(pager)
         whiteBGView.addSubview(addTrashView)
         
-        backButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(Close)))
+        backButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(close)))
         button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(add)))
     }
     

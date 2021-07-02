@@ -222,8 +222,11 @@ class AddPointController: UIViewController {
         server.createNewPoint(forCoorinate: settedLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
                               withMaterials: Array(selectedMaterials),
                               andImages: uploadedImages)
-        dismiss(animated: true, completion: nil)
-        delegate?.showPopUp()
+        
+        button.tap(completion: { (_) in
+            self.dismiss(animated: true, completion: nil)
+            self.delegate?.showPopUp()
+        })
     }
     
     

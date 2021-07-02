@@ -44,15 +44,17 @@ extension UIView {
     }
     
     
-    func withDashedBorder(lineWidth width: CGFloat, withColor color: UIColor, lineDashesPattern pattern: [NSNumber], Y: CGFloat) {
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.strokeColor = color.cgColor
-        shapeLayer.lineWidth = width
-        shapeLayer.lineDashPattern = pattern
-        let path = CGMutablePath()
-        path.addLines(between: [CGPoint(x: 0, y: Int(Y)),
-                                CGPoint(x: 215, y: Int(Y))])
-        shapeLayer.path = path
-        layer.addSublayer(shapeLayer)
+    func tap(completion: @escaping(_ completion: Bool) -> Void) {
+        UIView.animate(withDuration: 0.06, animations: {
+            self.transform = CGAffineTransform.init(scaleX: 0.92, y: 0.92)
+            self.alpha = 0.86
+        }, completion: { (_) in
+            UIView.animate(withDuration: 0.06, animations: {
+                self.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+                self.alpha = 1
+            }, completion: { (_) in
+                completion(true)
+            })
+        })
     }
 }

@@ -51,7 +51,9 @@ class RecyclingView: UIView {
     
     @objc
     func add(){
-        delegate?.Add()
+        button.tap(completion: { (_) in
+            self.delegate?.Add()
+        })
     }
 }
 

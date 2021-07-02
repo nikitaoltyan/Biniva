@@ -85,10 +85,12 @@ class PointAddedPopUpController: UIViewController {
     @objc
     func close() {
         Vibration.soft()
-        UIView.animate(withDuration: 0.1, animations: {
-            self.view.backgroundColor = .clear
-        }, completion: { (_) in
-            self.dismiss(animated: true, completion: nil)
+        addButton.tap(completion: { (_) in
+            UIView.animate(withDuration: 0.1, animations: {
+                self.view.backgroundColor = .clear
+            }, completion: { (_) in
+                self.dismiss(animated: true, completion: nil)
+            })
         })
     }
 }
