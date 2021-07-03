@@ -9,6 +9,8 @@ import UIKit
 
 class Onboarding_5_Cell: UICollectionViewCell {
     
+    let location = Location()
+    
     let titleBlack: UILabel = {
         let label = UILabel()
             .with(autolayout: false)
@@ -79,17 +81,18 @@ class Onboarding_5_Cell: UICollectionViewCell {
     @objc
     func buttonTap() {
         print("Ask about geolocations")
-//        button.tap(completion: { (_) in
-//            self.delegate?.next(slide: 5)
-//        })
+        button.tap(completion: { (_) in
+            self.location.requestUserLocation(completion: { (result) in
+                print("After requesting user location got: \(result)")
+                self.delegate?.finish()
+            })
+        })
     }
     
     @objc
     func skipTap() {
         print("End onboarding")
-//        button.tap(completion: { (_) in
-//            self.delegate?.next(slide: 5)
-//        })
+        delegate?.finish()
     }
 }
 

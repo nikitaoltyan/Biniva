@@ -9,6 +9,8 @@ import UIKit
 
 class Onboarding_4_Cell: UICollectionViewCell {
     
+    let notifications = Notifications()
+    
     let titleBlack: UILabel = {
         let label = UILabel()
             .with(autolayout: false)
@@ -81,16 +83,23 @@ class Onboarding_4_Cell: UICollectionViewCell {
     @objc
     func buttonTap() {
         print("Ask about notifications")
-//        button.tap(completion: { (_) in
-//            self.delegate?.next(slide: 5)
+        button.tap(completion: { (_) in } )
+        notifications.requestAuthorization(completion: { (_) in
+            print("before deleagate")
+            DispatchQueue.main.async {
+                self.delegate?.next(slide: 4)
+            }
+//            self.delegate?.next(slide: 4)
+        })
+//            self.notifications.requestAuthorization(completion: { (_) in
+//                self.delegate?.next(slide: 4)
+//            })
 //        })
     }
     
     @objc
     func skipTap() {
-        button.tap(completion: { (_) in
-            self.delegate?.next(slide: 4)
-        })
+        self.delegate?.next(slide: 4)
     }
 }
 

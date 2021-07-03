@@ -111,6 +111,7 @@ class ProgressView: UIView {
     }
     
     func update(addWeight weight: Int){
+        print("current value of Progress View before adding: \(currentValue)")
         let add = CGFloat(weight)/2000.0
         animate(addValue: add)
         currentValue += add

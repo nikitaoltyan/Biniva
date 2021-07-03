@@ -9,6 +9,7 @@ import UIKit
 
 protocol OnbordingDelegate {
     func next(slide: Int)
+    func finish()
 }
 
 class OnboardingController: UIViewController {
@@ -76,12 +77,10 @@ extension OnboardingController: UICollectionViewDelegate, UICollectionViewDataSo
             return cell
         case 3:
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_4_Cell", for: indexPath) as! Onboarding_4_Cell
-            cell.backgroundColor = .blue
             cell.delegate = self
             return cell
         default:
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_5_Cell", for: indexPath) as! Onboarding_5_Cell
-            cell.backgroundColor = .gray
             cell.delegate = self
             return cell
         }
@@ -102,6 +101,13 @@ extension OnboardingController: OnbordingDelegate {
         collection.scrollToItem(at: indexPath, at: .right, animated: true)
         collection.isPagingEnabled = false
         collection.reloadItems(at: [IndexPath(item: slide, section: 0)])
+    }
+    
+    func finish() {
+        Defaults.setHasLaunched(true)
+        let newVC = RecyclingController()
+        newVC.modalPresentationStyle = .fullScreen
+        present(newVC, animated: true, completion: nil)
     }
 }
 

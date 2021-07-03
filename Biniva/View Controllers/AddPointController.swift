@@ -12,6 +12,7 @@ import CoreLocation
 class AddPointController: UIViewController {
 
     let functions = MaterialFunctions()
+    let locationManager = CLLocationManager()
     let server = Server()
     
     let scrollView: UIScrollView = {
@@ -135,7 +136,6 @@ class AddPointController: UIViewController {
         return view
     }()
     
-    let locationManager = CLLocationManager()
     var currentAnnotation: MKPointAnnotation?
     
     var settedLocation: CLLocationCoordinate2D?
@@ -161,8 +161,9 @@ class AddPointController: UIViewController {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
 
-            let location: CLLocationCoordinate2D = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 55.754316, longitude: 37.619521)
-            let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
+            let location: CLLocationCoordinate2D = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 55.754316, longitude: 37.619521) // Cremlin I guess
+            let span = MKCoordinateSpan(latitudeDelta: 0.004,
+                                        longitudeDelta: 0.004) // Around 400x400 meters
             let region = MKCoordinateRegion(center: location, span: span)
             map.setRegion(region, animated: true)
         }
@@ -371,17 +372,17 @@ extension AddPointController {
             map.heightAnchor.constraint(equalToConstant: map.frame.height),
             
             adressLabel.topAnchor.constraint(equalTo: map.bottomAnchor, constant: 18),
-            adressLabel.leftAnchor.constraint(equalTo: mainTitle.leftAnchor),
+            adressLabel.leftAnchor.constraint(equalTo: map.leftAnchor),
             
             materialsLabel.topAnchor.constraint(equalTo: adressLabel.bottomAnchor, constant: 44),
-            materialsLabel.leftAnchor.constraint(equalTo: mainTitle.leftAnchor),
+            materialsLabel.leftAnchor.constraint(equalTo: map.leftAnchor),
             
             materialCollection.topAnchor.constraint(equalTo: materialsLabel.bottomAnchor, constant: 6),
             materialCollection.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             materialCollection.heightAnchor.constraint(equalToConstant: materialCollection.frame.height),
             materialCollection.widthAnchor.constraint(equalToConstant: materialCollection.frame.width),
             
-            photoLabel.topAnchor.constraint(equalTo: materialCollection.bottomAnchor, constant: 30),
+            photoLabel.topAnchor.constraint(equalTo: map.bottomAnchor, constant: 30),
             photoLabel.leftAnchor.constraint(equalTo: mainTitle.leftAnchor),
             
             photoCollection.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: 6),

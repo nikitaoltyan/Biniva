@@ -64,7 +64,7 @@ class Onboarding_3_Cell: UICollectionViewCell {
         self.backgroundColor = Colors.background
         setSubviews()
         activateLayouts()
-        progressView.update(addWeight: 1095)
+        progressView.update(addWeight: 995)
     }
     
     required init?(coder: NSCoder) {

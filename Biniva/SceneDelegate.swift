@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                window.rootViewController = RecyclingController()
                 window.rootViewController = OnboardingController()// Should be changed
             } else {
-                window.rootViewController = NewOnboardingController()
+                window.rootViewController = OnboardingController()
             }
             self.window = window
             window.makeKeyAndVisible()
