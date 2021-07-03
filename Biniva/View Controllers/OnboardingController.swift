@@ -68,12 +68,10 @@ extension OnboardingController: UICollectionViewDelegate, UICollectionViewDataSo
             return cell
         case 1:
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_2_Cell", for: indexPath) as! Onboarding_2_Cell
-            cell.backgroundColor = .orange
             cell.delegate = self
             return cell
         case 2:
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_3_Cell", for: indexPath) as! Onboarding_3_Cell
-            cell.backgroundColor = .purple
             cell.delegate = self
             return cell
         case 3:
@@ -98,7 +96,7 @@ extension OnboardingController: UICollectionViewDelegate, UICollectionViewDataSo
 extension OnboardingController: OnbordingDelegate {
 
     func next(slide: Int) {
-        print("next slide")
+        Vibration.soft()
         collection.isPagingEnabled = true
         let indexPath = IndexPath(item: slide, section: 0)
         collection.scrollToItem(at: indexPath, at: .right, animated: true)

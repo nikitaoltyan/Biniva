@@ -12,6 +12,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
     let imageView: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 550))
             .with(autolayout: false)
+        image.image = UIImage(named: "onboarding_1")
         return image
     }()
     
@@ -24,7 +25,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
     lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.frame = self.gradientView.frame
-        gradient.colors = [UIColor.orange.cgColor,
+        gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor,
                            Colors.background.cgColor]
         gradient.startPoint = CGPoint(x: 0.5, y: 0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1)
@@ -150,12 +151,12 @@ extension Onboarding_1_Cell {
             gradientView.heightAnchor.constraint(equalToConstant: gradientView.frame.height),
             
             titleBlack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            titleBlack.bottomAnchor.constraint(equalTo: gradientView.bottomAnchor),
+            titleBlack.topAnchor.constraint(equalTo: gradientView.bottomAnchor, constant: -5),
             
             titleGreen.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             titleGreen.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: 0),
             
-            subtitleGray.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: 20),
+            subtitleGray.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: 17),
             subtitleGray.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 45),
             subtitleGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -45),
             

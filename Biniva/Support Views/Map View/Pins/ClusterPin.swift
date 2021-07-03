@@ -28,19 +28,6 @@ class ClusterPin: MKAnnotationView {
             image = drawText(count: totalBins)
         }
         
-//        if let cluster = annotation as? MKClusterAnnotation {
-//            let totalBikes = cluster.memberAnnotations.count
-//
-//            if count(cycleType: .plastic) > 0 {
-//                image = drawUnicycleCount(count: totalBikes)
-//            }
-//
-//            if count(cycleType: .plastic) > 0 {
-//                displayPriority = .defaultLow
-//            } else {
-//                displayPriority = .defaultHigh
-//            }
-//        }
     }
     
     private
@@ -97,17 +84,5 @@ class ClusterPin: MKAnnotationView {
             text.draw(in: rect, withAttributes: attributes)
         }
     }
-    
-    
-    private
-    func count() -> Int {
-        guard let cluster = annotation as? MKClusterAnnotation else { return 0  }
 
-        return cluster.memberAnnotations.filter { member -> Bool in
-            guard let _ = member as? TrashBin else {
-                print("Not member of TrashBin")
-                return false }
-            return true
-        }.count
-    }
 }
