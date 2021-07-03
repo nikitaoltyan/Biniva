@@ -8,7 +8,7 @@
 import UIKit
 
 protocol OnbordingDelegate {
-    func next()
+    func next(slide: Int)
 }
 
 class OnboardingController: UIViewController {
@@ -27,7 +27,12 @@ class OnboardingController: UIViewController {
         collection.showsHorizontalScrollIndicator = false
         collection.delegate = self
         collection.dataSource = self
+        
         collection.register(Onboarding_1_Cell.self, forCellWithReuseIdentifier: "Onboarding_1_Cell")
+        collection.register(Onboarding_2_Cell.self, forCellWithReuseIdentifier: "Onboarding_2_Cell")
+        collection.register(Onboarding_3_Cell.self, forCellWithReuseIdentifier: "Onboarding_3_Cell")
+        collection.register(Onboarding_4_Cell.self, forCellWithReuseIdentifier: "Onboarding_4_Cell")
+        collection.register(Onboarding_5_Cell.self, forCellWithReuseIdentifier: "Onboarding_5_Cell")
         
         return collection
     }()
@@ -47,7 +52,7 @@ class OnboardingController: UIViewController {
 extension OnboardingController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -56,9 +61,32 @@ extension OnboardingController: UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_1_Cell", for: indexPath) as! Onboarding_1_Cell
-        cell.delegate = self
-        return cell
+        switch indexPath.row {
+        case 0:
+            let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_1_Cell", for: indexPath) as! Onboarding_1_Cell
+            cell.delegate = self
+            return cell
+        case 1:
+            let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_2_Cell", for: indexPath) as! Onboarding_2_Cell
+            cell.backgroundColor = .orange
+            cell.delegate = self
+            return cell
+        case 2:
+            let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_3_Cell", for: indexPath) as! Onboarding_3_Cell
+            cell.backgroundColor = .purple
+            cell.delegate = self
+            return cell
+        case 3:
+            let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_4_Cell", for: indexPath) as! Onboarding_4_Cell
+            cell.backgroundColor = .blue
+            cell.delegate = self
+            return cell
+        default:
+            let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_5_Cell", for: indexPath) as! Onboarding_5_Cell
+            cell.backgroundColor = .gray
+            cell.delegate = self
+            return cell
+        }
     }
     
 }
@@ -69,8 +97,13 @@ extension OnboardingController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension OnboardingController: OnbordingDelegate {
 
-    func next() {
+    func next(slide: Int) {
         print("next slide")
+        collection.isPagingEnabled = true
+        let indexPath = IndexPath(item: slide, section: 0)
+        collection.scrollToItem(at: indexPath, at: .right, animated: true)
+        collection.isPagingEnabled = false
+        collection.reloadItems(at: [IndexPath(item: slide, section: 0)])
     }
 }
 

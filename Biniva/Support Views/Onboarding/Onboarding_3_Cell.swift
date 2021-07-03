@@ -1,5 +1,5 @@
 //
-//  Onboarding_2_Cell.swift
+//  Onboarding_3_Cell.swift
 //  Biniva
 //
 //  Created by Никита Олтян on 03.07.2021.
@@ -7,19 +7,13 @@
 
 import UIKit
 
-class Onboarding_2_Cell: UICollectionViewCell {
+class Onboarding_3_Cell: UICollectionViewCell {
     
-    let mapImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth - 60,
-                                              height: MainConstants.screenHeight/2 - 40))
+    let progressView: ProgressView = {
+        let height: CGFloat = 350
+        let view = ProgressView(frame: CGRect(x: 0, y: 0, width: height, height: height))
             .with(autolayout: false)
-            .with(borderWidth: 1, color: Colors.topGradient.cgColor)
-            .with(cornerRadius: 13)
-        image.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
-        image.layer.shadowRadius = 5
-        image.layer.shadowOpacity = 0.8
-        image.layer.shadowOffset = CGSize(width: 0, height: 2)
-        return image
+        return view
     }()
     
     let titleBlack: UILabel = {
@@ -29,7 +23,7 @@ class Onboarding_2_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 2)
             .with(fontName: "SFPro-Bold", size: 28)
-        label.text = "Находи пункты переработки с помощью"
+        label.text = "Отслеживай свое потребление и"
         return label
     }()
     
@@ -38,9 +32,9 @@ class Onboarding_2_Cell: UICollectionViewCell {
             .with(autolayout: false)
             .with(color: Colors.topGradient)
             .with(alignment: .center)
-            .with(numberOfLines: 1)
-            .with(fontName: "SFPro-Bold", size: 32)
-        label.text = "Biniva"
+            .with(numberOfLines: 2)
+            .with(fontName: "SFPro-Bold", size: 28)
+        label.text = "создавай полезные привычки"
         return label
     }()
     
@@ -51,7 +45,7 @@ class Onboarding_2_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro", size: 16)
-        label.text = "Карта, составленная самими пользователями!"
+        label.text = "В среднем каждый житель Земли создает 1,1 килограмм мусора в день. Давай снизим это число?"
         return label
     }()
     
@@ -70,17 +64,17 @@ class Onboarding_2_Cell: UICollectionViewCell {
         self.backgroundColor = Colors.background
         setSubviews()
         activateLayouts()
+        progressView.update(addWeight: 1095)
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
     
-    
     @objc
     func buttonTap() {
         button.tap(completion: { (_) in
-            self.delegate?.next(slide: 2)
+            self.delegate?.next(slide: 3)
         })
     }
 }
@@ -88,9 +82,9 @@ class Onboarding_2_Cell: UICollectionViewCell {
 
 
 
-extension Onboarding_2_Cell {
+extension Onboarding_3_Cell {
     func setSubviews() {
-        self.addSubview(mapImage)
+        self.addSubview(progressView)
         self.addSubview(titleBlack)
         self.addSubview(titleGreen)
         self.addSubview(subtitleGray)
@@ -101,19 +95,20 @@ extension Onboarding_2_Cell {
     
     func activateLayouts() {
         NSLayoutConstraint.activate([
-            mapImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 75),
-            mapImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            mapImage.widthAnchor.constraint(equalToConstant: mapImage.frame.width),
-            mapImage.heightAnchor.constraint(equalToConstant: mapImage.frame.height),
+            progressView.topAnchor.constraint(equalTo: self.topAnchor, constant: 75),
+            progressView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            progressView.widthAnchor.constraint(equalToConstant: progressView.frame.width),
+            progressView.heightAnchor.constraint(equalToConstant: progressView.frame.height),
             
-            titleBlack.topAnchor.constraint(equalTo: mapImage.bottomAnchor, constant: 60),
+            titleBlack.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 60),
             titleBlack.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22),
             titleBlack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -22),
             
-            titleGreen.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: 10),
-            titleGreen.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 5),
+            titleGreen.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: 20),
+            titleGreen.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22),
+            titleGreen.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -22),
             
-            subtitleGray.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: 25),
+            subtitleGray.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: 30),
             subtitleGray.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 45),
             subtitleGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -45),
             
