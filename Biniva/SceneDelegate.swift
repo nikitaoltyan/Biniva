@@ -21,8 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             let hasLaunched = UserDefaults.standard.bool(forKey: "hasLaunched")
             if (hasLaunched) {
-//                window.rootViewController = RecyclingController()
-                window.rootViewController = OnboardingController()// Should be changed
+                window.rootViewController = RecyclingController()
+//                window.rootViewController = OnboardingController()// Should be changed
             } else {
                 window.rootViewController = OnboardingController()
             }

@@ -23,17 +23,11 @@
 		5C25D8A7263693A900D2206E /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C25D8A6263693A900D2206E /* StatsCell.swift */; };
 		5C25D8AC2636BB9B00D2206E /* MaterialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C25D8AB2636BB9B00D2206E /* MaterialData.swift */; };
 		5C2A670E2667888500772674 /* CoordinateAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A670D2667888500772674 /* CoordinateAnnotation.swift */; };
-		5C2E36B525D40CC500F92588 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E36B425D40CC500F92588 /* LogInController.swift */; };
 		5C3046DA25C02CA000BAFEEF /* View Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046D925C02CA000BAFEEF /* View Extension.swift */; };
-		5C3046E525C13B8E00BAFEEF /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046E425C13B8E00BAFEEF /* RegistrationController.swift */; };
-		5C3046EE25C13D9800BAFEEF /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046ED25C13D9800BAFEEF /* TextFieldCell.swift */; };
-		5C3046F625C13DAC00BAFEEF /* AddPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046F525C13DAC00BAFEEF /* AddPhotoCell.swift */; };
-		5C3046FC25C13DC100BAFEEF /* AddGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3046FB25C13DC100BAFEEF /* AddGoalCell.swift */; };
 		5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470025C140E100BAFEEF /* Label Extension.swift */; };
 		5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470525C1447D00BAFEEF /* TextView Extension.swift */; };
 		5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470A25C157C800BAFEEF /* TextField Extension.swift */; };
 		5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30472325C2A51E00BAFEEF /* SetResultView.swift */; };
-		5C30472925C2DC5C00BAFEEF /* EnableLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30472825C2DC5C00BAFEEF /* EnableLocationCell.swift */; };
 		5C36401625E64346003908B7 /* ProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C36401525E64346003908B7 /* ProfileInfoCell.swift */; };
 		5C3D533726301D0A00DA0AFB /* AddTrashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D533626301D0A00DA0AFB /* AddTrashView.swift */; };
 		5C3D533C2630564E00DA0AFB /* ExtraAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */; };
@@ -96,7 +90,6 @@
 		5CD557002652532F007B3D06 /* MaterialStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */; };
 		5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD5570426526946007B3D06 /* MaterialFunctions.swift */; };
 		5CE1B0282633DA5100549536 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE1B0272633DA5100549536 /* WeightView.swift */; };
-		5CE7218525A2047500ECE84F /* ProgressImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE7218425A2047500ECE84F /* ProgressImageView.swift */; };
 		5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDA06625DCF4A0009280D0 /* Array Extension.swift */; };
 		5CEE8C00266A166700EB6617 /* ClusterPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE8BFF266A166700EB6617 /* ClusterPin.swift */; };
 		5CEE8C02266A173200EB6617 /* TrashBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE8C01266A173200EB6617 /* TrashBin.swift */; };
@@ -156,18 +149,12 @@
 		5C25D8A6263693A900D2206E /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 		5C25D8AB2636BB9B00D2206E /* MaterialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialData.swift; sourceTree = "<group>"; };
 		5C2A670D2667888500772674 /* CoordinateAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateAnnotation.swift; sourceTree = "<group>"; };
-		5C2E36B425D40CC500F92588 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
 		5C3046D925C02CA000BAFEEF /* View Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Extension.swift"; sourceTree = "<group>"; };
 		5C3046DE25C06A3100BAFEEF /* Biniva.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Biniva.entitlements; sourceTree = "<group>"; };
-		5C3046E425C13B8E00BAFEEF /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
-		5C3046ED25C13D9800BAFEEF /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
-		5C3046F525C13DAC00BAFEEF /* AddPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoCell.swift; sourceTree = "<group>"; };
-		5C3046FB25C13DC100BAFEEF /* AddGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalCell.swift; sourceTree = "<group>"; };
 		5C30470025C140E100BAFEEF /* Label Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label Extension.swift"; sourceTree = "<group>"; };
 		5C30470525C1447D00BAFEEF /* TextView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextView Extension.swift"; sourceTree = "<group>"; };
 		5C30470A25C157C800BAFEEF /* TextField Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField Extension.swift"; sourceTree = "<group>"; };
 		5C30472325C2A51E00BAFEEF /* SetResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetResultView.swift; sourceTree = "<group>"; };
-		5C30472825C2DC5C00BAFEEF /* EnableLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableLocationCell.swift; sourceTree = "<group>"; };
 		5C36401525E64346003908B7 /* ProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoCell.swift; sourceTree = "<group>"; };
 		5C3D533626301D0A00DA0AFB /* AddTrashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrashView.swift; sourceTree = "<group>"; };
 		5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraAddCell.swift; sourceTree = "<group>"; };
@@ -236,7 +223,6 @@
 		5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatsCell.swift; sourceTree = "<group>"; };
 		5CD5570426526946007B3D06 /* MaterialFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialFunctions.swift; sourceTree = "<group>"; };
 		5CE1B0272633DA5100549536 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
-		5CE7218425A2047500ECE84F /* ProgressImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressImageView.swift; sourceTree = "<group>"; };
 		5CEDA06625DCF4A0009280D0 /* Array Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extension.swift"; sourceTree = "<group>"; };
 		5CEE8BFF266A166700EB6617 /* ClusterPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterPin.swift; sourceTree = "<group>"; };
 		5CEE8C01266A173200EB6617 /* TrashBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBin.swift; sourceTree = "<group>"; };
@@ -362,51 +348,6 @@
 			path = "Material Defaults";
 			sourceTree = "<group>";
 		};
-		5C2E36B325D40CA400F92588 /* LogIn Controller */ = {
-			isa = PBXGroup;
-			children = (
-				5C2E36B425D40CC500F92588 /* LogInController.swift */,
-			);
-			path = "LogIn Controller";
-			sourceTree = "<group>";
-		};
-		5C3046E225C13B3D00BAFEEF /* Registration */ = {
-			isa = PBXGroup;
-			children = (
-				5C3046E325C13B6C00BAFEEF /* Registration Controller */,
-				5C2E36B325D40CA400F92588 /* LogIn Controller */,
-			);
-			path = Registration;
-			sourceTree = "<group>";
-		};
-		5C3046E325C13B6C00BAFEEF /* Registration Controller */ = {
-			isa = PBXGroup;
-			children = (
-				5C3046E425C13B8E00BAFEEF /* RegistrationController.swift */,
-				5C3046EC25C13D7D00BAFEEF /* Cell */,
-				5C30471F25C2A4F100BAFEEF /* View */,
-			);
-			path = "Registration Controller";
-			sourceTree = "<group>";
-		};
-		5C3046EC25C13D7D00BAFEEF /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				5C3046ED25C13D9800BAFEEF /* TextFieldCell.swift */,
-				5C3046F525C13DAC00BAFEEF /* AddPhotoCell.swift */,
-				5C30472825C2DC5C00BAFEEF /* EnableLocationCell.swift */,
-				5C3046FB25C13DC100BAFEEF /* AddGoalCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		5C30471F25C2A4F100BAFEEF /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		5C454E5225BACF5B00966991 /* View Control */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,7 +377,6 @@
 		5C454E5C25BAD0EF00966991 /* Other Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5C3046E225C13B3D00BAFEEF /* Registration */,
 				5C454E6925BAD1DB00966991 /* Meeting Controller */,
 				5C454E5E25BAD11500966991 /* Add New Meeting Controller */,
 				5C454E6125BAD15500966991 /* Settings */,
@@ -554,7 +494,6 @@
 		5C454E6C25BAD24600966991 /* General Views */ = {
 			isa = PBXGroup;
 			children = (
-				5CE7218425A2047500ECE84F /* ProgressImageView.swift */,
 				5C6C89EF25AF41F400D55A16 /* ButtonView.swift */,
 				5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */,
 				5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */,
@@ -1031,7 +970,6 @@
 				5C5ED19A2659386B00084458 /* DefaultPins.swift in Sources */,
 				5CAF7D53262C7A5700249CC6 /* TopView.swift in Sources */,
 				5CF90C51262EA3A000127E4D /* AddTrashController.swift in Sources */,
-				5C3046F625C13DAC00BAFEEF /* AddPhotoCell.swift in Sources */,
 				5C25D8A7263693A900D2206E /* StatsCell.swift in Sources */,
 				5C087034262738EB0057E840 /* CoreDataFunction.swift in Sources */,
 				5C64D790269047860013F084 /* Onboarding_5_Cell.swift in Sources */,
@@ -1044,7 +982,6 @@
 				5C64D78C269047660013F084 /* Onboarding_3_Cell.swift in Sources */,
 				5CB6A23425C4638900EC4B3A /* EmptyMeetingsCell.swift in Sources */,
 				5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */,
-				5C3046EE25C13D9800BAFEEF /* TextFieldCell.swift in Sources */,
 				5C7D378A264CF80C00DFEBA7 /* EmptyStatsCell.swift in Sources */,
 				5C64D7922690B3DE0013F084 /* Notifications.swift in Sources */,
 				5C64D78A269047550013F084 /* Onboarding_2_Cell.swift in Sources */,
@@ -1055,8 +992,6 @@
 				5CC26A9C25CBF27F000501AD /* ItemView.swift in Sources */,
 				5C782CD4267A059900A853D5 /* Points+CoreDataClass.swift in Sources */,
 				5CC2DDD32590D13E009E9C73 /* SettingsCell.swift in Sources */,
-				5C3046E525C13B8E00BAFEEF /* RegistrationController.swift in Sources */,
-				5C3046FC25C13DC100BAFEEF /* AddGoalCell.swift in Sources */,
 				5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */,
 				5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */,
 				5C045BF725BFE25300E42843 /* Dictionary Extension.swift in Sources */,
@@ -1066,7 +1001,6 @@
 				5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */,
 				5C25D8AC2636BB9B00D2206E /* MaterialData.swift in Sources */,
 				5C087044262739E10057E840 /* Model+CoreDataProperties.swift in Sources */,
-				5C30472925C2DC5C00BAFEEF /* EnableLocationCell.swift in Sources */,
 				5CBB5102257D12160097F4BD /* MeetingViewController.swift in Sources */,
 				5CFB623E259B246800F1C8C7 /* AddMapCell.swift in Sources */,
 				5C5D03E925B1A71F0011AB9D /* InfoView.swift in Sources */,
@@ -1090,7 +1024,6 @@
 				5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */,
 				5C782CD5267A059900A853D5 /* Points+CoreDataProperties.swift in Sources */,
 				5C11455826612B9400F48626 /* MapView+Model.swift in Sources */,
-				5CE7218525A2047500ECE84F /* ProgressImageView.swift in Sources */,
 				5C3D533C2630564E00DA0AFB /* ExtraAddCell.swift in Sources */,
 				5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */,
 				5C64D78E269047760013F084 /* Onboarding_4_Cell.swift in Sources */,
@@ -1118,7 +1051,6 @@
 				5C64D7972690E6E20013F084 /* NotificationExampleView.swift in Sources */,
 				5C1BD66025D7CA770002A894 /* Material Defaults.swift in Sources */,
 				5C3D533726301D0A00DA0AFB /* AddTrashView.swift in Sources */,
-				5C2E36B525D40CC500F92588 /* LogInController.swift in Sources */,
 				5CFA1A3B25C99BD200587EC5 /* Defaults.swift in Sources */,
 				5CAF7D59262C7D0F00249CC6 /* ProgressView.swift in Sources */,
 				5CF2E64A255D946600B4EFE3 /* MeetingCell.swift in Sources */,

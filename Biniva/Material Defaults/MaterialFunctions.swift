@@ -34,9 +34,9 @@ class MaterialFunctions {
         }
         // Here we have dict with [MaterialID: ItsSize] and sum of all sizes.
         
-        while dict.count>0 {
+        while dict.count > 0 {
             let m = dict.max { a, b in a.value < b.value }
-            guard let max = m else { return []}
+            guard let max = m else { return [] }
             dict.removeValue(forKey: max.key)
             result.append((max.key, Double(max.value)/Double(sum)))
         }

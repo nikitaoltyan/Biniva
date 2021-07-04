@@ -11,9 +11,9 @@ import UIKit
 
 /// Пластик - 0
 /// Органика - 1
-/// Стекло - 2
-/// Бумага - 3
-/// Металл - 4
+/// Бумага - 2
+/// Металл - 3
+/// Стекло - 4
 /// Дерево - 5
 /// Ткань - 6
 /// Батарейки - 7
@@ -94,7 +94,7 @@ struct materials {
                                               materialColors.wood,
                                               materialColors.fabric,
                                               materialColors.battery]
-    static let id: Array<Int> = [0, 1, 3, 4, 2, 5, 6, 7]
+    static let id: Array<Int> = [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
 
