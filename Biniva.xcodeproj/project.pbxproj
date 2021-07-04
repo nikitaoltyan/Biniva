@@ -58,6 +58,7 @@
 		5C64D790269047860013F084 /* Onboarding_5_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64D78F269047860013F084 /* Onboarding_5_Cell.swift */; };
 		5C64D7922690B3DE0013F084 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64D7912690B3DE0013F084 /* Notifications.swift */; };
 		5C64D7952690B6460013F084 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64D7942690B6460013F084 /* Location.swift */; };
+		5C64D7972690E6E20013F084 /* NotificationExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64D7962690E6E20013F084 /* NotificationExampleView.swift */; };
 		5C6C2B022581477B00B653AD /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C2B012581477B00B653AD /* MessageCell.swift */; };
 		5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C89EF25AF41F400D55A16 /* ButtonView.swift */; };
 		5C6CDAAF26596990009F72D8 /* BottomPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6CDAAE26596990009F72D8 /* BottomPinView.swift */; };
@@ -197,6 +198,7 @@
 		5C64D78F269047860013F084 /* Onboarding_5_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding_5_Cell.swift; sourceTree = "<group>"; };
 		5C64D7912690B3DE0013F084 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		5C64D7942690B6460013F084 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		5C64D7962690E6E20013F084 /* NotificationExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExampleView.swift; sourceTree = "<group>"; };
 		5C6C2B012581477B00B653AD /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		5C6C89EF25AF41F400D55A16 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		5C6CDAAE26596990009F72D8 /* BottomPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPinView.swift; sourceTree = "<group>"; };
@@ -724,6 +726,7 @@
 				5C64D78B269047660013F084 /* Onboarding_3_Cell.swift */,
 				5C64D78D269047760013F084 /* Onboarding_4_Cell.swift */,
 				5C64D78F269047860013F084 /* Onboarding_5_Cell.swift */,
+				5C64D7962690E6E20013F084 /* NotificationExampleView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1112,6 +1115,7 @@
 				5C045BE825BC77B200E42843 /* Server.swift in Sources */,
 				5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */,
 				5CFB6239259A4DB100F1C8C7 /* AddOtherCell.swift in Sources */,
+				5C64D7972690E6E20013F084 /* NotificationExampleView.swift in Sources */,
 				5C1BD66025D7CA770002A894 /* Material Defaults.swift in Sources */,
 				5C3D533726301D0A00DA0AFB /* AddTrashView.swift in Sources */,
 				5C2E36B525D40CC500F92588 /* LogInController.swift in Sources */,

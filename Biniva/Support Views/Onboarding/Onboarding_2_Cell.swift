@@ -13,7 +13,7 @@ class Onboarding_2_Cell: UICollectionViewCell {
     
     let mapImage: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth - 60,
-                                              height: MainConstants.screenHeight/2 - 40))
+                                              height: MainConstants.screenHeight/2 - 60))
             .with(autolayout: false)
             .with(borderWidth: 1, color: Colors.topGradient.cgColor)
             .with(cornerRadius: 13)
@@ -67,7 +67,7 @@ class Onboarding_2_Cell: UICollectionViewCell {
             .with(autolayout: false)
             .with(color: Colors.nearBlack)
             .with(alignment: .center)
-            .with(numberOfLines: 2)
+            .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: 28)
         label.text = "Находи пункты переработки с помощью"
         return label
@@ -225,16 +225,17 @@ extension Onboarding_2_Cell {
             point_4.widthAnchor.constraint(equalToConstant: point_4.frame.width),
             point_4.heightAnchor.constraint(equalToConstant: point_4.frame.height),
             
-            titleBlack.topAnchor.constraint(equalTo: mapImage.bottomAnchor, constant: 60),
-            titleBlack.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22),
-            titleBlack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -22),
+            titleBlack.topAnchor.constraint(equalTo: mapImage.bottomAnchor, constant: 50),
+            titleBlack.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
+            titleBlack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
             
             titleGreen.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: 10),
-            titleGreen.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 5),
+            titleGreen.leftAnchor.constraint(equalTo: titleBlack.leftAnchor),
+            titleGreen.rightAnchor.constraint(equalTo: titleBlack.rightAnchor),
             
-            subtitleGray.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: 25),
-            subtitleGray.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 45),
-            subtitleGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -45),
+            subtitleGray.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: 20),
+            subtitleGray.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 25),
+            subtitleGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -25),
             
             button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -58),
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor),

@@ -10,7 +10,7 @@ import UIKit
 class Onboarding_1_Cell: UICollectionViewCell {
     
     let imageView: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 550))
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight/2+60))
             .with(autolayout: false)
         image.image = UIImage(named: "onboarding_1")
         return image

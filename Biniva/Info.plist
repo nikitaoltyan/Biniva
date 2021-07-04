@@ -26,10 +26,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Required to set the current user position to create Eco-Meeting</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Required to set the current user position to create Eco-Meeting</string>
+	<string>Required to set the current user position to create new BinPoints</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Pro-Italic.ttf</string>

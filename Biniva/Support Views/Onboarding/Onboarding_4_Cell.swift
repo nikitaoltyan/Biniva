@@ -11,12 +11,18 @@ class Onboarding_4_Cell: UICollectionViewCell {
     
     let notifications = Notifications()
     
+    let notificationExample: NotificationExampleView = {
+        let view = NotificationExampleView()
+            .with(autolayout: false)
+        return view
+    }()
+    
     let titleBlack: UILabel = {
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.nearBlack)
             .with(alignment: .center)
-            .with(numberOfLines: 2)
+            .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: 28)
         label.text = "Разрешить отправку уведомлений?"
         return label
@@ -74,10 +80,28 @@ class Onboarding_4_Cell: UICollectionViewCell {
         self.backgroundColor = Colors.background
         setSubviews()
         activateLayouts()
+        animate()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    
+    func animate() {
+        UIView.animate(withDuration: 0.5, delay: 2, options: .curveEaseIn, animations: {
+            self.notificationExample.transform = CGAffineTransform.init(translationX: 0, y: -20)
+        }, completion: { (_) in
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                self.notificationExample.transform = CGAffineTransform.init(translationX: 0, y: 2)
+            }, completion: { (_) in
+                UIView.animate(withDuration: 0.07, delay: 0, options: .curveLinear, animations: {
+                    self.notificationExample.transform = CGAffineTransform.init(translationX: 0, y: -2)
+                }, completion: { (_) in
+                    self.animate()
+                })
+            })
+        })
     }
     
     @objc
@@ -89,12 +113,7 @@ class Onboarding_4_Cell: UICollectionViewCell {
             DispatchQueue.main.async {
                 self.delegate?.next(slide: 4)
             }
-//            self.delegate?.next(slide: 4)
         })
-//            self.notifications.requestAuthorization(completion: { (_) in
-//                self.delegate?.next(slide: 4)
-//            })
-//        })
     }
     
     @objc
@@ -108,6 +127,7 @@ class Onboarding_4_Cell: UICollectionViewCell {
 
 extension Onboarding_4_Cell {
     func setSubviews() {
+        self.addSubview(notificationExample)
         self.addSubview(titleBlack)
         self.addSubview(titleGreen)
         self.addSubview(subtitleGray)
@@ -120,6 +140,11 @@ extension Onboarding_4_Cell {
     
     func activateLayouts() {
         NSLayoutConstraint.activate([
+            notificationExample.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
+            notificationExample.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            notificationExample.widthAnchor.constraint(equalToConstant: notificationExample.frame.width),
+            notificationExample.heightAnchor.constraint(equalToConstant: notificationExample.frame.height),
+            
             skipLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -50),
             skipLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
@@ -133,12 +158,12 @@ extension Onboarding_4_Cell {
             subtitleGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -45),
             
             titleGreen.bottomAnchor.constraint(equalTo: subtitleGray.topAnchor, constant: -38),
-            titleGreen.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22),
-            titleGreen.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -22),
+            titleGreen.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
+            titleGreen.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
             
             titleBlack.bottomAnchor.constraint(equalTo: titleGreen.topAnchor, constant: -38),
-            titleBlack.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22),
-            titleBlack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -22),
+            titleBlack.leftAnchor.constraint(equalTo: titleGreen.leftAnchor),
+            titleBlack.rightAnchor.constraint(equalTo: titleGreen.rightAnchor),
         ])
     }
 }

@@ -34,7 +34,7 @@ class Notifications {
         notificationContent.sound = .default
                         
         var datComp = DateComponents()
-        datComp.hour = 21
+        datComp.hour = 20
         datComp.minute = 01
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: datComp, repeats: true)

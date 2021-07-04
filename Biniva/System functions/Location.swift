@@ -11,8 +11,7 @@ class Location {
     
     let locationManager = CLLocationManager()
     
-    func requestUserLocation(completion: @escaping(_ success: Bool) -> Void) {
-        self.locationManager.requestAlwaysAuthorization()
+    func requestUserLocation(completion: @escaping(_ success:  Bool) -> Void) {
         self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
