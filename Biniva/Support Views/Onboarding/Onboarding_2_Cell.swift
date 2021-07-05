@@ -12,8 +12,15 @@ class Onboarding_2_Cell: UICollectionViewCell {
     let functions = MaterialFunctions()
     
     let mapImage: UIImageView = {
+        let imageHeight: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return MainConstants.screenHeight/2 - 20
+            case 736: return MainConstants.screenHeight/2 - 30
+            default: return MainConstants.screenHeight/2 - 60
+            }
+        }()
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth - 60,
-                                              height: MainConstants.screenHeight/2 - 60))
+                                              height: imageHeight))
             .with(autolayout: false)
             .with(borderWidth: 1, color: Colors.topGradient.cgColor)
             .with(cornerRadius: 13)
@@ -63,34 +70,53 @@ class Onboarding_2_Cell: UICollectionViewCell {
     }()
     
     let titleBlack: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 26
+            case 736: return 26
+            default: return 28
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro-Bold", size: 28)
+            .with(fontName: "SFPro-Bold", size: textSize)
         label.text = "Находи пункты переработки с помощью"
         return label
     }()
     
     let titleGreen: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 30
+            default: return 32
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.topGradient)
             .with(alignment: .center)
             .with(numberOfLines: 1)
-            .with(fontName: "SFPro-Bold", size: 32)
+            .with(fontName: "SFPro-Bold", size: textSize)
         label.text = "Biniva"
         return label
     }()
     
     let subtitleGray: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 14
+            default: return 16
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.darkGrayText)
             .with(alignment: .center)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro", size: 16)
+            .with(fontName: "SFPro", size: textSize)
         label.text = "Карта, составленная самими пользователями!"
         return label
     }()
@@ -199,8 +225,24 @@ extension Onboarding_2_Cell {
     }
     
     func activateLayouts() {
+        let mapTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 30
+            case 736: return 40
+            default: return 75
+            }
+        }()
+        
+        let buttonBottomConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return -24
+            case 736: return -35
+            default: return -58
+            }
+        }()
+        
         NSLayoutConstraint.activate([
-            mapImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 75),
+            mapImage.topAnchor.constraint(equalTo: self.topAnchor, constant: mapTopConstant),
             mapImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             mapImage.widthAnchor.constraint(equalToConstant: mapImage.frame.width),
             mapImage.heightAnchor.constraint(equalToConstant: mapImage.frame.height),
@@ -237,7 +279,7 @@ extension Onboarding_2_Cell {
             subtitleGray.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 25),
             subtitleGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -25),
             
-            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -58),
+            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: buttonBottomConstant),
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             button.widthAnchor.constraint(equalToConstant: button.frame.width),
             button.heightAnchor.constraint(equalToConstant: button.frame.height),

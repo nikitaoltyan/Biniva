@@ -18,34 +18,54 @@ class Onboarding_4_Cell: UICollectionViewCell {
     }()
     
     let titleBlack: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 26
+            case 736: return 26
+            default: return 28
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro-Bold", size: 28)
+            .with(fontName: "SFPro-Bold", size: textSize)
         label.text = "Разрешить отправку уведомлений?"
         return label
     }()
     
     let titleGreen: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 26
+            case 736: return 26
+            default: return 28
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.topGradient)
             .with(alignment: .center)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro-Bold", size: 28)
+            .with(fontName: "SFPro-Bold", size: textSize)
         label.text = "Они будут отправляться всего 1 раз в день, вечером"
         return label
     }()
     
     let subtitleGray: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 14
+            default: return 16
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.darkGrayText)
             .with(alignment: .center)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro", size: 16)
+            .with(fontName: "SFPro", size: textSize)
         label.text = "С уведомлением ты точно не забудешь записать весь свой мусор"
         return label
     }()
@@ -139,29 +159,60 @@ extension Onboarding_4_Cell {
     }
     
     func activateLayouts() {
+        let notificationTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 100
+            case 736: return 130
+            default: return 200
+            }
+        }()
+        
+        let skipBottomConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return -16
+            case 736: return -23
+            default: return -50
+            }
+        }()
+        
+        let buttonBottomConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return -12
+            default: return -17
+            }
+        }()
+        
+        let titlesBottomConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return -20
+            case 736: return -25
+            default: return -38
+            }
+        }()
+        
         NSLayoutConstraint.activate([
-            notificationExample.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
+            notificationExample.topAnchor.constraint(equalTo: self.topAnchor, constant: notificationTopConstant),
             notificationExample.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             notificationExample.widthAnchor.constraint(equalToConstant: notificationExample.frame.width),
             notificationExample.heightAnchor.constraint(equalToConstant: notificationExample.frame.height),
             
-            skipLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -50),
+            skipLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: skipBottomConstant),
             skipLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            button.bottomAnchor.constraint(equalTo: skipLabel.topAnchor, constant: -17),
+            button.bottomAnchor.constraint(equalTo: skipLabel.topAnchor, constant: buttonBottomConstant),
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             button.widthAnchor.constraint(equalToConstant: button.frame.width),
             button.heightAnchor.constraint(equalToConstant: button.frame.height),
             
-            subtitleGray.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -38),
+            subtitleGray.bottomAnchor.constraint(equalTo: button.topAnchor, constant: titlesBottomConstant),
             subtitleGray.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 45),
             subtitleGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -45),
             
-            titleGreen.bottomAnchor.constraint(equalTo: subtitleGray.topAnchor, constant: -38),
+            titleGreen.bottomAnchor.constraint(equalTo: subtitleGray.topAnchor, constant: titlesBottomConstant),
             titleGreen.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
             titleGreen.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
             
-            titleBlack.bottomAnchor.constraint(equalTo: titleGreen.topAnchor, constant: -38),
+            titleBlack.bottomAnchor.constraint(equalTo: titleGreen.topAnchor, constant: titlesBottomConstant),
             titleBlack.leftAnchor.constraint(equalTo: titleGreen.leftAnchor),
             titleBlack.rightAnchor.constraint(equalTo: titleGreen.rightAnchor),
         ])

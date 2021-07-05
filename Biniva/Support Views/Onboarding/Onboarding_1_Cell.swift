@@ -10,7 +10,14 @@ import UIKit
 class Onboarding_1_Cell: UICollectionViewCell {
     
     let imageView: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight/2+60))
+        let height: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return MainConstants.screenHeight/2+110
+            case 736: return MainConstants.screenHeight/2+110
+            default: return MainConstants.screenHeight/2+60
+            }
+        }()
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: height))
             .with(autolayout: false)
         image.image = UIImage(named: "onboarding_1")
         return image
@@ -33,34 +40,54 @@ class Onboarding_1_Cell: UICollectionViewCell {
     }()
     
     let titleBlack: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 26
+            case 736: return 26
+            default: return 28
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 1)
-            .with(fontName: "SFPro-Bold", size: 28)
+            .with(fontName: "SFPro-Bold", size: textSize)
         label.text = "Открой новый мир"
         return label
     }()
     
     let titleGreen: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 26
+            case 736: return 26
+            default: return 28
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.topGradient)
             .with(alignment: .center)
             .with(numberOfLines: 1)
-            .with(fontName: "SFPro-Bold", size: 28)
+            .with(fontName: "SFPro-Bold", size: textSize)
         label.text = "экологии"
         return label
     }()
     
     let subtitleGray: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 14
+            default: return 16
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.darkGrayText)
             .with(alignment: .center)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro", size: 16)
+            .with(fontName: "SFPro", size: textSize)
         label.text = "Сейчас самое время задуматься о том, сколько мы потребляем и что можем с этим сделать"
         return label
     }()
@@ -91,6 +118,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Semibold", size: 12)
+        label.isUserInteractionEnabled = true
         label.text = "Условиями"
         return label
     }()
@@ -115,6 +143,13 @@ class Onboarding_1_Cell: UICollectionViewCell {
             self.delegate?.next(slide: 1)
         })
     }
+    
+    @objc
+    func conditions() {
+        if let url = URL(string: "http://greener.tilda.ws/privacy_policy") {
+            UIApplication.shared.open(url)
+        }
+    }
 }
 
 
@@ -136,11 +171,36 @@ extension Onboarding_1_Cell {
         self.addSubview(conditionsLabel)
         
         button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(buttonTap)))
+        conditionsLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(conditions)))
     }
     
     func activateLayouts() {
+        let imageTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return -70
+            case 736: return -60
+            default: return 0
+            }
+        }()
+        
+        let buttonTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 20
+            case 736: return 26
+            default: return 40
+            }
+        }()
+        
+        let descTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 16
+            case 736: return 20
+            default: return 25
+            }
+        }()
+        
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: self.topAnchor),
+            imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: imageTopConstant),
             imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             imageView.heightAnchor.constraint(equalToConstant: imageView.frame.height),
             imageView.widthAnchor.constraint(equalToConstant: imageView.frame.width),
@@ -161,11 +221,11 @@ extension Onboarding_1_Cell {
             subtitleGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -45),
             
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            button.topAnchor.constraint(equalTo: subtitleGray.bottomAnchor, constant: 40),
+            button.topAnchor.constraint(equalTo: subtitleGray.bottomAnchor, constant: buttonTopConstant),
             button.widthAnchor.constraint(equalToConstant: button.frame.width),
             button.heightAnchor.constraint(equalToConstant: button.frame.height),
             
-            descGray.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 25),
+            descGray.topAnchor.constraint(equalTo: button.bottomAnchor, constant: descTopConstant),
             descGray.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
             descGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
             

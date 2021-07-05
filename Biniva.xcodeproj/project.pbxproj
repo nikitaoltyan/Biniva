@@ -58,7 +58,6 @@
 		5C6CDAAF26596990009F72D8 /* BottomPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6CDAAE26596990009F72D8 /* BottomPinView.swift */; };
 		5C782CD4267A059900A853D5 /* Points+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C782CD2267A059900A853D5 /* Points+CoreDataClass.swift */; };
 		5C782CD5267A059900A853D5 /* Points+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C782CD3267A059900A853D5 /* Points+CoreDataProperties.swift */; };
-		5C7C5E9E264ABDDE00B4FE8C /* NewOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */; };
 		5C7D378A264CF80C00DFEBA7 /* EmptyStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */; };
 		5C83A053255EB3CC005C2CAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A052255EB3CC005C2CAA /* Assets.xcassets */; };
 		5C83A05C255F9796005C2CAA /* SF-Pro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */; };
@@ -191,7 +190,6 @@
 		5C6CDAAE26596990009F72D8 /* BottomPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPinView.swift; sourceTree = "<group>"; };
 		5C782CD2267A059900A853D5 /* Points+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5C782CD3267A059900A853D5 /* Points+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOnboardingController.swift; sourceTree = "<group>"; };
 		5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStatsCell.swift; sourceTree = "<group>"; };
 		5C83A052255EB3CC005C2CAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C83A057255F959F005C2CAA /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro.ttf"; path = "../../../../../../Library/Fonts/SF-Pro.ttf"; sourceTree = "<group>"; };
@@ -588,7 +586,6 @@
 			children = (
 				5C45917D254D59D3005AE26C /* RecyclingController.swift */,
 				5CF90C50262EA3A000127E4D /* AddTrashController.swift */,
-				5C7C5E9D264ABDDE00B4FE8C /* NewOnboardingController.swift */,
 				5C454E2925B57B2000966991 /* OnboardingController.swift */,
 				5CD0B1312688A85E00267081 /* AddPointController.swift */,
 			);
@@ -1040,7 +1037,6 @@
 				5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */,
 				5CEE8C00266A166700EB6617 /* ClusterPin.swift in Sources */,
 				5CC12876265FFF8C0097ECDD /* MKMapView+Extension.swift in Sources */,
-				5C7C5E9E264ABDDE00B4FE8C /* NewOnboardingController.swift in Sources */,
 				5C08703D262739080057E840 /* Model.xcdatamodeld in Sources */,
 				5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */,
 				5CD0B1372689FFA600267081 /* UIImage+Extension.swift in Sources */,

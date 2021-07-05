@@ -17,34 +17,54 @@ class Onboarding_3_Cell: UICollectionViewCell {
     }()
     
     let titleBlack: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 26
+            case 736: return 26
+            default: return 28
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro-Bold", size: 28)
+            .with(fontName: "SFPro-Bold", size: textSize)
         label.text = "Отслеживай свое потребление и"
         return label
     }()
     
     let titleGreen: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 26
+            case 736: return 26
+            default: return 28
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.topGradient)
             .with(alignment: .center)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro-Bold", size: 28)
+            .with(fontName: "SFPro-Bold", size: textSize)
         label.text = "создавай полезные привычки"
         return label
     }()
     
     let subtitleGray: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 14
+            default: return 16
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.darkGrayText)
             .with(alignment: .center)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro", size: 16)
+            .with(fontName: "SFPro", size: textSize)
         label.text = "В среднем каждый житель Земли создает 1,1 килограмм мусора в день. Давай снизим это число?"
         return label
     }()
@@ -94,13 +114,45 @@ extension Onboarding_3_Cell {
     }
     
     func activateLayouts() {
+        let progressTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 25
+            case 736: return 40
+            default: return 70
+            }
+        }()
+        
+        let titleTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 0
+            case 736: return 10
+            default: return 27
+            }
+        }()
+        
+        let subtitleTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 15
+            case 736: return 20
+            default: return 30
+            }
+        }()
+        
+        let buttonBottomConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return -24
+            case 736: return -35
+            default: return -58
+            }
+        }()
+        
         NSLayoutConstraint.activate([
-            progressView.topAnchor.constraint(equalTo: self.topAnchor, constant: 70),
+            progressView.topAnchor.constraint(equalTo: self.topAnchor, constant: progressTopConstant),
             progressView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             progressView.widthAnchor.constraint(equalToConstant: progressView.frame.width),
             progressView.heightAnchor.constraint(equalToConstant: progressView.frame.height),
             
-            titleBlack.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 27),
+            titleBlack.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: titleTopConstant),
             titleBlack.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
             titleBlack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
             
@@ -108,11 +160,11 @@ extension Onboarding_3_Cell {
             titleGreen.leftAnchor.constraint(equalTo: titleBlack.leftAnchor),
             titleGreen.rightAnchor.constraint(equalTo: titleBlack.rightAnchor),
             
-            subtitleGray.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: 30),
+            subtitleGray.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: subtitleTopConstant),
             subtitleGray.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 25),
             subtitleGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -25),
             
-            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -58),
+            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: buttonBottomConstant),
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             button.widthAnchor.constraint(equalToConstant: button.frame.width),
             button.heightAnchor.constraint(equalToConstant: button.frame.height),
