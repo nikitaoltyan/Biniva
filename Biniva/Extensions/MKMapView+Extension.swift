@@ -20,11 +20,11 @@ extension MKMapView {
     }
 
     var bottomLeftCoordinate: CLLocationCoordinate2D {
-        return MKMapPoint(x: visibleMapRect.maxX, y: visibleMapRect.maxY).coordinate
+        return MKMapPoint(x: visibleMapRect.minX, y: visibleMapRect.maxY).coordinate
     }
 
     var bottomRightCoordinate: CLLocationCoordinate2D {
-        return MKMapPoint(x: visibleMapRect.minX, y: visibleMapRect.maxY).coordinate
+        return MKMapPoint(x: visibleMapRect.maxX, y: visibleMapRect.maxY).coordinate
     }
 
     /// - parameter delta: Measured in meaters.

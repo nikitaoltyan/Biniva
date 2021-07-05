@@ -13,7 +13,7 @@ class DefaultAnnotationView: MKAnnotationView {
     let functions = MaterialFunctions()
     static let ReuseID = "defaultAnnotation"
     
-    var types: [TrashType] = []
+    var types: [Int] = []
     var pointID: String?
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
@@ -53,13 +53,13 @@ class DefaultAnnotationView: MKAnnotationView {
         
         return renderer.image { (_) in
             // Fill full circle with wholeColor
-            let initColor: UIColor = functions.colorByRowValue(types[0].rawValue)
+            let initColor: UIColor = functions.colorByRowValue(types[0])
             initColor.setFill()
             UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: size, height: size)).fill()
 
             // Fill pie with fractionColor
             for (item, type) in types.enumerated() {
-                let fractionColor: UIColor = functions.colorByRowValue(type.rawValue)
+                let fractionColor: UIColor = functions.colorByRowValue(type)
                 fractionColor.setFill()
                 
                 let piePath = UIBezierPath()

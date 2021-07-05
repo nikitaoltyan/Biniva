@@ -22,11 +22,11 @@ class Server {
     /// - parameter radius: Should be in meters.
     /// - returns: Escaping parameter about function success.
     /// - warning: GeoPoints are stored in Points CoreModel and should be gotten from there.
-    func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D, radius: Double, notItPoints: [Points], result: @escaping(_ points: [Points]) -> Void) {
+    func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D, radius: Double, notInPoints: [Points], result: @escaping(_ points: [Points]) -> Void) {
         
         // First elements is added because of unebling to query empty notIt array in some cases.
         var notInGeohashes: [String] = [" "]
-        for point in notItPoints {
+        for point in notInPoints {
             guard let geohash = point.geohash else { return }
             notInGeohashes.append(geohash)
         }
@@ -124,7 +124,7 @@ class Server {
     
     fileprivate
     func addPointImage(forDocumentID documentID: String, images: [UIImage?], result: @escaping(_ strings: [String]) -> Void) {
-  
+        print("addPointImage for documentID: \(documentID)")
         let storageRef = storage.reference()
         var imageURLs: [String] = []
         for image in images {

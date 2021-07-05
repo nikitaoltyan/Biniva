@@ -91,7 +91,7 @@ class MapView: UIView {
     /// That function adds Points from [Points] and store theit IDs in Set.
     func addAnnotation(points: [Points]) {
         for point in points {
-            guard trashBinsID.contains(point.id ?? "") == false else { return }
+            guard trashBinsID.contains(point.id ?? "") == false else { continue }
             trashBinsID.insert(point.id ?? "")
             
             let coordinate = CLLocationCoordinate2D(latitude: point.latitude,
@@ -102,13 +102,12 @@ class MapView: UIView {
             
             guard let materials = point.materials else { return }
             for type in materials {
-                // This force unwrap is not good.
-                bin.types.append(TrashType(rawValue: type)!)
+                bin.types.append(type)
             }
             
-            DispatchQueue.main.async {
-                self.map.addAnnotation(bin)
-            }
+//            DispatchQueue.main.async {
+            self.map.addAnnotation(bin)
+//            }
         }
     }
     
@@ -123,7 +122,6 @@ class MapView: UIView {
         
         // Removing some glitch with pinAnnotation.center position for a while.
         if (pinAnnotation.isTouchedAlready == false) && (pinAnnotation.center.y == centerCoordinate) {
-            print("pinAnnotation.center.y == centerCoordinate")
             setBottomPosition()
             pinAnnotation.isTouchedAlready = true
         }
@@ -203,7 +201,7 @@ class MapView: UIView {
         }
         
         if (usedTopLeftCoordinate?.longitude ?? 90 > map.topLeftCoordinate.longitude) ||
-            (usedBottomRightCoordinate?.longitude ?? -90 < map.topRightCoordinate.longitude) ||
+            (usedBottomRightCoordinate?.longitude ?? -90 < map.bottomRightCoordinate.longitude) ||
             (usedTopLeftCoordinate?.latitude ?? -90 < map.topLeftCoordinate.latitude) ||
             (usedBottomRightCoordinate?.latitude ?? 90 > map.bottomRightCoordinate.latitude) {
             
@@ -232,11 +230,12 @@ class MapView: UIView {
     
     func getGeoPoints() {
         guard isLoadingDataNecessary() else { return }
+        print("isLoadingDataNecessary guard pass")
         
-        coreDatabase.getPointsInArea(topLeftX: map.topLeftCoordinate.longitude,
-                                     topRightX: map.topRightCoordinate.longitude,
-                                     topLeftY: map.topLeftCoordinate.latitude,
-                                     bottomLeftY: map.bottomLeftCoordinate.latitude,
+        coreDatabase.getPointsInArea(topLeftX: usedTopLeftCoordinate?.longitude ?? 0,
+                                     topRightX: usedBottomRightCoordinate?.longitude ?? 0,
+                                     topLeftY: usedTopLeftCoordinate?.latitude ?? 0,
+                                     bottomLeftY: usedBottomRightCoordinate?.latitude ?? 0,
                                      result: { (points) in
                                         
             self.addAnnotation(points: points)
@@ -244,7 +243,7 @@ class MapView: UIView {
             DispatchQueue.main.async {
                 self.server.getGeoPoints(centerCoordinate: self.map.region.center,
                                          radius: self.map.currentRadius(withDelta: 0),
-                                         notItPoints: points, result: { (serverPoint) in
+                                         notInPoints: points, result: { (serverPoint) in
                                             self.addAnnotation(points: serverPoint)
                 })
             }

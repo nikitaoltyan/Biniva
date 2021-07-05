@@ -9,7 +9,7 @@ import MapKit
 
 class TrashBin: NSObject, Decodable, MKAnnotation {
     
-    var types: [TrashType] = []
+    var types: [Int] = []
     var pointID: String?
     
     private var latitude: CLLocationDegrees = 0

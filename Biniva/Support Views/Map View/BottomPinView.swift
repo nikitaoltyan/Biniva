@@ -100,7 +100,7 @@ class BottomPinView: UIView {
     var leftTitleConstraint: NSLayoutConstraint?
     var leftAdressConstraint: NSLayoutConstraint?
     var topAdressConstraint: NSLayoutConstraint?
-    var types: [TrashType] = []
+    var types: [Int] = []
     var images: [String] = []
     var pointID: String?
     
@@ -123,7 +123,7 @@ class BottomPinView: UIView {
         fatalError()
     }
 
-    func setUp(trashTypes types: [TrashType], coordinate: CLLocationCoordinate2D) {
+    func setUp(trashTypes types: [Int], coordinate: CLLocationCoordinate2D) {
         print("Set up with types: \(types) and coordinate: \(coordinate)")
         // Add here translation from coordinate into adress.
         // Then update label and collection view with materials.
@@ -186,8 +186,8 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
         switch collectionView.tag {
         case 0:
             let cell = materialCollection.dequeueReusableCell(withReuseIdentifier: "MaterialPinCell", for: indexPath) as! MaterialPinCell
-            cell.backgroundColor = functions.colorByRowValue(types[indexPath.row].rawValue)
-            let useImage: UIImage = functions.iconByRowValue(types[indexPath.row].rawValue)
+            cell.backgroundColor = functions.colorByRowValue(types[indexPath.row])
+            let useImage: UIImage = functions.iconByRowValue(types[indexPath.row])
             let tintedImage = useImage.withRenderingMode(.alwaysTemplate)
             cell.image.image = tintedImage
             cell.image.tintColor = Colors.background
