@@ -20,28 +20,19 @@ class Server {
     
     /// - parameter center: the center coordinate of the showen mapView.
     /// - parameter radius: Should be in meters.
+    /// - parameter notInPoints: [Points] that already exist nad shouldn't be downloaded from the server.
     /// - returns: Escaping parameter about function success.
+    /// - warning: Firestore Query gets only maximum 10 array at once. So the function is divided.
     /// - warning: GeoPoints are stored in Points CoreModel and should be gotten from there.
-    func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D, radius: Double, notInPoints: [Points], result: @escaping(_ points: [Points]) -> Void) {
+    func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D,
+                      radius: Double,
+                      notInPoints: [Points],
+                      result: @escaping(_ points: [Points]) -> Void) {
         
         // First elements is added because of unebling to query empty notIt array in some cases.
-        var notInGeohashes: [String] = [" "]
-        for point in notInPoints {
-            guard let geohash = point.geohash else { return }
-            notInGeohashes.append(geohash)
-        }
+        let notInGeohashes: Array<[String]> = prepareGeohashes(forPoints: notInPoints)
         
-        let queryBounds = GFUtils.queryBounds(forLocation: center,
-                                              withRadius: radius)
-        
-        // Query only that geohashes that isn't storing.
-        let queries = queryBounds.map { bound -> Query in
-            return db.collection("points")
-                .whereField("geohash", notIn: notInGeohashes)
-                .order(by: "geohash")
-                .start(at: [bound.startValue])
-                .end(at: [bound.endValue])
-        }
+        let queries = prepareQuery(forLocation: center, withRadius: radius, geohashes: notInGeohashes)
         
         for query in queries {
             query.getDocuments(completion: { (snapshot, error) in
@@ -67,7 +58,53 @@ class Server {
                 }
             })
         }
+    }
+    
+    /// Function for preparing Geohashes for future extracting Queries.
+    /// - parameter points: [Points] whose geohashes we going to extract and use as filter.
+    /// - warning: Output is Array<[String]> because Firestore Query gets only maximum 10 count array at once.
+    fileprivate
+    func prepareGeohashes(forPoints points: [Points]) -> Array<[String]> {
+        var resultArray: Array<[String]> = []
+        var addArray: [String] = []
         
+        for point in points {
+            guard let geohash = point.geohash else { continue }
+            addArray.append(geohash)
+            
+            if addArray.count > 9 {
+                resultArray.append(addArray)
+                addArray.removeAll()
+            }
+        }
+        
+        return resultArray
+    }
+    
+    /// Function for preparing Queries for future extracting Points from the server.
+    /// - parameter geohashes: Array<[String]>  with arrays 10-size array of Geohashes that used as filter for future extraction.
+    fileprivate
+    func prepareQuery(forLocation center: CLLocationCoordinate2D,
+                      withRadius radius: Double,
+                      geohashes: Array<[String]>) -> [Query] {
+        let queryBounds = GFUtils.queryBounds(forLocation: center, withRadius: radius)
+        
+        var resultQuery: Set<Query> = []
+        
+        for part in geohashes {
+            // Query only that geohashes that isn't storing.
+            let queries = queryBounds.map { bound -> Query in
+                return db.collection("points")
+                    .whereField("geohash", notIn: part)
+                    .order(by: "geohash")
+                    .start(at: [bound.startValue])
+                    .end(at: [bound.endValue])
+            }
+            
+            resultQuery = resultQuery.union(queries)
+        }
+        
+        return Array(resultQuery) as [Query]
     }
     
     
@@ -112,6 +149,7 @@ class Server {
         var ref: DocumentReference? = nil
         ref = db.collection("points_moderation").addDocument(data: documentData) { (err) in
             guard (err == nil) else { return }
+            guard (images.count > 0) else { return }
             
             self.addPointImage(forDocumentID: ref!.documentID, images: images, result: { (imageURLs) in
                 self.db.collection("points_moderation").document(ref!.documentID).updateData([

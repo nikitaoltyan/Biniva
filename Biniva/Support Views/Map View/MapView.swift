@@ -117,7 +117,7 @@ class MapView: UIView {
         self.bringSubviewToFront(pinAnnotation)
         let translation = sender.translation(in: self)
 //        let condition = pinAnnotation.center.y >= MainConstants.screenHeight/2+50
-        let condition_1 = pinAnnotation.center.y <= centerCoordinate - 190
+        let condition_1 = pinAnnotation.center.y <= centerCoordinate - 170
         let condition_2 = pinAnnotation.center.y >= centerCoordinate - 700
         
         // Removing some glitch with pinAnnotation.center position for a while.

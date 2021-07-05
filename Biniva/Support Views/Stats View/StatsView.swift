@@ -164,7 +164,7 @@ class StatsView: UIView {
     
     @objc
     func openInst() {
-        let instagramHooks = "instagram://user?username=gr.ner"
+        let instagramHooks = "instagram://user?username=biniva_app"
         let instagramUrl = NSURL(string: instagramHooks)
         if UIApplication.shared.canOpenURL(instagramUrl! as URL) {
             print("Open Greener Inst page")

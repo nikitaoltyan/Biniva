@@ -215,10 +215,13 @@ class AddPointController: UIViewController {
             showAlert(withTitle: "Не выбраны материалы", andSubtitle: "Пожалуйста, выбери материалы, которые можно сдать. Это поможет другим пользователям.")
             return
         }
-        guard (uploadedImages.count > 0) else {
-            showAlert(withTitle: "Не загружены фото", andSubtitle: "Пожалуйста, загрузи фото места переработки. Это поможет другим пользователям проще найти это место.")
-            return
-        }
+        
+//        Commented it because of some distant points adding without photos.
+//        guard (uploadedImages.count > 0) else {
+//            showAlert(withTitle: "Не загружены фото", andSubtitle: "Пожалуйста, загрузи фото места переработки. Это поможет другим пользователям проще найти это место.")
+//            return
+//        }
+        
         print("Guard passed. Add new Point.")
         DispatchQueue.main.async {
             self.server.createNewPoint(forCoorinate: self.settedLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
