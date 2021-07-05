@@ -220,9 +220,11 @@ class AddPointController: UIViewController {
             return
         }
         print("Guard passed. Add new Point.")
-        server.createNewPoint(forCoorinate: settedLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                              withMaterials: Array(selectedMaterials),
-                              andImages: uploadedImages)
+        DispatchQueue.main.async {
+            self.server.createNewPoint(forCoorinate: self.settedLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                                       withMaterials: Array(self.selectedMaterials),
+                                       andImages: self.uploadedImages)
+        }
         
         button.tap(completion: { (_) in
             self.dismiss(animated: true, completion: nil)
@@ -382,8 +384,8 @@ extension AddPointController {
             materialCollection.heightAnchor.constraint(equalToConstant: materialCollection.frame.height),
             materialCollection.widthAnchor.constraint(equalToConstant: materialCollection.frame.width),
             
-            photoLabel.topAnchor.constraint(equalTo: map.bottomAnchor, constant: 30),
-            photoLabel.leftAnchor.constraint(equalTo: mainTitle.leftAnchor),
+            photoLabel.topAnchor.constraint(equalTo: materialCollection.bottomAnchor, constant: 30),
+            photoLabel.leftAnchor.constraint(equalTo: map.leftAnchor),
             
             photoCollection.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: 6),
             photoCollection.centerXAnchor.constraint(equalTo: view.centerXAnchor),
