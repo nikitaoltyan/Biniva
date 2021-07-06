@@ -115,6 +115,17 @@ extension WeightView: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        guard (textView.text.count > 0) else {
+            self.textView.text = "0 г"
+            return
+        }
+        guard (textView.text.contains("г") == false) else {
+            let txt = self.textView.text.split(separator: " ")
+            let weight: Int = Int(txt[0]) ?? 0
+            self.textView.text = "\(weight) г"
+            return
+        }
+        
         self.textView.text = "\(textView.text ?? "0") г"
     }
 }
