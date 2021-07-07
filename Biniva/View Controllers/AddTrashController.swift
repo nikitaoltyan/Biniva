@@ -13,6 +13,9 @@ protocol PushUpdateDelegate {
 }
 
 class AddTrashController: UIViewController {
+    
+    let analytics = ServerAnalytics()
+    let database = DataFunction()
 
     let backButton: UIImageView = {
         let scale: CGFloat = {
@@ -66,6 +69,7 @@ class AddTrashController: UIViewController {
         pager.numberOfPages = materials.enums.count
         pager.currentPageIndicatorTintColor = Colors.darkGrayText
         pager.pageIndicatorTintColor = Colors.sliderGray
+        pager.addTarget(self, action: #selector(pageControlTapHandler(sender:)), for: .touchUpInside)
         return pager
     }()
     
@@ -102,6 +106,11 @@ class AddTrashController: UIViewController {
         ActivateLayouts()
     }
 
+    @objc
+    func pageControlTapHandler(sender:UIPageControl) {
+        let indexPath = IndexPath(item: sender.currentPage, section: 0)
+        materialsCollection.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
     
     @objc
     func close(){
@@ -124,7 +133,8 @@ class AddTrashController: UIViewController {
             button.tap(completion: { (_) in
                 let txt = self.addTrashView.weightView.textView.text.split(separator: " ")
                 let weight: Int = Int(txt[0]) ?? 0
-                DataFunction().addData(loggedSize: weight, material: self.currentPage, date: Date().onlyDate)
+                self.analytics.logAddMaterial(type: self.currentPage, size: weight)
+                self.database.addData(loggedSize: weight, material: self.currentPage, date: Date().onlyDate)
                 
     //            Call circle animation function here also.
                 self.dismiss(animated: true, completion: {() in

@@ -38,6 +38,7 @@ protocol TopViewDelegate {
 class RecyclingController: UIViewController {
     
     let server = Server()
+    let analytics = ServerAnalytics()
     
     let topView: TopView = {
         let view = TopView()
@@ -157,6 +158,7 @@ extension RecyclingController: SwitcherDelegate {
 
     
     func showMap() {
+        analytics.logOpenMap()
         Vibration.soft()
         view.layoutIfNeeded()
         UIView.animate(withDuration: 0.3, animations: {

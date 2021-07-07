@@ -12,6 +12,7 @@ import CoreLocation
 class AddPointController: UIViewController {
 
     let functions = MaterialFunctions()
+    let analytics = ServerAnalytics()
     let locationManager = CLLocationManager()
     let server = Server()
     
@@ -228,7 +229,7 @@ class AddPointController: UIViewController {
                                        withMaterials: Array(self.selectedMaterials),
                                        andImages: self.uploadedImages)
         }
-        
+        analytics.logAddPoint()
         button.tap(completion: { (_) in
             self.dismiss(animated: true, completion: nil)
             self.delegate?.showPopUp()

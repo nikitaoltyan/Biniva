@@ -14,6 +14,8 @@ protocol OnbordingDelegate {
 
 class OnboardingController: UIViewController {
     
+    let analytics = ServerAnalytics()
+    
     lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -43,6 +45,7 @@ class OnboardingController: UIViewController {
         view.backgroundColor = MainConstants.white
         setSubviews()
         activateLayouts()
+        analytics.logStartOnboarding()
     }
 }
 
@@ -104,6 +107,7 @@ extension OnboardingController: OnbordingDelegate {
     }
     
     func finish() {
+        analytics.logFinishOnboarding()
         Defaults.setHasLaunched(true)
         let newVC = RecyclingController()
         newVC.modalPresentationStyle = .fullScreen

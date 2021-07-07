@@ -14,6 +14,7 @@ class MapView: UIView {
     var model = MapView_Model()
     let coreDatabase = DataFunction()
     let server = Server()
+    let analytics = ServerAnalytics()
     let locationManager = CLLocationManager()
     
     lazy var map: MKMapView = {
@@ -267,6 +268,7 @@ extension MapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let view = view as? DefaultAnnotationView else { return }
         guard let annotation = view.annotation as? TrashBin else { return }
+        analytics.logPointTap()
         setBottomPosition()
         pinAnnotation.pointID = annotation.pointID
         pinAnnotation.setUp(trashTypes: annotation.types, coordinate: annotation.coordinate)

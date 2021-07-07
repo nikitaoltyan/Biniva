@@ -63,6 +63,7 @@
 		5C83A05C255F9796005C2CAA /* SF-Pro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */; };
 		5C83A060255F979A005C2CAA /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A057255F959F005C2CAA /* SF-Pro.ttf */; };
 		5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83A0792563AC58005C2CAA /* Main Constants.swift */; };
+		5C9A56BA2695E2E7000D3401 /* ServerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9A56B92695E2E7000D3401 /* ServerAnalytics.swift */; };
 		5C9F98AB262DDDDD00DFCFEA /* RecyclingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F98AA262DDDDD00DFCFEA /* RecyclingView.swift */; };
 		5C9F98B3262DE1E200DFCFEA /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F98B2262DE1E200DFCFEA /* StatsView.swift */; };
 		5CA776D22656B3C600EDAF47 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA776D12656B3C600EDAF47 /* MapView.swift */; };
@@ -195,6 +196,7 @@
 		5C83A057255F959F005C2CAA /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro.ttf"; path = "../../../../../../Library/Fonts/SF-Pro.ttf"; sourceTree = "<group>"; };
 		5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Italic.ttf"; path = "../../../../../../Library/Fonts/SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
 		5C83A0792563AC58005C2CAA /* Main Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main Constants.swift"; sourceTree = "<group>"; };
+		5C9A56B92695E2E7000D3401 /* ServerAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAnalytics.swift; sourceTree = "<group>"; };
 		5C9F98AA262DDDDD00DFCFEA /* RecyclingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingView.swift; sourceTree = "<group>"; };
 		5C9F98B2262DE1E200DFCFEA /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		5CA776D12656B3C600EDAF47 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				5C045BE725BC77B200E42843 /* Server.swift */,
+				5C9A56B92695E2E7000D3401 /* ServerAnalytics.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -970,6 +973,7 @@
 				5C25D8A7263693A900D2206E /* StatsCell.swift in Sources */,
 				5C087034262738EB0057E840 /* CoreDataFunction.swift in Sources */,
 				5C64D790269047860013F084 /* Onboarding_5_Cell.swift in Sources */,
+				5C9A56BA2695E2E7000D3401 /* ServerAnalytics.swift in Sources */,
 				5CC2DDCE2590A9D7009E9C73 /* SettingsController.swift in Sources */,
 				5CE1B0282633DA5100549536 /* WeightView.swift in Sources */,
 				5C2A670E2667888500772674 /* CoordinateAnnotation.swift in Sources */,
