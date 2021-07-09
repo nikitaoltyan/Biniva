@@ -28,6 +28,7 @@ extension MKMapView {
     }
 
     /// - parameter delta: Measured in meaters.
+    /// - returns: Visible radius of MapView (measured in meters)
     func currentRadius(withDelta delta: Double) -> Double {
         let topLeftLocation = CLLocation(latitude: topLeftCoordinate.latitude,
                                  longitude: topLeftCoordinate.longitude)

@@ -39,7 +39,7 @@ class Onboarding_5_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Разрешить использование Геопозиции?"
+        label.text = "Разрешить использовать Геопозицию?"
         return label
     }()
     
@@ -82,7 +82,7 @@ class Onboarding_5_Cell: UICollectionViewCell {
         let view = ButtonView()
             .with(autolayout: false)
         view.clipsToBounds = true
-        view.label.text = "Разрешить"
+        view.label.text = "Продолжить"
         return view
     }()
     

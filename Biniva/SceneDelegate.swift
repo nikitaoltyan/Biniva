@@ -30,6 +30,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.makeKeyAndVisible()
         }
         
+        UserDefaults.standard.setValue(nil, forKey: "topLeftCoordinate")
+        UserDefaults.standard.setValue(nil, forKey: "bottomRightCoordinate")
+        UserDefaults.standard.setValue(nil, forKey: "lastUpdateDate")
+        
         guard let _ = (scene as? UIWindowScene) else { return }
 //        print("Scene was connected")
     }

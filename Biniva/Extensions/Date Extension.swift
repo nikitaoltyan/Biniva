@@ -17,6 +17,19 @@ extension Date {
         return date
     }
     
+    /// Returns only a Date of the previous day.
+    /// - warning: Optional is already opened. So that can be today Date.
+    var dayBefore: Date {
+            return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+        }
+    
+    /// Returns only a Date of the next day.
+    /// - warning: Optional is already opened. So that can be today Date.
+    var dayAfter: Date {
+        return Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
+    }
+    
+    
     /// Returns the day of a month of the current Date.
     var day: String {
         let dateFormatter = DateFormatter()

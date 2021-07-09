@@ -74,7 +74,7 @@ class Onboarding_4_Cell: UICollectionViewCell {
         let view = ButtonView()
             .with(autolayout: false)
         view.clipsToBounds = true
-        view.label.text = "Разрешить"
+        view.label.text = "Продолжить"
         return view
     }()
     

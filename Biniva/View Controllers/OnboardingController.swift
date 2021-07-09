@@ -15,6 +15,7 @@ protocol OnbordingDelegate {
 class OnboardingController: UIViewController {
     
     let analytics = ServerAnalytics()
+    let userDefaults = Defaults()
     
     lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -108,7 +109,7 @@ extension OnboardingController: OnbordingDelegate {
     
     func finish() {
         analytics.logFinishOnboarding()
-        Defaults.setHasLaunched(true)
+        userDefaults.setHasLaunched(true)
         let newVC = RecyclingController()
         newVC.modalPresentationStyle = .fullScreen
         present(newVC, animated: true, completion: nil)

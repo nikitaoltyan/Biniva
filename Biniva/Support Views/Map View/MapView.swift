@@ -13,6 +13,7 @@ class MapView: UIView {
     
     var model = MapView_Model()
     let coreDatabase = DataFunction()
+    let userDefaults = Defaults()
     let server = Server()
     let analytics = ServerAnalytics()
     let locationManager = CLLocationManager()
@@ -25,7 +26,8 @@ class MapView: UIView {
         
         // There should be user's coordinate.
         let coordinate = CLLocationCoordinate2D(latitude: 55.794698, longitude: 37.929111)
-        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1200, longitudinalMeters: 1200)
+        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 800,
+                                            longitudinalMeters: 800)
         map.setRegion(viewRegion, animated: false)
         
         map.register(DefaultAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
@@ -65,7 +67,7 @@ class MapView: UIView {
         self.backgroundColor = .clear
         setSubviews()
         activateLayouts()
-        setUserLocation()
+//        setUserLocation()
     }
 
     required init?(coder: NSCoder) {
@@ -190,7 +192,7 @@ class MapView: UIView {
     }
     
     
-    
+    fileprivate
     func isLoadingDataNecessary() -> Bool {
         // Setting initial coordinate after first map movement.
         guard (isFirstInteraction == false) else {
@@ -229,6 +231,105 @@ class MapView: UIView {
     }
     
     
+    fileprivate
+    func isLoadingDataFromServerNecessary() -> Bool {
+        let (mainTopLeft, mainBottomRight, updateDate) = userDefaults.getLocation()
+        
+        guard (updateDate != nil) else {
+            print("The updateDate is nil")
+            DispatchQueue.main.async {
+                self.updatePoints()
+            }
+            return false
+        }
+        
+        guard let date = Date().onlyDate else { return false }
+        
+        guard (mainTopLeft.latitude != 0) && (mainTopLeft.longitude != 0) else {
+            print("The Date or Coordinates were not setted")
+            DispatchQueue.main.async {
+                self.updatePoints()
+            }
+            return false
+        }
+        
+        guard (updateDate == date) else {
+            print("The Date not equals Today's Date")
+            DispatchQueue.main.async {
+                self.updatePoints()
+            }
+            return false
+        }
+        
+//        print("mainTopLeft: \(mainTopLeft)")
+//        print("mainBottomRight: \(mainBottomRight)")
+//
+//        print("usedTopLeft: \(usedTopLeftCoordinate)")
+//        print("usedBottomRight: \(usedBottomRightCoordinate)")
+        
+        if (mainTopLeft.longitude > usedTopLeftCoordinate?.longitude ?? 90) ||
+            (mainBottomRight.longitude < usedBottomRightCoordinate?.longitude ?? -90) ||
+            (mainTopLeft.latitude < usedTopLeftCoordinate?.latitude ?? -90) ||
+            (mainBottomRight.latitude > usedBottomRightCoordinate?.latitude ?? 90) {
+            
+            if (mainTopLeft.longitude > usedTopLeftCoordinate?.longitude ?? 90) {
+                userDefaults.updateTopLeftLocationLongitude(withLongitude: usedTopLeftCoordinate?.longitude ?? 90)
+            }
+            
+            if (mainBottomRight.longitude < usedBottomRightCoordinate?.longitude ?? -90) {
+                userDefaults.updateBottomRightLocationLongitude(withLongitude: usedBottomRightCoordinate?.longitude ?? -90)
+            }
+            
+            if (mainTopLeft.latitude < usedTopLeftCoordinate?.latitude ?? -90) {
+                userDefaults.updateTopLeftLocationLatitude(withLatitude: usedTopLeftCoordinate?.latitude ?? -90)
+            }
+            
+            if (mainBottomRight.latitude > usedBottomRightCoordinate?.latitude ?? 90) {
+                userDefaults.updateBottomRightLocationLatitude(withLatitude: usedBottomRightCoordinate?.latitude ?? 90)
+            }
+            
+            print("Default area was extended")
+            
+            return true
+        } else {
+            return false
+        }
+        
+    }
+    
+    
+    fileprivate
+    func updatePoints() {
+        print("updatePoints")
+        // 0.01 = 1.11 km.
+        let delta: Double = 0.04 // Around 4.44 km. So the searching area is about 16 km^2
+        let setTopLeftCoordinate = CLLocationCoordinate2D(latitude: self.map.region.center.latitude + delta,
+                                                          longitude: self.map.region.center.longitude - delta)
+        let setBottomRightCoordinate = CLLocationCoordinate2D(latitude: self.map.region.center.latitude - delta,
+                                                              longitude: self.map.region.center.longitude + delta)
+        
+        userDefaults.setLocation(topLeftCoordinate: setTopLeftCoordinate,
+                                 bottomRightCoordinate: setBottomRightCoordinate)
+        
+        coreDatabase.getPointsInArea(topLeftX: setTopLeftCoordinate.longitude,
+                                     topRightX: setBottomRightCoordinate.longitude,
+                                     topLeftY: setTopLeftCoordinate.latitude,
+                                     bottomLeftY: setBottomRightCoordinate.latitude,
+                                     result: { (points) in
+                                        
+            self.addAnnotation(points: points)
+                                        
+            DispatchQueue.main.async {
+                self.server.getGeoPoints(centerCoordinate: self.map.region.center,
+                                         radius: self.map.currentRadius(withDelta: 4440),
+                                         notInPoints: points, result: { (serverPoint) in
+                                            self.addAnnotation(points: serverPoint)
+                })
+            }
+        })
+    }
+    
+    
     func getGeoPoints() {
         guard isLoadingDataNecessary() else { return }
         print("isLoadingDataNecessary guard pass")
@@ -240,7 +341,10 @@ class MapView: UIView {
                                      result: { (points) in
                                         
             self.addAnnotation(points: points)
+            guard self.isLoadingDataFromServerNecessary() else { return }
+            print("isLoadingDataFromServerNecessary guard pass")
                                         
+//          Now data is loading for all map visible region. But in the future it should be downloaded only for new extended region.
             DispatchQueue.main.async {
                 self.server.getGeoPoints(centerCoordinate: self.map.region.center,
                                          radius: self.map.currentRadius(withDelta: 0),
@@ -276,7 +380,17 @@ extension MapView: MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         // That function is called only when map movement is complited.
-        getGeoPoints()
+        // If user zoomed out in area with more than 17km radius it will zoom in it back.
+        if map.currentRadius(withDelta: 0) > 17000 {
+            let viewRegion = MKCoordinateRegion(center: self.map.region.center, latitudinalMeters: 15800,
+                                                longitudinalMeters: 15800)
+            map.setRegion(viewRegion, animated: true)
+        }
+        
+        // Updateing geoPoints only in the allowed area.
+        if map.currentRadius(withDelta: 0) < 17000 {
+            getGeoPoints()
+        }
     }
 }
 

@@ -68,6 +68,10 @@ class Server {
         var resultArray: Array<[String]> = []
         var addArray: [String] = []
         
+        guard points.count > 0 else {
+            return [[" "]]
+        }
+        
         for point in points {
             guard let geohash = point.geohash else { continue }
             addArray.append(geohash)
