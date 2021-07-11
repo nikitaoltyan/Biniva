@@ -20,24 +20,21 @@ class Server {
     
     /// - parameter center: the center coordinate of the showen mapView.
     /// - parameter radius: Should be in meters.
-    /// - parameter notInPoints: [Points] that already exist nad shouldn't be downloaded from the server.
     /// - returns: Escaping parameter about function success.
-    /// - warning: Firestore Query gets only maximum 10 array at once. So the function is divided.
     /// - warning: GeoPoints are stored in Points CoreModel and should be gotten from there.
     func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D,
                       radius: Double,
-                      notInPoints: [Points],
                       result: @escaping(_ points: [Points]) -> Void) {
         
         // First elements is added because of unebling to query empty notIt array in some cases.
-        let notInGeohashes: Array<[String]> = prepareGeohashes(forPoints: notInPoints)
         
-        let queries = prepareQuery(forLocation: center, withRadius: radius, geohashes: notInGeohashes)
+        let queries = prepareQuery(forLocation: center, withRadius: radius)
         
         for query in queries {
             query.getDocuments(completion: { (snapshot, error) in
                 guard let documents = snapshot?.documents else {
                     print("Unable to fetch snapshot data. \(String(describing: error))")
+                    result([])
                     return
                 }
                 guard documents.count > 0 else {
@@ -60,55 +57,20 @@ class Server {
         }
     }
     
-    /// Function for preparing Geohashes for future extracting Queries.
-    /// - parameter points: [Points] whose geohashes we going to extract and use as filter.
-    /// - warning: Output is Array<[String]> because Firestore Query gets only maximum 10 count array at once.
-    fileprivate
-    func prepareGeohashes(forPoints points: [Points]) -> Array<[String]> {
-        var resultArray: Array<[String]> = []
-        var addArray: [String] = []
-        
-        guard points.count > 0 else {
-            return [[" "]]
-        }
-        
-        for point in points {
-            guard let geohash = point.geohash else { continue }
-            addArray.append(geohash)
-            
-            if addArray.count > 9 {
-                resultArray.append(addArray)
-                addArray.removeAll()
-            }
-        }
-        
-        return resultArray
-    }
-    
-    /// Function for preparing Queries for future extracting Points from the server.
-    /// - parameter geohashes: Array<[String]>  with arrays 10-size array of Geohashes that used as filter for future extraction.
+
     fileprivate
     func prepareQuery(forLocation center: CLLocationCoordinate2D,
-                      withRadius radius: Double,
-                      geohashes: Array<[String]>) -> [Query] {
+                      withRadius radius: Double) -> [Query] {
         let queryBounds = GFUtils.queryBounds(forLocation: center, withRadius: radius)
         
-        var resultQuery: Set<Query> = []
-        
-        for part in geohashes {
-            // Query only that geohashes that isn't storing.
-            let queries = queryBounds.map { bound -> Query in
-                return db.collection("points")
-                    .whereField("geohash", notIn: part)
-                    .order(by: "geohash")
-                    .start(at: [bound.startValue])
-                    .end(at: [bound.endValue])
-            }
-            
-            resultQuery = resultQuery.union(queries)
+        let queries = queryBounds.map { bound -> Query in
+            return db.collection("points")
+                .order(by: "geohash")
+                .start(at: [bound.startValue])
+                .end(at: [bound.endValue])
         }
         
-        return Array(resultQuery) as [Query]
+        return queries
     }
     
     

@@ -17,6 +17,7 @@ class MapView: UIView {
     let server = Server()
     let analytics = ServerAnalytics()
     let locationManager = CLLocationManager()
+    let mapPreparation = MapPreparation()
     
     lazy var map: MKMapView = {
         let map = MKMapView()
@@ -67,7 +68,7 @@ class MapView: UIView {
         self.backgroundColor = .clear
         setSubviews()
         activateLayouts()
-//        setUserLocation()
+        setUserLocation()
     }
 
     required init?(coder: NSCoder) {
@@ -108,9 +109,7 @@ class MapView: UIView {
                 bin.types.append(type)
             }
             
-//            DispatchQueue.main.async {
             self.map.addAnnotation(bin)
-//            }
         }
     }
     
@@ -119,7 +118,6 @@ class MapView: UIView {
     func draggedView(_ sender: UIPanGestureRecognizer){
         self.bringSubviewToFront(pinAnnotation)
         let translation = sender.translation(in: self)
-//        let condition = pinAnnotation.center.y >= MainConstants.screenHeight/2+50
         let condition_1 = pinAnnotation.center.y <= centerCoordinate - 170
         let condition_2 = pinAnnotation.center.y >= centerCoordinate - 700
         
@@ -192,6 +190,128 @@ class MapView: UIView {
     }
     
     
+    func getGeoPoints() {
+        guard isLoadingDataNecessary() else { return }
+        print("isLoadingDataNecessary guard pass")
+        
+        coreDatabase.getPointsInArea(topLeftX: usedTopLeftCoordinate?.longitude ?? 0,
+                                     topRightX: usedBottomRightCoordinate?.longitude ?? 0,
+                                     topLeftY: usedTopLeftCoordinate?.latitude ?? 0,
+                                     bottomLeftY: usedBottomRightCoordinate?.latitude ?? 0,
+                                     result: { (points) in
+                                        
+            self.addAnnotation(points: points)
+            guard self.isLoadingDataFromServerNecessary() else { return }
+            print("isLoadingDataFromServerNecessary guard pass")
+                                        
+//          Now data is loading for all map visible region. But in the future it should be downloaded only for new extended region.
+            DispatchQueue.main.async {
+                self.server.getGeoPoints(centerCoordinate: self.map.region.center,
+                                         radius: self.map.currentRadius(withDelta: 0),
+                                         result: { (serverPoint) in
+                    self.addAnnotation(points: serverPoint)
+                })
+            }
+        })
+    }
+
+}
+
+
+
+
+
+
+extension MapView: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? TrashBin else { return nil }
+        let view = DefaultAnnotationView(annotation: annotation, reuseIdentifier: DefaultAnnotationView.ReuseID)
+        return view
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let view = view as? DefaultAnnotationView else { return }
+        guard let annotation = view.annotation as? TrashBin else { return }
+        analytics.logPointTap()
+        setBottomPosition()
+        pinAnnotation.pointID = annotation.pointID
+        pinAnnotation.setUp(trashTypes: annotation.types, coordinate: annotation.coordinate)
+    }
+
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        // That function is called only when map movement is complited.
+        // If user zoomed out in area with more than 17km radius it will zoom in it back.
+        if map.currentRadius(withDelta: 0) > 17000 {
+            let viewRegion = MKCoordinateRegion(center: self.map.region.center, latitudinalMeters: 15800,
+                                                longitudinalMeters: 15800)
+            map.setRegion(viewRegion, animated: true)
+        }
+        
+        // Updateing geoPoints only in the allowed area.
+        if map.currentRadius(withDelta: 0) < 17000 {
+            getGeoPoints()
+        }
+    }
+}
+
+
+
+
+
+
+extension MapView {
+    func setSubviews() {
+        self.addSubview(map)
+        self.addSubview(pinAnnotation)
+        self.addSubview(addPointView)
+        
+        pinAnnotation.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:))))
+        addPointView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPoint)))
+    }
+    
+    func activateLayouts() {
+        NSLayoutConstraint.activate([
+            map.topAnchor.constraint(equalTo: self.topAnchor),
+            map.leftAnchor.constraint(equalTo: self.leftAnchor),
+            map.rightAnchor.constraint(equalTo: self.rightAnchor),
+            map.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
+            pinAnnotation.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            pinAnnotation.widthAnchor.constraint(equalToConstant: pinAnnotation.frame.width),
+            pinAnnotation.heightAnchor.constraint(equalToConstant: pinAnnotation.frame.height),
+            
+            addPointView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22),
+            addPointView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -60),
+            addPointView.widthAnchor.constraint(equalToConstant: addPointView.frame.width),
+            addPointView.heightAnchor.constraint(equalToConstant: addPointView.frame.height),
+        ])
+        
+        pinAnnotationTopConstraint = pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+        pinAnnotationTopConstraint?.isActive = true
+        
+        centerCoordinate = MainConstants.screenHeight + pinAnnotation.frame.height/2
+        print("activateLayouts. centerCoordinate: \(centerCoordinate), pinAnnotation.frame.height: \(pinAnnotation.frame.height)")
+    }
+}
+
+
+
+
+
+class InstantPanGestureRecognizer: UIPanGestureRecognizer {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        if (self.state == UIGestureRecognizer.State.began) { return }
+        super.touchesBegan(touches, with: event)
+        self.state = UIGestureRecognizer.State.began
+    }
+    
+}
+
+
+
+extension MapView {
+    
     fileprivate
     func isLoadingDataNecessary() -> Bool {
         // Setting initial coordinate after first map movement.
@@ -246,7 +366,7 @@ class MapView: UIView {
         guard let date = Date().onlyDate else { return false }
         
         guard (mainTopLeft.latitude != 0) && (mainTopLeft.longitude != 0) else {
-            print("The Date or Coordinates were not setted")
+            print("The Coordinates probably were not setted")
             DispatchQueue.main.async {
                 self.updatePoints()
             }
@@ -261,35 +381,33 @@ class MapView: UIView {
             return false
         }
         
-//        print("mainTopLeft: \(mainTopLeft)")
-//        print("mainBottomRight: \(mainBottomRight)")
-//
-//        print("usedTopLeft: \(usedTopLeftCoordinate)")
-//        print("usedBottomRight: \(usedBottomRightCoordinate)")
-        
         if (mainTopLeft.longitude > usedTopLeftCoordinate?.longitude ?? 90) ||
             (mainBottomRight.longitude < usedBottomRightCoordinate?.longitude ?? -90) ||
             (mainTopLeft.latitude < usedTopLeftCoordinate?.latitude ?? -90) ||
             (mainBottomRight.latitude > usedBottomRightCoordinate?.latitude ?? 90) {
             
+            prepareForFutureExtraction(mainTopLeft: mainTopLeft, mainBottomRight: mainBottomRight)
+            
             if (mainTopLeft.longitude > usedTopLeftCoordinate?.longitude ?? 90) {
                 userDefaults.updateTopLeftLocationLongitude(withLongitude: usedTopLeftCoordinate?.longitude ?? 90)
             }
-            
+
             if (mainBottomRight.longitude < usedBottomRightCoordinate?.longitude ?? -90) {
                 userDefaults.updateBottomRightLocationLongitude(withLongitude: usedBottomRightCoordinate?.longitude ?? -90)
             }
-            
+
             if (mainTopLeft.latitude < usedTopLeftCoordinate?.latitude ?? -90) {
                 userDefaults.updateTopLeftLocationLatitude(withLatitude: usedTopLeftCoordinate?.latitude ?? -90)
             }
-            
+
             if (mainBottomRight.latitude > usedBottomRightCoordinate?.latitude ?? 90) {
                 userDefaults.updateBottomRightLocationLatitude(withLatitude: usedBottomRightCoordinate?.latitude ?? 90)
             }
             
             print("Default area was extended")
             
+            // Return false to depriciate server activity while testing.
+//            return false
             return true
         } else {
             return false
@@ -302,7 +420,7 @@ class MapView: UIView {
     func updatePoints() {
         print("updatePoints")
         // 0.01 = 1.11 km.
-        let delta: Double = 0.04 // Around 4.44 km. So the searching area is about 16 km^2
+        let delta: Double = 0.04 // Around 4.44 km. So the searching area is around 16 km^2
         let setTopLeftCoordinate = CLLocationCoordinate2D(latitude: self.map.region.center.latitude + delta,
                                                           longitude: self.map.region.center.longitude - delta)
         let setBottomRightCoordinate = CLLocationCoordinate2D(latitude: self.map.region.center.latitude - delta,
@@ -322,126 +440,129 @@ class MapView: UIView {
             DispatchQueue.main.async {
                 self.server.getGeoPoints(centerCoordinate: self.map.region.center,
                                          radius: self.map.currentRadius(withDelta: 4440),
-                                         notInPoints: points, result: { (serverPoint) in
-                                            self.addAnnotation(points: serverPoint)
+                                         result: { (serverPoint) in
+                    self.addAnnotation(points: serverPoint)
                 })
             }
         })
     }
     
     
-    func getGeoPoints() {
-        guard isLoadingDataNecessary() else { return }
-        print("isLoadingDataNecessary guard pass")
+    fileprivate
+    func prepareForFutureExtraction(mainTopLeft: CLLocationCoordinate2D, mainBottomRight: CLLocationCoordinate2D) {
+        print("prepareForFutureExtraction")
+
+        let topLeftLongitudeDelta = usedTopLeftCoordinate!.longitude - mainTopLeft.longitude // If used area inside, then >0
+        let topLeftLatitudeDelta = usedTopLeftCoordinate!.latitude - mainTopLeft.latitude // If used area inside, then <0
+        let bottomRightLongitudeDelta = usedBottomRightCoordinate!.longitude - mainBottomRight.longitude // If used area inside, then <0
+        let bottomRightLatitudeDelta = usedBottomRightCoordinate!.latitude - mainBottomRight.latitude // If used area inside, then >0
         
-        coreDatabase.getPointsInArea(topLeftX: usedTopLeftCoordinate?.longitude ?? 0,
-                                     topRightX: usedBottomRightCoordinate?.longitude ?? 0,
-                                     topLeftY: usedTopLeftCoordinate?.latitude ?? 0,
-                                     bottomLeftY: usedBottomRightCoordinate?.latitude ?? 0,
-                                     result: { (points) in
-                                        
-            self.addAnnotation(points: points)
-            guard self.isLoadingDataFromServerNecessary() else { return }
-            print("isLoadingDataFromServerNecessary guard pass")
-                                        
-//          Now data is loading for all map visible region. But in the future it should be downloaded only for new extended region.
-            DispatchQueue.main.async {
-                self.server.getGeoPoints(centerCoordinate: self.map.region.center,
-                                         radius: self.map.currentRadius(withDelta: 0),
-                                         notInPoints: points, result: { (serverPoint) in
-                                            self.addAnnotation(points: serverPoint)
-                })
+        let conditions: [Bool] = [
+            isTopLeftLongitudeInside(delta: topLeftLongitudeDelta),
+            isTopLeftLatitudeInside(delta: topLeftLatitudeDelta),
+            isBottomRightLongitudeInside(delta: bottomRightLongitudeDelta),
+            isBottomRightLatitudeInside(delta: bottomRightLatitudeDelta)
+        ]
+        
+        var rectangles: [(CLLocationCoordinate2D, CLLocationCoordinate2D)] = []
+        
+        for (item, condition) in conditions.enumerated() {
+            print(condition)
+            
+            switch item {
+            case 0:
+                if (condition) {
+                    rectangles.append((CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: mainTopLeft.longitude),
+                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: mainTopLeft.longitude)))
+                } else {
+                    rectangles.append((CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: usedTopLeftCoordinate!.longitude),
+                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: mainTopLeft.longitude)))
+                }
+                
+            case 1:
+                let (lastTopLeft, _) = rectangles[0]
+                if (condition) {
+                    rectangles.append((CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: lastTopLeft.longitude),
+                                       CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: mainBottomRight.longitude)))
+                } else {
+                    rectangles.append((CLLocationCoordinate2D(latitude: usedTopLeftCoordinate!.latitude, longitude: lastTopLeft.longitude),
+                                       CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: mainBottomRight.longitude)))
+                }
+                
+            case 2:
+                let (lastTopLeft, _) = rectangles[1]
+                if (condition) {
+                    rectangles.append((CLLocationCoordinate2D(latitude: lastTopLeft.latitude, longitude: mainBottomRight.longitude),
+                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: mainBottomRight.longitude)))
+                } else {
+                    rectangles.append((CLLocationCoordinate2D(latitude: lastTopLeft.latitude, longitude: mainBottomRight.longitude),
+                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: usedBottomRightCoordinate!.longitude)))
+                }
+                
+            default:
+                let (lastTopLeft, _) = rectangles[0]
+                let (_, lastBottomRight) = rectangles[2]
+                if (condition) {
+                    rectangles.append((CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: lastTopLeft.longitude),
+                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: lastBottomRight.longitude)))
+                } else {
+                    rectangles.append((CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: lastTopLeft.longitude),
+                                       CLLocationCoordinate2D(latitude: usedBottomRightCoordinate!.latitude, longitude: lastBottomRight.longitude)))
+                }
             }
-        })
-    }
-
-}
-
-
-
-
-
-
-extension MapView: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard let annotation = annotation as? TrashBin else { return nil }
-        let view = DefaultAnnotationView(annotation: annotation, reuseIdentifier: DefaultAnnotationView.ReuseID)
-        return view
-    }
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let view = view as? DefaultAnnotationView else { return }
-        guard let annotation = view.annotation as? TrashBin else { return }
-        analytics.logPointTap()
-        setBottomPosition()
-        pinAnnotation.pointID = annotation.pointID
-        pinAnnotation.setUp(trashTypes: annotation.types, coordinate: annotation.coordinate)
-    }
-
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        // That function is called only when map movement is complited.
-        // If user zoomed out in area with more than 17km radius it will zoom in it back.
-        if map.currentRadius(withDelta: 0) > 17000 {
-            let viewRegion = MKCoordinateRegion(center: self.map.region.center, latitudinalMeters: 15800,
-                                                longitudinalMeters: 15800)
-            map.setRegion(viewRegion, animated: true)
         }
         
-        // Updateing geoPoints only in the allowed area.
-        if map.currentRadius(withDelta: 0) < 17000 {
-            getGeoPoints()
+        var resultArray: [(CLLocationCoordinate2D, CLLocationCoordinate2D)] = []
+        for (item, rectangle) in rectangles.enumerated() {
+            switch item {
+            case 0, 2:
+                let (topLeft, bottomRight) = rectangle
+                if topLeft.longitude != bottomRight.longitude {
+                    resultArray.append(rectangle)
+                }
+                
+            default:
+                let (topLeft, bottomRight) = rectangle
+                if topLeft.latitude != bottomRight.latitude {
+                    resultArray.append(rectangle)
+                }
+            }
+        }
+        rectangles.removeAll()
+        
+        print("Got rectangles:")
+        for rect in resultArray {
+            print(rect)
         }
     }
-}
-
-
-
-
-
-
-extension MapView{
-    func setSubviews(){
-        self.addSubview(map)
-        self.addSubview(pinAnnotation)
-        self.addSubview(addPointView)
-        
-        pinAnnotation.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:))))
-        addPointView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPoint)))
+    
+    
+    func isTopLeftLongitudeInside(delta: Double) -> Bool {
+        switch delta {
+            case 0...: return true
+            default: return false
+        }
     }
     
-    func activateLayouts(){
-        NSLayoutConstraint.activate([
-            map.topAnchor.constraint(equalTo: self.topAnchor),
-            map.leftAnchor.constraint(equalTo: self.leftAnchor),
-            map.rightAnchor.constraint(equalTo: self.rightAnchor),
-            map.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            
-            pinAnnotation.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            pinAnnotation.widthAnchor.constraint(equalToConstant: pinAnnotation.frame.width),
-            pinAnnotation.heightAnchor.constraint(equalToConstant: pinAnnotation.frame.height),
-            
-            addPointView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22),
-            addPointView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -60),
-            addPointView.widthAnchor.constraint(equalToConstant: addPointView.frame.width),
-            addPointView.heightAnchor.constraint(equalToConstant: addPointView.frame.height),
-        ])
-        
-        pinAnnotationTopConstraint = pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
-        pinAnnotationTopConstraint?.isActive = true
-        
-        centerCoordinate = MainConstants.screenHeight + pinAnnotation.frame.height/2
-        print("activateLayouts. centerCoordinate: \(centerCoordinate), pinAnnotation.frame.height: \(pinAnnotation.frame.height)")
+    func isTopLeftLatitudeInside(delta: Double) -> Bool {
+        switch delta {
+        case ...0: return true
+            default: return false
+        }
     }
-}
-
-
-
-class InstantPanGestureRecognizer: UIPanGestureRecognizer {
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        if (self.state == UIGestureRecognizer.State.began) { return }
-        super.touchesBegan(touches, with: event)
-        self.state = UIGestureRecognizer.State.began
+    func isBottomRightLongitudeInside(delta: Double) -> Bool {
+        switch delta {
+            case ...0: return true
+            default: return false
+        }
+    }
+    
+    func isBottomRightLatitudeInside(delta: Double) -> Bool {
+        switch delta {
+            case 0...: return true
+            default: return false
+        }
     }
     
 }

@@ -49,6 +49,7 @@
 		5C64D7972690E6E20013F084 /* NotificationExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64D7962690E6E20013F084 /* NotificationExampleView.swift */; };
 		5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C89EF25AF41F400D55A16 /* ButtonView.swift */; };
 		5C6CDAAF26596990009F72D8 /* BottomPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6CDAAE26596990009F72D8 /* BottomPinView.swift */; };
+		5C6F5AF12699E28200155933 /* MapPreparation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F5AF02699E28200155933 /* MapPreparation.swift */; };
 		5C782CD4267A059900A853D5 /* Points+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C782CD2267A059900A853D5 /* Points+CoreDataClass.swift */; };
 		5C782CD5267A059900A853D5 /* Points+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C782CD3267A059900A853D5 /* Points+CoreDataProperties.swift */; };
 		5C7D378A264CF80C00DFEBA7 /* EmptyStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */; };
@@ -164,6 +165,7 @@
 		5C64D7962690E6E20013F084 /* NotificationExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExampleView.swift; sourceTree = "<group>"; };
 		5C6C89EF25AF41F400D55A16 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		5C6CDAAE26596990009F72D8 /* BottomPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPinView.swift; sourceTree = "<group>"; };
+		5C6F5AF02699E28200155933 /* MapPreparation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPreparation.swift; sourceTree = "<group>"; };
 		5C782CD2267A059900A853D5 /* Points+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5C782CD3267A059900A853D5 /* Points+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStatsCell.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				5C2A670D2667888500772674 /* CoordinateAnnotation.swift */,
+				5C6F5AF02699E28200155933 /* MapPreparation.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -811,6 +814,7 @@
 				5CE1B0282633DA5100549536 /* WeightView.swift in Sources */,
 				5C2A670E2667888500772674 /* CoordinateAnnotation.swift in Sources */,
 				5C3046DA25C02CA000BAFEEF /* View Extension.swift in Sources */,
+				5C6F5AF12699E28200155933 /* MapPreparation.swift in Sources */,
 				5CD2F5962681C34400993A54 /* ImagePinCell.swift in Sources */,
 				5C64D78C269047660013F084 /* Onboarding_3_Cell.swift in Sources */,
 				5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */,
@@ -1041,7 +1045,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Biniva/Biniva.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = Z962Q7H43F;
 				INFOPLIST_FILE = "$(SRCROOT)/Biniva/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1065,7 +1069,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Biniva/Biniva.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = Z962Q7H43F;
 				INFOPLIST_FILE = "$(SRCROOT)/Biniva/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
