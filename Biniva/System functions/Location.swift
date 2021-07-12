@@ -15,7 +15,16 @@ class Location {
         self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
-            completion(true)
+            switch CLLocationManager.authorizationStatus() {
+                case .notDetermined, .restricted, .denied:
+                    print("No access")
+                    completion(false)
+                case .authorizedAlways, .authorizedWhenInUse:
+                    print("Access")
+                    completion(true)
+            @unknown default:
+                completion(false)
+            }
         } else {
             completion(false)
         }

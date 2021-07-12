@@ -78,7 +78,6 @@ class MapView: UIView {
     
     func setUserLocation() {
         map.showsUserLocation = true
-        self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
 
         if CLLocationManager.locationServicesEnabled() {

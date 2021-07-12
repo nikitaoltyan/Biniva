@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Required to set the current user position to create new BinPoints</string>
+	<string>Requires for uploading relevant BinPoint on user's map </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Pro-Italic.ttf</string>

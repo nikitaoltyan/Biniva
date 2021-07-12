@@ -155,7 +155,6 @@ class AddPointController: UIViewController {
     
     func setUserLocation() {
         map.showsUserLocation = true
-        self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
 
         if CLLocationManager.locationServicesEnabled() {
@@ -163,8 +162,8 @@ class AddPointController: UIViewController {
             locationManager.startUpdatingLocation()
 
             let location: CLLocationCoordinate2D = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 55.754316, longitude: 37.619521) // Cremlin I guess
-            let span = MKCoordinateSpan(latitudeDelta: 0.004,
-                                        longitudeDelta: 0.004) // Around 400x400 meters
+            let span = MKCoordinateSpan(latitudeDelta: 0.003,
+                                        longitudeDelta: 0.003) // Around 300x300 meters
             let region = MKCoordinateRegion(center: location, span: span)
             map.setRegion(region, animated: true)
         }
