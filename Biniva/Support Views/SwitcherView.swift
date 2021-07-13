@@ -99,7 +99,7 @@ class SwitcherView: UIView {
     func animateOne() {
         guard (isLabelOneActivated == false) else { return }
         DispatchQueue.main.async {
-            self.topViewDelegate?.UpdateTitles(isRecylcing: true)
+            self.topViewDelegate?.updateTitles(isRecylcing: true)
             self.delegate?.showRecycling()
 //            self.delegate?.hideTopView(false)
         }
@@ -123,7 +123,7 @@ class SwitcherView: UIView {
     func animateTwo() {
         guard (isLabelTwoActivated == false) else { return }
         DispatchQueue.main.async {
-            self.topViewDelegate?.UpdateTitles(isRecylcing: false)
+            self.topViewDelegate?.updateTitles(isRecylcing: false)
             self.delegate?.showStats()
 //            self.delegate?.hideTopView(false)
         }

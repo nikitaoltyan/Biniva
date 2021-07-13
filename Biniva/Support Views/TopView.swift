@@ -28,7 +28,21 @@ class TopView: UIView {
             .with(autolayout: false)
         return label
     }()
+    
+    let settingsButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            .with(autolayout: false)
+            .with(bgColor: .clear)
+        let image = UIImage(systemName: "gearshape.fill")?.withRenderingMode(.alwaysTemplate)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFill
+        button.setImage(image, for: .normal)
+        button.tintColor = Colors.darkGrayText
+        return button
+    }()
 
+    var delegate: topViewDelegate?
     
     override init(frame: CGRect) {
         let height: CGFloat = {
@@ -48,12 +62,17 @@ class TopView: UIView {
         fatalError()
     }
     
+    
+    @objc
+    func openSettings() {
+        delegate?.openSettings()
+    }
 }
 
 
 
 extension TopView: TopViewDelegate {
-    func UpdateTitles(isRecylcing: Bool) {
+    func updateTitles(isRecylcing: Bool) {
         var translation: CGFloat { if (isRecylcing) {return 300} else {return -300}}
         UIView.animate(withDuration: 0.15, animations: {
             self.title.transform = CGAffineTransform.init(translationX: translation, y: 0)
@@ -83,6 +102,9 @@ extension TopView {
     func SetSubviews(){
         self.addSubview(title)
         self.addSubview(subtitle)
+        self.addSubview(settingsButton)
+        
+        settingsButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
     }
     
     func ActivateLayouts(){
@@ -91,7 +113,12 @@ extension TopView {
             subtitle.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -1),
             
             title.leftAnchor.constraint(equalTo: subtitle.leftAnchor),
-            title.bottomAnchor.constraint(equalTo: subtitle.topAnchor, constant: -4)
+            title.bottomAnchor.constraint(equalTo: subtitle.topAnchor, constant: -4),
+            
+            settingsButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -26),
+            settingsButton.centerYAnchor.constraint(equalTo: title.centerYAnchor),
+            settingsButton.widthAnchor.constraint(equalToConstant: settingsButton.frame.width),
+            settingsButton.heightAnchor.constraint(equalToConstant: settingsButton.frame.height)
         ])
     }
 }

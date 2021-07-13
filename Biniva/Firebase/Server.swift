@@ -126,7 +126,7 @@ class Server {
     }
     
     
-    fileprivate
+    private
     func addPointImage(forDocumentID documentID: String, images: [UIImage?], result: @escaping(_ strings: [String]) -> Void) {
         print("addPointImage for documentID: \(documentID)")
         let storageRef = storage.reference()
@@ -158,40 +158,34 @@ class Server {
                 
             }
         }
-        }
+    }
 
     
-    /// Function returns dictionary with post details (including username and user avatar link).
-    /// - parameter mid: Meeting ID
-    /// - parameter postDetails: Returning Dictionary
-//    static func PostDetails(postWithId mid: String, postDetails: @escaping (_ result: [String : Any]) -> Void) {
-//        let postRef = ref.child("meetings").child(mid)
-//        postRef.observe(DataEventType.value, with: { (snapshot) in
-//            var postDict = snapshot.value as? [String : Any] ?? [:]
-//            postDict.merge(dict: ["mid": mid])
-//            self.ReturnUserData(userId: postDict["user_id"] as! String, userDetails: { returnDict in
-//                postDict.merge(dict: returnDict)
-//                postDetails(postDict)
-//            })
+    func getArticleText(forArtcileWithID aid: String, completion: @escaping(_ text: String) -> Void) {
+//        db.collection("articles").document(aid).getDocument(completion: { (document, error)  in
+//            guard error == nil else {
+//                completion("")
+//                return
+//            }
+//
+//            if let document = document, document.exists {
+//                let data = document.data()
+//
+                do {
+//                    let text = try String(contentsOf: URL(string: data?["text"] as? String ?? " ")!, encoding: .utf8) // here should be link on error message?
+                    let text = try String(contentsOf: URL(string: "https://firebasestorage.googleapis.com/v0/b/greener-964fe.appspot.com/o/Articles%2Ftest.txt?alt=media&token=20cb70db-f869-497e-ba45-8794735b3886")!, encoding: .utf8)
+                    completion(text)
+                } catch _ {
+                    print("Catch an error")
+                    completion("")
+                }
+//            } else {
+//                print("Document does not exist")
+//                completion("")
+//            }
 //        })
-//    }
-    
-    
-    /// Function for returning a Dictionary with two user data: username and image url. That dictionary can be added to post or message details.
-    /// - warning: There must be not nil User ID.
-    /// - parameter uid: requested User ID
-    /// - parameter userDetails: Function return
-    /// - returns: Dictionary with two user data: Username and Image URL.
-//    static func ReturnUserData(userId uid: String, userDetails: @escaping (_ result: [String : Any]) -> Void) {
-//        let userRef = ref.child("users").child(uid)
-//        userRef.observe(DataEventType.value, with: { (snapshot) in
-//            let userDict = snapshot.value as? [String : Any] ?? [:]
-//            var returnDict: Dictionary<String, Any> = [:]
-//            returnDict.merge(dict: ["username": userDict["username"] as Any])
-//            returnDict.merge(dict: ["image": userDict["image"] as Any])
-//            userDetails(returnDict)
-//        })
-//    }
+    }
+
     
     
 //    private static func GetMeetingsIDs(meetingsArray: @escaping (_ result: Array<String>?) -> Void) {

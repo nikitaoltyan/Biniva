@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Requires for uploading relevant BinPoint on user's map </string>
+	<string>The app loads only BinPoints near to the user to provide a better experience and reduce traffic overusage.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Pro-Italic.ttf</string>

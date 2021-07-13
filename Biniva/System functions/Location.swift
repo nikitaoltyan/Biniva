@@ -11,6 +11,7 @@ class Location {
     
     let locationManager = CLLocationManager()
     
+    
     func requestUserLocation(completion: @escaping(_ success:  Bool) -> Void) {
         self.locationManager.requestWhenInUseAuthorization()
         

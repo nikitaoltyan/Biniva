@@ -30,7 +30,11 @@ protocol mapDelegate {
 }
 
 protocol TopViewDelegate {
-    func UpdateTitles(isRecylcing: Bool)
+    func updateTitles(isRecylcing: Bool)
+}
+
+protocol topViewDelegate { // WTF
+    func openSettings()
 }
 
 
@@ -40,10 +44,11 @@ class RecyclingController: UIViewController {
     let server = Server()
     let analytics = ServerAnalytics()
     
-    let topView: TopView = {
+    lazy var topView: TopView = {
         let view = TopView()
             .with(bgColor: Colors.background)
             .with(autolayout: false)
+        view.delegate = self
         return view
     }()
     
@@ -199,6 +204,8 @@ extension RecyclingController: StatsDelegate {
 }
 
 
+
+
 extension RecyclingController: RecyclingDelegate {
     func Add() {
         Vibration.soft()
@@ -230,6 +237,17 @@ extension RecyclingController: mapDelegate {
     }
 }
 
+
+
+
+extension RecyclingController: topViewDelegate {
+    func openSettings() {
+        print("Open Settings")
+        let newVC = ArticleController()
+        newVC.modalPresentationStyle = .overFullScreen
+        present(newVC, animated: true, completion: nil)
+    }
+}
 
 
 

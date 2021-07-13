@@ -36,6 +36,11 @@
 		5C45916F254D55C2005AE26C /* BinivaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45916E254D55C2005AE26C /* BinivaUITests.swift */; };
 		5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45917D254D59D3005AE26C /* RecyclingController.swift */; };
 		5C54DF9626767B03002548B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C54DF9526767B02002548B8 /* GoogleService-Info.plist */; };
+		5C555084269CA17600AD8015 /* ArticleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C555083269CA17600AD8015 /* ArticleController.swift */; };
+		5C555087269CA38100AD8015 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C555086269CA38100AD8015 /* Parser.swift */; };
+		5C555089269D887800AD8015 /* ArticleTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C555088269D887800AD8015 /* ArticleTextCell.swift */; };
+		5C55508B269D88C100AD8015 /* ArticleImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55508A269D88C100AD8015 /* ArticleImageCell.swift */; };
+		5C55508D269DC53500AD8015 /* ArticleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55508C269DC53400AD8015 /* ArticleHeaderView.swift */; };
 		5C55591C262D945C0046F5A5 /* SwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55591B262D945C0046F5A5 /* SwitcherView.swift */; };
 		5C5ED19A2659386B00084458 /* DefaultPins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5ED1992659386B00084458 /* DefaultPins.swift */; };
 		5C64D785268C4F980013F084 /* PointAddedPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64D784268C4F980013F084 /* PointAddedPopUpController.swift */; };
@@ -152,6 +157,11 @@
 		5C459170254D55C2005AE26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C45917D254D59D3005AE26C /* RecyclingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecyclingController.swift; sourceTree = "<group>"; };
 		5C54DF9526767B02002548B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		5C555083269CA17600AD8015 /* ArticleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleController.swift; sourceTree = "<group>"; };
+		5C555086269CA38100AD8015 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		5C555088269D887800AD8015 /* ArticleTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTextCell.swift; sourceTree = "<group>"; };
+		5C55508A269D88C100AD8015 /* ArticleImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleImageCell.swift; sourceTree = "<group>"; };
+		5C55508C269DC53400AD8015 /* ArticleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderView.swift; sourceTree = "<group>"; };
 		5C55591B262D945C0046F5A5 /* SwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitcherView.swift; sourceTree = "<group>"; };
 		5C5ED1992659386B00084458 /* DefaultPins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPins.swift; sourceTree = "<group>"; };
 		5C64D784268C4F980013F084 /* PointAddedPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointAddedPopUpController.swift; sourceTree = "<group>"; };
@@ -421,6 +431,17 @@
 			path = BinivaUITests;
 			sourceTree = "<group>";
 		};
+		5C555085269CA36D00AD8015 /* Article */ = {
+			isa = PBXGroup;
+			children = (
+				5C555086269CA38100AD8015 /* Parser.swift */,
+				5C555088269D887800AD8015 /* ArticleTextCell.swift */,
+				5C55508A269D88C100AD8015 /* ArticleImageCell.swift */,
+				5C55508C269DC53400AD8015 /* ArticleHeaderView.swift */,
+			);
+			path = Article;
+			sourceTree = "<group>";
+		};
 		5C5ED19E2659677D00084458 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +449,7 @@
 				5CF90C50262EA3A000127E4D /* AddTrashController.swift */,
 				5C454E2925B57B2000966991 /* OnboardingController.swift */,
 				5CD0B1312688A85E00267081 /* AddPointController.swift */,
+				5C555083269CA17600AD8015 /* ArticleController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -443,6 +465,7 @@
 				5C5ED1A32659685000084458 /* Map View */,
 				5CD0B1332689BD0500267081 /* Add Point */,
 				5C64D786268F82A40013F084 /* Onboarding */,
+				5C555085269CA36D00AD8015 /* Article */,
 			);
 			path = "Support Views";
 			sourceTree = "<group>";
@@ -819,7 +842,9 @@
 				5C64D78C269047660013F084 /* Onboarding_3_Cell.swift in Sources */,
 				5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */,
 				5C7D378A264CF80C00DFEBA7 /* EmptyStatsCell.swift in Sources */,
+				5C555087269CA38100AD8015 /* Parser.swift in Sources */,
 				5C64D7922690B3DE0013F084 /* Notifications.swift in Sources */,
+				5C555084269CA17600AD8015 /* ArticleController.swift in Sources */,
 				5C64D78A269047550013F084 /* Onboarding_2_Cell.swift in Sources */,
 				5CD557002652532F007B3D06 /* MaterialStatsCell.swift in Sources */,
 				5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */,
@@ -841,6 +866,7 @@
 				5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */,
 				5C6CDAAF26596990009F72D8 /* BottomPinView.swift in Sources */,
 				5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */,
+				5C55508B269D88C100AD8015 /* ArticleImageCell.swift in Sources */,
 				5CD0B1352689BD4500267081 /* TakePhotoCell.swift in Sources */,
 				5C64D785268C4F980013F084 /* PointAddedPopUpController.swift in Sources */,
 				5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */,
@@ -855,6 +881,7 @@
 				5C64D78E269047760013F084 /* Onboarding_4_Cell.swift in Sources */,
 				5C64D788268F82EA0013F084 /* Onboarding_1_Cell.swift in Sources */,
 				5CF90C57262EA7C100127E4D /* MaterialCell.swift in Sources */,
+				5C55508D269DC53500AD8015 /* ArticleHeaderView.swift in Sources */,
 				5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */,
 				5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */,
 				5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */,
@@ -873,6 +900,7 @@
 				5C1BD66025D7CA770002A894 /* Material Defaults.swift in Sources */,
 				5C3D533726301D0A00DA0AFB /* AddTrashView.swift in Sources */,
 				5CFA1A3B25C99BD200587EC5 /* Defaults.swift in Sources */,
+				5C555089269D887800AD8015 /* ArticleTextCell.swift in Sources */,
 				5CAF7D59262C7D0F00249CC6 /* ProgressView.swift in Sources */,
 				5C9F98AB262DDDDD00DFCFEA /* RecyclingView.swift in Sources */,
 			);
@@ -1045,7 +1073,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Biniva/Biniva.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Z962Q7H43F;
 				INFOPLIST_FILE = "$(SRCROOT)/Biniva/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1053,7 +1081,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1069,7 +1097,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Biniva/Biniva.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Z962Q7H43F;
 				INFOPLIST_FILE = "$(SRCROOT)/Biniva/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1077,7 +1105,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

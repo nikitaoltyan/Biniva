@@ -39,7 +39,7 @@ class Onboarding_5_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Разрешить использовать Геопозицию?"
+        label.text = "Приложению может понадобится геопозиция"
         return label
     }()
     
@@ -96,6 +96,7 @@ class Onboarding_5_Cell: UICollectionViewCell {
             .with(fontName: "SFPro-Medium", size: 16)
         label.text = "Пропустить"
         label.isUserInteractionEnabled = true
+        label.isHidden = true
         return label
     }()
     
@@ -133,7 +134,9 @@ class Onboarding_5_Cell: UICollectionViewCell {
     func buttonTap() {
         button.tap(completion: { (_) in
             self.location.requestUserLocation(completion: { (_) in
-                self.delegate?.finish()
+                DispatchQueue.main.async { // Compiling in the main Thread
+                    self.delegate?.finish()
+                }
             })
         })
     }
