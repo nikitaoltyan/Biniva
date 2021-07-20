@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,7 +25,6 @@
 		5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470025C140E100BAFEEF /* Label Extension.swift */; };
 		5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470525C1447D00BAFEEF /* TextView Extension.swift */; };
 		5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470A25C157C800BAFEEF /* TextField Extension.swift */; };
-		5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30472325C2A51E00BAFEEF /* SetResultView.swift */; };
 		5C3D533726301D0A00DA0AFB /* AddTrashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D533626301D0A00DA0AFB /* AddTrashView.swift */; };
 		5C3D533C2630564E00DA0AFB /* ExtraAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */; };
 		5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C454E2925B57B2000966991 /* OnboardingController.swift */; };
@@ -58,6 +57,10 @@
 		5C782CD4267A059900A853D5 /* Points+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C782CD2267A059900A853D5 /* Points+CoreDataClass.swift */; };
 		5C782CD5267A059900A853D5 /* Points+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C782CD3267A059900A853D5 /* Points+CoreDataProperties.swift */; };
 		5C7D378A264CF80C00DFEBA7 /* EmptyStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */; };
+		5C7F557C26A48B64006B414F /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5C7F557B26A48B64006B414F /* FacebookCore */; };
+		5C7F557F26A56379006B414F /* YandexMobileMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 5C7F557E26A56379006B414F /* YandexMobileMetricaCrashes */; };
+		5C7F558126A56379006B414F /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = 5C7F558026A56379006B414F /* YandexMobileMetrica */; };
+		5C7F7D4B26A5C9C70021B6CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C7F7D4D26A5C9C70021B6CE /* Localizable.strings */; };
 		5C83A053255EB3CC005C2CAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A052255EB3CC005C2CAA /* Assets.xcassets */; };
 		5C83A05C255F9796005C2CAA /* SF-Pro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */; };
 		5C83A060255F979A005C2CAA /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A057255F959F005C2CAA /* SF-Pro.ttf */; };
@@ -72,8 +75,6 @@
 		5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */; };
 		5CB8593C2652BB3D00885A6D /* MaterialStatsCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */; };
 		5CC12876265FFF8C0097ECDD /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC12875265FFF8C0097ECDD /* MKMapView+Extension.swift */; };
-		5CC26A9C25CBF27F000501AD /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC26A9B25CBF27F000501AD /* ItemView.swift */; };
-		5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */; };
 		5CD0B13026888AD200267081 /* AddPointButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B12F26888AD200267081 /* AddPointButtonView.swift */; };
 		5CD0B1322688A85E00267081 /* AddPointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1312688A85E00267081 /* AddPointController.swift */; };
 		5CD0B1352689BD4500267081 /* TakePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1342689BD4500267081 /* TakePhotoCell.swift */; };
@@ -87,7 +88,6 @@
 		5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDA06625DCF4A0009280D0 /* Array Extension.swift */; };
 		5CEE8C00266A166700EB6617 /* ClusterPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE8BFF266A166700EB6617 /* ClusterPin.swift */; };
 		5CEE8C02266A173200EB6617 /* TrashBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE8C01266A173200EB6617 /* TrashBin.swift */; };
-		5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */; };
 		5CF90C51262EA3A000127E4D /* AddTrashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF90C50262EA3A000127E4D /* AddTrashController.swift */; };
 		5CF90C57262EA7C100127E4D /* MaterialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF90C56262EA7C100127E4D /* MaterialCell.swift */; };
 		5CFA1A3B25C99BD200587EC5 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1A3A25C99BD200587EC5 /* Defaults.swift */; };
@@ -140,7 +140,6 @@
 		5C30470025C140E100BAFEEF /* Label Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label Extension.swift"; sourceTree = "<group>"; };
 		5C30470525C1447D00BAFEEF /* TextView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextView Extension.swift"; sourceTree = "<group>"; };
 		5C30470A25C157C800BAFEEF /* TextField Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField Extension.swift"; sourceTree = "<group>"; };
-		5C30472325C2A51E00BAFEEF /* SetResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetResultView.swift; sourceTree = "<group>"; };
 		5C3D533626301D0A00DA0AFB /* AddTrashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrashView.swift; sourceTree = "<group>"; };
 		5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraAddCell.swift; sourceTree = "<group>"; };
 		5C454E2925B57B2000966991 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
@@ -179,6 +178,11 @@
 		5C782CD2267A059900A853D5 /* Points+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5C782CD3267A059900A853D5 /* Points+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStatsCell.swift; sourceTree = "<group>"; };
+		5C7F7D4C26A5C9C70021B6CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5C7F7D4F26A5CA130021B6CE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5C7F7D5026A5CA180021B6CE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5C7F7D5126A6B7640021B6CE /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		5C7F7D5226A6B77E0021B6CE /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		5C83A052255EB3CC005C2CAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C83A057255F959F005C2CAA /* SF-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro.ttf"; path = "../../../../../../Library/Fonts/SF-Pro.ttf"; sourceTree = "<group>"; };
 		5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Italic.ttf"; path = "../../../../../../Library/Fonts/SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
@@ -193,8 +197,6 @@
 		5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView Extension.swift"; sourceTree = "<group>"; };
 		5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaterialStatsCell+Empty.swift"; sourceTree = "<group>"; };
 		5CC12875265FFF8C0097ECDD /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
-		5CC26A9B25CBF27F000501AD /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
-		5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePlusView.swift; sourceTree = "<group>"; };
 		5CD0B12F26888AD200267081 /* AddPointButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointButtonView.swift; sourceTree = "<group>"; };
 		5CD0B1312688A85E00267081 /* AddPointController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointController.swift; sourceTree = "<group>"; };
 		5CD0B1342689BD4500267081 /* TakePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoCell.swift; sourceTree = "<group>"; };
@@ -208,7 +210,6 @@
 		5CEDA06625DCF4A0009280D0 /* Array Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extension.swift"; sourceTree = "<group>"; };
 		5CEE8BFF266A166700EB6617 /* ClusterPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterPin.swift; sourceTree = "<group>"; };
 		5CEE8C01266A173200EB6617 /* TrashBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBin.swift; sourceTree = "<group>"; };
-		5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		5CF90C50262EA3A000127E4D /* AddTrashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrashController.swift; sourceTree = "<group>"; };
 		5CF90C56262EA7C100127E4D /* MaterialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialCell.swift; sourceTree = "<group>"; };
 		5CFA1A3A25C99BD200587EC5 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
@@ -223,7 +224,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C7F557F26A56379006B414F /* YandexMobileMetricaCrashes in Frameworks */,
+				5C7F558126A56379006B414F /* YandexMobileMetrica in Frameworks */,
 				EB29D31B284BF2C9CD0D4697 /* Pods_Biniva.framework in Frameworks */,
+				5C7F557C26A48B64006B414F /* FacebookCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,10 +358,6 @@
 			isa = PBXGroup;
 			children = (
 				5C6C89EF25AF41F400D55A16 /* ButtonView.swift */,
-				5CC2DDFC259866C8009E9C73 /* CompletePlusView.swift */,
-				5CF84BDE254DCB1200CABEB6 /* AddItemView.swift */,
-				5C30472325C2A51E00BAFEEF /* SetResultView.swift */,
-				5CC26A9B25CBF27F000501AD /* ItemView.swift */,
 			);
 			path = "General Views";
 			sourceTree = "<group>";
@@ -409,6 +409,7 @@
 				5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */,
 				5C83A057255F959F005C2CAA /* SF-Pro.ttf */,
 				5C08703B262739080057E840 /* Model.xcdatamodeld */,
+				5C7F7D4D26A5C9C70021B6CE /* Localizable.strings */,
 			);
 			path = Biniva;
 			sourceTree = "<group>";
@@ -603,6 +604,11 @@
 			dependencies = (
 			);
 			name = Biniva;
+			packageProductDependencies = (
+				5C7F557B26A48B64006B414F /* FacebookCore */,
+				5C7F557E26A56379006B414F /* YandexMobileMetricaCrashes */,
+				5C7F558026A56379006B414F /* YandexMobileMetrica */,
+			);
 			productName = GreenerCo;
 			productReference = 5C459149254D55C0005AE26C /* Biniva.app */;
 			productType = "com.apple.product-type.application";
@@ -675,8 +681,14 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				"en-GB",
 			);
 			mainGroup = 5C459140254D55C0005AE26C;
+			packageReferences = (
+				5C7F557A26A48B64006B414F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				5C7F557D26A56379006B414F /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
+			);
 			productRefGroup = 5C45914A254D55C0005AE26C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -694,6 +706,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C459159254D55C1005AE26C /* LaunchScreen.storyboard in Resources */,
+				5C7F7D4B26A5C9C70021B6CE /* Localizable.strings in Resources */,
 				5C83A053255EB3CC005C2CAA /* Assets.xcassets in Resources */,
 				5C54DF9626767B03002548B8 /* GoogleService-Info.plist in Resources */,
 				5C83A05C255F9796005C2CAA /* SF-Pro-Italic.ttf in Resources */,
@@ -840,7 +853,6 @@
 				5C6F5AF12699E28200155933 /* MapPreparation.swift in Sources */,
 				5CD2F5962681C34400993A54 /* ImagePinCell.swift in Sources */,
 				5C64D78C269047660013F084 /* Onboarding_3_Cell.swift in Sources */,
-				5CF84BDF254DCB1200CABEB6 /* AddItemView.swift in Sources */,
 				5C7D378A264CF80C00DFEBA7 /* EmptyStatsCell.swift in Sources */,
 				5C555087269CA38100AD8015 /* Parser.swift in Sources */,
 				5C64D7922690B3DE0013F084 /* Notifications.swift in Sources */,
@@ -850,7 +862,6 @@
 				5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */,
 				5C087043262739E10057E840 /* Model+CoreDataClass.swift in Sources */,
 				5CFB8FB926281BB000372203 /* DataFunction.swift in Sources */,
-				5CC26A9C25CBF27F000501AD /* ItemView.swift in Sources */,
 				5C782CD4267A059900A853D5 /* Points+CoreDataClass.swift in Sources */,
 				5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */,
 				5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */,
@@ -883,7 +894,6 @@
 				5CF90C57262EA7C100127E4D /* MaterialCell.swift in Sources */,
 				5C55508D269DC53500AD8015 /* ArticleHeaderView.swift in Sources */,
 				5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */,
-				5CC2DDFD259866C9009E9C73 /* CompletePlusView.swift in Sources */,
 				5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */,
 				5CA776D22656B3C600EDAF47 /* MapView.swift in Sources */,
 				5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */,
@@ -895,7 +905,6 @@
 				5CD0B1372689FFA600267081 /* UIImage+Extension.swift in Sources */,
 				5CD0B1322688A85E00267081 /* AddPointController.swift in Sources */,
 				5C045BE825BC77B200E42843 /* Server.swift in Sources */,
-				5C30472425C2A51E00BAFEEF /* SetResultView.swift in Sources */,
 				5C64D7972690E6E20013F084 /* NotificationExampleView.swift in Sources */,
 				5C1BD66025D7CA770002A894 /* Material Defaults.swift in Sources */,
 				5C3D533726301D0A00DA0AFB /* AddTrashView.swift in Sources */,
@@ -942,8 +951,20 @@
 			isa = PBXVariantGroup;
 			children = (
 				5C459158254D55C1005AE26C /* Base */,
+				5C7F7D4F26A5CA130021B6CE /* ru */,
+				5C7F7D5126A6B7640021B6CE /* en-GB */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		5C7F7D4D26A5C9C70021B6CE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C7F7D4C26A5C9C70021B6CE /* en */,
+				5C7F7D5026A5CA180021B6CE /* ru */,
+				5C7F7D5226A6B77E0021B6CE /* en-GB */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -953,6 +974,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1014,6 +1036,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1073,7 +1096,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Biniva/Biniva.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z962Q7H43F;
 				INFOPLIST_FILE = "$(SRCROOT)/Biniva/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1081,7 +1104,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1097,7 +1120,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Biniva/Biniva.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z962Q7H43F;
 				INFOPLIST_FILE = "$(SRCROOT)/Biniva/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1105,7 +1128,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1241,6 +1264,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5C7F557A26A48B64006B414F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.1;
+			};
+		};
+		5C7F557D26A56379006B414F /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yandexmobile/metrica-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.17.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5C7F557B26A48B64006B414F /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C7F557A26A48B64006B414F /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		5C7F557E26A56379006B414F /* YandexMobileMetricaCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C7F557D26A56379006B414F /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetricaCrashes;
+		};
+		5C7F558026A56379006B414F /* YandexMobileMetrica */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C7F557D26A56379006B414F /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetrica;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		5C08703B262739080057E840 /* Model.xcdatamodeld */ = {

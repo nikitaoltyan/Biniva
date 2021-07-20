@@ -23,6 +23,7 @@ class MapView: UIView {
         let map = MKMapView()
             .with(autolayout: false)
         map.isUserInteractionEnabled = true
+        map.showsTraffic = false
         map.delegate = self
         
         // There should be user's coordinate.
@@ -162,6 +163,8 @@ class MapView: UIView {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
                                                 y: self.centerCoordinate)
             self.addPointView.transform = CGAffineTransform(translationX: 0, y: 0)
+        }, completion: { (_) in
+            self.map.selectedAnnotations.removeAll()
         })
     }
     
@@ -289,7 +292,6 @@ extension MapView {
         pinAnnotationTopConstraint?.isActive = true
         
         centerCoordinate = MainConstants.screenHeight + pinAnnotation.frame.height/2
-        print("activateLayouts. centerCoordinate: \(centerCoordinate), pinAnnotation.frame.height: \(pinAnnotation.frame.height)")
     }
 }
 

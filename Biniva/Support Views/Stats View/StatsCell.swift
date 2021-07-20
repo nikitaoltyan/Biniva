@@ -32,8 +32,8 @@ class StatsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
-        SetSubviews()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
     }
     
     required init?(coder: NSCoder) {
@@ -43,14 +43,17 @@ class StatsCell: UITableViewCell {
     func updateData(logSizes: [Int]?, logMaterials: [Int]?) {
         loggedLabel.text = ""
         guard (logSizes != nil && logMaterials != nil) else { return }
+        let weightText = NSLocalizedString("weight_measurement", comment: "Just a way of measuring weight")
+        
         for item in 0...(logSizes!.count-1){
             let logSize = logSizes![item]
             let logMaterial = MaterialDefaults().getMaterialName(id: logMaterials![item])
             let lastText = (loggedLabel.text ?? "") as String
+            
             if (lastText.count == 0){
-                loggedLabel.text = "\(logSize) гр \(logMaterial)"
+                loggedLabel.text = "\(logSize) \(weightText) \(logMaterial)"
             } else {
-                loggedLabel.text = "\(lastText)\n\(logSize) гр \(logMaterial)"
+                loggedLabel.text = "\(lastText)\n\(logSize) \(weightText) \(logMaterial)"
             }
         }
     }
@@ -61,12 +64,12 @@ class StatsCell: UITableViewCell {
 
 
 extension StatsCell {
-    func SetSubviews(){
+    func setSubviews(){
         self.addSubview(dateLabel)
         self.addSubview(loggedLabel)
     }
     
-    func ActivateLayouts(){
+    func activateLayouts(){
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
             dateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),

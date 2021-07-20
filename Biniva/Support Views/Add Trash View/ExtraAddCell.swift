@@ -30,7 +30,6 @@ class ExtraAddCell: UICollectionViewCell {
             .with(fontName: "SFPro-Semibold", size: size)
             .with(numberOfLines: 1)
             .with(autolayout: false)
-        label.text = "Бутылка"
         return label
     }()
     
@@ -45,7 +44,6 @@ class ExtraAddCell: UICollectionViewCell {
             .with(fontName: "SFPro-Regular", size: size)
             .with(numberOfLines: 1)
             .with(autolayout: false)
-        label.text = "объем 0,33 литра"
         return label
     }()
     

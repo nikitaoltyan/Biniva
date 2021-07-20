@@ -16,7 +16,6 @@ class MaterialStatsCell: UICollectionViewCell {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 12)
             .with(autolayout: false)
-        label.text = "27%"
         return label
     }()
     
@@ -34,7 +33,6 @@ class MaterialStatsCell: UICollectionViewCell {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 14)
             .with(autolayout: false)
-        label.text = "Пластик"
         return label
     }()
     

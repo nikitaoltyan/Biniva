@@ -2,7 +2,7 @@
 //  BottomPinView.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 22.05.2021.
+//  Created by Nick Oltyan on 22.05.2021.
 //
 
 import UIKit
@@ -28,7 +28,7 @@ class BottomPinView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 28)
             .with(autolayout: false)
-        label.text = "Контейнер"
+        label.text = NSLocalizedString("map_pin_title", comment: "Title for all points")
         return label
     }()
     
@@ -39,7 +39,7 @@ class BottomPinView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 20)
             .with(autolayout: false)
-        label.text = ""
+        label.text = "" // Creates automaticaly with coordinates.
         return label
     }()
     
@@ -71,7 +71,7 @@ class BottomPinView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 20)
             .with(autolayout: false)
-        label.text = "Фото"
+        label.text = NSLocalizedString("map_pin_photo", comment: "Photo title for all points")
         return label
     }()
     
@@ -138,7 +138,7 @@ class BottomPinView: UIView {
                 let firstLocation = placemarks?[0]
                 self.adressLabel.text = firstLocation?.name
             } else {
-                self.adressLabel.text = "Location is not available"
+                self.adressLabel.text = NSLocalizedString("map_pin_error", comment: "error")
             }
         })
     }

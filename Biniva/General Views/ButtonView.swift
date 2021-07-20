@@ -2,7 +2,7 @@
 //  ButtonView.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 13.01.2021.
+//  Created by Nick Oltyan on 13.01.2021.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class ButtonView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = MainConstants.white
         label.textAlignment = .center
-        label.text = "Добавить"
+        label.text = NSLocalizedString("add_button", comment: "Add title for button")
         label.font = UIFont.init(name: "SFPro-Medium", size: 20.0)
         return label
     }()
@@ -36,8 +36,8 @@ class ButtonView: UIView {
         super.init(frame: useFrame)
         self.layer.cornerRadius = 55/2
         
-        SetSubviews()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
     }
     
     required init?(coder: NSCoder) {
@@ -52,13 +52,13 @@ class ButtonView: UIView {
 
 extension ButtonView {
     
-    func SetSubviews(){
+    func setSubviews(){
         self.layer.addSublayer(gradient)
         self.addSubview(label)
     }
     
     
-    func ActivateLayouts(){
+    func activateLayouts(){
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: self.centerYAnchor)

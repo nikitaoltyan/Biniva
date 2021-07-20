@@ -13,14 +13,15 @@ class MaterialDefaults {
     /// - warning: Only for Stats table because of wrong spelling
     func getMaterialName(id: Int) -> String {
         switch id {
-        case 0: return "пластика"
-        case 1: return "органики"
-        case 2: return "бумаги"
-        case 3: return "металла"
-        case 4: return "стекла"
-        case 5: return "дерева"
-        case 6: return "ткани"
-        default: return "батареек"
+        case 0: return NSLocalizedString("plastic_for_stats", comment: "Title for stats table")
+        case 1: return NSLocalizedString("organic_for_stats", comment: "Title for stats table")
+        case 2: return NSLocalizedString("paper_for_stats", comment: "Title for stats table")
+        case 3: return NSLocalizedString("metal_for_stats", comment: "Title for stats table")
+        case 4: return NSLocalizedString("glass_for_stats", comment: "Title for stats table")
+        case 5: return NSLocalizedString("wood_for_stats", comment: "Title for stats table")
+        case 6: return NSLocalizedString("fabric_for_stats", comment: "Title for stats table")
+        case 7: return NSLocalizedString("battery_for_stats", comment: "Title for stats table")
+        default: return NSLocalizedString("lamp_for_stats", comment: "Title for stats table")
         }
     }
     
@@ -40,8 +41,10 @@ class MaterialDefaults {
             return (wood.title, wood.subtitle, wood.weight)
         case .fabric:
             return (fabric.title, fabric.subtitle, fabric.weight)
-        default:
+        case .battery:
             return (battery.title, battery.subtitle, battery.weight)
+        default:
+            return (lamp.title, lamp.subtitle, lamp.weight)
         }
     }
 

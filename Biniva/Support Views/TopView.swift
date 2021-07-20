@@ -39,6 +39,8 @@ class TopView: UIView {
         button.imageView?.contentMode = .scaleAspectFill
         button.setImage(image, for: .normal)
         button.tintColor = Colors.darkGrayText
+        
+        button.isHidden = true
         return button
     }()
 
@@ -51,8 +53,8 @@ class TopView: UIView {
         }()
         let useFrame: CGRect = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: height)
         super.init(frame: useFrame)
-        self.title.text = "Переработка"
-        self.subtitle.text = "поможем сегодня природе?"
+        self.title.text = NSLocalizedString("top_view_title_recycling", comment: "recycling topView Label")
+        self.subtitle.text = NSLocalizedString("top_view_subtitle_recycling", comment: "recycling topView support subtitle")
         self.backgroundColor = .white
         SetSubviews()
         ActivateLayouts()
@@ -86,11 +88,11 @@ extension TopView: TopViewDelegate {
             })
         })
         if (isRecylcing) {
-            title.text = "Переработка"
-            subtitle.text = "поможем сегодня природе?"
+            title.text = NSLocalizedString("top_view_title_recycling", comment: "recycling topView Label")
+            subtitle.text = NSLocalizedString("top_view_subtitle_recycling", comment: "recycling topView support subtitle")
         } else {
-            title.text = "Твои успехи"
-            subtitle.text = "продолжай в том же духе!"
+            title.text = NSLocalizedString("top_view_title_stats", comment: "stats topView support subtitle")
+            subtitle.text = NSLocalizedString("top_view_subtitle_stats", comment: "stats topView support subtitle")
         }
     }
 }

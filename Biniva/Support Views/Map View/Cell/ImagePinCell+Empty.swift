@@ -2,7 +2,7 @@
 //  EmptyImagePinCell.swift
 //  Biniva
 //
-//  Created by Никита Олтян on 22.06.2021.
+//  Created by Nick Oltyan on 22.06.2021.
 //
 
 import UIKit
@@ -16,7 +16,7 @@ class ImagePinCell_Empty: UICollectionViewCell {
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 16)
             .with(autolayout: false)
-        label.text = "Еще никто не сделал фотографий"
+        label.text = NSLocalizedString("map_pin_empty_title", comment: "Title for empty photo states")
         return label
     }()
     
@@ -27,7 +27,7 @@ class ImagePinCell_Empty: UICollectionViewCell {
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 13)
             .with(autolayout: false)
-        label.text = "Пожалуйста, заходи позже! Мы уже работаем над тем, чтобы все контейнеры были легко узнаваемы."
+        label.text = NSLocalizedString("map_pin_empty_subtitle", comment: "subtitle for empty photo states")
         return label
     }()
     

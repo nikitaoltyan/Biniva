@@ -67,7 +67,8 @@ class MaterialFunctions {
         case 4: return useStruct.metal
         case 5: return useStruct.wood
         case 6: return useStruct.fabric
-        default: return useStruct.battery
+        case 7: return useStruct.battery
+        default: return useStruct.lamp
         }
     }
     
@@ -83,7 +84,8 @@ class MaterialFunctions {
         case 4: return useStruct.metal
         case 5: return useStruct.wood
         case 6: return useStruct.fabric
-        default: return useStruct.battery
+        case 7: return useStruct.battery
+        default: return useStruct.lamp
         }
     }
 }

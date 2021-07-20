@@ -2,7 +2,7 @@
 //  ProgressView.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 18.04.2021.
+//  Created by Nick Oltyan on 18.04.2021.
 //
 
 import UIKit
@@ -73,7 +73,7 @@ class ProgressView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 18)
             .with(autolayout: false)
-        label.text = "собрано мусора"
+        label.text = NSLocalizedString("progress_view_subtitle", comment: "subtitle for progress view")
         return label
     }()
     
@@ -93,14 +93,15 @@ class ProgressView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .clear
-        SetSubviews()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
         setUpInitial()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
     
     func setUpInitial(){
         DataFunction().getTotalLogged(forDate: Date().onlyDate, result: { (logged) in
@@ -130,11 +131,15 @@ class ProgressView: UIView {
     
     func setLabels(){
         let formatted = String(format: "%.2f", currentValue*2)
-        weightLabel.text = "\(formatted) кг"
-        if (currentValue*2 < 1.1) {
-            warningTitle.text = "вы сегодня молодец!"
+        let weightMeasure: String = NSLocalizedString("weight_measurement_kilograms", comment: "Localized kg measurement")
+        let iconMeasure: String = NSLocalizedString("used_icon_measurement", comment: "Compareable weight measurement")
+        let iconMeasureCGFloat: CGFloat = CGFloat(Float(iconMeasure) ?? 1.0)
+        weightLabel.text = "\(formatted) \(weightMeasure)"
+        
+        if (currentValue*2 < iconMeasureCGFloat) {
+            warningTitle.text = NSLocalizedString("progress_view_warning_good", comment: "Title for good results")
         } else {
-            warningTitle.text = "максимальное значение за день"
+            warningTitle.text = NSLocalizedString("progress_view_warning_bad", comment: "Title for bad results")
         }
     }
 }
@@ -144,7 +149,7 @@ class ProgressView: UIView {
 
 
 extension ProgressView {
-    func SetSubviews(){
+    func setSubviews(){
         self.layer.addSublayer(grayCircleView)
         self.layer.addSublayer(circleView)
         self.addSubview(weightLabel)
@@ -152,7 +157,7 @@ extension ProgressView {
         self.addSubview(warningTitle)
     }
     
-    func ActivateLayouts(){
+    func activateLayouts(){
         NSLayoutConstraint.activate([
             weightLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             weightLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -30),

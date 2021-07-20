@@ -18,7 +18,7 @@ class WeightView: UIView {
         view.keyboardType = .numberPad
         view.textAlignment = .center
         view.delegate = self
-        view.text = "50 г"
+        view.text = "50 \(weightSymbol)"
         return view
     }()
     
@@ -58,6 +58,7 @@ class WeightView: UIView {
         return label
     }()
 
+    let weightSymbol: String = NSLocalizedString("weight_measurement_simplified", comment: "localized weight symbol")
     
     override init(frame: CGRect){
         let useFrame = CGRect(x: 0, y: 0, width: 182, height: 50)
@@ -77,27 +78,29 @@ class WeightView: UIView {
     }
     
     
-    @objc func addTen(){
+    @objc
+    func addTen(){
         Vibration.soft()
         let currentTextArray = textView.text.split(separator: " ")
         if currentTextArray.count > 0 {
             let number = Int(currentTextArray[0]) ?? 0
             guard (number < 9999) else { return }
-            textView.text = "\(number + 10) г"
+            textView.text = "\(number + 10) \(weightSymbol)"
         } else {
-            textView.text = "10 г"
+            textView.text = "10 \(weightSymbol)"
         }
     }
     
-    @objc func reduceTen(){
+    @objc
+    func reduceTen(){
         Vibration.soft()
         let currentTextArray = textView.text.split(separator: " ")
         if currentTextArray.count > 0 {
             let number = Int(currentTextArray[0]) ?? 0
             guard (number >= 10) else { return }
-            textView.text = "\(number - 10) г"
+            textView.text = "\(number - 10) \(weightSymbol)"
         } else {
-            textView.text = "0 г"
+            textView.text = "0 \(weightSymbol)"
         }
     }
 }
@@ -116,17 +119,17 @@ extension WeightView: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         guard (textView.text.count > 0) else {
-            self.textView.text = "0 г"
+            self.textView.text = "0 \(weightSymbol)"
             return
         }
-        guard (textView.text.contains("г") == false) else {
+        guard (textView.text.contains(weightSymbol) == false) else {
             let txt = self.textView.text.split(separator: " ")
             let weight: Int = Int(txt[0]) ?? 0
-            self.textView.text = "\(weight) г"
+            self.textView.text = "\(weight) \(weightSymbol)"
             return
         }
         
-        self.textView.text = "\(textView.text ?? "0") г"
+        self.textView.text = "\(textView.text ?? "0") \(weightSymbol)"
     }
 }
 

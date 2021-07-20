@@ -15,7 +15,6 @@ class AddTrashView: UIView {
             .with(alignment: .center)
             .with(fontName: "SFPro-Medium", size: 24)
             .with(autolayout: false)
-        label.text = "Пластик"
         return label
     }()
     

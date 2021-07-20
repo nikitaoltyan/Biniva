@@ -83,7 +83,7 @@ extension MaterialStatView: UICollectionViewDelegate, UICollectionViewDataSource
         case 0, nil:
             return CGSize(width: self.frame.width, height: 150)
         default:
-            return CGSize(width: 80, height: 150)
+            return CGSize(width: 75, height: 150)
         }
     }
     

@@ -39,7 +39,7 @@ class Onboarding_5_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Приложению может понадобится геопозиция"
+        label.text = NSLocalizedString("onboarding_5_title", comment: "title of the fifth onboarding cell")
         return label
     }()
     
@@ -57,7 +57,7 @@ class Onboarding_5_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Она нужна для простоты использования карты Biniva"
+        label.text = NSLocalizedString("onboarding_5_green_title", comment: "the green part of that title")
         return label
     }()
     
@@ -74,7 +74,7 @@ class Onboarding_5_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro", size: textSize)
-        label.text = "Никакой слежки, только удобство"
+        label.text = NSLocalizedString("onboarding_5_subtitle", comment: "the brief description of the feature")
         return label
     }()
     
@@ -82,7 +82,7 @@ class Onboarding_5_Cell: UICollectionViewCell {
         let view = ButtonView()
             .with(autolayout: false)
         view.clipsToBounds = true
-        view.label.text = "Продолжить"
+        view.label.text = NSLocalizedString("onboarding_next", comment: "the Continue label")
         return view
     }()
     
@@ -140,11 +140,6 @@ class Onboarding_5_Cell: UICollectionViewCell {
             })
         })
     }
-    
-    @objc
-    func skipTap() {
-        delegate?.finish()
-    }
 }
 
 
@@ -160,7 +155,6 @@ extension Onboarding_5_Cell {
         self.addSubview(skipLabel)
         
         button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(buttonTap)))
-        skipLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(skipTap)))
     }
     
     func activateLayouts() {

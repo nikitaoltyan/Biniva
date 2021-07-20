@@ -1,0 +1,237 @@
+/* 
+  Localizable.strings
+  Biniva
+
+  Created by Nick Oltyan on 19.07.2021.
+  
+*/
+
+
+// THE MAIN TITLES
+"privacy_policy" = "Политика конфиденциальности";
+"weight_measurement" = "гр";
+"weight_measurement_simplified" = "г";
+"weight_measurement_kilograms" = "кг";
+"used_icon_measurement" = "1.1";
+"add_button" = "Добавить";
+
+// Notification
+"notification_title" = "Как прошел твой день?";
+"notification_subtitle" = "Добавь свой мусор за сегодня, сделай мир чуточку зеленее!";
+
+// Material Defaults
+"plastic_for_stats" = "пластика";
+"organic_for_stats" = "органики";
+"paper_for_stats" = "бумаги";
+"metal_for_stats" = "металла";
+"glass_for_stats" = "стекла";
+"wood_for_stats" = "дерева";
+"fabric_for_stats" = "ткани";
+"battery_for_stats" = "батареек";
+"lamp_for_stats" = "ламп";
+
+"plastic" = "Пластик";
+"organic" = "Органика";
+"paper" = "Бумага";
+"metal" = "Металл";
+"glass" = "Стекло";
+"wood" = "Дерево";
+"fabric" = "Ткань";
+"battery" = "Батарейки";
+"lamp" = "Лампы";
+
+
+// ONBOARDING
+"onboarding_next" = "Продолжить";
+// First cell
+"onboarding_1_title" = "Открой новый мир";
+"onboarding_1_green_title" = "экологии";
+"onboarding_1_subtitle" = "Сейчас самое время задуматься о том, сколько мы потребляем и что можем с этим сделать";
+"onboarding_1_description" = "Мы очень ценим вашу приватность, поэтому мы хотели, чтобы вы знали, как мы используем продоставленную вами личную информацию. Нажав Начать вы соглашаетесь с";
+"onboarding_1_conditions" = "Условиями";
+// Second cell
+"onboarding_2_title" = "Находи пункты переработки с помощью";
+"onboarding_2_green_title" = "Biniva";
+"onboarding_2_subtitle" = "Карта, составленная самими пользователями!";
+// Third cell
+"onboarding_3_title" = "Отслеживай свое потребление и";
+"onboarding_3_green_title" = "создавай полезные привычки";
+"onboarding_3_subtitle" = "В среднем каждый житель Земли создает 1,1 килограмм мусора в день. Давай снизим это число?";
+// Fourth cell
+"onboarding_4_title" = "Разрешить отправку уведомлений?";
+"onboarding_4_green_title" = "Они будут отправляться всего 1 раз в день, вечером";
+"onboarding_4_subtitle" = "С уведомлением ты точно не забудешь записать весь свой мусор";
+// Fifth cell
+"onboarding_5_title" = "Приложению может понадобится геопозиция";
+"onboarding_5_green_title" = "Она нужна для простоты использования карты Biniva";
+"onboarding_5_subtitle" = "Никакой слежки, только удобство";
+
+
+// TOP VIEW
+"top_view_title_recycling" = "Переработка";
+"top_view_subtitle_recycling" = "поможем сегодня природе?";
+"top_view_title_stats" = "Твои успехи";
+"top_view_subtitle_stats" = "продолжай в том же духе!";
+
+// PROGRESS VIEW
+"progress_view_subtitle" = "собрано мусора";
+"progress_view_warning_good" = "вы сегодня молодец!";
+"progress_view_warning_bad" = "максимальное значение за день";
+
+// SWITCHER VIEW
+"switcher_recycling" = "Мусор";
+"switcher_stats" = "Статистика";
+"switcher_map" = "Карта";
+
+// STATS VIEW
+"stats_subtitle" = "всего собрано мусора";
+"stats_events_title" = "События";
+"stats_empty_cell_title" = "Еще ничего не добавлено";
+"stats_empty_cell_subtitle" = "Добавляй мусор, который выбрасываешь, и следи за своим потреблением здесь.";
+
+
+// MAP VIEW
+"map_pin_title" = "Контейнер";
+"map_pin_photo" = "Фото";
+"map_pin_error" = "Не удается получить адресс";
+"map_pin_empty_title" = "Еще никто не сделал фотографий";
+"map_pin_empty_subtitle" = "Пожалуйста, заходи позже! Мы уже работаем над тем, чтобы все контейнеры были легко узнаваемы.";
+
+
+// ADD POINT VIEW
+"add_point_title" = "Добавить контейнер";
+"add_point_choose_materials" = "Что можно сдать?";
+"add_point_map_start_position" = "Адресс не выбран";
+"add_point_add_photo" = "Добавь фото";
+"add_point_map_error" = "Геолокация недоступна. Попробуй еще раз.";
+"add_point_materials_alert_title" = "Не выбраны материалы";
+"add_point_materials_alert_subtitle" = "Пожалуйста, выбери материалы, которые можно сдать. Это поможет другим пользователям.";
+"add_point_adress_alert_title" = "Не выбрана геопозиция";
+"add_point_adress_alert_subtitle" = "Пожалуйста, выбери точку на карте, где можно найти это место переработки. Это поможет другим пользователям.";
+"add_point_close_alert" = "Исправить";
+"add_point_added_title" = "Добавлено!";
+"add_point_added_desc" = "Контейнер для мусора отправлен на модерацию. В ближайшее время он появится на карте. Спасибо!";
+"add_point_added_button" = "Олтично!";
+
+
+
+
+
+// Plastic material
+"plastic_title_1" = "Пакет";
+"plastic_title_2" = "Бутылка";
+"plastic_title_3" = "Бутылка";
+"plastic_title_4" = "Бутылка";
+"plastic_title_5" = "Бутылка";
+"plastic_title_6" = "Другое";
+"plastic_subtitle_1" = "Майка";
+"plastic_subtitle_2" = "Объем 0.5 литра";
+"plastic_subtitle_3" = "Объем 1 литр";
+"plastic_subtitle_4" = "Объем 1.5 литра";
+"plastic_subtitle_5" = "Объем 2 литра";
+"plastic_subtitle_6" = "Обертка и т.д.";
+"plastic_weight_1" = "7"; // In gramms
+"plastic_weight_2" = "25";
+"plastic_weight_3" = "35";
+"plastic_weight_4" = "40";
+"plastic_weight_5" = "45";
+"plastic_weight_6" = "50";
+
+
+// Organic material
+"organic_title_1" = "Огрызок";
+"organic_title_2" = "Кожура";
+"organic_title_3" = "Очистки";
+"organic_title_4" = "Другое";
+"organic_subtitle_1" = "Яблоко или груша";
+"organic_subtitle_2" = "Банановая";
+"organic_subtitle_3" = "Картофель";
+"organic_subtitle_4" = "Органика";
+"organic_weight_1" = "20"; // In gramms
+"organic_weight_2" = "60";
+"organic_weight_3" = "60";
+"organic_weight_4" = "50";
+
+
+// Glass material
+"glass_title_1" = "Стакан";
+"glass_title_2" = "Бутылка";
+"glass_title_3" = "Другое";
+"glass_subtitle_1" = "Объем 0,2 литра";
+"glass_subtitle_2" = "Объем 0.5 литра";
+"glass_subtitle_3" = "Стекло";
+"glass_weight_1" = "250"; // In gramms
+"glass_weight_2" = "350";
+"glass_weight_3" = "60";
+
+
+// Paper material
+"paper_title_1" = "Лист";
+"paper_title_2" = "Упаковка";
+"paper_title_3" = "Обертка";
+"paper_title_4" = "Коробка";
+"paper_title_5" = "Коробка";
+"paper_title_6" = "Другое";
+"paper_subtitle_1" = "А4";
+"paper_subtitle_2" = "Из под молока";
+"paper_subtitle_3" = "Небольшая";
+"paper_subtitle_4" = "Картонная маленькая";
+"paper_subtitle_5" = "Картонная большая";
+"paper_subtitle_6" = "Салфетка и т.д.";
+"paper_weight_1" = "5"; // In gramms
+"paper_weight_2" = "25";
+"paper_weight_3" = "40";
+"paper_weight_4" = "50";
+"paper_weight_5" = "100";
+"paper_weight_6" = "5";
+
+
+// Metal material
+"metal_title_1" = "Фольга";
+"metal_title_2" = "Фантик";
+"metal_title_3" = "Банка";
+"metal_title_4" = "Другое";
+"metal_subtitle_1" = "Длина 0,5 метра";
+"metal_subtitle_2" = "От конфеты";
+"metal_subtitle_3" = "Объем 0.33 литра";
+"metal_subtitle_4" = "Гвозди и т.д.";
+"metal_weight_1" = "30"; // In gramms
+"metal_weight_2" = "3";
+"metal_weight_3" = "17";
+"metal_weight_4" = "50";
+
+
+// Wood material
+"wood_title_1" = "Другое";
+"wood_subtitle_1" = "Стулья и т.д.";
+"wood_weight_1" = "500"; // In gramms
+
+
+// Fabric material
+"fabric_title_1" = "Футболка";
+"fabric_title_2" = "Другое";
+"fabric_subtitle_1" = "Взрослая";
+"fabric_subtitle_2" = "Ткань";
+"fabric_weight_1" = "200"; // In gramms
+"fabric_weight_2" = "50";
+
+
+// Battery material
+"battery_title_1" = "Батарейка";
+"battery_title_2" = "Батарейка";
+"battery_title_3" = "Другое";
+"battery_subtitle_1" = "Мизинчиковая";
+"battery_subtitle_2" = "Пальчиковая";
+"battery_subtitle_3" = "Батарейка";
+"battery_weight_1" = "25"; // In gramms
+"battery_weight_2" = "40";
+"battery_weight_3" = "50";
+
+
+// Fabric material
+"lamp_title_1" = "Лампочка";
+"lamp_title_2" = "Другое";
+"lamp_subtitle_1" = "Спиральная";
+"lamp_subtitle_2" = "Лампочка";
+"lamp_weight_1" = "105"; // In gramms
+"lamp_weight_2" = "100";

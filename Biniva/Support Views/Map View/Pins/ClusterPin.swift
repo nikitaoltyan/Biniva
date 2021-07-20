@@ -2,7 +2,7 @@
 //  ClusterPin.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 04.06.2021.
+//  Created by Nick Oltyan on 04.06.2021.
 //
 
 import MapKit
@@ -11,7 +11,6 @@ class ClusterPin: MKAnnotationView {
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        print("Cluster pin init")
         collisionMode = .circle
         centerOffset = CGPoint(x: 0, y: -10) // Offset center point to animate better with marker annotations
     }

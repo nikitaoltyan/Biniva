@@ -29,7 +29,7 @@ class PointAddedPopUpController: UIViewController {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 20)
             .with(autolayout: false)
-        label.text = "Добавлено!"
+        label.text = NSLocalizedString("add_point_added_title", comment: "Title for added points Pop Up")
         return label
     }()
     
@@ -47,7 +47,7 @@ class PointAddedPopUpController: UIViewController {
             .with(numberOfLines: 0)
             .with(fontName: "SFPro", size: 16)
             .with(autolayout: false)
-        label.text = "Контейнер для мусора отправлен на модерацию. В ближайшее время он появится на карте. Спасибо!"
+        label.text = NSLocalizedString("add_point_added_desc", comment: "Description for added points Pop Up")
         return label
     }()
     
@@ -57,7 +57,7 @@ class PointAddedPopUpController: UIViewController {
             .with(bgColor: .lightGray)
             .with(cornerRadius: 12)
         
-        button.setTitle("Отлично!", for: .normal)
+        button.setTitle(NSLocalizedString("add_point_added_button", comment: "button title"), for: .normal)
         button.titleLabel?.font = UIFont(name: "SFPro", size: 18)
         button.setTitleColor(Colors.background, for: .normal)
         

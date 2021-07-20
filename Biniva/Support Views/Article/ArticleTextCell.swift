@@ -32,8 +32,6 @@ class ArticleTextCell: UITableViewCell {
     
     func setText(text: String) {
         let attributedString = NSMutableAttributedString(string: text)
-
-        // *** Create instance of `NSMutableParagraphStyle`
         let paragraphStyle = NSMutableParagraphStyle()
 
         // *** set LineSpacing property in points ***

@@ -28,8 +28,8 @@ class Notifications {
     
     func setUpLocalNotifications(completion: @escaping(_ success: Bool) -> Void){
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "Как прошел твой день?"
-        notificationContent.body = "Добавь свой мусор за сегодня, сделай мир чуточку зеленее!"
+        notificationContent.title = NSLocalizedString("notification_title", comment: "Title for notification")
+        notificationContent.body = NSLocalizedString("notification_subtitle", comment: "Title for notification")
         notificationContent.badge = NSNumber(value: 1)
         notificationContent.sound = .default
                         

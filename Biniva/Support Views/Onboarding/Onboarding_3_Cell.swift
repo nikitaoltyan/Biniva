@@ -30,7 +30,7 @@ class Onboarding_3_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Отслеживай свое потребление и"
+        label.text = NSLocalizedString("onboarding_3_title", comment: "title of third onboarding cell")
         return label
     }()
     
@@ -48,7 +48,7 @@ class Onboarding_3_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "создавай полезные привычки"
+        label.text = NSLocalizedString("onboarding_3_green_title", comment: "the green part of that title")
         return label
     }()
     
@@ -65,7 +65,7 @@ class Onboarding_3_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro", size: textSize)
-        label.text = "В среднем каждый житель Земли создает 1,1 килограмм мусора в день. Давай снизим это число?"
+        label.text = NSLocalizedString("onboarding_3_subtitle", comment: "the brief description of the feature")
         return label
     }()
     
@@ -73,7 +73,7 @@ class Onboarding_3_Cell: UICollectionViewCell {
         let view = ButtonView()
             .with(autolayout: false)
         view.clipsToBounds = true
-        view.label.text = "Продолжить"
+        view.label.text = NSLocalizedString("onboarding_next", comment: "the Continue label")
         return view
     }()
     

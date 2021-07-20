@@ -2,7 +2,7 @@
 //  MaterialCell.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 20.04.2021.
+//  Created by Nick Oltyan on 20.04.2021.
 //
 
 import UIKit
@@ -31,12 +31,12 @@ class MaterialCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .clear
-        SetSubviews()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder: \(coder) has not been implemented")
     }
 }
 
@@ -46,12 +46,12 @@ class MaterialCell: UICollectionViewCell {
 
 
 extension MaterialCell {
-    func SetSubviews(){
+    func setSubviews(){
         self.addSubview(image)
         self.addSubview(title)
     }
     
-    func ActivateLayouts(){
+    func activateLayouts(){
         let imageTopConst: CGFloat = {
             if MainConstants.screenHeight > 700 { return 50 }
             else { return 30 }

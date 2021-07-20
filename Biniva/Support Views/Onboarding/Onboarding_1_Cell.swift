@@ -53,7 +53,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Открой новый мир"
+        label.text = NSLocalizedString("onboarding_1_title", comment: "title of first onboarding cell")
         return label
     }()
     
@@ -71,7 +71,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "экологии"
+        label.text = NSLocalizedString("onboarding_1_green_title", comment: "the green part of that title")
         return label
     }()
     
@@ -88,7 +88,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro", size: textSize)
-        label.text = "Сейчас самое время задуматься о том, сколько мы потребляем и что можем с этим сделать"
+        label.text = NSLocalizedString("onboarding_1_subtitle", comment: "subtitle")
         return label
     }()
     
@@ -96,7 +96,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
         let view = ButtonView()
             .with(autolayout: false)
         view.clipsToBounds = true
-        view.label.text = "Начать"
+        view.label.text = NSLocalizedString("onboarding_next", comment: "the Continue label")
         return view
     }()
     
@@ -107,7 +107,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "Helvetica", size: 12)
-        label.text = "Мы очень ценим вашу приватность, поэтому мы хотели, чтобы вы знали, как мы используем продоставленную вами личную информацию. Нажав Начать вы соглашаетесь с"
+        label.text = NSLocalizedString("onboarding_1_description", comment: "description before conditions")
         return label
     }()
     
@@ -119,7 +119,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Semibold", size: 12)
         label.isUserInteractionEnabled = true
-        label.text = "Условиями"
+        label.text = NSLocalizedString("onboarding_1_conditions", comment: "selectable Conditions label")
         return label
     }()
     

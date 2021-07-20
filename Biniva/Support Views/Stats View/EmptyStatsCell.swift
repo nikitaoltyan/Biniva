@@ -16,7 +16,7 @@ class EmptyStatsCell: UITableViewCell {
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 16)
             .with(autolayout: false)
-        label.text = "Еще ничего не добавлено"
+        label.text = NSLocalizedString("stats_empty_cell_title", comment: "title for empty state Cell")
         return label
     }()
     
@@ -27,7 +27,7 @@ class EmptyStatsCell: UITableViewCell {
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 13)
             .with(autolayout: false)
-        label.text = "Добавляй мусор, который выбрасываешь, и следи за своим потреблением здесь."
+        label.text = NSLocalizedString("stats_empty_cell_subtitle", comment: "title for empty state Cell")
         return label
     }()
 

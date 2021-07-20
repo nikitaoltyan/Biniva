@@ -2,7 +2,7 @@
 //  AddPointController.swift
 //  Biniva
 //
-//  Created by Никита Олтян on 27.06.2021.
+//  Created by Nick Oltyan on 27.06.2021.
 //
 
 import UIKit
@@ -32,15 +32,16 @@ class AddPointController: UIViewController {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 28)
             .with(autolayout: false)
-        label.text = "Добавить контейнер"
+        label.text = NSLocalizedString("add_point_title", comment: "title for whole view")
         return label
     }()
     
     let map: MKMapView = {
         let map = MKMapView(frame: CGRect(x: 0, y: 0, width: 300, height: 330))
             .with(autolayout: false)
+            .with(cornerRadius: 13)
         map.isUserInteractionEnabled = true
-        map.layer.cornerRadius = 13
+        map.showsTraffic = false
 
         // There should be user's coordinate.
         let coordinate = CLLocationCoordinate2D(latitude: 55.794698, longitude: 37.929111)
@@ -57,7 +58,7 @@ class AddPointController: UIViewController {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 20)
             .with(autolayout: false)
-        label.text = "Адрес не выбран"
+        label.text = NSLocalizedString("add_point_map_start_position", comment: "defining that adress wasn't setted") // Then this text is changing into choosed adress.
         return label
     }()
     
@@ -68,7 +69,7 @@ class AddPointController: UIViewController {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 23)
             .with(autolayout: false)
-        label.text = "Что можно сдать?"
+        label.text = NSLocalizedString("add_point_choose_materials", comment: "Ask about materials thet can be recycled")
         return label
     }()
     
@@ -100,7 +101,7 @@ class AddPointController: UIViewController {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 23)
             .with(autolayout: false)
-        label.text = "Добавь фото"
+        label.text = NSLocalizedString("add_point_add_photo", comment: "Ask for adding photos")
         return label
     }()
     
@@ -190,7 +191,7 @@ class AddPointController: UIViewController {
                 let firstLocation = placemarks?[0]
                 self.adressLabel.text = firstLocation?.name
             } else {
-                self.adressLabel.text = "Геолокация недоступна. Попробуй еще раз."
+                self.adressLabel.text = NSLocalizedString("add_point_map_error", comment: "Special error when it can't get adtress. Asking for retry.")
             }
         })
 
@@ -208,11 +209,16 @@ class AddPointController: UIViewController {
     @objc
     func add(){
         guard (settedLocation != nil) else {
-            showAlert(withTitle: "Не выбрана геопозиция", andSubtitle: "Пожалуйста, выбери точку на карте, где можно найти это место переработки. Это поможет другим пользователям.")
+            showAlert(withTitle: NSLocalizedString("add_point_adress_alert_title", comment: "title for add location alert"),
+                      andSubtitle: NSLocalizedString("add_point_adress_alert_subtitle",
+                                                     comment: "subtitle for add location alert"))
             return
         }
         guard (selectedMaterials.count > 0) else {
-            showAlert(withTitle: "Не выбраны материалы", andSubtitle: "Пожалуйста, выбери материалы, которые можно сдать. Это поможет другим пользователям.")
+            showAlert(withTitle: NSLocalizedString("add_point_materials_alert_title",
+                                                   comment: "title for add materials alert"),
+                      andSubtitle: NSLocalizedString("add_point_materials_alert_subtitle",
+                                                     comment: "subtitle for add materials alert"))
             return
         }
         
@@ -239,7 +245,7 @@ class AddPointController: UIViewController {
     func showAlert(withTitle title: String, andSubtitle subtitle: String) {
         let alert = prepareAlert(withTitle: title,
                                  andSubtitle: subtitle,
-                                 closeAction: "Исправить")
+                                 closeAction: NSLocalizedString("add_point_close_alert", comment: "Ask for change everything"))
         present(alert, animated: true, completion: nil)
     }
 }

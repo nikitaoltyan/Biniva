@@ -41,7 +41,7 @@ class StatsView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 18)
             .with(autolayout: false)
-        label.text = "всего собрано мусора"
+        label.text = NSLocalizedString("stats_subtitle", comment: "The whole view subtitle")
         return label
     }()
     
@@ -63,7 +63,7 @@ class StatsView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 22)
             .with(autolayout: false)
-        label.text = "События"
+        label.text = NSLocalizedString("stats_events_title", comment: "Just a title before whole stats table")
         return label
     }()
     
@@ -112,7 +112,7 @@ class StatsView: UIView {
             .with(fontName: "SFPro-Medium", size: 15)
             .with(autolayout: false)
         label.isUserInteractionEnabled = true
-        label.text = "Политика конфиденциальности"
+        label.text = NSLocalizedString("privacy_policy", comment: "Title for Privacy Policy link")
         return label
     }()
     
@@ -158,7 +158,8 @@ class StatsView: UIView {
     func updateLabel(){
         DataFunction().getTotalLogged(result: { sum in
             let formatted = String(format: "%.1f", Double(sum)/1000.0)
-            self.weightLabel.text = "\(formatted) кг"
+            let weightMeasure: String = NSLocalizedString("weight_measurement_kilograms", comment: "Localized kg measurement")
+            self.weightLabel.text = "\(formatted) \(weightMeasure)"
         })
     }
     
@@ -167,7 +168,7 @@ class StatsView: UIView {
         let instagramHooks = "instagram://user?username=biniva_app"
         let instagramUrl = NSURL(string: instagramHooks)
         if UIApplication.shared.canOpenURL(instagramUrl! as URL) {
-            print("Open Greener Inst page")
+            print("Open Biniva Inst page")
             UIApplication.shared.open(instagramUrl! as URL, options: [:], completionHandler: nil)
         } else {
             print("Open Ordinary Inst page")

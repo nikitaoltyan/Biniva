@@ -1,0 +1,237 @@
+/* 
+  Localizable.strings
+  Biniva
+
+  Created by Nick Oltyan on 19.07.2021.
+  
+*/
+
+
+// THE MAIN TITLES
+"privacy_policy" = "Privacy Policy";
+"weight_measurement" = "gr";
+"weight_measurement_simplified" = "g";
+"weight_measurement_kilograms" = "kg";
+"used_icon_measurement" = "1.1";
+"add_button" = "Add";
+
+// Notification
+"notification_title" = "How was your day?";
+"notification_subtitle" = "Add your garbage for today, make the world a little greener!";
+
+// Material Defaults
+"plastic_for_stats" = "plastic";
+"organic_for_stats" = "organic";
+"paper_for_stats" = "paper";
+"metal_for_stats" = "metal";
+"glass_for_stats" = "glass";
+"wood_for_stats" = "wood";
+"fabric_for_stats" = "fabric";
+"battery_for_stats" = "battery";
+"lamp_for_stats" = "lamp";
+
+"plastic" = "Plastic";
+"organic" = "Organic";
+"paper" = "Paper";
+"metal" = "Metal";
+"glass" = "Glass";
+"wood" = "Wood";
+"fabric" = "Fabric";
+"battery" = "Batteries";
+"lamp" = "Lamps";
+
+
+// ONBOARDING
+"onboarding_next" = "Continue";
+// First cell
+"onboarding_1_title" = "Explore the new world";
+"onboarding_1_green_title" = "of ecology";
+"onboarding_1_subtitle" = "Now is the time to think about how much we consume and what we can do about it";
+"onboarding_1_description" = "We appreciate your privacy very much, so we wanted you to know how we use the personal information you provided. By tapping Continue you agree to";
+"onboarding_1_conditions" = "Conditions";
+// Second cell
+"onboarding_2_title" = "Find recycling points with";
+"onboarding_2_green_title" = "Biniva";
+"onboarding_2_subtitle" = "A map made up by the users themselves!";
+// Third cell
+"onboarding_3_title" = "Track your consumption and";
+"onboarding_3_green_title" = "create useful habits";
+"onboarding_3_subtitle" = "On average, every inhabitant of the Earth creates 1.1 kilograms of garbage per day. Let's lower this number?";
+// Fourth cell
+"onboarding_4_title" = "Allow notifications?";
+"onboarding_4_green_title" = "They will be sent only 1 time per day, in the evening";
+"onboarding_4_subtitle" = "With the notifications, you will definitely not forget to write down all your garbage";
+// Fifth cell
+"onboarding_5_title" = "The app can track your geoposition";
+"onboarding_5_green_title" = "It is necessary for using the Biniva map";
+"onboarding_5_subtitle" = "No surveillance, just convenience!";
+
+
+// TOP VIEW
+"top_view_title_recycling" = "Recycling";
+"top_view_subtitle_recycling" = "let's help nature today!";
+"top_view_title_stats" = "Your progress";
+"top_view_subtitle_stats" = "go ahead!";
+
+// PROGRESS VIEW
+"progress_view_subtitle" = "garbage collected";
+"progress_view_warning_good" = "good job today!";
+"progress_view_warning_bad" = "maximum value per day";
+
+// SWITCHER VIEW
+"switcher_recycling" = "Garbage";
+"switcher_stats" = "Stats";
+"switcher_map" = "Map";
+
+// STATS VIEW
+"stats_subtitle" = "total garbage collected";
+"stats_events_title" = "Events";
+"stats_empty_cell_title" = "Nothing has been added yet";
+"stats_empty_cell_subtitle" = "Add the garbage that you throw away, and monitor your consumption here.";
+
+
+// MAP VIEW
+"map_pin_title" = "Disposal";
+"map_pin_photo" = "Photo";
+"map_pin_error" = "Can't get the address";
+"map_pin_empty_title" = "No one has taken photos yet";
+"map_pin_empty_subtitle" = "Please come back later! We are already working on making all containers easily recognizable.";
+
+
+// ADD POINT VIEW
+"add_point_title" = "Add disposal";
+"add_point_choose_materials" = "What can be recycled?";
+"add_point_map_start_position" = "The address is not selected";
+"add_point_add_photo" = "Add photo";
+"add_point_map_error" = "Geolocation is not available. Try again.";
+"add_point_materials_alert_title" = "No materials selected";
+"add_point_materials_alert_subtitle" = "Please, select the materials that can be submitted. This will help other users.";
+"add_point_adress_alert_title" = "No geoposition setted";
+"add_point_adress_alert_subtitle" = "Please, select a point on the map where you can find this recycling site. This will help other users.";
+"add_point_close_alert" = "Fix it";
+"add_point_added_title" = "Added!";
+"add_point_added_desc" = "The garbage container has been sent for moderation. It will appear on the map in the near future. Thanks!";
+"add_point_added_button" = "Excelent!";
+
+
+
+
+
+// Plastic material
+"plastic_title_1" = "Package";
+"plastic_title_2" = "Bottle";
+"plastic_title_3" = "Bottle";
+"plastic_title_4" = "Bottle";
+"plastic_title_5" = "Bottle";
+"plastic_title_6" = "Other";
+"plastic_subtitle_1" = "Ordinary";
+"plastic_subtitle_2" = "Volume 0.5 liters";
+"plastic_subtitle_3" = "Volume 1 liter";
+"plastic_subtitle_4" = "Volume 1.5 liters";
+"plastic_subtitle_5" = "Volume 2 liter";
+"plastic_subtitle_6" = "Wrapper, etc.";
+"plastic_weight_1" = "7"; // In gramms
+"plastic_weight_2" = "25";
+"plastic_weight_3" = "35";
+"plastic_weight_4" = "40";
+"plastic_weight_5" = "45";
+"plastic_weight_6" = "50";
+
+
+// Organic material
+"organic_title_1" = "Stub";
+"organic_title_2" = "Peel";
+"organic_title_3" = "Peel";
+"organic_title_4" = "Other";
+"organic_subtitle_1" = "Apple or pear";
+"organic_subtitle_2" = "Banana";
+"organic_subtitle_3" = "Potato";
+"organic_subtitle_4" = "Organic";
+"organic_weight_1" = "20"; // In gramms
+"organic_weight_2" = "60";
+"organic_weight_3" = "60";
+"organic_weight_4" = "50";
+
+
+// Glass material
+"glass_title_1" = "Glass";
+"glass_title_2" = "Bottle";
+"glass_title_3" = "Other";
+"glass_subtitle_1" = "Volume 0.2 liters";
+"glass_subtitle_2" = "Volume 0.5 liters";
+"glass_subtitle_3" = "Glass";
+"glass_weight_1" = "250"; // In gramms
+"glass_weight_2" = "350";
+"glass_weight_3" = "60";
+
+
+// Paper material
+"paper_title_1" = "Sheet";
+"paper_title_2" = "Package";
+"paper_title_3" = "Wrapper";
+"paper_title_4" = "Box";
+"paper_title_5" = "Box";
+"paper_title_6" = "Other";
+"paper_subtitle_1" = "A4";
+"paper_subtitle_2" = "Milk";
+"paper_subtitle_3" = "Small";
+"paper_subtitle_4" = "Small cardboard";
+"paper_subtitle_5" = "Big cardboard";
+"paper_subtitle_6" = "Napkin, etc.";
+"paper_weight_1" = "5"; // In gramms
+"paper_weight_2" = "25";
+"paper_weight_3" = "40";
+"paper_weight_4" = "50";
+"paper_weight_5" = "100";
+"paper_weight_6" = "5";
+
+
+// Metal material
+"metal_title_1" = "Foil";
+"metal_title_2" = "Wrapper";
+"metal_title_3" = "Can";
+"metal_title_4" = "Other";
+"metal_subtitle_1" = "Length 0.5 meters";
+"metal_subtitle_2" = "Candy";
+"metal_subtitle_3" = "Beer";
+"metal_subtitle_4" = "Nails, etc.";
+"metal_weight_1" = "30"; // In gramms
+"metal_weight_2" = "3";
+"metal_weight_3" = "17";
+"metal_weight_4" = "50";
+
+
+// Wood material
+"wood_title_1" = "Other";
+"wood_subtitle_1" = "Chairs, etc.";
+"wood_weight_1" = "500"; // In gramms
+
+
+// Fabric material
+"fabric_title_1" = "T-shirt";
+"fabric_title_2" = "Other";
+"fabric_subtitle_1" = "Adult";
+"fabric_subtitle_2" = "Fabric";
+"fabric_weight_1" = "200"; // In gramms
+"fabric_weight_2" = "50";
+
+
+// Battery material
+"battery_title_1" = "Battery";
+"battery_title_2" = "Battery";
+"battery_title_3" = "Other";
+"battery_subtitle_1" = "AAA";
+"battery_subtitle_2" = "AA";
+"battery_subtitle_3" = "Battery";
+"battery_weight_1" = "25"; // In gramms
+"battery_weight_2" = "40";
+"battery_weight_3" = "50";
+
+
+// Fabric material
+"lamp_title_1" = "Lamp";
+"lamp_title_2" = "Other";
+"lamp_subtitle_1" = "Spiral";
+"lamp_subtitle_2" = "Lamp";
+"lamp_weight_1" = "105"; // In gramms
+"lamp_weight_2" = "100";

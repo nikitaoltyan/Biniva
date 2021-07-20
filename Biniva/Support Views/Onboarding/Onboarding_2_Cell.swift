@@ -83,7 +83,7 @@ class Onboarding_2_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Находи пункты переработки с помощью"
+        label.text = NSLocalizedString("onboarding_2_title", comment: "title of second onboarding cell")
         return label
     }()
     
@@ -100,7 +100,7 @@ class Onboarding_2_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Biniva"
+        label.text = NSLocalizedString("onboarding_2_green_title", comment: "the green part of that title")
         return label
     }()
     
@@ -117,7 +117,7 @@ class Onboarding_2_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro", size: textSize)
-        label.text = "Карта, составленная самими пользователями!"
+        label.text = NSLocalizedString("onboarding_2_subtitle", comment: "the brief description of the feature")
         return label
     }()
     
@@ -125,7 +125,7 @@ class Onboarding_2_Cell: UICollectionViewCell {
         let view = ButtonView()
             .with(autolayout: false)
         view.clipsToBounds = true
-        view.label.text = "Продолжить"
+        view.label.text = NSLocalizedString("onboarding_next", comment: "the Continue label")
         return view
     }()
     

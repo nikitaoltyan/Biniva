@@ -102,8 +102,8 @@ class AddTrashController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Colors.sliderGray
         self.hideKeyboardWhenTappedAround()
-        SetSubviews()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
     }
 
     @objc
@@ -199,7 +199,7 @@ extension AddTrashController: UICollectionViewDelegate, UICollectionViewDataSour
 
 
 extension AddTrashController {
-    func SetSubviews(){
+    func setSubviews(){
         view.addSubview(backButton)
         view.addSubview(whiteBGView)
         whiteBGView.addSubview(materialsCollection)
@@ -211,7 +211,7 @@ extension AddTrashController {
         button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(add)))
     }
     
-    func ActivateLayouts(){
+    func activateLayouts(){
         let buttonBottomConst: CGFloat = {
             if MainConstants.screenHeight == 736 { return -40 }
             else if MainConstants.screenHeight > 700 { return -66 }

@@ -45,7 +45,7 @@ class SwitcherView: UIView {
             .with(alignment: .center)
             .with(fontName: "SFPro-Semibold", size: 16)
             .with(autolayout: false)
-        label.text = "Мусор"
+        label.text = NSLocalizedString("switcher_recycling", comment: "recycling switcher label")
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -56,7 +56,7 @@ class SwitcherView: UIView {
             .with(alignment: .center)
             .with(fontName: "SFPro-Semibold", size: 16)
             .with(autolayout: false)
-        label.text = "Статистика"
+        label.text = NSLocalizedString("switcher_stats", comment: "stats switcher label")
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -67,7 +67,7 @@ class SwitcherView: UIView {
             .with(alignment: .center)
             .with(fontName: "SFPro-Semibold", size: 16)
             .with(autolayout: false)
-        label.text = "Карта"
+        label.text = NSLocalizedString("switcher_map", comment: "map switcher label")
         label.isUserInteractionEnabled = true
         return label
     }()
