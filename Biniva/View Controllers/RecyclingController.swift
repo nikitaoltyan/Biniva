@@ -21,7 +21,8 @@ protocol StatsDelegate {
 
 
 protocol RecyclingDelegate {
-    func Add()
+    func add()
+    func openCamera()
 }
 
 protocol mapDelegate {
@@ -207,13 +208,21 @@ extension RecyclingController: StatsDelegate {
 
 
 extension RecyclingController: RecyclingDelegate {
-    func Add() {
+    func add() {
         Vibration.soft()
         let newVC = AddTrashController()
         newVC.modalPresentationStyle = .overFullScreen
         newVC.modalTransitionStyle = .coverVertical
         newVC.recyclingDelegate = recyclingView
         newVC.statsDelegate = statsView
+        present(newVC, animated: true, completion: nil)
+    }
+    
+    func openCamera() {
+        Vibration.soft()
+        let newVC = CameraController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
         present(newVC, animated: true, completion: nil)
     }
 }

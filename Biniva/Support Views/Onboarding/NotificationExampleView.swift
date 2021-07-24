@@ -45,7 +45,7 @@ class NotificationExampleView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Semibold", size: 16)
-        label.text = "Как прошел твой день?"
+        label.text = NSLocalizedString("notification_title", comment: "Title for notification")
         return label
     }()
     
@@ -56,7 +56,7 @@ class NotificationExampleView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "Helvetica", size: 16)
-        label.text = "Добавь свой мусор за сегодня, сделай мир чуточку зеленее!"
+        label.text = NSLocalizedString("notification_subtitle", comment: "Body for notification")
         return label
     }()
     

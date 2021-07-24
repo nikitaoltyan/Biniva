@@ -75,6 +75,9 @@
 		5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */; };
 		5CB8593C2652BB3D00885A6D /* MaterialStatsCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */; };
 		5CC12876265FFF8C0097ECDD /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC12875265FFF8C0097ECDD /* MKMapView+Extension.swift */; };
+		5CC8CB1126AAC043006186BE /* AddButtonWithPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8CB1026AAC043006186BE /* AddButtonWithPhotoView.swift */; };
+		5CC8CB1326AAC41E006186BE /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8CB1226AAC41E006186BE /* CameraController.swift */; };
+		5CC8CB1626AB618E006186BE /* TakePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8CB1526AB618E006186BE /* TakePhotoView.swift */; };
 		5CD0B13026888AD200267081 /* AddPointButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B12F26888AD200267081 /* AddPointButtonView.swift */; };
 		5CD0B1322688A85E00267081 /* AddPointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1312688A85E00267081 /* AddPointController.swift */; };
 		5CD0B1352689BD4500267081 /* TakePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1342689BD4500267081 /* TakePhotoCell.swift */; };
@@ -197,6 +200,9 @@
 		5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView Extension.swift"; sourceTree = "<group>"; };
 		5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaterialStatsCell+Empty.swift"; sourceTree = "<group>"; };
 		5CC12875265FFF8C0097ECDD /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
+		5CC8CB1026AAC043006186BE /* AddButtonWithPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonWithPhotoView.swift; sourceTree = "<group>"; };
+		5CC8CB1226AAC41E006186BE /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		5CC8CB1526AB618E006186BE /* TakePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoView.swift; sourceTree = "<group>"; };
 		5CD0B12F26888AD200267081 /* AddPointButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointButtonView.swift; sourceTree = "<group>"; };
 		5CD0B1312688A85E00267081 /* AddPointController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointController.swift; sourceTree = "<group>"; };
 		5CD0B1342689BD4500267081 /* TakePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoCell.swift; sourceTree = "<group>"; };
@@ -451,6 +457,7 @@
 				5C454E2925B57B2000966991 /* OnboardingController.swift */,
 				5CD0B1312688A85E00267081 /* AddPointController.swift */,
 				5C555083269CA17600AD8015 /* ArticleController.swift */,
+				5CC8CB1226AAC41E006186BE /* CameraController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -467,6 +474,7 @@
 				5CD0B1332689BD0500267081 /* Add Point */,
 				5C64D786268F82A40013F084 /* Onboarding */,
 				5C555085269CA36D00AD8015 /* Article */,
+				5CC8CB1426AB615D006186BE /* Camera View */,
 			);
 			path = "Support Views";
 			sourceTree = "<group>";
@@ -476,6 +484,7 @@
 			children = (
 				5CAF7D58262C7D0F00249CC6 /* ProgressView.swift */,
 				5C9F98AA262DDDDD00DFCFEA /* RecyclingView.swift */,
+				5CC8CB1026AAC043006186BE /* AddButtonWithPhotoView.swift */,
 			);
 			path = "Progress View";
 			sourceTree = "<group>";
@@ -538,6 +547,14 @@
 				5C64D7942690B6460013F084 /* Location.swift */,
 			);
 			path = "System functions";
+			sourceTree = "<group>";
+		};
+		5CC8CB1426AB615D006186BE /* Camera View */ = {
+			isa = PBXGroup;
+			children = (
+				5CC8CB1526AB618E006186BE /* TakePhotoView.swift */,
+			);
+			path = "Camera View";
 			sourceTree = "<group>";
 		};
 		5CD0B1332689BD0500267081 /* Add Point */ = {
@@ -864,6 +881,7 @@
 				5CFB8FB926281BB000372203 /* DataFunction.swift in Sources */,
 				5C782CD4267A059900A853D5 /* Points+CoreDataClass.swift in Sources */,
 				5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */,
+				5CC8CB1626AB618E006186BE /* TakePhotoView.swift in Sources */,
 				5C45914D254D55C0005AE26C /* AppDelegate.swift in Sources */,
 				5C045BF725BFE25300E42843 /* Dictionary Extension.swift in Sources */,
 				5C64D7952690B6460013F084 /* Location.swift in Sources */,
@@ -876,6 +894,7 @@
 				5C07594626596F17000F64C7 /* MaterialPinCell.swift in Sources */,
 				5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */,
 				5C6CDAAF26596990009F72D8 /* BottomPinView.swift in Sources */,
+				5CC8CB1126AAC043006186BE /* AddButtonWithPhotoView.swift in Sources */,
 				5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */,
 				5C55508B269D88C100AD8015 /* ArticleImageCell.swift in Sources */,
 				5CD0B1352689BD4500267081 /* TakePhotoCell.swift in Sources */,
@@ -891,6 +910,7 @@
 				5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */,
 				5C64D78E269047760013F084 /* Onboarding_4_Cell.swift in Sources */,
 				5C64D788268F82EA0013F084 /* Onboarding_1_Cell.swift in Sources */,
+				5CC8CB1326AAC41E006186BE /* CameraController.swift in Sources */,
 				5CF90C57262EA7C100127E4D /* MaterialCell.swift in Sources */,
 				5C55508D269DC53500AD8015 /* ArticleHeaderView.swift in Sources */,
 				5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */,

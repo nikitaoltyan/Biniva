@@ -1,25 +1,22 @@
 //
-//  ButtonView.swift
-//  GreenerCo
+//  TakePhotoView.swift
+//  Biniva
 //
-//  Created by Nick Oltyan on 13.01.2021.
+//  Created by Никита Олтян on 23.07.2021.
 //
 
 import UIKit
 
-class ButtonView: UIView {
+class TakePhotoView: UIView {
     
-    let label: UILabel = {
-        let label = UILabel()
+    let image: UIImageView = {
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 35, height: 31))
             .with(autolayout: false)
-            .with(color: Colors.background)
-            .with(alignment: .center)
-            .with(fontName: "SFPro-Medium", size: 20.0)
-            .with(numberOfLines: 1)
-        label.text = NSLocalizedString("add_button", comment: "Title for add button")
-        return label
+        image.image = UIImage(systemName: "camera.fill")
+        image.tintColor = Colors.background
+        return image
     }()
-    
+
     lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.frame = self.frame
@@ -29,13 +26,11 @@ class ButtonView: UIView {
         gradient.endPoint = CGPoint(x: 0, y: 1)
         return gradient
     }()
-    
-    var isActive: Bool = true
 
     override init(frame: CGRect) {
-        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth*0.86, height: 55)
+        let useFrame = CGRect(x: 0, y: 0, width: 70, height: 70)
         super.init(frame: useFrame)
-        self.layer.cornerRadius = 55/2
+        self.layer.cornerRadius = 70/2
         
         setSubviews()
         activateLayouts()
@@ -44,25 +39,26 @@ class ButtonView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
-
 }
 
 
 
 
 
-extension ButtonView {
+extension TakePhotoView {
     
     func setSubviews(){
         self.layer.addSublayer(gradient)
-        self.addSubview(label)
+        self.addSubview(image)
     }
     
     
     func activateLayouts(){
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            image.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            image.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            image.widthAnchor.constraint(equalToConstant: image.frame.width),
+            image.heightAnchor.constraint(equalToConstant: image.frame.height)
         ])
     }
 }

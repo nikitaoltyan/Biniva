@@ -94,7 +94,7 @@ class AddTrashController: UIViewController {
     
     
     var statsDelegate: Test?
-    var recyclingDelegate: RecyclingProgressDelegate?
+    var recyclingDelegate: recyclingProgressDelegate?
     var currentPage: Int = 0
     
     

@@ -7,9 +7,15 @@
 
 import UIKit
 
-protocol RecyclingProgressDelegate {
+protocol recyclingProgressDelegate {
     func update(addWeight weight: Int)
 }
+
+protocol recyclingButtonDelegate {
+    func add()
+    func openCamera()
+}
+
 
 class RecyclingView: UIView {
     
@@ -23,14 +29,15 @@ class RecyclingView: UIView {
         return view
     }()
     
-    let button: ButtonView = {
-        let view = ButtonView()
+    lazy var button: AddButtonWithPhotoView = {
+        let view = AddButtonWithPhotoView()
             .with(autolayout: false)
         view.clipsToBounds = true
         view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
         view.layer.shadowRadius = 5
         view.layer.shadowOpacity = 0.8
         view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.delegate = self
         return view
     }()
     
@@ -40,25 +47,20 @@ class RecyclingView: UIView {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
         super.init(frame: useFrame)
         self.backgroundColor = .clear
-        SetSubviews()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
     }
 
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
-    
-    @objc
-    func add(){
-        button.tap(completion: { (_) in
-            self.delegate?.Add()
-        })
-    }
 }
 
 
-extension RecyclingView: RecyclingProgressDelegate {
+
+
+
+extension RecyclingView: recyclingProgressDelegate {
     func update(addWeight weight: Int) {
         progressView.update(addWeight: weight)
     }
@@ -67,15 +69,29 @@ extension RecyclingView: RecyclingProgressDelegate {
 
 
 
-extension RecyclingView {
-    func SetSubviews(){
-        self.addSubview(progressView)
-        self.addSubview(button)
-        
-        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(add)))
+
+
+extension RecyclingView: recyclingButtonDelegate {
+    func openCamera() {
+        self.delegate?.openCamera()
     }
     
-    func ActivateLayouts(){
+    func add() {
+        self.delegate?.add()
+    }
+}
+
+
+
+
+
+extension RecyclingView {
+    func setSubviews(){
+        self.addSubview(progressView)
+        self.addSubview(button)
+    }
+    
+    func activateLayouts(){
         let buttonBottomConst: CGFloat = {
             if MainConstants.screenHeight == 736 { return -40 }
             else if MainConstants.screenHeight > 700 { return -66 }

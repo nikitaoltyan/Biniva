@@ -29,7 +29,7 @@ class Notifications {
     func setUpLocalNotifications(completion: @escaping(_ success: Bool) -> Void){
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = NSLocalizedString("notification_title", comment: "Title for notification")
-        notificationContent.body = NSLocalizedString("notification_subtitle", comment: "Title for notification")
+        notificationContent.body = NSLocalizedString("notification_subtitle", comment: "Body for notification")
         notificationContent.badge = NSNumber(value: 1)
         notificationContent.sound = .default
                         
