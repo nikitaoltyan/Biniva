@@ -26,6 +26,14 @@ class ServerAnalytics {
         ])
     }
     
+    /// Initiates when user complited adding materials.
+    func logCameraAddMaterial(type: Int, size: Int) {
+        Analytics.logEvent("add_material_by_camera", parameters: [
+            "type": type,
+            "size": size
+        ])
+    }
+    
     /// Initiates when user tap on Map selector on the top Sliding View.
     func logOpenMap() {
         Analytics.logEvent("open_map", parameters: [:])

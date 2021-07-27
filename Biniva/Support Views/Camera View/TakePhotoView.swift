@@ -12,7 +12,6 @@ class TakePhotoView: UIView {
     let image: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 35, height: 31))
             .with(autolayout: false)
-        image.image = UIImage(systemName: "camera.fill")
         image.tintColor = Colors.background
         return image
     }()
@@ -34,10 +33,20 @@ class TakePhotoView: UIView {
         
         setSubviews()
         activateLayouts()
+        setCamera()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    
+    func setCamera() {
+        image.image = UIImage(systemName: "camera.fill")
+    }
+    
+    func setTray() {
+        image.image = UIImage(systemName: "tray.and.arrow.down.fill")
     }
 }
 

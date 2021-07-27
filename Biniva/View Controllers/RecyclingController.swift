@@ -223,6 +223,8 @@ extension RecyclingController: RecyclingDelegate {
         let newVC = CameraController()
         newVC.modalPresentationStyle = .overFullScreen
         newVC.modalTransitionStyle = .coverVertical
+        newVC.recyclingDelegate = recyclingView
+        newVC.statsDelegate = statsView
         present(newVC, animated: true, completion: nil)
     }
 }

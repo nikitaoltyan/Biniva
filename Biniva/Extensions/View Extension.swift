@@ -57,4 +57,22 @@ extension UIView {
             })
         })
     }
+    
+    enum rotationAngle {
+        case vertical
+        case horizontal
+    }
+    
+    func rotate(forPosition position: rotationAngle) {
+        switch position {
+        case .horizontal:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.transform = CGAffineTransform(rotationAngle: 0)
+            })
+        case .vertical:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
+            })
+        }
+    }
 }
