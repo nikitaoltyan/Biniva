@@ -20,9 +20,7 @@
 
 #if !TARGET_OS_TV
 
- #import <Foundation/Foundation.h>
-
- #import "FBSDKFeatureExtracting.h"
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,10 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
               withScreenName:(NSString *)screenName;
 + (nullable float *)getDenseFeatures:(NSDictionary *)viewHierarchy;
 
-@end
-
-// Default conformance to the feature extracting protocol
-@interface FBSDKFeatureExtractor (FeatureExtracting) <FBSDKFeatureExtracting>
 @end
 
 NS_ASSUME_NONNULL_END

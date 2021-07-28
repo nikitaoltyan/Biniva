@@ -39,7 +39,7 @@ class CameraController: UIViewController {
     }()
     
     let aboutButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 113, height: 30))
             .with(autolayout: false)
             .with(bgColor: Colors.sliderGray)
             .with(cornerRadius: 9)

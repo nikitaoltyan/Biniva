@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FacebookCore
 
 protocol OnbordingDelegate {
     func next(slide: Int)
@@ -108,6 +109,7 @@ extension OnboardingController: OnbordingDelegate {
     }
     
     func finish() {
+        AppEvents.logEvent(.completedTutorial)
         analytics.logFinishOnboarding()
         userDefaults.setHasLaunched(true)
         let newVC = RecyclingController()

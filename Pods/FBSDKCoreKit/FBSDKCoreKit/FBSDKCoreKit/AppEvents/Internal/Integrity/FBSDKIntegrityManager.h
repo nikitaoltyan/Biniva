@@ -20,26 +20,13 @@
 
 #if !TARGET_OS_TV
 
- #import <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 
-@protocol FBSDKGateKeeperManaging;
-@protocol FBSDKIntegrityProcessing;
-
-NS_ASSUME_NONNULL_BEGIN
-
-NS_SWIFT_NAME(IntegrityManager)
 @interface FBSDKIntegrityManager : NSObject
 
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
-
-- (instancetype)initWithGateKeeperManager:(Class<FBSDKGateKeeperManaging>)gateKeeperManager
-                       integrityProcessor:(id<FBSDKIntegrityProcessing>)integrityProcessor;
-
-- (void)enable;
++ (void)enable;
++ (nullable NSDictionary<NSString *, id> *)processParameters:(nullable NSDictionary<NSString *, id> *)parameters;
 
 @end
-
-NS_ASSUME_NONNULL_END
 
 #endif

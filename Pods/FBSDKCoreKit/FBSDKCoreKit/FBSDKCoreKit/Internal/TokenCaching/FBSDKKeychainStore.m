@@ -18,10 +18,10 @@
 
 #import "FBSDKKeychainStore.h"
 
-#import "FBSDKCoreKitBasicsImport.h"
 #import "FBSDKDynamicFrameworkLoader.h"
 #import "FBSDKLogger.h"
-#import "FBSDKUnarchiverProvider.h"
+#import "FBSDKSettings.h"
+#import "FBSDKTypeUtility.h"
 
 @implementation FBSDKKeychainStore
 
@@ -50,17 +50,14 @@
   if (!data) {
     return nil;
   }
-  id<FBSDKObjectDecoding> unarchiver = [FBSDKUnarchiverProvider createInsecureUnarchiverFor:data];
 
-  NSDictionary<NSString *, id> *dict = nil;
-  @try {
-    dict = [unarchiver decodeObjectOfClass:NSDictionary.class forKey:NSKeyedArchiveRootObjectKey];
-  } @catch (NSException *ex) {
-    // ignore decoding exceptions
+  NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+  if (![dict isKindOfClass:[NSDictionary class]]) {
+    return nil;
   }
+
   return dict;
 }
-
 #pragma clang diagnostic pop
 
 - (BOOL)setString:(NSString *)value forKey:(NSString *)key accessibility:(CFTypeRef)accessibility
@@ -99,15 +96,15 @@
     NSMutableDictionary *attributesToUpdate = [NSMutableDictionary dictionary];
     [attributesToUpdate setObject:value forKey:[FBSDKDynamicFrameworkLoader loadkSecValueData]];
 
-    status = fbsdkdfl_SecItemUpdate((__bridge CFDictionaryRef)query, (__bridge CFDictionaryRef)attributesToUpdate);
-    if (status == errSecItemNotFound) {
-    #if !TARGET_OS_TV
-      if (@available(macOS 10.9, iOS 8, *)) {
-        if (accessibility) {
-          [query setObject:(__bridge id)(accessibility) forKey:[FBSDKDynamicFrameworkLoader loadkSecAttrAccessible]];
+      status = fbsdkdfl_SecItemUpdate((__bridge CFDictionaryRef)query, (__bridge CFDictionaryRef)attributesToUpdate);
+      if (status == errSecItemNotFound) {
+#if !TARGET_OS_TV
+        if (@available(macOS 10.9, iOS 8, *)) {
+          if (accessibility) {
+            [query setObject:(__bridge id)(accessibility) forKey:[FBSDKDynamicFrameworkLoader loadkSecAttrAccessible]];
+          }
         }
-      }
-    #endif
+#endif
       [query setObject:value forKey:[FBSDKDynamicFrameworkLoader loadkSecValueData]];
 
       status = fbsdkdfl_SecItemAdd((__bridge CFDictionaryRef)query, NULL);
@@ -161,7 +158,7 @@
   [FBSDKTypeUtility dictionary:query setObject:[FBSDKDynamicFrameworkLoader loadkSecClassGenericPassword] forKey:[FBSDKDynamicFrameworkLoader loadkSecClass]];
   [FBSDKTypeUtility dictionary:query setObject:_service forKey:[FBSDKDynamicFrameworkLoader loadkSecAttrService]];
   [FBSDKTypeUtility dictionary:query setObject:key forKey:[FBSDKDynamicFrameworkLoader loadkSecAttrAccount]];
-#if !TARGET_OS_SIMULATOR
+#if !TARGET_IPHONE_SIMULATOR
   if (_accessGroup) {
     [query setObject:_accessGroup forKey:[FBSDKDynamicFrameworkLoader loadkSecAttrAccessGroup]];
   }

@@ -26,9 +26,8 @@
 #import <WebKit/WebKit.h>
 
 #import "FBSDKAppLink.h"
-#import "FBSDKCoreKitBasicsImport.h"
-#import "FBSDKError.h"
-#import "NSURLSession+Protocols.h"
+#import "FBSDKAppLinkTarget.h"
+#import "FBSDKTypeUtility.h"
 
 /**
  Describes the callback for appLinkFromURLInBackground.
@@ -95,43 +94,24 @@ static NSString *const FBSDKWebViewAppLinkResolverShouldFallbackKey = @"should_f
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
 {
-    if (self.hasLoaded) {
-        self.didFinishLoad(webView);
-        decisionHandler(WKNavigationActionPolicyCancel);
-    } else {
-        self.hasLoaded = YES;
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }
+  if (self.hasLoaded) {
+    self.didFinishLoad(webView);
+    decisionHandler(WKNavigationActionPolicyCancel);
+  }
+
+  self.hasLoaded = YES;
+  decisionHandler(WKNavigationActionPolicyAllow);
 }
-
-@end
-
-@interface FBSDKWebViewAppLinkResolver ()
-
-@property (nonatomic, strong) id<FBSDKSessionProviding> sessionProvider;
 
 @end
 
 @implementation FBSDKWebViewAppLinkResolver
 
-- (instancetype)init
-{
-  return [self initWithSessionProvider:NSURLSession.sharedSession];
-}
-
-- (instancetype)initWithSessionProvider:(id<FBSDKSessionProviding>)sessionProvider
-{
-  if ((self = [super init])) {
-    _sessionProvider = sessionProvider;
-  }
-  return self;
-}
-
 + (instancetype)sharedInstance {
     static id instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [self new];
+        instance = [[self alloc] init];
     });
     return instance;
 }
@@ -159,67 +139,70 @@ static NSString *const FBSDKWebViewAppLinkResolverShouldFallbackKey = @"should_f
       }
     }
 
-    if (data) {
-      handler(@{ @"response" : response, @"data" : data }, nil);
-    } else {
-      handler(nil, [FBSDKError unknownErrorWithMessage:@"Invalid network response - missing data"]);
-    }
+    handler(@{ @"response" : response, @"data" : data }, nil);
   };
 
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
   [request setValue:FBSDKWebViewAppLinkResolverMetaTagPrefix forHTTPHeaderField:FBSDKWebViewAppLinkResolverPreferHeader];
 
-  id<FBSDKSessionDataTask> task = [self.sessionProvider dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+  NSURLSession *session = [NSURLSession sharedSession];
+  [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
     completion(response, data, error);
-  }];
-  [task resume];
+  }] resume];
 }
 
 - (void)appLinkFromURL:(NSURL *)url handler:(FBSDKAppLinkBlock)handler
 {
+  dispatch_async(dispatch_get_main_queue(), ^{
     [self followRedirects:url handler:^(NSDictionary<NSString *,id> *result, NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            if (error) {
-                handler(nil, error);
-                return;
-            }
-            
-            NSData *responseData = result[@"data"];
-            NSHTTPURLResponse *response = result[@"response"];
-            
-            WKWebView *webView = [WKWebView new];
-            
-            FBSDKWebViewAppLinkResolverWebViewDelegate *listener = [FBSDKWebViewAppLinkResolverWebViewDelegate new];
-            __block FBSDKWebViewAppLinkResolverWebViewDelegate *retainedListener = listener;
-            listener.didFinishLoad = ^(WKWebView *view) {
-                if (retainedListener) {
-                    [self getALDataFromLoadedPage:view handler:^(NSDictionary<NSString *,id> *ogData) {
-                        [view removeFromSuperview];
-                        view.navigationDelegate = nil;
-                        retainedListener = nil;
-                        handler([self appLinkFromALData:ogData destination:url], nil);
-                    }];
-                }
-            };
-            listener.didFailLoadWithError = ^(WKWebView *view, NSError *loadError) {
-                if (retainedListener) {
-                    [view removeFromSuperview];
-                    view.navigationDelegate = nil;
-                    retainedListener = nil;
-                    handler(nil, loadError);
-                }
-            };
-            webView.navigationDelegate = listener;
-            webView.hidden = YES;
-            [webView loadData:responseData
-                     MIMEType:response.MIMEType
-        characterEncodingName:response.textEncodingName
-                      baseURL:response.URL];
-            UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
-            [window addSubview:webView];
-        });
+
+      if (error) {
+        handler(nil, error);
+        return;
+      }
+
+      NSData *responseData = result[@"data"];
+      NSHTTPURLResponse *response = result[@"response"];
+
+      WKWebView *webView = [[WKWebView alloc] init];
+
+      FBSDKWebViewAppLinkResolverWebViewDelegate *listener = [[FBSDKWebViewAppLinkResolverWebViewDelegate alloc] init];
+      __block FBSDKWebViewAppLinkResolverWebViewDelegate *retainedListener = listener;
+      listener.didFinishLoad = ^(WKWebView *view) {
+        if (retainedListener) {
+          [self getALDataFromLoadedPage:view handler:^(NSDictionary<NSString *,id> *ogData) {
+            [view removeFromSuperview];
+            view.navigationDelegate = nil;
+            retainedListener = nil;
+            handler([self appLinkFromALData:ogData destination:url], nil);
+          }];
+        }
+      };
+      listener.didFailLoadWithError = ^(WKWebView *view, NSError *loadError) {
+        if (retainedListener) {
+          [view removeFromSuperview];
+          view.navigationDelegate = nil;
+          retainedListener = nil;
+          handler(nil, loadError);
+        }
+      };
+      webView.navigationDelegate = listener;
+      webView.hidden = YES;
+      if (@available(iOS 9.0, *)) {
+        [webView loadData:responseData
+                 MIMEType:response.MIMEType
+    characterEncodingName:response.textEncodingName
+                  baseURL:response.URL];
+      } else {
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setValue:FBSDKWebViewAppLinkResolverMetaTagPrefix forHTTPHeaderField:FBSDKWebViewAppLinkResolverPreferHeader];
+        [webView loadRequest:request];
+      }
+
+      UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
+      [window addSubview:webView];
     }];
+  });
 }
 
 /*
@@ -265,17 +248,14 @@ static NSString *const FBSDKWebViewAppLinkResolverShouldFallbackKey = @"should_f
   // Run some JavaScript in the webview to fetch the meta tags.
   [webView evaluateJavaScript:FBSDKWebViewAppLinkResolverTagExtractionJavaScript
             completionHandler:^(id _Nullable evaluateResult, NSError * _Nullable error) {
-    NSString *jsonString = [evaluateResult isKindOfClass:[NSString class]] ? evaluateResult : nil;
-    error = nil;
-    NSData *encodedJSON = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    if (encodedJSON) {
-      NSArray<NSDictionary<NSString *, id> *> *arr =
-      [FBSDKTypeUtility JSONObjectWithData:encodedJSON
-                                   options:0
-                                     error:&error];
-      handler([self parseALData:arr]);
-    }
-  }];
+              NSString *jsonString = [evaluateResult isKindOfClass:[NSString class]] ? evaluateResult : nil;
+              error = nil;
+              NSArray<NSDictionary<NSString *, id> *> *arr =
+              [FBSDKTypeUtility JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
+                                              options:0
+                                                error:&error];
+              handler([self parseALData:arr]);
+            }];
 }
 
 /*
@@ -285,7 +265,10 @@ static NSString *const FBSDKWebViewAppLinkResolverShouldFallbackKey = @"should_f
     NSMutableArray<FBSDKAppLinkTarget *> *linkTargets = [NSMutableArray array];
 
     NSArray *platformData = nil;
-    const UIUserInterfaceIdiom idiom = UIDevice.currentDevice.userInterfaceIdiom;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    const UIUserInterfaceIdiom idiom = UI_USER_INTERFACE_IDIOM();
+#pragma clang diagnostic pop
     if (idiom == UIUserInterfaceIdiomPad) {
         platformData = @[ appLinkDict[FBSDKWebViewAppLinkResolverIPadKey] ?: @{},
                           appLinkDict[FBSDKWebViewAppLinkResolverIOSKey] ?: @{} ];

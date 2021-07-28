@@ -17,7 +17,6 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-
 #import "FBSDKServerConfiguration.h"
 
 FOUNDATION_EXPORT NSString *const FBSDKDialogConfigurationNameDefault;

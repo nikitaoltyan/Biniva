@@ -87,6 +87,19 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>branch_key</key>
+      <string>key_live_poYzmML3BfCQm64fbZNqogcgwxhE5YCz</string>
+      <key>branch_app_domain</key>
+      <string>biniva.app.link</string>
+      <key>CFBundleURLTypes</key>
+      <array>
+        <dict>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>httpsapps.apple.com/us/app/biniva-recycling-tracker/id1551525911</string>
+          </array>
+        </dict>
+      </array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>

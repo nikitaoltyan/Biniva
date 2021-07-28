@@ -10,7 +10,8 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Firestore'
 pod 'Firebase/Storage'
 pod 'GeoFire/Utils'
-pod 'FBSDKCoreKit'
+pod 'Facebook-iOS-SDK'
+pod 'Branch'
 
 # Optionally, include the Swift extensions if you're using Swift.
 pod 'FirebaseFirestoreSwift'

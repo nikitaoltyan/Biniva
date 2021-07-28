@@ -9,7 +9,8 @@ import UIKit
 import Firebase
 import CoreData
 import YandexMobileMetrica
-import FBSDKCoreKit
+import FacebookCore
+import Branch
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         let configuration = YMMYandexMetricaConfiguration.init(apiKey: "ae801a68-0664-4441-a67d-da8c4ef95506")
         YMMYandexMetrica.activate(with: configuration!)
+        
+        Branch.setUseTestBranchKey(true)
+          // listener for Branch Deep Link data
+        Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+            // do stuff with deep link data (nav to page, display content, etc)
+            print(params as? [String: AnyObject] ?? {})
+        }
         return true
     }
 
@@ -39,14 +47,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-            ApplicationDelegate.shared.application(
-                app,
-                open: url,
-                sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-            )
-
-        }
+        Branch.getInstance().application(app, open: url, options: options)
+        ApplicationDelegate.shared.application(app,  open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+        return true
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // handler for Push Notifications
+        Branch.getInstance().handlePushNotification(userInfo)
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        // handler for Universal Links
+        Branch.getInstance().continue(userActivity)
+        return true
+    }
 
 
     var persistentContainer: NSPersistentContainer = {
