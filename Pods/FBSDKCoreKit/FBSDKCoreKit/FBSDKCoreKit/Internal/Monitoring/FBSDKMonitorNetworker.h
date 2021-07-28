@@ -16,31 +16,16 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKInstrumentManager.h"
+#import <Foundation/Foundation.h>
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
+#import "FBSDKMonitorEntry.h"
 
-@implementation FBSDKInstrumentManager
+NS_ASSUME_NONNULL_BEGIN
 
-+ (void)enable
-{
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
-  }
+@interface FBSDKMonitorNetworker : NSObject
 
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
-}
++ (void)sendEntries:(NSArray<id<FBSDKMonitorEntry>> *)entries;
 
 @end
+
+NS_ASSUME_NONNULL_END

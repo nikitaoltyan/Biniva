@@ -15,32 +15,19 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#import "FBSDKPerformanceMonitor.h"
+#import "FBSDKMonitorHeaders.h"
 
-#import "FBSDKInstrumentManager.h"
+@implementation FBSDKPerformanceMonitor
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
-
-@implementation FBSDKInstrumentManager
-
-+ (void)enable
++ (void)record:(NSString *)name startTime:(NSDate *)startTime
 {
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
+  FBSDKPerformanceMonitorEntry *entry = [FBSDKPerformanceMonitorEntry entryWithName:name
+                                                                          startTime:startTime
+                                                                            endTime:[NSDate date]];
+  if (entry) {
+    [FBSDKMonitor record:entry];
   }
-
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
 }
 
 @end

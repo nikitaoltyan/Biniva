@@ -16,31 +16,23 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKInstrumentManager.h"
+#import <Foundation/Foundation.h>
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation FBSDKInstrumentManager
+@protocol FBSDKApplicationObserving <NSObject>
 
-+ (void)enable
-{
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
-  }
+@optional
+- (void)applicationDidBecomeActive:(nullable UIApplication *)application;
+- (void)applicationDidEnterBackground:(nullable UIApplication *)application;
+- (BOOL)application:(UIApplication *)application
+didFinishLaunchingWithOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions;
 
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
-}
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(nullable NSString *)sourceApplication
+         annotation:(nullable id)annotation;
 
 @end
+
+NS_ASSUME_NONNULL_END

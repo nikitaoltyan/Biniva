@@ -52,12 +52,20 @@ class MapView: UIView {
         return view
     }()
     
+    let returnToPositionView: ReturnToPositionView = {
+        let view = ReturnToPositionView()
+            .with(autolayout: false)
+        view.isHidden = true
+        return view
+    }()
+    
     var delegate: mapDelegate?
     var pinAnnotationTopConstraint: NSLayoutConstraint?
     var centerCoordinate: CGFloat = 0
     
     var usedTopLeftCoordinate: CLLocationCoordinate2D?
     var usedBottomRightCoordinate: CLLocationCoordinate2D?
+    var userLocation: CLLocationCoordinate2D?
     var isFirstInteraction: Bool = true
 
     var trashBinsID: Set<String> = []
@@ -86,6 +94,7 @@ class MapView: UIView {
             locationManager.startUpdatingLocation()
 
             let location: CLLocationCoordinate2D = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 55.754316, longitude: 37.619521)
+            userLocation = location
             let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
             let region = MKCoordinateRegion(center: location, span: span)
             map.setRegion(region, animated: true)
@@ -142,8 +151,19 @@ class MapView: UIView {
     @objc
     func addPoint() {
         Vibration.light()
-        delegate?.openAddNewPoint()
+        addPointView.tap(completion: { _ in
+            self.delegate?.openAddNewPoint()
+        })
     }
+    
+    @objc
+    func returnToPositionAction() {
+        Vibration.light()
+        returnToPositionView.tap(completion: { _ in
+            self.setUserLocation()
+        })
+    }
+    
     
     func setRightPosition(){
         let middle: CGFloat = (190.0 + 500.0)/2.0
@@ -216,6 +236,29 @@ class MapView: UIView {
             }
         })
     }
+    
+    
+    private
+    func checkReturnLocation() {
+        guard userLocation != nil else {
+            returnToPositionView.isHidden = false
+            return
+        }
+        guard map.currentRadius(withDelta: 0) < 1000 else {
+            print("Too far!")
+            returnToPositionView.isHidden = false
+            return
+        }
+
+        let latitudeDelta = fabs(userLocation!.latitude - map.region.center.latitude)
+        let longitudeDelta = fabs(userLocation!.longitude - map.region.center.longitude)
+
+        guard latitudeDelta < 0.01 && longitudeDelta < 0.01 else {
+            returnToPositionView.isHidden = false
+            return
+        }
+        returnToPositionView.isHidden = true
+    }
 
 }
 
@@ -252,6 +295,7 @@ extension MapView: MKMapViewDelegate {
         // Updateing geoPoints only in the allowed area.
         if map.currentRadius(withDelta: 0) < 17000 {
             getGeoPoints()
+            checkReturnLocation()
         }
     }
 }
@@ -266,9 +310,11 @@ extension MapView {
         self.addSubview(map)
         self.addSubview(pinAnnotation)
         self.addSubview(addPointView)
+        self.addSubview(returnToPositionView)
         
         pinAnnotation.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:))))
         addPointView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPoint)))
+        returnToPositionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(returnToPositionAction)))
     }
     
     func activateLayouts() {
@@ -286,6 +332,11 @@ extension MapView {
             addPointView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -60),
             addPointView.widthAnchor.constraint(equalToConstant: addPointView.frame.width),
             addPointView.heightAnchor.constraint(equalToConstant: addPointView.frame.height),
+            
+            returnToPositionView.leftAnchor.constraint(equalTo: addPointView.leftAnchor),
+            returnToPositionView.bottomAnchor.constraint(equalTo: addPointView.topAnchor, constant: -14),
+            returnToPositionView.widthAnchor.constraint(equalToConstant: returnToPositionView.frame.width),
+            returnToPositionView.heightAnchor.constraint(equalToConstant: returnToPositionView.frame.height)
         ])
         
         pinAnnotationTopConstraint = pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)

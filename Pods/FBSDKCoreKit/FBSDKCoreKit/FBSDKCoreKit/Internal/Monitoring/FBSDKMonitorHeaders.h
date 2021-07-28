@@ -16,31 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKInstrumentManager.h"
+#ifndef FBSDKMonitorHeaders_h
+#define FBSDKMonitorHeaders_h
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
+#import "FBSDKMethodUsageMonitor.h"
+#import "FBSDKMethodUsageMonitorEntry.h"
+#import "FBSDKMonitor.h"
+#import "FBSDKMonitoringConfiguration.h"
+#import "FBSDKMonitorEntry.h"
+#import "FBSDKMonitorNetworker.h"
+#import "FBSDKMonitorStore.h"
+#import "FBSDKPerformanceMonitor.h"
+#import "FBSDKPerformanceMonitorEntry.h"
 
-@implementation FBSDKInstrumentManager
-
-+ (void)enable
-{
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
-  }
-
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
-}
-
-@end
+#endif /* FBSDKMonitorHeaders_h */

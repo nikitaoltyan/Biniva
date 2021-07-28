@@ -16,31 +16,21 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKInstrumentManager.h"
+#import "FBSDKMonitorEntry.h"
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation FBSDKInstrumentManager
+/**
+ Defines a monitor entry type to track performance metrics.
+ This should not be called directly. Instead use the
+ `FBSDKPerformanceMonitor` to record metrics with their start times
+ and durations. That will create and persist an entry.
+ */
+@interface FBSDKPerformanceMonitorEntry : NSObject<FBSDKMonitorEntry>
 
-+ (void)enable
-{
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
-  }
-
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
-}
++ (instancetype)new NS_UNAVAILABLE;
++ (instancetype _Nullable)entryWithName:(NSString *)name startTime:(NSDate *)startTime endTime:(NSDate *)endTime;
 
 @end
+
+NS_ASSUME_NONNULL_END

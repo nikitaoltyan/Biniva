@@ -16,31 +16,23 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKInstrumentManager.h"
+#import <Foundation/Foundation.h>
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation FBSDKInstrumentManager
+/**
+ Used for capturing performance metrics.
 
-+ (void)enable
-{
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
-  }
+ To use: Create a Date object marking the start time of what you want to capture.
+ When you call `record:startTime:` the time spent will be the time of
+ recording minus the start time.
 
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
-}
+ - Note: This is essentially a name-spaced pass-through to `FBSDKMonitor`.
+ */
+@interface FBSDKPerformanceMonitor : NSObject
+
++ (void)record:(NSString *)name startTime:(NSDate *)startTime;
 
 @end
+
+NS_ASSUME_NONNULL_END

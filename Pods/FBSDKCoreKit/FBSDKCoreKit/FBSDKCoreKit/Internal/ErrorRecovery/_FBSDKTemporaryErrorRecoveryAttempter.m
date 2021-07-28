@@ -16,31 +16,13 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKInstrumentManager.h"
+#import "_FBSDKTemporaryErrorRecoveryAttempter.h"
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
+@implementation _FBSDKTemporaryErrorRecoveryAttempter
 
-@implementation FBSDKInstrumentManager
-
-+ (void)enable
+- (void)attemptRecoveryFromError:(NSError *)error optionIndex:(NSUInteger)recoveryOptionIndex delegate:(id)delegate didRecoverSelector:(SEL)didRecoverSelector contextInfo:(void *)contextInfo
 {
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
-  }
-
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
+  [super completeRecovery:YES delegate:delegate didRecoverSelector:didRecoverSelector contextInfo:contextInfo];
 }
 
 @end

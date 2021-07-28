@@ -16,31 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKInstrumentManager.h"
+#import "FBSDKMethodUsageMonitor.h"
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
+#import "FBSDKMethodUsageMonitorEntry.h"
+#import "FBSDKMonitor.h"
 
-@implementation FBSDKInstrumentManager
+@implementation FBSDKMethodUsageMonitor
 
-+ (void)enable
++ (void)recordMethod:(SEL)method inClass:(Class)clazz
 {
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
-  }
-
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
+  FBSDKMethodUsageMonitorEntry *entry = [FBSDKMethodUsageMonitorEntry entryFromClass:clazz withMethod:method];
+  [FBSDKMonitor record:entry];
 }
 
 @end

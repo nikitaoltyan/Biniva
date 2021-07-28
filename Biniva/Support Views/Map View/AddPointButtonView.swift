@@ -2,7 +2,7 @@
 //  AddPointButton.swift
 //  Biniva
 //
-//  Created by Никита Олтян on 27.06.2021.
+//  Created by Nick Oltyan on 27.06.2021.
 //
 
 import UIKit
@@ -46,11 +46,13 @@ class AddPointButtonView: UIView {
 
 
 extension AddPointButtonView {
+    private
     func setSubviews() {
         self.addSubview(horizontalView)
         self.addSubview(verticalView)
     }
     
+    private
     func activateLayouts() {
         NSLayoutConstraint.activate([
             horizontalView.centerXAnchor.constraint(equalTo: self.centerXAnchor),

@@ -16,31 +16,22 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKInstrumentManager.h"
+#import <Foundation/Foundation.h>
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation FBSDKInstrumentManager
+/**
+ Used for tracking method usage.
 
-+ (void)enable
-{
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
-  }
+ To use: pass a Class and Selector to identify the method you want to track.
+ They will resolve to a string with the format: `Class::Selector:arg1:arg2`
 
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
-}
+ This is essentially a name-spaced pass-through to `FBSDKMonitor`.
+ */
+@interface FBSDKMethodUsageMonitor : NSObject
+
++ (void)recordMethod:(SEL)method inClass:(Class)clazz;
 
 @end
+
+NS_ASSUME_NONNULL_END

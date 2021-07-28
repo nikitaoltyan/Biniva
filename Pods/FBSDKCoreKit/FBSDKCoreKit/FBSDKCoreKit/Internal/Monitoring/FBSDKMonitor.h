@@ -16,31 +16,36 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKInstrumentManager.h"
+#import <Foundation/Foundation.h>
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
+#import "FBSDKCoreKit+Internal.h"
 
-@implementation FBSDKInstrumentManager
+NS_ASSUME_NONNULL_BEGIN
 
-+ (void)enable
-{
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
-  }
+/**
+ The shared implementation for 'Monitoring' types to call into.
+ For example if you want to record performance metrics you should
+ add a PerformanceMonitoring class and call `[PerformanceMonitor record:metric]`.
+ Internally the `record:` method should invoke the shared instance of this
+ monitor class.
 
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
-}
+ Important: Should not be called directly.
+ */
+@interface FBSDKMonitor : NSObject
+
+/**
+ Stores entry in local memory until a limit is reached or a flush is forced.
+ Will only record entries if the monitor is enabled.
+
+ Important: Should not be called directly.
+ */
++ (void)record:(_Nonnull id<FBSDKMonitorEntry>)entry;
+
+/**
+ Enable entries to be recorded.
+ */
++ (void)enable;
 
 @end
+
+NS_ASSUME_NONNULL_END

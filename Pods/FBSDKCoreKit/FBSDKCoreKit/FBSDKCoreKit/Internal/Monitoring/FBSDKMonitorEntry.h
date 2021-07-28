@@ -16,31 +16,31 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKInstrumentManager.h"
+#import <Foundation/Foundation.h>
 
-#import "FBSDKCrashObserver.h"
-#import "FBSDKErrorReport.h"
-#import "FBSDKFeatureManager.h"
-#import "FBSDKSettings.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation FBSDKInstrumentManager
+/**
+ Describes any object that can provide a dictionary representation of itself
+ */
+@protocol FBSDKDictionaryRepresentable <NSObject>
 
-+ (void)enable
-{
-  if (![FBSDKSettings isAutoLogAppEventsEnabled]) {
-    return;
-  }
-
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashObserver enable];
-    }
-  }];
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureErrorReport completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKErrorReport enable];
-    }
-  }];
-}
+- (NSDictionary *)dictionaryRepresentation;
 
 @end
+
+/**
+ Describes monitor entries.
+
+ Usage: Conform a new type of entry that is specific to the information you'd like to capture.
+ For example a PerformanceMonitorEntry will conform to this so that it is Codable and can be
+ easily represented as a dictionary to aid with JSON serialization.
+*/
+@protocol FBSDKMonitorEntry <NSObject, NSCoding, FBSDKDictionaryRepresentable>
+
++ (instancetype)new NS_UNAVAILABLE;
+- (NSString *)name;
+
+@end
+
+NS_ASSUME_NONNULL_END
