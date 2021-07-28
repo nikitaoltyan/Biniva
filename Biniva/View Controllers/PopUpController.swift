@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PointAddedPopUpController: UIViewController {
+class PopUpController: UIViewController {
     
     let popUpView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 315, height: 410))
@@ -29,7 +29,6 @@ class PointAddedPopUpController: UIViewController {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 20)
             .with(autolayout: false)
-        label.text = NSLocalizedString("add_point_added_title", comment: "Title for added points Pop Up")
         return label
     }()
     
@@ -47,7 +46,6 @@ class PointAddedPopUpController: UIViewController {
             .with(numberOfLines: 0)
             .with(fontName: "SFPro", size: 16)
             .with(autolayout: false)
-        label.text = NSLocalizedString("add_point_added_desc", comment: "Description for added points Pop Up")
         return label
     }()
     
@@ -57,7 +55,6 @@ class PointAddedPopUpController: UIViewController {
             .with(bgColor: .lightGray)
             .with(cornerRadius: 12)
         
-        button.setTitle(NSLocalizedString("add_point_added_button", comment: "button title"), for: .normal)
         button.titleLabel?.font = UIFont(name: "SFPro", size: 18)
         button.setTitleColor(Colors.background, for: .normal)
         
@@ -81,7 +78,14 @@ class PointAddedPopUpController: UIViewController {
             self.view.backgroundColor = Colors.nearBlack.withAlphaComponent(0.2)
         })
     }
+    
+    func setUpTitles(title: String, description desc: String, buttonTitle: String) {
+        mainTitle.text = title
+        self.desc.text = desc
+        addButton.setTitle(buttonTitle, for: .normal)
+    }
 
+    
     @objc
     func close() {
         Vibration.soft()
@@ -100,7 +104,8 @@ class PointAddedPopUpController: UIViewController {
 
 
 
-extension PointAddedPopUpController {
+extension PopUpController {
+    private
     func setSubviews() {
         view.addSubview(popUpView)
         popUpView.addSubview(mainTitle)
@@ -111,6 +116,7 @@ extension PointAddedPopUpController {
         addButton.addTarget(self, action: #selector(close), for: .touchUpInside)
     }
     
+    private
     func activateLayouts() {
         NSLayoutConstraint.activate([
             popUpView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

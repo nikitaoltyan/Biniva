@@ -63,6 +63,7 @@ class RecyclingView: UIView {
 extension RecyclingView: recyclingProgressDelegate {
     func update(addWeight weight: Int) {
         progressView.update(addWeight: weight)
+        AppStoreReviewManager.requestReview()
     }
 }
 

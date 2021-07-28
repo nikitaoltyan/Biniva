@@ -165,6 +165,7 @@ class MapView: UIView {
             self.addPointView.transform = CGAffineTransform(translationX: 0, y: 0)
         }, completion: { (_) in
             self.map.selectedAnnotations.removeAll()
+            AppStoreReviewManager.requestReview()
         })
     }
     

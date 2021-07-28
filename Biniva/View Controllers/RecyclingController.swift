@@ -242,7 +242,10 @@ extension RecyclingController: mapDelegate {
     
     func showPopUp() {
         Vibration.soft()
-        let newVC = PointAddedPopUpController()
+        let newVC = PopUpController()
+        newVC.setUpTitles(title: NSLocalizedString("add_point_added_title", comment: "Title for added points Pop Up"),
+                          description: NSLocalizedString("add_point_added_desc", comment: "Description for added points Pop Up"),
+                          buttonTitle: NSLocalizedString("add_point_added_button", comment: "button title"))
         newVC.modalPresentationStyle = .overFullScreen
         present(newVC, animated: true, completion: nil)
     }
