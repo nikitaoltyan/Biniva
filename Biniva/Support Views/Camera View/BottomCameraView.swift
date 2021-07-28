@@ -160,8 +160,8 @@ class BottomCameraView: UIView {
     func addMaterial() {
 
         guard (selectedMaterial != nil) else {
-            delegate?.showAlert(withTitle: "Add material!",
-                                andSubtitle: "Please")
+            delegate?.showAlert(withTitle: NSLocalizedString("camera_controller_material_alert_title", comment: "Title for ask to select material"),
+                                andSubtitle: NSLocalizedString("camera_controller_material_alert_subtitle", comment: "Subtitle for ask to select material"))
             return
         }
         
@@ -169,11 +169,10 @@ class BottomCameraView: UIView {
         let weight: Int = Int(txt[0]) ?? 0
         
         guard (weight != 0) else {
-            delegate?.showAlert(withTitle: "Set the weight!",
-                                andSubtitle: "Please")
+            delegate?.showAlert(withTitle: NSLocalizedString("camera_controller_weight_alert_title", comment: "Title for ask to set weight"),
+                                andSubtitle: NSLocalizedString("camera_controller_weight_alert_subtitle", comment: "Subitle for ask to set weight"))
             return
         }
-        
         delegate?.addMaterial(material: selectedMaterial!, weight: weight)
     }
 }
@@ -184,7 +183,7 @@ class BottomCameraView: UIView {
 
 extension BottomCameraView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return materials.name.count
+        return materials.enums.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -68,4 +68,12 @@ class Defaults {
         bottomRight["longitude"] = longitude
         UserDefaults.standard.setValue(bottomRight, forKey: "bottomRightCoordinate")
     }
+    
+    func setIsCameraUsed(_ set: Bool) {
+        UserDefaults.standard.setValue(set, forKey: "isCameraUsed")
+    }
+    
+    func getIsCameraUsed() -> Bool {
+       return UserDefaults.standard.bool(forKey: "isCameraUsed")
+    }
 }

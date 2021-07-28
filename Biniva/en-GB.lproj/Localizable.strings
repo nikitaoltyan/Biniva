@@ -115,6 +115,21 @@
 
 
 
+// CAMERA CONTROLLER
+"camera_controller_about_button" = "Where am I?";
+"camera_controller_material_alert_title" = "No material selected";
+"camera_controller_material_alert_subtitle" = "Please, choose the material that you throw away.";
+"camera_controller_weight_alert_title" = "No weight setted";
+"camera_controller_weight_alert_subtitle" = "Please, specify the weight of the garbage that you throw away.";
+
+"camera_controller_alert_title" = "You can help us!";
+"camera_controller_alert_subtitle" = "We are developing an intelligent system for automatic detection of garbage using a camera.\n\nPlease take a picture of your garbage and note its weight. Thanks!";
+
+"camera_controller_pop_up_title" = "Added!";
+"camera_controller_pop_up_subtitle" = "The depersonalized garbage data has been sent to the Biniva server, thank you for this. You are helping to make the world a better place!";
+"camera_controller_pop_up_button" = "I'm awesome!";
+
+
 
 
 // Plastic material

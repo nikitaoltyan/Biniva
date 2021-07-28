@@ -211,7 +211,7 @@ class Server {
     
     private
     func addCameraImage(forDocumentID documentID: String, image: UIImage, result: @escaping(_ strings: String) -> Void) {
-        print("addPointImage for documentID: \(documentID)")
+        print("addCameraImage for documentID: \(documentID)")
         let storageRef = storage.reference()
 
         let data = image.jpegData(compressionQuality: 0.3)

@@ -37,4 +37,14 @@ extension UIViewController {
 
         return alert
     }
+    
+    
+    func showPopUp(withTitle title: String, subtitle: String, andButtonText buttonText: String) {
+        let newVC = PopUpController()
+        newVC.setUpTitles(title: title,
+                          description: subtitle,
+                          buttonTitle: buttonText)
+        newVC.modalPresentationStyle = .overFullScreen
+        present(newVC, animated: true, completion: nil)
+    }
 }

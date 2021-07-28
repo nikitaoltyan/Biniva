@@ -23,6 +23,7 @@ class CameraController: UIViewController {
     let analytics = ServerAnalytics()
     let server = Server()
     let database = DataFunction()
+    let defaults = Defaults()
     
     let backButton: UIImageView = {
         let scale: CGFloat = {
@@ -38,12 +39,12 @@ class CameraController: UIViewController {
     }()
     
     let aboutButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 85, height: 30))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
             .with(autolayout: false)
             .with(bgColor: Colors.sliderGray)
             .with(cornerRadius: 9)
         
-        button.setTitle("Где я?", for: .normal)
+        button.setTitle(NSLocalizedString("camera_controller_about_button",  comment: "The question about where am I"), for: .normal)
         button.titleLabel?.font = UIFont(name: "SFPro", size: 12)
         button.setTitleColor(Colors.nearBlack, for: .normal)
         
@@ -96,6 +97,7 @@ class CameraController: UIViewController {
     }()
     
     var statsDelegate: Test?
+    var popUpDelegate: mapDelegate?
     var recyclingDelegate: recyclingProgressDelegate?
     
     var session: AVCaptureSession?
@@ -169,21 +171,6 @@ class CameraController: UIViewController {
         })
     }
     
-//    @objc
-//    func draggedView(_ sender: UIPanGestureRecognizer){
-//        view.bringSubviewToFront(alertView)
-//        let translation = sender.translation(in: view)
-//        guard translation.x < 0 else { return }
-//
-//        alertView.center = CGPoint(x: alertView.center.x + translation.x,
-//                                    y: alertView.center.y)
-//
-//        sender.setTranslation(CGPoint.zero, in: view)
-//        if (sender.state == .ended) {
-//            closeAlert()
-//        }
-//    }
-    
     
     private
     func setUpCamera() {
@@ -240,7 +227,6 @@ extension CameraController: AVCapturePhotoCaptureDelegate, bottomCameraDelegate 
         isPhotoTaken = true
         backButton.rotate(forPosition: .vertical)
         extendBottomView()
-//        AudioServicesPlayAlertSound(1108)
 
         let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
         output?.capturePhoto(with: settings, delegate: self)
@@ -268,6 +254,14 @@ extension CameraController: AVCapturePhotoCaptureDelegate, bottomCameraDelegate 
         self.dismiss(animated: true, completion: {() in
             self.statsDelegate?.update()
             self.recyclingDelegate?.update(addWeight: weight)
+            
+            guard (self.defaults.getIsCameraUsed()) else {
+                self.popUpDelegate?.showPopUp(title: NSLocalizedString("camera_controller_pop_up_title", comment: "Title for PopUp controller"),
+                                              subtitle: NSLocalizedString("camera_controller_pop_up_subtitle",  comment: "Subitle for PopUp controller"),
+                                              andButtonText: NSLocalizedString("camera_controller_pop_up_button",  comment: "Button title for PopUp controller"))
+                self.defaults.setIsCameraUsed(true)
+                return
+            }
         })
     }
     
@@ -321,7 +315,6 @@ extension CameraController {
         
         backButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backAction)))
         aboutButton.addTarget(self, action: #selector(aboutAction), for: .touchUpInside)
-//        alertView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:))))
     }
     
     private

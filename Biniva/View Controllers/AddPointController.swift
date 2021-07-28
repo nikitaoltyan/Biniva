@@ -237,7 +237,9 @@ class AddPointController: UIViewController {
         analytics.logAddPoint()
         button.tap(completion: { (_) in
             self.dismiss(animated: true, completion: nil)
-            self.delegate?.showPopUp()
+            self.delegate?.showPopUp(title: NSLocalizedString("add_point_added_title", comment: "Title for added points Pop Up"),
+                                    subtitle: NSLocalizedString("add_point_added_desc", comment: "Description for added points Pop Up"),
+                                    andButtonText: NSLocalizedString("add_point_added_button", comment: "button title"))
         })
     }
     

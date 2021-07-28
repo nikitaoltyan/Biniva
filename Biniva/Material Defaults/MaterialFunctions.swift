@@ -62,9 +62,9 @@ class MaterialFunctions {
         switch value {
         case 0: return useStruct.plastic
         case 1: return useStruct.organic
-        case 2: return useStruct.glass
-        case 3: return useStruct.paper
-        case 4: return useStruct.metal
+        case 2: return useStruct.paper
+        case 3: return useStruct.metal
+        case 4: return useStruct.glass
         case 5: return useStruct.wood
         case 6: return useStruct.fabric
         case 7: return useStruct.battery
@@ -79,9 +79,9 @@ class MaterialFunctions {
         switch value {
         case 0: return useStruct.plastic
         case 1: return useStruct.organic
-        case 2: return useStruct.glass
-        case 3: return useStruct.paper
-        case 4: return useStruct.metal
+        case 2: return useStruct.paper
+        case 3: return useStruct.metal
+        case 4: return useStruct.glass
         case 5: return useStruct.wood
         case 6: return useStruct.fabric
         case 7: return useStruct.battery

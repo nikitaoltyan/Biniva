@@ -27,7 +27,7 @@ protocol RecyclingDelegate {
 
 protocol mapDelegate {
     func openAddNewPoint()
-    func showPopUp()
+    func showPopUp(title: String, subtitle: String, andButtonText buttonText: String)
 }
 
 protocol TopViewDelegate {
@@ -225,6 +225,7 @@ extension RecyclingController: RecyclingDelegate {
         newVC.modalTransitionStyle = .coverVertical
         newVC.recyclingDelegate = recyclingView
         newVC.statsDelegate = statsView
+        newVC.popUpDelegate = self
         present(newVC, animated: true, completion: nil)
     }
 }
@@ -240,14 +241,10 @@ extension RecyclingController: mapDelegate {
         present(newVC, animated: true, completion: nil)
     }
     
-    func showPopUp() {
+    func showPopUp(title: String, subtitle: String, andButtonText buttonText: String) {
+        print("showPopUp function with Title: \(title)")
         Vibration.soft()
-        let newVC = PopUpController()
-        newVC.setUpTitles(title: NSLocalizedString("add_point_added_title", comment: "Title for added points Pop Up"),
-                          description: NSLocalizedString("add_point_added_desc", comment: "Description for added points Pop Up"),
-                          buttonTitle: NSLocalizedString("add_point_added_button", comment: "button title"))
-        newVC.modalPresentationStyle = .overFullScreen
-        present(newVC, animated: true, completion: nil)
+        self.showPopUp(withTitle: title, subtitle: subtitle, andButtonText: buttonText)
     }
 }
 

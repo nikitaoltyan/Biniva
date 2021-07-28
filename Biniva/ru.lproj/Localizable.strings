@@ -111,8 +111,22 @@
 "add_point_close_alert" = "Исправить";
 "add_point_added_title" = "Добавлено!";
 "add_point_added_desc" = "Контейнер для мусора отправлен на модерацию. В ближайшее время он появится на карте. Спасибо!";
-"add_point_added_button" = "Олтично!";
+"add_point_added_button" = "Отлично!";
 
+
+// CAMERA CONTROLLER
+"camera_controller_about_button" = "Где я?";
+"camera_controller_material_alert_title" = "Материал не выбран";
+"camera_controller_material_alert_subtitle" = "Пожалуйста, выбери материал, который ты выбрасываешь.";
+"camera_controller_weight_alert_title" = "Вес не указан";
+"camera_controller_weight_alert_subtitle" = "Пожалуйста, укажи вес мусора, который ты выбрасываешь.";
+
+"camera_controller_alert_title" = "Ты можешь нам помочь!";
+"camera_controller_alert_subtitle" = "Мы разрабатываем интеллектуальную систему автоматического определения мусора с помощью камеры.\n\nПожалуйста, сфотографируй свой мусор и отметь его вес. Спасибо!";
+
+"camera_controller_pop_up_title" = "Добавлено!";
+"camera_controller_pop_up_subtitle" = "Обезличенные данные о мусоре отправлены на сервер Biniva, спасибо вам за это. Вы помогаете делать мир лучше!";
+"camera_controller_pop_up_button" = "Я молодец!";
 
 
 

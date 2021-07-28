@@ -94,6 +94,7 @@ class PopUpController: UIViewController {
                 self.view.backgroundColor = .clear
             }, completion: { (_) in
                 self.dismiss(animated: true, completion: nil)
+                AppStoreReviewManager.requestReview()
             })
         })
     }

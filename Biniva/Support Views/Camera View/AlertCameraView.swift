@@ -16,7 +16,7 @@ class AlertCameraView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Semibold", size: 18)
-        label.text = "Ты можешь нам помочь!"
+        label.text = NSLocalizedString("camera_controller_alert_title", comment: "Title for explanation alert")
         return label
     }()
     
@@ -27,7 +27,7 @@ class AlertCameraView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "Helvetica", size: 16)
-        label.text = "Мы разрабатываем интелектуальную систему автоматического определения мусора с помощью камеры.\n\nПожалуйста, сфотографируй свой мусор и отметь его вес. Спасибо!"
+        label.text = NSLocalizedString("camera_controller_alert_subtitle", comment: "Subitle for explanation alert")
         return label
     }()
     
