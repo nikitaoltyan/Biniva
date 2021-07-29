@@ -19,15 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Initializing Firebase
         FirebaseApp.configure()
+        // Initializing Facebook
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        // Initializing Yandex AppMetrica
         let configuration = YMMYandexMetricaConfiguration.init(apiKey: "ae801a68-0664-4441-a67d-da8c4ef95506")
         YMMYandexMetrica.activate(with: configuration!)
         
+        // Initializing Branch
         Branch.setUseTestBranchKey(true)
-          // listener for Branch Deep Link data
         Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
             // do stuff with deep link data (nav to page, display content, etc)
-            print(params as? [String: AnyObject] ?? {})
+//            print(params as? [String: AnyObject] ?? {})
         }
         return true
     }

@@ -25,7 +25,7 @@ extension UIViewController {
     }
     
     
-    func prepareAlert(withTitle title: String, andSubtitle subtitle: String, closeAction close: String) -> UIAlertController {
+    func prepareAlert(withTitle title: String?, andSubtitle subtitle: String?, closeAction close: String) -> UIAlertController {
         Vibration.soft()
         let alert = UIAlertController(title: title,
                                       message: subtitle,

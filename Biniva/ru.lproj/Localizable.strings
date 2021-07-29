@@ -43,7 +43,9 @@
 
 // ONBOARDING
 "onboarding_next" = "Продолжить";
+"onboarding_skip" = "Пропустить";
 // First cell
+"onboarding_1_image_name" = "onboarding_1_ru";
 "onboarding_1_title" = "Открой новый мир";
 "onboarding_1_green_title" = "экологии";
 "onboarding_1_subtitle" = "Сейчас самое время задуматься о том, сколько мы потребляем и что можем с этим сделать";
@@ -103,6 +105,10 @@
 "add_point_choose_materials" = "Что можно сдать?";
 "add_point_map_start_position" = "Адресс не выбран";
 "add_point_add_photo" = "Добавь фото";
+"add_point_camera_alert_title" = "Добавь фото";
+"add_point_camera_alert_camera" = "Сделать фото";
+"add_point_camera_alert_photo_library" = "Выбрать фото";
+"add_point_camera_alert_close" = "Закрыть";
 "add_point_map_error" = "Геолокация недоступна. Попробуй еще раз.";
 "add_point_materials_alert_title" = "Не выбраны материалы";
 "add_point_materials_alert_subtitle" = "Пожалуйста, выбери материалы, которые можно сдать. Это поможет другим пользователям.";

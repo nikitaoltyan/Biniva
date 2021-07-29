@@ -19,7 +19,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
         }()
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: height))
             .with(autolayout: false)
-        image.image = UIImage(named: "onboarding_1")
+        image.image = UIImage(named: NSLocalizedString("onboarding_1_image_name", comment: "Name of localized image"))
         return image
     }()
     

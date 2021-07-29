@@ -43,7 +43,9 @@
 
 // ONBOARDING
 "onboarding_next" = "Continue";
+"onboarding_skip" = "Skip";
 // First cell
+"onboarding_1_image_name" = "onboarding_1_en";
 "onboarding_1_title" = "Explore the new world";
 "onboarding_1_green_title" = "of ecology";
 "onboarding_1_subtitle" = "Now is the time to think about how much we consume and what we can do about it";
@@ -103,6 +105,10 @@
 "add_point_choose_materials" = "What can be recycled?";
 "add_point_map_start_position" = "The address is not selected";
 "add_point_add_photo" = "Add photo";
+"add_point_camera_alert_title" = "Add photo";
+"add_point_camera_alert_camera" = "Take a photo";
+"add_point_camera_alert_photo_library" = "Choose a photo";
+"add_point_camera_alert_close" = "Close";
 "add_point_map_error" = "Geolocation is not available. Try again.";
 "add_point_materials_alert_title" = "No materials selected";
 "add_point_materials_alert_subtitle" = "Please, select the materials that can be submitted. This will help other users.";

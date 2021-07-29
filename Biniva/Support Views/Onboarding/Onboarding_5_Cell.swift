@@ -94,7 +94,7 @@ class Onboarding_5_Cell: UICollectionViewCell {
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 16)
-        label.text = "Пропустить"
+        label.text = NSLocalizedString("onboarding_skip", comment: "skip button")
         label.isUserInteractionEnabled = true
         label.isHidden = true
         return label

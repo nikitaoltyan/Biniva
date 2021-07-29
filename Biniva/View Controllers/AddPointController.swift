@@ -197,11 +197,12 @@ class AddPointController: UIViewController {
 
     }
     
-    func showImagePicker() {
+    private
+    func showImagePicker(withType: UIImagePickerController.SourceType) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.allowsEditing = true
-        pickerController.sourceType = .photoLibrary
+        pickerController.sourceType = withType
         self.present(pickerController, animated: true, completion: nil)
     }
 
@@ -244,10 +245,25 @@ class AddPointController: UIViewController {
     }
     
     
+    private
     func showAlert(withTitle title: String, andSubtitle subtitle: String) {
         let alert = prepareAlert(withTitle: title,
                                  andSubtitle: subtitle,
                                  closeAction: NSLocalizedString("add_point_close_alert", comment: "Ask for change everything"))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private
+    func showCameraAlert() {
+        let alert = prepareAlert(withTitle: nil,
+                                 andSubtitle: nil,
+                                 closeAction: NSLocalizedString("add_point_camera_alert_close", comment: "Close"))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("add_point_camera_alert_photo_library", comment: "Add via Camera"), style: .default , handler:{ (UIAlertAction) in
+            self.showImagePicker(withType: .photoLibrary)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("add_point_camera_alert_camera", comment: "Add via Camera"), style: .default , handler:{ (UIAlertAction) in
+            self.showImagePicker(withType: .camera)
+        }))
         present(alert, animated: true, completion: nil)
     }
 }
@@ -331,7 +347,7 @@ extension AddPointController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Vibration.soft()
         if (uploadedImages.count < 5) && (collectionView.tag == 1) && (indexPath.row == 0) {
-            showImagePicker()
+            showCameraAlert()
         }
         
         guard collectionView.tag == 0 else { return }
@@ -354,6 +370,7 @@ extension AddPointController: UICollectionViewDelegate, UICollectionViewDataSour
 
 
 extension AddPointController {
+    private
     func setSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(mainTitle)
@@ -369,6 +386,7 @@ extension AddPointController {
         map.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(gestureRecognizer:))))
     }
     
+    private
     func activateLayouts() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
