@@ -27,6 +27,7 @@
 		5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470A25C157C800BAFEEF /* TextField Extension.swift */; };
 		5C3B737026B1BC5000B48DAC /* ReturnToPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3B736F26B1BC5000B48DAC /* ReturnToPositionView.swift */; };
 		5C3B737326B3BBE900B48DAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C3B737526B3BBE900B48DAC /* InfoPlist.strings */; };
+		5C3B737926B3C38B00B48DAC /* AppTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3B737826B3C38B00B48DAC /* AppTransparency.swift */; };
 		5C3D533726301D0A00DA0AFB /* AddTrashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D533626301D0A00DA0AFB /* AddTrashView.swift */; };
 		5C3D533C2630564E00DA0AFB /* ExtraAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */; };
 		5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C454E2925B57B2000966991 /* OnboardingController.swift */; };
@@ -153,6 +154,7 @@
 		5C3B737426B3BBE900B48DAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5C3B737626B3BBEF00B48DAC /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5C3B737726B3BBFC00B48DAC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5C3B737826B3C38B00B48DAC /* AppTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTransparency.swift; sourceTree = "<group>"; };
 		5C3D533626301D0A00DA0AFB /* AddTrashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrashView.swift; sourceTree = "<group>"; };
 		5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraAddCell.swift; sourceTree = "<group>"; };
 		5C454E2925B57B2000966991 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				5C64D7912690B3DE0013F084 /* Notifications.swift */,
 				5C64D7942690B6460013F084 /* Location.swift */,
 				5C996A4B26B12AA600C3BD8C /* Review.swift */,
+				5C3B737826B3C38B00B48DAC /* AppTransparency.swift */,
 			);
 			path = "System functions";
 			sourceTree = "<group>";
@@ -931,6 +934,7 @@
 				5C782CD5267A059900A853D5 /* Points+CoreDataProperties.swift in Sources */,
 				5CC8CB1C26AD5276006186BE /* CloseCircleView.swift in Sources */,
 				5C11455826612B9400F48626 /* MapView+Model.swift in Sources */,
+				5C3B737926B3C38B00B48DAC /* AppTransparency.swift in Sources */,
 				5C3D533C2630564E00DA0AFB /* ExtraAddCell.swift in Sources */,
 				5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */,
 				5C64D78E269047760013F084 /* Onboarding_4_Cell.swift in Sources */,
@@ -1155,7 +1159,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Z962Q7H43F;
 				INFOPLIST_FILE = "$(SRCROOT)/Biniva/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1179,7 +1183,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Z962Q7H43F;
 				INFOPLIST_FILE = "$(SRCROOT)/Biniva/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

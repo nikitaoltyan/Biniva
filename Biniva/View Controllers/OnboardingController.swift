@@ -16,6 +16,7 @@ protocol OnbordingDelegate {
 class OnboardingController: UIViewController {
     
     let analytics = ServerAnalytics()
+    let appTransparency = AppTransparency()
     let userDefaults = Defaults()
     
     lazy var collection: UICollectionView = {
@@ -48,6 +49,7 @@ class OnboardingController: UIViewController {
         setSubviews()
         activateLayouts()
         analytics.logStartOnboarding()
+        appTransparency.requestPermission()
     }
 }
 

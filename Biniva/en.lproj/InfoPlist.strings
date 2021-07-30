@@ -8,4 +8,5 @@
 
 NSCameraUsageDescription = "The app takes photos of your garbage to provide an AI based user experience in the future.";
 NSLocationWhenInUseUsageDescription = "The app loads only BinPoints near to the user to provide a better experience and reduce traffic overusage.";
+NSUserTrackingUsageDescription = "This identifier will be used to track and measure our ads activity.";
 
