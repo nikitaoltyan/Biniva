@@ -16,18 +16,36 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "TargetConditionals.h"
 
-@protocol FBSDKGraphRequest;
+#if !TARGET_OS_TV
 
-NS_ASSUME_NONNULL_BEGIN
+NS_SWIFT_NAME(URLOpening)
+@protocol FBSDKURLOpening <NSObject>
 
-NS_SWIFT_NAME(AppLinkResolverRequestBuilding)
-@protocol FBSDKAppLinkResolverRequestBuilding
+// Implementations should make sure they can handle nil parameters
+// which is possible in SafariViewController.
+// see canOpenURL below.
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation;
 
-- (id<FBSDKGraphRequest> _Nonnull)requestForURLs:(NSArray<NSURL *> * _Nonnull)urls;
-- (NSString* _Nullable)getIdiomSpecificField;
+// create a different handler to return YES/NO if the receiver can process the above openURL:.
+// This is separated so that we can process the openURL: in callbacks, while still returning
+// the result of canOpenURL synchronously in FBSDKApplicationDelegate
+- (BOOL)canOpenURL:(NSURL *)url
+    forApplication:(UIApplication *)application
+ sourceApplication:(NSString *)sourceApplication
+        annotation:(id)annotation;
+
+- (void)applicationDidBecomeActive:(UIApplication *)application;
+
+- (BOOL)isAuthenticationURL:(NSURL *)url;
+
+@optional
+- (BOOL)shouldStopPropagationOfURL:(NSURL *)url;
 
 @end
 
-NS_ASSUME_NONNULL_END
+#endif

@@ -22,12 +22,27 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FBSDKWebViewProviding.h"
+#import "FBSDKBridgeAPIProtocolType.h"
 
-NS_SWIFT_NAME(WebViewFactory)
-@interface FBSDKWebViewFactory : NSObject<FBSDKWebViewProviding>
+@class FBSDKBridgeAPIRequest;
 
-- (id<FBSDKWebView>)createWebViewWithFrame:(CGRect)frame;
+FOUNDATION_EXPORT NSString *const FBSDKBridgeAPIAppIDKey;
+FOUNDATION_EXPORT NSString *const FBSDKBridgeAPISchemeSuffixKey;
+FOUNDATION_EXPORT NSString *const FBSDKBridgeAPIVersionKey;
+
+NS_SWIFT_NAME(BridgeAPIProtocol)
+@protocol FBSDKBridgeAPIProtocol <NSObject>
+
+- (NSURL *)requestURLWithActionID:(NSString *)actionID
+                           scheme:(NSString *)scheme
+                       methodName:(NSString *)methodName
+                    methodVersion:(NSString *)methodVersion
+                       parameters:(NSDictionary *)parameters
+                            error:(NSError *__autoreleasing *)errorRef;
+- (NSDictionary *)responseParametersForActionID:(NSString *)actionID
+                                queryParameters:(NSDictionary *)queryParameters
+                                      cancelled:(BOOL *)cancelledRef
+                                          error:(NSError *__autoreleasing *)errorRef;
 
 @end
 

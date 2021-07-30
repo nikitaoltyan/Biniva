@@ -20,26 +20,12 @@
 
 #if !TARGET_OS_TV
 
-@protocol FBSDKBridgeAPIRequestProtocol;
-@class FBSDKBridgeAPIResponse;
+#import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-NS_SWIFT_NAME(BridgeAPIResponseCreating)
-@protocol FBSDKBridgeAPIResponseCreating
-
-- (FBSDKBridgeAPIResponse *)createResponseWithRequest:(NSObject<FBSDKBridgeAPIRequestProtocol> *)request
-                                                error:(NSError *)error;
-
-- (nullable FBSDKBridgeAPIResponse *)createResponseWithRequest:(NSObject<FBSDKBridgeAPIRequestProtocol> *)request
-                                                   responseURL:(NSURL *)responseURL
-                                             sourceApplication:(nullable NSString *)sourceApplication
-                                                         error:(NSError *__autoreleasing *)errorRef;
-
-- (FBSDKBridgeAPIResponse *)createResponseCancelledWithRequest:(NSObject<FBSDKBridgeAPIRequestProtocol> *)request;
-
-@end
-
-NS_ASSUME_NONNULL_END
+typedef NS_ENUM(NSUInteger, FBSDKBridgeAPIProtocolType)
+{
+  FBSDKBridgeAPIProtocolTypeNative,
+  FBSDKBridgeAPIProtocolTypeWeb,
+} NS_SWIFT_NAME(BridgeAPIProtocol.Type);
 
 #endif

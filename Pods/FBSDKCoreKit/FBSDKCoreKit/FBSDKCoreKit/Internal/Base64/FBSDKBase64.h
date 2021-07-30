@@ -16,23 +16,37 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "TargetConditionals.h"
+#import <Foundation/Foundation.h>
 
-#if !TARGET_OS_TV
+NS_SWIFT_NAME(Base64)
+@interface FBSDKBase64 : NSObject
 
- #import "FBSDKWebViewFactory.h"
+/**
+  Decodes a base-64 encoded string.
+ @param string The base-64 encoded string.
+ @return NSData containing the decoded bytes.
+ */
++ (NSData *)decodeAsData:(NSString *)string;
 
- #import "WKWebView+WebViewProtocol.h"
+/**
+  Decodes a base-64 encoded string into a string.
+ @param string The base-64 encoded string.
+ @return NSString with the decoded UTF-8 value.
+ */
++ (NSString *)decodeAsString:(NSString *)string;
 
-@protocol FBSDKWebView;
+/**
+  Encodes data into a string.
+ @param data The data to be encoded.
+ @return The base-64 encoded string.
+ */
++ (NSString *)encodeData:(NSData *)data;
 
-@implementation FBSDKWebViewFactory
-
-- (nonnull id<FBSDKWebView>)createWebViewWithFrame:(CGRect)frame
-{
-  return [[WKWebView alloc] initWithFrame:frame];
-}
+/**
+  Encodes string into a base-64 representation.
+ @param string The string to be encoded.
+ @return The base-64 encoded string.
+ */
++ (NSString *)encodeString:(NSString *)string;
 
 @end
-
-#endif

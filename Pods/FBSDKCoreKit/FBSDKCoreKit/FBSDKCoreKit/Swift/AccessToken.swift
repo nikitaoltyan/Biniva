@@ -1,4 +1,4 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+// Copyright (c) 2016-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
 // copy, modify, and distribute this software in source code or binary form for use
@@ -16,18 +16,38 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "TargetConditionals.h"
+import Foundation
 
-#if !TARGET_OS_TV
+/**
+ AccessToken Extension
+ */
+public extension AccessToken {
+  /**
+   Returns the known granted permissions.
+   */
+  var permissions: Set<Permission> {
+    Set(__permissions.map { Permission(stringLiteral: $0) })
+  }
 
- #import "FBSDKApplicationObserving.h"
- #import "FBSDKBridgeAPI.h"
+  /**
+   Returns the known declined permissions.
+   */
+  var declinedPermissions: Set<Permission> {
+    Set(__declinedPermissions.map { Permission(stringLiteral: $0) })
+  }
 
-NS_ASSUME_NONNULL_BEGIN
+  /**
+   Returns the known expired permissions.
+   */
+  var expiredPermissions: Set<Permission> {
+    Set(__expiredPermissions.map { Permission(stringLiteral: $0) })
+  }
 
-@interface FBSDKBridgeAPI () <FBSDKApplicationObserving>
-@end
-
-NS_ASSUME_NONNULL_END
-
-#endif
+  /**
+   Convenience getter to determine if a permission has been granted
+   - parameter permission: The permission to check
+   */
+  func hasGranted(_ permission: Permission) -> Bool {
+    hasGranted(permission: permission.name)
+  }
+}

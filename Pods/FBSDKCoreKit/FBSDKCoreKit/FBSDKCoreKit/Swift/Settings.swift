@@ -1,4 +1,4 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+// Copyright (c) 2016-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
 // copy, modify, and distribute this software in source code or binary form for use
@@ -16,25 +16,30 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+import Foundation
+
+//--------------------------------------
+// MARK: - SDKSettings
+//--------------------------------------
 
 /**
-
- NS_ENUM (NSUInteger, FBSDKAppEventsFlushBehavior)
-
-  Specifies when `FBSDKAppEvents` sends log events to the server.
-
+ Provides access to settings and configuration used by the entire SDK.
  */
-typedef NS_ENUM(NSUInteger, FBSDKAppEventsFlushBehavior)
-{
+public extension Settings {
+  //--------------------------------------
+  // MARK: - SDKSettings + Logging Behavior
+  //--------------------------------------
 
-  /** Flush automatically: periodically (once a minute or every 100 logged events) and always at app reactivation. */
-  FBSDKAppEventsFlushBehaviorAuto = 0,
-
-  /** Only flush when the `flush` method is called. When an app is moved to background/terminated, the
-   events are persisted and re-established at activation, but they will only be written with an
-   explicit call to `flush`. */
-  FBSDKAppEventsFlushBehaviorExplicitOnly,
-} NS_SWIFT_NAME(AppEvents.FlushBehavior);
-
-
+  /**
+   Current logging behaviors of Facebook SDK.
+   The default enabled behavior is `.DeveloperErrors` only.
+   */
+  static var loggingBehaviors: Set<LoggingBehavior> {
+    get {
+      Set(Settings.__loggingBehaviors.map { LoggingBehavior(rawValue: $0) })
+    }
+    set {
+      Settings.__loggingBehaviors = Set(newValue.map { $0.rawValue })
+    }
+  }
+}

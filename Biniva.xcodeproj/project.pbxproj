@@ -26,6 +26,7 @@
 		5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470525C1447D00BAFEEF /* TextView Extension.swift */; };
 		5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C30470A25C157C800BAFEEF /* TextField Extension.swift */; };
 		5C3B737026B1BC5000B48DAC /* ReturnToPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3B736F26B1BC5000B48DAC /* ReturnToPositionView.swift */; };
+		5C3B737326B3BBE900B48DAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C3B737526B3BBE900B48DAC /* InfoPlist.strings */; };
 		5C3D533726301D0A00DA0AFB /* AddTrashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D533626301D0A00DA0AFB /* AddTrashView.swift */; };
 		5C3D533C2630564E00DA0AFB /* ExtraAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */; };
 		5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C454E2925B57B2000966991 /* OnboardingController.swift */; };
@@ -149,6 +150,9 @@
 		5C30470525C1447D00BAFEEF /* TextView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextView Extension.swift"; sourceTree = "<group>"; };
 		5C30470A25C157C800BAFEEF /* TextField Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField Extension.swift"; sourceTree = "<group>"; };
 		5C3B736F26B1BC5000B48DAC /* ReturnToPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnToPositionView.swift; sourceTree = "<group>"; };
+		5C3B737426B3BBE900B48DAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5C3B737626B3BBEF00B48DAC /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		5C3B737726B3BBFC00B48DAC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5C3D533626301D0A00DA0AFB /* AddTrashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrashView.swift; sourceTree = "<group>"; };
 		5C3D533B2630564E00DA0AFB /* ExtraAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraAddCell.swift; sourceTree = "<group>"; };
 		5C454E2925B57B2000966991 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
@@ -426,6 +430,7 @@
 				5C83A057255F959F005C2CAA /* SF-Pro.ttf */,
 				5C08703B262739080057E840 /* Model.xcdatamodeld */,
 				5C7F7D4D26A5C9C70021B6CE /* Localizable.strings */,
+				5C3B737526B3BBE900B48DAC /* InfoPlist.strings */,
 			);
 			path = Biniva;
 			sourceTree = "<group>";
@@ -738,6 +743,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C459159254D55C1005AE26C /* LaunchScreen.storyboard in Resources */,
+				5C3B737326B3BBE900B48DAC /* InfoPlist.strings in Resources */,
 				5C7F7D4B26A5C9C70021B6CE /* Localizable.strings in Resources */,
 				5C83A053255EB3CC005C2CAA /* Assets.xcassets in Resources */,
 				5C54DF9626767B03002548B8 /* GoogleService-Info.plist in Resources */,
@@ -987,6 +993,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5C3B737526B3BBE900B48DAC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C3B737426B3BBE900B48DAC /* en */,
+				5C3B737626B3BBEF00B48DAC /* en-GB */,
+				5C3B737726B3BBFC00B48DAC /* ru */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		5C459157254D55C1005AE26C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1136,7 +1152,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Biniva/Biniva.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Z962Q7H43F;
 				INFOPLIST_FILE = "$(SRCROOT)/Biniva/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1160,7 +1176,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Biniva/Biniva.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = Z962Q7H43F;
 				INFOPLIST_FILE = "$(SRCROOT)/Biniva/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
