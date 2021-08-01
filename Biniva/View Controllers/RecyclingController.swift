@@ -43,6 +43,7 @@ protocol topViewDelegate { // WTF
 class RecyclingController: UIViewController {
     
     let server = Server()
+    let appTransparency = AppTransparency()
     let analytics = ServerAnalytics()
     
     lazy var topView: TopView = {
@@ -96,7 +97,7 @@ class RecyclingController: UIViewController {
         view.backgroundColor = Colors.background
         SetSubviews()
         ActivateLayouts()
-        print(MaterialFunctions().calculate())
+        appTransparency.requestPermission()
     }
     
     func hideTopView(_ hide: Bool) {
@@ -242,7 +243,6 @@ extension RecyclingController: mapDelegate {
     }
     
     func showPopUp(title: String, subtitle: String, andButtonText buttonText: String) {
-        print("showPopUp function with Title: \(title)")
         Vibration.soft()
         self.showPopUp(withTitle: title, subtitle: subtitle, andButtonText: buttonText)
     }

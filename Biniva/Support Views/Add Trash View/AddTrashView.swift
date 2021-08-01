@@ -106,7 +106,7 @@ extension AddTrashView: UICollectionViewDelegate, UICollectionViewDataSource, UI
         
         if let cell = collection.cellForItem(at: indexPath) as? ExtraAddCell {
             cell.select()
-            weightView.textView.text = "\(weights?[indexPath.row] ?? 0) г"
+            weightView.textView.text = "\(weights?[indexPath.row] ?? 0) \(NSLocalizedString("weight_measurement_simplified", comment: "localized weight symbol"))"
             currentSelectedIndexPath = indexPath
         }
     }

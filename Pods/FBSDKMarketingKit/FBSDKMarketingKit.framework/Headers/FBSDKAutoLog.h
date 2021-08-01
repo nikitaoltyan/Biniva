@@ -20,12 +20,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Used for defining behavior of types that provide classes for types that
-/// exist in dynamically loaded frameworks.
-@protocol FBSDKDynamicFrameworkResolving <NSObject>
-
-- (nullable Class)safariViewControllerClass;
-- (nullable Class)asIdentifierManagerClass;
+NS_SWIFT_NAME(AutoLog)
+@interface FBSDKAutoLog : NSObject
 
 @end
 

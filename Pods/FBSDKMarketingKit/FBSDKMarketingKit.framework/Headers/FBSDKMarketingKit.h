@@ -16,24 +16,12 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+//! Project version number for FBSDKMarketingKit.
+FOUNDATION_EXPORT double FBSDKMarketingKitVersionNumber;
 
-/// An internal protocol used to describe a session data task
-NS_SWIFT_NAME(DataPersisting)
-@protocol FBSDKDataPersisting
+//! Project version string for FBSDKMarketingKit.
+FOUNDATION_EXPORT const unsigned char FBSDKMarketingKitVersionString[];
 
-- (void)setInteger:(NSInteger)value
-            forKey:(NSString *)defaultName;
-- (void)setObject:(id)value
-           forKey:(NSString *)defaultName;
-- (nullable NSData *)dataForKey:(NSString *)defaultName;
-- (NSInteger)integerForKey:(NSString *)defaultName;
-- (nullable NSString *)stringForKey:(NSString *)defaultName;
-- (nullable id)objectForKey:(NSString *)defaultName;
-- (void)removeObjectForKey:(NSString *)defaultName;
-
-@end
-
-NS_ASSUME_NONNULL_END
+#import <FBSDKMarketingKit/FBSDKAutoLog.h>

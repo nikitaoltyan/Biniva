@@ -42,7 +42,6 @@ class TakePhotoView: UIView {
     
     
     func setCamera() {
-        #if available 
         image.image = UIImage(systemName: "camera.fill")
     }
     
