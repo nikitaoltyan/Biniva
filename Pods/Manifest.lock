@@ -212,6 +212,8 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Adapty (1.15):
+    - CryptoSwift (= 1.4.0)
   - Bolts (1.9.1):
     - Bolts/AppLinks (= 1.9.1)
     - Bolts/Tasks (= 1.9.1)
@@ -225,6 +227,7 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
   - Branch (1.39.4)
+  - CryptoSwift (1.4.0)
   - Facebook-iOS-SDK (4.38.0):
     - Bolts (~> 1.9)
     - Facebook-iOS-SDK/CoreKit (= 4.38.0)
@@ -359,6 +362,7 @@ PODS:
   - PromisesObjC (1.2.12)
 
 DEPENDENCIES:
+  - Adapty (~> 1.15)
   - Branch
   - Facebook-iOS-SDK
   - Firebase/Analytics
@@ -370,9 +374,11 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - Adapty
     - Bolts
     - BoringSSL-GRPC
     - Branch
+    - CryptoSwift
     - Facebook-iOS-SDK
     - FBSDKCoreKit
     - FBSDKMarketingKit
@@ -397,9 +403,11 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  Adapty: ad84f10e8c9dd686bb7de80d5a5d561579600a24
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Branch: d21c40c47b5c15c6ab709cdf7d965a50059e0546
+  CryptoSwift: 7cc902df1784de3b389a387756c7d710f197730c
   Facebook-iOS-SDK: 9077b67c4178ea46c62997bcf2b6314ca6555440
   FBSDKCoreKit: 9cc05bec0568a5955c82eb59ae95da0fe125b88d
   FBSDKMarketingKit: 3d5736f9bbfcf7deae1e236f746712c2b6730ae5
@@ -422,6 +430,6 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
-PODFILE CHECKSUM: ffbae668d7aab420b49d297efca405af99cbf4c8
+PODFILE CHECKSUM: cad342b4250070977357a964f65f712996abd923
 
 COCOAPODS: 1.9.3

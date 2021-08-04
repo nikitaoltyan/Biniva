@@ -11,6 +11,7 @@ import CoreData
 import YandexMobileMetrica
 import FacebookCore
 import Branch
+import Adapty
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // do stuff with deep link data (nav to page, display content, etc)
 //            print(params as? [String: AnyObject] ?? {})
         }
+        
+        // Initializing Adapty (Managing Subscriptions)
+        Adapty.activate("public_live_TCqGfHQg.Zho8J82OJRT3fTSF2NDo", customerUserId: nil)
         
         return true
     }

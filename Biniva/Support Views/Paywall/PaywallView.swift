@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Adapty
 
 class PaywallView: UIView {
     
@@ -254,15 +255,41 @@ class PaywallView: UIView {
     }()
     
     
+    enum subscriptionType {
+        case monthly
+        case annual
+    }
+    
+    var choosedSubscriptionType: subscriptionType = .annual
+    var annualProduct: ProductModel?
+    var monthlyProduct: ProductModel?
+    
     override init(frame: CGRect) {
         let useFrame: CGRect = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
         super.init(frame: useFrame)
+        prepareSubscriptions()
         setSubviews()
         activateLayouts()
     }
 
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    
+    private
+    func prepareSubscriptions() {
+        var paywall: PaywallModel?
+        Adapty.getPaywalls { (paywalls, _, error) in
+            guard error == nil else  { return }
+            paywall = paywalls?.first(where: { $0.developerId == "001" }) //001 is my Paywall ID
+            guard let paywall = paywall else { return }
+            
+            self.annualProduct = paywall.products.first
+            self.monthlyProduct = paywall.products[1]
+            Adapty.logShowPaywall(paywall)
+            print("Subscriptions were prepared")
+        }
     }
     
     
@@ -281,6 +308,7 @@ class PaywallView: UIView {
             return
         }
         Vibration.soft()
+        choosedSubscriptionType = .annual
         UIView.animate(withDuration: 0.1, animations: {
             self.annualPlateView.layer.borderWidth = 3
             self.monthlyPlateView.layer.borderWidth = 0
@@ -296,6 +324,7 @@ class PaywallView: UIView {
             return
         }
         Vibration.soft()
+        choosedSubscriptionType = .monthly
         UIView.animate(withDuration: 0.1, animations: {
             self.monthlyPlateView.layer.borderWidth = 3
             self.annualPlateView.layer.borderWidth = 0
@@ -308,8 +337,32 @@ class PaywallView: UIView {
     func continueAction() {
         Vibration.soft()
         continueButton.tap(completion: { _ in
-            // TODO
-            print("BUY SUBSCRIPTION HERE")
+            print("BUY SUBSCRIPTION")
+            print("choosedSubscriptionType: \(self.choosedSubscriptionType)")
+            
+            switch self.choosedSubscriptionType {
+            case .annual:
+                guard let product = self.annualProduct else { return }
+                Adapty.makePurchase(product: product) { (purchaserInfo, receipt, appleValidationResult, product, error) in
+                    if error == nil {
+                        // successful purchase
+                        // TODO
+                    } else {
+                        print("Error: \(error!)")
+                    }
+                }
+
+            case .monthly:
+                guard let product = self.monthlyProduct else { return }
+                Adapty.makePurchase(product: product) { (purchaserInfo, receipt, appleValidationResult, product, error) in
+                    if error == nil {
+                        // successful purchase
+                        // TODO
+                    } else {
+                        print("Error: \(error!)")
+                    }
+                }
+            }
         })
     }
     
@@ -317,8 +370,13 @@ class PaywallView: UIView {
     func restoreAction() {
         Vibration.soft()
         restoreButton.tap(completion: { _ in
-            // TODO
             print("Restore purchases")
+            Adapty.restorePurchases { (purchaserInfo, receipt, appleValidationResult, error) in
+                if error == nil {
+                    // successful restore
+                    // TODO
+                }
+            }
         })
     }
     

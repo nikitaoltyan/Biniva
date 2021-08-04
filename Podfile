@@ -12,6 +12,7 @@ pod 'Firebase/Storage'
 pod 'GeoFire/Utils'
 pod 'Facebook-iOS-SDK'
 pod 'Branch'
+pod 'Adapty', '~> 1.15'
 
 # Optionally, include the Swift extensions if you're using Swift.
 pod 'FirebaseFirestoreSwift'
