@@ -13,7 +13,7 @@ class PaywallView: UIView {
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
             .with(autolayout: false)
-        scroll.contentSize = CGSize(width: MainConstants.screenWidth, height: 1500)
+        scroll.contentSize = CGSize(width: MainConstants.screenWidth, height: 1050)
         scroll.bounces = true
         scroll.showsVerticalScrollIndicator = true
         return scroll
@@ -27,7 +27,7 @@ class PaywallView: UIView {
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 16)
-        label.text = "Закрыть"
+        label.text = NSLocalizedString("paywall_close_button", comment: "Close title for that button")
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -46,7 +46,7 @@ class PaywallView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 2)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Поддержи проект эко-карты Biniva"
+        label.text = NSLocalizedString("paywall_title", comment: "The whole view title")
         return label
     }()
     
@@ -57,7 +57,7 @@ class PaywallView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro", size: 23)
-        label.text = "Помоги нам развиваться и позволь большему количеству людей переработать мусор"
+        label.text = NSLocalizedString("paywall_subtitle_1", comment: "The reason of purchase 1")
         return label
     }()
     
@@ -76,7 +76,7 @@ class PaywallView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro", size: 23)
-        label.text = "Открой доступ к расширеной статистике и эксклюзивным советам по Zero Waste"
+        label.text = NSLocalizedString("paywall_subtitle_2", comment: "The reason of purchase 2")
         return label
     }()
     
@@ -95,7 +95,7 @@ class PaywallView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro", size: 23)
-        label.text = "Помоги сделать мир чище!"
+        label.text = NSLocalizedString("paywall_subtitle_3", comment: "The reason of purchase 3")
         return label
     }()
     
@@ -137,7 +137,7 @@ class PaywallView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 15)
-        label.text = "Годовая поддержка проекта позволит:"
+        label.text = NSLocalizedString("paywall_annual_title", comment: "Title for annual plate")
         return label
     }()
     
@@ -148,7 +148,7 @@ class PaywallView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "Helvetica", size: 15)
-        label.text = "80 новым людям найти место переработки мусора рядом с домом.\n\nДополнительно сдать на переработку 3.2 тонны мусора в год."
+        label.text = NSLocalizedString("paywall_annual_text", comment: "In-plate text")
         return label
     }()
     
@@ -159,7 +159,6 @@ class PaywallView: UIView {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: 16)
-        label.text = "$29.99 per year"
         return label
     }()
     
@@ -193,7 +192,7 @@ class PaywallView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 15)
-        label.text = "Ежемесячная поддержка проекта позволит:"
+        label.text = NSLocalizedString("paywall_monthly_title", comment: "Title for monthly plate")
         label.alpha = 0
         return label
     }()
@@ -205,7 +204,7 @@ class PaywallView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "Helvetica", size: 15)
-        label.text = "120 новым людям найти место переработки мусора рядом с домом.\n\nДополнительно сдать на переработку 4.8 тонны мусора в год."
+        label.text = NSLocalizedString("paywall_monthly_text", comment: "In-plate text")
         return label
     }()
     
@@ -216,7 +215,6 @@ class PaywallView: UIView {
             .with(alignment: .center)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: 16)
-        label.text = "$3.99 per month"
         return label
     }()
     
@@ -236,7 +234,7 @@ class PaywallView: UIView {
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 16)
-        label.text = "Восстановить покупки"
+        label.text = NSLocalizedString("paywall_restore_purchases", comment: "Restore purchases")
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -249,10 +247,57 @@ class PaywallView: UIView {
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 16)
-        label.text = "Пропустить"
+        label.text = NSLocalizedString("paywall_skip", comment: "Skip")
         label.isUserInteractionEnabled = true
         return label
     }()
+    
+    let descGray: UILabel = {
+        let label = UILabel()
+            .with(autolayout: false)
+            .with(color: Colors.darkGrayText)
+            .with(alignment: .center)
+            .with(numberOfLines: 0)
+            .with(fontName: "Helvetica", size: 12)
+        label.text = NSLocalizedString("paywall_description_1", comment: "description before conditions")
+        return label
+    }()
+    
+    let conditionsLabel: UILabel = {
+        let label = UILabel()
+            .with(autolayout: false)
+            .with(color: Colors.darkGrayText)
+            .with(alignment: .center)
+            .with(numberOfLines: 1)
+            .with(fontName: "SFPro-Semibold", size: 12)
+        label.isUserInteractionEnabled = true
+        label.text = NSLocalizedString("paywall_conditions", comment: "Conditions")
+        return label
+    }()
+    
+    let privacyPolicyLabel: UILabel = {
+        let label = UILabel()
+            .with(autolayout: false)
+            .with(color: Colors.darkGrayText)
+            .with(alignment: .center)
+            .with(numberOfLines: 1)
+            .with(fontName: "SFPro-Semibold", size: 12)
+        label.isUserInteractionEnabled = true
+        label.text = NSLocalizedString("paywall_privacy_policy", comment: "Privacy Policy")
+        return label
+    }()
+    
+    let descVolumesGray: UILabel = {
+        let label = UILabel()
+            .with(autolayout: false)
+            .with(color: Colors.darkGrayText)
+            .with(alignment: .center)
+            .with(numberOfLines: 0)
+            .with(fontName: "Helvetica", size: 12)
+        label.text = NSLocalizedString("paywall_description_2", comment: "Description about used numbers in Plates")
+        return label
+    }()
+    
     
     
     enum subscriptionType {
@@ -285,10 +330,14 @@ class PaywallView: UIView {
             paywall = paywalls?.first(where: { $0.developerId == "001" }) //001 is my Paywall ID
             guard let paywall = paywall else { return }
             
+            print("Subscription was prepared")
             self.annualProduct = paywall.products.first
             self.monthlyProduct = paywall.products[1]
             Adapty.logShowPaywall(paywall)
-            print("Subscriptions were prepared")
+            
+            // Setting prices that were got from the product
+            self.annualPrice.text = "\(self.annualProduct?.currencySymbol ?? "NaN")\(self.annualProduct?.price ?? 0)\(NSLocalizedString("paywall_annual_price_tag", comment: "tag for annual"))"
+            self.monthlyPrice.text = "\(self.monthlyProduct?.currencySymbol ?? "NaN")\(self.monthlyProduct?.price ?? 0)\(NSLocalizedString("paywall_monthly_price_tag", comment: "tag for annual"))"
         }
     }
     
@@ -388,6 +437,20 @@ class PaywallView: UIView {
             print("Close")
         })
     }
+    
+    @objc
+    func conditionsAction() {
+        conditionsLabel.tap(completion: { _ in
+            
+        })
+    }
+    
+    @objc
+    func privacyPolicyAction() {
+        privacyPolicyLabel.tap(completion: { _ in
+            
+        })
+    }
 }
 
 
@@ -425,6 +488,10 @@ extension PaywallView {
         scrollView.addSubview(continueButton)
         scrollView.addSubview(restoreButton)
         scrollView.addSubview(skipButton)
+        scrollView.addSubview(descGray)
+        scrollView.addSubview(conditionsLabel)
+        scrollView.addSubview(privacyPolicyLabel)
+        scrollView.addSubview(descVolumesGray)
         
         closeButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeAction)))
         annualPlateView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(chooseAnnualAction)))
@@ -432,6 +499,8 @@ extension PaywallView {
         continueButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(continueAction)))
         restoreButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(restoreAction)))
         skipButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(skipAction)))
+        conditionsLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(conditionsAction)))
+        privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(privacyPolicyAction)))
     }
     
     private
@@ -477,7 +546,7 @@ extension PaywallView {
             subtitle_3_image.heightAnchor.constraint(equalToConstant: subtitle_3_image.frame.height),
             
             annualPlateView.topAnchor.constraint(equalTo: subtitle_3.bottomAnchor, constant: 84),
-            annualPlateView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+            annualPlateView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 13),
             annualPlateView.widthAnchor.constraint(equalToConstant: annualPlateView.frame.width),
             annualPlateView.heightAnchor.constraint(equalToConstant: annualPlateView.frame.height),
             
@@ -493,7 +562,7 @@ extension PaywallView {
             annualPrice.centerXAnchor.constraint(equalTo: annualPlateView.centerXAnchor),
             
             monthlyPlateView.topAnchor.constraint(equalTo: annualPlateView.topAnchor),
-            monthlyPlateView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
+            monthlyPlateView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -13),
             monthlyPlateView.widthAnchor.constraint(equalToConstant: monthlyPlateView.frame.width),
             monthlyPlateView.heightAnchor.constraint(equalToConstant: monthlyPlateView.frame.height),
             
@@ -518,6 +587,20 @@ extension PaywallView {
             
             skipButton.topAnchor.constraint(equalTo: restoreButton.bottomAnchor, constant: 15),
             skipButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            descGray.topAnchor.constraint(equalTo: skipButton.bottomAnchor, constant: 12),
+            descGray.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
+            descGray.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
+            
+            conditionsLabel.topAnchor.constraint(equalTo: descGray.bottomAnchor, constant: 3),
+            conditionsLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -70),
+            
+            privacyPolicyLabel.topAnchor.constraint(equalTo: descGray.bottomAnchor, constant: 3),
+            privacyPolicyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 64),
+            
+            descVolumesGray.topAnchor.constraint(equalTo: privacyPolicyLabel.bottomAnchor, constant: 14),
+            descVolumesGray.leftAnchor.constraint(equalTo: descGray.leftAnchor),
+            descVolumesGray.rightAnchor.constraint(equalTo: descGray.rightAnchor),
         ])
     }
 }

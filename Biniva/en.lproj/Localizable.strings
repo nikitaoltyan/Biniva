@@ -69,6 +69,26 @@
 "onboarding_5_subtitle" = "No surveillance, just convenience!";
 
 
+// PAYWALL
+"paywall_close_button" = "Close";
+"paywall_title" = "Support the Biniva eco-map project";
+"paywall_subtitle_1" = "Help us to evolve and allow more people to recycle garbage";
+"paywall_subtitle_2" = "Open access to advanced statistics and exclusive tips about Zero Waste";
+"paywall_subtitle_3" = "Help us make the world cleaner!";
+"paywall_annual_title" = "The annual support of the project will allow:";
+"paywall_monthly_title" = "The monthly support of the project will allow:";
+"paywall_annual_text" = "Help 80 new people find a garbage recycling place near their home.\n\nThey will additionaly recycle 3.2 tons of garbage per year.";
+"paywall_monthly_text" = "Help 120 new people find a garbage recycling place near their home.\n\nThey will additionaly recycle 4.8 tons of garbage per year.";
+"paywall_annual_price_tag" = " per year";
+"paywall_monthly_price_tag" = " per month";
+"paywall_restore_purchases" = "Restore purchases";
+"paywall_skip" = "Skip";
+"paywall_description_1" = "The subscription will resume automatically. We appreciate your privacy very much, so we wanted you to know how we use the personal information you provided. By tapping Continue you agree to";
+"paywall_conditions" = "Conditions";
+"paywall_privacy_policy" = "Privacy Policy";
+"paywall_description_2" = "These numbers for the number of new people who could use the Biniva map, as well as the amount of recycled garbage, are calculated based on the average price of attracting one user and the average amount of garbage created by the Biniva test team. In reality, the numbers may differ. Thank you for your support!";
+
+
 // TOP VIEW
 "top_view_title_recycling" = "Recycling";
 "top_view_subtitle_recycling" = "let's help nature today!";
