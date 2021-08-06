@@ -18,19 +18,28 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+typedef void (^FBSDKURLSessionTaskBlock)(NSData *responseData,
+                                         NSURLResponse *response,
+                                         NSError *error)
+NS_SWIFT_NAME(URLSessionTaskBlock);
 
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
+NS_SWIFT_NAME(URLSessionTask)
+@interface FBSDKURLSessionTask : NSObject
 
- @warning UNSAFE - DO NOT USE
- */
-typedef NS_ENUM(NSUInteger, FBSDKAdvertisingTrackingStatus)
-{
-  FBSDKAdvertisingTrackingAllowed,
-  FBSDKAdvertisingTrackingDisallowed,
-  FBSDKAdvertisingTrackingUnspecified
-} NS_SWIFT_NAME(AdvertisingTrackingStatus);
+@property (nonatomic, strong) NSURLSessionTask *task;
+@property (atomic, readonly) NSURLSessionTaskState state;
+@property (nonatomic, strong, readonly) NSDate *requestStartDate;
+@property (nonatomic, copy) FBSDKURLSessionTaskBlock handler;
+@property (nonatomic, assign) uint64_t requestStartTime;
+@property (nonatomic, assign) NSUInteger loggerSerialNumber;
 
-NS_ASSUME_NONNULL_END
++ (instancetype)new NS_UNAVAILABLE;
+
+- (instancetype)initWithRequest:(NSURLRequest *)request
+                    fromSession:(NSURLSession *)session
+              completionHandler:(FBSDKURLSessionTaskBlock)handler;
+
+- (void)start;
+- (void)cancel;
+
+@end

@@ -18,25 +18,27 @@
 
 #import <Foundation/Foundation.h>
 
+#import "FBSDKURLSessionTask.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-/*
- Describes any types that optionally responds to various lifecycle events
- received by the system and propagated by `ApplicationDelegate`.
- */
-@protocol FBSDKApplicationObserving <NSObject>
+@interface FBSDKURLSession : NSObject
 
-@optional
-- (void)applicationDidBecomeActive:(nullable UIApplication *)application;
-- (void)applicationWillResignActive:(nullable UIApplication *)application;
-- (void)applicationDidEnterBackground:(nullable UIApplication *)application;
-- (BOOL)            application:(UIApplication *)application
-  didFinishLaunchingWithOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions;
+@property (atomic, strong, nullable) NSURLSession *session;
+@property (nonatomic, weak, nullable) id<NSURLSessionDataDelegate> delegate;
+@property (nonatomic, retain, nullable) NSOperationQueue *delegateQueue;
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(nullable NSString *)sourceApplication
-         annotation:(nullable id)annotation;
+- (instancetype)initWithDelegate:(id<NSURLSessionDataDelegate>)delegate
+                   delegateQueue:(NSOperationQueue *)delegateQueue;
+
+- (void)executeURLRequest:(NSURLRequest *)request
+        completionHandler:(FBSDKURLSessionTaskBlock)handler;
+
+- (void)updateSessionWithBlock:(dispatch_block_t)block;
+
+- (void)invalidateAndCancel;
+
+- (BOOL)valid;
 
 @end
 

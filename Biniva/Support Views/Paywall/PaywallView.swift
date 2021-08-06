@@ -441,14 +441,18 @@ class PaywallView: UIView {
     @objc
     func conditionsAction() {
         conditionsLabel.tap(completion: { _ in
-            
+            if let url = URL(string: NSLocalizedString("paywall_terms_of_use_url", comment: "terms of use link")) {
+                UIApplication.shared.open(url)
+            }
         })
     }
     
     @objc
     func privacyPolicyAction() {
         privacyPolicyLabel.tap(completion: { _ in
-            
+            if let url = URL(string: NSLocalizedString("paywall_privacy_policy_url", comment: "privacy policy link")) {
+                UIApplication.shared.open(url)
+            }
         })
     }
 }

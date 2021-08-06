@@ -16,34 +16,45 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "FBSDKURLSessionTask.h"
 
-@class FBSDKAccessToken;
-@class FBSDKAuthenticationToken;
+@implementation FBSDKURLSessionTask
 
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
+- (instancetype)init
+{
+  if ((self = [super init])) {
+    _requestStartDate = [NSDate date];
+  }
+  return self;
+}
 
- @warning UNSAFE - DO NOT USE
- */
-NS_SWIFT_NAME(TokenCaching)
-@protocol FBSDKTokenCaching<NSObject>
+- (instancetype)initWithRequest:(NSURLRequest *)request
+                    fromSession:(NSURLSession *)session
+              completionHandler:(FBSDKURLSessionTaskBlock)handler
+{
+  if ((self = [self init])) {
+    self.requestStartTime = (uint64_t)([self.requestStartDate timeIntervalSince1970] * 1000);
+    self.task = [session dataTaskWithRequest:request completionHandler:handler];
+  }
+  return self;
+}
 
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
+- (NSURLSessionTaskState)state
+{
+  return self.task.state;
+}
 
- @warning UNSAFE - DO NOT USE
- */
-@property (nonatomic, copy) FBSDKAccessToken *accessToken;
+#pragma mark - Task State
 
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
+- (void)start
+{
+  [self.task resume];
+}
 
- @warning UNSAFE - DO NOT USE
- */
-@property (nonatomic, copy) FBSDKAuthenticationToken *authenticationToken;
+- (void)cancel
+{
+  [self.task cancel];
+  self.handler = nil;
+}
 
 @end

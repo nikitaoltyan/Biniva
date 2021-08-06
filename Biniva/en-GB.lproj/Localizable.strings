@@ -87,6 +87,8 @@
 "paywall_conditions" = "Conditions";
 "paywall_privacy_policy" = "Privacy Policy";
 "paywall_description_2" = "These numbers for the number of new people who could use the Biniva map, as well as the amount of recycled garbage, are calculated based on the average price of attracting one user and the average amount of garbage created by the Biniva test team. In reality, the numbers may differ. Thank you for your support!";
+"paywall_privacy_policy_url" = "http://greener.tilda.ws/privacy_policy/en";
+"paywall_terms_of_use_url" = "http://greener.tilda.ws/terms_of_use/en";
 
 
 

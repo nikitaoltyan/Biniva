@@ -20,12 +20,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_SWIFT_NAME(SettingsLogging)
-@protocol FBSDKSettingsLogging
+@interface FBSDKLibAnalyzer : NSObject
 
-- (void)logWarnings;
-- (void)logIfSDKSettingsChanged;
-- (void)recordInstall;
++ (NSDictionary<NSString *, NSString *> *)getMethodsTable:(NSArray<NSString *> *)prefixes
+                                               frameworks:(NSArray<NSString *> * _Nullable)frameworks;
++ (nullable NSArray<NSString *> *)symbolicateCallstack:(NSArray<NSString *> *)callstack
+                                         methodMapping:(NSDictionary<NSString *,id> *)methodMapping;
 
 @end
 

@@ -18,32 +18,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class FBSDKAccessToken;
-@protocol FBSDKTokenCaching;
+#import "FBSDKCrashObserving.h"
 
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
+NS_ASSUME_NONNULL_BEGIN
 
- @warning UNSAFE - DO NOT USE
- */
-NS_SWIFT_NAME(AccessTokenProviding)
-@protocol FBSDKAccessTokenProviding
+@interface FBSDKCrashHandler : NSObject
 
-@property (class, nonatomic, copy, nullable, readonly) FBSDKAccessToken *currentAccessToken;
-@property (class, nonatomic, copy, nullable) id<FBSDKTokenCaching> tokenCache;
++ (void)disable;
++ (void)addObserver:(id<FBSDKCrashObserving>)observer;
++ (void)removeObserver:(id<FBSDKCrashObserving>)observer;
++ (void)clearCrashReportFiles;
++ (NSString *)getFBSDKVersion;
 
 @end
 
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
-
- @warning UNSAFE - DO NOT USE
- */
-NS_SWIFT_NAME(AccessTokenSetting)
-@protocol FBSDKAccessTokenSetting
-
-@property (class, nonatomic, copy, nullable) FBSDKAccessToken *currentAccessToken;
-
-@end
+NS_ASSUME_NONNULL_END

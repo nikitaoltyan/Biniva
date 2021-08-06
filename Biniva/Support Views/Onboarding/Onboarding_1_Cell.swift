@@ -146,7 +146,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
     
     @objc
     func conditions() {
-        if let url = URL(string: "http://greener.tilda.ws/privacy_policy") {
+        if let url = URL(string: NSLocalizedString("paywall_privacy_policy_url", comment: "privacy policy link")) {
             UIApplication.shared.open(url)
         }
     }

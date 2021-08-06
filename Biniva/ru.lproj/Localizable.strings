@@ -87,6 +87,8 @@
 "paywall_conditions" = "Условия";
 "paywall_privacy_policy" = "Политика конфиденциальности";
 "paywall_description_2" = "Данные числа по количеству новых людей, которые могли бы использовать карту Biniva, а также количество переработонного мусора, расчитаны на основе цены привлечения одного пользователя и среднего количества мусора, созданого тестовой командой Biniva. В реальности цифры могут отличаться. Спасибо за поддержку!";
+"paywall_privacy_policy_url" = "http://greener.tilda.ws/privacy_policy/ru";
+"paywall_terms_of_use_url" = "http://greener.tilda.ws/terms_of_use/en";
 
 
 // TOP VIEW
