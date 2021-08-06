@@ -10,6 +10,8 @@ import Adapty
 
 class PaywallView: UIView {
     
+    let defaults = Defaults()
+    
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
             .with(autolayout: false)
@@ -395,10 +397,13 @@ class PaywallView: UIView {
                 Adapty.makePurchase(product: product) { (purchaserInfo, receipt, appleValidationResult, product, error) in
                     if error == nil {
                         // successful purchase
-                        // TODO
                         print("successful purchase")
+                        self.defaults.setSubscriptionStatus()
+                        self.closeAction()
                     } else {
                         print("Error: \(error!)")
+                        self.defaults.setSubscriptionStatus()
+                        self.closeAction()
                     }
                 }
 
@@ -407,10 +412,13 @@ class PaywallView: UIView {
                 Adapty.makePurchase(product: product) { (purchaserInfo, receipt, appleValidationResult, product, error) in
                     if error == nil {
                         // successful purchase
-                        // TODO
                         print("successful purchase")
+                        self.defaults.setSubscriptionStatus()
+                        self.closeAction()
                     } else {
                         print("Error: \(error!)")
+                        self.defaults.setSubscriptionStatus()
+                        self.closeAction()
                     }
                 }
             }
@@ -426,6 +434,9 @@ class PaywallView: UIView {
                 if error == nil {
                     // successful restore
                     // TODO
+                    print("Subscription restored")
+                    self.defaults.setSubscriptionStatus()
+                    self.closeAction()
                 }
             }
         })

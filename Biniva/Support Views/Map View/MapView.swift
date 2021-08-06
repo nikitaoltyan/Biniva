@@ -62,6 +62,7 @@ class MapView: UIView {
     let paywallView: PaywallButton = {
         let view = PaywallButton()
             .with(autolayout: false)
+        view.isHidden = Defaults.getSubscriptionStatus()
         return view
     }()
     

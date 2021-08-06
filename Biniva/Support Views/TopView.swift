@@ -39,7 +39,21 @@ class TopView: UIView {
         button.imageView?.contentMode = .scaleAspectFill
         button.setImage(image, for: .normal)
         button.tintColor = Colors.darkGrayText
-        
+
+        button.isHidden = true
+        return button
+    }()
+    
+    let paywallButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            .with(autolayout: false)
+            .with(bgColor: .clear)
+        let image = UIImage(systemName: "dollarsign.circle")?.withRenderingMode(.alwaysTemplate)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFill
+        button.setImage(image, for: .normal)
+        button.tintColor = Colors.darkGrayText
         button.isHidden = true
         return button
     }()
@@ -90,9 +104,11 @@ extension TopView: TopViewDelegate {
         if (isRecylcing) {
             title.text = NSLocalizedString("top_view_title_recycling", comment: "recycling topView Label")
             subtitle.text = NSLocalizedString("top_view_subtitle_recycling", comment: "recycling topView support subtitle")
+            paywallButton.isHidden = true
         } else {
             title.text = NSLocalizedString("top_view_title_stats", comment: "stats topView support subtitle")
             subtitle.text = NSLocalizedString("top_view_subtitle_stats", comment: "stats topView support subtitle")
+            paywallButton.isHidden = false
         }
     }
 }
@@ -105,6 +121,7 @@ extension TopView {
         self.addSubview(title)
         self.addSubview(subtitle)
         self.addSubview(settingsButton)
+        self.addSubview(paywallButton)
         
         settingsButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
     }
@@ -120,7 +137,12 @@ extension TopView {
             settingsButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -26),
             settingsButton.centerYAnchor.constraint(equalTo: title.centerYAnchor),
             settingsButton.widthAnchor.constraint(equalToConstant: settingsButton.frame.width),
-            settingsButton.heightAnchor.constraint(equalToConstant: settingsButton.frame.height)
+            settingsButton.heightAnchor.constraint(equalToConstant: settingsButton.frame.height),
+            
+            paywallButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -26),
+            paywallButton.centerYAnchor.constraint(equalTo: title.centerYAnchor),
+            paywallButton.widthAnchor.constraint(equalToConstant: paywallButton.frame.width),
+            paywallButton.heightAnchor.constraint(equalToConstant: paywallButton.frame.height),
         ])
     }
 }

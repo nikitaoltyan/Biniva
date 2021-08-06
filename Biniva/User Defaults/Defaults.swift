@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import Adapty
 
 
 class Defaults {
@@ -75,5 +76,29 @@ class Defaults {
     
     func getIsCameraUsed() -> Bool {
        return UserDefaults.standard.bool(forKey: "isCameraUsed")
+    }
+    
+    func setSubscriptionStatus() {
+        Adapty.getPurchaserInfo { (purchaserInfo, error) in
+            guard error == nil else {
+                UserDefaults.standard.setValue(false, forKey: "isSubscriptionActive")
+                return
+            }
+            
+            // "premium" is an identifier of default access level
+            print("Got purchaserInfo: \(purchaserInfo)")
+            if purchaserInfo?.accessLevels["premium"]?.isActive == true {
+                // grant access to premium features
+                UserDefaults.standard.setValue(true, forKey: "isSubscriptionActive")
+            } else {
+                UserDefaults.standard.setValue(false, forKey: "isSubscriptionActive")
+            }
+
+        }
+    }
+    
+    static
+    func getSubscriptionStatus() -> Bool {
+        return UserDefaults.standard.bool(forKey: "isSubscriptionActive")
     }
 }
