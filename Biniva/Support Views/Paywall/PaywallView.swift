@@ -13,9 +13,16 @@ class PaywallView: UIView {
     let defaults = Defaults()
     
     lazy var scrollView: UIScrollView = {
+        let scrollHeight: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 900
+            case 736: return 950
+            default: return 1050
+            }
+        }()
         let scroll = UIScrollView()
             .with(autolayout: false)
-        scroll.contentSize = CGSize(width: MainConstants.screenWidth, height: 1050)
+        scroll.contentSize = CGSize(width: MainConstants.screenWidth, height: scrollHeight)
         scroll.bounces = true
         scroll.showsVerticalScrollIndicator = true
         return scroll
@@ -53,12 +60,18 @@ class PaywallView: UIView {
     }()
     
     let subtitle_1: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 23
+            default: return 23
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro", size: 23)
+            .with(fontName: "SFPro", size: textSize)
         label.text = NSLocalizedString("paywall_subtitle_1", comment: "The reason of purchase 1")
         return label
     }()
@@ -72,12 +85,18 @@ class PaywallView: UIView {
     }()
     
     let subtitle_2: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 23
+            default: return 23
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro", size: 23)
+            .with(fontName: "SFPro", size: textSize)
         label.text = NSLocalizedString("paywall_subtitle_2", comment: "The reason of purchase 2")
         return label
     }()
@@ -91,12 +110,18 @@ class PaywallView: UIView {
     }()
     
     let subtitle_3: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 23
+            default: return 23
+            }
+        }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 0)
-            .with(fontName: "SFPro", size: 23)
+            .with(fontName: "SFPro", size: textSize)
         label.text = NSLocalizedString("paywall_subtitle_3", comment: "The reason of purchase 3")
         return label
     }()
@@ -522,6 +547,48 @@ extension PaywallView {
     
     private
     func activateLayouts() {
+        let titleBlackTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 15
+            case 736: return 20
+            default: return 50
+            }
+        }()
+        let subtitle_1TopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 17
+            case 736: return 20
+            default: return 40
+            }
+        }()
+        let subtitlesTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 12
+            case 736: return 20
+            default: return 25
+            }
+        }()
+        let plateTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 70
+            case 736: return 78
+            default: return 84
+            }
+        }()
+        let continueButtonTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 17
+            case 736: return 25
+            default: return 30
+            }
+        }()
+        let restoreTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 10
+            default: return 15
+            }
+        }()
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -531,11 +598,11 @@ extension PaywallView {
             closeButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
             closeButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
             
-            titleBlack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50),
+            titleBlack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: titleBlackTopConstant),
             titleBlack.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             titleBlack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -90),
             
-            subtitle_1.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: 40),
+            subtitle_1.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: subtitle_1TopConstant),
             subtitle_1.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -30),
             subtitle_1.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 75),
             
@@ -544,7 +611,7 @@ extension PaywallView {
             subtitle_1_image.widthAnchor.constraint(equalToConstant: subtitle_1_image.frame.width),
             subtitle_1_image.heightAnchor.constraint(equalToConstant: subtitle_1_image.frame.height),
             
-            subtitle_2.topAnchor.constraint(equalTo: subtitle_1.bottomAnchor, constant: 25),
+            subtitle_2.topAnchor.constraint(equalTo: subtitle_1.bottomAnchor, constant: subtitlesTopConstant),
             subtitle_2.rightAnchor.constraint(equalTo: subtitle_1.rightAnchor),
             subtitle_2.leftAnchor.constraint(equalTo: subtitle_1.leftAnchor),
             
@@ -553,7 +620,7 @@ extension PaywallView {
             subtitle_2_image.widthAnchor.constraint(equalToConstant: subtitle_2_image.frame.width),
             subtitle_2_image.heightAnchor.constraint(equalToConstant: subtitle_2_image.frame.height),
             
-            subtitle_3.topAnchor.constraint(equalTo: subtitle_2.bottomAnchor, constant: 25),
+            subtitle_3.topAnchor.constraint(equalTo: subtitle_2.bottomAnchor, constant: subtitlesTopConstant),
             subtitle_3.rightAnchor.constraint(equalTo: subtitle_1.rightAnchor),
             subtitle_3.leftAnchor.constraint(equalTo: subtitle_1.leftAnchor),
             
@@ -562,7 +629,7 @@ extension PaywallView {
             subtitle_3_image.widthAnchor.constraint(equalToConstant: subtitle_3_image.frame.width),
             subtitle_3_image.heightAnchor.constraint(equalToConstant: subtitle_3_image.frame.height),
             
-            annualPlateView.topAnchor.constraint(equalTo: subtitle_3.bottomAnchor, constant: 84),
+            annualPlateView.topAnchor.constraint(equalTo: subtitle_3.bottomAnchor, constant: plateTopConstant),
             annualPlateView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 13),
             annualPlateView.widthAnchor.constraint(equalToConstant: annualPlateView.frame.width),
             annualPlateView.heightAnchor.constraint(equalToConstant: annualPlateView.frame.height),
@@ -594,15 +661,15 @@ extension PaywallView {
             monthlyPrice.bottomAnchor.constraint(equalTo: monthlyPlateView.bottomAnchor, constant: -15),
             monthlyPrice.centerXAnchor.constraint(equalTo: monthlyPlateView.centerXAnchor),
             
-            continueButton.topAnchor.constraint(equalTo: annualPlateView.bottomAnchor, constant: 30),
+            continueButton.topAnchor.constraint(equalTo: annualPlateView.bottomAnchor, constant: continueButtonTopConstant),
             continueButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             continueButton.widthAnchor.constraint(equalToConstant: continueButton.frame.width),
             continueButton.heightAnchor.constraint(equalToConstant: continueButton.frame.height),
             
-            restoreButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 15),
+            restoreButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: restoreTopConstant),
             restoreButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            skipButton.topAnchor.constraint(equalTo: restoreButton.bottomAnchor, constant: 15),
+            skipButton.topAnchor.constraint(equalTo: restoreButton.bottomAnchor, constant: restoreTopConstant),
             skipButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             descGray.topAnchor.constraint(equalTo: skipButton.bottomAnchor, constant: 12),
