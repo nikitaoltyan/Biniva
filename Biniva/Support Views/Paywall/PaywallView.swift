@@ -298,7 +298,7 @@ class PaywallView: UIView {
         return label
     }()
     
-    
+    var delegate: paywallDelegate?
     
     enum subscriptionType {
         case monthly
@@ -346,8 +346,8 @@ class PaywallView: UIView {
     func closeAction() {
         Vibration.soft()
         closeButton.tap(completion: { _ in
-            // TODO
             print("Close")
+            self.delegate?.close()
         })
     }
     
@@ -396,6 +396,7 @@ class PaywallView: UIView {
                     if error == nil {
                         // successful purchase
                         // TODO
+                        print("successful purchase")
                     } else {
                         print("Error: \(error!)")
                     }
@@ -407,6 +408,7 @@ class PaywallView: UIView {
                     if error == nil {
                         // successful purchase
                         // TODO
+                        print("successful purchase")
                     } else {
                         print("Error: \(error!)")
                     }
@@ -433,8 +435,8 @@ class PaywallView: UIView {
     func skipAction() {
         Vibration.soft()
         skipButton.tap(completion: { _ in
-            // TODO
             print("Close")
+            self.delegate?.close()
         })
     }
     

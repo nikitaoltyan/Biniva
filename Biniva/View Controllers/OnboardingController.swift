@@ -116,7 +116,10 @@ extension OnboardingController: OnbordingDelegate {
         userDefaults.setHasLaunched(true)
         let newVC = RecyclingController()
         newVC.modalPresentationStyle = .fullScreen
-        present(newVC, animated: true, completion: nil)
+        present(newVC, animated: true, completion: {
+            print("newVC.showPaywall")
+            newVC.showPaywall() // Show paywall right after finished onboarding.
+        })
     }
 }
 

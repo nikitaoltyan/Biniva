@@ -27,6 +27,7 @@ protocol RecyclingDelegate {
 
 protocol mapDelegate {
     func openAddNewPoint()
+    func showPaywall()
     func showPopUp(title: String, subtitle: String, andButtonText buttonText: String)
 }
 
@@ -99,6 +100,8 @@ class RecyclingController: UIViewController {
         ActivateLayouts()
         appTransparency.requestPermission()
     }
+    
+    
     
     func hideTopView(_ hide: Bool) {
         if (hide) {
@@ -245,6 +248,13 @@ extension RecyclingController: mapDelegate {
     func showPopUp(title: String, subtitle: String, andButtonText buttonText: String) {
         Vibration.soft()
         self.showPopUp(withTitle: title, subtitle: subtitle, andButtonText: buttonText)
+    }
+    
+    func showPaywall() {
+        let newVC = PaywallController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
+        present(newVC, animated: true, completion: nil)
     }
 }
 

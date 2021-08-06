@@ -98,6 +98,7 @@
 		5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD5570426526946007B3D06 /* MaterialFunctions.swift */; };
 		5CE1B0282633DA5100549536 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE1B0272633DA5100549536 /* WeightView.swift */; };
 		5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDA06625DCF4A0009280D0 /* Array Extension.swift */; };
+		5CEE555C26BD19CB00561B76 /* PaywallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE555B26BD19CB00561B76 /* PaywallButton.swift */; };
 		5CEE8C00266A166700EB6617 /* ClusterPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE8BFF266A166700EB6617 /* ClusterPin.swift */; };
 		5CEE8C02266A173200EB6617 /* TrashBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE8C01266A173200EB6617 /* TrashBin.swift */; };
 		5CF90C51262EA3A000127E4D /* AddTrashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF90C50262EA3A000127E4D /* AddTrashController.swift */; };
@@ -234,6 +235,7 @@
 		5CD5570426526946007B3D06 /* MaterialFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialFunctions.swift; sourceTree = "<group>"; };
 		5CE1B0272633DA5100549536 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
 		5CEDA06625DCF4A0009280D0 /* Array Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extension.swift"; sourceTree = "<group>"; };
+		5CEE555B26BD19CB00561B76 /* PaywallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallButton.swift; sourceTree = "<group>"; };
 		5CEE8BFF266A166700EB6617 /* ClusterPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterPin.swift; sourceTree = "<group>"; };
 		5CEE8C01266A173200EB6617 /* TrashBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBin.swift; sourceTree = "<group>"; };
 		5CF90C50262EA3A000127E4D /* AddTrashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrashController.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				5CD0B12F26888AD200267081 /* AddPointButtonView.swift */,
 				5CEE8C01266A173200EB6617 /* TrashBin.swift */,
 				5C3B736F26B1BC5000B48DAC /* ReturnToPositionView.swift */,
+				5CEE555B26BD19CB00561B76 /* PaywallButton.swift */,
 				5CD2F5972682251500993A54 /* Cell */,
 				5CEE8BFE266A15AC00EB6617 /* Pins */,
 			);
@@ -961,6 +964,7 @@
 				5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */,
 				5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */,
 				5CA776D22656B3C600EDAF47 /* MapView.swift in Sources */,
+				5CEE555C26BD19CB00561B76 /* PaywallButton.swift in Sources */,
 				5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */,
 				5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */,
 				5CEE8C00266A166700EB6617 /* ClusterPin.swift in Sources */,

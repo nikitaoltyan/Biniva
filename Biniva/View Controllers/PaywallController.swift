@@ -7,12 +7,17 @@
 
 import UIKit
 
+protocol paywallDelegate {
+    func close()
+}
+
+
 class PaywallController: UIViewController {
     
-    
-    let paywallView: PaywallView = {
+    lazy var paywallView: PaywallView = {
         let view = PaywallView()
             .with(autolayout: false)
+        view.delegate = self
         return view
     }()
 
@@ -25,6 +30,14 @@ class PaywallController: UIViewController {
 
 }
 
+
+
+
+extension PaywallController: paywallDelegate {
+    func close() {
+        dismiss(animated: true, completion: nil)
+    }
+}
 
 
 

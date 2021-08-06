@@ -16,41 +16,45 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKTimeSpentRecordingFactory.h"
+#import "TargetConditionals.h"
 
-#import "FBSDKEventLogging.h"
-#import "FBSDKServerConfigurationProviding.h"
-#import "FBSDKTimeSpentData.h"
-#import "FBSDKTimeSpentData+SourceApplicationTracking.h"
-#import "FBSDKTimeSpentData+TimeSpentRecording.h"
+#if !TARGET_OS_TV
+
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FBSDKTimeSpentRecordingFactory ()
+@class FBSDKAppLink;
 
-@property (nonnull, nonatomic, readonly) Class<FBSDKServerConfigurationProviding> serverConfigurationProvider;
-@property (nonnull, nonatomic, readonly) id<FBSDKEventLogging> eventLogger;
+/**
+ Describes the callback for appLinkFromURLInBackground.
+ @param appLink the FBSDKAppLink representing the deferred App Link
+ @param error the error during the request, if any
 
-@end
+ */
+typedef void (^FBSDKAppLinkBlock)(FBSDKAppLink * _Nullable appLink, NSError * _Nullable error)
+NS_SWIFT_NAME(AppLinkBlock);
 
-@implementation FBSDKTimeSpentRecordingFactory
 
-- (instancetype)initWithEventLogger:(id<FBSDKEventLogging>)eventLogger
-        serverConfigurationProvider:(Class<FBSDKServerConfigurationProviding>)serverConfigurationProvider
-{
-  if ((self = [super init])) {
-    _eventLogger = eventLogger;
-    _serverConfigurationProvider = serverConfigurationProvider;
-  }
-  return self;
-}
+/**
+ Implement this protocol to provide an alternate strategy for resolving
+ App Links that may include pre-fetching, caching, or querying for App Link
+ data from an index provided by a service provider.
+ */
+NS_SWIFT_NAME(AppLinkResolving)
+@protocol FBSDKAppLinkResolving <NSObject>
 
-- (id<FBSDKSourceApplicationTracking, FBSDKTimeSpentRecording>)createTimeSpentRecorder
-{
-  return [[FBSDKTimeSpentData alloc] initWithEventLogger:self.eventLogger
-                             serverConfigurationProvider:self.serverConfigurationProvider];
-}
+/**
+ Asynchronously resolves App Link data for a given URL.
+
+ @param url The URL to resolve into an App Link.
+ @param handler The completion block that will return an App Link for the given URL.
+ */
+- (void)appLinkFromURL:(NSURL *)url handler:(FBSDKAppLinkBlock)handler
+NS_EXTENSION_UNAVAILABLE_IOS("Not available in app extension");
 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

@@ -59,6 +59,12 @@ class MapView: UIView {
         return view
     }()
     
+    let paywallView: PaywallButton = {
+        let view = PaywallButton()
+            .with(autolayout: false)
+        return view
+    }()
+    
     var delegate: mapDelegate?
     var pinAnnotationTopConstraint: NSLayoutConstraint?
     var centerCoordinate: CGFloat = 0
@@ -161,6 +167,14 @@ class MapView: UIView {
         Vibration.light()
         returnToPositionView.tap(completion: { _ in
             self.setUserLocation()
+        })
+    }
+    
+    @objc
+    func openPaywallAction() {
+        Vibration.light()
+        paywallView.tap(completion: { _ in
+            self.delegate?.showPaywall()
         })
     }
     
@@ -306,18 +320,29 @@ extension MapView: MKMapViewDelegate {
 
 
 extension MapView {
+    private
     func setSubviews() {
         self.addSubview(map)
         self.addSubview(pinAnnotation)
         self.addSubview(addPointView)
         self.addSubview(returnToPositionView)
+        self.addSubview(paywallView)
         
         pinAnnotation.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:))))
         addPointView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPoint)))
         returnToPositionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(returnToPositionAction)))
+        paywallView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openPaywallAction)))
     }
     
+    private
     func activateLayouts() {
+        let addPointBottomConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return -35
+            case 736: return -50
+            default: return -60
+            }
+        }()
         NSLayoutConstraint.activate([
             map.topAnchor.constraint(equalTo: self.topAnchor),
             map.leftAnchor.constraint(equalTo: self.leftAnchor),
@@ -329,14 +354,19 @@ extension MapView {
             pinAnnotation.heightAnchor.constraint(equalToConstant: pinAnnotation.frame.height),
             
             addPointView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22),
-            addPointView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -60),
+            addPointView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: addPointBottomConstant),
             addPointView.widthAnchor.constraint(equalToConstant: addPointView.frame.width),
             addPointView.heightAnchor.constraint(equalToConstant: addPointView.frame.height),
             
             returnToPositionView.leftAnchor.constraint(equalTo: addPointView.leftAnchor),
             returnToPositionView.bottomAnchor.constraint(equalTo: addPointView.topAnchor, constant: -14),
             returnToPositionView.widthAnchor.constraint(equalToConstant: returnToPositionView.frame.width),
-            returnToPositionView.heightAnchor.constraint(equalToConstant: returnToPositionView.frame.height)
+            returnToPositionView.heightAnchor.constraint(equalToConstant: returnToPositionView.frame.height),
+            
+            paywallView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -22),
+            paywallView.bottomAnchor.constraint(equalTo: addPointView.bottomAnchor),
+            paywallView.widthAnchor.constraint(equalToConstant: paywallView.frame.width),
+            paywallView.heightAnchor.constraint(equalToConstant: paywallView.frame.height),
         ])
         
         pinAnnotationTopConstraint = pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
