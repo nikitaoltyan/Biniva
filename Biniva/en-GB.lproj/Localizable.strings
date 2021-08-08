@@ -67,6 +67,13 @@
 "onboarding_5_title" = "The app can track your geoposition";
 "onboarding_5_green_title" = "It is necessary for using the Biniva map";
 "onboarding_5_subtitle" = "No surveillance, just convenience!";
+// Sixth cell
+"onboarding_6_title" = "Choose the measurement system";
+"onboarding_6_green_title" = "We wish only to attend your needs";
+"onboarding_6_metric_title" = "Metric";
+"onboarding_6_imperial_title" = "Imperial";
+"onboarding_6_metric" = "metric_image_en";
+"onboarding_6_imperial" = "imperial_image_en";
 
 
 // PAYWALL

@@ -81,6 +81,7 @@
 		5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */; };
 		5CB8593C2652BB3D00885A6D /* MaterialStatsCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */; };
 		5CC12876265FFF8C0097ECDD /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC12875265FFF8C0097ECDD /* MKMapView+Extension.swift */; };
+		5CC4D52C26BFA5E400FC6E30 /* Onboarding_6_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D52B26BFA5E400FC6E30 /* Onboarding_6_Cell.swift */; };
 		5CC8CB1126AAC043006186BE /* AddButtonWithPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8CB1026AAC043006186BE /* AddButtonWithPhotoView.swift */; };
 		5CC8CB1326AAC41E006186BE /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8CB1226AAC41E006186BE /* CameraController.swift */; };
 		5CC8CB1626AB618E006186BE /* TakePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8CB1526AB618E006186BE /* TakePhotoView.swift */; };
@@ -99,6 +100,9 @@
 		5CE1B0282633DA5100549536 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE1B0272633DA5100549536 /* WeightView.swift */; };
 		5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDA06625DCF4A0009280D0 /* Array Extension.swift */; };
 		5CEE555C26BD19CB00561B76 /* PaywallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE555B26BD19CB00561B76 /* PaywallButton.swift */; };
+		5CEE555E26BD5F3B00561B76 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE555D26BD5F3B00561B76 /* SettingsController.swift */; };
+		5CEE556126BD60D800561B76 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE556026BD60D800561B76 /* SettingsCell.swift */; };
+		5CEE556326BD660B00561B76 /* SettingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE556226BD660B00561B76 /* SettingsTableHeaderView.swift */; };
 		5CEE8C00266A166700EB6617 /* ClusterPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE8BFF266A166700EB6617 /* ClusterPin.swift */; };
 		5CEE8C02266A173200EB6617 /* TrashBin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE8C01266A173200EB6617 /* TrashBin.swift */; };
 		5CF90C51262EA3A000127E4D /* AddTrashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF90C50262EA3A000127E4D /* AddTrashController.swift */; };
@@ -218,6 +222,7 @@
 		5CB6A22E25C40D6200EC4B3A /* ImageView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView Extension.swift"; sourceTree = "<group>"; };
 		5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaterialStatsCell+Empty.swift"; sourceTree = "<group>"; };
 		5CC12875265FFF8C0097ECDD /* MKMapView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
+		5CC4D52B26BFA5E400FC6E30 /* Onboarding_6_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding_6_Cell.swift; sourceTree = "<group>"; };
 		5CC8CB1026AAC043006186BE /* AddButtonWithPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonWithPhotoView.swift; sourceTree = "<group>"; };
 		5CC8CB1226AAC41E006186BE /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		5CC8CB1526AB618E006186BE /* TakePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoView.swift; sourceTree = "<group>"; };
@@ -236,6 +241,9 @@
 		5CE1B0272633DA5100549536 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
 		5CEDA06625DCF4A0009280D0 /* Array Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extension.swift"; sourceTree = "<group>"; };
 		5CEE555B26BD19CB00561B76 /* PaywallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallButton.swift; sourceTree = "<group>"; };
+		5CEE555D26BD5F3B00561B76 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		5CEE556026BD60D800561B76 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		5CEE556226BD660B00561B76 /* SettingsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableHeaderView.swift; sourceTree = "<group>"; };
 		5CEE8BFF266A166700EB6617 /* ClusterPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterPin.swift; sourceTree = "<group>"; };
 		5CEE8C01266A173200EB6617 /* TrashBin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBin.swift; sourceTree = "<group>"; };
 		5CF90C50262EA3A000127E4D /* AddTrashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrashController.swift; sourceTree = "<group>"; };
@@ -491,6 +499,7 @@
 				5C64D784268C4F980013F084 /* PopUpController.swift */,
 				5CC8CB1226AAC41E006186BE /* CameraController.swift */,
 				5C41703626B6FF43008E39CC /* PaywallController.swift */,
+				5CEE555D26BD5F3B00561B76 /* SettingsController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -509,6 +518,7 @@
 				5C555085269CA36D00AD8015 /* Article */,
 				5CC8CB1426AB615D006186BE /* Camera View */,
 				5C41703826B6FF74008E39CC /* Paywall */,
+				5CEE555F26BD60B400561B76 /* Settings */,
 			);
 			path = "Support Views";
 			sourceTree = "<group>";
@@ -571,6 +581,7 @@
 				5C64D78B269047660013F084 /* Onboarding_3_Cell.swift */,
 				5C64D78D269047760013F084 /* Onboarding_4_Cell.swift */,
 				5C64D78F269047860013F084 /* Onboarding_5_Cell.swift */,
+				5CC4D52B26BFA5E400FC6E30 /* Onboarding_6_Cell.swift */,
 				5C64D7962690E6E20013F084 /* NotificationExampleView.swift */,
 			);
 			path = Onboarding;
@@ -614,6 +625,15 @@
 				5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		5CEE555F26BD60B400561B76 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5CEE556026BD60D800561B76 /* SettingsCell.swift */,
+				5CEE556226BD660B00561B76 /* SettingsTableHeaderView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		5CEE8BFE266A15AC00EB6617 /* Pins */ = {
@@ -935,6 +955,7 @@
 				5C25D8AC2636BB9B00D2206E /* MaterialData.swift in Sources */,
 				5C087044262739E10057E840 /* Model+CoreDataProperties.swift in Sources */,
 				5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */,
+				5CC4D52C26BFA5E400FC6E30 /* Onboarding_6_Cell.swift in Sources */,
 				5C07594626596F17000F64C7 /* MaterialPinCell.swift in Sources */,
 				5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */,
 				5C41703726B6FF43008E39CC /* PaywallController.swift in Sources */,
@@ -948,8 +969,10 @@
 				5C30470625C1447D00BAFEEF /* TextView Extension.swift in Sources */,
 				5CB6A22A25C3D4A900EC4B3A /* ViewController Extension.swift in Sources */,
 				5C9F98B3262DE1E200DFCFEA /* StatsView.swift in Sources */,
+				5CEE556326BD660B00561B76 /* SettingsTableHeaderView.swift in Sources */,
 				5CD0B13026888AD200267081 /* AddPointButtonView.swift in Sources */,
 				5C45917E254D59D3005AE26C /* RecyclingController.swift in Sources */,
+				5CEE556126BD60D800561B76 /* SettingsCell.swift in Sources */,
 				5C782CD5267A059900A853D5 /* Points+CoreDataProperties.swift in Sources */,
 				5CC8CB1C26AD5276006186BE /* CloseCircleView.swift in Sources */,
 				5C11455826612B9400F48626 /* MapView+Model.swift in Sources */,
@@ -968,6 +991,7 @@
 				5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */,
 				5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */,
 				5CEE8C00266A166700EB6617 /* ClusterPin.swift in Sources */,
+				5CEE555E26BD5F3B00561B76 /* SettingsController.swift in Sources */,
 				5CC12876265FFF8C0097ECDD /* MKMapView+Extension.swift in Sources */,
 				5C08703D262739080057E840 /* Model.xcdatamodeld in Sources */,
 				5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */,

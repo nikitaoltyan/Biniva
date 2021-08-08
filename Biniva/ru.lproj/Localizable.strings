@@ -67,6 +67,13 @@
 "onboarding_5_title" = "Приложению может понадобится геопозиция";
 "onboarding_5_green_title" = "Она нужна для простоты использования карты Biniva";
 "onboarding_5_subtitle" = "Никакой слежки, только удобство";
+// Sixth cell
+"onboarding_6_title" = "Выберите систему измерения";
+"onboarding_6_green_title" = "Мы хотим, чтобы вам было удобно";
+"onboarding_6_metric_title" = "Метрическая";
+"onboarding_6_imperial_title" = "Английская";
+"onboarding_6_metric" = "metric_image_ru";
+"onboarding_6_imperial" = "imperial_image_ru";
 
 
 // PAYWALL

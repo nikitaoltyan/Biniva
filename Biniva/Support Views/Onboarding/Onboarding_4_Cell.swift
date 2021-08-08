@@ -11,6 +11,17 @@ class Onboarding_4_Cell: UICollectionViewCell {
     
     let notifications = Notifications()
     
+    let slideNumber: UILabel = {
+        let label = UILabel()
+            .with(autolayout: false)
+            .with(color: Colors.darkGrayText)
+            .with(alignment: .center)
+            .with(numberOfLines: 0)
+            .with(fontName: "SFPro", size: 14)
+        label.text = "4/6"
+        return label
+    }()
+    
     let notificationExample: NotificationExampleView = {
         let view = NotificationExampleView()
             .with(autolayout: false)
@@ -147,6 +158,7 @@ class Onboarding_4_Cell: UICollectionViewCell {
 
 extension Onboarding_4_Cell {
     func setSubviews() {
+        self.addSubview(slideNumber)
         self.addSubview(notificationExample)
         self.addSubview(titleBlack)
         self.addSubview(titleGreen)
@@ -159,6 +171,14 @@ extension Onboarding_4_Cell {
     }
     
     func activateLayouts() {
+        let sliderTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 20
+            case 736: return 30
+            default: return 50
+            }
+        }()
+        
         let notificationTopConstant: CGFloat = {
             switch MainConstants.screenHeight {
             case ...700: return 100
@@ -191,6 +211,9 @@ extension Onboarding_4_Cell {
         }()
         
         NSLayoutConstraint.activate([
+            slideNumber.topAnchor.constraint(equalTo: self.topAnchor, constant: sliderTopConstant),
+            slideNumber.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
+            
             notificationExample.topAnchor.constraint(equalTo: self.topAnchor, constant: notificationTopConstant),
             notificationExample.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             notificationExample.widthAnchor.constraint(equalToConstant: notificationExample.frame.width),

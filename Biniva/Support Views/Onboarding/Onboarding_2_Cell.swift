@@ -11,6 +11,17 @@ class Onboarding_2_Cell: UICollectionViewCell {
     
     let functions = MaterialFunctions()
     
+    let slideNumber: UILabel = {
+        let label = UILabel()
+            .with(autolayout: false)
+            .with(color: Colors.darkGrayText)
+            .with(alignment: .center)
+            .with(numberOfLines: 0)
+            .with(fontName: "SFPro", size: 14)
+        label.text = "2/6"
+        return label
+    }()
+    
     let mapImage: UIImageView = {
         let imageHeight: CGFloat = {
             switch MainConstants.screenHeight {
@@ -211,6 +222,7 @@ class Onboarding_2_Cell: UICollectionViewCell {
 
 extension Onboarding_2_Cell {
     func setSubviews() {
+        self.addSubview(slideNumber)
         self.addSubview(mapImage)
         mapImage.addSubview(point_1)
         mapImage.addSubview(point_2)
@@ -225,9 +237,17 @@ extension Onboarding_2_Cell {
     }
     
     func activateLayouts() {
+        let sliderTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 20
+            case 736: return 30
+            default: return 50
+            }
+        }()
+        
         let mapTopConstant: CGFloat = {
             switch MainConstants.screenHeight {
-            case ...700: return 30
+            case ...700: return 42
             case 736: return 40
             default: return 75
             }
@@ -242,6 +262,9 @@ extension Onboarding_2_Cell {
         }()
         
         NSLayoutConstraint.activate([
+            slideNumber.topAnchor.constraint(equalTo: self.topAnchor, constant: sliderTopConstant),
+            slideNumber.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
+            
             mapImage.topAnchor.constraint(equalTo: self.topAnchor, constant: mapTopConstant),
             mapImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             mapImage.widthAnchor.constraint(equalToConstant: mapImage.frame.width),

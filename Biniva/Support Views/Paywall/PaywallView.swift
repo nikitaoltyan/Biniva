@@ -16,8 +16,7 @@ class PaywallView: UIView {
         let scrollHeight: CGFloat = {
             switch MainConstants.screenHeight {
             case ...700: return 900
-            case 736: return 950
-            default: return 1050
+            default: return 950
             }
         }()
         let scroll = UIScrollView()
@@ -551,14 +550,14 @@ extension PaywallView {
             switch MainConstants.screenHeight {
             case ...700: return 15
             case 736: return 20
-            default: return 50
+            default: return 37
             }
         }()
         let subtitle_1TopConstant: CGFloat = {
             switch MainConstants.screenHeight {
             case ...700: return 17
             case 736: return 20
-            default: return 40
+            default: return 35
             }
         }()
         let subtitlesTopConstant: CGFloat = {

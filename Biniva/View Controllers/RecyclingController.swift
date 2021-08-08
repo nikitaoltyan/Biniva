@@ -35,8 +35,9 @@ protocol TopViewDelegate {
     func updateTitles(isRecylcing: Bool)
 }
 
-protocol topViewDelegate { // WTF
+protocol topViewDelegate { // WTF. Used for delegates methonds from TopView to RecyclingController.
     func openSettings()
+    func openPaywall()
 }
 
 
@@ -263,9 +264,16 @@ extension RecyclingController: mapDelegate {
 
 extension RecyclingController: topViewDelegate {
     func openSettings() {
-        print("Open Settings")
-        let newVC = ArticleController()
+        let newVC = SettingsController()
         newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
+        present(newVC, animated: true, completion: nil)
+    }
+    
+    func openPaywall() {
+        let newVC = PaywallController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
         present(newVC, animated: true, completion: nil)
     }
 }

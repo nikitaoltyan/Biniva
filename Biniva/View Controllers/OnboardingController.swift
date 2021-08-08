@@ -39,6 +39,7 @@ class OnboardingController: UIViewController {
         collection.register(Onboarding_3_Cell.self, forCellWithReuseIdentifier: "Onboarding_3_Cell")
         collection.register(Onboarding_4_Cell.self, forCellWithReuseIdentifier: "Onboarding_4_Cell")
         collection.register(Onboarding_5_Cell.self, forCellWithReuseIdentifier: "Onboarding_5_Cell")
+        collection.register(Onboarding_6_Cell.self, forCellWithReuseIdentifier: "Onboarding_6_Cell")
         
         return collection
     }()
@@ -60,7 +61,7 @@ class OnboardingController: UIViewController {
 extension OnboardingController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -86,8 +87,12 @@ extension OnboardingController: UICollectionViewDelegate, UICollectionViewDataSo
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_4_Cell", for: indexPath) as! Onboarding_4_Cell
             cell.delegate = self
             return cell
-        default:
+        case 4:
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_5_Cell", for: indexPath) as! Onboarding_5_Cell
+            cell.delegate = self
+            return cell
+        default:
+            let cell = collection.dequeueReusableCell(withReuseIdentifier: "Onboarding_6_Cell", for: indexPath) as! Onboarding_6_Cell
             cell.delegate = self
             return cell
         }

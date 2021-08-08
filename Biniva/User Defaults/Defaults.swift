@@ -101,4 +101,19 @@ class Defaults {
     func getSubscriptionStatus() -> Bool {
         return UserDefaults.standard.bool(forKey: "isSubscriptionActive")
     }
+    
+    
+    // In general 0 – metric, 1 – imperial
+    static
+    func setWeightSystem(typeOfSystem type: Int) {
+        guard type == 0 || type == 1 else { return }
+        UserDefaults.standard.setValue(type, forKey: "weightType")
+    }
+    
+    static
+    func getWeightSystem() -> Int {
+        let type: Int = UserDefaults.standard.integer(forKey: "weightType")
+        guard type == 0 || type == 1 else {  return 0  }
+        return type
+    }
 }

@@ -40,7 +40,7 @@ class TopView: UIView {
         button.setImage(image, for: .normal)
         button.tintColor = Colors.darkGrayText
 
-        button.isHidden = true
+//        button.isHidden = true
         return button
     }()
     
@@ -54,7 +54,7 @@ class TopView: UIView {
         button.imageView?.contentMode = .scaleAspectFill
         button.setImage(image, for: .normal)
         button.tintColor = Colors.darkGrayText
-        button.isHidden = true
+        button.isHidden = true // It's just initial position, cos paywallButton only on stats view.
         return button
     }()
 
@@ -83,6 +83,11 @@ class TopView: UIView {
     func openSettings() {
         delegate?.openSettings()
     }
+    
+    @objc
+    func openPaywall() {
+        delegate?.openPaywall()
+    }
 }
 
 
@@ -105,10 +110,12 @@ extension TopView: TopViewDelegate {
             title.text = NSLocalizedString("top_view_title_recycling", comment: "recycling topView Label")
             subtitle.text = NSLocalizedString("top_view_subtitle_recycling", comment: "recycling topView support subtitle")
             paywallButton.isHidden = true
+            settingsButton.isHidden = false
         } else {
-            title.text = NSLocalizedString("top_view_title_stats", comment: "stats topView support subtitle")
+            title.text = NSLocalizedString("top_view_title_stats", comment: "stats topView title")
             subtitle.text = NSLocalizedString("top_view_subtitle_stats", comment: "stats topView support subtitle")
-            paywallButton.isHidden = false
+            paywallButton.isHidden = Defaults.getSubscriptionStatus()
+            settingsButton.isHidden = true
         }
     }
 }
@@ -124,6 +131,7 @@ extension TopView {
         self.addSubview(paywallButton)
         
         settingsButton.addTarget(self, action: #selector(openSettings), for: .touchUpInside)
+        paywallButton.addTarget(self, action: #selector(openPaywall), for: .touchUpInside)
     }
     
     func ActivateLayouts(){

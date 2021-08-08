@@ -2,7 +2,7 @@
 //  Onboarding_5_Cell.swift
 //  Biniva
 //
-//  Created by Никита Олтян on 03.07.2021.
+//  Created by Nick Oltyan on 03.07.2021.
 //
 
 import UIKit
@@ -11,6 +11,17 @@ import CoreLocation
 class Onboarding_5_Cell: UICollectionViewCell {
     
     let location = Location()
+    
+    let slideNumber: UILabel = {
+        let label = UILabel()
+            .with(autolayout: false)
+            .with(color: Colors.darkGrayText)
+            .with(alignment: .center)
+            .with(numberOfLines: 0)
+            .with(fontName: "SFPro", size: 14)
+        label.text = "5/6"
+        return label
+    }()
     
     let icon: UIImageView = {
         let width: CGFloat = {
@@ -86,20 +97,6 @@ class Onboarding_5_Cell: UICollectionViewCell {
         return view
     }()
     
-    let skipLabel: UILabel = {
-        let label = UILabel()
-            .with(autolayout: false)
-            .with(alignment: .center)
-            .with(color: Colors.darkGrayText)
-            .with(alignment: .center)
-            .with(numberOfLines: 1)
-            .with(fontName: "SFPro-Medium", size: 16)
-        label.text = NSLocalizedString("onboarding_skip", comment: "skip button")
-        label.isUserInteractionEnabled = true
-        label.isHidden = true
-        return label
-    }()
-    
     var delegate: OnbordingDelegate?
     
     override init(frame: CGRect) {
@@ -135,7 +132,7 @@ class Onboarding_5_Cell: UICollectionViewCell {
         button.tap(completion: { (_) in
             self.location.requestUserLocation(completion: { (_) in
                 DispatchQueue.main.async { // Compiling in the main Thread
-                    self.delegate?.finish()
+                    self.delegate?.next(slide: 5)
                 }
             })
         })
@@ -146,18 +143,28 @@ class Onboarding_5_Cell: UICollectionViewCell {
 
 
 extension Onboarding_5_Cell {
+    private
     func setSubviews() {
+        self.addSubview(slideNumber)
         self.addSubview(icon)
         self.addSubview(titleBlack)
         self.addSubview(titleGreen)
         self.addSubview(subtitleGray)
         self.addSubview(button)
-        self.addSubview(skipLabel)
         
         button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(buttonTap)))
     }
     
+    private
     func activateLayouts() {
+        let sliderTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 20
+            case 736: return 30
+            default: return 50
+            }
+        }()
+        
         let iconTopConstant: CGFloat = {
             switch MainConstants.screenHeight {
             case ...700: return 70
@@ -166,18 +173,11 @@ extension Onboarding_5_Cell {
             }
         }()
         
-        let skipBottomConstant: CGFloat = {
-            switch MainConstants.screenHeight {
-            case ...700: return -16
-            case 736: return -23
-            default: return -50
-            }
-        }()
-        
         let buttonBottomConstant: CGFloat = {
             switch MainConstants.screenHeight {
-            case ...700: return -12
-            default: return -17
+            case ...700: return -24
+            case 736: return -35
+            default: return -58
             }
         }()
         
@@ -190,15 +190,15 @@ extension Onboarding_5_Cell {
         }()
         
         NSLayoutConstraint.activate([
+            slideNumber.topAnchor.constraint(equalTo: self.topAnchor, constant: sliderTopConstant),
+            slideNumber.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
+            
             icon.topAnchor.constraint(equalTo: self.topAnchor, constant: iconTopConstant),
             icon.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             icon.widthAnchor.constraint(equalToConstant: icon.frame.width),
             icon.heightAnchor.constraint(equalToConstant: icon.frame.height),
             
-            skipLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: skipBottomConstant),
-            skipLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
-            button.bottomAnchor.constraint(equalTo: skipLabel.topAnchor, constant: buttonBottomConstant),
+            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: buttonBottomConstant),
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             button.widthAnchor.constraint(equalToConstant: button.frame.width),
             button.heightAnchor.constraint(equalToConstant: button.frame.height),

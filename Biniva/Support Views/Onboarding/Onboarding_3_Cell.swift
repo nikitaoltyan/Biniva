@@ -9,6 +9,17 @@ import UIKit
 
 class Onboarding_3_Cell: UICollectionViewCell {
     
+    let slideNumber: UILabel = {
+        let label = UILabel()
+            .with(autolayout: false)
+            .with(color: Colors.darkGrayText)
+            .with(alignment: .center)
+            .with(numberOfLines: 0)
+            .with(fontName: "SFPro", size: 14)
+        label.text = "3/6"
+        return label
+    }()
+    
     let progressView: ProgressView = {
         let height: CGFloat = 320
         let view = ProgressView(frame: CGRect(x: 0, y: 0, width: height, height: height))
@@ -104,6 +115,7 @@ class Onboarding_3_Cell: UICollectionViewCell {
 
 extension Onboarding_3_Cell {
     func setSubviews() {
+        self.addSubview(slideNumber)
         self.addSubview(progressView)
         self.addSubview(titleBlack)
         self.addSubview(titleGreen)
@@ -114,11 +126,19 @@ extension Onboarding_3_Cell {
     }
     
     func activateLayouts() {
+        let sliderTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 20
+            case 736: return 30
+            default: return 50
+            }
+        }()
+        
         let progressTopConstant: CGFloat = {
             switch MainConstants.screenHeight {
-            case ...700: return 25
+            case ...700: return 35
             case 736: return 40
-            default: return 70
+            default: return 130
             }
         }()
         
@@ -147,6 +167,9 @@ extension Onboarding_3_Cell {
         }()
         
         NSLayoutConstraint.activate([
+            slideNumber.topAnchor.constraint(equalTo: self.topAnchor, constant: sliderTopConstant),
+            slideNumber.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
+            
             progressView.topAnchor.constraint(equalTo: self.topAnchor, constant: progressTopConstant),
             progressView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             progressView.widthAnchor.constraint(equalToConstant: progressView.frame.width),
