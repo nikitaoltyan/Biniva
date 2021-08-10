@@ -93,6 +93,9 @@ class RecyclingController: UIViewController {
     var statsXConstraint: NSLayoutConstraint?
     var mapXConstraint: NSLayoutConstraint?
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("Recycling Controller Will Appear")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +105,11 @@ class RecyclingController: UIViewController {
         appTransparency.requestPermission()
     }
     
+    func updateDataAfterSettings() {
+        print("test was called from SettingsController")
+        recyclingView.progressView.setUpInitial()
+        statsView.statsTable.reloadData()
+    }
     
     
     func hideTopView(_ hide: Bool) {

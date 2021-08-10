@@ -13,6 +13,8 @@ protocol Test {
 
 
 class StatsView: UIView {
+    
+    let measure = Measure()
 
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -126,8 +128,8 @@ class StatsView: UIView {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
         super.init(frame: useFrame)
         self.backgroundColor = .clear
-        SetSubviews()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
         fetchData()
     }
 
@@ -135,7 +137,8 @@ class StatsView: UIView {
         fatalError()
     }
     
-    @objc func fetchData(){
+    @objc
+    func fetchData(){
         model?.removeAll()
         statsTable.reloadData()
         model = dataFunction.fetchData()
@@ -157,9 +160,7 @@ class StatsView: UIView {
     
     func updateLabel(){
         DataFunction().getTotalLogged(result: { sum in
-            let formatted = String(format: "%.1f", Double(sum)/1000.0)
-            let weightMeasure: String = NSLocalizedString("weight_measurement_kilograms", comment: "Localized kg measurement")
-            self.weightLabel.text = "\(formatted) \(weightMeasure)"
+            self.weightLabel.text = self.measure.getMeasurementString(weight: sum, forNeededType: .kilogramm)
         })
     }
     
@@ -238,7 +239,8 @@ extension StatsView: UITableViewDelegate, UITableViewDataSource {
 
 
 extension StatsView {
-    func SetSubviews(){
+    private
+    func setSubviews(){
         self.addSubview(scrollView)
         scrollView.addSubview(weightLabel)
         scrollView.addSubview(subtitle)
@@ -253,7 +255,8 @@ extension StatsView {
         privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openPrivacyPolicy)))
     }
     
-    func ActivateLayouts(){
+    private
+    func activateLayouts(){
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),

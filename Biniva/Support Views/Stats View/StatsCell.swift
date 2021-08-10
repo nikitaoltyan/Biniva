@@ -8,6 +8,8 @@
 import UIKit
 
 class StatsCell: UITableViewCell {
+    
+    let measure = Measure()
 
     let dateLabel: UILabel = {
         let label = UILabel()
@@ -43,17 +45,16 @@ class StatsCell: UITableViewCell {
     func updateData(logSizes: [Int]?, logMaterials: [Int]?) {
         loggedLabel.text = ""
         guard (logSizes != nil && logMaterials != nil) else { return }
-        let weightText = NSLocalizedString("weight_measurement", comment: "Just a way of measuring weight")
         
-        for item in 0...(logSizes!.count-1){
-            let logSize = logSizes![item]
+        for item in 0...(logSizes!.count-1) {
+            let weightString = self.measure.getMeasurementString(weight: logSizes![item], forNeededType: .gramm)
             let logMaterial = MaterialDefaults().getMaterialName(id: logMaterials![item])
             let lastText = (loggedLabel.text ?? "") as String
             
             if (lastText.count == 0){
-                loggedLabel.text = "\(logSize) \(weightText) \(logMaterial)"
+                loggedLabel.text = "\(weightString) \(logMaterial)"
             } else {
-                loggedLabel.text = "\(lastText)\n\(logSize) \(weightText) \(logMaterial)"
+                loggedLabel.text = "\(lastText)\n\(weightString) \(logMaterial)"
             }
         }
     }

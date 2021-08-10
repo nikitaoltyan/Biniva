@@ -1,5 +1,5 @@
 //
-//  Onboarding_6_Cell.swift
+//  WeightMeasureController.swift
 //  Biniva
 //
 //  Created by Nick Oltyan on 08.08.2021.
@@ -7,55 +7,38 @@
 
 import UIKit
 
-class Onboarding_6_Cell: UICollectionViewCell {
+class WeightMeasureController: UIViewController {
     
-    let slideNumber: UILabel = {
-        let label = UILabel()
+    let backButton: UIImageView = {
+        let scale: CGFloat = {
+            if MainConstants.screenHeight > 700 { return 35 }
+            else { return 27 }
+        }()
+        let button = UIImageView(frame: CGRect(x: 0, y: 0, width: scale-5, height: scale))
             .with(autolayout: false)
-            .with(color: Colors.darkGrayText)
-            .with(alignment: .center)
-            .with(numberOfLines: 0)
-            .with(fontName: "SFPro", size: 14)
-        label.text = "6/6"
-        return label
+        button.tintColor = MainConstants.nearBlack
+        button.image = UIImage(systemName: "chevron.left")
+        button.isUserInteractionEnabled = true
+        return button
     }()
     
     let titleBlack: UILabel = {
         let textSize: CGFloat = {
             switch MainConstants.screenHeight {
-            case ...700: return 26
-            case 736: return 26
-            default: return 28
+            case ...736: return 24
+            default: return 25
             }
         }()
         let label = UILabel()
             .with(autolayout: false)
             .with(color: Colors.nearBlack)
-            .with(alignment: .center)
+            .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
         label.text = NSLocalizedString("onboarding_6_title", comment: "Title for that cell")
         return label
     }()
     
-    let titleGreen: UILabel = {
-        let textSize: CGFloat = {
-            switch MainConstants.screenHeight {
-            case ...700: return 26
-            case 736: return 26
-            default: return 28
-            }
-        }()
-        let label = UILabel()
-            .with(autolayout: false)
-            .with(color: Colors.topGradient)
-            .with(alignment: .center)
-            .with(numberOfLines: 0)
-            .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = NSLocalizedString("onboarding_6_green_title", comment: "Green title for that cell")
-        return label
-    }()
-
     let metricPlateView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth/2-30, height: 60))
             .with(autolayout: false)
@@ -123,35 +106,25 @@ class Onboarding_6_Cell: UICollectionViewCell {
         label.text = NSLocalizedString("onboarding_6_imperial_title", comment: "name of imperial system")
         return label
     }()
-    
-    let button: ButtonView = {
-        let view = ButtonView()
-            .with(autolayout: false)
-        view.clipsToBounds = true
-        view.label.text = NSLocalizedString("onboarding_next", comment: "the Continue label")
-        view.alpha = 0.2
-        return view
-    }()
-    
-    enum metricType {
-        case metric
-        case imperial
-    }
-    
-    var isButtonActive: Bool = false
-    var choosedType: metricType?
-    var delegate: OnbordingDelegate?
+
     
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = Colors.background
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = Colors.background
+        setInitialBorder()
         setSubviews()
         activateLayouts()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError()
+    
+    private
+    func setInitialBorder() {
+        switch Defaults.getWeightSystem() {
+        case 0: metricPlateView.layer.borderWidth = 3
+        case 1: imperialPlateView.layer.borderWidth = 3
+        default: break  // For some trouble events. Shouldn't be called.
+        }
     }
     
     @objc
@@ -159,16 +132,11 @@ class Onboarding_6_Cell: UICollectionViewCell {
         guard metricPlateView.layer.borderWidth == 0 else {
             return
         }
+        Defaults.setWeightSystem(typeOfSystem: 0) // Metric
         Vibration.soft()
-        choosedType = .metric
         UIView.animate(withDuration: 0.1, animations: {
             self.metricPlateView.layer.borderWidth = 3
             self.imperialPlateView.layer.borderWidth = 0
-            if !(self.isButtonActive) {
-                self.button.alpha = 1
-            }
-        }, completion: { _ in
-            self.isButtonActive = true
         })
     }
     
@@ -177,28 +145,21 @@ class Onboarding_6_Cell: UICollectionViewCell {
         guard imperialPlateView.layer.borderWidth == 0 else {
             return
         }
+        Defaults.setWeightSystem(typeOfSystem: 1) // Imperial
         Vibration.soft()
-        choosedType = .imperial
         UIView.animate(withDuration: 0.1, animations: {
             self.imperialPlateView.layer.borderWidth = 3
             self.metricPlateView.layer.borderWidth = 0
-            if !(self.isButtonActive) {
-                self.button.alpha = 1
-            }
-        }, completion: { _ in
-            self.isButtonActive = true
         })
     }
     
     @objc
-    func buttonAction() {
-        guard (isButtonActive) else { return }
-        print("Finish")
-        switch choosedType {
-            case .metric: Defaults.setWeightSystem(typeOfSystem: 0)
-            default: Defaults.setWeightSystem(typeOfSystem: 1) // Imperial
-        }
-        delegate?.finish()
+    func backAction() {
+        backButton.tap(completion: { _ in
+            self.dismiss(animated: true, completion: nil)
+            // TODO:
+            // After dismission nothing is changed. For changes implementation the app should be restarted. FIX IT!
+        })
     }
 }
 
@@ -208,76 +169,39 @@ class Onboarding_6_Cell: UICollectionViewCell {
 
 
 
-extension Onboarding_6_Cell {
+extension WeightMeasureController {
     private
     func setSubviews() {
-        self.addSubview(slideNumber)
-        self.addSubview(titleBlack)
-        self.addSubview(titleGreen)
+        view.addSubview(backButton)
+        view.addSubview(titleBlack)
         
-        self.addSubview(metricPlateView)
-        self.addSubview(imperialPlateView)
+        view.addSubview(metricPlateView)
+        view.addSubview(imperialPlateView)
         
         metricPlateView.layer.addSublayer(metricGradient)
         metricPlateView.addSubview(metricTitle)
         imperialPlateView.layer.addSublayer(imperialGradient)
         imperialPlateView.addSubview(imperialTitle)
         
-        self.addSubview(button)
-        
         metricPlateView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(metricAction)))
         imperialPlateView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imperialAction)))
-        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(buttonAction)))
+        backButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backAction)))
     }
     
     private
     func activateLayouts() {
-        let sliderTopConstant: CGFloat = {
-            switch MainConstants.screenHeight {
-            case ...700: return 20
-            case 736: return 30
-            default: return 50
-            }
-        }()
-        
-        let titleTopConstant: CGFloat = {
-            switch MainConstants.screenHeight {
-            case ...700: return 90
-            case 736: return 100
-            default: return 160
-            }
-        }()
-        
-        let plateTopConstant: CGFloat = {
-            switch MainConstants.screenHeight {
-            case ...700: return 80
-            case 736: return 90
-            default: return 100
-            }
-        }()
-        
-        let buttonBottomConstant: CGFloat = {
-            switch MainConstants.screenHeight {
-            case ...700: return -24
-            case 736: return -35
-            default: return -58
-            }
-        }()
-        
         NSLayoutConstraint.activate([
-            slideNumber.topAnchor.constraint(equalTo: self.topAnchor, constant: sliderTopConstant),
-            slideNumber.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
+            backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
+            backButton.heightAnchor.constraint(equalToConstant: backButton.frame.height),
+            backButton.widthAnchor.constraint(equalToConstant: backButton.frame.width),
             
-            titleBlack.topAnchor.constraint(equalTo: self.topAnchor, constant: titleTopConstant),
-            titleBlack.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
-            titleBlack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            titleBlack.topAnchor.constraint(equalTo: backButton.topAnchor),
+            titleBlack.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: 20),
+            titleBlack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             
-            titleGreen.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: 30),
-            titleGreen.leftAnchor.constraint(equalTo: titleBlack.leftAnchor),
-            titleGreen.rightAnchor.constraint(equalTo: titleBlack.rightAnchor),
-            
-            metricPlateView.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: plateTopConstant),
-            metricPlateView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
+            metricPlateView.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: 150),
+            metricPlateView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
             metricPlateView.widthAnchor.constraint(equalToConstant: metricPlateView.frame.width),
             metricPlateView.heightAnchor.constraint(equalToConstant: metricPlateView.frame.height),
             
@@ -285,17 +209,12 @@ extension Onboarding_6_Cell {
             metricTitle.centerYAnchor.constraint(equalTo: metricPlateView.centerYAnchor),
             
             imperialPlateView.topAnchor.constraint(equalTo: metricPlateView.topAnchor),
-            imperialPlateView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
+            imperialPlateView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
             imperialPlateView.widthAnchor.constraint(equalToConstant: imperialPlateView.frame.width),
             imperialPlateView.heightAnchor.constraint(equalToConstant: imperialPlateView.frame.height),
             
             imperialTitle.centerXAnchor.constraint(equalTo: imperialPlateView.centerXAnchor),
             imperialTitle.centerYAnchor.constraint(equalTo: imperialPlateView.centerYAnchor),
-            
-            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: buttonBottomConstant),
-            button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            button.widthAnchor.constraint(equalToConstant: button.frame.width),
-            button.heightAnchor.constraint(equalToConstant: button.frame.height),
         ])
     }
 }

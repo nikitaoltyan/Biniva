@@ -9,11 +9,14 @@
 
 // THE MAIN TITLES
 "privacy_policy" = "Политика конфиденциальности";
-"weight_measurement" = "гр";
-"weight_measurement_simplified" = "г";
-"weight_measurement_kilograms" = "кг";
 "used_icon_measurement" = "1.1";
 "add_button" = "Добавить";
+
+// WEIGHT MEASUREMENT
+"weight_measurement_gramms" = "г";
+"weight_measurement_kilograms" = "кг";
+"weight_measurement_pounds" = "lb";
+"weight_measurement_ounces" = "oz";
 
 // Notification
 "notification_title" = "Как прошел твой день?";
@@ -174,17 +177,16 @@
 "plastic_title_5" = "Бутылка";
 "plastic_title_6" = "Другое";
 "plastic_subtitle_1" = "Майка";
-"plastic_subtitle_2" = "Объем 0.5 литра";
-"plastic_subtitle_3" = "Объем 1 литр";
-"plastic_subtitle_4" = "Объем 1.5 литра";
-"plastic_subtitle_5" = "Объем 2 литра";
+"plastic_subtitle_2_metric" = "Объем 0.5 литра";
+"plactic_subtitle_2_imperial" = "Объем 1 пинта";
+"plastic_subtitle_3_metric" = "Объем 1 литр";
+"plactic_subtitle_3_imperial" = "Объем 2 пинты";
+"plastic_subtitle_4_metric" = "Объем 1.5 литра";
+"plactic_subtitle_4_imperial" = "Объем 3 пинты";
+"plastic_subtitle_5_metric" = "Объем 2 литра";
+"plactic_subtitle_5_imperial" = "Объем 1/2 галлона";
 "plastic_subtitle_6" = "Обертка и т.д.";
-"plastic_weight_1" = "7"; // In gramms
-"plastic_weight_2" = "25";
-"plastic_weight_3" = "35";
-"plastic_weight_4" = "40";
-"plastic_weight_5" = "45";
-"plastic_weight_6" = "50";
+
 
 
 // Organic material
@@ -196,22 +198,19 @@
 "organic_subtitle_2" = "Банановая";
 "organic_subtitle_3" = "Картофель";
 "organic_subtitle_4" = "Органика";
-"organic_weight_1" = "20"; // In gramms
-"organic_weight_2" = "60";
-"organic_weight_3" = "60";
-"organic_weight_4" = "50";
+
 
 
 // Glass material
 "glass_title_1" = "Стакан";
 "glass_title_2" = "Бутылка";
 "glass_title_3" = "Другое";
-"glass_subtitle_1" = "Объем 0,2 литра";
-"glass_subtitle_2" = "Объем 0.5 литра";
+"glass_subtitle_1_metric" = "Объем 0.2 литра";
+"glass_subtitle_1_imperial" = "Объем 1/2 пинты";
+"glass_subtitle_2_metric" = "Объем 0.5 литра";
+"glass_subtitle_2_imperial" = "Объем 1 пинта";
 "glass_subtitle_3" = "Стекло";
-"glass_weight_1" = "250"; // In gramms
-"glass_weight_2" = "350";
-"glass_weight_3" = "60";
+
 
 
 // Paper material
@@ -227,12 +226,7 @@
 "paper_subtitle_4" = "Картонная маленькая";
 "paper_subtitle_5" = "Картонная большая";
 "paper_subtitle_6" = "Салфетка и т.д.";
-"paper_weight_1" = "5"; // In gramms
-"paper_weight_2" = "25";
-"paper_weight_3" = "40";
-"paper_weight_4" = "50";
-"paper_weight_5" = "100";
-"paper_weight_6" = "5";
+
 
 
 // Metal material
@@ -240,20 +234,17 @@
 "metal_title_2" = "Фантик";
 "metal_title_3" = "Банка";
 "metal_title_4" = "Другое";
-"metal_subtitle_1" = "Длина 0,5 метра";
+"metal_subtitle_1_metric" = "Длина 0,5 метра";
+"metal_subtitle_1_imperial" = "Длина 1 фут";
 "metal_subtitle_2" = "От конфеты";
-"metal_subtitle_3" = "Объем 0.33 литра";
+"metal_subtitle_3_metric" = "Объем 0.33 литра";
+"metal_subtitle_3_imperial" = "Объем 1 пинта";
 "metal_subtitle_4" = "Гвозди и т.д.";
-"metal_weight_1" = "30"; // In gramms
-"metal_weight_2" = "3";
-"metal_weight_3" = "17";
-"metal_weight_4" = "50";
 
 
 // Wood material
 "wood_title_1" = "Другое";
 "wood_subtitle_1" = "Стулья и т.д.";
-"wood_weight_1" = "500"; // In gramms
 
 
 // Fabric material
@@ -261,8 +252,6 @@
 "fabric_title_2" = "Другое";
 "fabric_subtitle_1" = "Взрослая";
 "fabric_subtitle_2" = "Ткань";
-"fabric_weight_1" = "200"; // In gramms
-"fabric_weight_2" = "50";
 
 
 // Battery material
@@ -272,15 +261,10 @@
 "battery_subtitle_1" = "Мизинчиковая";
 "battery_subtitle_2" = "Пальчиковая";
 "battery_subtitle_3" = "Батарейка";
-"battery_weight_1" = "25"; // In gramms
-"battery_weight_2" = "40";
-"battery_weight_3" = "50";
 
 
-// Fabric material
+// Lamp material
 "lamp_title_1" = "Лампочка";
 "lamp_title_2" = "Другое";
 "lamp_subtitle_1" = "Спиральная";
 "lamp_subtitle_2" = "Лампочка";
-"lamp_weight_1" = "105"; // In gramms
-"lamp_weight_2" = "100";

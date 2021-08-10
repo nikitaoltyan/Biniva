@@ -16,6 +16,7 @@ class AddTrashController: UIViewController {
     
     let analytics = ServerAnalytics()
     let database = DataFunction()
+    let measure = Measure()
 
     let backButton: UIImageView = {
         let scale: CGFloat = {
@@ -131,8 +132,19 @@ class AddTrashController: UIViewController {
         if (materialsCollection.isHidden) {
             Vibration.light()
             button.tap(completion: { (_) in
-                let txt = self.addTrashView.weightView.textView.text.split(separator: " ")
-                let weight: Int = Int(txt[0]) ?? 0
+                var weight: Int?
+                
+                switch Defaults.getWeightSystem() {
+                case 0: // Metric
+                    let txt = self.addTrashView.weightView.textView.text.split(separator: " ")
+                    weight = Int(txt[0]) ?? 0
+                default: //Imperial
+                    let txt = self.addTrashView.weightViewImperial.textView.text.split(separator: " ")
+                    weight = self.measure.getGrammsForOz(oz: Double(txt[0]) ?? 0.0)
+                }
+                
+                guard let weight = weight else { return }
+                
                 self.analytics.logAddMaterial(type: self.currentPage, size: weight)
                 self.database.addData(loggedSize: weight, material: self.currentPage, date: Date().onlyDate)
                 

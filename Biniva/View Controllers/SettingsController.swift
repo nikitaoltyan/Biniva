@@ -14,33 +14,12 @@ protocol settingsHeaderDelegate {
 
 class SettingsController: UITableViewController {
     
-    lazy var settingsTable: UITableView = {
-        let table = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0),
-                                style: .insetGrouped)
-            .with(bgColor: .clear)
-            .with(borderWidth: 2, color: Colors.topGradient.cgColor)
-            .with(autolayout: false)
-        
-        table.allowsSelection = true
-        table.delegate = self
-        table.dataSource = self
-        table.separatorStyle = .singleLine
-        
-        // Setting header for table
-        var headerView: SettingsTableHeaderView = {
-            let view = SettingsTableHeaderView()
-            view.delegate = self
-            return view
-        }()
-        
-        table.tableHeaderView = headerView
-        table.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
-        return table
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
+        
+        tableView.register(SettingsCell.self, forCellReuseIdentifier: "SettingsCell")
         tableView.backgroundColor = Colors.background
         tableView.separatorStyle = .singleLine
         
@@ -51,8 +30,15 @@ class SettingsController: UITableViewController {
         }()
         
         tableView.tableHeaderView = headerView
-//        setSubviews()
-//        activateLayout()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let firstVC = presentingViewController as? RecyclingController {
+            DispatchQueue.main.async {
+                firstVC.updateDataAfterSettings()
+            }
+        }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -75,7 +61,7 @@ class SettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
             case 0: return 4
-            case 1: return 2
+            case 1: return 1
             case 2: return 3
             default: return 1
         }
@@ -86,9 +72,9 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = settingsTable.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
-//        let numberOfRows: Int = settingsTable.numberOfRows(inSection: indexPath.section)
-//        cell.setCell(forRowNumber: indexPath.row, rowsInSection: numberOfRows)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
+        cell.selectionStyle = .none
+        
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -98,10 +84,11 @@ class SettingsController: UITableViewController {
             default: cell.title.text = "Subscription"
             }
         case 1:
-            switch indexPath.row {
-            case 0: cell.title.text = "Measurement System"
-            default: cell.title.text = "Daily Goal"
-            }
+//            switch indexPath.row {
+//            case 0:
+                cell.title.text = "Measurement System"
+//            default: cell.title.text = "Daily Goal"
+//            }
         case 2:
             switch indexPath.row {
             case 0: cell.title.text = "Instagram"
@@ -121,7 +108,8 @@ class SettingsController: UITableViewController {
             case 3: openSubscription()
             default: openAppSettings()
             }
-//        case 1:
+        case 1:
+            openMeasureController()
 //            switch indexPath.row {
 //            case 0: cell.title.text = "Measurement System"
 //            default: cell.title.text = "Daily Goal"
@@ -183,24 +171,14 @@ extension SettingsController {
             UIApplication.shared.open(subscriptionUrl, completionHandler: { (_) in })
         }
     }
-}
-
-
-
-
-extension SettingsController {
-    private
-    func setSubviews() {
-        view.addSubview(settingsTable)
-    }
     
     private
-    func activateLayout() {
-        NSLayoutConstraint.activate([
-            settingsTable.topAnchor.constraint(equalTo: view.topAnchor),
-            settingsTable.leftAnchor.constraint(equalTo: view.leftAnchor),
-            settingsTable.rightAnchor.constraint(equalTo: view.rightAnchor),
-            settingsTable.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+    func openMeasureController() {
+        // TODO:
+        // VC should open from the right to left.
+        let newVC = WeightMeasureController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
+        present(newVC, animated: true, completion: nil)
     }
 }

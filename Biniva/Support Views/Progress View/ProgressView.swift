@@ -8,6 +8,8 @@
 import UIKit
 
 class ProgressView: UIView {
+    
+    let measure = Measure()
 
     lazy var grayCircleView: CAShapeLayer = {
         let shapeLayer = CAShapeLayer()
@@ -88,7 +90,7 @@ class ProgressView: UIView {
     }()
     
     // Should be setted with initializer.
-    var currentValue: CGFloat = 0
+    var currentValue: Int = 0 // In gramms
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -104,25 +106,24 @@ class ProgressView: UIView {
     
     
     func setUpInitial(){
+        print("ProgressView setUpInitial")
         DataFunction().getTotalLogged(forDate: Date().onlyDate, result: { (logged) in
-            self.currentValue = CGFloat(logged)/2000.0
+            self.currentValue = logged
             self.maskCircle.strokeEnd = CGFloat(logged)/2000.0
             self.setLabels()
         })
     }
     
     func update(addWeight weight: Int){
-        print("current value of Progress View before adding: \(currentValue)")
-        let add = CGFloat(weight)/2000.0
-        animate(addValue: add)
-        currentValue += add
+        animate(addValue: weight)
+        currentValue += weight
         setLabels()
     }
     
-    func animate(addValue: CGFloat){
+    func animate(addValue: Int){
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.fromValue = currentValue
-        animation.toValue = currentValue + addValue
+        animation.fromValue = CGFloat(currentValue)/2000.0
+        animation.toValue = CGFloat(currentValue + addValue)/2000.0
         animation.duration = 0.5
         animation.fillMode = .forwards
         animation.isRemovedOnCompletion = false
@@ -130,13 +131,9 @@ class ProgressView: UIView {
     }
     
     func setLabels(){
-        let formatted = String(format: "%.2f", currentValue*2)
-        let weightMeasure: String = NSLocalizedString("weight_measurement_kilograms", comment: "Localized kg measurement")
-        let iconMeasure: String = NSLocalizedString("used_icon_measurement", comment: "Compareable weight measurement")
-        let iconMeasureCGFloat: CGFloat = CGFloat(Float(iconMeasure) ?? 1.0)
-        weightLabel.text = "\(formatted) \(weightMeasure)"
+        weightLabel.text = "\(measure.getMeasurementString(weight: currentValue, forNeededType: .kilogramm))"
         
-        if (currentValue*2 < iconMeasureCGFloat) {
+        if (Double(currentValue) < 1100) { // 1100 gramms as Iconic
             warningTitle.text = NSLocalizedString("progress_view_warning_good", comment: "Title for good results")
         } else {
             warningTitle.text = NSLocalizedString("progress_view_warning_bad", comment: "Title for bad results")

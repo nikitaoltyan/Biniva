@@ -1,13 +1,14 @@
 //
-//  WeightView.swift
-//  GreenerCo
+//  WeightViewImperial.swift
+//  Biniva
 //
-//  Created by Nikita Oltyan on 24.04.2021.
+//  Created by Никита Олтян on 09.08.2021.
 //
 
 import UIKit
 
-class WeightView: UIView {
+
+class WeightViewImperial: UIView {
     
     lazy var textView: UITextView = {
         let view = UITextView(frame: CGRect(x: 0, y: 0, width: self.frame.width/2.2, height: self.frame.height-4))
@@ -15,15 +16,15 @@ class WeightView: UIView {
             .with(fontName: "SFPro-Medium", size: 20)
             .with(autolayout: false)
         view.textColor = Colors.background
-        view.keyboardType = .numberPad
+        view.keyboardType = .decimalPad
         view.textAlignment = .center
         view.delegate = self
-        view.text = "50 \(weightSymbol)"
+        view.text = "10.0 \(weightSymbol)"
         return view
     }()
     
     lazy var minusView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width/3.5, height: self.frame.height-4))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width/4, height: self.frame.height-4))
             .with(bgColor: Colors.background)
             .with(cornerRadius: (self.frame.height-4)/2)
             .with(autolayout: false)
@@ -31,7 +32,7 @@ class WeightView: UIView {
     }()
     
     lazy var plusView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width/3.5, height: self.frame.height-4))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width/4, height: self.frame.height-4))
             .with(bgColor: Colors.background)
             .with(cornerRadius: (self.frame.height-4)/2)
             .with(autolayout: false)
@@ -58,10 +59,11 @@ class WeightView: UIView {
         return label
     }()
 
-    let weightSymbol: String = NSLocalizedString("weight_measurement_gramms", comment: "localized gramms symbol")
+    let weightSymbol: String = NSLocalizedString("weight_measurement_ounces", comment: "localized ounces (oz) symbol")
+    var currentNumber: Double = 10.0
     
     override init(frame: CGRect){
-        let useFrame = CGRect(x: 0, y: 0, width: 182, height: 50)
+        let useFrame = CGRect(x: 0, y: 0, width: 215, height: 50)
         super.init(frame: useFrame)
         self.backgroundColor = Colors.topGradient
         self.layer.cornerRadius = 25
@@ -79,26 +81,32 @@ class WeightView: UIView {
     
     
     @objc
-    func addTen(){
+    func addAction(){
         Vibration.soft()
+        
         let currentTextArray = textView.text.split(separator: " ")
         if currentTextArray.count > 0 {
-            let number = Int(currentTextArray[0]) ?? 0
+            let number = Double(currentTextArray[0]) ?? 0.0
             guard (number < 9999) else { return }
-            textView.text = "\(number + 10) \(weightSymbol)"
+            currentNumber += 0.1
+            currentNumber = currentNumber.rounded(toPlaces: 1)
+            textView.text = "\(currentNumber) \(weightSymbol)"
         } else {
-            textView.text = "10 \(weightSymbol)"
+            textView.text = "10.0 \(weightSymbol)"
         }
     }
     
     @objc
-    func reduceTen(){
+    func reduceAction(){
         Vibration.soft()
+        
         let currentTextArray = textView.text.split(separator: " ")
         if currentTextArray.count > 0 {
-            let number = Int(currentTextArray[0]) ?? 0
-            guard (number >= 10) else { return }
-            textView.text = "\(number - 10) \(weightSymbol)"
+            let number = Double(currentTextArray[0]) ?? 0.0
+            guard (number >= 0.1) else { return }
+            currentNumber -= 0.1
+            currentNumber = currentNumber.rounded(toPlaces: 1)
+            textView.text = "\(currentNumber) \(weightSymbol)"
         } else {
             textView.text = "0 \(weightSymbol)"
         }
@@ -108,28 +116,41 @@ class WeightView: UIView {
 
 
 
-extension WeightView: UITextViewDelegate {
+extension WeightViewImperial: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         self.textView.text = ""
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return textView.text.count < 4
+        print("replacementText: \(text)")
+        if text == "," {
+            textView.text += "."
+            return false
+        }
+        if textView.text.count >= 4 {
+            self.textView.endEditing(true)
+            return false
+        }
+        return true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         guard (textView.text.count > 0) else {
-            self.textView.text = "0 \(weightSymbol)"
+            self.currentNumber = 0
+            self.textView.text = "\(currentNumber) \(weightSymbol)"
             return
         }
         guard (textView.text.contains(weightSymbol) == false) else {
-            let txt = self.textView.text.split(separator: " ")
-            let weight: Int = Int(txt[0]) ?? 0
+            let currentTextArray = self.textView.text.split(separator: " ")
+            let weight = Double(currentTextArray[0]) ?? 0.0
             self.textView.text = "\(weight) \(weightSymbol)"
             return
         }
         
-        self.textView.text = "\(textView.text ?? "0") \(weightSymbol)"
+        let currentTextArray = self.textView.text.split(separator: " ")
+        let weight = Double(currentTextArray[0]) ?? 0.0
+        self.currentNumber = weight
+        self.textView.text = "\(weight) \(weightSymbol)"
     }
 }
 
@@ -137,7 +158,7 @@ extension WeightView: UITextViewDelegate {
 
 
 
-extension WeightView {
+extension WeightViewImperial {
     private
     func setSubviews(){
         self.addSubview(textView)
@@ -147,10 +168,9 @@ extension WeightView {
         minusView.addSubview(minusLabel)
         plusView.addSubview(plusLabel)
         
-        minusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reduceTen)))
-        plusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addTen)))
+        minusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reduceAction)))
+        plusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addAction)))
     }
-    
     private
     func activateLayouts(){
         NSLayoutConstraint.activate([

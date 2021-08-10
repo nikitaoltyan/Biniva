@@ -125,22 +125,23 @@ struct plastic {
         NSLocalizedString("plastic_title_5", comment: "localized title for quick add"),
         NSLocalizedString("plastic_title_6", comment: "localized title for quick add")
     ]
-    static let subtitle: [String] = [
+    static let subtitleMetric: [String] = [
         NSLocalizedString("plastic_subtitle_1", comment: "localized subtitle for quick add"),
-        NSLocalizedString("plastic_subtitle_2", comment: "localized subtitle for quick add"),
-        NSLocalizedString("plastic_subtitle_3", comment: "localized subtitle for quick add"),
-        NSLocalizedString("plastic_subtitle_4", comment: "localized subtitle for quick add"),
-        NSLocalizedString("plastic_subtitle_5", comment: "localized subtitle for quick add"),
+        NSLocalizedString("plastic_subtitle_2_metric", comment: "localized subtitle for quick add"),
+        NSLocalizedString("plastic_subtitle_3_metric", comment: "localized subtitle for quick add"),
+        NSLocalizedString("plastic_subtitle_4_metric", comment: "localized subtitle for quick add"),
+        NSLocalizedString("plastic_subtitle_5_metric", comment: "localized subtitle for quick add"),
         NSLocalizedString("plastic_subtitle_6", comment: "localized subtitle for quick add"),
     ]
-    static let weight: [Int] = [
-        Int(NSLocalizedString("plastic_weight_1", comment: "weight")) ?? 7,
-        Int(NSLocalizedString("plastic_weight_2", comment: "weight")) ?? 25,
-        Int(NSLocalizedString("plastic_weight_3", comment: "weight")) ?? 35,
-        Int(NSLocalizedString("plastic_weight_4", comment: "weight")) ?? 40,
-        Int(NSLocalizedString("plastic_weight_5", comment: "weight")) ?? 45,
-        Int(NSLocalizedString("plastic_weight_6", comment: "weight")) ?? 50,
-    ] // ?? in gramms
+    static let subtitleImperial: [String] = [
+        NSLocalizedString("plastic_subtitle_1", comment: "localized subtitle for quick add"),
+        NSLocalizedString("plactic_subtitle_2_imperial", comment: "localized subtitle for quick add"),
+        NSLocalizedString("plactic_subtitle_3_imperial", comment: "localized subtitle for quick add"),
+        NSLocalizedString("plactic_subtitle_4_imperial", comment: "localized subtitle for quick add"),
+        NSLocalizedString("plactic_subtitle_5_imperial", comment: "localized subtitle for quick add"),
+        NSLocalizedString("plastic_subtitle_6", comment: "localized subtitle for quick add"),
+    ]
+    static let weight: [Int] = [7, 25, 35, 40, 45, 50] // In gramms
 }
 
 
@@ -158,12 +159,7 @@ struct organic {
         NSLocalizedString("organic_subtitle_3", comment: "localized subtitle for quick add"),
         NSLocalizedString("organic_subtitle_4", comment: "localized subtitle for quick add"),
     ]
-    static let weight: [Int] = [
-        Int(NSLocalizedString("organic_weight_1", comment: "weight")) ?? 20,
-        Int(NSLocalizedString("organic_weight_2", comment: "weight")) ?? 60,
-        Int(NSLocalizedString("organic_weight_3", comment: "weight")) ?? 60,
-        Int(NSLocalizedString("organic_weight_4", comment: "weight")) ?? 50,
-    ] // ?? in gramms
+    static let weight: [Int] = [20, 60, 60, 50] // in gramms
 }
 
 
@@ -174,16 +170,17 @@ struct glass {
         NSLocalizedString("glass_title_2", comment: "localized title for quick add"),
         NSLocalizedString("glass_title_3", comment: "localized title for quick add"),
     ]
-    static let subtitle: [String] = [
-        NSLocalizedString("glass_subtitle_1", comment: "localized subtitle for quick add"),
-        NSLocalizedString("glass_subtitle_2", comment: "localized subtitle for quick add"),
+    static let subtitleMetric: [String] = [
+        NSLocalizedString("glass_subtitle_1_metric", comment: "localized subtitle for quick add"),
+        NSLocalizedString("glass_subtitle_2_metric", comment: "localized subtitle for quick add"),
         NSLocalizedString("glass_subtitle_3", comment: "localized subtitle for quick add")
     ]
-    static let weight: [Int] = [
-        Int(NSLocalizedString("glass_weight_1", comment: "weight")) ?? 250,
-        Int(NSLocalizedString("glass_weight_2", comment: "weight")) ?? 350,
-        Int(NSLocalizedString("glass_weight_3", comment: "weight")) ?? 60
-    ] // ?? in gramms
+    static let subtitleImperial: [String] = [
+        NSLocalizedString("glass_subtitle_1_imperial", comment: "localized subtitle for quick add"),
+        NSLocalizedString("glass_subtitle_2_imperial", comment: "localized subtitle for quick add"),
+        NSLocalizedString("glass_subtitle_3", comment: "localized subtitle for quick add")
+    ]
+    static let weight: [Int] = [250, 350, 60] // in gramms
 }
 
 
@@ -205,14 +202,7 @@ struct paper {
         NSLocalizedString("paper_subtitle_5", comment: "localized subtitle for quick add"),
         NSLocalizedString("paper_subtitle_6", comment: "localized subtitle for quick add"),
     ]
-    static let weight: Array<Int> = [
-        Int(NSLocalizedString("paper_weight_1", comment: "weight")) ?? 5,
-        Int(NSLocalizedString("paper_weight_2", comment: "weight")) ?? 25,
-        Int(NSLocalizedString("paper_weight_3", comment: "weight")) ?? 40,
-        Int(NSLocalizedString("paper_weight_4", comment: "weight")) ?? 50,
-        Int(NSLocalizedString("paper_weight_5", comment: "weight")) ?? 100,
-        Int(NSLocalizedString("paper_weight_6", comment: "weight")) ?? 5,
-    ] // ?? in gramms
+    static let weight: Array<Int> = [5,  25, 40, 50, 100, 5] // in gramms
 }
 
 
@@ -224,18 +214,19 @@ struct metal {
         NSLocalizedString("metal_title_3", comment: "localized title for quick add"),
         NSLocalizedString("metal_title_4", comment: "localized title for quick add"),
     ]
-    static let subtitle: [String] = [
-        NSLocalizedString("metal_subtitle_1", comment: "localized subtitle for quick add"),
+    static let subtitleMetric: [String] = [
+        NSLocalizedString("metal_subtitle_1_metric", comment: "localized subtitle for quick add"),
         NSLocalizedString("metal_subtitle_2", comment: "localized subtitle for quick add"),
-        NSLocalizedString("metal_subtitle_3", comment: "localized subtitle for quick add"),
+        NSLocalizedString("metal_subtitle_3_metric", comment: "localized subtitle for quick add"),
         NSLocalizedString("metal_subtitle_4", comment: "localized subtitle for quick add"),
     ]
-    static let weight: [Int] = [
-        Int(NSLocalizedString("metal_weight_1", comment: "weight")) ?? 30,
-        Int(NSLocalizedString("metal_weight_2", comment: "weight")) ?? 3,
-        Int(NSLocalizedString("metal_weight_3", comment: "weight")) ?? 17,
-        Int(NSLocalizedString("metal_weight_4", comment: "weight")) ?? 50,
-    ] // ?? in gramms
+    static let subtitleImperial: [String] = [
+        NSLocalizedString("metal_subtitle_1_imperial", comment: "localized subtitle for quick add"),
+        NSLocalizedString("metal_subtitle_2", comment: "localized subtitle for quick add"),
+        NSLocalizedString("metal_subtitle_3_imperial", comment: "localized subtitle for quick add"),
+        NSLocalizedString("metal_subtitle_4", comment: "localized subtitle for quick add"),
+    ]
+    static let weight: [Int] = [30, 3, 17, 50] // in gramms
 }
 
 
@@ -247,9 +238,7 @@ struct wood {
     static let subtitle: [String] = [
         NSLocalizedString("wood_subtitle_1", comment: "localized subtitle for quick add")
     ]
-    static let weight: [Int] = [
-        Int(NSLocalizedString("wood_weight_1", comment: "weight")) ?? 30
-    ]
+    static let weight: [Int] = [500]
 }
 
 
@@ -263,10 +252,7 @@ struct fabric {
         NSLocalizedString("fabric_subtitle_1", comment: "localized subtitle for quick add"),
         NSLocalizedString("fabric_subtitle_2", comment: "localized subtitle for quick add")
     ]
-    static let weight: [Int] = [
-        Int(NSLocalizedString("fabric_weight_1", comment: "weight")) ?? 200,
-        Int(NSLocalizedString("fabric_weight_2", comment: "weight")) ?? 50
-    ]
+    static let weight: [Int] = [200, 50]
 }
 
 
@@ -282,11 +268,7 @@ struct battery {
         NSLocalizedString("battery_subtitle_2", comment: "localized subtitle for quick add"),
         NSLocalizedString("battery_subtitle_3", comment: "localized subtitle for quick add")
     ]
-    static let weight: [Int] = [
-        Int(NSLocalizedString("battery_weight_1", comment: "weight")) ?? 25,
-        Int(NSLocalizedString("battery_weight_2", comment: "weight")) ?? 40,
-        Int(NSLocalizedString("battery_weight_3", comment: "weight")) ?? 50
-    ] // ?? in gramms
+    static let weight: [Int] = [25, 40, 50] // in gramms
 }
 
 
@@ -299,8 +281,5 @@ struct lamp {
         NSLocalizedString("lamp_subtitle_1", comment: "localized subtitle for quick add"),
         NSLocalizedString("lamp_subtitle_2", comment: "localized subtitle for quick add")
     ]
-    static let weight: [Int] = [
-        Int(NSLocalizedString("lamp_weight_1", comment: "weight")) ?? 105,
-        Int(NSLocalizedString("lamp_weight_2", comment: "weight")) ?? 100
-    ] // ?? in gramms
+    static let weight: [Int] = [105, 100] // in gramms
 }

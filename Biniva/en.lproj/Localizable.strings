@@ -9,11 +9,15 @@
 
 // THE MAIN TITLES
 "privacy_policy" = "Privacy Policy";
-"weight_measurement" = "gr";
-"weight_measurement_simplified" = "g";
-"weight_measurement_kilograms" = "kg";
 "used_icon_measurement" = "1.1";
 "add_button" = "Add";
+
+// WEIGHT MEASUREMENT
+"weight_measurement_gramms" = "g";
+"weight_measurement_kilograms" = "kg";
+"weight_measurement_pounds" = "lb";
+"weight_measurement_ounces" = "oz";
+
 
 // Notification
 "notification_title" = "How was your day?";
@@ -174,17 +178,16 @@
 "plastic_title_5" = "Bottle";
 "plastic_title_6" = "Other";
 "plastic_subtitle_1" = "Ordinary";
-"plastic_subtitle_2" = "Volume 0.5 liters";
-"plastic_subtitle_3" = "Volume 1 liter";
-"plastic_subtitle_4" = "Volume 1.5 liters";
-"plastic_subtitle_5" = "Volume 2 liter";
+"plastic_subtitle_2_metric" = "Volume 0.5 liter";
+"plactic_subtitle_2_imperial" = "Volume 1 pint";
+"plastic_subtitle_3_metric" = "Volume 1 liter";
+"plactic_subtitle_3_imperial" = "Volume 2 pints";
+"plastic_subtitle_4_metric" = "Volume 1.5 liter";
+"plactic_subtitle_4_imperial" = "Volume 3 pints";
+"plastic_subtitle_5_metric" = "Volume 2 liter";
+"plactic_subtitle_5_imperial" = "Volume 1/2 gallon";
 "plastic_subtitle_6" = "Wrapper, etc.";
-"plastic_weight_1" = "7"; // In gramms
-"plastic_weight_2" = "25";
-"plastic_weight_3" = "35";
-"plastic_weight_4" = "40";
-"plastic_weight_5" = "45";
-"plastic_weight_6" = "50";
+
 
 
 // Organic material
@@ -196,22 +199,17 @@
 "organic_subtitle_2" = "Banana";
 "organic_subtitle_3" = "Potato";
 "organic_subtitle_4" = "Organic";
-"organic_weight_1" = "20"; // In gramms
-"organic_weight_2" = "60";
-"organic_weight_3" = "60";
-"organic_weight_4" = "50";
 
 
 // Glass material
 "glass_title_1" = "Glass";
 "glass_title_2" = "Bottle";
 "glass_title_3" = "Other";
-"glass_subtitle_1" = "Volume 0.2 liters";
-"glass_subtitle_2" = "Volume 0.5 liters";
+"glass_subtitle_1_metric" = "Volume 0.2 liter";
+"glass_subtitle_1_imperial" = "Volume 1/2 pint";
+"glass_subtitle_2_metric" = "Volume 0.5 liter";
+"glass_subtitle_2_imperial" = "Volume 1 pint";
 "glass_subtitle_3" = "Glass";
-"glass_weight_1" = "250"; // In gramms
-"glass_weight_2" = "350";
-"glass_weight_3" = "60";
 
 
 // Paper material
@@ -227,12 +225,6 @@
 "paper_subtitle_4" = "Small cardboard";
 "paper_subtitle_5" = "Big cardboard";
 "paper_subtitle_6" = "Napkin, etc.";
-"paper_weight_1" = "5"; // In gramms
-"paper_weight_2" = "25";
-"paper_weight_3" = "40";
-"paper_weight_4" = "50";
-"paper_weight_5" = "100";
-"paper_weight_6" = "5";
 
 
 // Metal material
@@ -240,20 +232,17 @@
 "metal_title_2" = "Wrapper";
 "metal_title_3" = "Can";
 "metal_title_4" = "Other";
-"metal_subtitle_1" = "Length 0.5 meters";
+"metal_subtitle_1_metric" = "Length 0,5 meter";
+"metal_subtitle_1_imperial" = "Length 1.5 foot";
 "metal_subtitle_2" = "Candy";
-"metal_subtitle_3" = "Beer";
+"metal_subtitle_3_metric" = "Beer/Cola";
+"metal_subtitle_3_imperial" = "Beer/Cola";
 "metal_subtitle_4" = "Nails, etc.";
-"metal_weight_1" = "30"; // In gramms
-"metal_weight_2" = "3";
-"metal_weight_3" = "17";
-"metal_weight_4" = "50";
 
 
 // Wood material
 "wood_title_1" = "Other";
 "wood_subtitle_1" = "Chairs, etc.";
-"wood_weight_1" = "500"; // In gramms
 
 
 // Fabric material
@@ -261,8 +250,6 @@
 "fabric_title_2" = "Other";
 "fabric_subtitle_1" = "Adult";
 "fabric_subtitle_2" = "Fabric";
-"fabric_weight_1" = "200"; // In gramms
-"fabric_weight_2" = "50";
 
 
 // Battery material
@@ -272,15 +259,10 @@
 "battery_subtitle_1" = "AAA";
 "battery_subtitle_2" = "AA";
 "battery_subtitle_3" = "Battery";
-"battery_weight_1" = "25"; // In gramms
-"battery_weight_2" = "40";
-"battery_weight_3" = "50";
 
 
-// Fabric material
+// Lamp material
 "lamp_title_1" = "Lamp";
 "lamp_title_2" = "Other";
 "lamp_subtitle_1" = "Spiral";
 "lamp_subtitle_2" = "Lamp";
-"lamp_weight_1" = "105"; // In gramms
-"lamp_weight_2" = "100";

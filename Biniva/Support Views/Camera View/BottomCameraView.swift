@@ -2,7 +2,7 @@
 //  BottomCameraView.swift
 //  Biniva
 //
-//  Created by Никита Олтян on 25.07.2021.
+//  Created by Nick Oltyan on 25.07.2021.
 //
 
 import UIKit
@@ -11,9 +11,18 @@ import UIKit
 class BottomCameraView: UIView {
     
     let functions = MaterialFunctions()
+    let measure = Measure()
     
     let weightView: WeightView = {
         let view = WeightView()
+            .with(autolayout: false)
+        view.alpha = 0
+        view.isHidden = true
+        return view
+    }()
+    
+    let weightViewImperial: WeightViewImperial = {
+        let view = WeightViewImperial()
             .with(autolayout: false)
         view.alpha = 0
         view.isHidden = true
@@ -127,12 +136,14 @@ class BottomCameraView: UIView {
             self.layoutIfNeeded()
             self.materialCollection.alpha = 0
             self.weightView.alpha = 0
+            self.weightViewImperial.alpha = 0
             self.gradientViewLeft.alpha = 0
             self.gradientViewRight.alpha = 0
             self.mainButton.setCamera()
         }, completion: { (_) in
             self.materialCollection.isHidden = true
             self.weightView.isHidden = true
+            self.weightViewImperial.isHidden = true
             self.gradientViewLeft.isHidden = true
             self.gradientViewRight.isHidden = true
         })
@@ -144,7 +155,8 @@ class BottomCameraView: UIView {
         gradientViewLeft.isHidden = false
         gradientViewRight.isHidden = false
         materialCollection.isHidden = false
-        weightView.isHidden = false
+        weightView.isHidden = (Defaults.getWeightSystem() != 0) // Returns false when metric (0)
+        weightViewImperial.isHidden = (Defaults.getWeightSystem() != 1) // Returns false when imperial (1)
         mainButtonCenterXConstraint?.constant = MainConstants.screenWidth/2 - mainButton.frame.width
         UIView.animate(withDuration: 0.4, animations: {
             self.layoutIfNeeded()
@@ -152,6 +164,7 @@ class BottomCameraView: UIView {
             self.gradientViewLeft.alpha = 1
             self.gradientViewRight.alpha = 1
             self.weightView.alpha = 1
+            self.weightViewImperial.alpha = 1
             self.mainButton.setTray()
         })
     }
@@ -160,17 +173,32 @@ class BottomCameraView: UIView {
     func addMaterial() {
 
         guard (selectedMaterial != nil) else {
-            delegate?.showAlert(withTitle: NSLocalizedString("camera_controller_material_alert_title", comment: "Title for ask to select material"),
-                                andSubtitle: NSLocalizedString("camera_controller_material_alert_subtitle", comment: "Subtitle for ask to select material"))
+            delegate?.showAlert(withTitle: NSLocalizedString("camera_controller_material_alert_title",
+                                                             comment: "Title for ask to select material"),
+                                andSubtitle: NSLocalizedString("camera_controller_material_alert_subtitle",
+                                                               comment: "Subtitle for ask to select material"))
             return
         }
         
-        let txt = self.weightView.textView.text.split(separator: " ")
-        let weight: Int = Int(txt[0]) ?? 0
+        
+        var weight: Int?
+        
+        switch Defaults.getWeightSystem() {
+        case 0: // Metric
+            let txt = self.weightView.textView.text.split(separator: " ")
+            weight = Int(txt[0]) ?? 0
+        default: //Imperial
+            let txt = self.weightViewImperial.textView.text.split(separator: " ")
+            weight = self.measure.getGrammsForOz(oz: Double(txt[0]) ?? 0.0)
+        }
+        
+        guard let weight = weight else { return }
         
         guard (weight != 0) else {
-            delegate?.showAlert(withTitle: NSLocalizedString("camera_controller_weight_alert_title", comment: "Title for ask to set weight"),
-                                andSubtitle: NSLocalizedString("camera_controller_weight_alert_subtitle", comment: "Subitle for ask to set weight"))
+            delegate?.showAlert(withTitle: NSLocalizedString("camera_controller_weight_alert_title",
+                                                             comment: "Title for ask to set weight"),
+                                andSubtitle: NSLocalizedString("camera_controller_weight_alert_subtitle",
+                                                               comment: "Subitle for ask to set weight"))
             return
         }
         delegate?.addMaterial(material: selectedMaterial!, weight: weight)
@@ -227,9 +255,10 @@ extension BottomCameraView: UICollectionViewDelegate, UICollectionViewDelegateFl
 
 
 extension BottomCameraView {
-    
+    private
     func setSubviews(){
         self.addSubview(weightView)
+        self.addSubview(weightViewImperial)
         self.addSubview(materialCollection)
         self.addSubview(gradientViewLeft)
         gradientViewLeft.layer.addSublayer(gradientLeft)
@@ -241,7 +270,7 @@ extension BottomCameraView {
         mainButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainAction)))
     }
     
-    
+    private
     func activateLayouts(){
         NSLayoutConstraint.activate([
 //            mainButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -253,6 +282,11 @@ extension BottomCameraView {
             weightView.topAnchor.constraint(equalTo: self.topAnchor, constant: 25),
             weightView.widthAnchor.constraint(equalToConstant: weightView.frame.width),
             weightView.heightAnchor.constraint(equalToConstant: weightView.frame.height),
+            
+            weightViewImperial.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            weightViewImperial.topAnchor.constraint(equalTo: self.topAnchor, constant: 25),
+            weightViewImperial.widthAnchor.constraint(equalToConstant: weightViewImperial.frame.width),
+            weightViewImperial.heightAnchor.constraint(equalToConstant: weightViewImperial.frame.height),
             
             materialCollection.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             materialCollection.centerYAnchor.constraint(equalTo: mainButton.centerYAnchor),

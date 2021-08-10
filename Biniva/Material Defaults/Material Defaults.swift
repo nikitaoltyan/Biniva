@@ -28,21 +28,44 @@ class MaterialDefaults {
     func getMaterialData(material: material) -> (Array<String>, Array<String>, Array<Int>) {
         switch material {
         case .plastic:
-            return (plastic.title, plastic.subtitle, plastic.weight)
+            switch Defaults.getWeightSystem() {
+            case 0: // Metric
+                return (plastic.title, plastic.subtitleMetric, plastic.weight)
+            default: // Imperial
+                return (plastic.title, plastic.subtitleImperial, plastic.weight)
+            }
+            
         case .organic:
             return (organic.title, organic.subtitle, organic.weight)
+            
         case .paper:
             return (paper.title, paper.subtitle, paper.weight)
+            
         case .metal:
-            return (metal.title, metal.subtitle, metal.weight)
+            switch Defaults.getWeightSystem() {
+            case 0: // Metric
+                return (metal.title, metal.subtitleMetric, metal.weight)
+            default: // Imperial
+                return (metal.title, metal.subtitleImperial, metal.weight)
+            }
+            
         case .glass:
-            return (glass.title, glass.subtitle, glass.weight)
+            switch Defaults.getWeightSystem() {
+            case 0: // Metric
+                return (glass.title, glass.subtitleMetric, glass.weight)
+            default: // Imperial
+                return (glass.title, glass.subtitleImperial, glass.weight)
+            }
+            
         case .wood:
             return (wood.title, wood.subtitle, wood.weight)
+            
         case .fabric:
             return (fabric.title, fabric.subtitle, fabric.weight)
+            
         case .battery:
             return (battery.title, battery.subtitle, battery.weight)
+            
         default:
             return (lamp.title, lamp.subtitle, lamp.weight)
         }

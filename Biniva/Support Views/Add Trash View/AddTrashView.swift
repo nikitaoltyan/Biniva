@@ -2,12 +2,15 @@
 //  AddTrashView.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 21.04.2021.
+//  Created by Nick Oltyan on 21.04.2021.
 //
 
 import UIKit
 
 class AddTrashView: UIView {
+    
+    let materialDefaults = MaterialDefaults()
+    let measure = Measure()
     
     let title: UILabel = {
         let label = UILabel()
@@ -21,6 +24,14 @@ class AddTrashView: UIView {
     let weightView: WeightView = {
         let view = WeightView()
             .with(autolayout: false)
+        view.isHidden = (Defaults.getWeightSystem() != 0) // Returns false when metric (0)
+        return view
+    }()
+    
+    let weightViewImperial: WeightViewImperial = {
+        let view = WeightViewImperial()
+            .with(autolayout: false)
+        view.isHidden = (Defaults.getWeightSystem() != 1) // Returns false when imperial (1)
         return view
     }()
     
@@ -69,8 +80,8 @@ class AddTrashView: UIView {
     }
     
     func populate(){
-        guard (useCase != nil) else { return }
-        (titles, subtitles, weights) = MaterialDefaults().getMaterialData(material: useCase!)
+        guard let material = useCase else { return }
+        (titles, subtitles, weights) = materialDefaults.getMaterialData(material: material)
         collection.reloadData()
     }
 }
@@ -106,7 +117,18 @@ extension AddTrashView: UICollectionViewDelegate, UICollectionViewDataSource, UI
         
         if let cell = collection.cellForItem(at: indexPath) as? ExtraAddCell {
             cell.select()
-            weightView.textView.text = "\(weights?[indexPath.row] ?? 0) \(NSLocalizedString("weight_measurement_simplified", comment: "localized weight symbol"))"
+        
+            let weight: Int = weights?[indexPath.row] ?? 0
+            switch Defaults.getWeightSystem() {
+            case 0: // Metric
+                let weightSymbol: String = NSLocalizedString("weight_measurement_gramms", comment: "localized gramms symbol")
+                weightView.textView.text = "\(weight) \(weightSymbol)"
+            default: //Imperial
+                let weightSymbol: String = NSLocalizedString("weight_measurement_ounces", comment: "localized ounces symbol")
+                let oz: Double = measure.getOzForGramms(gramms: weight)
+                weightViewImperial.textView.text = "\(oz) \(weightSymbol)"
+                weightViewImperial.currentNumber = oz
+            }
             currentSelectedIndexPath = indexPath
         }
     }
@@ -119,6 +141,7 @@ extension AddTrashView {
     func SetSubviews(){
         self.addSubview(title)
         self.addSubview(weightView)
+        self.addSubview(weightViewImperial)
         self.addSubview(collection)
     }
     
@@ -135,6 +158,11 @@ extension AddTrashView {
             weightView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 25),
             weightView.widthAnchor.constraint(equalToConstant: weightView.frame.width),
             weightView.heightAnchor.constraint(equalToConstant: weightView.frame.height),
+            
+            weightViewImperial.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            weightViewImperial.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 25),
+            weightViewImperial.widthAnchor.constraint(equalToConstant: weightViewImperial.frame.width),
+            weightViewImperial.heightAnchor.constraint(equalToConstant: weightViewImperial.frame.height),
             
             collection.topAnchor.constraint(equalTo: weightView.bottomAnchor, constant: 40),
             collection.centerXAnchor.constraint(equalTo: self.centerXAnchor),
