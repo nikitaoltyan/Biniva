@@ -2,7 +2,7 @@
 //  MaterialStatsCell+Empty.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 17.05.2021.
+//  Created by Nick Oltyan on 17.05.2021.
 //
 
 import UIKit
@@ -53,12 +53,14 @@ class MaterialStatsCell_Empty: UICollectionViewCell {
 
 
 extension MaterialStatsCell_Empty {
+    private
     func setSubviews(){
         self.addSubview(title)
         self.addSubview(subtitle)
         self.addSubview(image)
     }
     
+    private
     func activateLayouts(){
         NSLayoutConstraint.activate([
             image.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5),

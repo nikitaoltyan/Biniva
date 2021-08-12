@@ -20,7 +20,8 @@ class Defaults {
  
     func setLocation(topLeftCoordinate: CLLocationCoordinate2D,
                      bottomRightCoordinate: CLLocationCoordinate2D) {
-        guard let date = Date().onlyDate else { return }
+        let date = Date().onlyDate
+        print("Date.today(): \(Date.today())")
         print("setLocation fore date: \(date)")
         let topLeft: [String: Double] = ["latitude": topLeftCoordinate.latitude,
                                          "longitude": topLeftCoordinate.longitude]
@@ -115,5 +116,18 @@ class Defaults {
         let type: Int = UserDefaults.standard.integer(forKey: "weightType")
         guard type == 0 || type == 1 else {  return 0  }
         return type
+    }
+    
+    static
+    func setDateLastWeeklyReportGenerated() {
+        UserDefaults.standard.setValue(Date().onlyDate, forKey: "lastWeeklyReport")
+    }
+    
+    static
+    func getDateLastWeeklyReportGenerated() -> Date {
+        guard let date = UserDefaults.standard.object(forKey: "lastWeeklyReport") as? Date else {
+            return Date.today()
+        }
+        return date
     }
 }

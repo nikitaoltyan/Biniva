@@ -34,6 +34,8 @@ struct Colors {
     static let darkGrayText = UIColor(named: "darkGrayText") ?? UIColor.darkGray
     static let topGradient = UIColor(named: "topGradient") ?? UIColor.green
     static let bottomGradient = UIColor(named: "bottomGradient") ?? UIColor.green
+    static let arrowUpRed = UIColor(named: "arrowUpColor") ?? UIColor.red
+    static let arrowDownGreen = UIColor(named: "arrowDownColor") ?? UIColor.green
 }
 
 

@@ -119,6 +119,7 @@
 
 // STATS VIEW
 "stats_subtitle" = "всего собрано мусора";
+"stats_weekly_subtitle" = "изменения за неделю:";
 "stats_events_title" = "События";
 "stats_empty_cell_title" = "Еще ничего не добавлено";
 "stats_empty_cell_subtitle" = "Добавляй мусор, который выбрасываешь, и следи за своим потреблением здесь.";

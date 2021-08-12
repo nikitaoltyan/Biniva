@@ -80,6 +80,28 @@ class StatsView: UIView {
         return view
     }()
     
+    let weeklySubtitle: UILabel = {
+        let label = UILabel()
+            .with(color: MainConstants.nearBlack)
+            .with(alignment: .center)
+            .with(numberOfLines: 1)
+            .with(fontName: "SFPro-Medium", size: 18)
+            .with(autolayout: false)
+        label.text = NSLocalizedString("stats_weekly_subtitle", comment: "Title for weekly plate")
+        return label
+    }()
+    
+    let weeklyStatsView: WeeklyStatsView = {
+        let view = WeeklyStatsView()
+            .with(autolayout: false)
+        view.clipsToBounds = true
+        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        view.layer.shadowRadius = 10
+        view.layer.shadowOpacity = 0.9
+        view.layer.shadowOffset = CGSize(width: 4, height: 4)
+        return view
+    }()
+    
     lazy var statsTable: UITableView = {
         let table = UITableView()
             .with(bgColor: .clear)
@@ -150,12 +172,12 @@ class StatsView: UIView {
     
     func updateConst(){
         var height: CGFloat {
-                    statsTable.layoutIfNeeded()
-                    return statsTable.contentSize.height
-                }
+            statsTable.layoutIfNeeded()
+            return statsTable.contentSize.height
+        }
         statsTableHeightConst?.constant = height
         statsTable.layoutIfNeeded()
-        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 735 + height)
+        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 935 + height)
     }
     
     func updateLabel(){
@@ -192,9 +214,9 @@ extension StatsView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard (scrollView == self.scrollView) else { return }
         if scrollView.contentOffset.y < 22 {
-            delegate?.HideTopBar(false)
+            delegate?.hideTopBar(false)
         } else {
-            delegate?.HideTopBar(true)
+            delegate?.hideTopBar(true)
         }
     }
 }
@@ -247,6 +269,8 @@ extension StatsView {
 //        scrollView.addSubview(timeTitle)
         scrollView.addSubview(eventsTitle)
         scrollView.addSubview(materialStatsView)
+        scrollView.addSubview(weeklySubtitle)
+        scrollView.addSubview(weeklyStatsView)
         scrollView.addSubview(statsTable)
         scrollView.addSubview(instaLabel)
         scrollView.addSubview(privacyPolicyLabel)
@@ -277,8 +301,16 @@ extension StatsView {
             materialStatsView.widthAnchor.constraint(equalToConstant: materialStatsView.frame.width),
             materialStatsView.heightAnchor.constraint(equalToConstant: materialStatsView.frame.height),
             
+            weeklySubtitle.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 37),
+            weeklySubtitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            weeklyStatsView.topAnchor.constraint(equalTo: weeklySubtitle.bottomAnchor, constant: 7),
+            weeklyStatsView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            weeklyStatsView.widthAnchor.constraint(equalToConstant: weeklyStatsView.frame.width),
+            weeklyStatsView.heightAnchor.constraint(equalToConstant: weeklyStatsView.frame.height),
+            
 //            statsTable height was setted in the bottom of the function.
-            statsTable.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 85),
+            statsTable.topAnchor.constraint(equalTo: weeklyStatsView.bottomAnchor, constant: 85),
             statsTable.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             statsTable.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth - 50),
             

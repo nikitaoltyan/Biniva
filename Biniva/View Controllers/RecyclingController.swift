@@ -16,7 +16,7 @@ protocol SwitcherDelegate {
 
 
 protocol StatsDelegate {
-    func HideTopBar(_ should: Bool)
+    func hideTopBar(_ should: Bool)
 }
 
 
@@ -199,15 +199,22 @@ extension RecyclingController: SwitcherDelegate {
 
 
 extension RecyclingController: StatsDelegate {
-    func HideTopBar(_ should: Bool) {
+    func hideTopBar(_ should: Bool) {
         if (should) {
             guard (self.switcherView.center.y > 0) else { return }
+            switcherView.isHidden = false
+            topView.isHidden = false
             UIView.animate(withDuration: 0.5, animations: {
                 self.switcherView.center.y = -2 * self.switcherView.center.y
                 self.topView.center.y =  -2 * self.topView.center.y
-            }, completion: { (result) in })
+            }, completion: { (result) in
+                self.switcherView.isHidden = true
+                self.topView.isHidden = true
+            })
         } else {
             guard (self.switcherView.center.y < 0) else { return }
+            switcherView.isHidden = false
+            topView.isHidden = false
             UIView.animate(withDuration: 0.5, animations: {
                 self.switcherView.center.y = -0.5 * self.switcherView.center.y
                 self.topView.center.y =  -0.5 * self.topView.center.y

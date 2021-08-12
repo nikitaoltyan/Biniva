@@ -447,7 +447,7 @@ extension MapView {
             return false
         }
         
-        guard let date = Date().onlyDate else { return false }
+        let date = Date().onlyDate
         
         guard (mainTopLeft.latitude != 0) && (mainTopLeft.longitude != 0) else {
             print("The Coordinates probably were not setted")

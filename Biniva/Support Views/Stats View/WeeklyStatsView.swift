@@ -1,14 +1,15 @@
 //
-//  MaterialStatView.swift
-//  GreenerCo
+//  WeeklyStatsView.swift
+//  Biniva
 //
-//  Created by Nikita Oltyan on 17.05.2021.
+//  Created by Nick Oltyan on 11.08.2021.
 //
 
 import UIKit
 
-class MaterialStatView: UIView {
-    
+
+class WeeklyStatsView: UIView {
+
     let materialFunction = MaterialFunctions()
     
     lazy var gradient: CAGradientLayer = {
@@ -34,16 +35,16 @@ class MaterialStatView: UIView {
         collection.showsHorizontalScrollIndicator = false
         collection.delegate = self
         collection.dataSource = self
-        collection.register(MaterialStatsCell.self, forCellWithReuseIdentifier: "MaterialStatsCell")
-        collection.register(MaterialStatsCell_Empty.self, forCellWithReuseIdentifier: "MaterialStatsCell_Empty")
+        collection.register(WeeklyStatsCell.self, forCellWithReuseIdentifier: "WeeklyStatsCell")
+        collection.register(WeeklyStatsCell_Empty.self, forCellWithReuseIdentifier: "WeeklyStatsCell_Empty")
         return collection
     }()
 
-    var data: Array<(Int, Double)> = []
+    var data: Array<(Int, Double, direction)> = []
     var heightFunction: ((Double) -> (CGFloat))?
 
     override init(frame: CGRect){
-        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth - 50, height: 185)
+        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth - 50, height: 210)
         super.init(frame: useFrame)
         self.layer.cornerRadius = 30
         setSubviews()
@@ -56,19 +57,22 @@ class MaterialStatView: UIView {
     }
 
     func update(){
-        data = materialFunction.calculate()
+        data = materialFunction.calculateWeekly()
         if data.count > 0 {
-            let (_, weight) = data[0]
-            heightFunction = materialFunction.statsHeightFunction(maxProportion: weight)
+            let (_, percentage, _) = data[0]
+            heightFunction = materialFunction.weeklyHeightFunction(maxPercentage: percentage)
         }
         collection.reloadData()
     }
+    
 }
 
 
 
 
-extension MaterialStatView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+
+extension WeeklyStatsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch data.count {
         case 0, nil:
@@ -81,22 +85,27 @@ extension MaterialStatView: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch data.count {
         case 0, nil:
-            return CGSize(width: self.frame.width, height: 150)
+            return CGSize(width: self.frame.width, height: 175)
         default:
-            return CGSize(width: 75, height: 150)
+            return CGSize(width: 75, height: 175)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch data.count {
         case 0, nil:
-            let cell = collection.dequeueReusableCell(withReuseIdentifier: "MaterialStatsCell_Empty", for: indexPath) as! MaterialStatsCell_Empty
+            let cell = collection.dequeueReusableCell(withReuseIdentifier: "WeeklyStatsCell_Empty", for: indexPath) as! WeeklyStatsCell_Empty
             return cell
         default:
-            let cell = collection.dequeueReusableCell(withReuseIdentifier: "MaterialStatsCell", for: indexPath) as! MaterialStatsCell
-            let (id, percent) = data[indexPath.row]
-            cell.updateHeight(height: heightFunction!(percent))
+            let cell = collection.dequeueReusableCell(withReuseIdentifier: "WeeklyStatsCell", for: indexPath) as! WeeklyStatsCell
+            let (id, percent, direction) = data[indexPath.row]
+            if percent > 0 {
+                cell.updateHeight(height: heightFunction!(percent))
+            } else {
+                cell.updateHeight(height: heightFunction!(0))
+            }
             cell.updateMaterial(id: id)
+            cell.updateArrow(direction: direction)
             cell.percent.text = "\(Int(percent*100))%"
             return cell
         }
@@ -107,7 +116,8 @@ extension MaterialStatView: UICollectionViewDelegate, UICollectionViewDataSource
 
 
 
-extension MaterialStatView{
+
+extension WeeklyStatsView{
     func setSubviews(){
         self.layer.addSublayer(gradient)
         self.addSubview(collection)

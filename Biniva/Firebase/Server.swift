@@ -192,7 +192,7 @@ class Server {
         let documentData: [String: Any] = [
             "trash_type": material,
             "weight": weight,
-            "date": Date().onlyDate!
+            "date": Date().onlyDate
         ]
         
         var ref: DocumentReference? = nil

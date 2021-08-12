@@ -92,6 +92,7 @@
 		5CC8CB1826AD2759006186BE /* BottomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8CB1726AD2759006186BE /* BottomCameraView.swift */; };
 		5CC8CB1A26AD514A006186BE /* AlertCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8CB1926AD514A006186BE /* AlertCameraView.swift */; };
 		5CC8CB1C26AD5276006186BE /* CloseCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8CB1B26AD5276006186BE /* CloseCircleView.swift */; };
+		5CC8D2F526C3BFA900305FAB /* WeeklyStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8D2F426C3BFA900305FAB /* WeeklyStatsView.swift */; };
 		5CD0B13026888AD200267081 /* AddPointButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B12F26888AD200267081 /* AddPointButtonView.swift */; };
 		5CD0B1322688A85E00267081 /* AddPointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1312688A85E00267081 /* AddPointController.swift */; };
 		5CD0B1352689BD4500267081 /* TakePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1342689BD4500267081 /* TakePhotoCell.swift */; };
@@ -101,6 +102,8 @@
 		5CD556FB26524DFE007B3D06 /* MaterialStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */; };
 		5CD557002652532F007B3D06 /* MaterialStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */; };
 		5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD5570426526946007B3D06 /* MaterialFunctions.swift */; };
+		5CE08E9526C3C12A002FA542 /* WeeklyStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE08E9426C3C12A002FA542 /* WeeklyStatsCell.swift */; };
+		5CE08E9726C3C30B002FA542 /* WeeklyStatsCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE08E9626C3C30B002FA542 /* WeeklyStatsCell+Empty.swift */; };
 		5CE1B0282633DA5100549536 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE1B0272633DA5100549536 /* WeightView.swift */; };
 		5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDA06625DCF4A0009280D0 /* Array Extension.swift */; };
 		5CEE555C26BD19CB00561B76 /* PaywallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE555B26BD19CB00561B76 /* PaywallButton.swift */; };
@@ -237,6 +240,7 @@
 		5CC8CB1726AD2759006186BE /* BottomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCameraView.swift; sourceTree = "<group>"; };
 		5CC8CB1926AD514A006186BE /* AlertCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCameraView.swift; sourceTree = "<group>"; };
 		5CC8CB1B26AD5276006186BE /* CloseCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseCircleView.swift; sourceTree = "<group>"; };
+		5CC8D2F426C3BFA900305FAB /* WeeklyStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyStatsView.swift; sourceTree = "<group>"; };
 		5CD0B12F26888AD200267081 /* AddPointButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointButtonView.swift; sourceTree = "<group>"; };
 		5CD0B1312688A85E00267081 /* AddPointController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointController.swift; sourceTree = "<group>"; };
 		5CD0B1342689BD4500267081 /* TakePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhotoCell.swift; sourceTree = "<group>"; };
@@ -246,6 +250,8 @@
 		5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatView.swift; sourceTree = "<group>"; };
 		5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatsCell.swift; sourceTree = "<group>"; };
 		5CD5570426526946007B3D06 /* MaterialFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialFunctions.swift; sourceTree = "<group>"; };
+		5CE08E9426C3C12A002FA542 /* WeeklyStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyStatsCell.swift; sourceTree = "<group>"; };
+		5CE08E9626C3C30B002FA542 /* WeeklyStatsCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyStatsCell+Empty.swift"; sourceTree = "<group>"; };
 		5CE1B0272633DA5100549536 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
 		5CEDA06625DCF4A0009280D0 /* Array Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array Extension.swift"; sourceTree = "<group>"; };
 		5CEE555B26BD19CB00561B76 /* PaywallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallButton.swift; sourceTree = "<group>"; };
@@ -548,10 +554,13 @@
 			children = (
 				5C9F98B2262DE1E200DFCFEA /* StatsView.swift */,
 				5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */,
+				5CC8D2F426C3BFA900305FAB /* WeeklyStatsView.swift */,
 				5C25D8A6263693A900D2206E /* StatsCell.swift */,
 				5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */,
 				5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */,
 				5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */,
+				5CE08E9426C3C12A002FA542 /* WeeklyStatsCell.swift */,
+				5CE08E9626C3C30B002FA542 /* WeeklyStatsCell+Empty.swift */,
 			);
 			path = "Stats View";
 			sourceTree = "<group>";
@@ -972,9 +981,11 @@
 				5CC4D52C26BFA5E400FC6E30 /* Onboarding_6_Cell.swift in Sources */,
 				5C07594626596F17000F64C7 /* MaterialPinCell.swift in Sources */,
 				5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */,
+				5CC8D2F526C3BFA900305FAB /* WeeklyStatsView.swift in Sources */,
 				5C41703726B6FF43008E39CC /* PaywallController.swift in Sources */,
 				5C6CDAAF26596990009F72D8 /* BottomPinView.swift in Sources */,
 				5CC4D53426C163EE00FC6E30 /* Double+Extension.swift in Sources */,
+				5CE08E9526C3C12A002FA542 /* WeeklyStatsCell.swift in Sources */,
 				5CC8CB1126AAC043006186BE /* AddButtonWithPhotoView.swift in Sources */,
 				5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */,
 				5CC8CB1A26AD514A006186BE /* AlertCameraView.swift in Sources */,
@@ -993,6 +1004,7 @@
 				5C11455826612B9400F48626 /* MapView+Model.swift in Sources */,
 				5C3B737926B3C38B00B48DAC /* AppTransparency.swift in Sources */,
 				5C3D533C2630564E00DA0AFB /* ExtraAddCell.swift in Sources */,
+				5CE08E9726C3C30B002FA542 /* WeeklyStatsCell+Empty.swift in Sources */,
 				5C45914F254D55C0005AE26C /* SceneDelegate.swift in Sources */,
 				5C64D78E269047760013F084 /* Onboarding_4_Cell.swift in Sources */,
 				5C64D788268F82EA0013F084 /* Onboarding_1_Cell.swift in Sources */,

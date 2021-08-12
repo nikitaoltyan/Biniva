@@ -153,4 +153,20 @@ class CoreDataFunction {
         result([])
         return
     }
+    
+    func getWeeklyData(start: Date?, end: Date?) -> [Model] {
+        let predicate1 = NSPredicate(format: "day > %@", argumentArray: [start!])
+        let predicate2 = NSPredicate(format: "day < %@", argumentArray: [end!])
+        
+        let finalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2])
+        
+        request.predicate = finalPredicate
+        do {
+            let data: [Model] = try managedContext.fetch(request)
+            return data
+        } catch {
+            print(error)
+            return []
+        }
+    }
 }

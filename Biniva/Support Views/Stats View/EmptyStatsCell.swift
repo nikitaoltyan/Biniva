@@ -2,7 +2,7 @@
 //  EmptyStatsCell.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 13.05.2021.
+//  Created by Nick Oltyan on 13.05.2021.
 //
 
 import UIKit
@@ -48,11 +48,13 @@ class EmptyStatsCell: UITableViewCell {
 
 
 extension EmptyStatsCell {
+    private
     func setSubviews(){
         self.addSubview(title)
         self.addSubview(subtitle)
     }
     
+    private
     func activateLayouts(){
         NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: self.topAnchor, constant: 35),

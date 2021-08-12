@@ -72,6 +72,12 @@ class DataFunction {
     }
     
     
+    func fetchWeeklyData(start: Date?, end: Date?) -> [Model] {
+        let data: [Model] = database.getWeeklyData(start: start, end: end)
+        return data
+    }
+    
+    
     func addPoint(latitude: Double, longitude: Double, materials: [Int]?, geohash: String, id: String, result: @escaping(_ point: [Points]) -> Void) {
         let data = database.getByPointID(id: id)
         guard data.count == 0 else { return }

@@ -1,17 +1,17 @@
 //
-//  MaterialStatsCell.swift
-//  GreenerCo
+//  WeeklyStatsCell.swift
+//  Biniva
 //
-//  Created by Nick Oltyan on 17.05.2021.
+//  Created by Nick Oltyan on 11.08.2021.
 //
 
 import UIKit
 
-class MaterialStatsCell: UICollectionViewCell {
-    
+class WeeklyStatsCell: UICollectionViewCell {
+
     let percent: UILabel = {
         let label = UILabel()
-            .with(color: Colors.darkGrayText)
+            .with(color: Colors.background)
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 11)
@@ -37,8 +37,13 @@ class MaterialStatsCell: UICollectionViewCell {
         return label
     }()
     
-    var colorViewBottom: NSLayoutConstraint?
+    let arrowImage: UIImageView = {
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+            .with(autolayout: false)
+        return image
+    }()
     
+    var colorViewBottom: NSLayoutConstraint?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -60,19 +65,31 @@ class MaterialStatsCell: UICollectionViewCell {
         colorView.backgroundColor = materials.statsColors[id]
         title.text = materials.name[id]
     }
+    
+    func updateArrow(direction: direction) {
+        switch direction {
+        case .up:
+            arrowImage.image = UIImage(systemName: "arrow.up.square.fill")
+            arrowImage.tintColor = Colors.arrowUpRed
+        case .down:
+            arrowImage.image = UIImage(systemName: "arrow.down.square.fill")
+            arrowImage.tintColor = Colors.arrowDownGreen
+        }
+    }
+    
 }
 
 
 
 
 
-
-extension MaterialStatsCell {
+extension WeeklyStatsCell {
     private
     func setSubviews(){
         self.addSubview(title)
+        self.addSubview(arrowImage)
         self.addSubview(colorView)
-        self.addSubview(percent)
+        colorView.addSubview(percent)
     }
     
     private
@@ -86,8 +103,13 @@ extension MaterialStatsCell {
             colorView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             colorView.widthAnchor.constraint(equalToConstant: colorView.frame.width),
             
-            percent.bottomAnchor.constraint(equalTo: colorView.topAnchor, constant: -5),
-            percent.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            percent.bottomAnchor.constraint(equalTo: colorView.bottomAnchor, constant: -5),
+            percent.centerXAnchor.constraint(equalTo: colorView.centerXAnchor),
+            
+            arrowImage.bottomAnchor.constraint(equalTo: colorView.topAnchor, constant: -4),
+            arrowImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            arrowImage.widthAnchor.constraint(equalToConstant: arrowImage.frame.width),
+            arrowImage.heightAnchor.constraint(equalToConstant: arrowImage.frame.height)
         ])
         colorViewBottom = colorView.heightAnchor.constraint(equalToConstant: colorView.frame.height)
         colorViewBottom?.isActive = true

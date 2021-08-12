@@ -15,8 +15,8 @@ class PaywallView: UIView {
     lazy var scrollView: UIScrollView = {
         let scrollHeight: CGFloat = {
             switch MainConstants.screenHeight {
-            case ...700: return 900
-            default: return 950
+            case ...700: return 910
+            default: return 1000
             }
         }()
         let scroll = UIScrollView()
@@ -76,7 +76,7 @@ class PaywallView: UIView {
     }()
     
     let subtitle_1_image: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 28, height: 21))
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 20))
             .with(autolayout: false)
         image.image = UIImage(systemName: "person.3.fill")
         image.tintColor = Colors.topGradient
