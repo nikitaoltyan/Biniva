@@ -37,6 +37,7 @@ class SettingsController: UITableViewController {
         if let firstVC = presentingViewController as? RecyclingController {
             DispatchQueue.main.async {
                 firstVC.updateDataAfterSettings()
+                firstVC.updateDataAfterPaywall() // In case when user bought subscription in settings.
             }
         }
     }
@@ -63,7 +64,7 @@ class SettingsController: UITableViewController {
             case 0: return 4
             case 1: return 1
             case 2: return 3
-            default: return 1
+            default: return 2
         }
     }
     
@@ -78,25 +79,43 @@ class SettingsController: UITableViewController {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 0: cell.title.text = "Geolocation"
-            case 1: cell.title.text = "Notification"
-            case 2: cell.title.text = "Camera"
-            default: cell.title.text = "Subscription"
+            case 0:
+                cell.image.image = UIImage(systemName: "location")
+                cell.title.text = NSLocalizedString("settings_geolocation", comment: "")
+            case 1:
+                cell.image.image = UIImage(systemName: "app.badge")
+                cell.title.text = NSLocalizedString("settings_notification", comment: "")
+            case 2:
+                cell.image.image = UIImage(systemName: "camera.circle")
+                cell.title.text = NSLocalizedString("settings_camers", comment: "")
+            default:
+                cell.image.image = UIImage(systemName: "dollarsign.circle")
+                cell.title.text = NSLocalizedString("settings_subscription", comment: "")
             }
         case 1:
-//            switch indexPath.row {
-//            case 0:
-                cell.title.text = "Measurement System"
-//            default: cell.title.text = "Daily Goal"
-//            }
+            cell.image.image = UIImage(systemName: "cube.transparent")
+            cell.title.text = NSLocalizedString("settings_measure", comment: "")
         case 2:
             switch indexPath.row {
-            case 0: cell.title.text = "Instagram"
-            case 1: cell.title.text = "Privacy Policy"
-            default: cell.title.text = "Terms of Use"
+            case 0:
+                cell.image.image = UIImage(systemName: "figure.wave.circle")
+                cell.title.text = "Instagram"
+            case 1:
+                cell.image.image = UIImage(systemName: "hand.raised")
+                cell.title.text = NSLocalizedString("privacy_policy", comment: "")
+            default:
+                cell.image.image = UIImage(systemName: "newspaper")
+                cell.title.text = NSLocalizedString("paywall_conditions", comment: "")
             }
         default:
-            cell.title.text = "Leave a comment"
+            switch indexPath.row {
+            case 0:
+                cell.image.image = UIImage(systemName: "paperplane.circle")
+                cell.title.text = NSLocalizedString("settings_leave_comment", comment: "")
+            default:
+                cell.image.image = UIImage(systemName: "star")
+                cell.title.text = NSLocalizedString("settings_mark_app", comment: "")
+            }
         }
         return cell
     }
@@ -110,19 +129,17 @@ class SettingsController: UITableViewController {
             }
         case 1:
             openMeasureController()
-//            switch indexPath.row {
-//            case 0: cell.title.text = "Measurement System"
-//            default: cell.title.text = "Daily Goal"
-//            }
-//        case 2:
-//            switch indexPath.row {
-//            case 0: cell.title.text = "Instagram"
-//            case 1: cell.title.text = "Privacy Policy"
-//            default: cell.title.text = "Terms of Use"
-//            }
+        case 2:
+            switch indexPath.row {
+            case 0: openInstagram()
+            case 1: openPrivacyPolicy()
+            default: openTermsOfUse()
+            }
         default:
-//            cell.title.text = "Leave a comment"
-            print("Leave a comment")
+            switch indexPath.row {
+            case 0: openLeaveComment()
+            default: openAppStore()
+            }
         }
     
     }
@@ -155,7 +172,7 @@ extension SettingsController {
     
     private
     func openSubscription() {
-        guard Defaults.getSubscriptionStatus() else {
+        guard Defaults.getIsSubscribed() else {
             let newVC = PaywallController()
             newVC.modalPresentationStyle = .overFullScreen
             newVC.modalTransitionStyle = .coverVertical
@@ -175,10 +192,56 @@ extension SettingsController {
     private
     func openMeasureController() {
         // TODO:
-        // VC should open from the right to left.
+        // VC should open from the right to left. (?)
+        // Or may be fuck this thing for now?
         let newVC = WeightMeasureController()
         newVC.modalPresentationStyle = .overFullScreen
         newVC.modalTransitionStyle = .coverVertical
         present(newVC, animated: true, completion: nil)
+    }
+    
+    private
+    func openInstagram() {
+        let instagramHooks = "instagram://user?username=biniva_app"
+        let instagramUrl = NSURL(string: instagramHooks)
+        if UIApplication.shared.canOpenURL(instagramUrl! as URL) {
+            print("Open Biniva Inst page")
+            UIApplication.shared.open(instagramUrl! as URL, options: [:], completionHandler: nil)
+        } else {
+            print("Open Ordinary Inst page")
+            UIApplication.shared.open(NSURL(string: "http://instagram.com/")! as URL, options: [:], completionHandler: nil)
+        }
+    }
+    
+    private
+    func openPrivacyPolicy() {
+        if let url = URL(string: NSLocalizedString("paywall_privacy_policy_url", comment: "privacy policy link")) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    private
+    func openTermsOfUse() {
+        if let url = URL(string: NSLocalizedString("paywall_terms_of_use_url", comment: "terms of use link")) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    private
+    func openLeaveComment() {
+        // TODO:
+        // VC should open from the right to left. (?)
+        // Or may be fuck this thing for now?
+        let newVC = LeaveCommentController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
+        present(newVC, animated: true, completion: nil)
+    }
+    
+    private
+    func openAppStore() {
+        if let url = URL(string: "itms-apps://apple.com/app/id1551525911") {
+            UIApplication.shared.open(url)
+        }
     }
 }

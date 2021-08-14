@@ -87,6 +87,7 @@ class StatsView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 18)
             .with(autolayout: false)
+        label.isHidden = !Defaults.getIsSubscribed()
         label.text = NSLocalizedString("stats_weekly_subtitle", comment: "Title for weekly plate")
         return label
     }()
@@ -99,6 +100,7 @@ class StatsView: UIView {
         view.layer.shadowRadius = 10
         view.layer.shadowOpacity = 0.9
         view.layer.shadowOffset = CGSize(width: 4, height: 4)
+        view.isHidden = !Defaults.getIsSubscribed()
         return view
     }()
     
@@ -145,11 +147,14 @@ class StatsView: UIView {
     var model: [Model]?
     
     var statsTableHeightConst: NSLayoutConstraint?
+    var unsubscribedConstraint: NSLayoutConstraint?
+    var subscribedConstraint: NSLayoutConstraint?
     
     override init(frame: CGRect){
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
         super.init(frame: useFrame)
         self.backgroundColor = .clear
+        
         setSubviews()
         activateLayouts()
         fetchData()
@@ -177,7 +182,7 @@ class StatsView: UIView {
         }
         statsTableHeightConst?.constant = height
         statsTable.layoutIfNeeded()
-        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 935 + height)
+        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 1000 + height)
     }
     
     func updateLabel(){
@@ -186,22 +191,33 @@ class StatsView: UIView {
         })
     }
     
+    
+    func updateAfterPaywall() {
+        print("StatsView update after paywall")
+        weeklySubtitle.isHidden = !Defaults.getIsSubscribed()
+        weeklyStatsView.isHidden = !Defaults.getIsSubscribed()
+        if Defaults.getIsSubscribed() { // Show Weekly stats only if isSubscribed == true
+            self.layoutIfNeeded()
+            unsubscribedConstraint?.isActive = false
+            subscribedConstraint?.isActive = true
+        }
+    }
+    
+    
     @objc
     func openInst() {
         let instagramHooks = "instagram://user?username=biniva_app"
         let instagramUrl = NSURL(string: instagramHooks)
         if UIApplication.shared.canOpenURL(instagramUrl! as URL) {
-            print("Open Biniva Inst page")
             UIApplication.shared.open(instagramUrl! as URL, options: [:], completionHandler: nil)
         } else {
-            print("Open Ordinary Inst page")
             UIApplication.shared.open(NSURL(string: "http://instagram.com/")! as URL, options: [:], completionHandler: nil)
         }
     }
     
     @objc
     func openPrivacyPolicy() {
-        if let url = URL(string: "http://greener.tilda.ws/privacy_policy") {
+        if let url = URL(string: NSLocalizedString("paywall_privacy_policy_url", comment: "privacy policy link")) {
             UIApplication.shared.open(url)
         }
     }
@@ -281,6 +297,15 @@ extension StatsView {
     
     private
     func activateLayouts(){
+        unsubscribedConstraint = statsTable.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 85)
+        subscribedConstraint = statsTable.topAnchor.constraint(equalTo: weeklyStatsView.bottomAnchor, constant: 85)
+        let statsTableTopConstraint: NSLayoutConstraint = {
+            if Defaults.getIsSubscribed() {
+                return subscribedConstraint!
+            } else {
+                return unsubscribedConstraint!
+            }
+        }()
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -310,7 +335,7 @@ extension StatsView {
             weeklyStatsView.heightAnchor.constraint(equalToConstant: weeklyStatsView.frame.height),
             
 //            statsTable height was setted in the bottom of the function.
-            statsTable.topAnchor.constraint(equalTo: weeklyStatsView.bottomAnchor, constant: 85),
+            statsTableTopConstraint,
             statsTable.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             statsTable.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth - 50),
             

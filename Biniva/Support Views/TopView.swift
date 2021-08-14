@@ -88,6 +88,11 @@ class TopView: UIView {
     func openPaywall() {
         delegate?.openPaywall()
     }
+    
+    func updatePaywallButton() {
+        guard settingsButton.isHidden == true else { return }
+        paywallButton.isHidden = Defaults.getIsSubscribed()
+    }
 }
 
 
@@ -114,7 +119,7 @@ extension TopView: TopViewDelegate {
         } else {
             title.text = NSLocalizedString("top_view_title_stats", comment: "stats topView title")
             subtitle.text = NSLocalizedString("top_view_subtitle_stats", comment: "stats topView support subtitle")
-            paywallButton.isHidden = Defaults.getSubscriptionStatus()
+            paywallButton.isHidden = Defaults.getIsSubscribed()
             settingsButton.isHidden = true
         }
     }

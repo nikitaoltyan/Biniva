@@ -61,7 +61,7 @@
 // Third cell
 "onboarding_3_title" = "Отслеживай свое потребление и";
 "onboarding_3_green_title" = "создавай полезные привычки";
-"onboarding_3_subtitle" = "В среднем каждый житель Земли создает 1,1 килограмм мусора в день. Давай снизим это число?";
+"onboarding_3_subtitle" = "В среднем каждый житель Земли создает 1,1 килограмм (3,3 фунта) мусора в день. Давай снизим это число?";
 // Fourth cell
 "onboarding_4_title" = "Разрешить отправку уведомлений?";
 "onboarding_4_green_title" = "Они будут отправляться всего 1 раз в день, вечером";
@@ -123,6 +123,17 @@
 "stats_events_title" = "События";
 "stats_empty_cell_title" = "Еще ничего не добавлено";
 "stats_empty_cell_subtitle" = "Добавляй мусор, который выбрасываешь, и следи за своим потреблением здесь.";
+
+
+// SETTINGS
+"settings_geolocation" = "Геолокация";
+"settings_notification" = "Уведомления";
+"settings_camers" = "Камера";
+"settings_subscription" = "Подписка";
+"settings_measure" = "Система измерения";
+"settings_leave_comment" = "Оставь отзыв";
+"settings_mark_app" = "Оцени приложение";
+
 
 
 // MAP VIEW

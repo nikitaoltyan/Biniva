@@ -28,6 +28,7 @@ protocol RecyclingDelegate {
 protocol mapDelegate {
     func openAddNewPoint()
     func showPaywall()
+    func showImageShower(withImages images: [String], open: Int)
     func showPopUp(title: String, subtitle: String, andButtonText buttonText: String)
 }
 
@@ -106,9 +107,14 @@ class RecyclingController: UIViewController {
     }
     
     func updateDataAfterSettings() {
-        print("test was called from SettingsController")
         recyclingView.progressView.setUpInitial()
         statsView.statsTable.reloadData()
+    }
+    
+    func updateDataAfterPaywall() {
+        topView.updatePaywallButton()
+        mapView.updatePaywallButton()
+        statsView.updateAfterPaywall()
     }
     
     
@@ -264,6 +270,16 @@ extension RecyclingController: mapDelegate {
     func showPopUp(title: String, subtitle: String, andButtonText buttonText: String) {
         Vibration.soft()
         self.showPopUp(withTitle: title, subtitle: subtitle, andButtonText: buttonText)
+    }
+    
+    func showImageShower(withImages images: [String], open: Int) {
+        let newVC = ImageShowerController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
+        newVC.update(arrayOfImages: images)
+        present(newVC, animated: true, completion: {
+            newVC.open(image: open)
+        })
     }
     
     func showPaywall() {

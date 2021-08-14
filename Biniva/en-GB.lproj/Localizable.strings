@@ -62,7 +62,7 @@
 // Third cell
 "onboarding_3_title" = "Track your consumption and";
 "onboarding_3_green_title" = "create useful habits";
-"onboarding_3_subtitle" = "On average, every inhabitant of the Earth creates 1.1 kilograms of garbage per day. Let's lower this number?";
+"onboarding_3_subtitle" = "On average, every inhabitant of the Earth creates 1.1 kilograms (3.3 pounds) of trash per day. Let's lower this number?";
 // Fourth cell
 "onboarding_4_title" = "Allow notifications?";
 "onboarding_4_green_title" = "They will be sent only 1 time per day, in the evening";
@@ -124,6 +124,16 @@
 "stats_events_title" = "Events";
 "stats_empty_cell_title" = "Nothing has been added yet";
 "stats_empty_cell_subtitle" = "Add the garbage that you throw away, and monitor your consumption here.";
+
+
+// SETTINGS
+"settings_geolocation" = "Geolocation";
+"settings_notification" = "Notifications";
+"settings_camers" = "Camera";
+"settings_subscription" = "Subscription";
+"settings_measure" = "Measerement system";
+"settings_leave_comment" = "Leave a comment";
+"settings_mark_app" = "Rate the app";
 
 
 // MAP VIEW

@@ -105,6 +105,8 @@ class BottomPinView: UIView {
     var pointID: String?
     
     var isTouchedAlready: Bool = false
+    var delegate: bottomPinDelegate?
+    
     
     override init(frame: CGRect) {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 800)
@@ -207,6 +209,11 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
         }
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard collectionView.tag == 1 else { return }
+        delegate?.showImageShower(withImages: self.images, open: indexPath.row)
+    }
     
 }
 

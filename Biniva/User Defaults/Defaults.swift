@@ -99,7 +99,7 @@ class Defaults {
     }
     
     static
-    func getSubscriptionStatus() -> Bool {
+    func getIsSubscribed() -> Bool {
         return UserDefaults.standard.bool(forKey: "isSubscriptionActive")
     }
     

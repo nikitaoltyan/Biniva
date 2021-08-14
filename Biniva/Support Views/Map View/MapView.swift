@@ -9,6 +9,11 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol bottomPinDelegate {
+    func showImageShower(withImages images: [String], open: Int)
+}
+
+
 class MapView: UIView {
     
     var model = MapView_Model()
@@ -37,12 +42,13 @@ class MapView: UIView {
         return map
     }()
 
-    let pinAnnotation: BottomPinView = {
+    lazy var pinAnnotation: BottomPinView = {
         let view = BottomPinView()
             .with(cornerRadius: 16)
             .with(autolayout: false)
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         view.isUserInteractionEnabled = true
+        view.delegate = self
         return view
     }()
     
@@ -62,8 +68,8 @@ class MapView: UIView {
     let paywallView: PaywallButton = {
         let view = PaywallButton()
             .with(autolayout: false)
-        print("paywallView getSubscriptionStatus: \(Defaults.getSubscriptionStatus())")
-        view.isHidden = Defaults.getSubscriptionStatus()
+        print("paywallView getSubscriptionStatus: \(Defaults.getIsSubscribed())")
+        view.isHidden = Defaults.getIsSubscribed()
         return view
     }()
     
@@ -92,6 +98,9 @@ class MapView: UIView {
         fatalError()
     }
 
+    func updatePaywallButton() {
+        paywallView.isHidden = Defaults.getIsSubscribed()
+    }
     
     func setUserLocation() {
         map.showsUserLocation = true
@@ -195,10 +204,12 @@ class MapView: UIView {
     
     func setClosedPosition() {
         addPointView.isHidden = false
+        paywallView.isHidden = Defaults.getIsSubscribed()
         UIView.animate(withDuration: 0.1, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
                                                 y: self.centerCoordinate)
             self.addPointView.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.paywallView.transform = CGAffineTransform(translationX: 0, y: 0)
         }, completion: { (_) in
             self.map.selectedAnnotations.removeAll()
         })
@@ -210,10 +221,11 @@ class MapView: UIView {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
                                                 y: self.centerCoordinate-190)
             self.addPointView.transform = CGAffineTransform(translationX: -100, y: 0)
+            self.paywallView.transform = CGAffineTransform(translationX: 100, y: 0)
         }, completion: { (_) in
             self.addPointView.isHidden = true
+            self.paywallView.isHidden = true
             Vibration.soft()
-            print(self.pinAnnotation.center.y)
         })
     }
     
@@ -283,7 +295,7 @@ class MapView: UIView {
 
 
 
-extension MapView: MKMapViewDelegate {
+extension MapView: MKMapViewDelegate, bottomPinDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? TrashBin else { return nil }
         let view = DefaultAnnotationView(annotation: annotation, reuseIdentifier: DefaultAnnotationView.ReuseID)
@@ -314,6 +326,10 @@ extension MapView: MKMapViewDelegate {
             checkReturnLocation()
         }
     }
+    
+    func showImageShower(withImages images: [String], open: Int) {
+        delegate?.showImageShower(withImages: images, open: open)
+    }
 }
 
 
@@ -325,10 +341,10 @@ extension MapView {
     private
     func setSubviews() {
         self.addSubview(map)
-        self.addSubview(pinAnnotation)
         self.addSubview(addPointView)
         self.addSubview(returnToPositionView)
         self.addSubview(paywallView)
+        self.addSubview(pinAnnotation)
         
         pinAnnotation.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:))))
         addPointView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPoint)))

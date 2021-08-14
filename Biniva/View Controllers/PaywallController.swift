@@ -9,6 +9,7 @@ import UIKit
 
 protocol paywallDelegate {
     func close()
+    func showAlert(withTitle title: String, andSubtitle subtitle: String)
 }
 
 
@@ -28,6 +29,14 @@ class PaywallController: UIViewController {
         activateLayouts()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let firstVC = presentingViewController as? RecyclingController {
+            DispatchQueue.main.async {
+                firstVC.updateDataAfterPaywall()
+            }
+        }
+    }
 }
 
 
@@ -36,6 +45,13 @@ class PaywallController: UIViewController {
 extension PaywallController: paywallDelegate {
     func close() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func showAlert(withTitle title: String, andSubtitle subtitle: String) {
+        let alert = prepareAlert(withTitle: title,
+                                 andSubtitle: subtitle,
+                                 closeAction: "Try again")
+        present(alert, animated: true, completion: nil)
     }
 }
 

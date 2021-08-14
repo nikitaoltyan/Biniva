@@ -173,7 +173,7 @@ class PaywallView: UIView {
             .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 0)
-            .with(fontName: "Helvetica", size: 15)
+            .with(fontName: "Helvetica", size: 14)
         label.text = NSLocalizedString("paywall_annual_text", comment: "In-plate text")
         return label
     }()
@@ -229,7 +229,7 @@ class PaywallView: UIView {
             .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 0)
-            .with(fontName: "Helvetica", size: 15)
+            .with(fontName: "Helvetica", size: 14)
         label.text = NSLocalizedString("paywall_monthly_text", comment: "In-plate text")
         return label
     }()
@@ -427,7 +427,7 @@ class PaywallView: UIView {
                     } else {
                         print("Error: \(error!)")
                         self.defaults.setSubscriptionStatus()
-                        self.closeAction()
+                        self.showErrorAlert()
                     }
                 }
 
@@ -442,7 +442,7 @@ class PaywallView: UIView {
                     } else {
                         print("Error: \(error!)")
                         self.defaults.setSubscriptionStatus()
-                        self.closeAction()
+                        self.showErrorAlert()
                     }
                 }
             }
@@ -484,13 +484,18 @@ class PaywallView: UIView {
         })
     }
     
-    @objc
+    @objc private
     func privacyPolicyAction() {
         privacyPolicyLabel.tap(completion: { _ in
             if let url = URL(string: NSLocalizedString("paywall_privacy_policy_url", comment: "privacy policy link")) {
                 UIApplication.shared.open(url)
             }
         })
+    }
+    
+    private
+    func showErrorAlert() {
+        delegate?.showAlert(withTitle: "Error", andSubtitle: "Error subtitle")
     }
 }
 
