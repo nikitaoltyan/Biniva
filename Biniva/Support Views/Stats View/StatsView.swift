@@ -87,7 +87,6 @@ class StatsView: UIView {
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 18)
             .with(autolayout: false)
-        label.isHidden = !Defaults.getIsSubscribed()
         label.text = NSLocalizedString("stats_weekly_subtitle", comment: "Title for weekly plate")
         return label
     }()
@@ -100,7 +99,6 @@ class StatsView: UIView {
         view.layer.shadowRadius = 10
         view.layer.shadowOpacity = 0.9
         view.layer.shadowOffset = CGSize(width: 4, height: 4)
-        view.isHidden = !Defaults.getIsSubscribed()
         return view
     }()
     
@@ -147,8 +145,6 @@ class StatsView: UIView {
     var model: [Model]?
     
     var statsTableHeightConst: NSLayoutConstraint?
-    var unsubscribedConstraint: NSLayoutConstraint?
-    var subscribedConstraint: NSLayoutConstraint?
     
     override init(frame: CGRect){
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
@@ -194,12 +190,8 @@ class StatsView: UIView {
     
     func updateAfterPaywall() {
         print("StatsView update after paywall")
-        weeklySubtitle.isHidden = !Defaults.getIsSubscribed()
-        weeklyStatsView.isHidden = !Defaults.getIsSubscribed()
         if Defaults.getIsSubscribed() { // Show Weekly stats only if isSubscribed == true
-            self.layoutIfNeeded()
-            unsubscribedConstraint?.isActive = false
-            subscribedConstraint?.isActive = true
+            self.weeklyStatsView.update()
         }
     }
     
@@ -297,15 +289,6 @@ extension StatsView {
     
     private
     func activateLayouts(){
-        unsubscribedConstraint = statsTable.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 85)
-        subscribedConstraint = statsTable.topAnchor.constraint(equalTo: weeklyStatsView.bottomAnchor, constant: 85)
-        let statsTableTopConstraint: NSLayoutConstraint = {
-            if Defaults.getIsSubscribed() {
-                return subscribedConstraint!
-            } else {
-                return unsubscribedConstraint!
-            }
-        }()
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -335,7 +318,7 @@ extension StatsView {
             weeklyStatsView.heightAnchor.constraint(equalToConstant: weeklyStatsView.frame.height),
             
 //            statsTable height was setted in the bottom of the function.
-            statsTableTopConstraint,
+            statsTable.topAnchor.constraint(equalTo: weeklyStatsView.bottomAnchor, constant: 85),
             statsTable.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             statsTable.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth - 50),
             

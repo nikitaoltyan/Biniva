@@ -71,6 +71,7 @@
 		5C83A060255F979A005C2CAA /* SF-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C83A057255F959F005C2CAA /* SF-Pro.ttf */; };
 		5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83A0792563AC58005C2CAA /* Main Constants.swift */; };
 		5C85E69726C81130001661CA /* LeaveCommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85E69626C81130001661CA /* LeaveCommentController.swift */; };
+		5C85E6A126CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85E6A026CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift */; };
 		5C96F17526C67F40008FC57F /* ImageShowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96F17426C67F40008FC57F /* ImageShowerController.swift */; };
 		5C996A4C26B12AA600C3BD8C /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C996A4B26B12AA600C3BD8C /* Review.swift */; };
 		5C9A56BA2695E2E7000D3401 /* ServerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9A56B92695E2E7000D3401 /* ServerAnalytics.swift */; };
@@ -221,6 +222,7 @@
 		5C83A058255F959F005C2CAA /* SF-Pro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Italic.ttf"; path = "../../../../../../Library/Fonts/SF-Pro-Italic.ttf"; sourceTree = "<group>"; };
 		5C83A0792563AC58005C2CAA /* Main Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main Constants.swift"; sourceTree = "<group>"; };
 		5C85E69626C81130001661CA /* LeaveCommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveCommentController.swift; sourceTree = "<group>"; };
+		5C85E6A026CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyStatsCell+Unsubscribed.swift"; sourceTree = "<group>"; };
 		5C96F17426C67F40008FC57F /* ImageShowerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShowerController.swift; sourceTree = "<group>"; };
 		5C996A4B26B12AA600C3BD8C /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		5C9A56B92695E2E7000D3401 /* ServerAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAnalytics.swift; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				5CB8593B2652BB3D00885A6D /* MaterialStatsCell+Empty.swift */,
 				5CE08E9426C3C12A002FA542 /* WeeklyStatsCell.swift */,
 				5CE08E9626C3C30B002FA542 /* WeeklyStatsCell+Empty.swift */,
+				5C85E6A026CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift */,
 			);
 			path = "Stats View";
 			sourceTree = "<group>";
@@ -968,6 +971,7 @@
 				5C64D7922690B3DE0013F084 /* Notifications.swift in Sources */,
 				5C555084269CA17600AD8015 /* ArticleController.swift in Sources */,
 				5C64D78A269047550013F084 /* Onboarding_2_Cell.swift in Sources */,
+				5C85E6A126CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift in Sources */,
 				5C996A4C26B12AA600C3BD8C /* Review.swift in Sources */,
 				5CD557002652532F007B3D06 /* MaterialStatsCell.swift in Sources */,
 				5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */,

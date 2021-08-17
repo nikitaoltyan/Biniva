@@ -192,7 +192,7 @@ class Server {
         let documentData: [String: Any] = [
             "trash_type": material,
             "weight": weight,
-            "date": Date().onlyDate
+            "date": Date().onlyDate as Any
         ]
         
         var ref: DocumentReference? = nil
@@ -230,6 +230,20 @@ class Server {
                     
                 result(URL)
             }
+        }
+    }
+    
+    
+    func createNewComment(withTitle title: String, andText text: String) {
+        let documentData: [String: Any] = [
+            "title": title,
+            "text": text,
+            "date": Date().onlyDate as Any
+        ]
+        
+        db.collection("comments").addDocument(data: documentData) { (err) in
+            guard (err == nil) else { return }
+            return 
         }
     }
 }

@@ -83,8 +83,8 @@
 "paywall_close_button" = "Закрыть";
 "paywall_title" = "Поддержи проект эко-карты Biniva";
 "paywall_subtitle_1" = "Помоги нам развиваться и позволь большему количеству людей переработать мусор";
-"paywall_subtitle_2" = "Открой доступ к расширенной статистике и эксклюзивным советам по Zero Waste";
-"paywall_subtitle_3" = "Помоги сделать мир чище!";
+"paywall_subtitle_2" = "Открой доступ к расширенной еженедельной статистике";
+"paywall_subtitle_3" = "Помоги нам поддерживать работу карты, чтобы сделать мир чище!";
 "paywall_annual_title" = "Годовая поддержка проекта позволит:";
 "paywall_monthly_title" = "Ежемесячная поддержка проекта позволит:";
 "paywall_annual_text" = "80 новым людям найти место переработки мусора рядом с домом.\n\nДополнительно сдать на переработку 3.2 тонны мусора в год.";
@@ -99,6 +99,10 @@
 "paywall_description_2" = "Данные числа по количеству новых людей, которые могли бы использовать карту Biniva, а также количество переработонного мусора, расчитаны на основе цены привлечения одного пользователя и среднего количества мусора, созданого тестовой командой Biniva. В реальности цифры могут отличаться. Спасибо за поддержку!";
 "paywall_privacy_policy_url" = "http://greener.tilda.ws/privacy_policy/ru";
 "paywall_terms_of_use_url" = "http://greener.tilda.ws/terms_of_use/en";
+"paywall_error_title" = "Возникла ошибка при покупке";
+"paywall_error_subtitle" = "Пожалуйста, попробуйте позже";
+"paywall_error_close" = "Закрыть";
+
 
 
 // TOP VIEW
@@ -123,9 +127,15 @@
 "stats_events_title" = "События";
 "stats_empty_cell_title" = "Еще ничего не добавлено";
 "stats_empty_cell_subtitle" = "Добавляй мусор, который выбрасываешь, и следи за своим потреблением здесь.";
+"stats_weekly_empty_cell_title" = "Еще недостаточно данных";
+"stats_weekly_empty_cell_subtitle" = "Добавляй свой мусор как минимум неделю, чтобы Biniva сформировала правильный отчет.";
+"stats_weekly_unsubscribed_cell_title" = "Поддержи проект";
+"stats_weekly_unsubscribed_cell_subtitle" = "Получи доступ к еженедельной статистике, оформив подписку. Она поможет поддерживать сервера Biniva в рабочем состоянии.";
+
 
 
 // SETTINGS
+"settings_title" = "Настройки";
 "settings_geolocation" = "Геолокация";
 "settings_notification" = "Уведомления";
 "settings_camers" = "Камера";
@@ -133,6 +143,18 @@
 "settings_measure" = "Система измерения";
 "settings_leave_comment" = "Оставь отзыв";
 "settings_mark_app" = "Оцени приложение";
+
+// SETTINGS - LEAVE A COMMENT
+"leave_comment_title" = "Оставь свой отзыв";
+"leave_comment_title_placeholder" = "Тема письма";
+"leave_comment_text_placeholder" = "Что нам стоит добавить или изменить? (Или просто похвалите команду Biniva)";
+"leave_comment_button" = "Отправить";
+"leave_comment_title_error_title" = "Нет темы письма";
+"leave_comment_title_error_subtitle" = "Пожалуйста, напиши тему. Так мы быстрее поймем, что ты хотел нам сообщить.";
+"leave_comment_comment_error_title" = "Нет текста письма";
+"leave_comment_comment_error_subtitle" = "Пожалуйста, опиши свою проблему или идею. Мы ждем твоих сообщений!";
+"leave_comment_error_close" = "Исправить";
+"leave_comment_done_button" = "Готово";
 
 
 

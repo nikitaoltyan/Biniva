@@ -37,6 +37,7 @@ class WeeklyStatsView: UIView {
         collection.dataSource = self
         collection.register(WeeklyStatsCell.self, forCellWithReuseIdentifier: "WeeklyStatsCell")
         collection.register(WeeklyStatsCell_Empty.self, forCellWithReuseIdentifier: "WeeklyStatsCell_Empty")
+        collection.register(WeeklyStatsCell_Unsubscribed.self, forCellWithReuseIdentifier: "WeeklyStatsCell_Unsubscribed")
         return collection
     }()
 
@@ -57,6 +58,8 @@ class WeeklyStatsView: UIView {
     }
 
     func update(){
+        guard Defaults.getIsSubscribed() else { return } // Not even calculate if user is unsubscribed
+        
         data = materialFunction.calculateWeekly()
         if data.count > 0 {
             let (_, percentage, _) = data[0]
@@ -94,8 +97,13 @@ extension WeeklyStatsView: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch data.count {
         case 0, nil:
-            let cell = collection.dequeueReusableCell(withReuseIdentifier: "WeeklyStatsCell_Empty", for: indexPath) as! WeeklyStatsCell_Empty
-            return cell
+            if Defaults.getIsSubscribed() {
+                let cell = collection.dequeueReusableCell(withReuseIdentifier: "WeeklyStatsCell_Empty", for: indexPath) as! WeeklyStatsCell_Empty
+                return cell
+            } else {
+                let cell = collection.dequeueReusableCell(withReuseIdentifier: "WeeklyStatsCell_Unsubscribed", for: indexPath) as! WeeklyStatsCell_Unsubscribed
+                return cell
+            }
         default:
             let cell = collection.dequeueReusableCell(withReuseIdentifier: "WeeklyStatsCell", for: indexPath) as! WeeklyStatsCell
             let (id, percent, direction) = data[indexPath.row]

@@ -48,4 +48,14 @@ class ServerAnalytics {
     func logPointTap() {
         Analytics.logEvent("point_tap", parameters: [:])
     }
+    
+    
+    // Subscription
+    
+    /// Initiates when user open the PaywallController
+    func logOpenPaywall() {
+        Analytics.logEvent(AnalyticsEventViewPromotion, parameters: [:])
+    }
+    // Logging In-app purchases performs automatically
+
 }

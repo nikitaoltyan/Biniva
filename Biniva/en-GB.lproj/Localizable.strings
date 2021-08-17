@@ -84,8 +84,8 @@
 "paywall_close_button" = "Close";
 "paywall_title" = "Support the Biniva eco-map project";
 "paywall_subtitle_1" = "Help us to evolve and allow more people to recycle garbage";
-"paywall_subtitle_2" = "Open access to advanced statistics and exclusive tips about Zero Waste";
-"paywall_subtitle_3" = "Help us make the world cleaner!";
+"paywall_subtitle_2" = "Open access to advanced weekly statistics";
+"paywall_subtitle_3" = "Help us to keep the map working and make the world cleaner!";
 "paywall_annual_title" = "The annual support of the project will allow:";
 "paywall_monthly_title" = "The monthly support of the project will allow:";
 "paywall_annual_text" = "Help 80 new people find a garbage recycling place near their home.\n\nThey will additionaly recycle 3.2 tons of garbage per year.";
@@ -100,6 +100,9 @@
 "paywall_description_2" = "These numbers for the number of new people who could use the Biniva map, as well as the amount of recycled garbage, are calculated based on the average price of attracting one user and the average amount of garbage created by the Biniva test team. In reality, the numbers may differ. Thank you for your support!";
 "paywall_privacy_policy_url" = "http://greener.tilda.ws/privacy_policy/en";
 "paywall_terms_of_use_url" = "http://greener.tilda.ws/terms_of_use/en";
+"paywall_error_title" = "An error occurred during the purchase";
+"paywall_error_subtitle" = "Please try again later";
+"paywall_error_close" = "Close";
 
 
 
@@ -121,12 +124,19 @@
 
 // STATS VIEW
 "stats_subtitle" = "total garbage collected";
+"stats_weekly_subtitle" = "weekly changes:";
 "stats_events_title" = "Events";
 "stats_empty_cell_title" = "Nothing has been added yet";
 "stats_empty_cell_subtitle" = "Add the garbage that you throw away, and monitor your consumption here.";
+"stats_weekly_empty_cell_title" = "Not enough data yet";
+"stats_weekly_empty_cell_subtitle" = "Keep adding your trash at least for a week to allow Biniva generate a report.";
+"stats_weekly_unsubscribed_cell_title" = "Support the project";
+"stats_weekly_unsubscribed_cell_subtitle" = "Get access to weekly statistics by subscribing. It will help to keep the Biniva servers in working condition.";
+
 
 
 // SETTINGS
+"settings_title" = "Settings";
 "settings_geolocation" = "Geolocation";
 "settings_notification" = "Notifications";
 "settings_camers" = "Camera";
@@ -134,6 +144,19 @@
 "settings_measure" = "Measerement system";
 "settings_leave_comment" = "Leave a comment";
 "settings_mark_app" = "Rate the app";
+
+
+// SETTINGS - LEAVE A COMMENT
+"leave_comment_title" = "Leave your comment";
+"leave_comment_title_placeholder" = "Title";
+"leave_comment_text_placeholder" = "What should we add or change? (Or just praise the Biniva team)";
+"leave_comment_button" = "Send";
+"leave_comment_title_error_title" = "There's no title";
+"leave_comment_title_error_subtitle" = "Please, write a title. This way we will quickly understand what you wanted to tell us.";
+"leave_comment_comment_error_title" = "There is no message text";
+"leave_comment_comment_error_subtitle" = "Please describe your problem or idea. We are waiting for your messages!";
+"leave_comment_error_close" = "Fix it";
+"leave_comment_done_button" = "Done";
 
 
 // MAP VIEW

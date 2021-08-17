@@ -68,14 +68,14 @@ extension MaterialStatsCell_Empty {
             image.heightAnchor.constraint(equalToConstant: image.frame.height),
             image.widthAnchor.constraint(equalToConstant: image.frame.width),
             
-            title.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            title.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
             title.leftAnchor.constraint(equalTo: self.leftAnchor,constant: 25),
             title.rightAnchor.constraint(equalTo: image.leftAnchor, constant: -15),
             
-            subtitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 7),
+            subtitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 0),
             subtitle.leftAnchor.constraint(equalTo: title.leftAnchor),
             subtitle.rightAnchor.constraint(equalTo: title.rightAnchor),
-            subtitle.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
+            subtitle.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
         ])
     }
 }

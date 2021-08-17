@@ -15,6 +15,8 @@ protocol paywallDelegate {
 
 class PaywallController: UIViewController {
     
+    let analytics = ServerAnalytics()
+    
     lazy var paywallView: PaywallView = {
         let view = PaywallView()
             .with(autolayout: false)
@@ -24,6 +26,7 @@ class PaywallController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        analytics.logOpenPaywall()
         view.backgroundColor = Colors.background
         setSubviews()
         activateLayouts()
@@ -50,7 +53,7 @@ extension PaywallController: paywallDelegate {
     func showAlert(withTitle title: String, andSubtitle subtitle: String) {
         let alert = prepareAlert(withTitle: title,
                                  andSubtitle: subtitle,
-                                 closeAction: "Try again")
+                                 closeAction: NSLocalizedString("paywall_error_close", comment: ""))
         present(alert, animated: true, completion: nil)
     }
 }

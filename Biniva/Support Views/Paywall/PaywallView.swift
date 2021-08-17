@@ -495,7 +495,8 @@ class PaywallView: UIView {
     
     private
     func showErrorAlert() {
-        delegate?.showAlert(withTitle: "Error", andSubtitle: "Error subtitle")
+        delegate?.showAlert(withTitle: NSLocalizedString("paywall_error_title", comment: ""),
+                            andSubtitle: NSLocalizedString("paywall_error_subtitle", comment: ""))
     }
 }
 

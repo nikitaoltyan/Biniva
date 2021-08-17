@@ -36,7 +36,7 @@ class SettingsTableHeaderView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Настройки"
+        label.text = NSLocalizedString("settings_title", comment: "")
         return label
     }()
     

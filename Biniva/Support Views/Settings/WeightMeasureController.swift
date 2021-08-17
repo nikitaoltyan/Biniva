@@ -158,7 +158,7 @@ class WeightMeasureController: UIViewController {
         backButton.tap(completion: { _ in
             self.dismiss(animated: true, completion: nil)
             // TODO:
-            // After dismission nothing is changed. For changes implementation the app should be restarted. FIX IT!
+            // After dismission Sttings update all. But it shodn't do that always.
         })
     }
 }

@@ -1,13 +1,13 @@
 //
-//  WeeklyStatsCell+Empty.swift
+//  WeeklyStatsCell+Unsubscribed.swift
 //  Biniva
 //
-//  Created by Nick Oltyan on 11.08.2021.
+//  Created by Nick Oltyan on 16.08.2021.
 //
 
 import UIKit
 
-class WeeklyStatsCell_Empty: UICollectionViewCell {
+class WeeklyStatsCell_Unsubscribed: UICollectionViewCell {
     
     let title: UILabel = {
         let label = UILabel()
@@ -16,7 +16,7 @@ class WeeklyStatsCell_Empty: UICollectionViewCell {
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 16)
             .with(autolayout: false)
-        label.text = NSLocalizedString("stats_weekly_empty_cell_title", comment: "title for empty state Cell")
+        label.text = NSLocalizedString("stats_weekly_unsubscribed_cell_title", comment: "title for unsubscribed cell")
         return label
     }()
     
@@ -27,14 +27,14 @@ class WeeklyStatsCell_Empty: UICollectionViewCell {
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 13)
             .with(autolayout: false)
-        label.text = NSLocalizedString("stats_weekly_empty_cell_subtitle", comment: "title for empty state Cell")
+        label.text = NSLocalizedString("stats_weekly_unsubscribed_cell_subtitle", comment: "subtitle for unsubscribed cell")
         return label
     }()
     
     let image: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 130, height: 110))
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 130, height: 100))
             .with(autolayout: false)
-        image.image = UIImage(named: "weekly_no_data")
+        image.image = UIImage(named: "weekly_unsubscribed")
         return image
     }()
 
@@ -56,7 +56,7 @@ class WeeklyStatsCell_Empty: UICollectionViewCell {
 
 
 
-extension WeeklyStatsCell_Empty {
+extension WeeklyStatsCell_Unsubscribed {
     private
     func setSubviews(){
         self.addSubview(title)
@@ -72,7 +72,7 @@ extension WeeklyStatsCell_Empty {
             image.heightAnchor.constraint(equalToConstant: image.frame.height),
             image.widthAnchor.constraint(equalToConstant: image.frame.width),
             
-            title.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            title.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             title.leftAnchor.constraint(equalTo: self.leftAnchor,constant: 25),
             title.rightAnchor.constraint(equalTo: image.leftAnchor, constant: -15),
             
