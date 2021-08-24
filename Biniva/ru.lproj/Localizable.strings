@@ -131,6 +131,7 @@
 "stats_weekly_empty_cell_subtitle" = "Добавляй свой мусор как минимум неделю, чтобы Biniva сформировала правильный отчет.";
 "stats_weekly_unsubscribed_cell_title" = "Поддержи проект";
 "stats_weekly_unsubscribed_cell_subtitle" = "Получи доступ к еженедельной статистике, оформив подписку. Она поможет поддерживать сервера Biniva в рабочем состоянии.";
+"stats_weekly_article_title" = "Недельные советы";
 
 
 

@@ -59,11 +59,17 @@ class ProgressView: UIView {
     }()
     
     let weightLabel: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 40
+            default: return 48
+            }
+        }()
         let label = UILabel()
             .with(color: MainConstants.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 1)
-            .with(fontName: "SFPro-Bold", size: 48)
+            .with(fontName: "SFPro-Bold", size: textSize)
             .with(autolayout: false)
         return label
     }()

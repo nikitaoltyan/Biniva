@@ -346,13 +346,13 @@ extension StatsView {
             weeklyStatsView.widthAnchor.constraint(equalToConstant: weeklyStatsView.frame.width),
             weeklyStatsView.heightAnchor.constraint(equalToConstant: weeklyStatsView.frame.height),
             
-            weeklyArticleView.topAnchor.constraint(equalTo: weeklyStatsView.bottomAnchor, constant: 13),
+            weeklyArticleView.topAnchor.constraint(equalTo: weeklyStatsView.bottomAnchor, constant: 25),
             weeklyArticleView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             weeklyArticleView.widthAnchor.constraint(equalToConstant: weeklyArticleView.frame.width),
             weeklyArticleView.heightAnchor.constraint(equalToConstant: weeklyArticleView.frame.height),
             
 //            statsTable height was setted in the bottom of the function.
-            statsTable.topAnchor.constraint(equalTo: weeklyArticleView.bottomAnchor, constant: 85),
+            statsTable.topAnchor.constraint(equalTo: weeklyArticleView.bottomAnchor, constant: 80),
             statsTable.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             statsTable.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth - 50),
             

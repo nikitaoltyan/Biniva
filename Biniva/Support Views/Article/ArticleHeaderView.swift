@@ -36,7 +36,7 @@ class ArticleHeaderView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Недельные советы"
+        label.text = NSLocalizedString("stats_weekly_article_title", comment: "")
         return label
     }()
     

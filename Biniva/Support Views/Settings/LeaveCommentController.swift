@@ -182,6 +182,20 @@ extension LeaveCommentController {
     
     private
     func activateLayouts() {
+        let topBackButtonConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 45
+            default: return 70
+            }
+        }()
+        
+        let topTitleTextConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 20
+            default: return 30
+            }
+        }()
+        
         let buttonBottomConstant: CGFloat = {
             switch MainConstants.screenHeight {
             case ...700: return -24
@@ -191,7 +205,7 @@ extension LeaveCommentController {
         }()
         
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: topBackButtonConstant),
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
             backButton.heightAnchor.constraint(equalToConstant: backButton.frame.height),
             backButton.widthAnchor.constraint(equalToConstant: backButton.frame.width),
@@ -200,7 +214,7 @@ extension LeaveCommentController {
             titleBlack.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: 20),
             titleBlack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             
-            titleText.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: 30),
+            titleText.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: topTitleTextConstant),
             titleText.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
             titleText.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
             titleText.heightAnchor.constraint(equalToConstant: 40),

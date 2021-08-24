@@ -132,6 +132,7 @@
 "stats_weekly_empty_cell_subtitle" = "Keep adding your trash at least for a week to allow Biniva generate a report.";
 "stats_weekly_unsubscribed_cell_title" = "Support the project";
 "stats_weekly_unsubscribed_cell_subtitle" = "Get access to weekly statistics by subscribing. It will help to keep the Biniva servers in working condition.";
+"stats_weekly_article_title" = "Weekly advices";
 
 
 
