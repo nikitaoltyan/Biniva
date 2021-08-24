@@ -58,7 +58,7 @@ class MaterialFunctions {
         
         let data: [Model] = database.fetchWeeklyData(start: firstStart, end: firstEnd)
         guard (data.count != 0) else { return [] }
-        var (dict, _): ([Int: Int], Double) = prepareModelDict(data: data)
+        let (dict, _): ([Int: Int], Double) = prepareModelDict(data: data)
         // Here we have dict with [MaterialID: ItsWeight] for last week.
         
         
@@ -69,44 +69,47 @@ class MaterialFunctions {
         let data2: [Model] = database.fetchWeeklyData(start: secondStart, end: secondEnd)
         guard (data2.count != 0) else { return [] }
         let (dict2, _): ([Int: Int], Double) = prepareModelDict(data: data2)
-        // Here we have dict with [MaterialID: ItsWeight] for week before last.
+        // Here we have dict2 with [MaterialID: ItsWeight] for week before last.
         
         var result: Array<(Int, Double, direction)> = []
         
-        // Step 2 Preparation
+        // Step 1 Preparation
         // Need to preapre sets before actions with dict
         let dict1Keys: Set<Int> = Set(dict.keys)
         let dict2Keys: Set<Int> = Set(dict2.keys)
         
-        // Step 1
-        //
-        print("dict: \(dict)")
-        while dict.count > 0 {
-            let m = dict.max { a, b in a.value < b.value }
-            guard let max = m else { return [] }
-            
-            let keyExists = dict2[max.key] != nil // Checking if key exist in dict2
+        var newDict: [Int: Double] = [:]
+        // Step WTF
+        for key in dict.keys {
+            let keyExists = (dict2[key] != nil) // Checking if key exist in dict2
             
             if keyExists {
-                let difference: Double = Double(dict[max.key] ?? 1) / Double(dict2[max.key] ?? 1)
-                if difference > 1 {
-                    result.append((max.key, difference-1.0, .up))
-                } else {
-                    result.append((max.key, difference-1.0, .down))
-                }
+                let difference: Double = Double(dict[key] ?? 1) / Double(dict2[key] ?? 1)
+                newDict[key] = difference-1.0
             }
             else {
-                result.append((max.key, 1.0, .up))
+                newDict[key] = 1.0
             }
-            
-            dict.removeValue(forKey: max.key)
         }
         
         
         // Step 2
+        while newDict.count > 0 {
+            let m = newDict.max { a, b in a.value < b.value }
+            guard let max = m else { return [] }
+            
+            if max.value > 0 {
+                result.append((max.key, max.value, .up))
+            } else {
+                result.append((max.key, max.value, .down))
+            }
+            newDict.removeValue(forKey: max.key)
+        }
+        
+        
+        // Step 3
         // Adding -1.0 for all keys that wasn't in first dict 
         for key in dict2Keys.subtracting(dict1Keys) {
-            
             result.append((key, -1.0, .down))
         }
         return result
@@ -146,6 +149,78 @@ class MaterialFunctions {
         
         return (dict, Double(sum))
     }
+    
+    
+    func getArticleText() -> [String] {
+        var resultArray: [String] = []
+        
+        for item in prepareArticleData() {
+            print("for item in prepareArticleData item: \(item)")
+            do {
+                let path = Bundle.main.path(forResource: item, ofType: "txt")
+                let string = try String(contentsOfFile: path!, encoding: String.Encoding.utf8)
+                resultArray.append(string)
+            } catch _ {
+                print("catch an error")
+            }
+        }
+        
+        return resultArray
+    }
+    
+    private
+    func prepareArticleData() -> [String] {
+        let data: Array<(Int, Double, direction)> = calculateWeekly()
+        let itemsForArticle = prepareItemsForArticle(data: data)
+        
+        var resultArray: [String] = []
+        
+        for item in itemsForArticle {
+            let (material, direction) = item
+            resultArray.append("\(material)_intro")
+            if direction == .up {
+                resultArray.append("\(material)_up")
+            } else {
+                resultArray.append("\(material)_down")
+            }
+        }
+        
+        return resultArray
+    }
+    
+    private
+    func prepareItemsForArticle(data: Array<(Int, Double, direction)>) -> [(Int, direction)] {
+        var resultArray: [(Int, direction)] = []
+
+        if data.count >= 3 {
+            // Add the material that raised the max
+            let max = data[0]
+            let (materialMax, _, directionMax) = max
+            resultArray.append((materialMax, directionMax))
+            
+            // Add the material thet felt the max
+            let min = data[data.count-1]
+            let (materialMin, _, directionMin) = min
+            resultArray.append((materialMin, directionMin))
+            
+            // Add the random material between them
+            let randomIndex: Int = Int.random(in: 1...data.count-2)
+            let randomElement = data[randomIndex]
+            print("randomElement: \(randomElement)")
+            let (materialRandom, _, directionRandom) = randomElement
+            resultArray.append((materialRandom, directionRandom))
+            
+        } else {
+            for element in data {
+                let (material, _, direction) = element
+                resultArray.append((material, direction))
+            }
+        }
+
+        resultArray.shuffle() // Shuffle the array to present always new articles for users.
+        return resultArray
+    }
+    
     
     /// Some weird shit. Must be redeveloped.
     func colorByRowValue(_ value: Int) -> UIColor {

@@ -58,7 +58,7 @@ class WeeklyStatsView: UIView {
     }
 
     func update(){
-        guard Defaults.getIsSubscribed() else { return } // Not even calculate if user is unsubscribed
+//        guard Defaults.getIsSubscribed() else { return } // Do not calculate if user is unsubscribed
         
         data = materialFunction.calculateWeekly()
         if data.count > 0 {

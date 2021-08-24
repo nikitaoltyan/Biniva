@@ -45,8 +45,8 @@
 	<string>The app takes photos of your garbage to provide an AI based user experience in the future.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>The app loads only BinPoints near to the user to provide a better experience and reduce traffic overusage.</string>
-    <key>NSUserTrackingUsageDescription</key>
-    <string>This identifier will be used to track and measure our ads activity.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier will be used to track and measure our ads activity.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Pro-Italic.ttf</string>

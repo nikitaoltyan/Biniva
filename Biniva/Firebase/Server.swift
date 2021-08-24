@@ -161,32 +161,6 @@ class Server {
     }
 
     
-    func getArticleText(forArtcileWithID aid: String, completion: @escaping(_ text: String) -> Void) {
-//        db.collection("articles").document(aid).getDocument(completion: { (document, error)  in
-//            guard error == nil else {
-//                completion("")
-//                return
-//            }
-//
-//            if let document = document, document.exists {
-//                let data = document.data()
-//
-                do {
-//                    let text = try String(contentsOf: URL(string: data?["text"] as? String ?? " ")!, encoding: .utf8) // here should be link on error message?
-                    let text = try String(contentsOf: URL(string: "https://firebasestorage.googleapis.com/v0/b/greener-964fe.appspot.com/o/Articles%2Ftest.txt?alt=media&token=20cb70db-f869-497e-ba45-8794735b3886")!, encoding: .utf8)
-                    completion(text)
-                } catch _ {
-                    print("Catch an error")
-                    completion("")
-                }
-//            } else {
-//                print("Document does not exist")
-//                completion("")
-//            }
-//        })
-    }
-
-    
     func createNewPhotoData(_ image: UIImage, forMaterial material: Int, andWeight weight: Int) {
 
         let documentData: [String: Any] = [

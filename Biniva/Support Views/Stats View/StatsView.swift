@@ -102,6 +102,17 @@ class StatsView: UIView {
         return view
     }()
     
+    let weeklyArticleView: WeeklyArticleView = {
+        let view = WeeklyArticleView()
+            .with(autolayout: false)
+        view.clipsToBounds = true
+        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        view.layer.shadowRadius = 10
+        view.layer.shadowOpacity = 0.9
+        view.layer.shadowOffset = CGSize(width: 4, height: 4)
+        return view
+    }()
+    
     lazy var statsTable: UITableView = {
         let table = UITableView()
             .with(bgColor: .clear)
@@ -197,6 +208,13 @@ class StatsView: UIView {
     
     
     @objc
+    func weeklyArticleAction() {
+        weeklyArticleView.tap(completion: { _ in
+            self.delegate?.openArticle()
+        })
+    }
+    
+    @objc
     func openInst() {
         let instagramHooks = "instagram://user?username=biniva_app"
         let instagramUrl = NSURL(string: instagramHooks)
@@ -218,6 +236,8 @@ class StatsView: UIView {
 
 
 
+
+
 extension StatsView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard (scrollView == self.scrollView) else { return }
@@ -230,12 +250,18 @@ extension StatsView: UIScrollViewDelegate {
 }
 
 
+
+
+
 extension StatsView: Test {
     func update(){
         materialStatsView.update()
         fetchData()
     }
 }
+
+
+
 
 
 
@@ -268,6 +294,7 @@ extension StatsView: UITableViewDelegate, UITableViewDataSource {
 
 
 
+
 extension StatsView {
     private
     func setSubviews(){
@@ -279,10 +306,12 @@ extension StatsView {
         scrollView.addSubview(materialStatsView)
         scrollView.addSubview(weeklySubtitle)
         scrollView.addSubview(weeklyStatsView)
+        scrollView.addSubview(weeklyArticleView)
         scrollView.addSubview(statsTable)
         scrollView.addSubview(instaLabel)
         scrollView.addSubview(privacyPolicyLabel)
         
+        weeklyArticleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(weeklyArticleAction)))
         instaLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openInst)))
         privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openPrivacyPolicy)))
     }
@@ -317,8 +346,13 @@ extension StatsView {
             weeklyStatsView.widthAnchor.constraint(equalToConstant: weeklyStatsView.frame.width),
             weeklyStatsView.heightAnchor.constraint(equalToConstant: weeklyStatsView.frame.height),
             
+            weeklyArticleView.topAnchor.constraint(equalTo: weeklyStatsView.bottomAnchor, constant: 13),
+            weeklyArticleView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            weeklyArticleView.widthAnchor.constraint(equalToConstant: weeklyArticleView.frame.width),
+            weeklyArticleView.heightAnchor.constraint(equalToConstant: weeklyArticleView.frame.height),
+            
 //            statsTable height was setted in the bottom of the function.
-            statsTable.topAnchor.constraint(equalTo: weeklyStatsView.bottomAnchor, constant: 85),
+            statsTable.topAnchor.constraint(equalTo: weeklyArticleView.bottomAnchor, constant: 85),
             statsTable.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             statsTable.widthAnchor.constraint(equalToConstant: MainConstants.screenWidth - 50),
             

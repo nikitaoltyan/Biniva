@@ -17,6 +17,7 @@ protocol SwitcherDelegate {
 
 protocol StatsDelegate {
     func hideTopBar(_ should: Bool)
+    func openArticle()
 }
 
 
@@ -108,6 +109,7 @@ class RecyclingController: UIViewController {
     
     func updateDataAfterSettings() {
         recyclingView.progressView.setUpInitial()
+        statsView.updateLabel()
         statsView.statsTable.reloadData()
     }
     
@@ -228,6 +230,12 @@ extension RecyclingController: StatsDelegate {
         }
     }
     
+    func openArticle() {
+        let newVC = ArticleController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
+        present(newVC, animated: true, completion: nil)
+    }
 }
 
 

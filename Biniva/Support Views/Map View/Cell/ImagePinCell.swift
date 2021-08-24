@@ -28,11 +28,15 @@ class ImagePinCell: UICollectionViewCell {
 
 
 
+
+
 extension ImagePinCell{
+    private
     func setSubviews(){
         self.addSubview(image)
     }
     
+    private
     func activateLayouts(){
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: self.topAnchor),
