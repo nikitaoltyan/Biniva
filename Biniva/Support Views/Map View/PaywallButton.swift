@@ -2,7 +2,7 @@
 //  PaywallButton.swift
 //  Biniva
 //
-//  Created by Никита Олтян on 06.08.2021.
+//  Created by Nick Oltyan on 06.08.2021.
 //
 
 import UIKit

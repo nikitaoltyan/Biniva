@@ -37,4 +37,11 @@ extension MKMapView {
                                         longitude: center.longitude)
         return round(centerLocation.distance(from: topLeftLocation) + delta)
     }
+    
+   func visibleAnnotations() -> [MKAnnotation] {
+        return self.annotations(in: self.visibleMapRect).map {
+            obj -> MKAnnotation in return obj as! MKAnnotation
+        }
+   }
+    
 }

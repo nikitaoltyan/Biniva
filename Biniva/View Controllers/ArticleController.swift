@@ -13,6 +13,7 @@ protocol articleHeaderDelegate {
 
 class ArticleController: UITableViewController {
     
+    let analytic = ServerAnalytics()
     let parser = Parser()
     
     enum type {
@@ -24,6 +25,7 @@ class ArticleController: UITableViewController {
     var text: [(String, type)] = []
     
     override func viewDidLoad() {
+        analytic.logOpenWeeklyArticle()
         view.backgroundColor = Colors.background
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
@@ -43,14 +45,9 @@ class ArticleController: UITableViewController {
     private
     func prepareText() {
         print("prepareText")
-//        if Defaults.getIsSubscribed() {
-//            getSubscribedText()
-//        } else {
-//            getUnsubscribedText()
-//        }
-        
         var images = 0
         var texts = 0
+        
         DispatchQueue.main.async {
             let articleTexts = self.parser.getArticleText()
             print("self.parser.getArticleText: \(articleTexts)")
@@ -72,7 +69,6 @@ class ArticleController: UITableViewController {
                     self.text.append((part, .text))
                 }
                 
-                print("texts:\(texts) images:\(images)")
                 if (texts == 1 || texts == 3) && images < 2{
                     let randomNumber = Int.random(in: 0...15)
                     self.text.append(("article_\(randomNumber)", .image))
@@ -85,53 +81,6 @@ class ArticleController: UITableViewController {
         }
     }
     
-    
-//    private
-//    func getSubscribedText() {
-//        var images = 0
-//        var texts = 0
-//        DispatchQueue.main.async {
-//            let articleTexts = self.parser.getArticleText()
-//
-//            guard articleTexts.count != 0 else {
-//                self.getNoDataText()
-//                return
-//            }
-//
-//            for text in articleTexts {
-//                for part in self.parser.tabParser(text: text) {
-//                    self.text.append((part, .text))
-//                }
-//
-//                print("texts:\(texts) images:\(images)")
-//                if (texts == 1 || texts == 3) && images < 2{
-//                    let randomNumber = Int.random(in: 0...15)
-//                    self.text.append(("article_\(randomNumber)", .image))
-//                    images += 1
-//                }
-//                texts += 1
-//            }
-//
-//            self.tableView.reloadData()
-//        }
-//    }
-    
-//    private
-//    func getUnsubscribedText() {
-//        let articleTexts = parser.getUnsubscribedText()
-//
-//    }
-//
-//    private
-//    func getNoDataText() {
-//        do {
-//            let path = Bundle.main.path(forResource: item, ofType: "txt")
-//            let string = try String(contentsOfFile: path!, encoding: String.Encoding.utf8)
-//            resultArray.append(string)
-//        } catch _ {
-//            print("catch an error")
-//        }
-//    }
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {

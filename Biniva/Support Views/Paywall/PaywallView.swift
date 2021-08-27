@@ -134,7 +134,13 @@ class PaywallView: UIView {
     }()
     
     let annualPlateView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth/2-20, height: 225))
+        let heightConstants: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 195
+            default: return 225
+            }
+        }()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth/2-20, height: heightConstants))
             .with(autolayout: false)
             .with(cornerRadius: 16)
             .with(borderWidth: 3, color: Colors.topGradient.cgColor)
@@ -189,7 +195,13 @@ class PaywallView: UIView {
     }()
     
     let monthlyPlateView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth/2-20, height: 225))
+        let heightConstants: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 195
+            default: return 225
+            }
+        }()
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth/2-20, height: heightConstants))
             .with(autolayout: false)
             .with(cornerRadius: 16)
             .with(borderWidth: 0, color: Colors.topGradient.cgColor)

@@ -40,12 +40,24 @@ class WeeklyStatsView: UIView {
         collection.register(WeeklyStatsCell_Unsubscribed.self, forCellWithReuseIdentifier: "WeeklyStatsCell_Unsubscribed")
         return collection
     }()
+    
+    let weeklySubtitle: UILabel = {
+        let label = UILabel()
+            .with(color: Colors.bottomGradient)
+            .with(alignment: .left)
+            .with(numberOfLines: 1)
+            .with(fontName: "SFPro-Bold", size: 19)
+            .with(autolayout: false)
+        label.text = NSLocalizedString("stats_weekly_subtitle", comment: "Title for weekly plate")
+        label.isHidden = true
+        return label
+    }()
 
     var data: Array<(Int, Double, direction)> = []
     var heightFunction: ((Double) -> (CGFloat))?
 
     override init(frame: CGRect){
-        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth - 50, height: 210)
+        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth - 50, height: 230)
         super.init(frame: useFrame)
         self.layer.cornerRadius = 30
         setSubviews()
@@ -58,12 +70,14 @@ class WeeklyStatsView: UIView {
     }
 
     func update(){
-//        guard Defaults.getIsSubscribed() else { return } // Do not calculate if user is unsubscribed
+        guard Defaults.getIsSubscribed() else { return } // Do not calculate if user is unsubscribed
         
         data = materialFunction.calculateWeekly()
         if data.count > 0 {
-            let (_, percentage, _) = data[0]
+            let (material, percentage, _) = data[0]
             heightFunction = materialFunction.weeklyHeightFunction(maxPercentage: percentage)
+            weeklySubtitle.textColor = materialFunction.colorByRowValue(material)
+            weeklySubtitle.isHidden = false
         }
         collection.reloadData()
     }
@@ -88,9 +102,9 @@ extension WeeklyStatsView: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch data.count {
         case 0, nil:
-            return CGSize(width: self.frame.width, height: 175)
+            return CGSize(width: self.frame.width, height: 195)
         default:
-            return CGSize(width: 75, height: 175)
+            return CGSize(width: 75, height: 195)
         }
     }
     
@@ -129,14 +143,18 @@ extension WeeklyStatsView{
     func setSubviews(){
         self.layer.addSublayer(gradient)
         self.addSubview(collection)
+        self.addSubview(weeklySubtitle)
     }
     
     func activateLayouts(){
         NSLayoutConstraint.activate([
             collection.leftAnchor.constraint(equalTo: self.leftAnchor),
             collection.rightAnchor.constraint(equalTo: self.rightAnchor),
-            collection.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            collection.heightAnchor.constraint(equalToConstant: collection.frame.height)
+            collection.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -25),
+            collection.heightAnchor.constraint(equalToConstant: collection.frame.height),
+            
+            weeklySubtitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 9),
+            weeklySubtitle.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 22)
         ])
     }
 }

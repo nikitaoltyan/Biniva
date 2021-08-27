@@ -57,5 +57,9 @@ class ServerAnalytics {
         Analytics.logEvent(AnalyticsEventViewPromotion, parameters: [:])
     }
     // Logging In-app purchases performs automatically
+    
+    func logOpenWeeklyArticle() {
+        Analytics.logEvent("open_weekly_article", parameters: [:])
+    }
 
 }

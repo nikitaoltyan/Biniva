@@ -75,6 +75,8 @@
 		5C6D67E326D505D8000AA376 /* 8_up.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5C6D67E526D505D8000AA376 /* 8_up.txt */; };
 		5C6D67EC26D5468E000AA376 /* no_data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5C6D67EE26D5468E000AA376 /* no_data.txt */; };
 		5C6D67F126D546E8000AA376 /* unsubscribed.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5C6D67F326D546E8000AA376 /* unsubscribed.txt */; };
+		5C6D67F726D77D30000AA376 /* DisabledGeolocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D67F626D77D30000AA376 /* DisabledGeolocationView.swift */; };
+		5C6D67F926D7D504000AA376 /* AskForPointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D67F826D7D504000AA376 /* AskForPointsView.swift */; };
 		5C6F5AF12699E28200155933 /* MapPreparation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F5AF02699E28200155933 /* MapPreparation.swift */; };
 		5C782CD4267A059900A853D5 /* Points+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C782CD2267A059900A853D5 /* Points+CoreDataClass.swift */; };
 		5C782CD5267A059900A853D5 /* Points+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C782CD3267A059900A853D5 /* Points+CoreDataProperties.swift */; };
@@ -289,6 +291,8 @@
 		5C6D67F226D546E8000AA376 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text; name = ru; path = ru.lproj/unsubscribed.txt; sourceTree = "<group>"; };
 		5C6D67F426D546EB000AA376 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text; name = "en-GB"; path = "en-GB.lproj/unsubscribed.txt"; sourceTree = "<group>"; };
 		5C6D67F526D546ED000AA376 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/unsubscribed.txt; sourceTree = "<group>"; };
+		5C6D67F626D77D30000AA376 /* DisabledGeolocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledGeolocationView.swift; sourceTree = "<group>"; };
+		5C6D67F826D7D504000AA376 /* AskForPointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointsView.swift; sourceTree = "<group>"; };
 		5C6F5AF02699E28200155933 /* MapPreparation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPreparation.swift; sourceTree = "<group>"; };
 		5C782CD2267A059900A853D5 /* Points+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5C782CD3267A059900A853D5 /* Points+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -715,6 +719,8 @@
 				5CEE8C01266A173200EB6617 /* TrashBin.swift */,
 				5C3B736F26B1BC5000B48DAC /* ReturnToPositionView.swift */,
 				5CEE555B26BD19CB00561B76 /* PaywallButton.swift */,
+				5C6D67F626D77D30000AA376 /* DisabledGeolocationView.swift */,
+				5C6D67F826D7D504000AA376 /* AskForPointsView.swift */,
 				5CD2F5972682251500993A54 /* Cell */,
 				5CEE8BFE266A15AC00EB6617 /* Pins */,
 			);
@@ -1136,6 +1142,7 @@
 				5CB8593C2652BB3D00885A6D /* MaterialStatsCell+Empty.swift in Sources */,
 				5C55591C262D945C0046F5A5 /* SwitcherView.swift in Sources */,
 				5C5ED19A2659386B00084458 /* DefaultPins.swift in Sources */,
+				5C6D67F926D7D504000AA376 /* AskForPointsView.swift in Sources */,
 				5CAF7D53262C7A5700249CC6 /* TopView.swift in Sources */,
 				5CF90C51262EA3A000127E4D /* AddTrashController.swift in Sources */,
 				5C25D8A7263693A900D2206E /* StatsCell.swift in Sources */,
@@ -1162,6 +1169,7 @@
 				5C6C89F025AF41F400D55A16 /* ButtonView.swift in Sources */,
 				5C96F17526C67F40008FC57F /* ImageShowerController.swift in Sources */,
 				5C087043262739E10057E840 /* Model+CoreDataClass.swift in Sources */,
+				5C6D67F726D77D30000AA376 /* DisabledGeolocationView.swift in Sources */,
 				5CFB8FB926281BB000372203 /* DataFunction.swift in Sources */,
 				5C782CD4267A059900A853D5 /* Points+CoreDataClass.swift in Sources */,
 				5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */,

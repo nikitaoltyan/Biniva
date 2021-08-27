@@ -80,16 +80,16 @@ class StatsView: UIView {
         return view
     }()
     
-    let weeklySubtitle: UILabel = {
-        let label = UILabel()
-            .with(color: MainConstants.nearBlack)
-            .with(alignment: .center)
-            .with(numberOfLines: 1)
-            .with(fontName: "SFPro-Medium", size: 18)
-            .with(autolayout: false)
-        label.text = NSLocalizedString("stats_weekly_subtitle", comment: "Title for weekly plate")
-        return label
-    }()
+//    let weeklySubtitle: UILabel = {
+//        let label = UILabel()
+//            .with(color: MainConstants.nearBlack)
+//            .with(alignment: .center)
+//            .with(numberOfLines: 1)
+//            .with(fontName: "SFPro-Medium", size: 18)
+//            .with(autolayout: false)
+//        label.text = NSLocalizedString("stats_weekly_subtitle", comment: "Title for weekly plate")
+//        return label
+//    }()
     
     let weeklyStatsView: WeeklyStatsView = {
         let view = WeeklyStatsView()
@@ -189,7 +189,7 @@ class StatsView: UIView {
         }
         statsTableHeightConst?.constant = height
         statsTable.layoutIfNeeded()
-        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 1000 + height)
+        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 1220 + height)
     }
     
     func updateLabel(){
@@ -304,7 +304,7 @@ extension StatsView {
 //        scrollView.addSubview(timeTitle)
         scrollView.addSubview(eventsTitle)
         scrollView.addSubview(materialStatsView)
-        scrollView.addSubview(weeklySubtitle)
+//        scrollView.addSubview(weeklySubtitle)
         scrollView.addSubview(weeklyStatsView)
         scrollView.addSubview(weeklyArticleView)
         scrollView.addSubview(statsTable)
@@ -318,13 +318,20 @@ extension StatsView {
     
     private
     func activateLayouts(){
+        let weightLabelTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 190
+            default: return 250
+            }
+        }()
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: self.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             scrollView.leftAnchor.constraint(equalTo: self.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: self.rightAnchor),
             
-            weightLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 250),
+            weightLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: weightLabelTopConstant),
             weightLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             
             subtitle.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 9),
@@ -338,10 +345,11 @@ extension StatsView {
             materialStatsView.widthAnchor.constraint(equalToConstant: materialStatsView.frame.width),
             materialStatsView.heightAnchor.constraint(equalToConstant: materialStatsView.frame.height),
             
-            weeklySubtitle.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 37),
-            weeklySubtitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
-            weeklyStatsView.topAnchor.constraint(equalTo: weeklySubtitle.bottomAnchor, constant: 7),
+//            weeklySubtitle.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 37),
+//            weeklySubtitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+//
+//            weeklyStatsView.topAnchor.constraint(equalTo: weeklySubtitle.bottomAnchor, constant: 7),
+            weeklyStatsView.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 25),
             weeklyStatsView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             weeklyStatsView.widthAnchor.constraint(equalToConstant: weeklyStatsView.frame.width),
             weeklyStatsView.heightAnchor.constraint(equalToConstant: weeklyStatsView.frame.height),

@@ -30,7 +30,7 @@ protocol mapDelegate {
     func openAddNewPoint()
     func showPaywall()
     func showImageShower(withImages images: [String], open: Int)
-    func showPopUp(title: String, subtitle: String, andButtonText buttonText: String)
+    func showPopUp(title: String, subtitle: String, image: UIImage?, andButtonText buttonText: String)
 }
 
 protocol TopViewDelegate {
@@ -105,6 +105,11 @@ class RecyclingController: UIViewController {
         SetSubviews()
         ActivateLayouts()
         appTransparency.requestPermission()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateMap), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
     func updateDataAfterSettings() {
@@ -144,6 +149,11 @@ class RecyclingController: UIViewController {
                 self.isTopViewHidden = false
             })
         }
+    }
+    
+    @objc
+    func updateMap() {
+        self.mapView.setUserLocation()
     }
 }
 
@@ -275,9 +285,9 @@ extension RecyclingController: mapDelegate {
         present(newVC, animated: true, completion: nil)
     }
     
-    func showPopUp(title: String, subtitle: String, andButtonText buttonText: String) {
+    func showPopUp(title: String, subtitle: String, image: UIImage?, andButtonText buttonText: String) {
         Vibration.soft()
-        self.showPopUp(withTitle: title, subtitle: subtitle, andButtonText: buttonText)
+        self.showPopUp(withTitle: title, subtitle: subtitle, image: image, andButtonText: buttonText)
     }
     
     func showImageShower(withImages images: [String], open: Int) {

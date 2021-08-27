@@ -84,6 +84,11 @@ class PopUpController: UIViewController {
         self.desc.text = desc
         addButton.setTitle(buttonTitle, for: .normal)
     }
+    
+    func setUpImage(_ setImage: UIImage?) {
+        guard let image = setImage else { return }
+        self.image.image = image
+    }
 
     
     @objc

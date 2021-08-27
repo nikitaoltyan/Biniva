@@ -220,4 +220,17 @@ class Server {
             return 
         }
     }
+    
+    func createNewAskForPoints(coordinate: CLLocationCoordinate2D) {
+        let documentData: [String: Any] = [
+            "lat": coordinate.latitude,
+            "lng": coordinate.longitude,
+            "date": Date().onlyDate as Any
+        ]
+        
+        db.collection("ask_for_points").addDocument(data: documentData) { (err) in
+            guard (err == nil) else { return }
+            return
+        }
+    }
 }

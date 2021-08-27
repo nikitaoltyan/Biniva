@@ -128,6 +128,8 @@ class CameraController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         self.session?.stopRunning()
     }
     
@@ -258,6 +260,7 @@ extension CameraController: AVCapturePhotoCaptureDelegate, bottomCameraDelegate 
             guard (self.defaults.getIsCameraUsed()) else {
                 self.popUpDelegate?.showPopUp(title: NSLocalizedString("camera_controller_pop_up_title", comment: "Title for PopUp controller"),
                                               subtitle: NSLocalizedString("camera_controller_pop_up_subtitle",  comment: "Subitle for PopUp controller"),
+                                              image: nil,
                                               andButtonText: NSLocalizedString("camera_controller_pop_up_button",  comment: "Button title for PopUp controller"))
                 self.defaults.setIsCameraUsed(true)
                 return

@@ -240,6 +240,7 @@ class AddPointController: UIViewController {
             self.dismiss(animated: true, completion: nil)
             self.delegate?.showPopUp(title: NSLocalizedString("add_point_added_title", comment: "Title for added points Pop Up"),
                                     subtitle: NSLocalizedString("add_point_added_desc", comment: "Description for added points Pop Up"),
+                                    image: nil,
                                     andButtonText: NSLocalizedString("add_point_added_button", comment: "button title"))
         })
     }

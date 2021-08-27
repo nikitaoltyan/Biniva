@@ -84,7 +84,7 @@
 "paywall_close_button" = "Close";
 "paywall_title" = "Support the Biniva eco-map project";
 "paywall_subtitle_1" = "Help us to evolve and allow more people to recycle garbage";
-"paywall_subtitle_2" = "Open access to advanced weekly statistics";
+"paywall_subtitle_2" = "Get weekly tips about Zero Waste and open access to advanced weekly statistics";
 "paywall_subtitle_3" = "Help us to keep the map working and make the world cleaner!";
 "paywall_annual_title" = "The annual support of the project will allow:";
 "paywall_monthly_title" = "The monthly support of the project will allow:";
@@ -124,7 +124,7 @@
 
 // STATS VIEW
 "stats_subtitle" = "total garbage collected";
-"stats_weekly_subtitle" = "weekly changes:";
+"stats_weekly_subtitle" = "weekly changes";
 "stats_events_title" = "Events";
 "stats_empty_cell_title" = "Nothing has been added yet";
 "stats_empty_cell_subtitle" = "Add the garbage that you throw away, and monitor your consumption here.";
@@ -166,6 +166,12 @@
 "map_pin_error" = "Can't get the address";
 "map_pin_empty_title" = "No one has taken photos yet";
 "map_pin_empty_subtitle" = "Please come back later! We are already working on making all containers easily recognizable.";
+"map_disabled_geolocation_title" = "Geolocation disabled";
+"map_disabled_geolocation_desc" = "Unfortunately, Biniva can't determine your location. To use the map and find waste recycling points nearby, activate geolocation.";
+"map_disabled_geolocation_button" = "Enable";
+"map_ask_for_points_title" = "No points found";
+"map_ask_for_points_desc" = "he Biniva map is under developing, the whole world has not yet been digitized. You can send a request and we will add all recycling points in your city!";
+"map_ask_for_points_button" = "Ask";
 
 
 // ADD POINT VIEW

@@ -13,6 +13,11 @@ protocol bottomPinDelegate {
     func showImageShower(withImages images: [String], open: Int)
 }
 
+protocol askForPointsDelegate {
+    func askForPoints()
+    func close()
+}
+
 
 class MapView: UIView {
     
@@ -30,12 +35,6 @@ class MapView: UIView {
         map.isUserInteractionEnabled = true
         map.showsTraffic = false
         map.delegate = self
-        
-        // There should be user's coordinate.
-        let coordinate = CLLocationCoordinate2D(latitude: 55.794698, longitude: 37.929111)
-        let viewRegion = MKCoordinateRegion(center: coordinate, latitudinalMeters: 800,
-                                            longitudinalMeters: 800)
-        map.setRegion(viewRegion, animated: false)
         
         map.register(DefaultAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         map.register(ClusterPin.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
@@ -68,10 +67,26 @@ class MapView: UIView {
     let paywallView: PaywallButton = {
         let view = PaywallButton()
             .with(autolayout: false)
-        print("paywallView getSubscriptionStatus: \(Defaults.getIsSubscribed())")
         view.isHidden = Defaults.getIsSubscribed()
         return view
     }()
+    
+    let disabledGeolocationView: DisabledGeolocationView = {
+        let view = DisabledGeolocationView()
+            .with(autolayout: false)
+        view.isHidden = Defaults.getGeolocationStatus()
+        return view
+    }()
+    
+    lazy var askForPointsView: AskForPointsView = {
+        let view = AskForPointsView()
+            .with(autolayout: false)
+        view.alpha = 1
+        view.isHidden = true
+        view.delegate = self
+        return view
+    }()
+    
     
     var delegate: mapDelegate?
     var pinAnnotationTopConstraint: NSLayoutConstraint?
@@ -110,11 +125,23 @@ class MapView: UIView {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
 
-            let location: CLLocationCoordinate2D = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 55.754316, longitude: 37.619521)
+            let location: CLLocationCoordinate2D = locationManager.location?.coordinate
+                ?? CLLocationCoordinate2D(latitude: 51.501543, longitude: -0.141420) // London Buckingham Palace
             userLocation = location
             let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
             let region = MKCoordinateRegion(center: location, span: span)
             map.setRegion(region, animated: true)
+            
+            // Diasabling map movement when geolocation disabled.
+            if Defaults.getGeolocationStatus() {
+                self.map.isUserInteractionEnabled = true
+                self.disabledGeolocationView.isHidden = true
+                self.map.alpha = 1
+            } else {
+                self.map.isUserInteractionEnabled = false
+                self.disabledGeolocationView.isHidden = false
+                self.map.alpha = 0.8
+            }
         }
     }
     
@@ -241,7 +268,10 @@ class MapView: UIView {
     
     
     func getGeoPoints() {
-        guard isLoadingDataNecessary() else { return }
+        guard isLoadingDataNecessary() else {
+            self.showAskForPointsView()
+            return
+        }
         print("isLoadingDataNecessary guard pass")
         
         coreDatabase.getPointsInArea(topLeftX: usedTopLeftCoordinate?.longitude ?? 0,
@@ -249,17 +279,20 @@ class MapView: UIView {
                                      topLeftY: usedTopLeftCoordinate?.latitude ?? 0,
                                      bottomLeftY: usedBottomRightCoordinate?.latitude ?? 0,
                                      result: { (points) in
-                                        
+            
             self.addAnnotation(points: points)
-            guard self.isLoadingDataFromServerNecessary() else { return }
+                                        
+            guard self.isLoadingDataFromServerNecessary() else {
+                self.showAskForPointsView()
+                return
+            }
             print("isLoadingDataFromServerNecessary guard pass")
                                         
 //          Now data is loading for all map visible region. But in the future it should be downloaded only for new extended region.
             DispatchQueue.main.async {
-                self.server.getGeoPoints(centerCoordinate: self.map.region.center,
-                                         radius: self.map.currentRadius(withDelta: 0),
-                                         result: { (serverPoint) in
-                    self.addAnnotation(points: serverPoint)
+                self.server.getGeoPoints(centerCoordinate: self.map.region.center, radius: self.map.currentRadius(withDelta: 0), result: { (serverPoints) in
+                    self.addAnnotation(points: serverPoints)
+                    self.showAskForPointsView()
                 })
             }
         })
@@ -288,6 +321,21 @@ class MapView: UIView {
         returnToPositionView.isHidden = true
     }
 
+    private
+    func showAskForPointsView() {
+        guard map.visibleAnnotations().count == 0 else {
+            close()
+            return
+        }
+        guard askForPointsView.alpha != 1 else { return }
+        guard disabledGeolocationView.isHidden == true else { return }
+        
+        askForPointsView.isHidden = false
+        UIView.animate(withDuration: 0.4, animations: {
+            self.askForPointsView.alpha = 1
+        })
+    }
+
 }
 
 
@@ -295,7 +343,7 @@ class MapView: UIView {
 
 
 
-extension MapView: MKMapViewDelegate, bottomPinDelegate {
+extension MapView: MKMapViewDelegate, bottomPinDelegate, askForPointsDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? TrashBin else { return nil }
         let view = DefaultAnnotationView(annotation: annotation, reuseIdentifier: DefaultAnnotationView.ReuseID)
@@ -314,14 +362,14 @@ extension MapView: MKMapViewDelegate, bottomPinDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         // That function is called only when map movement is complited.
         // If user zoomed out in area with more than 17km radius it will zoom in it back.
-        if map.currentRadius(withDelta: 0) > 17000 {
-            let viewRegion = MKCoordinateRegion(center: self.map.region.center, latitudinalMeters: 15800,
-                                                longitudinalMeters: 15800)
+        if map.currentRadius(withDelta: 0) > 27000 {
+            let viewRegion = MKCoordinateRegion(center: self.map.region.center, latitudinalMeters: 24000,
+                                                longitudinalMeters: 24000)
             map.setRegion(viewRegion, animated: true)
         }
         
         // Updateing geoPoints only in the allowed area.
-        if map.currentRadius(withDelta: 0) < 17000 {
+        if map.currentRadius(withDelta: 0) < 27000 {
             getGeoPoints()
             checkReturnLocation()
         }
@@ -329,6 +377,21 @@ extension MapView: MKMapViewDelegate, bottomPinDelegate {
     
     func showImageShower(withImages images: [String], open: Int) {
         delegate?.showImageShower(withImages: images, open: open)
+    }
+    
+    /// Close AskForPoints view
+    func close() {
+        guard askForPointsView.alpha != 0 else { return }
+        UIView.animate(withDuration: 0.4, animations: {
+            self.askForPointsView.alpha = 0
+        }, completion: { _ in
+            self.askForPointsView.isHidden = true
+        })
+    }
+    
+    func askForPoints() {
+        server.createNewAskForPoints(coordinate: map.centerCoordinate)
+        close()
     }
 }
 
@@ -345,6 +408,8 @@ extension MapView {
         self.addSubview(returnToPositionView)
         self.addSubview(paywallView)
         self.addSubview(pinAnnotation)
+        self.addSubview(disabledGeolocationView)
+        self.addSubview(askForPointsView)
         
         pinAnnotation.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:))))
         addPointView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPoint)))
@@ -359,6 +424,12 @@ extension MapView {
             case ...700: return -35
             case 736: return -50
             default: return -60
+            }
+        }()
+        let askForPointsTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 82
+            default: return 110
             }
         }()
         NSLayoutConstraint.activate([
@@ -385,6 +456,16 @@ extension MapView {
             paywallView.bottomAnchor.constraint(equalTo: addPointView.bottomAnchor),
             paywallView.widthAnchor.constraint(equalToConstant: paywallView.frame.width),
             paywallView.heightAnchor.constraint(equalToConstant: paywallView.frame.height),
+            
+            disabledGeolocationView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30),
+            disabledGeolocationView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            disabledGeolocationView.widthAnchor.constraint(equalToConstant: disabledGeolocationView.frame.width),
+            disabledGeolocationView.heightAnchor.constraint(equalToConstant: disabledGeolocationView.frame.height),
+            
+            askForPointsView.topAnchor.constraint(equalTo: self.topAnchor, constant: askForPointsTopConstant),
+            askForPointsView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            askForPointsView.widthAnchor.constraint(equalToConstant: askForPointsView.frame.width),
+            askForPointsView.heightAnchor.constraint(equalToConstant: askForPointsView.frame.height),
         ])
         
         pinAnnotationTopConstraint = pinAnnotation.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)

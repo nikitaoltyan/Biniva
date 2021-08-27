@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 import Adapty
 
 
@@ -21,8 +22,6 @@ class Defaults {
     func setLocation(topLeftCoordinate: CLLocationCoordinate2D,
                      bottomRightCoordinate: CLLocationCoordinate2D) {
         let date = Date().onlyDate
-        print("Date.today(): \(Date.today())")
-        print("setLocation fore date: \(date)")
         let topLeft: [String: Double] = ["latitude": topLeftCoordinate.latitude,
                                          "longitude": topLeftCoordinate.longitude]
         let bottomRight: [String: Double] = ["latitude": bottomRightCoordinate.latitude,
@@ -80,12 +79,13 @@ class Defaults {
     }
     
     func setSubscriptionStatus() {
+//        UserDefaults.standard.setValue(true, forKey: "isSubscriptionActive")
         Adapty.getPurchaserInfo { (purchaserInfo, error) in
             guard error == nil else {
                 UserDefaults.standard.setValue(false, forKey: "isSubscriptionActive")
                 return
             }
-            
+
             // "premium" is an identifier of default access level
             print("Got purchaserInfo: \(purchaserInfo)")
             if purchaserInfo?.accessLevels["premium"]?.isActive == true {
@@ -129,5 +129,30 @@ class Defaults {
             return Date.today()
         }
         return date
+    }
+    
+    func setGeolocationStatus() {
+        let locationManager = CLLocationManager()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+            locationManager.startUpdatingLocation()
+
+            let location: CLLocationCoordinate2D? = locationManager.location?.coordinate
+            
+            if location != nil {
+                print("Geolocation status: true")
+                UserDefaults.standard.setValue(true, forKey: "locationServicesEnabled")
+            } else {
+                print("Geolocation status: false")
+                UserDefaults.standard.setValue(false, forKey: "locationServicesEnabled")
+            }
+        }
+    }
+    
+    
+    /// - returns: returns True if geolocation enabled and False, if geolocation disabled.
+    static
+    func getGeolocationStatus() -> Bool {
+        return UserDefaults.standard.bool(forKey: "locationServicesEnabled")
     }
 }
