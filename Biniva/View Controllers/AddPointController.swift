@@ -347,7 +347,7 @@ extension AddPointController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         Vibration.soft()
-        if (uploadedImages.count < 5) && (collectionView.tag == 1) && (indexPath.row == 0) {
+        if (uploadedImages.count < 4) && (collectionView.tag == 1) && (indexPath.row == 0) {
             showCameraAlert()
         }
         

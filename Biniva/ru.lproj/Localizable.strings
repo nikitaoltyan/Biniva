@@ -142,6 +142,7 @@
 "settings_camers" = "Камера";
 "settings_subscription" = "Подписка";
 "settings_measure" = "Система измерения";
+"settings_sub_stats" = "Полезность поддержки";
 "settings_leave_comment" = "Оставь отзыв";
 "settings_mark_app" = "Оцени приложение";
 

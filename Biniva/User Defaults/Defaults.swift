@@ -83,19 +83,32 @@ class Defaults {
         Adapty.getPurchaserInfo { (purchaserInfo, error) in
             guard error == nil else {
                 UserDefaults.standard.setValue(false, forKey: "isSubscriptionActive")
+                self.setSubscriptionStart(date: nil)
                 return
             }
 
             // "premium" is an identifier of default access level
-            print("Got purchaserInfo: \(purchaserInfo)")
             if purchaserInfo?.accessLevels["premium"]?.isActive == true {
                 // grant access to premium features
                 UserDefaults.standard.setValue(true, forKey: "isSubscriptionActive")
+                let date: Date? = purchaserInfo?.accessLevels["premium"]?.activatedAt
+                self.setSubscriptionStart(date: date)
             } else {
                 UserDefaults.standard.setValue(false, forKey: "isSubscriptionActive")
+                self.setSubscriptionStart(date: nil)
             }
 
         }
+    }
+    
+    private
+    func setSubscriptionStart(date: Date?) {
+        guard date != nil else {
+            UserDefaults.standard.setValue(nil, forKey: "subscriptionStart")
+            return
+        }
+        
+        UserDefaults.standard.setValue(date!, forKey: "subscriptionStart")
     }
     
     static
@@ -103,6 +116,13 @@ class Defaults {
         return UserDefaults.standard.bool(forKey: "isSubscriptionActive")
     }
     
+    static
+    func getSubscriptionStart() -> Date {
+        guard let date = UserDefaults.standard.object(forKey: "subscriptionStart") as? Date else {
+            return Date.today()
+        }
+        return date
+    }
     
     // In general 0 – metric, 1 – imperial
     static

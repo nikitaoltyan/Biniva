@@ -62,7 +62,12 @@ class SettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
             case 0: return 4
-            case 1: return 1
+            case 1:
+                if Defaults.getIsSubscribed() {
+                    return 2 // Return 2 to place SubStats here
+                } else {
+                    return 1
+                }
             case 2: return 3
             default: return 2
         }
@@ -92,9 +97,21 @@ class SettingsController: UITableViewController {
                 cell.image.image = UIImage(systemName: "dollarsign.circle")
                 cell.title.text = NSLocalizedString("settings_subscription", comment: "")
             }
+            
         case 1:
-            cell.image.image = UIImage(systemName: "cube.transparent")
-            cell.title.text = NSLocalizedString("settings_measure", comment: "")
+            if Defaults.getIsSubscribed() {
+                switch indexPath.row {
+                case 0:
+                    cell.image.image = UIImage(systemName: "cube.transparent")
+                    cell.title.text = NSLocalizedString("settings_measure", comment: "")
+                default:
+                    cell.image.image = UIImage(systemName: "crown.fill")
+                    cell.title.text = NSLocalizedString("settings_sub_stats", comment: "")
+                }
+            } else {
+                cell.image.image = UIImage(systemName: "cube.transparent")
+                cell.title.text = NSLocalizedString("settings_measure", comment: "")
+            }
         case 2:
             switch indexPath.row {
             case 0:
@@ -107,6 +124,7 @@ class SettingsController: UITableViewController {
                 cell.image.image = UIImage(systemName: "newspaper")
                 cell.title.text = NSLocalizedString("paywall_conditions", comment: "")
             }
+            
         default:
             switch indexPath.row {
             case 0:
@@ -128,7 +146,16 @@ class SettingsController: UITableViewController {
             default: openAppSettings()
             }
         case 1:
-            openMeasureController()
+            if Defaults.getIsSubscribed() {
+                switch indexPath.row {
+                case 0:
+                    openMeasureController()
+                default:
+                    openSubStatsController()
+                }
+            } else {
+                openMeasureController()
+            }
         case 2:
             switch indexPath.row {
             case 0: openInstagram()
@@ -195,6 +222,14 @@ extension SettingsController {
         // VC should open from the right to left. (?)
         // Or may be fuck this thing for now?
         let newVC = WeightMeasureController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
+        present(newVC, animated: true, completion: nil)
+    }
+    
+    private
+    func openSubStatsController() {
+        let newVC = SubscriptionStatsController()
         newVC.modalPresentationStyle = .overFullScreen
         newVC.modalTransitionStyle = .coverVertical
         present(newVC, animated: true, completion: nil)

@@ -16,6 +16,10 @@ class Measure {
     }
     
     
+    /// Return string with the right measurement style. It defines Kg/Lb automatically.
+    /// - parameter weight: in gramms
+    /// - parameter type: kilograms or gramms
+    /// - returns: A string with weight and proper weight symbol.
     func getMeasurementString(weight: Int, forNeededType type: neededMeasurementType) -> String {
         switch type {
         case .kilogramm:

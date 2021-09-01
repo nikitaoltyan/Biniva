@@ -96,6 +96,7 @@ class MapView: UIView {
     var usedBottomRightCoordinate: CLLocationCoordinate2D?
     var userLocation: CLLocationCoordinate2D?
     var isFirstInteraction: Bool = true
+    var isAskForPointsTapped: Bool = false
 
     var trashBinsID: Set<String> = []
     
@@ -323,6 +324,7 @@ class MapView: UIView {
 
     private
     func showAskForPointsView() {
+        guard !isAskForPointsTapped else { return }
         guard map.visibleAnnotations().count == 0 else {
             close()
             return
@@ -390,6 +392,7 @@ extension MapView: MKMapViewDelegate, bottomPinDelegate, askForPointsDelegate {
     }
     
     func askForPoints() {
+        isAskForPointsTapped = true
         server.createNewAskForPoints(coordinate: map.centerCoordinate)
         close()
     }
