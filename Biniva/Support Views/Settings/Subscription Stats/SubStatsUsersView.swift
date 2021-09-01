@@ -28,7 +28,7 @@ class SubStatsUsersView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: 20)
-        label.text = "пользователей"
+        label.text = NSLocalizedString("sub_stats_users_title", comment: "")
         return label
     }()
     
@@ -89,12 +89,11 @@ class SubStatsUsersView: UIView {
     func update() {
         let usersNumber = function.gainedGarbageNumber()
         number.text = "\(usersNumber)"
-//        time.text = ""
+        time.text = function.getDate()
         
         let width = self.frame.width - 60
         let setWidth = function.calculateUsersBarWidth(current: Double(usersNumber), width: Double(width))
         
-        print("Got number: \(usersNumber) and setWidth: \(setWidth)")
         barWidthConstraint?.constant = CGFloat(setWidth)
         self.layoutIfNeeded()
     }

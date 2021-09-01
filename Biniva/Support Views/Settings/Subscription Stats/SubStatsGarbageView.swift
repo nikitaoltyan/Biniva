@@ -29,7 +29,7 @@ class SubStatsGarbageView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: 20)
-        label.text = "мусора переработано"
+        label.text = NSLocalizedString("sub_stats_garbage_title", comment: "")
         return label
     }()
     
@@ -91,12 +91,11 @@ class SubStatsGarbageView: UIView {
     func update() {
         let weight = function.gainedGarbageNumber()
         number.text = measure.getMeasurementString(weight: weight, forNeededType: .kilogramm)
-//        time.text = ""
+        time.text = function.getDate()
         
         let width = self.frame.width - 60
         let setWidth = function.calculateUsersBarWidth(current: Double(weight), width: Double(width))
         
-        print("Got number: \(weight) and setWidth: \(setWidth)")
         barWidthConstraint?.constant = CGFloat(setWidth)
         self.layoutIfNeeded()
     }

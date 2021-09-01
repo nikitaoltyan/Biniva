@@ -19,15 +19,27 @@ class SubStatsFunctions {
         else { return result }
     }
     
+    func getDate() -> String {
+        let start = Defaults.getSubscriptionStart()
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year], from: start)
+        let year = components.year
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "LLLL"
+        let monthString = dateFormatter.string(from: start)
+        
+        return "\(NSLocalizedString("sub_stats_time_since", comment: "")) \(monthString) \(year ?? 0000)"
+    }
+    
     
     func gainedUserNumber() -> Int {
         let start = Defaults.getSubscriptionStart()
         let today = Date.today()
-        print("start day: \(start)")
-        print("end day: \(today)")
-        
         let daysPassed: Double = Double(daysBetween(start: start, end: today))
         let dailyCame = maxUsers/360.0
+        
         let result = Int(dailyCame.rounded() * daysPassed)
         return result
     }

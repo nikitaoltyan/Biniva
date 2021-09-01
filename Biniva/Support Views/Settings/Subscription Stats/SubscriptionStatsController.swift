@@ -44,7 +44,7 @@ class SubscriptionStatsController: UIViewController {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = "Успехи поддержки"
+        label.text = NSLocalizedString("settings_sub_stats", comment: "")
         return label
     }()
     
@@ -55,7 +55,7 @@ class SubscriptionStatsController: UIViewController {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "Helvetica", size: 16)
-        label.text = "Спасибо, что поддерживаешь проект Biniva подпиской. \n\nМы - это открытое сообщество людей, поддерживающих идеи экологии, разумного потребления и устойчивого развития. Мы стараемся тратить полученные средва не только на поддержание серверов и внедрение новых функций, но и на привлечение новый пользователей. А также их знакомство с переработкой мусора и Zero Waste. \n\nНа этой страницу можно узнать, какой вклад внес лично ты. Следи за своими успехами, ведь ты помогаешь сделать этот мире чище, зеленее и добрее!"
+        label.text = NSLocalizedString("sub_stats_desc", comment: "")
         return label
     }()
 

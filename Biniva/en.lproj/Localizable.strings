@@ -146,7 +146,6 @@
 "settings_leave_comment" = "Leave a comment";
 "settings_mark_app" = "Rate the app";
 
-
 // SETTINGS - LEAVE A COMMENT
 "leave_comment_title" = "Leave your comment";
 "leave_comment_title_placeholder" = "Title";
@@ -158,6 +157,14 @@
 "leave_comment_comment_error_subtitle" = "Please describe your problem or idea. We are waiting for your messages!";
 "leave_comment_error_close" = "Fix it";
 "leave_comment_done_button" = "Done";
+
+// SETTINGS - SUB STATS
+"sub_stats_desc" = "Thanks for supporting Biniva via subscription. \n\nWe are an open community of people who support the ideas of ecology, reasonable consumption and sustainable development. We try to spend the received funds not only on keeping servers alive and implementing new features, but also on attracting new users. And also their acquaintance with garbage recycling and Zero Waste. \n\nOn this page you can find out what contribution you personally made. Watch your progress, because you are helping to make this world cleaner, greener and kinder!";
+"sub_stats_users_title" = "users";
+"sub_stats_garbage_title" = "garbage recycled";
+"sub_stats_time_since" = "since";
+
+
 
 
 // MAP VIEW
