@@ -61,7 +61,7 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-            case 0: return 4
+            case 0: return 5
             case 1:
                 if Defaults.getIsSubscribed() {
                     return 2 // Return 2 to place SubStats here
@@ -93,9 +93,12 @@ class SettingsController: UITableViewController {
             case 2:
                 cell.image.image = UIImage(systemName: "camera.circle")
                 cell.title.text = NSLocalizedString("settings_camers", comment: "")
-            default:
+            case 3:
                 cell.image.image = UIImage(systemName: "dollarsign.circle")
                 cell.title.text = NSLocalizedString("settings_subscription", comment: "")
+            default:
+                cell.image.image = UIImage(systemName: "mappin.and.ellipse")
+                cell.title.text = NSLocalizedString("settings_ask_for_points", comment: "")
             }
             
         case 1:
@@ -143,6 +146,7 @@ class SettingsController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 3: openSubscription()
+            case 4: openAskForPoints()
             default: openAppSettings()
             }
         case 1:
@@ -188,6 +192,15 @@ extension SettingsController: settingsHeaderDelegate {
 
 /// Private functions to extend from TableView
 extension SettingsController {
+    private
+    func openAskForPoints() {
+        let newVC = AskForPointsController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
+        present(newVC, animated: true, completion: nil)
+        return
+    }
+    
     private
     func openAppSettings() {
         if let url = URL(string: UIApplication.openSettingsURLString) {

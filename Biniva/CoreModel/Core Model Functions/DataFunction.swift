@@ -2,17 +2,17 @@
 //  DataFunction.swift
 //  GreenerCo
 //
-//  Created by Nikita Oltyan on 15.04.2021.
+//  Created by Nick Oltyan on 15.04.2021.
 //
 
 import Foundation
 import UIKit
+import CoreLocation
 
 
 class DataFunction {
     
     let database = CoreDataFunction()
-    
     
     func addData(loggedSize: Int, material: Int, date: Date?) {
         guard (date != nil) else { return }
@@ -71,6 +71,12 @@ class DataFunction {
         return data
     }
     
+    private
+    func fetchData() -> [AskForPoints] {
+        let data: [AskForPoints] = database.fetchData()
+        return data
+    }
+    
     
     func fetchWeeklyData(start: Date?, end: Date?) -> [Model] {
         let data: [Model] = database.getWeeklyData(start: start, end: end)
@@ -111,5 +117,73 @@ class DataFunction {
                                 result: { (points) in
                                     result(points)
                                 })
+    }
+    
+    
+    func getAllAskForPoints(completion: @escaping(_ points: [AskForPoints]) -> Void) {
+        let server = Server()
+        let data: [AskForPoints] = fetchData()
+        var returnArray: [AskForPoints] = []
+        
+        for item in data {
+            let daysPassed = daysBetween(start: item.date, end: Date.today())
+            
+            if item.status && daysPassed > 5 { // Status True (Points were added) and more then 6 days passed since that moment
+                deleteAskForPoint(latitude: item.latitude)
+                break
+            }
+            
+            if item.status {
+                returnArray.append(item)
+                completion(returnArray)
+            }
+            
+            if !item.status && daysPassed > 20 {
+                deleteAskForPoint(latitude: item.latitude)
+                break
+            }
+            
+            if !item.status {
+                let coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
+                server.checkGeoPoints(centerCoordinate: coordinate, radius: 3500, result: { (success) in
+                    
+                    if success {
+                        self.changeAskForPointStatus(latitude: item.latitude, setStatus: true)
+                        item.status = true
+                        returnArray.append(item)
+                    } else {
+                        returnArray.append(item)
+                    }
+                    completion(returnArray)
+                })
+            }
+        }
+    }
+    
+    
+    /// Creating row in Database about the asked Point
+    func addAskForPointStatus(latitude: Double, longitude: Double) {
+        database.addAskForPoint(latitude: latitude, longitude: longitude)
+    }
+    
+    /// - parameter latitude: Used like ID for the AskForPoint.
+    /// - parameter status: Which status should function set. True preferable.
+    private
+    func changeAskForPointStatus(latitude: Double, setStatus status: Bool) {
+        database.changeAskForPointStatus(latitude: latitude, setStatus: status)
+    }
+    
+    /// - parameter latitude: Used like ID for the AskForPoint.
+    private
+    func deleteAskForPoint(latitude: Double) {
+        database.deleteAskForPoint(latitude: latitude)
+    }
+    
+    private
+    func daysBetween(start: Date?, end: Date) -> Int {
+        guard let start = start else {
+            return 0
+        }
+        return Calendar.current.dateComponents([.day], from: start, to: end).day!
     }
 }

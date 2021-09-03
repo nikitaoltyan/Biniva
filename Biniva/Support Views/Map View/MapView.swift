@@ -14,7 +14,7 @@ protocol bottomPinDelegate {
 }
 
 protocol askForPointsDelegate {
-    func askForPoints()
+    func askForPoints(showAgain show: Bool)
     func close()
 }
 
@@ -333,7 +333,7 @@ class MapView: UIView {
         guard disabledGeolocationView.isHidden == true else { return }
         
         askForPointsView.isHidden = false
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.askForPointsView.alpha = 1
         })
     }
@@ -391,9 +391,10 @@ extension MapView: MKMapViewDelegate, bottomPinDelegate, askForPointsDelegate {
         })
     }
     
-    func askForPoints() {
-        isAskForPointsTapped = true
-        server.createNewAskForPoints(coordinate: map.centerCoordinate)
+    func askForPoints(showAgain show: Bool) {
+        isAskForPointsTapped = !show
+        coreDatabase.addAskForPointStatus(latitude: map.centerCoordinate.latitude, longitude: map.centerCoordinate.longitude)
+        server.createNewAskForPoints(coordinate: map.centerCoordinate, radius: map.currentRadius(withDelta: 0))
         close()
     }
 }

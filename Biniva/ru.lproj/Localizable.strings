@@ -141,6 +141,7 @@
 "settings_notification" = "Уведомления";
 "settings_camers" = "Камера";
 "settings_subscription" = "Подписка";
+"settings_ask_for_points" = "Запрос точек";
 "settings_measure" = "Система измерения";
 "settings_sub_stats" = "Успехи поддержки";
 "settings_leave_comment" = "Оставь отзыв";
@@ -163,6 +164,12 @@
 "sub_stats_users_title" = "пользователей";
 "sub_stats_garbage_title" = "мусора переработано";
 "sub_stats_time_since" = "с";
+
+// SETTINGS - ASK FOR POINTS
+"ask_for_points_header_desc" = "Здесь ты найдешь свои запросы на добавление новых точек на карту. Мы стараемся действовать оперативно и добавлям их в течении 1-3 дней. После того, как точки будут добавлены, ты увидишь новый статус.";
+"ask_for_points_footer" = "Все точки обновляются автоматически";
+"ask_for_points_added" = "Добавлено";
+"ask_for_points_in_process" = "В работе";
 
 
 

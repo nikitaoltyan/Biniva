@@ -36,6 +36,7 @@ struct Colors {
     static let bottomGradient = UIColor(named: "bottomGradient") ?? UIColor.green
     static let arrowUpRed = UIColor(named: "arrowUpColor") ?? UIColor.red
     static let arrowDownGreen = UIColor(named: "arrowDownColor") ?? UIColor.green
+    static let askForPointInWork = UIColor(named: "askForPointInWork") ?? UIColor.orange
 }
 
 

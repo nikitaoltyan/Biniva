@@ -74,6 +74,31 @@ class Server {
     }
     
     
+    func checkGeoPoints(centerCoordinate center: CLLocationCoordinate2D,
+                        radius: Double, result: @escaping(_ points: Bool) -> Void) {
+        print("checkGeoPoints")
+        let queries = prepareQuery(forLocation: center, withRadius: radius)
+        
+        for query in queries {
+            query.getDocuments(completion: { (snapshot, error) in
+                guard let documents = snapshot?.documents else {
+                    print("Unable to fetch snapshot data. \(String(describing: error))")
+                    result(false)
+                    return
+                }
+                guard documents.count > 0 else {
+                    result(false)
+                    return
+                }
+                
+                print("Gor documents: \(documents)")
+                
+                result(true)
+            })
+        }
+    }
+    
+    
     /// Function for loading array with images URLs.
     /// - parameter pid: PointID in the server.
     /// - parameter result: escaping property with [String] image URLs.
@@ -221,11 +246,12 @@ class Server {
         }
     }
     
-    func createNewAskForPoints(coordinate: CLLocationCoordinate2D) {
+    func createNewAskForPoints(coordinate: CLLocationCoordinate2D, radius: Double) {
         let documentData: [String: Any] = [
             "lat": coordinate.latitude,
             "lng": coordinate.longitude,
-            "date": Date().onlyDate as Any
+            "date": Date().onlyDate as Any,
+            "radius": radius
         ]
         
         db.collection("ask_for_points").addDocument(data: documentData) { (err) in

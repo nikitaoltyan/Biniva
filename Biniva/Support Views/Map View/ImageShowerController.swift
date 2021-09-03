@@ -8,6 +8,8 @@
 import UIKit
 
 class ImageShowerController: UIViewController {
+    
+    let analytics = ServerAnalytics()
 
     lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -44,6 +46,7 @@ class ImageShowerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        analytics.logOpenImage()
         view.backgroundColor = .clear
         setSubviews()
         activateLayouts()

@@ -18,6 +18,10 @@
 		5C0E9D9126DF503F0016B9B0 /* SubStatsUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9D9026DF503F0016B9B0 /* SubStatsUsersView.swift */; };
 		5C0E9D9326DF50500016B9B0 /* SubStatsGarbageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9D9226DF50500016B9B0 /* SubStatsGarbageView.swift */; };
 		5C0E9D9526DFBB6C0016B9B0 /* SubStatsFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9D9426DFBB6C0016B9B0 /* SubStatsFunctions.swift */; };
+		5C0E9D9C26DFDD290016B9B0 /* AskForPoints+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9D9A26DFDD290016B9B0 /* AskForPoints+CoreDataClass.swift */; };
+		5C0E9D9D26DFDD290016B9B0 /* AskForPoints+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9D9B26DFDD290016B9B0 /* AskForPoints+CoreDataProperties.swift */; };
+		5C0E9DA026E0AA900016B9B0 /* AskForPointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9D9F26E0AA900016B9B0 /* AskForPointsController.swift */; };
+		5C0E9DA226E0AB730016B9B0 /* AskForPointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9DA126E0AB730016B9B0 /* AskForPointCell.swift */; };
 		5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */; };
 		5C11455826612B9400F48626 /* MapView+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11455726612B9400F48626 /* MapView+Model.swift */; };
 		5C1BD66025D7CA770002A894 /* Material Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1BD65F25D7CA770002A894 /* Material Defaults.swift */; };
@@ -155,6 +159,8 @@
 		5CF90C57262EA7C100127E4D /* MaterialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF90C56262EA7C100127E4D /* MaterialCell.swift */; };
 		5CFA1A3B25C99BD200587EC5 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1A3A25C99BD200587EC5 /* Defaults.swift */; };
 		5CFB8FB926281BB000372203 /* DataFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB8FB826281BB000372203 /* DataFunction.swift */; };
+		5CFCFC3726E1FEB100065EF7 /* AskForPointsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFCFC3626E1FEB100065EF7 /* AskForPointsHeader.swift */; };
+		5CFCFC3926E1FFBE00065EF7 /* AskForPointsFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFCFC3826E1FFBE00065EF7 /* AskForPointsFooter.swift */; };
 		7AED20DC133BA76E7FD0985E /* Pods_BinivaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4738DE77F4FC6012602D51 /* Pods_BinivaTests.framework */; };
 		964AB812A9DF5A8874E0AB55 /* Pods_Biniva_BinivaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC08C6CA904D3B70E2693E56 /* Pods_Biniva_BinivaUITests.framework */; };
 		EB29D31B284BF2C9CD0D4697 /* Pods_Biniva.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3104BA7F5B996BFFAE13BFE4 /* Pods_Biniva.framework */; };
@@ -195,6 +201,10 @@
 		5C0E9D9026DF503F0016B9B0 /* SubStatsUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubStatsUsersView.swift; sourceTree = "<group>"; };
 		5C0E9D9226DF50500016B9B0 /* SubStatsGarbageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubStatsGarbageView.swift; sourceTree = "<group>"; };
 		5C0E9D9426DFBB6C0016B9B0 /* SubStatsFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubStatsFunctions.swift; sourceTree = "<group>"; };
+		5C0E9D9A26DFDD290016B9B0 /* AskForPoints+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForPoints+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5C0E9D9B26DFDD290016B9B0 /* AskForPoints+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForPoints+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5C0E9D9F26E0AA900016B9B0 /* AskForPointsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointsController.swift; sourceTree = "<group>"; };
+		5C0E9DA126E0AB730016B9B0 /* AskForPointCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointCell.swift; sourceTree = "<group>"; };
 		5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsController.swift; sourceTree = "<group>"; };
 		5C11455726612B9400F48626 /* MapView+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapView+Model.swift"; sourceTree = "<group>"; };
 		5C1BD65F25D7CA770002A894 /* Material Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Material Defaults.swift"; sourceTree = "<group>"; };
@@ -400,6 +410,8 @@
 		5CF90C56262EA7C100127E4D /* MaterialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialCell.swift; sourceTree = "<group>"; };
 		5CFA1A3A25C99BD200587EC5 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		5CFB8FB826281BB000372203 /* DataFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFunction.swift; sourceTree = "<group>"; };
+		5CFCFC3626E1FEB100065EF7 /* AskForPointsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointsHeader.swift; sourceTree = "<group>"; };
+		5CFCFC3826E1FFBE00065EF7 /* AskForPointsFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointsFooter.swift; sourceTree = "<group>"; };
 		65FAE0A43344AF62CA16FBB3 /* Pods-Biniva-BinivaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Biniva-BinivaUITests.debug.xcconfig"; path = "Target Support Files/Pods-Biniva-BinivaUITests/Pods-Biniva-BinivaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC08C6CA904D3B70E2693E56 /* Pods_Biniva_BinivaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Biniva_BinivaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE81C2D922101F0CB84288C /* Pods-Biniva.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Biniva.release.xcconfig"; path = "Target Support Files/Pods-Biniva/Pods-Biniva.release.xcconfig"; sourceTree = "<group>"; };
@@ -480,6 +492,8 @@
 		5C0870312627381F0057E840 /* CoreModel */ = {
 			isa = PBXGroup;
 			children = (
+				5C0E9D9A26DFDD290016B9B0 /* AskForPoints+CoreDataClass.swift */,
+				5C0E9D9B26DFDD290016B9B0 /* AskForPoints+CoreDataProperties.swift */,
 				5C782CD2267A059900A853D5 /* Points+CoreDataClass.swift */,
 				5C782CD3267A059900A853D5 /* Points+CoreDataProperties.swift */,
 				5C087041262739E10057E840 /* Model+CoreDataClass.swift */,
@@ -507,6 +521,17 @@
 				5C0E9D9426DFBB6C0016B9B0 /* SubStatsFunctions.swift */,
 			);
 			path = "Subscription Stats";
+			sourceTree = "<group>";
+		};
+		5C0E9D9E26E0AA6B0016B9B0 /* Ask For Points */ = {
+			isa = PBXGroup;
+			children = (
+				5C0E9D9F26E0AA900016B9B0 /* AskForPointsController.swift */,
+				5C0E9DA126E0AB730016B9B0 /* AskForPointCell.swift */,
+				5CFCFC3626E1FEB100065EF7 /* AskForPointsHeader.swift */,
+				5CFCFC3826E1FFBE00065EF7 /* AskForPointsFooter.swift */,
+			);
+			path = "Ask For Points";
 			sourceTree = "<group>";
 		};
 		5C11455F26612D4100F48626 /* Maps */ = {
@@ -844,6 +869,7 @@
 				5CC4D52F26C03E6B00FC6E30 /* WeightMeasureController.swift */,
 				5C85E69626C81130001661CA /* LeaveCommentController.swift */,
 				5C0E9D8F26DF500E0016B9B0 /* Subscription Stats */,
+				5C0E9D9E26E0AA6B0016B9B0 /* Ask For Points */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1192,7 +1218,9 @@
 				5C96F17526C67F40008FC57F /* ImageShowerController.swift in Sources */,
 				5C087043262739E10057E840 /* Model+CoreDataClass.swift in Sources */,
 				5C6D67F726D77D30000AA376 /* DisabledGeolocationView.swift in Sources */,
+				5C0E9DA226E0AB730016B9B0 /* AskForPointCell.swift in Sources */,
 				5CFB8FB926281BB000372203 /* DataFunction.swift in Sources */,
+				5C0E9D9D26DFDD290016B9B0 /* AskForPoints+CoreDataProperties.swift in Sources */,
 				5C782CD4267A059900A853D5 /* Points+CoreDataClass.swift in Sources */,
 				5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */,
 				5CC8CB1626AB618E006186BE /* TakePhotoView.swift in Sources */,
@@ -1209,12 +1237,15 @@
 				5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */,
 				5CC4D52C26BFA5E400FC6E30 /* Onboarding_6_Cell.swift in Sources */,
 				5C07594626596F17000F64C7 /* MaterialPinCell.swift in Sources */,
+				5C0E9D9C26DFDD290016B9B0 /* AskForPoints+CoreDataClass.swift in Sources */,
+				5C0E9DA026E0AA900016B9B0 /* AskForPointsController.swift in Sources */,
 				5C30470B25C157C800BAFEEF /* TextField Extension.swift in Sources */,
 				5CC8D2F526C3BFA900305FAB /* WeeklyStatsView.swift in Sources */,
 				5C41703726B6FF43008E39CC /* PaywallController.swift in Sources */,
 				5C6CDAAF26596990009F72D8 /* BottomPinView.swift in Sources */,
 				5CC4D53426C163EE00FC6E30 /* Double+Extension.swift in Sources */,
 				5CE08E9526C3C12A002FA542 /* WeeklyStatsCell.swift in Sources */,
+				5CFCFC3926E1FFBE00065EF7 /* AskForPointsFooter.swift in Sources */,
 				5CC8CB1126AAC043006186BE /* AddButtonWithPhotoView.swift in Sources */,
 				5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */,
 				5CC8CB1A26AD514A006186BE /* AlertCameraView.swift in Sources */,
@@ -1248,6 +1279,7 @@
 				5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */,
 				5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */,
 				5CEE8C00266A166700EB6617 /* ClusterPin.swift in Sources */,
+				5CFCFC3726E1FEB100065EF7 /* AskForPointsHeader.swift in Sources */,
 				5CEE555E26BD5F3B00561B76 /* SettingsController.swift in Sources */,
 				5CC12876265FFF8C0097ECDD /* MKMapView+Extension.swift in Sources */,
 				5C08703D262739080057E840 /* Model.xcdatamodeld in Sources */,

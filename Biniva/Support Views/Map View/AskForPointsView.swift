@@ -74,7 +74,7 @@ class AskForPointsView: UIView {
     func askAction() {
         Vibration.soft()
         askButton.tap(completion: { _ in
-            self.delegate?.askForPoints()
+            self.delegate?.askForPoints(showAgain: false)
         })
     }
     

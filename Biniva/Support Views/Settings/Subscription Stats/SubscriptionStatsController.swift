@@ -9,6 +9,8 @@ import UIKit
 
 class SubscriptionStatsController: UIViewController {
     
+    let analytics = ServerAnalytics()
+    
     let scrollView: UIScrollView = {
         let scroll = UIScrollView()
             .with(autolayout: false)
@@ -88,6 +90,7 @@ class SubscriptionStatsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        analytics.openSubscriptionStats()
         view.backgroundColor = Colors.background
         setSubviews()
         activateLayouts()

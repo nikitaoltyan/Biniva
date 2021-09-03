@@ -2,7 +2,7 @@
 //  CoewDataFunction.swift
 //  GreenerCo
 //
-//  Created by Nikita Oltyan on 14.04.2021.
+//  Created by Nick Oltyan on 14.04.2021.
 //
 
 import Foundation
@@ -16,12 +16,13 @@ class CoreDataFunction {
     lazy var managedContext = appDelegate!.persistentContainer.viewContext
     let request: NSFetchRequest<Model> = Model.fetchRequest()
     let pointsRequest: NSFetchRequest<Points> = Points.fetchRequest()
+    let askForPointsRequest: NSFetchRequest<AskForPoints> = AskForPoints.fetchRequest()
     
     
     /// Returns all data in model.
     /// - warning: Only for "Model" Data Model.
     /// - warning: Recreate fetch request for properly fetching updated data.
-    func fetchData() -> [Model]{
+    func fetchData() -> [Model] {
         request.returnsObjectsAsFaults = false
         do {
             return try managedContext.fetch(request)
@@ -35,7 +36,7 @@ class CoreDataFunction {
     /// Returns all data in model.
     /// - warning: Only for "Points" Data Model.
     /// - warning: Recreate fetch request for properly fetching updated data.
-    func fetchData() -> [Points]{
+    func fetchData() -> [Points] {
         pointsRequest.returnsObjectsAsFaults = false
         do {
             return try managedContext.fetch(pointsRequest)
@@ -45,10 +46,23 @@ class CoreDataFunction {
         return []
     }
     
+    /// Returns all data in model.
+    /// - warning: Only for "AskForPoints" Data Model.
+    /// - warning: Recreate fetch request for properly fetching updated data.
+    func fetchData() -> [AskForPoints] {
+        askForPointsRequest.returnsObjectsAsFaults = false
+        do {
+            return try managedContext.fetch(askForPointsRequest)
+        } catch {
+            print(error)
+        }
+        return []
+    }
+    
     
     /// Add given data in model.
     /// - warning: Only for "Model" Data Model.
-    func AddDataToModel(logSize: [Int], logMaterial: [Int], date: Date?){
+    func AddDataToModel(logSize: [Int], logMaterial: [Int], date: Date?) {
         guard (date != nil) else { return }
         guard (logSize.count > 0) else { return }
         guard (logMaterial.count > 0) else { return }
@@ -154,6 +168,7 @@ class CoreDataFunction {
         return
     }
     
+    
     func getWeeklyData(start: Date?, end: Date?) -> [Model] {
         let predicate1 = NSPredicate(format: "day > %@", argumentArray: [start!])
         let predicate2 = NSPredicate(format: "day < %@", argumentArray: [end!])
@@ -167,6 +182,50 @@ class CoreDataFunction {
         } catch {
             print(error)
             return []
+        }
+    }
+    
+    
+    func addAskForPoint(latitude: Double, longitude: Double) {
+        let newStamp = AskForPoints(context: managedContext)
+        newStamp.latitude = latitude
+        newStamp.longitude = longitude
+        newStamp.date = Date.today()
+        newStamp.status = false
+        try! managedContext.save()
+    }
+    
+    /// Change status into True and date for Today when points that were requested were added.
+    /// - warning: date is needed for deleting this entiti after a week.
+    func changeAskForPointStatus(latitude: Double, setStatus status: Bool) {
+        askForPointsRequest.predicate = NSPredicate(format: "latitude = %@", argumentArray: [latitude])
+        askForPointsRequest.returnsObjectsAsFaults = false
+
+        do {
+            let data = try managedContext.fetch(askForPointsRequest)
+            data[0].setValue(status, forKey: "status")
+            data[0].setValue(Date.today(), forKey: "date")
+            try! managedContext.save()
+        } catch {
+            print(error)
+        }
+    }
+    
+    /// Delete one specific row from the AskForPoints Model.
+    func deleteAskForPoint(latitude: Double) {
+        askForPointsRequest.predicate = NSPredicate(format: "latitude = %@", argumentArray: [latitude])
+        askForPointsRequest.returnsObjectsAsFaults = false
+        
+        do {
+            let data = try managedContext.fetch(askForPointsRequest)
+            
+            for item in data {
+                managedContext.delete(item)
+            }
+            
+            try managedContext.save()
+        } catch {
+            print(error)
         }
     }
 }

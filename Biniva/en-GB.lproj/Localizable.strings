@@ -142,6 +142,7 @@
 "settings_notification" = "Notifications";
 "settings_camers" = "Camera";
 "settings_subscription" = "Subscription";
+"settings_ask_for_points" = "Points request";
 "settings_measure" = "Measerement system";
 "settings_sub_stats" = "Donations utility";
 "settings_leave_comment" = "Leave a comment";
@@ -165,6 +166,12 @@
 "sub_stats_garbage_title" = "garbage recycled";
 "sub_stats_time_since" = "since";
 
+// SETTINGS - ASK FOR POINTS
+"ask_for_points_header_desc" = "Here you can find your requests to add new points on the map. We try to be fast, so we add new points within 1-3 days. After points will be added you will see a new statuses.";
+"ask_for_points_footer" = "All points are updated automatically";
+"ask_for_points_added" = "Added";
+"ask_for_points_in_process" = "In process";
+
 
 
 
@@ -178,7 +185,7 @@
 "map_disabled_geolocation_desc" = "Unfortunately, Biniva can't determine your location. To use the map and find waste recycling points nearby, activate geolocation.";
 "map_disabled_geolocation_button" = "Enable";
 "map_ask_for_points_title" = "No points found";
-"map_ask_for_points_desc" = "he Biniva map is under developing, the whole world has not yet been digitized. You can send a request and we will add all recycling points in your city!";
+"map_ask_for_points_desc" = "The Biniva map is under developing, the whole world has not yet been digitized. You can send a request and we will add all recycling points in your city!";
 "map_ask_for_points_button" = "Ask";
 
 
