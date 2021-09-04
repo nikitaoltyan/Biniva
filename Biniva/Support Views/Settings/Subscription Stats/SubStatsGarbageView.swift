@@ -94,7 +94,7 @@ class SubStatsGarbageView: UIView {
         time.text = function.getDate()
         
         let width = self.frame.width - 60
-        let setWidth = function.calculateUsersBarWidth(current: Double(weight), width: Double(width))
+        let setWidth = function.calculateGarbageBarWidth(current: Double(weight), width: Double(width))
         
         barWidthConstraint?.constant = CGFloat(setWidth)
         self.layoutIfNeeded()

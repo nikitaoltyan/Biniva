@@ -435,7 +435,7 @@ class PaywallView: UIView {
                         // successful purchase
                         print("successful purchase")
                         self.defaults.setSubscriptionStatus()
-                        self.closeAction()
+                        self.closeAfterPurchase()
                     } else {
                         print("Error: \(error!)")
                         self.defaults.setSubscriptionStatus()
@@ -450,7 +450,7 @@ class PaywallView: UIView {
                         // successful purchase
                         print("successful purchase")
                         self.defaults.setSubscriptionStatus()
-                        self.closeAction()
+                        self.closeAfterPurchase()
                     } else {
                         print("Error: \(error!)")
                         self.defaults.setSubscriptionStatus()
@@ -472,7 +472,7 @@ class PaywallView: UIView {
                     // TODO
                     print("Subscription restored")
                     self.defaults.setSubscriptionStatus()
-                    self.closeAction()
+                    self.closeAfterPurchase()
                 }
             }
         })
@@ -509,6 +509,12 @@ class PaywallView: UIView {
     func showErrorAlert() {
         delegate?.showAlert(withTitle: NSLocalizedString("paywall_error_title", comment: ""),
                             andSubtitle: NSLocalizedString("paywall_error_subtitle", comment: ""))
+    }
+    
+    private
+    func closeAfterPurchase() {
+        delegate?.shouldPopUpAfterPurchase(shouldShow: true)
+        delegate?.close()
     }
 }
 

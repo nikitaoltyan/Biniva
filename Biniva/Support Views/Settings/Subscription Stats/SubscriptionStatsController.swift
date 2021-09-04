@@ -14,7 +14,7 @@ class SubscriptionStatsController: UIViewController {
     let scrollView: UIScrollView = {
         let scroll = UIScrollView()
             .with(autolayout: false)
-        scroll.contentSize = CGSize(width: MainConstants.screenWidth, height: 1150)
+        scroll.contentSize = CGSize(width: MainConstants.screenWidth, height: 1050)
         scroll.bounces = true
         scroll.showsVerticalScrollIndicator = false
         return scroll
@@ -90,7 +90,7 @@ class SubscriptionStatsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        analytics.openSubscriptionStats()
+        analytics.logOpenSubscriptionStats()
         view.backgroundColor = Colors.background
         setSubviews()
         activateLayouts()

@@ -19,6 +19,12 @@ class SubStatsFunctions {
         else { return result }
     }
     
+    func calculateGarbageBarWidth(current: Double, width: Double) -> Double {
+        let result = (current * width)/maxGarbage
+        if result > width { return width }
+        else { return result }
+    }
+    
     func getDate() -> String {
         let start = Defaults.getSubscriptionStart()
         

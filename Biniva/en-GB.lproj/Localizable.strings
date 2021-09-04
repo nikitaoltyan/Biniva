@@ -103,6 +103,9 @@
 "paywall_error_title" = "An error occurred during the purchase";
 "paywall_error_subtitle" = "Please try again later";
 "paywall_error_close" = "Close";
+"paywall_pop_up_title" = "Thanks a lot!";
+"paywall_pop_up_desc" = "Now Biniva have an opportunity to attract new users and make the world greener. You can track its progrees in the Settings";
+"paywall_pop_up_button" = "Let's go!";
 
 
 

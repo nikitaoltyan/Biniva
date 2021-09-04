@@ -2,7 +2,7 @@
 //  PaywallController.swift
 //  Biniva
 //
-//  Created by Никита Олтян on 01.08.2021.
+//  Created by Nick Oltyan on 01.08.2021.
 //
 
 import UIKit
@@ -10,6 +10,7 @@ import UIKit
 protocol paywallDelegate {
     func close()
     func showAlert(withTitle title: String, andSubtitle subtitle: String)
+    func shouldPopUpAfterPurchase(shouldShow show: Bool)
 }
 
 
@@ -23,6 +24,8 @@ class PaywallController: UIViewController {
         view.delegate = self
         return view
     }()
+    
+    var showPopUpAfterPurchase: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +37,25 @@ class PaywallController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if let firstVC = presentingViewController as? RecyclingController {
-            DispatchQueue.main.async {
-                firstVC.updateDataAfterPaywall()
+        if showPopUpAfterPurchase {
+            if let firstVC = presentingViewController as? RecyclingController {
+                DispatchQueue.main.async {
+                    firstVC.updateDataAfterPaywall()
+                    firstVC.showPopUp(withTitle: NSLocalizedString("paywall_pop_up_title", comment: ""),
+                                      subtitle: NSLocalizedString("paywall_pop_up_desc", comment: ""),
+                                      image: UIImage(named: "subscriprion_pop_up"),
+                                      andButtonText: NSLocalizedString("paywall_pop_up_button", comment: ""))
+                }
+            }
+            
+            if let firstVC = presentingViewController as? SettingsController {
+                DispatchQueue.main.async {
+                    firstVC.tableView.reloadData()
+                    firstVC.showPopUp(withTitle: NSLocalizedString("paywall_pop_up_title", comment: ""),
+                                      subtitle: NSLocalizedString("paywall_pop_up_desc", comment: ""),
+                                      image: UIImage(named: "subscriprion_pop_up"),
+                                      andButtonText: NSLocalizedString("paywall_pop_up_button", comment: ""))
+                }
             }
         }
     }
@@ -55,6 +74,10 @@ extension PaywallController: paywallDelegate {
                                  andSubtitle: subtitle,
                                  closeAction: NSLocalizedString("paywall_error_close", comment: ""))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func shouldPopUpAfterPurchase(shouldShow show: Bool) {
+        showPopUpAfterPurchase = true
     }
 }
 

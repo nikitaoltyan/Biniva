@@ -66,7 +66,11 @@ class ServerAnalytics {
         Analytics.logEvent("open_image", parameters: [:])
     }
     
-    func openSubscriptionStats() {
+    func logOpenSubscriptionStats() {
         Analytics.logEvent("open_subscription_stats", parameters: [:])
+    }
+    
+    func logAskForPoints() {
+        Analytics.logEvent("ask_for_points", parameters: [:])
     }
 }

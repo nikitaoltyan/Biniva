@@ -102,8 +102,8 @@ class RecyclingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Colors.background
-        SetSubviews()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
         appTransparency.requestPermission()
         NotificationCenter.default.addObserver(self, selector: #selector(updateMap), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
@@ -331,15 +331,17 @@ extension RecyclingController: topViewDelegate {
 
 
 extension RecyclingController {
-    func SetSubviews(){
+    private
+    func setSubviews(){
         view.addSubview(recyclingView)
         view.addSubview(statsView)
         view.addSubview(mapView)
         view.addSubview(topView)
         view.addSubview(switcherView)
     }
-        
-    func ActivateLayouts(){
+    
+    private
+    func activateLayouts(){
         let switcherTopConstant: CGFloat = {
             switch MainConstants.screenHeight {
             case ...700: return 20

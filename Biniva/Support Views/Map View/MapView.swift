@@ -395,6 +395,7 @@ extension MapView: MKMapViewDelegate, bottomPinDelegate, askForPointsDelegate {
         isAskForPointsTapped = !show
         coreDatabase.addAskForPointStatus(latitude: map.centerCoordinate.latitude, longitude: map.centerCoordinate.longitude)
         server.createNewAskForPoints(coordinate: map.centerCoordinate, radius: map.currentRadius(withDelta: 0))
+        analytics.logAskForPoints()
         close()
     }
 }
