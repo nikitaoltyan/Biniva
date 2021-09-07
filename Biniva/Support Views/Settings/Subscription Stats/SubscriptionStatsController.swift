@@ -81,7 +81,7 @@ class SubscriptionStatsController: UIViewController {
             .with(color: Colors.darkGrayText)
             .with(alignment: .left)
             .with(numberOfLines: 0)
-            .with(fontName: "Helvetica", size: 14)
+            .with(fontName: "Helvetica", size: 13)
         label.text = NSLocalizedString("paywall_description_2", comment: "Description about used numbers in Plates")
         return label
     }()
@@ -146,7 +146,7 @@ extension SubscriptionStatsController {
             desc.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
             desc.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
             
-            usersView.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 40),
+            usersView.topAnchor.constraint(equalTo: desc.bottomAnchor, constant: 55),
             usersView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             usersView.heightAnchor.constraint(equalToConstant: usersView.frame.height),
             usersView.widthAnchor.constraint(equalToConstant: usersView.frame.width),
@@ -156,7 +156,7 @@ extension SubscriptionStatsController {
             garbageView.heightAnchor.constraint(equalToConstant: garbageView.frame.height),
             garbageView.widthAnchor.constraint(equalToConstant: garbageView.frame.width),
             
-            desc_2.topAnchor.constraint(equalTo: garbageView.bottomAnchor, constant: 30),
+            desc_2.topAnchor.constraint(equalTo: garbageView.bottomAnchor, constant: 45),
             desc_2.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
             desc_2.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
         ])

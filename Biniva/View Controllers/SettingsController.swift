@@ -61,12 +61,12 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-            case 0: return 5
+            case 0: return 4
             case 1:
                 if Defaults.getIsSubscribed() {
-                    return 2 // Return 2 to place SubStats here
+                    return 3 // Return 3 to place SubStats here
                 } else {
-                    return 1
+                    return 2
                 }
             case 2: return 3
             default: return 2
@@ -93,12 +93,9 @@ class SettingsController: UITableViewController {
             case 2:
                 cell.image.image = UIImage(systemName: "camera.circle")
                 cell.title.text = NSLocalizedString("settings_camers", comment: "")
-            case 3:
+            default:
                 cell.image.image = UIImage(systemName: "dollarsign.circle")
                 cell.title.text = NSLocalizedString("settings_subscription", comment: "")
-            default:
-                cell.image.image = UIImage(systemName: "mappin.and.ellipse")
-                cell.title.text = NSLocalizedString("settings_ask_for_points", comment: "")
             }
             
         case 1:
@@ -107,13 +104,22 @@ class SettingsController: UITableViewController {
                 case 0:
                     cell.image.image = UIImage(systemName: "cube.transparent")
                     cell.title.text = NSLocalizedString("settings_measure", comment: "")
-                default:
+                case 1:
                     cell.image.image = UIImage(systemName: "crown.fill")
                     cell.title.text = NSLocalizedString("settings_sub_stats", comment: "")
+                default:
+                    cell.image.image = UIImage(systemName: "mappin.and.ellipse")
+                    cell.title.text = NSLocalizedString("settings_ask_for_points", comment: "")
                 }
             } else {
-                cell.image.image = UIImage(systemName: "cube.transparent")
-                cell.title.text = NSLocalizedString("settings_measure", comment: "")
+                switch indexPath.row {
+                case 0:
+                    cell.image.image = UIImage(systemName: "cube.transparent")
+                    cell.title.text = NSLocalizedString("settings_measure", comment: "")
+                default:
+                    cell.image.image = UIImage(systemName: "mappin.and.ellipse")
+                    cell.title.text = NSLocalizedString("settings_ask_for_points", comment: "")
+                }
             }
         case 2:
             switch indexPath.row {
@@ -142,11 +148,11 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Vibration.soft()
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 3: openSubscription()
-            case 4: openAskForPoints()
             default: openAppSettings()
             }
         case 1:
@@ -154,11 +160,14 @@ class SettingsController: UITableViewController {
                 switch indexPath.row {
                 case 0:
                     openMeasureController()
-                default:
-                    openSubStatsController()
+                case 1: openSubStatsController()
+                default: openAskForPoints()
                 }
             } else {
-                openMeasureController()
+                switch indexPath.row {
+                case 0: openMeasureController()
+                default: openAskForPoints()
+                }
             }
         case 2:
             switch indexPath.row {

@@ -363,15 +363,13 @@ extension MapView: MKMapViewDelegate, bottomPinDelegate, askForPointsDelegate {
 
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         // That function is called only when map movement is complited.
-        // If user zoomed out in area with more than 17km radius it will zoom in it back.
-        if map.currentRadius(withDelta: 0) > 27000 {
-            let viewRegion = MKCoordinateRegion(center: self.map.region.center, latitudinalMeters: 24000,
-                                                longitudinalMeters: 24000)
+        // If user zoomed out in area with more than 37km radius it will zoom in it back.
+        if map.currentRadius(withDelta: 0) > 37000 {
+            let viewRegion = MKCoordinateRegion(center: self.map.region.center, latitudinalMeters: 30000,
+                                                longitudinalMeters: 30000)
             map.setRegion(viewRegion, animated: true)
-        }
-        
-        // Updateing geoPoints only in the allowed area.
-        if map.currentRadius(withDelta: 0) < 27000 {
+        } else {
+            // Updateing geoPoints only in the allowed area.
             getGeoPoints()
             checkReturnLocation()
         }

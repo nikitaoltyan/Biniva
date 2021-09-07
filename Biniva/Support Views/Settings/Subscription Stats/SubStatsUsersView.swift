@@ -87,7 +87,7 @@ class SubStatsUsersView: UIView {
     
     private
     func update() {
-        let usersNumber = function.gainedGarbageNumber()
+        let usersNumber = function.gainedUserNumber()
         number.text = "\(usersNumber)"
         time.text = function.getDate()
         

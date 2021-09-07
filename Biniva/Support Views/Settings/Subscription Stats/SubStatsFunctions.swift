@@ -41,16 +41,18 @@ class SubStatsFunctions {
     
     
     func gainedUserNumber() -> Int {
+        print("gainedUserNumber")
         let start = Defaults.getSubscriptionStart()
         let today = Date.today()
         let daysPassed: Double = Double(daysBetween(start: start, end: today))
         let dailyCame = maxUsers/360.0
         
-        let result = Int(dailyCame.rounded() * daysPassed)
+        let result = Int((dailyCame * daysPassed).rounded())
         return result
     }
     
     func gainedGarbageNumber() -> Int {
+        print("gainedGarbageNumber")
         let start = Defaults.getSubscriptionStart()
         let today = Date.today()
         let daysPassed: Double = Double(daysBetween(start: start, end: today))
