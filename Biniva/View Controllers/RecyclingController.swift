@@ -24,6 +24,7 @@ protocol StatsDelegate {
 protocol RecyclingDelegate {
     func add()
     func openCamera()
+    func openMaterialInfo()
 }
 
 protocol mapDelegate {
@@ -270,6 +271,14 @@ extension RecyclingController: RecyclingDelegate {
         newVC.recyclingDelegate = recyclingView
         newVC.statsDelegate = statsView
         newVC.popUpDelegate = self
+        present(newVC, animated: true, completion: nil)
+    }
+    
+    func openMaterialInfo() {
+        Vibration.soft()
+        let newVC = MaterialsInfoController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
         present(newVC, animated: true, completion: nil)
     }
 }

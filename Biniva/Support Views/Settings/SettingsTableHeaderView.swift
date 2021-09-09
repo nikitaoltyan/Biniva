@@ -36,7 +36,6 @@ class SettingsTableHeaderView: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = NSLocalizedString("settings_title", comment: "")
         return label
     }()
     
@@ -55,6 +54,9 @@ class SettingsTableHeaderView: UIView {
         fatalError()
     }
     
+    func setTitle(title: String) {
+        titleBlack.text = title
+    }
     
     @objc
     func backAction() {

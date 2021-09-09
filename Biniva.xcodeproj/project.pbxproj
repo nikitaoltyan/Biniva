@@ -161,6 +161,9 @@
 		5CFB8FB926281BB000372203 /* DataFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB8FB826281BB000372203 /* DataFunction.swift */; };
 		5CFCFC3726E1FEB100065EF7 /* AskForPointsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFCFC3626E1FEB100065EF7 /* AskForPointsHeader.swift */; };
 		5CFCFC3926E1FFBE00065EF7 /* AskForPointsFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFCFC3826E1FFBE00065EF7 /* AskForPointsFooter.swift */; };
+		5CFD799726E7442F000D04A4 /* MaterialsInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD799626E7442F000D04A4 /* MaterialsInfoController.swift */; };
+		5CFD799A26E7451B000D04A4 /* MaterialInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD799926E7451B000D04A4 /* MaterialInfoCell.swift */; };
+		5CFD799C26E75321000D04A4 /* MaterialInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFD799B26E75321000D04A4 /* MaterialInfoButton.swift */; };
 		7AED20DC133BA76E7FD0985E /* Pods_BinivaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A4738DE77F4FC6012602D51 /* Pods_BinivaTests.framework */; };
 		964AB812A9DF5A8874E0AB55 /* Pods_Biniva_BinivaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC08C6CA904D3B70E2693E56 /* Pods_Biniva_BinivaUITests.framework */; };
 		EB29D31B284BF2C9CD0D4697 /* Pods_Biniva.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3104BA7F5B996BFFAE13BFE4 /* Pods_Biniva.framework */; };
@@ -412,6 +415,9 @@
 		5CFB8FB826281BB000372203 /* DataFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFunction.swift; sourceTree = "<group>"; };
 		5CFCFC3626E1FEB100065EF7 /* AskForPointsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointsHeader.swift; sourceTree = "<group>"; };
 		5CFCFC3826E1FFBE00065EF7 /* AskForPointsFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointsFooter.swift; sourceTree = "<group>"; };
+		5CFD799626E7442F000D04A4 /* MaterialsInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialsInfoController.swift; sourceTree = "<group>"; };
+		5CFD799926E7451B000D04A4 /* MaterialInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialInfoCell.swift; sourceTree = "<group>"; };
+		5CFD799B26E75321000D04A4 /* MaterialInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialInfoButton.swift; sourceTree = "<group>"; };
 		65FAE0A43344AF62CA16FBB3 /* Pods-Biniva-BinivaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Biniva-BinivaUITests.debug.xcconfig"; path = "Target Support Files/Pods-Biniva-BinivaUITests/Pods-Biniva-BinivaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC08C6CA904D3B70E2693E56 /* Pods_Biniva_BinivaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Biniva_BinivaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE81C2D922101F0CB84288C /* Pods-Biniva.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Biniva.release.xcconfig"; path = "Target Support Files/Pods-Biniva/Pods-Biniva.release.xcconfig"; sourceTree = "<group>"; };
@@ -689,6 +695,7 @@
 				5CC8CB1226AAC41E006186BE /* CameraController.swift */,
 				5C41703626B6FF43008E39CC /* PaywallController.swift */,
 				5CEE555D26BD5F3B00561B76 /* SettingsController.swift */,
+				5CFD799626E7442F000D04A4 /* MaterialsInfoController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -708,6 +715,7 @@
 				5CC8CB1426AB615D006186BE /* Camera View */,
 				5C41703826B6FF74008E39CC /* Paywall */,
 				5CEE555F26BD60B400561B76 /* Settings */,
+				5CFD799826E744FD000D04A4 /* Info */,
 			);
 			path = "Support Views";
 			sourceTree = "<group>";
@@ -889,6 +897,15 @@
 				5CFA1A3A25C99BD200587EC5 /* Defaults.swift */,
 			);
 			path = "User Defaults";
+			sourceTree = "<group>";
+		};
+		5CFD799826E744FD000D04A4 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				5CFD799926E7451B000D04A4 /* MaterialInfoCell.swift */,
+				5CFD799B26E75321000D04A4 /* MaterialInfoButton.swift */,
+			);
+			path = Info;
 			sourceTree = "<group>";
 		};
 		69F69B6106B6C3A91B2C84B8 /* Frameworks */ = {
@@ -1220,6 +1237,7 @@
 				5C6D67F726D77D30000AA376 /* DisabledGeolocationView.swift in Sources */,
 				5C0E9DA226E0AB730016B9B0 /* AskForPointCell.swift in Sources */,
 				5CFB8FB926281BB000372203 /* DataFunction.swift in Sources */,
+				5CFD799A26E7451B000D04A4 /* MaterialInfoCell.swift in Sources */,
 				5C0E9D9D26DFDD290016B9B0 /* AskForPoints+CoreDataProperties.swift in Sources */,
 				5C782CD4267A059900A853D5 /* Points+CoreDataClass.swift in Sources */,
 				5C454E2A25B57B2000966991 /* OnboardingController.swift in Sources */,
@@ -1229,6 +1247,7 @@
 				5C64D7952690B6460013F084 /* Location.swift in Sources */,
 				5CCCA14726D38F690027C516 /* WeeklyArticleView.swift in Sources */,
 				5CD556FB26524DFE007B3D06 /* MaterialStatView.swift in Sources */,
+				5CFD799726E7442F000D04A4 /* MaterialsInfoController.swift in Sources */,
 				5CEE8C02266A173200EB6617 /* TrashBin.swift in Sources */,
 				5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */,
 				5C0E9D8E26DF4F670016B9B0 /* SubscriptionStatsController.swift in Sources */,
@@ -1295,6 +1314,7 @@
 				5CFA1A3B25C99BD200587EC5 /* Defaults.swift in Sources */,
 				5C555089269D887800AD8015 /* ArticleTextCell.swift in Sources */,
 				5CAF7D59262C7D0F00249CC6 /* ProgressView.swift in Sources */,
+				5CFD799C26E75321000D04A4 /* MaterialInfoButton.swift in Sources */,
 				5C9F98AB262DDDDD00DFCFEA /* RecyclingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

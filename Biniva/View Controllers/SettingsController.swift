@@ -25,6 +25,7 @@ class SettingsController: UITableViewController {
         
         let headerView: SettingsTableHeaderView = {
             let view = SettingsTableHeaderView()
+            view.setTitle(title: NSLocalizedString("settings_title", comment: ""))
             view.delegate = self
             return view
         }()

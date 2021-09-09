@@ -79,6 +79,18 @@ struct materialColors {
     static let lamp = UIColor(named: "lampColor") ?? .systemPink
 }
 
+struct materialDesc {
+    static let plastic = NSLocalizedString("plastic_info_desc", comment: "Desc for plastic for Info Controller.")
+    static let organic = NSLocalizedString("organic_info_desc", comment: "Desc for organic for Info Controller.")
+    static let paper = NSLocalizedString("paper_info_desc", comment: "Desc for paper for Info Controller.")
+    static let metal = NSLocalizedString("metal_info_desc", comment: "Desc for metal for Info Controller.")
+    static let glass = NSLocalizedString("glass_info_desc", comment: "Desc for glass for Info Controller")
+    static let wood = NSLocalizedString("wood_info_desc", comment: "Desc for wood for Info Controller")
+    static let fabric = NSLocalizedString("fabric_info_desc", comment: "Desc for fabric for Info Controller")
+    static let battery = NSLocalizedString("battery_info_desc", comment: "Desc for battery for Info Controller")
+    static let lamp = NSLocalizedString("lamp_info_desc", comment: "Desc for lamp for Info Controller")
+}
+
 
 struct materials {
     static let name: Array<String> = [

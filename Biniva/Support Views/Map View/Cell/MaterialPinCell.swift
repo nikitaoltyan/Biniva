@@ -32,10 +32,12 @@ class MaterialPinCell: UICollectionViewCell {
 
 
 extension MaterialPinCell{
+    private
     func setSubviews(){
         self.addSubview(image)
     }
     
+    private
     func activateLayouts(){
         NSLayoutConstraint.activate([
             image.centerXAnchor.constraint(equalTo: self.centerXAnchor),

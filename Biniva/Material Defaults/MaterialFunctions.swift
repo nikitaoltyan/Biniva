@@ -183,6 +183,36 @@ class MaterialFunctions {
         default: return useStruct.lamp
         }
     }
+    
+    
+    func titleByRowValue(_ value: Int) -> String {
+        let useArray = materials.name
+//        guard value >= 0 && useArray.count <= materials.name.count+1 else { return "NaN" }
+        return useArray[value]
+    }
+    
+    
+    func descByRowValue(_ value: Int) -> String {
+        let useStruct = materialDesc.self
+        switch value {
+        case 0: return useStruct.plastic
+        case 1: return useStruct.organic
+        case 2: return useStruct.paper
+        case 3: return useStruct.metal
+        case 4: return useStruct.glass
+        case 5: return useStruct.wood
+        case 6: return useStruct.fabric
+        case 7: return useStruct.battery
+        default: return useStruct.lamp
+        }
+    }
+    
+    
+    func imageByRowValue(_ value: Int) -> UIImage? {
+        let useArray = materials.image
+//        guard value >= 0 && useArray.count <= value+1 else { return nil }
+        return useArray[value]
+    }
 }
 
 

@@ -9,8 +9,8 @@ import UIKit
 
 class AddButtonWithPhotoView: UIView {
     
-    lazy var photoView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width/3, height: 48))
+    let photoView: UIView = {
+        let view = UIView()
             .with(autolayout: false)
             .with(cornerRadius: 48/2)
             .with(bgColor: Colors.background)
@@ -36,9 +36,25 @@ class AddButtonWithPhotoView: UIView {
         return label
     }()
     
-    lazy var gradient: CAGradientLayer = {
+    lazy var underCameraView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width/3+7, height: 55))
+            .with(autolayout: false)
+            .with(cornerRadius: 55/2)
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    lazy var addView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width*2/3 - 15, height: 55))
+            .with(autolayout: false)
+            .with(cornerRadius: 55/2)
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    lazy var gradient_1: CAGradientLayer = {
         let gradient = CAGradientLayer()
-        gradient.frame = self.frame
+        gradient.frame = underCameraView.frame
         gradient.colors = [Colors.topGradient.cgColor,
                            Colors.bottomGradient.cgColor]
         gradient.startPoint = CGPoint(x: 1, y: 0)
@@ -46,14 +62,23 @@ class AddButtonWithPhotoView: UIView {
         return gradient
     }()
     
+    lazy var gradient_2: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.frame = addView.frame
+        gradient.colors = [Colors.topGradient.cgColor,
+                           Colors.bottomGradient.cgColor]
+        gradient.startPoint = CGPoint(x: 1, y: 0)
+        gradient.endPoint = CGPoint(x: 0, y: 1)
+        return gradient
+    }()
+    
+    
     var delegate: recyclingButtonDelegate?
 
     
     override init(frame: CGRect) {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth*0.86, height: 55)
         super.init(frame: useFrame)
-        self.layer.cornerRadius = 55/2
-        
         setSubviews()
         activateLayouts()
     }
@@ -65,14 +90,16 @@ class AddButtonWithPhotoView: UIView {
     
     @objc
     func photoAction() {
-        print("photoAction")
-        delegate?.openCamera()
+        underCameraView.tap(completion: { _ in
+            self.delegate?.openCamera()
+        })
     }
     
     @objc
     func addAction() {
-        print("addAction")
-        delegate?.add()
+        addView.tap(completion: { _ in
+            self.delegate?.add()
+        })
     }
 }
 
@@ -80,33 +107,48 @@ class AddButtonWithPhotoView: UIView {
 
 
 
+
 extension AddButtonWithPhotoView {
-    
+    private
     func setSubviews(){
-        self.layer.addSublayer(gradient)
-        self.addSubview(photoView)
-        self.addSubview(label)
-        self.photoView.addSubview(image)
+        self.addSubview(underCameraView)
+        underCameraView.layer.addSublayer(gradient_1)
+        underCameraView.addSubview(photoView)
+        photoView.addSubview(image)
         
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addAction)))
-        self.photoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(photoAction)))
+        self.addSubview(addView)
+        addView.layer.addSublayer(gradient_2)
+        addView.addSubview(label)
+        
+        addView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addAction)))
+        underCameraView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(photoAction)))
     }
     
-    
+    private
     func activateLayouts(){
         NSLayoutConstraint.activate([
-            photoView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 3.5),
-            photoView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            photoView.widthAnchor.constraint(equalToConstant: photoView.frame.width),
-            photoView.heightAnchor.constraint(equalToConstant: photoView.frame.height),
+            underCameraView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            underCameraView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            underCameraView.widthAnchor.constraint(equalToConstant: underCameraView.frame.width),
+            underCameraView.heightAnchor.constraint(equalToConstant: underCameraView.frame.height),
+            
+            photoView.topAnchor.constraint(equalTo: underCameraView.topAnchor, constant: 3.5),
+            photoView.leftAnchor.constraint(equalTo: underCameraView.leftAnchor, constant: 3.5),
+            photoView.rightAnchor.constraint(equalTo: underCameraView.rightAnchor, constant: -3.5),
+            photoView.bottomAnchor.constraint(equalTo: underCameraView.bottomAnchor, constant: -3.5),
             
             image.centerXAnchor.constraint(equalTo: photoView.centerXAnchor),
             image.centerYAnchor.constraint(equalTo: photoView.centerYAnchor),
             image.widthAnchor.constraint(equalToConstant: image.frame.width),
             image.heightAnchor.constraint(equalToConstant: image.frame.height),
             
-            label.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: self.photoView.frame.width/2 - 6),
-            label.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            addView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            addView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            addView.widthAnchor.constraint(equalToConstant: addView.frame.width),
+            addView.heightAnchor.constraint(equalToConstant: addView.frame.height),
+            
+            label.centerXAnchor.constraint(equalTo: addView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: addView.centerYAnchor)
         ])
     }
 }

@@ -238,15 +238,17 @@
 "plastic_title_5" = "Bottle";
 "plastic_title_6" = "Other";
 "plastic_subtitle_1" = "Ordinary";
-"plastic_subtitle_2_metric" = "Volume 0.5 litre";
+"plastic_subtitle_2_metric" = "Volume 0.5 liter";
 "plactic_subtitle_2_imperial" = "Volume 1 pint";
-"plastic_subtitle_3_metric" = "Volume 1 litre";
+"plastic_subtitle_3_metric" = "Volume 1 liter";
 "plactic_subtitle_3_imperial" = "Volume 2 pints";
-"plastic_subtitle_4_metric" = "Volume 1.5 litre";
+"plastic_subtitle_4_metric" = "Volume 1.5 liter";
 "plactic_subtitle_4_imperial" = "Volume 3 pints";
-"plastic_subtitle_5_metric" = "Volume 2 litres";
+"plastic_subtitle_5_metric" = "Volume 2 liter";
 "plactic_subtitle_5_imperial" = "Volume 1/2 gallon";
 "plastic_subtitle_6" = "Wrapper, etc.";
+"plastic_info_desc" = "Bottles of various volumes, cans, wrappers – it's all plastic. But not only that! Disposable tableware, children's toys, even plastic bags – the fragments of total, derivatives of oil. There are many different types of plastic, be careful and recycle everything correctly.";
+
 
 
 // Organic material
@@ -258,17 +260,19 @@
 "organic_subtitle_2" = "Banana";
 "organic_subtitle_3" = "Potato";
 "organic_subtitle_4" = "Organic";
+"organic_info_desc" = "It's various stubs, peelings and scraps. And also bones from fish and meat, if you are fond of it. In general, everything that is of natural origin and perfectly rots without outside help.";
 
 
 // Glass material
 "glass_title_1" = "Glass";
 "glass_title_2" = "Bottle";
 "glass_title_3" = "Other";
-"glass_subtitle_1_metric" = "Volume 0.2 litre";
+"glass_subtitle_1_metric" = "Volume 0.2 liter";
 "glass_subtitle_1_imperial" = "Volume 1/2 pint";
-"glass_subtitle_2_metric" = "Volume 0.5 litre";
+"glass_subtitle_2_metric" = "Volume 0.5 liter";
 "glass_subtitle_2_imperial" = "Volume 1 pint";
 "glass_subtitle_3" = "Glass";
+"glass_info_desc" = "It's bottles of alcohol and lemonade. And just broken glasses. Transparent and multicolored – this is all glass and it can be recycled!";
 
 
 // Paper material
@@ -284,6 +288,7 @@
 "paper_subtitle_4" = "Small cardboard";
 "paper_subtitle_5" = "Big cardboard";
 "paper_subtitle_6" = "Napkin, etc.";
+"paper_info_desc" = "It's napkins, unnecessary papers. And even books (but they will be in a separate section soon).";
 
 
 // Metal material
@@ -291,17 +296,19 @@
 "metal_title_2" = "Wrapper";
 "metal_title_3" = "Can";
 "metal_title_4" = "Other";
-"metal_subtitle_1_metric" = "Length 0,5 metre";
+"metal_subtitle_1_metric" = "Length 0,5 meter";
 "metal_subtitle_1_imperial" = "Length 1.5 foot";
 "metal_subtitle_2" = "Candy";
 "metal_subtitle_3_metric" = "Beer/Cola";
 "metal_subtitle_3_imperial" = "Beer/Cola";
 "metal_subtitle_4" = "Nails, etc.";
+"metal_info_desc" = "Cola cans, foil and wrappers are all metal.";
 
 
 // Wood material
 "wood_title_1" = "Other";
 "wood_subtitle_1" = "Chairs, etc.";
+"wood_info_desc" = "Chairs, tables and other pieces of furniture are all made of wood. And it is necessary to recycle (re-use) them correctly.";
 
 
 // Fabric material
@@ -309,6 +316,7 @@
 "fabric_title_2" = "Other";
 "fabric_subtitle_1" = "Adult";
 "fabric_subtitle_2" = "Fabric";
+"fabric_info_desc" = "Old or simply unnecessary T-shirts, pants and other items of clothing are all fabric (things) that someone really needs.";
 
 
 // Battery material
@@ -318,6 +326,7 @@
 "battery_subtitle_1" = "AAA";
 "battery_subtitle_2" = "AA";
 "battery_subtitle_3" = "Battery";
+"bettery_info_desc" = "Just used batteries and accumulators.";
 
 
 // Lamp material
@@ -325,3 +334,4 @@
 "lamp_title_2" = "Other";
 "lamp_subtitle_1" = "Spiral";
 "lamp_subtitle_2" = "Lamp";
+"lamp_info_desc" = "Just used lamps and LEDs.";

@@ -2,7 +2,7 @@
 //  RecyclingView.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 19.04.2021.
+//  Created by Nick Oltyan on 19.04.2021.
 //
 
 import UIKit
@@ -29,6 +29,12 @@ class RecyclingView: UIView {
         return view
     }()
     
+    let materialInfoButton: MaterialInfoButton = {
+        let view = MaterialInfoButton()
+            .with(autolayout: false)
+        return view
+    }()
+    
     lazy var button: AddButtonWithPhotoView = {
         let view = AddButtonWithPhotoView()
             .with(autolayout: false)
@@ -43,6 +49,7 @@ class RecyclingView: UIView {
     
     var delegate: RecyclingDelegate?
 
+    
     override init(frame: CGRect){
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
         super.init(frame: useFrame)
@@ -53,6 +60,14 @@ class RecyclingView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    
+    @objc private
+    func openMaterialInfo() {
+        materialInfoButton.tap(completion: { _ in
+            self.delegate?.openMaterialInfo()
+        })
     }
 }
 
@@ -87,11 +102,16 @@ extension RecyclingView: recyclingButtonDelegate {
 
 
 extension RecyclingView {
+    private
     func setSubviews(){
         self.addSubview(progressView)
+        self.addSubview(materialInfoButton)
         self.addSubview(button)
+        
+        materialInfoButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openMaterialInfo)))
     }
     
+    private
     func activateLayouts(){
         let buttonBottomConst: CGFloat = {
             if MainConstants.screenHeight == 736 { return -40 }
@@ -103,6 +123,11 @@ extension RecyclingView {
             progressView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 30),
             progressView.widthAnchor.constraint(equalToConstant: progressView.frame.width),
             progressView.heightAnchor.constraint(equalToConstant: progressView.frame.height),
+            
+            materialInfoButton.topAnchor.constraint(equalTo: progressView.topAnchor, constant: 25),
+            materialInfoButton.leftAnchor.constraint(equalTo: progressView.leftAnchor, constant: 40),
+            materialInfoButton.widthAnchor.constraint(equalToConstant: materialInfoButton.frame.width),
+            materialInfoButton.heightAnchor.constraint(equalToConstant: materialInfoButton.frame.height),
             
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: buttonBottomConst),
