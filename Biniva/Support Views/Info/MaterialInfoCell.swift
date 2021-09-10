@@ -52,6 +52,9 @@ class MaterialInfoCell: UITableViewCell {
     }()
     
     
+    var descBottomConstraint: NSLayoutConstraint?
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setSubviews()
@@ -70,6 +73,16 @@ class MaterialInfoCell: UITableViewCell {
         materialImage.image = function.imageByRowValue(material)
         title.text = function.titleByRowValue(material)
         desc.text = function.descByRowValue(material)
+        
+        switch material {
+        case 3:
+            descBottomConstraint?.constant = -70
+        case 7, 8:
+            descBottomConstraint?.constant = -110
+        default:
+            descBottomConstraint?.constant = -25
+        }
+        desc.layoutIfNeeded()
     }
 }
 
@@ -115,5 +128,8 @@ extension MaterialInfoCell {
             materialImage.heightAnchor.constraint(equalToConstant: materialImage.frame.height),
             materialImage.widthAnchor.constraint(equalToConstant: materialImage.frame.width),
         ])
+        
+        descBottomConstraint = desc.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -25)
+        descBottomConstraint?.isActive = true
     }
 }

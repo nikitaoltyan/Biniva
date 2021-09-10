@@ -17,13 +17,14 @@ class MaterialsInfoController: UITableViewController {
         tableView.backgroundColor = Colors.background
         tableView.allowsSelection = false
         tableView.separatorStyle = .singleLine
-//        tableView.estimatedRowHeight = 250
-//        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 250
+        tableView.rowHeight = UITableView.automaticDimension
         
-        let headerView: SettingsTableHeaderView = {
-            let view = SettingsTableHeaderView()
-            view.setTitle(title: "Materials")
+        let headerView: AskForPointsHeader = {
+            let view = AskForPointsHeader()
             view.delegate = self
+            view.set(title: NSLocalizedString("material_info_title", comment: ""),
+                     description: NSLocalizedString("material_info_desc", comment: ""))
             return view
         }()
         
@@ -37,10 +38,6 @@ class MaterialsInfoController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 9
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 330
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

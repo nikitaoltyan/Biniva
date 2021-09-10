@@ -26,6 +26,8 @@ class AskForPointsController: UITableViewController {
         let headerView: AskForPointsHeader = {
             let view = AskForPointsHeader()
             view.delegate = self
+            view.set(title: NSLocalizedString("settings_ask_for_points", comment: ""),
+                     description: NSLocalizedString("ask_for_points_header_desc", comment: ""))
             return view
         }()
         

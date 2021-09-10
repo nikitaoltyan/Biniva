@@ -11,7 +11,7 @@ import UIKit
 class MaterialInfoButton: UIView {
     
     let image: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
             .with(autolayout: false)
         image.image = UIImage(systemName: "questionmark.circle")
         image.tintColor = Colors.darkGrayText
@@ -22,11 +22,6 @@ class MaterialInfoButton: UIView {
         let useFrame: CGRect = CGRect(x: 0, y: 0, width: 50, height: 50)
         super.init(frame: useFrame)
         self.backgroundColor = .clear
-//        self.layer.cornerRadius = 25
-//        self.layer.shadowColor = UIColor.black.withAlphaComponent(0.25).cgColor
-//        self.layer.shadowRadius = 4
-//        self.layer.shadowOpacity = 0.8
-//        self.layer.shadowOffset = CGSize(width: 1, height: 4)
         setSubviews()
         activateLayouts()
     }

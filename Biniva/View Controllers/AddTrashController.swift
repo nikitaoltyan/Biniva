@@ -31,6 +31,12 @@ class AddTrashController: UIViewController {
         return button
     }()
     
+    let materialInfoButton: MaterialInfoButton = {
+        let view = MaterialInfoButton()
+            .with(autolayout: false)
+        return view
+    }()
+    
     let whiteBGView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight * 0.835))
             .with(bgColor: Colors.background)
@@ -115,17 +121,32 @@ class AddTrashController: UIViewController {
     
     @objc
     func close(){
-        if (materialsCollection.isHidden) {
-            addTrashView.isHidden = true
-            materialsCollection.isHidden = false
-            pager.isHidden = false
-            UIView.animate(withDuration: 0.2, animations: {
-                self.backButton.transform = CGAffineTransform(rotationAngle: 0)
-            })
-        } else {
-            dismiss(animated: true, completion: nil)
-        }
+        Vibration.soft()
+        backButton.tap(completion: { _ in
+            if (self.materialsCollection.isHidden) {
+                self.addTrashView.isHidden = true
+                self.materialsCollection.isHidden = false
+                self.pager.isHidden = false
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.backButton.transform = CGAffineTransform(rotationAngle: 0)
+                })
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
     }
+    
+    @objc
+    func openMaterialInfo() {
+        Vibration.soft()
+        materialInfoButton.tap(completion: { _ in
+            let newVC = MaterialsInfoController()
+            newVC.modalPresentationStyle = .overFullScreen
+            newVC.modalTransitionStyle = .coverVertical
+            self.present(newVC, animated: true, completion: nil)
+        })
+    }
+    
     
     @objc
     func add(){
@@ -172,6 +193,10 @@ class AddTrashController: UIViewController {
 
 
 
+
+
+
+
 extension AddTrashController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
@@ -179,6 +204,9 @@ extension AddTrashController: UIScrollViewDelegate {
         pager.currentPage = Int(pageIndex)
     }
 }
+
+
+
 
 
 
@@ -210,9 +238,12 @@ extension AddTrashController: UICollectionViewDelegate, UICollectionViewDataSour
 
 
 
+
+
 extension AddTrashController {
     func setSubviews(){
         view.addSubview(backButton)
+        view.addSubview(materialInfoButton)
         view.addSubview(whiteBGView)
         whiteBGView.addSubview(materialsCollection)
         whiteBGView.addSubview(button)
@@ -220,6 +251,7 @@ extension AddTrashController {
         whiteBGView.addSubview(addTrashView)
         
         backButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(close)))
+        materialInfoButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openMaterialInfo)))
         button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(add)))
     }
     
@@ -238,6 +270,11 @@ extension AddTrashController {
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
             backButton.heightAnchor.constraint(equalToConstant: backButton.frame.height),
             backButton.widthAnchor.constraint(equalToConstant: backButton.frame.width),
+            
+            materialInfoButton.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
+            materialInfoButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
+            materialInfoButton.heightAnchor.constraint(equalToConstant: materialInfoButton.frame.height),
+            materialInfoButton.widthAnchor.constraint(equalToConstant: materialInfoButton.frame.width),
             
             whiteBGView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             whiteBGView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

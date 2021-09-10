@@ -229,6 +229,11 @@
 
 
 
+// MATERIAL INFO CONTROLLER
+"material_info_title" = "Materials";
+"material_info_desc" = "Biniva garbage tracker will help you to understand your consumption. Just write down you daily rabbish. \n\nAnd this list will help you to clearify which garbage belongs to which material.";
+
+
 
 // Plastic material
 "plastic_title_1" = "Package";
@@ -326,7 +331,7 @@
 "battery_subtitle_1" = "AAA";
 "battery_subtitle_2" = "AA";
 "battery_subtitle_3" = "Battery";
-"bettery_info_desc" = "Just used batteries and accumulators.";
+"battery_info_desc" = "Just used batteries and accumulators.";
 
 
 // Lamp material

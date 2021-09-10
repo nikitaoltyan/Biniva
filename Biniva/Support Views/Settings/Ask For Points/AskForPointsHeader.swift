@@ -36,7 +36,6 @@ class AskForPointsHeader: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
-        label.text = NSLocalizedString("settings_ask_for_points", comment: "")
         return label
     }()
     
@@ -48,7 +47,7 @@ class AskForPointsHeader: UIView {
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "Helvetica", size: 16)
-        label.text = NSLocalizedString("ask_for_points_header_desc", comment: "")
+//        label.text = NSLocalizedString("ask_for_points_header_desc", comment: "")
         return label
     }()
     
@@ -56,7 +55,14 @@ class AskForPointsHeader: UIView {
     var delegate: settingsHeaderDelegate?
 
     override init(frame: CGRect) {
-        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 210)
+//        var useFrame = CGRect()
+//        switch MainConstants.screenWidth {
+//        case ...700:
+//            useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 150)
+//        default:
+//            useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 210)
+//        }
+        let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 230)
         super.init(frame: useFrame)
         self.backgroundColor = Colors.background
         setSubviews()
@@ -65,6 +71,12 @@ class AskForPointsHeader: UIView {
 
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    
+    func set(title: String, description desc: String) {
+        titleBlack.text = title
+        self.desc.text = desc
     }
     
     
