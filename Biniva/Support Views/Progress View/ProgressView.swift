@@ -137,7 +137,7 @@ class ProgressView: UIView {
     }
     
     func setLabels(){
-        weightLabel.text = "\(measure.getMeasurementString(weight: currentValue, forNeededType: .kilogramm))"
+        weightLabel.text = measure.getMeasurementString(weight: currentValue, forNeededType: .kilogramm)
         
         if (Double(currentValue) < 1100) { // 1100 gramms as Iconic
             warningTitle.text = NSLocalizedString("progress_view_warning_good", comment: "Title for good results")

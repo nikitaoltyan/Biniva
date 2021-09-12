@@ -2,7 +2,7 @@
 //  MapView.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 20.05.2021.
+//  Created by Nick Oltyan on 20.05.2021.
 //
 
 import UIKit
@@ -21,13 +21,13 @@ protocol askForPointsDelegate {
 
 class MapView: UIView {
     
-    var model = MapView_Model()
+//    var model = MapView_Model()
     let coreDatabase = DataFunction()
     let userDefaults = Defaults()
     let server = Server()
     let analytics = ServerAnalytics()
     let locationManager = CLLocationManager()
-    let mapPreparation = MapPreparation()
+//    let mapPreparation = MapPreparation()
     
     lazy var map: MKMapView = {
         let map = MKMapView()
@@ -88,7 +88,7 @@ class MapView: UIView {
     }()
     
     
-    var delegate: mapDelegate?
+    weak var delegate: mapDelegate?
     var pinAnnotationTopConstraint: NSLayoutConstraint?
     var centerCoordinate: CGFloat = 0
     
@@ -99,7 +99,6 @@ class MapView: UIView {
     var isAskForPointsTapped: Bool = false
 
     var trashBinsID: Set<String> = []
-    
     
     override init(frame: CGRect) {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: MainConstants.screenHeight)
@@ -147,13 +146,34 @@ class MapView: UIView {
     }
     
     /// That function adds Points from [Points] and store theit IDs in Set.
-    func addAnnotation(points: [Points]) {
+//    func addAnnotation(points: [Points]) {
+//        for point in points {
+//            guard trashBinsID.contains(point.id ?? "") == false else { continue }
+//            trashBinsID.insert(point.id ?? "")
+//
+//            let coordinate = CLLocationCoordinate2D(latitude: point.latitude,
+//                                                    longitude: point.longitude)
+//            let bin = TrashBin()
+//            bin.coordinate = coordinate
+//            bin.pointID = point.id
+//
+//            guard let materials = point.materials else { return }
+//            for type in materials {
+//                bin.types.append(type)
+//            }
+//
+//            self.map.addAnnotation(bin)
+//        }
+//    }
+    
+    private
+    func addAnnotation(points: [Point]) {
         for point in points {
             guard trashBinsID.contains(point.id ?? "") == false else { continue }
             trashBinsID.insert(point.id ?? "")
             
-            let coordinate = CLLocationCoordinate2D(latitude: point.latitude,
-                                                    longitude: point.longitude)
+            let coordinate = CLLocationCoordinate2D(latitude: point.lat ?? 0.0,
+                                                    longitude: point.lng ?? 0.0)
             let bin = TrashBin()
             bin.coordinate = coordinate
             bin.pointID = point.id
@@ -209,7 +229,7 @@ class MapView: UIView {
         })
     }
     
-    @objc
+    @objc private
     func openPaywallAction() {
         Vibration.light()
         paywallView.tap(completion: { _ in
@@ -217,7 +237,7 @@ class MapView: UIView {
         })
     }
     
-    
+    private
     func setRightPosition(){
         let middle: CGFloat = (190.0 + 500.0)/2.0
         switch centerCoordinate-pinAnnotation.center.y {
@@ -230,6 +250,7 @@ class MapView: UIView {
         }
     }
     
+    private
     func setClosedPosition() {
         addPointView.isHidden = false
         paywallView.isHidden = Defaults.getIsSubscribed()
@@ -243,6 +264,7 @@ class MapView: UIView {
         })
     }
     
+    private
     func setBottomPosition() {
         self.addPointView.layoutIfNeeded()
         UIView.animate(withDuration: 0.2, animations: {
@@ -257,6 +279,7 @@ class MapView: UIView {
         })
     }
     
+    private
     func setTopPosition() {
         UIView.animate(withDuration: 0.25, animations: {
             self.pinAnnotation.center = CGPoint(x: self.pinAnnotation.center.x,
@@ -268,35 +291,50 @@ class MapView: UIView {
     }
     
     
+//    func getGeoPoints() {
+//        guard isLoadingDataNecessary() else {
+//            self.showAskForPointsView()
+//            return
+//        }
+//        print("isLoadingDataNecessary guard pass")
+//
+//        coreDatabase.getPointsInArea(topLeftX: usedTopLeftCoordinate?.longitude ?? 0,
+//                                     topRightX: usedBottomRightCoordinate?.longitude ?? 0,
+//                                     topLeftY: usedTopLeftCoordinate?.latitude ?? 0,
+//                                     bottomLeftY: usedBottomRightCoordinate?.latitude ?? 0,
+//                                     result: { (points) in
+//
+//            self.addAnnotation(points: points)
+//
+//            guard self.isLoadingDataFromServerNecessary() else {
+//                self.showAskForPointsView()
+//                return
+//            }
+//            print("isLoadingDataFromServerNecessary guard pass")
+//
+////          Now data is loading for all map visible region. But in the future it should be downloaded only for new extended region.
+//            DispatchQueue.main.async {
+//                self.server.getGeoPoints(centerCoordinate: self.map.region.center, radius: self.map.currentRadius(withDelta: 0), result: { (serverPoints) in
+//                    self.addAnnotation(points: serverPoints)
+//                    self.showAskForPointsView()
+//                })
+//            }
+//        })
+//    }
+    
+    private
     func getGeoPoints() {
-        guard isLoadingDataNecessary() else {
-            self.showAskForPointsView()
-            return
-        }
-        print("isLoadingDataNecessary guard pass")
-        
-        coreDatabase.getPointsInArea(topLeftX: usedTopLeftCoordinate?.longitude ?? 0,
-                                     topRightX: usedBottomRightCoordinate?.longitude ?? 0,
-                                     topLeftY: usedTopLeftCoordinate?.latitude ?? 0,
-                                     bottomLeftY: usedBottomRightCoordinate?.latitude ?? 0,
-                                     result: { (points) in
-            
-            self.addAnnotation(points: points)
-                                        
-            guard self.isLoadingDataFromServerNecessary() else {
-                self.showAskForPointsView()
-                return
-            }
-            print("isLoadingDataFromServerNecessary guard pass")
-                                        
-//          Now data is loading for all map visible region. But in the future it should be downloaded only for new extended region.
-            DispatchQueue.main.async {
-                self.server.getGeoPoints(centerCoordinate: self.map.region.center, radius: self.map.currentRadius(withDelta: 0), result: { (serverPoints) in
-                    self.addAnnotation(points: serverPoints)
-                    self.showAskForPointsView()
-                })
-            }
+        server.getGeoPoints(centerCoordinate: self.map.region.center, radius: self.map.currentRadius(withDelta: 0), result: { [weak self] points in
+            print("server.getGeoPoints: \(points.count)")
+            guard let strongSelf = self else { return }
+            strongSelf.addAnnotation(points: points)
         })
+    }
+    
+    
+    private
+    func removeGeoPoints() {
+        removeAllUnvisibleAnnotations()
     }
     
     
@@ -345,7 +383,7 @@ class MapView: UIView {
 
 
 
-extension MapView: MKMapViewDelegate, bottomPinDelegate, askForPointsDelegate {
+extension MapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? TrashBin else { return nil }
         let view = DefaultAnnotationView(annotation: annotation, reuseIdentifier: DefaultAnnotationView.ReuseID)
@@ -366,19 +404,30 @@ extension MapView: MKMapViewDelegate, bottomPinDelegate, askForPointsDelegate {
         // If user zoomed out in area with more than 37km radius it will zoom in it back. (Depriciated)
         
         // Checking currentRadius was depriciated to allow people to zoom-out and make sure, that map is in working condition.
-//        if map.currentRadius(withDelta: 0) > 37000 {
-//            let viewRegion = MKCoordinateRegion(center: self.map.region.center, latitudinalMeters: 30000,
-//                                                longitudinalMeters: 30000)
-//            map.setRegion(viewRegion, animated: true)
-//        } else {
-            // Updateing geoPoints only in the allowed area.
+        if map.currentRadius(withDelta: 0) > 1000000 {
+            let viewRegion = MKCoordinateRegion(center: self.map.region.center,
+                                                latitudinalMeters: 700000,
+                                                longitudinalMeters: 700000)
+            map.setRegion(viewRegion, animated: true)
+        } else {
+//             Updateing geoPoints only in the allowed area.
         
             getGeoPoints()
+            removeGeoPoints()
             checkReturnLocation()
         
-//        }
+        }
     }
     
+}
+
+
+
+
+
+
+
+extension MapView: bottomPinDelegate, askForPointsDelegate {
     func showImageShower(withImages images: [String], open: Int) {
         delegate?.showImageShower(withImages: images, open: open)
     }
@@ -500,257 +549,273 @@ class InstantPanGestureRecognizer: UIPanGestureRecognizer {
 
 extension MapView {
     
-    fileprivate
-    func isLoadingDataNecessary() -> Bool {
-        // Setting initial coordinate after first map movement.
-        guard (isFirstInteraction == false) else {
-            usedTopLeftCoordinate = map.topLeftCoordinate
-            usedBottomRightCoordinate = map.bottomRightCoordinate
-            isFirstInteraction = false
-            getGeoPoints()
-            return false
-        }
-        
-        if (usedTopLeftCoordinate?.longitude ?? 90 > map.topLeftCoordinate.longitude) ||
-            (usedBottomRightCoordinate?.longitude ?? -90 < map.bottomRightCoordinate.longitude) ||
-            (usedTopLeftCoordinate?.latitude ?? -90 < map.topLeftCoordinate.latitude) ||
-            (usedBottomRightCoordinate?.latitude ?? 90 > map.bottomRightCoordinate.latitude) {
-            
-            if map.topLeftCoordinate.longitude < usedTopLeftCoordinate?.longitude ?? 90 {
-                usedTopLeftCoordinate?.longitude = map.topLeftCoordinate.longitude
+    private
+    func removeAllUnvisibleAnnotations() {
+        let visibleRect = map.visibleMapRect
+        let inRectAnnotations = map.annotations(in: visibleRect)
+        print("inRectAnnotations count: \(inRectAnnotations.count)")
+        for annotation: MKAnnotation in map.annotations {
+            if !(inRectAnnotations.contains(annotation as! AnyHashable)) {
+                print("self.removeAnnotation(annotation): \(annotation)")
+                map.removeAnnotation(annotation)
+                
+                if let annotation = annotation as? TrashBin {
+                    self.trashBinsID.subtract([annotation.pointID ?? ""])
+                }
             }
-            
-            if map.topRightCoordinate.longitude > usedBottomRightCoordinate?.longitude ?? -90 {
-                usedBottomRightCoordinate?.longitude = map.topRightCoordinate.longitude
-            }
-            
-            if map.topLeftCoordinate.latitude > usedTopLeftCoordinate?.latitude ?? -90 {
-                usedTopLeftCoordinate?.latitude = map.topLeftCoordinate.latitude
-            }
-            
-            if map.bottomRightCoordinate.latitude < usedBottomRightCoordinate?.latitude ?? 90 {
-                usedBottomRightCoordinate?.latitude = map.bottomRightCoordinate.latitude
-            }
-            
-            return true
-        } else {
-            return false
         }
     }
-    
-    
-    fileprivate
-    func isLoadingDataFromServerNecessary() -> Bool {
-        let (mainTopLeft, mainBottomRight, updateDate) = userDefaults.getLocation()
-        
-        guard (updateDate != nil) else {
-            print("The updateDate is nil")
-            DispatchQueue.main.async {
-                self.updatePoints()
-            }
-            return false
-        }
-        
-        let date = Date().onlyDate
-        
-        guard (mainTopLeft.latitude != 0) && (mainTopLeft.longitude != 0) else {
-            print("The Coordinates probably were not setted")
-            DispatchQueue.main.async {
-                self.updatePoints()
-            }
-            return false
-        }
-        
-        guard (updateDate == date) else {
-            print("The Date not equals Today's Date")
-            DispatchQueue.main.async {
-                self.updatePoints()
-            }
-            return false
-        }
-        
-        if (mainTopLeft.longitude > usedTopLeftCoordinate?.longitude ?? 90) ||
-            (mainBottomRight.longitude < usedBottomRightCoordinate?.longitude ?? -90) ||
-            (mainTopLeft.latitude < usedTopLeftCoordinate?.latitude ?? -90) ||
-            (mainBottomRight.latitude > usedBottomRightCoordinate?.latitude ?? 90) {
-            
-            prepareForFutureExtraction(mainTopLeft: mainTopLeft, mainBottomRight: mainBottomRight)
-            
-            if (mainTopLeft.longitude > usedTopLeftCoordinate?.longitude ?? 90) {
-                userDefaults.updateTopLeftLocationLongitude(withLongitude: usedTopLeftCoordinate?.longitude ?? 90)
-            }
-
-            if (mainBottomRight.longitude < usedBottomRightCoordinate?.longitude ?? -90) {
-                userDefaults.updateBottomRightLocationLongitude(withLongitude: usedBottomRightCoordinate?.longitude ?? -90)
-            }
-
-            if (mainTopLeft.latitude < usedTopLeftCoordinate?.latitude ?? -90) {
-                userDefaults.updateTopLeftLocationLatitude(withLatitude: usedTopLeftCoordinate?.latitude ?? -90)
-            }
-
-            if (mainBottomRight.latitude > usedBottomRightCoordinate?.latitude ?? 90) {
-                userDefaults.updateBottomRightLocationLatitude(withLatitude: usedBottomRightCoordinate?.latitude ?? 90)
-            }
-            
-            print("Default area was extended")
-            
-            // Return false to depriciate server activity while testing.
+//    fileprivate
+//    func isLoadingDataNecessary() -> Bool {
+//        // Setting initial coordinate after first map movement.
+//        guard (isFirstInteraction == false) else {
+//            usedTopLeftCoordinate = map.topLeftCoordinate
+//            usedBottomRightCoordinate = map.bottomRightCoordinate
+//            isFirstInteraction = false
+//            getGeoPoints()
 //            return false
-            return true
-        } else {
-            return false
-        }
-        
-    }
+//        }
+//
+//        if (usedTopLeftCoordinate?.longitude ?? 90 > map.topLeftCoordinate.longitude) ||
+//            (usedBottomRightCoordinate?.longitude ?? -90 < map.bottomRightCoordinate.longitude) ||
+//            (usedTopLeftCoordinate?.latitude ?? -90 < map.topLeftCoordinate.latitude) ||
+//            (usedBottomRightCoordinate?.latitude ?? 90 > map.bottomRightCoordinate.latitude) {
+//
+//            if map.topLeftCoordinate.longitude < usedTopLeftCoordinate?.longitude ?? 90 {
+//                usedTopLeftCoordinate?.longitude = map.topLeftCoordinate.longitude
+//            }
+//
+//            if map.topRightCoordinate.longitude > usedBottomRightCoordinate?.longitude ?? -90 {
+//                usedBottomRightCoordinate?.longitude = map.topRightCoordinate.longitude
+//            }
+//
+//            if map.topLeftCoordinate.latitude > usedTopLeftCoordinate?.latitude ?? -90 {
+//                usedTopLeftCoordinate?.latitude = map.topLeftCoordinate.latitude
+//            }
+//
+//            if map.bottomRightCoordinate.latitude < usedBottomRightCoordinate?.latitude ?? 90 {
+//                usedBottomRightCoordinate?.latitude = map.bottomRightCoordinate.latitude
+//            }
+//
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
     
     
-    fileprivate
-    func updatePoints() {
-        print("updatePoints")
-        // 0.01 = 1.11 km.
-        let delta: Double = 0.04 // Around 4.44 km. So the searching area is around 16 km^2
-        let setTopLeftCoordinate = CLLocationCoordinate2D(latitude: self.map.region.center.latitude + delta,
-                                                          longitude: self.map.region.center.longitude - delta)
-        let setBottomRightCoordinate = CLLocationCoordinate2D(latitude: self.map.region.center.latitude - delta,
-                                                              longitude: self.map.region.center.longitude + delta)
-        
-        userDefaults.setLocation(topLeftCoordinate: setTopLeftCoordinate,
-                                 bottomRightCoordinate: setBottomRightCoordinate)
-        
-        coreDatabase.getPointsInArea(topLeftX: setTopLeftCoordinate.longitude,
-                                     topRightX: setBottomRightCoordinate.longitude,
-                                     topLeftY: setTopLeftCoordinate.latitude,
-                                     bottomLeftY: setBottomRightCoordinate.latitude,
-                                     result: { (points) in
-                                        
-            self.addAnnotation(points: points)
-                                        
-            DispatchQueue.main.async {
-                self.server.getGeoPoints(centerCoordinate: self.map.region.center,
-                                         radius: self.map.currentRadius(withDelta: 4440),
-                                         result: { (serverPoint) in
-                    self.addAnnotation(points: serverPoint)
-                })
-            }
-        })
-    }
+//    fileprivate
+//    func isLoadingDataFromServerNecessary() -> Bool {
+//        let (mainTopLeft, mainBottomRight, updateDate) = userDefaults.getLocation()
+//
+//        guard (updateDate != nil) else {
+//            print("The updateDate is nil")
+//            DispatchQueue.main.async {
+//                self.updatePoints()
+//            }
+//            return false
+//        }
+//
+//        let date = Date().onlyDate
+//
+//        guard (mainTopLeft.latitude != 0) && (mainTopLeft.longitude != 0) else {
+//            print("The Coordinates probably were not setted")
+//            DispatchQueue.main.async {
+//                self.updatePoints()
+//            }
+//            return false
+//        }
+//
+//        guard (updateDate == date) else {
+//            print("The Date not equals Today's Date")
+//            DispatchQueue.main.async {
+//                self.updatePoints()
+//            }
+//            return false
+//        }
+//
+//        if (mainTopLeft.longitude > usedTopLeftCoordinate?.longitude ?? 90) ||
+//            (mainBottomRight.longitude < usedBottomRightCoordinate?.longitude ?? -90) ||
+//            (mainTopLeft.latitude < usedTopLeftCoordinate?.latitude ?? -90) ||
+//            (mainBottomRight.latitude > usedBottomRightCoordinate?.latitude ?? 90) {
+//
+//            prepareForFutureExtraction(mainTopLeft: mainTopLeft, mainBottomRight: mainBottomRight)
+//
+//            if (mainTopLeft.longitude > usedTopLeftCoordinate?.longitude ?? 90) {
+//                userDefaults.updateTopLeftLocationLongitude(withLongitude: usedTopLeftCoordinate?.longitude ?? 90)
+//            }
+//
+//            if (mainBottomRight.longitude < usedBottomRightCoordinate?.longitude ?? -90) {
+//                userDefaults.updateBottomRightLocationLongitude(withLongitude: usedBottomRightCoordinate?.longitude ?? -90)
+//            }
+//
+//            if (mainTopLeft.latitude < usedTopLeftCoordinate?.latitude ?? -90) {
+//                userDefaults.updateTopLeftLocationLatitude(withLatitude: usedTopLeftCoordinate?.latitude ?? -90)
+//            }
+//
+//            if (mainBottomRight.latitude > usedBottomRightCoordinate?.latitude ?? 90) {
+//                userDefaults.updateBottomRightLocationLatitude(withLatitude: usedBottomRightCoordinate?.latitude ?? 90)
+//            }
+//
+//            print("Default area was extended")
+//
+//            // Return false to depriciate server activity while testing.
+////            return false
+//            return true
+//        } else {
+//            return false
+//        }
+//
+//    }
+//
+//
+//    fileprivate
+//    func updatePoints() {
+//        print("updatePoints")
+//        // 0.01 = 1.11 km.
+//        let delta: Double = 0.04 // Around 4.44 km. So the searching area is around 16 km^2
+//        let setTopLeftCoordinate = CLLocationCoordinate2D(latitude: self.map.region.center.latitude + delta,
+//                                                          longitude: self.map.region.center.longitude - delta)
+//        let setBottomRightCoordinate = CLLocationCoordinate2D(latitude: self.map.region.center.latitude - delta,
+//                                                              longitude: self.map.region.center.longitude + delta)
+//
+//        userDefaults.setLocation(topLeftCoordinate: setTopLeftCoordinate,
+//                                 bottomRightCoordinate: setBottomRightCoordinate)
+//
+//        coreDatabase.getPointsInArea(topLeftX: setTopLeftCoordinate.longitude,
+//                                     topRightX: setBottomRightCoordinate.longitude,
+//                                     topLeftY: setTopLeftCoordinate.latitude,
+//                                     bottomLeftY: setBottomRightCoordinate.latitude,
+//                                     result: { (points) in
+//
+//            self.addAnnotation(points: points)
+//
+//            DispatchQueue.main.async {
+//                self.server.getGeoPoints(centerCoordinate: self.map.region.center,
+//                                         radius: self.map.currentRadius(withDelta: 4440),
+//                                         result: { (serverPoint) in
+//                    self.addAnnotation(points: serverPoint)
+//                })
+//            }
+//        })
+//    }
     
-    
-    fileprivate
-    func prepareForFutureExtraction(mainTopLeft: CLLocationCoordinate2D, mainBottomRight: CLLocationCoordinate2D) {
-        print("prepareForFutureExtraction")
-
-        let topLeftLongitudeDelta = usedTopLeftCoordinate!.longitude - mainTopLeft.longitude // If used area inside, then >0
-        let topLeftLatitudeDelta = usedTopLeftCoordinate!.latitude - mainTopLeft.latitude // If used area inside, then <0
-        let bottomRightLongitudeDelta = usedBottomRightCoordinate!.longitude - mainBottomRight.longitude // If used area inside, then <0
-        let bottomRightLatitudeDelta = usedBottomRightCoordinate!.latitude - mainBottomRight.latitude // If used area inside, then >0
-        
-        let conditions: [Bool] = [
-            isTopLeftLongitudeInside(delta: topLeftLongitudeDelta),
-            isTopLeftLatitudeInside(delta: topLeftLatitudeDelta),
-            isBottomRightLongitudeInside(delta: bottomRightLongitudeDelta),
-            isBottomRightLatitudeInside(delta: bottomRightLatitudeDelta)
-        ]
-        
-        var rectangles: [(CLLocationCoordinate2D, CLLocationCoordinate2D)] = []
-        
-        for (item, condition) in conditions.enumerated() {
-            print(condition)
-            
-            switch item {
-            case 0:
-                if (condition) {
-                    rectangles.append((CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: mainTopLeft.longitude),
-                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: mainTopLeft.longitude)))
-                } else {
-                    rectangles.append((CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: usedTopLeftCoordinate!.longitude),
-                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: mainTopLeft.longitude)))
-                }
-                
-            case 1:
-                let (lastTopLeft, _) = rectangles[0]
-                if (condition) {
-                    rectangles.append((CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: lastTopLeft.longitude),
-                                       CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: mainBottomRight.longitude)))
-                } else {
-                    rectangles.append((CLLocationCoordinate2D(latitude: usedTopLeftCoordinate!.latitude, longitude: lastTopLeft.longitude),
-                                       CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: mainBottomRight.longitude)))
-                }
-                
-            case 2:
-                let (lastTopLeft, _) = rectangles[1]
-                if (condition) {
-                    rectangles.append((CLLocationCoordinate2D(latitude: lastTopLeft.latitude, longitude: mainBottomRight.longitude),
-                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: mainBottomRight.longitude)))
-                } else {
-                    rectangles.append((CLLocationCoordinate2D(latitude: lastTopLeft.latitude, longitude: mainBottomRight.longitude),
-                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: usedBottomRightCoordinate!.longitude)))
-                }
-                
-            default:
-                let (lastTopLeft, _) = rectangles[0]
-                let (_, lastBottomRight) = rectangles[2]
-                if (condition) {
-                    rectangles.append((CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: lastTopLeft.longitude),
-                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: lastBottomRight.longitude)))
-                } else {
-                    rectangles.append((CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: lastTopLeft.longitude),
-                                       CLLocationCoordinate2D(latitude: usedBottomRightCoordinate!.latitude, longitude: lastBottomRight.longitude)))
-                }
-            }
-        }
-        
-        var resultArray: [(CLLocationCoordinate2D, CLLocationCoordinate2D)] = []
-        for (item, rectangle) in rectangles.enumerated() {
-            switch item {
-            case 0, 2:
-                let (topLeft, bottomRight) = rectangle
-                if topLeft.longitude != bottomRight.longitude {
-                    resultArray.append(rectangle)
-                }
-                
-            default:
-                let (topLeft, bottomRight) = rectangle
-                if topLeft.latitude != bottomRight.latitude {
-                    resultArray.append(rectangle)
-                }
-            }
-        }
-        rectangles.removeAll()
-        
-        print("Got rectangles:")
-        for rect in resultArray {
-            print(rect)
-        }
-    }
-    
-    
-    func isTopLeftLongitudeInside(delta: Double) -> Bool {
-        switch delta {
-            case 0...: return true
-            default: return false
-        }
-    }
-    
-    func isTopLeftLatitudeInside(delta: Double) -> Bool {
-        switch delta {
-        case ...0: return true
-            default: return false
-        }
-    }
-    
-    func isBottomRightLongitudeInside(delta: Double) -> Bool {
-        switch delta {
-            case ...0: return true
-            default: return false
-        }
-    }
-    
-    func isBottomRightLatitudeInside(delta: Double) -> Bool {
-        switch delta {
-            case 0...: return true
-            default: return false
-        }
-    }
+//
+//    fileprivate
+//    func prepareForFutureExtraction(mainTopLeft: CLLocationCoordinate2D, mainBottomRight: CLLocationCoordinate2D) {
+//        print("prepareForFutureExtraction")
+//
+//        let topLeftLongitudeDelta = usedTopLeftCoordinate!.longitude - mainTopLeft.longitude // If used area inside, then >0
+//        let topLeftLatitudeDelta = usedTopLeftCoordinate!.latitude - mainTopLeft.latitude // If used area inside, then <0
+//        let bottomRightLongitudeDelta = usedBottomRightCoordinate!.longitude - mainBottomRight.longitude // If used area inside, then <0
+//        let bottomRightLatitudeDelta = usedBottomRightCoordinate!.latitude - mainBottomRight.latitude // If used area inside, then >0
+//
+//        let conditions: [Bool] = [
+//            isTopLeftLongitudeInside(delta: topLeftLongitudeDelta),
+//            isTopLeftLatitudeInside(delta: topLeftLatitudeDelta),
+//            isBottomRightLongitudeInside(delta: bottomRightLongitudeDelta),
+//            isBottomRightLatitudeInside(delta: bottomRightLatitudeDelta)
+//        ]
+//
+//        var rectangles: [(CLLocationCoordinate2D, CLLocationCoordinate2D)] = []
+//
+//        for (item, condition) in conditions.enumerated() {
+//            print(condition)
+//
+//            switch item {
+//            case 0:
+//                if (condition) {
+//                    rectangles.append((CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: mainTopLeft.longitude),
+//                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: mainTopLeft.longitude)))
+//                } else {
+//                    rectangles.append((CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: usedTopLeftCoordinate!.longitude),
+//                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: mainTopLeft.longitude)))
+//                }
+//
+//            case 1:
+//                let (lastTopLeft, _) = rectangles[0]
+//                if (condition) {
+//                    rectangles.append((CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: lastTopLeft.longitude),
+//                                       CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: mainBottomRight.longitude)))
+//                } else {
+//                    rectangles.append((CLLocationCoordinate2D(latitude: usedTopLeftCoordinate!.latitude, longitude: lastTopLeft.longitude),
+//                                       CLLocationCoordinate2D(latitude: mainTopLeft.latitude, longitude: mainBottomRight.longitude)))
+//                }
+//
+//            case 2:
+//                let (lastTopLeft, _) = rectangles[1]
+//                if (condition) {
+//                    rectangles.append((CLLocationCoordinate2D(latitude: lastTopLeft.latitude, longitude: mainBottomRight.longitude),
+//                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: mainBottomRight.longitude)))
+//                } else {
+//                    rectangles.append((CLLocationCoordinate2D(latitude: lastTopLeft.latitude, longitude: mainBottomRight.longitude),
+//                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: usedBottomRightCoordinate!.longitude)))
+//                }
+//
+//            default:
+//                let (lastTopLeft, _) = rectangles[0]
+//                let (_, lastBottomRight) = rectangles[2]
+//                if (condition) {
+//                    rectangles.append((CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: lastTopLeft.longitude),
+//                                       CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: lastBottomRight.longitude)))
+//                } else {
+//                    rectangles.append((CLLocationCoordinate2D(latitude: mainBottomRight.latitude, longitude: lastTopLeft.longitude),
+//                                       CLLocationCoordinate2D(latitude: usedBottomRightCoordinate!.latitude, longitude: lastBottomRight.longitude)))
+//                }
+//            }
+//        }
+//
+//        var resultArray: [(CLLocationCoordinate2D, CLLocationCoordinate2D)] = []
+//        for (item, rectangle) in rectangles.enumerated() {
+//            switch item {
+//            case 0, 2:
+//                let (topLeft, bottomRight) = rectangle
+//                if topLeft.longitude != bottomRight.longitude {
+//                    resultArray.append(rectangle)
+//                }
+//
+//            default:
+//                let (topLeft, bottomRight) = rectangle
+//                if topLeft.latitude != bottomRight.latitude {
+//                    resultArray.append(rectangle)
+//                }
+//            }
+//        }
+//        rectangles.removeAll()
+//
+//        print("Got rectangles:")
+//        for rect in resultArray {
+//            print(rect)
+//        }
+//    }
+//
+//
+//    func isTopLeftLongitudeInside(delta: Double) -> Bool {
+//        switch delta {
+//            case 0...: return true
+//            default: return false
+//        }
+//    }
+//
+//    func isTopLeftLatitudeInside(delta: Double) -> Bool {
+//        switch delta {
+//        case ...0: return true
+//            default: return false
+//        }
+//    }
+//
+//    func isBottomRightLongitudeInside(delta: Double) -> Bool {
+//        switch delta {
+//            case ...0: return true
+//            default: return false
+//        }
+//    }
+//
+//    func isBottomRightLatitudeInside(delta: Double) -> Bool {
+//        switch delta {
+//            case 0...: return true
+//            default: return false
+//        }
+//    }
     
 }

@@ -9,6 +9,8 @@ import UIKit
 
 class Onboarding_6_Cell: UICollectionViewCell {
     
+    let measure = Measure()
+    
     let slideNumber: UILabel = {
         let label = UILabel()
             .with(autolayout: false)
@@ -90,6 +92,23 @@ class Onboarding_6_Cell: UICollectionViewCell {
         return label
     }()
     
+    let weightLabel: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 40
+            default: return 48
+            }
+        }()
+        let label = UILabel()
+            .with(color: MainConstants.nearBlack)
+            .with(alignment: .center)
+            .with(numberOfLines: 1)
+            .with(fontName: "SFPro-Bold", size: textSize)
+            .with(autolayout: false)
+        label.text = "0.0"
+        return label
+    }()
+    
     let imperialPlateView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth/2-30, height: 60))
             .with(autolayout: false)
@@ -160,7 +179,8 @@ class Onboarding_6_Cell: UICollectionViewCell {
             return
         }
         Vibration.soft()
-        choosedType = .metric
+        Defaults.setWeightSystem(typeOfSystem: 0) // Metric
+        weightLabel.text = measure.getMeasurementString(weight: 1100, forNeededType: .kilogramm)
         UIView.animate(withDuration: 0.1, animations: {
             self.metricPlateView.layer.borderWidth = 3
             self.imperialPlateView.layer.borderWidth = 0
@@ -178,7 +198,8 @@ class Onboarding_6_Cell: UICollectionViewCell {
             return
         }
         Vibration.soft()
-        choosedType = .imperial
+        Defaults.setWeightSystem(typeOfSystem: 1) // Imperial
+        weightLabel.text = measure.getMeasurementString(weight: 1100, forNeededType: .kilogramm)
         UIView.animate(withDuration: 0.1, animations: {
             self.imperialPlateView.layer.borderWidth = 3
             self.metricPlateView.layer.borderWidth = 0
@@ -194,11 +215,9 @@ class Onboarding_6_Cell: UICollectionViewCell {
     func buttonAction() {
         guard (isButtonActive) else { return }
         print("Finish")
-        switch choosedType {
-            case .metric: Defaults.setWeightSystem(typeOfSystem: 0)
-            default: Defaults.setWeightSystem(typeOfSystem: 1) // Imperial
-        }
-        delegate?.finish()
+        button.tap(completion: { _ in
+            self.delegate?.finish()
+        })
     }
 }
 
@@ -215,6 +234,7 @@ extension Onboarding_6_Cell {
         self.addSubview(titleBlack)
         self.addSubview(titleGreen)
         
+        self.addSubview(weightLabel)
         self.addSubview(metricPlateView)
         self.addSubview(imperialPlateView)
         
@@ -248,11 +268,19 @@ extension Onboarding_6_Cell {
             }
         }()
         
+        let weightTopConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 50
+            case 736: return 60
+            default: return 70
+            }
+        }()
+        
         let plateTopConstant: CGFloat = {
             switch MainConstants.screenHeight {
-            case ...700: return 80
-            case 736: return 90
-            default: return 100
+            case ...700: return 50
+            case 736: return 60
+            default: return 70
             }
         }()
         
@@ -276,7 +304,10 @@ extension Onboarding_6_Cell {
             titleGreen.leftAnchor.constraint(equalTo: titleBlack.leftAnchor),
             titleGreen.rightAnchor.constraint(equalTo: titleBlack.rightAnchor),
             
-            metricPlateView.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: plateTopConstant),
+            weightLabel.topAnchor.constraint(equalTo: titleGreen.bottomAnchor, constant: weightTopConstant),
+            weightLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            metricPlateView.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: plateTopConstant),
             metricPlateView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
             metricPlateView.widthAnchor.constraint(equalToConstant: metricPlateView.frame.width),
             metricPlateView.heightAnchor.constraint(equalToConstant: metricPlateView.frame.height),

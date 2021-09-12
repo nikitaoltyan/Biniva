@@ -260,7 +260,7 @@ extension SettingsController {
     
     private
     func openInstagram() {
-        let instagramHooks = "instagram://user?username=biniva_app"
+        let instagramHooks = NSLocalizedString("instagram_link", comment: "")
         let instagramUrl = NSURL(string: instagramHooks)
         if UIApplication.shared.canOpenURL(instagramUrl! as URL) {
             print("Open Biniva Inst page")

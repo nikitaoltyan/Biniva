@@ -72,6 +72,25 @@ class LeaveCommentController: UIViewController {
         return view
     }()
     
+    let graySeparator_2: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: MainConstants.screenWidth-50, height: 2))
+            .with(autolayout: false)
+            .with(bgColor: Colors.grayCircle)
+            .with(cornerRadius: 1)
+        return view
+    }()
+    
+    lazy var emailText: UITextField = {
+        let view = UITextField()
+            .with(autolayout: false)
+            .with(keybordType: .emailAddress)
+            .with(placeholder: NSLocalizedString("leave_comment_email_placeholder", comment: ""))
+            .with(fontName: "SFPro-Regular", size: 16)
+        view.textColor = Colors.nearBlack
+        view.delegate = self
+        return view
+    }()
+    
     let sendButton: ButtonView = {
         let view = ButtonView()
             .with(autolayout: false)
@@ -79,7 +98,9 @@ class LeaveCommentController: UIViewController {
         view.label.text = NSLocalizedString("leave_comment_button", comment: "the Send label")
         return view
     }()
-
+    
+    var currentTextField: UITextField?
+    var buttonBottomConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +108,59 @@ class LeaveCommentController: UIViewController {
         hideKeyboardWhenTappedAround()
         setSubviews()
         activateLayouts()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillShow(notification: NSNotification) {
+        print("keyboardWillShow")
+        guard currentTextField == emailText else { return }
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+//                self.view.frame.origin.y -= keyboardSize.height
+                self.buttonBottomConstraint?.constant = -keyboardSize.height
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.view.layoutIfNeeded()
+                })
+            }
+            
+        }
+        
+//        let buttonBottomConstant: CGFloat = {
+//            switch MainConstants.screenHeight {
+//            case ...700: return -150
+//            case 736: return -150
+//            default: return -200
+//            }
+//        }()
+        
+//        buttonBottomConstraint?.constant = buttonBottomConstant
+//        UIView.animate(withDuration: 0.4, animations: {
+//            self.view.layoutIfNeeded()
+//        })
+    }
+
+    @objc
+    func keyboardWillHide(notification: NSNotification) {
+        print("keyboardWillHide")
+        guard currentTextField == emailText else { return }
+        
+        let buttonBottomConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return -24
+            case 736: return -35
+            default: return -58
+            }
+        }()
+        
+        buttonBottomConstraint?.constant = buttonBottomConstant
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.layoutIfNeeded()
+        })
+        
+        currentTextField = nil
     }
     
     @objc
@@ -119,9 +193,11 @@ class LeaveCommentController: UIViewController {
                 return
             }
             
+            
             DispatchQueue.main.async {
                 self.server.createNewComment(withTitle: self.titleText.text ?? "",
-                                             andText: self.commentText.text ?? "")
+                                             text: self.commentText.text ?? "",
+                                             andEmail: self.emailText.text ?? "")
             }
             self.dismiss(animated: true, completion: nil)
         })
@@ -140,7 +216,7 @@ class LeaveCommentController: UIViewController {
 
 
 
-extension LeaveCommentController: UITextViewDelegate {
+extension LeaveCommentController: UITextViewDelegate, UITextFieldDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == Colors.grayCircle {
             commentText.text = nil
@@ -153,6 +229,10 @@ extension LeaveCommentController: UITextViewDelegate {
             commentText.text = NSLocalizedString("leave_comment_text_placeholder", comment: "")
             commentText.textColor = Colors.grayCircle
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        currentTextField = textField
     }
 }
 
@@ -169,6 +249,8 @@ extension LeaveCommentController {
         view.addSubview(titleText)
         view.addSubview(graySeparator)
         view.addSubview(commentText)
+        view.addSubview(graySeparator_2)
+        view.addSubview(emailText)
         
         view.addSubview(sendButton)
         
@@ -178,6 +260,8 @@ extension LeaveCommentController {
                                 target: self, selector: #selector(closeKeyboard))
         commentText.addDoneButton(title: NSLocalizedString("leave_comment_done_button", comment: ""),
                                   target: self, selector: #selector(closeKeyboard))
+        emailText.addDoneButton(title: NSLocalizedString("leave_comment_done_button", comment: ""),
+                                target: self, selector: #selector(closeKeyboard))
     }
     
     private
@@ -204,6 +288,14 @@ extension LeaveCommentController {
             }
         }()
         
+        let emailTextBottomConstant: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return -20
+            case 736: return -30
+            default: return -40
+            }
+        }()
+        
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: topBackButtonConstant),
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
@@ -224,15 +316,28 @@ extension LeaveCommentController {
             graySeparator.widthAnchor.constraint(equalToConstant: graySeparator.frame.width),
             graySeparator.heightAnchor.constraint(equalToConstant: graySeparator.frame.height),
             
-            sendButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: buttonBottomConstant),
+//            sendButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: buttonBottomConstant),
             sendButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             sendButton.widthAnchor.constraint(equalToConstant: sendButton.frame.width),
             sendButton.heightAnchor.constraint(equalToConstant: sendButton.frame.height),
             
+            emailText.bottomAnchor.constraint(equalTo: sendButton.topAnchor, constant: emailTextBottomConstant),
+            emailText.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
+            emailText.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
+            emailText.heightAnchor.constraint(equalToConstant: 40),
+            
+            graySeparator_2.bottomAnchor.constraint(equalTo: emailText.topAnchor, constant: -6),
+            graySeparator_2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            graySeparator_2.widthAnchor.constraint(equalToConstant: graySeparator_2.frame.width),
+            graySeparator_2.heightAnchor.constraint(equalToConstant: graySeparator_2.frame.height),
+            
             commentText.topAnchor.constraint(equalTo: graySeparator.bottomAnchor, constant: 6),
             commentText.leftAnchor.constraint(equalTo: view.leftAnchor),
             commentText.rightAnchor.constraint(equalTo: view.rightAnchor),
-            commentText.bottomAnchor.constraint(equalTo: sendButton.topAnchor, constant: -40),
+            commentText.bottomAnchor.constraint(equalTo: graySeparator_2.topAnchor, constant: -6),
         ])
+        
+        buttonBottomConstraint = sendButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: buttonBottomConstant)
+        buttonBottomConstraint?.isActive = true
     }
 }

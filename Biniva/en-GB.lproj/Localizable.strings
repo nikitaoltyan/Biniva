@@ -11,6 +11,8 @@
 "privacy_policy" = "Privacy Policy";
 "used_icon_measurement" = "1.1";
 "add_button" = "Add";
+"instagram_link" = "instagram://user?username=biniva_map";
+
 
 // WEIGHT MEASUREMENT
 "weight_measurement_gramms" = "g";
@@ -148,13 +150,14 @@
 "settings_ask_for_points" = "Points request";
 "settings_measure" = "Measerement system";
 "settings_sub_stats" = "Donations utility";
-"settings_leave_comment" = "Leave a comment";
+"settings_leave_comment" = "Share your vision";
 "settings_mark_app" = "Rate the app";
 
 // SETTINGS - LEAVE A COMMENT
-"leave_comment_title" = "Leave your comment";
+"leave_comment_title" = "Share your vision";
 "leave_comment_title_placeholder" = "Title";
-"leave_comment_text_placeholder" = "What should we add or change? (Or just praise the Biniva team)";
+"leave_comment_text_placeholder" = "Share your vision! What should we add or change? (Or just praise the Biniva team)";
+"leave_comment_email_placeholder" = "Your e-mail, if you want to stay in touch :)";
 "leave_comment_button" = "Send";
 "leave_comment_title_error_title" = "There's no title";
 "leave_comment_title_error_subtitle" = "Please, write a title. This way we will quickly understand what you wanted to tell us.";

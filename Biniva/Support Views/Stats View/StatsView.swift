@@ -80,16 +80,16 @@ class StatsView: UIView {
         return view
     }()
     
-//    let weeklySubtitle: UILabel = {
-//        let label = UILabel()
-//            .with(color: MainConstants.nearBlack)
-//            .with(alignment: .center)
-//            .with(numberOfLines: 1)
-//            .with(fontName: "SFPro-Medium", size: 18)
-//            .with(autolayout: false)
-//        label.text = NSLocalizedString("stats_weekly_subtitle", comment: "Title for weekly plate")
-//        return label
-//    }()
+    let askForCommentView: AskForCommentView = {
+        let view = AskForCommentView()
+            .with(autolayout: false)
+        view.clipsToBounds = true
+        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        view.layer.shadowRadius = 10
+        view.layer.shadowOpacity = 0.9
+        view.layer.shadowOffset = CGSize(width: 4, height: 4)
+        return view
+    }()
     
     let weeklyStatsView: WeeklyStatsView = {
         let view = WeeklyStatsView()
@@ -189,7 +189,7 @@ class StatsView: UIView {
         }
         statsTableHeightConst?.constant = height
         statsTable.layoutIfNeeded()
-        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 1220 + height)
+        scrollView.contentSize = CGSize(width: MainConstants.screenWidth, height: 1320 + height)
     }
     
     func updateLabel(){
@@ -206,6 +206,12 @@ class StatsView: UIView {
         }
     }
     
+    @objc
+    func askForCommentAction() {
+        askForCommentView.tap(completion: { _ in
+            self.delegate?.openAskForComment()
+        })
+    }
     
     @objc
     func weeklyArticleAction() {
@@ -216,7 +222,7 @@ class StatsView: UIView {
     
     @objc
     func openInst() {
-        let instagramHooks = "instagram://user?username=biniva_app"
+        let instagramHooks = NSLocalizedString("instagram_link", comment: "")
         let instagramUrl = NSURL(string: instagramHooks)
         if UIApplication.shared.canOpenURL(instagramUrl! as URL) {
             UIApplication.shared.open(instagramUrl! as URL, options: [:], completionHandler: nil)
@@ -304,13 +310,14 @@ extension StatsView {
 //        scrollView.addSubview(timeTitle)
         scrollView.addSubview(eventsTitle)
         scrollView.addSubview(materialStatsView)
-//        scrollView.addSubview(weeklySubtitle)
+        scrollView.addSubview(askForCommentView)
         scrollView.addSubview(weeklyStatsView)
         scrollView.addSubview(weeklyArticleView)
         scrollView.addSubview(statsTable)
         scrollView.addSubview(instaLabel)
         scrollView.addSubview(privacyPolicyLabel)
         
+        askForCommentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(askForCommentAction)))
         weeklyArticleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(weeklyArticleAction)))
         instaLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openInst)))
         privacyPolicyLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openPrivacyPolicy)))
@@ -337,19 +344,17 @@ extension StatsView {
             subtitle.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 9),
             subtitle.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             
-//            timeTitle.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 6),
-//            timeTitle.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            
             materialStatsView.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 37),
             materialStatsView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             materialStatsView.widthAnchor.constraint(equalToConstant: materialStatsView.frame.width),
             materialStatsView.heightAnchor.constraint(equalToConstant: materialStatsView.frame.height),
             
-//            weeklySubtitle.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 37),
-//            weeklySubtitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-//
-//            weeklyStatsView.topAnchor.constraint(equalTo: weeklySubtitle.bottomAnchor, constant: 7),
-            weeklyStatsView.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 25),
+            askForCommentView.topAnchor.constraint(equalTo: materialStatsView.bottomAnchor, constant: 25),
+            askForCommentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            askForCommentView.widthAnchor.constraint(equalToConstant: askForCommentView.frame.width),
+            askForCommentView.heightAnchor.constraint(equalToConstant: askForCommentView.frame.height),
+            
+            weeklyStatsView.topAnchor.constraint(equalTo: askForCommentView.bottomAnchor, constant: 25),
             weeklyStatsView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             weeklyStatsView.widthAnchor.constraint(equalToConstant: weeklyStatsView.frame.width),
             weeklyStatsView.heightAnchor.constraint(equalToConstant: weeklyStatsView.frame.height),

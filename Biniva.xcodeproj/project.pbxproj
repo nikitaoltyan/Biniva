@@ -99,6 +99,7 @@
 		5C83A07A2563AC58005C2CAA /* Main Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C83A0792563AC58005C2CAA /* Main Constants.swift */; };
 		5C85E69726C81130001661CA /* LeaveCommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85E69626C81130001661CA /* LeaveCommentController.swift */; };
 		5C85E6A126CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85E6A026CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift */; };
+		5C89519D26EB987800BAE15C /* AskForCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89519C26EB987800BAE15C /* AskForCommentView.swift */; };
 		5C96F17526C67F40008FC57F /* ImageShowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96F17426C67F40008FC57F /* ImageShowerController.swift */; };
 		5C996A4C26B12AA600C3BD8C /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C996A4B26B12AA600C3BD8C /* Review.swift */; };
 		5C9A56BA2695E2E7000D3401 /* ServerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9A56B92695E2E7000D3401 /* ServerAnalytics.swift */; };
@@ -142,6 +143,7 @@
 		5CD0B1372689FFA600267081 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0B1362689FFA600267081 /* UIImage+Extension.swift */; };
 		5CD2F5962681C34400993A54 /* ImagePinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2F5952681C34400993A54 /* ImagePinCell.swift */; };
 		5CD2F5992682253700993A54 /* ImagePinCell+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */; };
+		5CD3385326EDF3280050ED82 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3385226EDF3280050ED82 /* Point.swift */; };
 		5CD556FB26524DFE007B3D06 /* MaterialStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */; };
 		5CD557002652532F007B3D06 /* MaterialStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */; };
 		5CD5570526526946007B3D06 /* MaterialFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD5570426526946007B3D06 /* MaterialFunctions.swift */; };
@@ -329,6 +331,7 @@
 		5C83A0792563AC58005C2CAA /* Main Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main Constants.swift"; sourceTree = "<group>"; };
 		5C85E69626C81130001661CA /* LeaveCommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveCommentController.swift; sourceTree = "<group>"; };
 		5C85E6A026CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyStatsCell+Unsubscribed.swift"; sourceTree = "<group>"; };
+		5C89519C26EB987800BAE15C /* AskForCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForCommentView.swift; sourceTree = "<group>"; };
 		5C96F17426C67F40008FC57F /* ImageShowerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShowerController.swift; sourceTree = "<group>"; };
 		5C996A4B26B12AA600C3BD8C /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		5C9A56B92695E2E7000D3401 /* ServerAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAnalytics.swift; sourceTree = "<group>"; };
@@ -396,6 +399,7 @@
 		5CD0B1362689FFA600267081 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		5CD2F5952681C34400993A54 /* ImagePinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePinCell.swift; sourceTree = "<group>"; };
 		5CD2F5982682253700993A54 /* ImagePinCell+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePinCell+Empty.swift"; sourceTree = "<group>"; };
+		5CD3385226EDF3280050ED82 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatView.swift; sourceTree = "<group>"; };
 		5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialStatsCell.swift; sourceTree = "<group>"; };
 		5CD5570426526946007B3D06 /* MaterialFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialFunctions.swift; sourceTree = "<group>"; };
@@ -545,6 +549,7 @@
 			children = (
 				5C2A670D2667888500772674 /* CoordinateAnnotation.swift */,
 				5C6F5AF02699E28200155933 /* MapPreparation.swift */,
+				5CD3385226EDF3280050ED82 /* Point.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -737,6 +742,7 @@
 				5CD556FA26524DFE007B3D06 /* MaterialStatView.swift */,
 				5CC8D2F426C3BFA900305FAB /* WeeklyStatsView.swift */,
 				5CCCA14626D38F690027C516 /* WeeklyArticleView.swift */,
+				5C89519C26EB987800BAE15C /* AskForCommentView.swift */,
 				5C25D8A6263693A900D2206E /* StatsCell.swift */,
 				5C7D3789264CF80B00DFEBA7 /* EmptyStatsCell.swift */,
 				5CD556FF2652532F007B3D06 /* MaterialStatsCell.swift */,
@@ -1252,6 +1258,7 @@
 				5CB6A22F25C40D6200EC4B3A /* ImageView Extension.swift in Sources */,
 				5C0E9D8E26DF4F670016B9B0 /* SubscriptionStatsController.swift in Sources */,
 				5C25D8AC2636BB9B00D2206E /* MaterialData.swift in Sources */,
+				5CD3385326EDF3280050ED82 /* Point.swift in Sources */,
 				5C087044262739E10057E840 /* Model+CoreDataProperties.swift in Sources */,
 				5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */,
 				5CC4D52C26BFA5E400FC6E30 /* Onboarding_6_Cell.swift in Sources */,
@@ -1290,6 +1297,7 @@
 				5C64D788268F82EA0013F084 /* Onboarding_1_Cell.swift in Sources */,
 				5CC8CB1326AAC41E006186BE /* CameraController.swift in Sources */,
 				5CF90C57262EA7C100127E4D /* MaterialCell.swift in Sources */,
+				5C89519D26EB987800BAE15C /* AskForCommentView.swift in Sources */,
 				5C55508D269DC53500AD8015 /* ArticleHeaderView.swift in Sources */,
 				5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */,
 				5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */,

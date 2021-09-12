@@ -22,13 +22,49 @@ class Server {
     /// - parameter radius: Should be in meters.
     /// - returns: Escaping parameter about function success.
     /// - warning: GeoPoints are stored in Points CoreModel and should be gotten from there.
+//    func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D,
+//                      radius: Double,
+//                      result: @escaping(_ points: [Points]) -> Void) {
+//        
+//        // First elements is added because of unebling to query empty notIt array in some cases.
+//        
+//        let queries = prepareQuery(forLocation: center, withRadius: radius)
+//        
+//        for query in queries {
+//            query.getDocuments(completion: { (snapshot, error) in
+//                guard let documents = snapshot?.documents else {
+//                    print("Unable to fetch snapshot data. \(String(describing: error))")
+//                    result([])
+//                    return
+//                }
+//                guard documents.count > 0 else {
+//                    result([])
+//                    return
+//                }
+//                
+//                for document in documents {
+//                    DispatchQueue.main.async {
+//                        self.coreDatabase.addPoint(latitude: document.data()["lat"] as? Double ?? 0,
+//                                                   longitude: document.data()["lng"] as? Double ?? 0,
+//                                                   materials: document.data()["trash_types"] as? [Int] ?? [0],
+//                                                   geohash: document.data()["geohash"] as? String ?? "",
+//                                                   id: document.documentID, result: { (point) in
+//                                                    result(point)
+//                        })
+//                    }
+//                }
+//            })
+//        }
+//    }
+    
     func getGeoPoints(centerCoordinate center: CLLocationCoordinate2D,
                       radius: Double,
-                      result: @escaping(_ points: [Points]) -> Void) {
+                      result: @escaping(_ points: [Point]) -> Void) {
         
         // First elements is added because of unebling to query empty notIt array in some cases.
         
         let queries = prepareQuery(forLocation: center, withRadius: radius)
+        var resultArray: [Point] = []
         
         for query in queries {
             query.getDocuments(completion: { (snapshot, error) in
@@ -43,15 +79,22 @@ class Server {
                 }
                 
                 for document in documents {
-                    DispatchQueue.main.async {
-                        self.coreDatabase.addPoint(latitude: document.data()["lat"] as? Double ?? 0,
-                                                   longitude: document.data()["lng"] as? Double ?? 0,
-                                                   materials: document.data()["trash_types"] as? [Int] ?? [0],
-                                                   geohash: document.data()["geohash"] as? String ?? "",
-                                                   id: document.documentID, result: { (point) in
-                                                    result(point)
-                        })
-                    }
+                    let point = Point(latitude: document.data()["lat"] as? Double ?? 0,
+                                      longitude: document.data()["lng"] as? Double ?? 0,
+                                      materials: document.data()["trash_types"] as? [Int] ?? [0],
+                                      geohash: document.data()["geohash"] as? String ?? "",
+                                      id: document.documentID)
+                    resultArray.append(point)
+                    result(resultArray)
+//                    DispatchQueue.main.async {
+//                        self.coreDatabase.addPoint(latitude: document.data()["lat"] as? Double ?? 0,
+//                                                   longitude: document.data()["lng"] as? Double ?? 0,
+//                                                   materials: document.data()["trash_types"] as? [Int] ?? [0],
+//                                                   geohash: document.data()["geohash"] as? String ?? "",
+//                                                   id: document.documentID, result: { (point) in
+//                                                    result(point)
+//                        })
+//                    }
                 }
             })
         }
@@ -233,11 +276,12 @@ class Server {
     }
     
     
-    func createNewComment(withTitle title: String, andText text: String) {
+    func createNewComment(withTitle title: String, text: String, andEmail email: String) {
         let documentData: [String: Any] = [
             "title": title,
             "text": text,
-            "date": Date().onlyDate as Any
+            "date": Date().onlyDate as Any,
+            "email": email
         ]
         
         db.collection("comments").addDocument(data: documentData) { (err) in

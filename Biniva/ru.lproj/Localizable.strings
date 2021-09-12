@@ -11,6 +11,7 @@
 "privacy_policy" = "Политика конфиденциальности";
 "used_icon_measurement" = "1.1";
 "add_button" = "Добавить";
+"instagram_link" = "instagram://user?username=biniva_app";
 
 // WEIGHT MEASUREMENT
 "weight_measurement_gramms" = "г";
@@ -147,13 +148,14 @@
 "settings_ask_for_points" = "Запрос точек";
 "settings_measure" = "Система измерения";
 "settings_sub_stats" = "Успехи поддержки";
-"settings_leave_comment" = "Оставь отзыв";
+"settings_leave_comment" = "Поделись свои виденьем";
 "settings_mark_app" = "Оцени приложение";
 
 // SETTINGS - LEAVE A COMMENT
-"leave_comment_title" = "Оставь свой отзыв";
+"leave_comment_title" = "Поделись свои виденьем";
 "leave_comment_title_placeholder" = "Тема письма";
-"leave_comment_text_placeholder" = "Что нам стоит добавить или изменить? (Или просто похвалите команду Biniva)";
+"leave_comment_text_placeholder" = "Поделись свои виденьем! Что нам стоит добавить или изменить? (Или просто похвалите команду Biniva)";
+"leave_comment_email_placeholder" = "Твой e-mail, если хочешь продолжить диалог :)";
 "leave_comment_button" = "Отправить";
 "leave_comment_title_error_title" = "Нет темы письма";
 "leave_comment_title_error_subtitle" = "Пожалуйста, напиши тему. Так мы быстрее поймем, что ты хотел нам сообщить.";

@@ -38,10 +38,22 @@ extension MKMapView {
         return round(centerLocation.distance(from: topLeftLocation) + delta)
     }
     
-   func visibleAnnotations() -> [MKAnnotation] {
+    func visibleAnnotations() -> [MKAnnotation] {
         return self.annotations(in: self.visibleMapRect).map {
             obj -> MKAnnotation in return obj as! MKAnnotation
         }
-   }
+    }
+
+//    func removeAllUnvisibleAnnotations() {
+//        let visibleRect = self.visibleMapRect
+//        let inRectAnnotations = self.annotations(in: visibleRect)
+//        print("inRectAnnotations count: \(inRectAnnotations.count)")
+//        for annotation: MKAnnotation in self.annotations {
+//            if !(inRectAnnotations.contains(annotation as! AnyHashable)) {
+//                print("self.removeAnnotation(annotation): \(annotation)")
+//                self.removeAnnotation(annotation)
+//            }
+//        }
+//    }
     
 }

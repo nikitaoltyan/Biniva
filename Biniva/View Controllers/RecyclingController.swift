@@ -18,6 +18,7 @@ protocol SwitcherDelegate {
 protocol StatsDelegate {
     func hideTopBar(_ should: Bool)
     func openArticle()
+    func openAskForComment()
 }
 
 
@@ -27,7 +28,7 @@ protocol RecyclingDelegate {
     func openMaterialInfo()
 }
 
-protocol mapDelegate {
+protocol mapDelegate: AnyObject {
     func openAddNewPoint()
     func showPaywall()
     func showImageShower(withImages images: [String], open: Int)
@@ -247,6 +248,13 @@ extension RecyclingController: StatsDelegate {
         newVC.modalTransitionStyle = .coverVertical
         present(newVC, animated: true, completion: nil)
     }
+    
+    func openAskForComment() {
+        let newVC = LeaveCommentController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.modalTransitionStyle = .coverVertical
+        present(newVC, animated: true, completion: nil)
+    }
 }
 
 
@@ -322,6 +330,7 @@ extension RecyclingController: mapDelegate {
 
 extension RecyclingController: topViewDelegate {
     func openSettings() {
+        Vibration.soft()
         let newVC = SettingsController()
         newVC.modalPresentationStyle = .overFullScreen
         newVC.modalTransitionStyle = .coverVertical

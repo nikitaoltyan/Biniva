@@ -9,6 +9,8 @@ import UIKit
 
 class WeightMeasureController: UIViewController {
     
+    let measure = Measure()
+    
     let backButton: UIImageView = {
         let scale: CGFloat = {
             if MainConstants.screenHeight > 700 { return 35 }
@@ -36,6 +38,23 @@ class WeightMeasureController: UIViewController {
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Bold", size: textSize)
         label.text = NSLocalizedString("onboarding_6_title", comment: "Title for that cell")
+        return label
+    }()
+    
+    lazy var weightLabel: UILabel = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...700: return 40
+            default: return 48
+            }
+        }()
+        let label = UILabel()
+            .with(color: MainConstants.nearBlack)
+            .with(alignment: .center)
+            .with(numberOfLines: 1)
+            .with(fontName: "SFPro-Bold", size: textSize)
+            .with(autolayout: false)
+        label.text = measure.getMeasurementString(weight: 1100, forNeededType: .kilogramm)
         return label
     }()
     
@@ -132,8 +151,9 @@ class WeightMeasureController: UIViewController {
         guard metricPlateView.layer.borderWidth == 0 else {
             return
         }
-        Defaults.setWeightSystem(typeOfSystem: 0) // Metric
         Vibration.soft()
+        Defaults.setWeightSystem(typeOfSystem: 0) // Metric
+        weightLabel.text = measure.getMeasurementString(weight: 1100, forNeededType: .kilogramm)
         UIView.animate(withDuration: 0.1, animations: {
             self.metricPlateView.layer.borderWidth = 3
             self.imperialPlateView.layer.borderWidth = 0
@@ -145,8 +165,9 @@ class WeightMeasureController: UIViewController {
         guard imperialPlateView.layer.borderWidth == 0 else {
             return
         }
-        Defaults.setWeightSystem(typeOfSystem: 1) // Imperial
         Vibration.soft()
+        Defaults.setWeightSystem(typeOfSystem: 1) // Imperial
+        weightLabel.text = measure.getMeasurementString(weight: 1100, forNeededType: .kilogramm)
         UIView.animate(withDuration: 0.1, animations: {
             self.imperialPlateView.layer.borderWidth = 3
             self.metricPlateView.layer.borderWidth = 0
@@ -157,8 +178,6 @@ class WeightMeasureController: UIViewController {
     func backAction() {
         backButton.tap(completion: { _ in
             self.dismiss(animated: true, completion: nil)
-            // TODO:
-            // After dismission Sttings update all. But it shodn't do that always.
         })
     }
 }
@@ -175,6 +194,7 @@ extension WeightMeasureController {
         view.addSubview(backButton)
         view.addSubview(titleBlack)
         
+        view.addSubview(weightLabel)
         view.addSubview(metricPlateView)
         view.addSubview(imperialPlateView)
         
@@ -200,7 +220,10 @@ extension WeightMeasureController {
             titleBlack.leftAnchor.constraint(equalTo: backButton.rightAnchor, constant: 20),
             titleBlack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             
-            metricPlateView.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: 150),
+            weightLabel.topAnchor.constraint(equalTo: titleBlack.bottomAnchor, constant: 90),
+            weightLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            metricPlateView.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 40),
             metricPlateView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
             metricPlateView.widthAnchor.constraint(equalToConstant: metricPlateView.frame.width),
             metricPlateView.heightAnchor.constraint(equalToConstant: metricPlateView.frame.height),
