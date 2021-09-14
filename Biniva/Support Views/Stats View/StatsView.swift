@@ -28,7 +28,7 @@ class StatsView: UIView {
     
     let weightLabel: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 36)
@@ -38,7 +38,7 @@ class StatsView: UIView {
     
     let subtitle: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 18)
@@ -60,7 +60,7 @@ class StatsView: UIView {
     
     let eventsTitle: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: 22)
@@ -73,7 +73,7 @@ class StatsView: UIView {
         let view = MaterialStatView()
             .with(autolayout: false)
         view.clipsToBounds = true
-        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        view.layer.shadowColor = Colors.nearBlack.withAlphaComponent(0.1).cgColor
         view.layer.shadowRadius = 10
         view.layer.shadowOpacity = 0.9
         view.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -84,7 +84,7 @@ class StatsView: UIView {
         let view = AskForCommentView()
             .with(autolayout: false)
         view.clipsToBounds = true
-        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        view.layer.shadowColor = Colors.nearBlack.withAlphaComponent(0.1).cgColor
         view.layer.shadowRadius = 10
         view.layer.shadowOpacity = 0.9
         view.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -95,7 +95,7 @@ class StatsView: UIView {
         let view = WeeklyStatsView()
             .with(autolayout: false)
         view.clipsToBounds = true
-        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        view.layer.shadowColor = Colors.nearBlack.withAlphaComponent(0.1).cgColor
         view.layer.shadowRadius = 10
         view.layer.shadowOpacity = 0.9
         view.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -106,7 +106,7 @@ class StatsView: UIView {
         let view = WeeklyArticleView()
             .with(autolayout: false)
         view.clipsToBounds = true
-        view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        view.layer.shadowColor = Colors.nearBlack.withAlphaComponent(0.1).cgColor
         view.layer.shadowRadius = 10
         view.layer.shadowOpacity = 0.9
         view.layer.shadowOffset = CGSize(width: 4, height: 4)

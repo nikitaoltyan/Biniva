@@ -22,7 +22,7 @@ class AskForCommentView: UIView {
     let title: UILabel = {
         let label = UILabel()
             .with(autolayout: false)
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 2)
             .with(fontName: "SFPro-Bold", size: 24)

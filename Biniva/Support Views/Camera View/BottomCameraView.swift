@@ -63,7 +63,7 @@ class BottomCameraView: UIView {
         let gradient = CAGradientLayer()
         gradient.frame = self.gradientViewLeft.frame
         gradient.colors = [Colors.background.cgColor,
-                           UIColor.white.withAlphaComponent(0).cgColor]
+                           Colors.background.withAlphaComponent(0).cgColor]
         gradient.startPoint = CGPoint(x: 0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1, y: 0.5)
         return gradient
@@ -80,7 +80,7 @@ class BottomCameraView: UIView {
     lazy var gradientRight: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.frame = self.gradientViewRight.frame
-        gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor,
+        gradient.colors = [Colors.background.withAlphaComponent(0).cgColor,
                            Colors.background.cgColor]
         gradient.startPoint = CGPoint(x: 0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1, y: 0.5)

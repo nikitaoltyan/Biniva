@@ -11,7 +11,7 @@ class WeeklyStatsCell_Unsubscribed: UICollectionViewCell {
     
     let title: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 16)
@@ -22,7 +22,7 @@ class WeeklyStatsCell_Unsubscribed: UICollectionViewCell {
     
     let subtitle: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 13)

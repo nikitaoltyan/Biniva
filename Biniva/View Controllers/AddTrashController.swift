@@ -2,7 +2,7 @@
 //  AddTrashController.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 20.04.2021.
+//  Created by Nikita Oltyan on 20.04.2021.
 //
 
 import UIKit
@@ -25,7 +25,7 @@ class AddTrashController: UIViewController {
         }()
         let button = UIImageView(frame: CGRect(x: 0, y: 0, width: scale, height: scale-5))
             .with(autolayout: false)
-        button.tintColor = MainConstants.nearBlack
+        button.tintColor = Colors.nearBlack
         button.image = UIImage(systemName: "chevron.down")
         button.isUserInteractionEnabled = true
         return button
@@ -241,6 +241,7 @@ extension AddTrashController: UICollectionViewDelegate, UICollectionViewDataSour
 
 
 extension AddTrashController {
+    private
     func setSubviews(){
         view.addSubview(backButton)
         view.addSubview(materialInfoButton)
@@ -255,6 +256,7 @@ extension AddTrashController {
         button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(add)))
     }
     
+    private
     func activateLayouts(){
         let buttonBottomConst: CGFloat = {
             if MainConstants.screenHeight == 736 { return -40 }

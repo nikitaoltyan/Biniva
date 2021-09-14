@@ -66,7 +66,7 @@ class ProgressView: UIView {
             }
         }()
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: textSize)
@@ -76,7 +76,7 @@ class ProgressView: UIView {
     
     let subtitle: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Medium", size: 18)

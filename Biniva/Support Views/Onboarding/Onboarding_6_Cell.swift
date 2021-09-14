@@ -100,7 +100,7 @@ class Onboarding_6_Cell: UICollectionViewCell {
             }
         }()
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: textSize)

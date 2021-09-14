@@ -18,7 +18,7 @@ class WeightMeasureController: UIViewController {
         }()
         let button = UIImageView(frame: CGRect(x: 0, y: 0, width: scale-5, height: scale))
             .with(autolayout: false)
-        button.tintColor = MainConstants.nearBlack
+        button.tintColor = Colors.nearBlack
         button.image = UIImage(systemName: "chevron.left")
         button.isUserInteractionEnabled = true
         return button
@@ -49,7 +49,7 @@ class WeightMeasureController: UIViewController {
             }
         }()
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(numberOfLines: 1)
             .with(fontName: "SFPro-Bold", size: textSize)

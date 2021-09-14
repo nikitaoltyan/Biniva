@@ -25,7 +25,7 @@ class ExtraAddCell: UICollectionViewCell {
             else { return 14 }
         }()
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(fontName: "SFPro-Semibold", size: size)
             .with(numberOfLines: 1)
@@ -81,7 +81,7 @@ class ExtraAddCell: UICollectionViewCell {
         gradient.removeFromSuperlayer()
         view.backgroundColor = .clear
         view.layer.borderWidth = 2
-        title.textColor = MainConstants.nearBlack
+        title.textColor = Colors.nearBlack
         subtitle.textColor = Colors.darkGrayText
     }
 }

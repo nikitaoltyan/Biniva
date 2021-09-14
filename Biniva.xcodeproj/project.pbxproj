@@ -22,7 +22,6 @@
 		5C0E9D9D26DFDD290016B9B0 /* AskForPoints+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9D9B26DFDD290016B9B0 /* AskForPoints+CoreDataProperties.swift */; };
 		5C0E9DA026E0AA900016B9B0 /* AskForPointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9D9F26E0AA900016B9B0 /* AskForPointsController.swift */; };
 		5C0E9DA226E0AB730016B9B0 /* AskForPointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9DA126E0AB730016B9B0 /* AskForPointCell.swift */; };
-		5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */; };
 		5C11455826612B9400F48626 /* MapView+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11455726612B9400F48626 /* MapView+Model.swift */; };
 		5C1BD66025D7CA770002A894 /* Material Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1BD65F25D7CA770002A894 /* Material Defaults.swift */; };
 		5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D11C325C6B7F2007C8DBC /* Date Extension.swift */; };
@@ -210,7 +209,6 @@
 		5C0E9D9B26DFDD290016B9B0 /* AskForPoints+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AskForPoints+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5C0E9D9F26E0AA900016B9B0 /* AskForPointsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointsController.swift; sourceTree = "<group>"; };
 		5C0E9DA126E0AB730016B9B0 /* AskForPointCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointCell.swift; sourceTree = "<group>"; };
-		5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsController.swift; sourceTree = "<group>"; };
 		5C11455726612B9400F48626 /* MapView+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapView+Model.swift"; sourceTree = "<group>"; };
 		5C1BD65F25D7CA770002A894 /* Material Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Material Defaults.swift"; sourceTree = "<group>"; };
 		5C1D11C325C6B7F2007C8DBC /* Date Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date Extension.swift"; sourceTree = "<group>"; };
@@ -573,30 +571,6 @@
 			path = Paywall;
 			sourceTree = "<group>";
 		};
-		5C454E5225BACF5B00966991 /* View Control */ = {
-			isa = PBXGroup;
-			children = (
-				5C454E5C25BAD0EF00966991 /* Other Controllers */,
-			);
-			path = "View Control";
-			sourceTree = "<group>";
-		};
-		5C454E5C25BAD0EF00966991 /* Other Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				5C454E5D25BAD10300966991 /* About Us Controller */,
-			);
-			path = "Other Controllers";
-			sourceTree = "<group>";
-		};
-		5C454E5D25BAD10300966991 /* About Us Controller */ = {
-			isa = PBXGroup;
-			children = (
-				5C0F7E3225AC6B20000C4312 /* AboutUsController.swift */,
-			);
-			path = "About Us Controller";
-			sourceTree = "<group>";
-		};
 		5C454E6C25BAD24600966991 /* General Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -634,7 +608,6 @@
 				5C5ED19F265967AC00084458 /* Support Views */,
 				5C3046DE25C06A3100BAFEEF /* Biniva.entitlements */,
 				5C11455F26612D4100F48626 /* Maps */,
-				5C454E5225BACF5B00966991 /* View Control */,
 				5C454E6C25BAD24600966991 /* General Views */,
 				5CFA1A3925C99BBE00587EC5 /* User Defaults */,
 				5C1BD65E25D7CA560002A894 /* Material Defaults */,
@@ -1299,7 +1272,6 @@
 				5CF90C57262EA7C100127E4D /* MaterialCell.swift in Sources */,
 				5C89519D26EB987800BAE15C /* AskForCommentView.swift in Sources */,
 				5C55508D269DC53500AD8015 /* ArticleHeaderView.swift in Sources */,
-				5C0F7E3325AC6B20000C4312 /* AboutUsController.swift in Sources */,
 				5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */,
 				5CA776D22656B3C600EDAF47 /* MapView.swift in Sources */,
 				5CEE555C26BD19CB00561B76 /* PaywallButton.swift in Sources */,

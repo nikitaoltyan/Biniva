@@ -18,7 +18,7 @@ class LeaveCommentController: UIViewController {
         }()
         let button = UIImageView(frame: CGRect(x: 0, y: 0, width: scale-5, height: scale))
             .with(autolayout: false)
-        button.tintColor = MainConstants.nearBlack
+        button.tintColor = Colors.nearBlack
         button.image = UIImage(systemName: "chevron.left")
         button.isUserInteractionEnabled = true
         return button

@@ -2,7 +2,7 @@
 //  WeightViewImperial.swift
 //  Biniva
 //
-//  Created by Никита Олтян on 09.08.2021.
+//  Created by Nick Oltyan on 09.08.2021.
 //
 
 import UIKit
@@ -41,7 +41,7 @@ class WeightViewImperial: UIView {
     
     let minusLabel: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(fontName: "SFPro", size: 21)
             .with(autolayout: false)
@@ -51,7 +51,7 @@ class WeightViewImperial: UIView {
     
     let plusLabel: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(fontName: "SFPro", size: 21)
             .with(autolayout: false)

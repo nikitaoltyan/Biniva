@@ -11,7 +11,7 @@ class EmptyStatsCell: UITableViewCell {
     
     let title: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 16)
@@ -22,7 +22,7 @@ class EmptyStatsCell: UITableViewCell {
     
     let subtitle: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(numberOfLines: 0)
             .with(fontName: "SFPro-Medium", size: 13)
@@ -33,6 +33,7 @@ class EmptyStatsCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = Colors.background
         setSubviews()
         activateLayouts()
     }

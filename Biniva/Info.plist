@@ -89,8 +89,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>branch_app_domain</key>
 	<string>biniva.app.link</string>
 	<key>branch_key</key>

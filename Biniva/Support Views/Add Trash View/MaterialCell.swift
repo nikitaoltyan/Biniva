@@ -21,7 +21,7 @@ class MaterialCell: UICollectionViewCell {
     
     let title: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(fontName: "SFPro-Medium", size: 24)
             .with(autolayout: false)

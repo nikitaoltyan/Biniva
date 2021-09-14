@@ -46,7 +46,7 @@ class OnboardingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = MainConstants.white
+        view.backgroundColor = Colors.background
         setSubviews()
         activateLayouts()
         analytics.logStartOnboarding()
@@ -133,12 +133,12 @@ extension OnboardingController: OnbordingDelegate {
 
 
 extension OnboardingController {
-    
+    private
     func setSubviews(){
         view.addSubview(collection)
     }
     
-    
+    private
     func activateLayouts(){
         NSLayoutConstraint.activate([
             collection.topAnchor.constraint(equalTo: view.topAnchor),

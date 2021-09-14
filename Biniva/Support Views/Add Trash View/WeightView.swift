@@ -2,7 +2,7 @@
 //  WeightView.swift
 //  GreenerCo
 //
-//  Created by Nikita Oltyan on 24.04.2021.
+//  Created by Nick Oltyan on 24.04.2021.
 //
 
 import UIKit
@@ -40,7 +40,7 @@ class WeightView: UIView {
     
     let minusLabel: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(fontName: "SFPro", size: 21)
             .with(autolayout: false)
@@ -50,7 +50,7 @@ class WeightView: UIView {
     
     let plusLabel: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .center)
             .with(fontName: "SFPro", size: 21)
             .with(autolayout: false)

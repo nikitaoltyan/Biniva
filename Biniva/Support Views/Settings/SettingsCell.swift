@@ -33,7 +33,7 @@ class SettingsCell: UITableViewCell {
         }()
         let button = UIImageView(frame: CGRect(x: 0, y: 0, width: scale-5, height: scale))
             .with(autolayout: false)
-        button.tintColor = MainConstants.nearBlack
+        button.tintColor = Colors.nearBlack
         button.image = UIImage(systemName: "chevron.right")
         button.isUserInteractionEnabled = true
         return button

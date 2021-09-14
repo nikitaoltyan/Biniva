@@ -32,7 +32,7 @@ class CameraController: UIViewController {
         }()
         let button = UIImageView(frame: CGRect(x: 0, y: 0, width: scale, height: scale-5))
             .with(autolayout: false)
-        button.tintColor = MainConstants.nearBlack
+        button.tintColor = Colors.nearBlack
         button.image = UIImage(systemName: "chevron.down")
         button.isUserInteractionEnabled = true
         return button

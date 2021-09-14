@@ -2,7 +2,7 @@
 //  TopView.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 18.04.2021.
+//  Created by Nick Oltyan on 18.04.2021.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ class TopView: UIView {
     
     let title: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(fontName: "SFPro-Semibold", size: 28)
             .with(numberOfLines: 1)
@@ -70,8 +70,8 @@ class TopView: UIView {
         self.title.text = NSLocalizedString("top_view_title_recycling", comment: "recycling topView Label")
         self.subtitle.text = NSLocalizedString("top_view_subtitle_recycling", comment: "recycling topView support subtitle")
         self.backgroundColor = .white
-        SetSubviews()
-        ActivateLayouts()
+        setSubviews()
+        activateLayouts()
     }
     
     required init?(coder: NSCoder) {
@@ -129,7 +129,8 @@ extension TopView: TopViewDelegate {
 
 
 extension TopView {
-    func SetSubviews(){
+    private
+    func setSubviews(){
         self.addSubview(title)
         self.addSubview(subtitle)
         self.addSubview(settingsButton)
@@ -139,7 +140,8 @@ extension TopView {
         paywallButton.addTarget(self, action: #selector(openPaywall), for: .touchUpInside)
     }
     
-    func ActivateLayouts(){
+    private
+    func activateLayouts(){
         NSLayoutConstraint.activate([
             subtitle.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 26),
             subtitle.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -1),

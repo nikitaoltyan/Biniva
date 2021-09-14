@@ -81,7 +81,7 @@ class MapView: UIView {
     lazy var askForPointsView: AskForPointsView = {
         let view = AskForPointsView()
             .with(autolayout: false)
-        view.alpha = 1
+        view.alpha = 0
         view.isHidden = true
         view.delegate = self
         return view
@@ -126,7 +126,7 @@ class MapView: UIView {
             locationManager.startUpdatingLocation()
 
             let location: CLLocationCoordinate2D = locationManager.location?.coordinate
-                ?? CLLocationCoordinate2D(latitude: 51.501543, longitude: -0.141420) // London Buckingham Palace
+                ?? CLLocationCoordinate2D(latitude: 51.499724, longitude: -0.141420) // London Buckingham Palace
             userLocation = location
             let span = MKCoordinateSpan(latitudeDelta: 0.009, longitudeDelta: 0.009)
             let region = MKCoordinateRegion(center: location, span: span)
@@ -168,6 +168,7 @@ class MapView: UIView {
     
     private
     func addAnnotation(points: [Point]) {
+        print("addAnnotation")
         for point in points {
             guard trashBinsID.contains(point.id ?? "") == false else { continue }
             trashBinsID.insert(point.id ?? "")
@@ -185,6 +186,8 @@ class MapView: UIView {
             
             self.map.addAnnotation(bin)
         }
+        
+        showAskForPointsView()
     }
     
     
@@ -324,9 +327,10 @@ class MapView: UIView {
     
     private
     func getGeoPoints() {
+        print("getGeoPoints")
         server.getGeoPoints(centerCoordinate: self.map.region.center, radius: self.map.currentRadius(withDelta: 0), result: { [weak self] points in
-            print("server.getGeoPoints: \(points.count)")
             guard let strongSelf = self else { return }
+            print("getGeoPoints: \(points)")
             strongSelf.addAnnotation(points: points)
         })
     }
@@ -362,13 +366,18 @@ class MapView: UIView {
 
     private
     func showAskForPointsView() {
+        print("showAskForPointsView")
         guard !isAskForPointsTapped else { return }
+        print("guard !isAskForPointsTapped passed")
         guard map.visibleAnnotations().count == 0 else {
             close()
             return
         }
+        print("guard map.visibleAnnotations().count == 0 passed")
         guard askForPointsView.alpha != 1 else { return }
+        print("guard askForPointsView.alpha != 1 passed")
         guard disabledGeolocationView.isHidden == true else { return }
+        print("disabledGeolocationView.isHidden == true passed")
         
         askForPointsView.isHidden = false
         UIView.animate(withDuration: 0.3, animations: {
@@ -404,10 +413,10 @@ extension MapView: MKMapViewDelegate {
         // If user zoomed out in area with more than 37km radius it will zoom in it back. (Depriciated)
         
         // Checking currentRadius was depriciated to allow people to zoom-out and make sure, that map is in working condition.
-        if map.currentRadius(withDelta: 0) > 1000000 {
+        if map.currentRadius(withDelta: 0) > 2000000 {
             let viewRegion = MKCoordinateRegion(center: self.map.region.center,
-                                                latitudinalMeters: 700000,
-                                                longitudinalMeters: 700000)
+                                                latitudinalMeters: 1700000,
+                                                longitudinalMeters: 1700000)
             map.setRegion(viewRegion, animated: true)
         } else {
 //             Updateing geoPoints only in the allowed area.
@@ -434,8 +443,9 @@ extension MapView: bottomPinDelegate, askForPointsDelegate {
     
     /// Close AskForPoints view
     func close() {
+        print("close")
         guard askForPointsView.alpha != 0 else { return }
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.26, animations: {
             self.askForPointsView.alpha = 0
         }, completion: { _ in
             self.askForPointsView.isHidden = true

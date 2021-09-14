@@ -2,7 +2,7 @@
 //  StatsCell.swift
 //  GreenerCo
 //
-//  Created by Никита Олтян on 26.04.2021.
+//  Created by Nick Oltyan on 26.04.2021.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ class StatsCell: UITableViewCell {
 
     let dateLabel: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(fontName: "SFPro-Bold", size: 20)
             .with(numberOfLines: 1)
@@ -23,7 +23,7 @@ class StatsCell: UITableViewCell {
     
     let loggedLabel: UILabel = {
         let label = UILabel()
-            .with(color: MainConstants.nearBlack)
+            .with(color: Colors.nearBlack)
             .with(alignment: .left)
             .with(fontName: "SFPro", size: 17)
             .with(numberOfLines: 0)
@@ -65,11 +65,13 @@ class StatsCell: UITableViewCell {
 
 
 extension StatsCell {
+    private
     func setSubviews(){
         self.addSubview(dateLabel)
         self.addSubview(loggedLabel)
     }
     
+    private
     func activateLayouts(){
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
