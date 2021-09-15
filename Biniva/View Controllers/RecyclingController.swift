@@ -31,6 +31,7 @@ protocol RecyclingDelegate {
 protocol mapDelegate: AnyObject {
     func openAddNewPoint()
     func showPaywall()
+    func showActivityController()
     func showImageShower(withImages images: [String], open: Int)
     func showPopUp(title: String, subtitle: String, image: UIImage?, andButtonText buttonText: String)
 }
@@ -305,6 +306,12 @@ extension RecyclingController: mapDelegate {
     func showPopUp(title: String, subtitle: String, image: UIImage?, andButtonText buttonText: String) {
         Vibration.soft()
         self.showPopUp(withTitle: title, subtitle: subtitle, image: image, andButtonText: buttonText)
+    }
+    
+    func showActivityController() {
+        Vibration.soft()
+        let vc = UIActivityViewController(activityItems: [], applicationActivities: [])
+        present(vc, animated: true)
     }
     
     func showImageShower(withImages images: [String], open: Int) {

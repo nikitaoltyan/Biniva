@@ -32,6 +32,20 @@ class BottomPinView: UIView {
         return label
     }()
     
+    let activityButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+            .with(autolayout: false)
+            .with(bgColor: .clear)
+        let image = UIImage(systemName: "pencil.circle")?.withRenderingMode(.alwaysTemplate)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFill
+        button.setImage(image, for: .normal)
+        button.tintColor = Colors.darkGrayText
+        button.alpha = 0
+        return button
+    }()
+    
     let adressLabel: UILabel = {
         let label = UILabel()
             .with(color: Colors.darkGrayText)
@@ -107,6 +121,10 @@ class BottomPinView: UIView {
     var isTouchedAlready: Bool = false
     var delegate: bottomPinDelegate?
     
+    enum buttonActivity {
+        case hide
+        case show
+    }
     
     override init(frame: CGRect) {
         let useFrame = CGRect(x: 0, y: 0, width: MainConstants.screenWidth, height: 800)
@@ -151,6 +169,30 @@ class BottomPinView: UIView {
             self.images = images
             self.photoCollection.reloadData()
         })
+    }
+    
+    
+    func update(set status: buttonActivity) {
+        switch status {
+        case .show:
+            guard activityButton.isHidden == true else { return }
+            activityButton.isHidden = false
+            UIView.animate(withDuration: 0.2, animations: {
+                self.activityButton.alpha = 1
+            })
+        case .hide:
+            guard activityButton.isHidden == false else { return }
+            UIView.animate(withDuration: 0.2, animations: {
+                self.activityButton.alpha = 0
+            }, completion: { _ in
+                self.activityButton.isHidden = true
+            })
+        }
+    }
+    
+    @objc
+    func activityAcrion() {
+        delegate?.showActivityController()
     }
 }
 
@@ -209,7 +251,6 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
         }
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard collectionView.tag == 1 else { return }
         delegate?.showImageShower(withImages: self.images, open: indexPath.row)
@@ -220,14 +261,21 @@ extension BottomPinView: UICollectionViewDelegate, UICollectionViewDataSource, U
 
 
 
+
+
+
 extension BottomPinView {
+    private
     func setSubviews(){
         self.addSubview(topView)
         self.addSubview(title)
+        self.addSubview(activityButton)
         self.addSubview(adressLabel)
         self.addSubview(materialCollection)
         self.addSubview(photoLabel)
         self.addSubview(photoCollection)
+        
+        activityButton.addTarget(self, action: #selector(activityAcrion), for: .touchUpInside)
     }
     
     func activateLayouts(){
@@ -239,6 +287,11 @@ extension BottomPinView {
      
             title.topAnchor.constraint(equalTo: self.topAnchor, constant: 19),
             title.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 19),
+            
+            activityButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -19),
+            activityButton.centerYAnchor.constraint(equalTo: title.centerYAnchor),
+            activityButton.heightAnchor.constraint(equalToConstant: activityButton.frame.height),
+            activityButton.widthAnchor.constraint(equalToConstant: activityButton.frame.width),
             
             adressLabel.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 7),
             adressLabel.leftAnchor.constraint(equalTo: title.leftAnchor),
