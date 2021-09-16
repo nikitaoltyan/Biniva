@@ -154,6 +154,13 @@ class Onboarding_2_Cell: UICollectionViewCell {
         fatalError()
     }
     
+    // Detecting changing to Dark/Light theam.
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        mapImage.layer.borderColor = Colors.topGradient.cgColor
+        self.setNeedsLayout()
+    }
+    
+    
     func animate() {
         let points: [UIImageView] = [point_1, point_2, point_3, point_4]
         for point in points {

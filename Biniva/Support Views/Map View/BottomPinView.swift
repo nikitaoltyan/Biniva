@@ -33,7 +33,7 @@ class BottomPinView: UIView {
     }()
     
     let activityButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 27, height: 27))
             .with(autolayout: false)
             .with(bgColor: .clear)
         let image = UIImage(systemName: "pencil.circle")?.withRenderingMode(.alwaysTemplate)

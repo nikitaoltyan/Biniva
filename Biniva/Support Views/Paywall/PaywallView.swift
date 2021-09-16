@@ -359,6 +359,17 @@ class PaywallView: UIView {
         fatalError()
     }
     
+    // Detecting changing to Dark/Light theam.
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        annualPlateView.layer.borderColor = Colors.topGradient.cgColor
+        monthlyPlateView.layer.borderColor = Colors.topGradient.cgColor
+        annualGradient.colors = [Colors.background.cgColor,
+                                 Colors.sliderGray.cgColor]
+        monthlyGradient.colors = [Colors.background.cgColor,
+                                   Colors.sliderGray.cgColor]
+        self.setNeedsLayout()
+    }
+    
     
     private
     func prepareSubscriptions() {

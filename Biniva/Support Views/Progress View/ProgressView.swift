@@ -110,6 +110,14 @@ class ProgressView: UIView {
         fatalError()
     }
     
+    // Detecting changing to Dark/Light theam.
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        grayCircleView.strokeColor = Colors.grayCircle.cgColor
+        circleView.colors = [Colors.topGradient.cgColor,
+                             Colors.bottomGradient.cgColor]
+        self.setNeedsLayout()
+    }
+    
     
     func setUpInitial(){
         print("ProgressView setUpInitial")

@@ -87,6 +87,14 @@ class AddButtonWithPhotoView: UIView {
         fatalError()
     }
 
+    // Detecting changing to Dark/Light theam.
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        gradient_1.colors = [Colors.topGradient.cgColor,
+                             Colors.bottomGradient.cgColor]
+        gradient_2.colors = [Colors.topGradient.cgColor,
+                             Colors.bottomGradient.cgColor]
+        self.setNeedsLayout()
+    }
     
     @objc
     func photoAction() {

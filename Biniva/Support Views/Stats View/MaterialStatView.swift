@@ -54,6 +54,12 @@ class MaterialStatView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        gradient.colors = [Colors.background.cgColor,
+                           Colors.sliderGray.cgColor]
+        self.setNeedsLayout()
+    }
 
     func update(){
         data = materialFunction.calculate()

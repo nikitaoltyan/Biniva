@@ -233,7 +233,7 @@ extension RecyclingController: StatsDelegate {
                 self.topView.isHidden = true
             })
         } else {
-            guard (self.switcherView.center.y < 0) else { return }
+            guard (self.switcherView.isHidden) else { return }
             switcherView.isHidden = false
             topView.isHidden = false
             UIView.animate(withDuration: 0.5, animations: {
@@ -310,7 +310,8 @@ extension RecyclingController: mapDelegate {
     
     func showActivityController() {
         Vibration.soft()
-        let vc = UIActivityViewController(activityItems: [], applicationActivities: [])
+        guard let image = UIImage(named: "ask_for_comment") else { return }
+        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
         present(vc, animated: true)
     }
     

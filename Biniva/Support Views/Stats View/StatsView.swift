@@ -253,6 +253,18 @@ extension StatsView: UIScrollViewDelegate {
             delegate?.hideTopBar(true)
         }
     }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("scrollViewDidEndDragging")
+        guard (scrollView == self.scrollView) else { return }
+        print("scrollView.contentOffset.y: \(scrollView.contentOffset.y)")
+        if scrollView.contentOffset.y < 22 {
+            print("delegate?.hideTopBar(false)")
+            delegate?.hideTopBar(false)
+        } else {
+            delegate?.hideTopBar(true)
+        }
+    }
 }
 
 

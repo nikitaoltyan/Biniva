@@ -44,6 +44,14 @@ class ButtonView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+    
+    // Detecting changing to Dark/Light theam.
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        gradient.colors = [Colors.topGradient.cgColor,
+                           Colors.bottomGradient.cgColor]
+        self.setNeedsLayout()
+    }
 
 }
 

@@ -32,7 +32,7 @@ class Onboarding_1_Cell: UICollectionViewCell {
     lazy var gradient: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.frame = self.gradientView.frame
-        gradient.colors = [UIColor.white.withAlphaComponent(0).cgColor,
+        gradient.colors = [Colors.background.withAlphaComponent(0).cgColor,
                            Colors.background.cgColor]
         gradient.startPoint = CGPoint(x: 0.5, y: 0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1)
@@ -135,6 +135,13 @@ class Onboarding_1_Cell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    // Detecting changing to Dark/Light theam.
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        gradient.colors = [Colors.background.withAlphaComponent(0).cgColor,
+                           Colors.background.cgColor]
+        self.setNeedsLayout()
     }
     
     @objc

@@ -50,6 +50,11 @@ class WeeklyArticleView: UIView {
         fatalError()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        gradient.colors = [Colors.background.cgColor,
+                           Colors.sliderGray.cgColor]
+        self.setNeedsLayout()
+    }
     
     func update() {
         if Defaults.getIsSubscribed() {

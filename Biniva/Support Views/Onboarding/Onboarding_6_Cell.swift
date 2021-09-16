@@ -173,6 +173,18 @@ class Onboarding_6_Cell: UICollectionViewCell {
         fatalError()
     }
     
+    // Detecting changing to Dark/Light theam.
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        metricPlateView.layer.borderColor = Colors.topGradient.cgColor
+        imperialPlateView.layer.borderColor = Colors.topGradient.cgColor
+        metricGradient.colors = [Colors.background.cgColor,
+                                 Colors.sliderGray.cgColor]
+        imperialGradient.colors = [Colors.background.cgColor,
+                                   Colors.sliderGray.cgColor]
+        self.setNeedsLayout()
+    }
+    
+    
     @objc
     func metricAction() {
         guard metricPlateView.layer.borderWidth == 0 else {
