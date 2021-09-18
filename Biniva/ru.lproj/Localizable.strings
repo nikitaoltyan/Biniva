@@ -151,6 +151,11 @@
 "settings_leave_comment" = "Поделись свои виденьем";
 "settings_mark_app" = "Оцени приложение";
 
+// SETTINGS - Change Appearance
+"change_theme_title" = "Внешний вид";
+"change_theme_light" = "Светлый";
+"change_theme_dark" = "Темный";
+
 // SETTINGS - LEAVE A COMMENT
 "leave_comment_title" = "Поделись свои виденьем";
 "leave_comment_title_placeholder" = "Тема письма";

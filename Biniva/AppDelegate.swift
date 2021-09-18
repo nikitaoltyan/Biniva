@@ -72,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-
     var persistentContainer: NSPersistentContainer = {
           let container = NSPersistentContainer(name: "Model")
           container.loadPersistentStores(completionHandler: { (storeDescription, error) in

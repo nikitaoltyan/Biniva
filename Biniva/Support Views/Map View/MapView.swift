@@ -279,7 +279,7 @@ class MapView: UIView {
         }, completion: { (_) in
             self.addPointView.isHidden = true
             self.paywallView.isHidden = true
-            self.pinAnnotation.update(set: .hide)
+//            self.pinAnnotation.update(set: .hide)
             Vibration.soft()
         })
     }
@@ -291,7 +291,7 @@ class MapView: UIView {
                                                 y: self.centerCoordinate-500)
         }, completion: { (_) in
             Vibration.soft()
-            self.pinAnnotation.update(set: .show)
+//            self.pinAnnotation.update(set: .show)
             self.pinAnnotation.loadImages()
         })
     }

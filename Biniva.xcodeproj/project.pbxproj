@@ -99,6 +99,7 @@
 		5C85E69726C81130001661CA /* LeaveCommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85E69626C81130001661CA /* LeaveCommentController.swift */; };
 		5C85E6A126CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85E6A026CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift */; };
 		5C89519D26EB987800BAE15C /* AskForCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89519C26EB987800BAE15C /* AskForCommentView.swift */; };
+		5C8F0D1E26F4D0D000A07108 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8F0D1D26F4D0D000A07108 /* ThemeViewController.swift */; };
 		5C96F17526C67F40008FC57F /* ImageShowerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C96F17426C67F40008FC57F /* ImageShowerController.swift */; };
 		5C996A4C26B12AA600C3BD8C /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C996A4B26B12AA600C3BD8C /* Review.swift */; };
 		5C9A56BA2695E2E7000D3401 /* ServerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9A56B92695E2E7000D3401 /* ServerAnalytics.swift */; };
@@ -330,6 +331,7 @@
 		5C85E69626C81130001661CA /* LeaveCommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveCommentController.swift; sourceTree = "<group>"; };
 		5C85E6A026CA7D15001661CA /* WeeklyStatsCell+Unsubscribed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyStatsCell+Unsubscribed.swift"; sourceTree = "<group>"; };
 		5C89519C26EB987800BAE15C /* AskForCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForCommentView.swift; sourceTree = "<group>"; };
+		5C8F0D1D26F4D0D000A07108 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		5C96F17426C67F40008FC57F /* ImageShowerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShowerController.swift; sourceTree = "<group>"; };
 		5C996A4B26B12AA600C3BD8C /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		5C9A56B92695E2E7000D3401 /* ServerAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAnalytics.swift; sourceTree = "<group>"; };
@@ -855,6 +857,7 @@
 				5CEE556226BD660B00561B76 /* SettingsTableHeaderView.swift */,
 				5CC4D52F26C03E6B00FC6E30 /* WeightMeasureController.swift */,
 				5C85E69626C81130001661CA /* LeaveCommentController.swift */,
+				5C8F0D1D26F4D0D000A07108 /* ThemeViewController.swift */,
 				5C0E9D8F26DF500E0016B9B0 /* Subscription Stats */,
 				5C0E9D9E26E0AA6B0016B9B0 /* Ask For Points */,
 			);
@@ -1287,6 +1290,7 @@
 				5CD0B1322688A85E00267081 /* AddPointController.swift in Sources */,
 				5C045BE825BC77B200E42843 /* Server.swift in Sources */,
 				5CC8CB1826AD2759006186BE /* BottomCameraView.swift in Sources */,
+				5C8F0D1E26F4D0D000A07108 /* ThemeViewController.swift in Sources */,
 				5C64D7972690E6E20013F084 /* NotificationExampleView.swift in Sources */,
 				5CC4D52E26C0278000FC6E30 /* Measure.swift in Sources */,
 				5C1BD66025D7CA770002A894 /* Material Defaults.swift in Sources */,
@@ -1788,7 +1792,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1812,7 +1816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = Greener.GreenerCo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

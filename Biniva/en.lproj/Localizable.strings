@@ -152,6 +152,11 @@
 "settings_leave_comment" = "Share your vision";
 "settings_mark_app" = "Rate the app";
 
+// SETTINGS - Change Appearance
+"change_theme_title" = "Appearance";
+"change_theme_light" = "Light";
+"change_theme_dark" = "Dark";
+
 // SETTINGS - LEAVE A COMMENT
 "leave_comment_title" = "Share your vision";
 "leave_comment_title_placeholder" = "Title";
