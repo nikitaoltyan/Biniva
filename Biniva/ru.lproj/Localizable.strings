@@ -157,9 +157,9 @@
 "change_theme_dark" = "Темный";
 
 // SETTINGS - LEAVE A COMMENT
-"leave_comment_title" = "Поделись свои виденьем";
+"leave_comment_title" = "Поделись своим виденьем";
 "leave_comment_title_placeholder" = "Тема письма";
-"leave_comment_text_placeholder" = "Поделись свои виденьем! Что нам стоит добавить или изменить? (Или просто похвалите команду Biniva)";
+"leave_comment_text_placeholder" = "Поделись своим виденьем! Что нам стоит добавить или изменить? (Или просто похвалите команду Biniva)";
 "leave_comment_email_placeholder" = "Твой e-mail, если хочешь продолжить диалог :)";
 "leave_comment_button" = "Отправить";
 "leave_comment_title_error_title" = "Нет темы письма";

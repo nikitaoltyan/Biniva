@@ -1,17 +1,11 @@
 //
-//  Main Constants.swift
-//  GreenerCo
+//  Colors.swift
+//  Biniva
 //
-//  Created by Никита Олтян on 17.11.2020.
+//  Created by Nick Oltyan on 05.10.2021.
 //
 
 import UIKit
- 
-struct MainConstants {
-    static let screenHeight = UIScreen.main.bounds.height
-    static let screenWidth = UIScreen.main.bounds.width
-}
-
 
 struct Colors {
     static let nearBlack = UIColor(named: "nearBlack") ?? UIColor.black
@@ -24,29 +18,4 @@ struct Colors {
     static let arrowUpRed = UIColor(named: "arrowUpColor") ?? UIColor.red
     static let arrowDownGreen = UIColor(named: "arrowDownColor") ?? UIColor.green
     static let askForPointInWork = UIColor(named: "askForPointInWork") ?? UIColor.orange
-}
-
-
-class Vibration {
-    
-    static func soft() -> Void{
-        let soft = UIImpactFeedbackGenerator(style: .soft)
-        soft.impactOccurred()
-    }
-    
-    static func light() -> Void{
-        let light = UIImpactFeedbackGenerator(style: .light)
-        light.impactOccurred()
-    }
-    
-    static func medium() -> Void{
-        let medium = UIImpactFeedbackGenerator(style: .medium)
-        medium.impactOccurred()
-    }
-    
-    
-    static func Heavy() -> Void{
-        let heavy = UIImpactFeedbackGenerator(style: .heavy)
-        heavy.impactOccurred()
-    }
 }

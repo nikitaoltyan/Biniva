@@ -23,6 +23,9 @@
 		5C0E9DA026E0AA900016B9B0 /* AskForPointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9D9F26E0AA900016B9B0 /* AskForPointsController.swift */; };
 		5C0E9DA226E0AB730016B9B0 /* AskForPointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0E9DA126E0AB730016B9B0 /* AskForPointCell.swift */; };
 		5C11455826612B9400F48626 /* MapView+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C11455726612B9400F48626 /* MapView+Model.swift */; };
+		5C17D40A270C9E2300035051 /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17D409270C9E2300035051 /* Vibration.swift */; };
+		5C17D40C270C9E7100035051 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17D40B270C9E7100035051 /* Colors.swift */; };
+		5C17D40E270C9FA900035051 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17D40D270C9FA900035051 /* TabBarController.swift */; };
 		5C1BD66025D7CA770002A894 /* Material Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1BD65F25D7CA770002A894 /* Material Defaults.swift */; };
 		5C1D11C425C6B7F2007C8DBC /* Date Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D11C325C6B7F2007C8DBC /* Date Extension.swift */; };
 		5C25D8A7263693A900D2206E /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C25D8A6263693A900D2206E /* StatsCell.swift */; };
@@ -211,6 +214,9 @@
 		5C0E9D9F26E0AA900016B9B0 /* AskForPointsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointsController.swift; sourceTree = "<group>"; };
 		5C0E9DA126E0AB730016B9B0 /* AskForPointCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskForPointCell.swift; sourceTree = "<group>"; };
 		5C11455726612B9400F48626 /* MapView+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapView+Model.swift"; sourceTree = "<group>"; };
+		5C17D409270C9E2300035051 /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
+		5C17D40B270C9E7100035051 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5C17D40D270C9FA900035051 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5C1BD65F25D7CA770002A894 /* Material Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Material Defaults.swift"; sourceTree = "<group>"; };
 		5C1D11C325C6B7F2007C8DBC /* Date Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date Extension.swift"; sourceTree = "<group>"; };
 		5C25D8A6263693A900D2206E /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
@@ -554,6 +560,14 @@
 			path = Maps;
 			sourceTree = "<group>";
 		};
+		5C17D40F270C9FB900035051 /* New Design */ = {
+			isa = PBXGroup;
+			children = (
+				5C17D40D270C9FA900035051 /* TabBarController.swift */,
+			);
+			path = "New Design";
+			sourceTree = "<group>";
+		};
 		5C1BD65E25D7CA560002A894 /* Material Defaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,6 +620,7 @@
 		5C45914B254D55C0005AE26C /* Biniva */ = {
 			isa = PBXGroup;
 			children = (
+				5C17D40F270C9FB900035051 /* New Design */,
 				5C5ED19E2659677D00084458 /* View Controllers */,
 				5C5ED19F265967AC00084458 /* Support Views */,
 				5C3046DE25C06A3100BAFEEF /* Biniva.entitlements */,
@@ -617,7 +632,6 @@
 				5C045BF525BFE24600E42843 /* Extensions */,
 				5C0870312627381F0057E840 /* CoreModel */,
 				5C64D7932690B5FB0013F084 /* System functions */,
-				5C83A0792563AC58005C2CAA /* Main Constants.swift */,
 				5C45914C254D55C0005AE26C /* AppDelegate.swift */,
 				5C45914E254D55C0005AE26C /* SceneDelegate.swift */,
 				5C83A052255EB3CC005C2CAA /* Assets.xcassets */,
@@ -781,6 +795,9 @@
 				5C64D7942690B6460013F084 /* Location.swift */,
 				5C996A4B26B12AA600C3BD8C /* Review.swift */,
 				5C3B737826B3C38B00B48DAC /* AppTransparency.swift */,
+				5C17D409270C9E2300035051 /* Vibration.swift */,
+				5C17D40B270C9E7100035051 /* Colors.swift */,
+				5C83A0792563AC58005C2CAA /* Main Constants.swift */,
 			);
 			path = "System functions";
 			sourceTree = "<group>";
@@ -1183,6 +1200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C3B737026B1BC5000B48DAC /* ReturnToPositionView.swift in Sources */,
+				5C17D40C270C9E7100035051 /* Colors.swift in Sources */,
 				5C85E69726C81130001661CA /* LeaveCommentController.swift in Sources */,
 				5CB8593C2652BB3D00885A6D /* MaterialStatsCell+Empty.swift in Sources */,
 				5C55591C262D945C0046F5A5 /* SwitcherView.swift in Sources */,
@@ -1238,6 +1256,7 @@
 				5C087044262739E10057E840 /* Model+CoreDataProperties.swift in Sources */,
 				5C30470125C140E100BAFEEF /* Label Extension.swift in Sources */,
 				5CC4D52C26BFA5E400FC6E30 /* Onboarding_6_Cell.swift in Sources */,
+				5C17D40E270C9FA900035051 /* TabBarController.swift in Sources */,
 				5C07594626596F17000F64C7 /* MaterialPinCell.swift in Sources */,
 				5C0E9D9C26DFDD290016B9B0 /* AskForPoints+CoreDataClass.swift in Sources */,
 				5C0E9DA026E0AA900016B9B0 /* AskForPointsController.swift in Sources */,
@@ -1273,6 +1292,7 @@
 				5C64D788268F82EA0013F084 /* Onboarding_1_Cell.swift in Sources */,
 				5CC8CB1326AAC41E006186BE /* CameraController.swift in Sources */,
 				5CF90C57262EA7C100127E4D /* MaterialCell.swift in Sources */,
+				5C17D40A270C9E2300035051 /* Vibration.swift in Sources */,
 				5C89519D26EB987800BAE15C /* AskForCommentView.swift in Sources */,
 				5C55508D269DC53500AD8015 /* ArticleHeaderView.swift in Sources */,
 				5CEDA06725DCF4A0009280D0 /* Array Extension.swift in Sources */,

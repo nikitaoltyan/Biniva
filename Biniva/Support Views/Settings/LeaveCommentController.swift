@@ -81,11 +81,17 @@ class LeaveCommentController: UIViewController {
     }()
     
     lazy var emailText: UITextField = {
+        let textSize: CGFloat = {
+            switch MainConstants.screenHeight {
+            case ...736: return 14
+            default: return 16
+            }
+        }()
         let view = UITextField()
             .with(autolayout: false)
             .with(keybordType: .emailAddress)
             .with(placeholder: NSLocalizedString("leave_comment_email_placeholder", comment: ""))
-            .with(fontName: "SFPro-Regular", size: 16)
+            .with(fontName: "SFPro-Regular", size: textSize)
         view.textColor = Colors.nearBlack
         view.delegate = self
         return view
@@ -119,7 +125,6 @@ class LeaveCommentController: UIViewController {
         
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-//                self.view.frame.origin.y -= keyboardSize.height
                 self.buttonBottomConstraint?.constant = -keyboardSize.height
                 UIView.animate(withDuration: 0.4, animations: {
                     self.view.layoutIfNeeded()
@@ -127,20 +132,8 @@ class LeaveCommentController: UIViewController {
             }
             
         }
-        
-//        let buttonBottomConstant: CGFloat = {
-//            switch MainConstants.screenHeight {
-//            case ...700: return -150
-//            case 736: return -150
-//            default: return -200
-//            }
-//        }()
-        
-//        buttonBottomConstraint?.constant = buttonBottomConstant
-//        UIView.animate(withDuration: 0.4, animations: {
-//            self.view.layoutIfNeeded()
-//        })
     }
+    
 
     @objc
     func keyboardWillHide(notification: NSNotification) {
@@ -186,8 +179,7 @@ class LeaveCommentController: UIViewController {
                 return
             }
             
-            guard !(self.commentText.textColor == Colors.grayCircle)
-                || !(self.titleText.text?.isEmpty ?? true) else {
+            guard !(self.commentText.textColor == Colors.grayCircle) else {
                 self.showAlert(withTitle: NSLocalizedString("leave_comment_comment_error_title", comment: ""),
                           andSubtitle: NSLocalizedString("leave_comment_comment_error_subtitle", comment: ""))
                 return
