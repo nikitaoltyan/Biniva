@@ -11,6 +11,11 @@ This is an app with eco-map (map of all recycling points in the user's location)
 - Weekly in-divice generated Zero Waste suggestions
 
 ## Photos
+<img src="./assets/MockUp_1_8_Eng.png" width = "20%"></img>
+<img src="./assets/MockUp_2_8_Eng.png" width = "20%"></img>
+<img src="./assets/MockUp_3_8_Eng.png" width = "20%"></img>
+<img src="./assets/MockUp_4_8_Eng.png" width = "20%"></img>
+<img src="./assets/MockUp_5_8_Eng.png" width = "20%"></img>
 
 ## Monetization
 The app uses free-to-use monetization strategy. The consumption tracker and all features of the map is available for every user.
